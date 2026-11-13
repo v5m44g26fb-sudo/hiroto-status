@@ -124,9 +124,37 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 #x-compose-btn{position:absolute;right:16px;bottom:calc(150px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
 #x-compose-btn:active{transform:scale(.9)}
 #x-compose-btn.fab-hide{opacity:0;pointer-events:none;transform:translateY(12px)}
-#x-compose{position:absolute;inset:0;background:#fff;z-index:80;display:none;flex-direction:column;padding:16px}
+#x-compose{position:absolute;inset:0;background:#fff;z-index:80;display:none;flex-direction:column}
 #x-compose.on{display:flex;animation:composeup .26s cubic-bezier(.2,.8,.25,1)}
+#x-compose.closing{animation:composedown .18s ease forwards}
 @keyframes composeup{from{transform:translateY(26px);opacity:.3}to{transform:none;opacity:1}}
+@keyframes composedown{to{transform:translateY(18px);opacity:0}}
+.xc-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px 6px;flex:none}
+#xc-cancel{background:none;border:none;font-size:14.5px;cursor:pointer;color:#0f1419;padding:8px 6px;border-radius:999px;font-family:inherit}
+#xc-cancel:active{background:#eff3f4}
+#xc-post{background:#1d9bf0;color:#fff;border:none;font-weight:800;font-size:14.5px;padding:8px 18px;border-radius:999px;cursor:pointer;font-family:inherit;transition:opacity .15s ease,transform .12s ease,background .15s ease}
+#xc-post:disabled{opacity:.45;cursor:default}
+#xc-post:not(:disabled):active{transform:scale(.94)}
+#xc-post.posting{background:#0d7ec2}
+.xc-body{display:flex;gap:11px;padding:10px 16px 0;flex:none}
+.xc-main{flex:1;min-width:0}
+.xc-preview{font-size:17px;line-height:1.55;white-space:pre-wrap;word-break:break-word;min-height:76px;color:#0f1419}
+.xc-preview.empty{color:#536471}
+.xc-reply{color:#1d9bf0;font-size:13px;font-weight:700;border-bottom:1px solid #eff3f4;padding:4px 0 10px;display:flex;align-items:center;gap:5px}
+.xc-reply svg{width:14px;height:14px;flex:none}
+.xc-tools{display:flex;align-items:center;padding:6px 12px 2px 58px;color:#1d9bf0;flex:none}
+.xc-tools .tool{padding:7px;border-radius:50%;display:flex}
+.xc-tools .tool:active{background:rgba(29,155,240,.12)}
+.xc-tools .tool svg{width:19px;height:19px;display:block}
+.xc-spacer{flex:1}
+.xc-count{font-size:12.5px;color:#536471;min-width:26px;text-align:right}
+.xc-count.warn{color:#ffad1f;font-weight:700}.xc-count.over{color:#f4212e;font-weight:700}
+.xc-ring{transform:rotate(-90deg);flex:none;margin-left:6px}
+.xc-ring circle{fill:none;stroke-width:2.5}
+.xc-ring .bgc{stroke:#eff3f4}
+.xc-ring .fgc{stroke:#1d9bf0;stroke-linecap:round;transition:stroke-dashoffset .18s ease,stroke .18s ease}
+.xc-note{color:#536471;font-size:13px;margin:10px 16px 2px;flex:none}
+#postopts{padding:2px 16px 24px;overflow-y:auto}
 #x-nav{position:absolute;left:0;right:0;bottom:0;height:calc(58px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
 #x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center}
 #x-nav svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9}
@@ -243,7 +271,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v10</p>
+  <p class="ver">v11</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -324,7 +352,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v10</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v11</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -366,11 +394,27 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   </div>
   <button id="x-compose-btn" aria-label="投稿">＋</button>
   <div id="x-compose">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <button id="xc-cancel" style="background:none;border:none;font-size:14px;cursor:pointer">キャンセル</button>
-      <b style="font-size:15px">投稿する</b><span style="width:64px"></span>
+    <div class="xc-head">
+      <button id="xc-cancel">キャンセル</button>
+      <button id="xc-post" disabled>ポストする</button>
     </div>
-    <p style="color:#536471;font-size:13px;margin:14px 0 4px">今日の話題に合った投稿案。どれを出す？</p>
+    <div class="xc-body">
+      <img class="avatar" src="assets/nao-avatar4.jpg" width="40" height="40" alt="">
+      <div class="xc-main">
+        <div id="xc-preview" class="xc-preview empty">いまどうしてる？</div>
+        <div class="xc-reply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>全員が返信できます</div>
+      </div>
+    </div>
+    <div class="xc-tools" aria-hidden="true">
+      <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 18 5.5-5.5 3 3L17 11l3 3.5"/></svg></span>
+      <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20v-7M11 20V6M17 20v-10"/></svg></span>
+      <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/><circle cx="9" cy="9.5" r=".4" fill="currentColor"/><circle cx="15" cy="9.5" r=".4" fill="currentColor"/></svg></span>
+      <span class="tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 21s-6.5-5.4-6.5-10.4A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.6C18.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.2"/></svg></span>
+      <span class="xc-spacer"></span>
+      <span class="xc-count" id="xc-count"></span>
+      <svg class="xc-ring" width="24" height="24" viewBox="0 0 24 24"><circle class="bgc" cx="12" cy="12" r="9"/><circle class="fgc" id="xc-ring-fg" cx="12" cy="12" r="9" stroke-dasharray="56.5" stroke-dashoffset="56.5"/></svg>
+    </div>
+    <p class="xc-note">今日の話題に合った投稿案。タップで下書きにセット、右上の「ポストする」で投稿。</p>
     <div id="postopts"></div>
   </div>
   <div id="storyviewer" role="dialog" aria-label="ストーリー">
@@ -401,7 +445,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v10</p>
+  <p class="ver">v11</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -913,14 +957,40 @@ function startChapter(n){
 }
 function checkNext(){$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";}
 $("#btn-nextday").onclick=()=>{if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}};
-/* compose (transplanted shell; free text swapped for 3 choices = Status addition) */
+/* compose (real-X flow): tap a draft choice to load it into the composer like
+   typed text - avatar + 17px preview + reply-scope line + char ring - then the
+   top-right Post button (disabled until a draft is set) actually posts.
+   Switching drafts before posting is free; cancel/post share a slide-down
+   close, and Changes pops only fire once the sheet is gone. */
+let xcSel=null,xcBusy=false;
+const XC_MAX=140,XC_CIRC=56.5;
+function xcRenderDraft(){
+ const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg");
+ if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}return;}
+ pv.textContent=xcSel.tx;pv.classList.remove("empty");btn.disabled=xcBusy;
+ const len=[...xcSel.tx.replace(/\n/g,"")].length;
+ cnt.textContent=String(len);cnt.className="xc-count"+(len>XC_MAX?" over":(len>XC_MAX-20?" warn":""));
+ if(fg){fg.style.strokeDashoffset=String(XC_CIRC*(1-Math.min(1,len/XC_MAX)));fg.style.stroke=len>XC_MAX?"#f4212e":(len>XC_MAX-20?"#ffad1f":"#1d9bf0");}
+}
+function xcCloseSheet(done){
+ const sh=$("#x-compose");if(!sh.classList.contains("on")){if(done)done();return;}
+ sh.classList.add("closing");
+ setTimeout(()=>{sh.classList.remove("on");sh.classList.remove("closing");xcBusy=false;const b=$("#xc-post");b.classList.remove("posting");b.textContent="ポストする";if(done)done();},180);
+}
 $("#x-compose-btn").addEventListener("click",()=>{
  if(S.posted){toastChg("今日の投稿は完了してるよ");return;}
+ xcSel=null;xcBusy=false;xcRenderDraft();
  const box=$("#postopts");box.innerHTML="";
- CH[S.ch-1].posts.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.tx;b.onclick=()=>{if(b.disabled)return;box.querySelectorAll(".choice").forEach(x=>{x.disabled=true;});b.classList.add("sel");b.disabled=false;setTimeout(()=>{doPost(o);$("#x-compose").classList.remove("on");$("#x-scroll").scrollTo({top:0,behavior:"smooth"});},200);};box.appendChild(b);});
+ CH[S.ch-1].posts.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.tx;b.onclick=()=>{if(xcBusy)return;box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");xcSel=o;xcRenderDraft();};box.appendChild(b);});
  $("#x-compose").classList.add("on");
 });
-$("#xc-cancel").addEventListener("click",()=>$("#x-compose").classList.remove("on"));
+$("#xc-post").addEventListener("click",()=>{
+ if(!xcSel||xcBusy)return;xcBusy=true;
+ const btn=$("#xc-post");btn.disabled=true;btn.classList.add("posting");btn.textContent="ポスト中…";
+ const o=xcSel;
+ xcCloseSheet(()=>{doPost(o);$("#x-scroll").scrollTo({top:0,behavior:"smooth"});});
+});
+$("#xc-cancel").addEventListener("click",()=>{if(xcBusy)return;xcCloseSheet(null);});
 function doPost(o){
  const mine=mkPost("nao",o.tx,0,0,0,true,o.img);mine.fresh=true;
  S.posts.forEach(p=>{p.fresh=false;});
