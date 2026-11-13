@@ -150,6 +150,34 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .story:active .ring{transform:scale(.93)}
 .story .ring img,.story .ring .ava-txt{width:100%;height:100%;border:2px solid #fff}
 .story span{font-size:11px;color:#536471;display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.story.seen .ring{background:#cfd9de}
+/* story viewer: fullscreen, segmented progress, tap zones + hold-to-pause (Status stories feel) */
+#storyviewer{position:absolute;inset:0;background:#000;z-index:85;display:none;flex-direction:column;color:#fff;overflow:hidden}
+#storyviewer.on{display:flex;animation:svin .22s ease}
+@keyframes svin{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:none}}
+.sv-bg{position:absolute;inset:0;background-color:#14181c;background-position:center;background-size:cover;background-repeat:no-repeat;transition:opacity .18s ease}
+#storyviewer.paused .sv-bg{opacity:.82}
+.sv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 76%,rgba(0,0,0,.45));pointer-events:none}
+.sv-top{position:relative;z-index:5;padding:calc(10px + env(safe-area-inset-top)) 12px 0;flex:none}
+.sv-segs{display:flex;gap:4px}
+.sv-seg{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
+.sv-seg i{display:block;height:100%;width:0;background:#fff;border-radius:2px}
+.sv-head{display:flex;align-items:center;gap:9px;margin-top:11px}
+.sv-id{display:flex;align-items:center;gap:9px;background:none;border:none;color:#fff;text-align:left;padding:2px;border-radius:999px;min-width:0}
+.sv-id:active{background:rgba(255,255,255,.14)}
+.sv-id .ava-txt{width:32px;height:32px;font-size:14px}
+.sv-id img.avatar{width:32px;height:32px}
+.sv-id b{font-size:14px;display:block;line-height:1.25}
+.sv-id small{color:rgba(255,255,255,.75);font-size:12px;display:block;line-height:1.25}
+.sv-close{margin-left:auto;background:none;border:none;color:#fff;padding:8px;border-radius:50%;cursor:pointer;display:flex;flex:none}
+.sv-close:active{background:rgba(255,255,255,.16)}
+.sv-close svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round}
+.sv-center{position:relative;z-index:2;flex:1;display:none;align-items:center;justify-content:center;pointer-events:none}
+.sv-center.show{display:flex}
+.sv-center .ava-txt{width:108px;height:108px;font-size:44px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+.sv-zone{position:absolute;top:96px;bottom:0;z-index:3;background:none;border:none;cursor:pointer}
+.sv-zone.left{left:0;width:34%}
+.sv-zone.right{right:0;width:66%}
 .sysnote{padding:10px 15px;color:#536471;font-size:13px;border-bottom:1px solid #eff3f4;background:#f7f9fa;line-height:1.6}
 /* game additions: event card / actbar / changes / sheets / dm */
 .evcard{margin:13px 14px;border:1px solid #e3c766;background:linear-gradient(180deg,#fffbe8,#fff7d1);border-radius:18px;padding:16px;color:#0f1419}
@@ -215,7 +243,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v9</p>
+  <p class="ver">v10</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -296,7 +324,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v9</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v10</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -345,6 +373,20 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <p style="color:#536471;font-size:13px;margin:14px 0 4px">今日の話題に合った投稿案。どれを出す？</p>
     <div id="postopts"></div>
   </div>
+  <div id="storyviewer" role="dialog" aria-label="ストーリー">
+    <div class="sv-bg" id="sv-bg"></div>
+    <div class="sv-shade"></div>
+    <div class="sv-top">
+      <div class="sv-segs" id="sv-segs"></div>
+      <div class="sv-head">
+        <button class="sv-id" id="sv-id" aria-label="プロフィール"></button>
+        <button class="sv-close" id="sv-close" aria-label="閉じる"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+      </div>
+    </div>
+    <div class="sv-center" id="sv-center"></div>
+    <button class="sv-zone left" id="sv-prev" aria-label="前へ"></button>
+    <button class="sv-zone right" id="sv-next" aria-label="次へ"></button>
+  </div>
   <nav id="x-nav"></nav>
 </section>
 
@@ -359,7 +401,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v9</p>
+  <p class="ver">v10</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -590,7 +632,8 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0};}
+function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[]};}
+
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -694,8 +737,61 @@ function renderNotifs(){
  const men=$("#x-men-list");const emp=$("#x-men-empty");
  if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>men.appendChild(postEl(p,false)));$("#x-men-n").textContent="("+S.men.length+")";}
 }
-/* stories (Status addition) */
-function renderStories(){$("#stories").innerHTML="";STORY.forEach(s=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story";b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</div><span>'+s[1]+"</span>";if(s[0]==="hiroto")b.onclick=()=>showPane("hisprof");$("#stories").appendChild(b);});}
+/* stories (Status addition): tap a ring -> fullscreen viewer.
+   One segment per story entry, auto-advance, tap right = next / left = back,
+   press-and-hold pauses (a quick tap still navigates on release).
+   Backdrops reuse photos already in the game; accounts without one get a
+   gradient + initial, so no new photos or story text are introduced. */
+const SV_IMG={hiroto:"assets/ig-gen-stage.jpg",nao:"assets/nao-promo.jpg"};
+const SV_DUR=5000;
+let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];STORY.forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
+function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
+function renderStorySeg(){
+ const s=STORY[svIdx],a=ACC[s[0]];if(!a)return;
+ const bg=$("#sv-bg"),img=SV_IMG[s[0]];
+ if(img){bg.style.backgroundImage="url("+img+")";}
+ else{const h=svHue(a.n);bg.style.backgroundImage="linear-gradient(160deg,hsl("+h+",52%,46%),hsl("+((h+50)%360)+",58%,26%))";}
+ const center=$("#sv-center");
+ if(img){center.className="sv-center";center.innerHTML="";}
+ else{center.className="sv-center show";center.innerHTML=avaTxt(a.n);}
+ const id=$("#sv-id");
+ id.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"<span><b></b><small></small></span>";
+ id.querySelector("b").textContent=a.n;id.querySelector("small").textContent=a.h;
+ const segs=$("#sv-segs");segs.innerHTML="";
+ STORY.forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
+ if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(s[0])){S.storySeen.push(s[0]);save();}}
+ svElapsed=0;
+}
+function svTick(ts){
+ if(svPaused){svLastTs=ts;svTimer=requestAnimationFrame(svTick);return;}
+ if(svLastTs)svElapsed+=ts-svLastTs;
+ svLastTs=ts;
+ svSegFill(svIdx,Math.min(100,svElapsed/SV_DUR*100));
+ if(svElapsed>=SV_DUR){svStep(1);return;}
+ svTimer=requestAnimationFrame(svTick);
+}
+function svStartTimer(){svStopTimer();svElapsed=0;svLastTs=0;svPaused=false;$("#storyviewer").classList.remove("paused");svTimer=requestAnimationFrame(svTick);}
+function svStopTimer(){if(svTimer!==null)cancelAnimationFrame(svTimer);svTimer=null;}
+function svStep(d){
+ if(d>0){if(svIdx>=STORY.length-1){closeStory();return;}svIdx++;}
+ else{if(svIdx<=0){svElapsed=0;svStartTimer();return;}svIdx--;}
+ renderStorySeg();svStartTimer();
+}
+function openStory(i){svIdx=Math.max(0,Math.min(STORY.length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
+function closeStory(){svStopTimer();svPaused=false;$("#storyviewer").classList.remove("on");$("#storyviewer").classList.remove("paused");renderStories();}
+$("#sv-close").addEventListener("click",closeStory);
+$("#sv-id").addEventListener("click",()=>{const a=STORY[svIdx]&&STORY[svIdx][0];if(a!=="hiroto"&&a!=="nao")return;closeStory();showPane(a==="hiroto"?"hisprof":"me");});
+function svZone(el,dir){if(!el)return;
+ el.addEventListener("pointerdown",e=>{e.preventDefault();svDownAt=Date.now();svPaused=true;$("#storyviewer").classList.add("paused");});
+ const release=nav=>{if(!svPaused&&!svDownAt)return;const held=Date.now()-svDownAt;svDownAt=0;svPaused=false;$("#storyviewer").classList.remove("paused");svLastTs=0;if(nav&&held<300)svStep(dir);};
+ el.addEventListener("pointerup",()=>release(true));
+ el.addEventListener("pointercancel",()=>release(false));
+ el.addEventListener("pointerleave",()=>release(false));
+}
+svZone($("#sv-next"),1);svZone($("#sv-prev"),-1);
+document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains("on"))return;if(e.key==="Escape")closeStory();else if(e.key==="ArrowRight")svStep(1);else if(e.key==="ArrowLeft")svStep(-1);});
 /* feed */
 function renderFeed(){
  const tl=$("#tl-posts");tl.innerHTML="";
