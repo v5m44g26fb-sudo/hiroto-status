@@ -107,7 +107,11 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .emptytab span{color:#536471;font-size:13.5px;line-height:1.65;display:block}
 .counts span{font-size:13px;color:#536471}.counts b{color:#0f1419}
 .sug{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px}
-.sug span{border:1px solid #cfd9de;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.sug span{border:1px solid #cfd9de;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;transition:background .15s ease,transform .1s ease}
+.sug span:active{background:#eff3f4;transform:scale(.96)}
+#x-pane-search .xtabs button{flex:none;padding-left:14px;padding-right:14px;white-space:nowrap}
+.trend{cursor:pointer;transition:background .15s ease}
+.trend:active{background:#f7f9f9}
 .trend{padding:12px 16px;border-bottom:1px solid #eff3f4}
 .trend small{color:#536471}.trend b{display:block;font-size:15px;margin:2px 0}
 /* compose (transplanted shell: #x-compose-btn / #x-compose) */
@@ -129,7 +133,9 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 #x-bell-n{position:absolute;top:-4px;right:-6px;background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
 #x-notif{position:absolute;top:52px;right:10px;width:min(330px,92vw);max-height:60dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:16px;box-shadow:0 12px 34px rgba(0,0,0,.2);z-index:90;display:none}
 #x-notif.on{display:block;animation:panein .18s ease}
-#x-notif .nrow{display:flex;gap:10px;padding:11px 13px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5}
+#x-notif .nrow{display:flex;gap:10px;padding:11px 13px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5;cursor:pointer;transition:background .15s ease}
+#x-notif .nrow:active{background:#f7f9f9}
+#x-notif .nrow.unseen{background:rgba(29,155,240,.06)}
 #x-notif .nrow small{color:#536471;display:block}
 /* stories row (Status addition, minimal) */
 #stories{display:flex;gap:13px;padding:11px 14px 7px;overflow-x:auto;border-bottom:1px solid #eff3f4}
@@ -172,12 +178,16 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .statbox.distbox{border-color:#f91880;background:rgba(249,24,128,.05);grid-column:1/-1}
 .gauge{height:8px;border-radius:4px;background:#eff3f4;margin-top:8px;overflow:hidden}
 .gauge i{display:block;height:100%;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:4px}
-.dmrow{display:flex;gap:11px;padding:13px 15px;border-bottom:1px solid #eff3f4;width:100%;text-align:left;align-items:center;background:#fff;border:none}
+.dmrow{display:flex;gap:11px;padding:13px 15px;border-bottom:1px solid #eff3f4;width:100%;text-align:left;align-items:center;background:#fff;border:none;cursor:pointer;font-family:inherit;transition:background .15s ease}
+.dmrow:active{background:#f7f9f9}
 .dmrow .pv{color:#536471;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.unread{width:9px;height:9px;border-radius:50%;background:#f91880;flex:none}
-.msg{max-width:78%;padding:10px 13px;border-radius:18px;font-size:14.5px;line-height:1.55;margin:9px 14px;width:fit-content;white-space:pre-wrap}
-.msg.them{background:#eff3f4;margin-right:auto;border-bottom-left-radius:4px}
-.msg.me{background:#f91880;color:#fff;margin-left:auto;border-bottom-right-radius:4px}
+.dmrow.unreadrow .pv{color:#0f1419;font-weight:600}
+.unread{width:9px;height:9px;border-radius:50%;background:#1d9bf0;flex:none}
+#dmthread .dmhead{position:sticky;top:0;z-index:6;background:rgba(255,255,255,.94);backdrop-filter:blur(10px)}
+@keyframes msgin{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+.msg{max-width:78%;padding:10px 13px;border-radius:18px;font-size:15px;line-height:1.55;margin:9px 14px;width:fit-content;white-space:pre-wrap;animation:msgin .24s cubic-bezier(.2,.8,.25,1)}
+.msg.them{background:#eff3f4;margin-right:auto;border-bottom-left-radius:4px;transform-origin:bottom left}
+.msg.me{background:#1d9bf0;color:#fff;margin-left:auto;border-bottom-right-radius:4px;transform-origin:bottom right}
 .endgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:18px;text-align:left}
 .endgrid .statbox{background:#16181c;border-color:#2f3336;color:#fff}
 .endgrid .statbox small{color:#9aa0a6}
@@ -193,7 +203,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v6</p>
+  <p class="ver">v7</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -248,7 +258,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div id="x-pane-trend" style="display:none"></div>
     <div id="x-pane-mention" style="display:none"><div style="padding:26px 18px;color:#536471;font-size:13.5px" id="x-men-empty">まだメンションはない。…今のところは。</div><div id="x-men-list"></div></div>
     <div id="x-pane-search" style="display:none">
-      <div class="xtabs" style="overflow-x:auto"><button class="act">話題を検索</button><button>トレンド</button><button>ニュース</button><button>スポーツ</button><button>エンタメ</button></div>
+      <div class="xtabs" id="x-stabs" style="overflow-x:auto"><button data-stab="topic" class="act">話題を検索</button><button data-stab="trend">トレンド</button><button data-stab="news">ニュース</button><button data-stab="sports">スポーツ</button><button data-stab="entame">エンタメ</button></div>
       <div style="padding:10px 14px 0;font-weight:800;font-size:13.5px;color:#536471">おすすめワード</div>
       <div class="sug" id="x-sug"></div>
       <div id="x-search-results"></div>
@@ -273,7 +283,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v6</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v7</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -293,8 +303,8 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div id="x-pane-msg" style="display:none">
       <div id="dmlist"></div>
       <div id="dmthread" class="hidden">
-        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #eff3f4">
-          <button id="dm-back" style="background:none;border:none;font-size:19px;cursor:pointer">‹</button>
+        <div class="dmhead" style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #eff3f4">
+          <button id="dm-back" style="background:none;border:none;font-size:19px;cursor:pointer;padding:4px 6px;border-radius:50%">‹</button>
           <span id="th-av"></span><b id="th-name" style="font-size:15px"></b>
         </div>
         <div id="th-msgs"></div>
@@ -330,7 +340,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v6</p>
+  <p class="ver">v7</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -557,7 +567,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false};}
+function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0};}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -587,6 +597,7 @@ function toastChg(t){const d=document.createElement("div");d.className="chg";d.t
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 const PANES=["tl","trend","mention","me","search","msg","hisprof"];
 function showPane(k){
+ $("#x-notif").classList.remove("on");
  PANES.forEach(p=>{const el=$("#x-pane-"+p);if(el)el.style.display=p===k?"block":"none";});
  $$("#x-xtabs [data-xtab]").forEach(x=>x.classList.toggle("act",x.dataset.xtab===k));
  $("#x-appbar").classList.toggle("v738-search",k==="search");
@@ -619,15 +630,16 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
 /* FAB: hide while scrolling down, return on scroll up (real-X feel) */
 (function(){const sc=$("#x-scroll"),fab=$("#x-compose-btn");if(!sc||!fab)return;let ly=0;sc.addEventListener("scroll",()=>{const y=sc.scrollTop;if(y>ly+8&&y>120)fab.classList.add("fab-hide");else if(y<ly-4||y<60)fab.classList.remove("fab-hide");ly=y;},{passive:true});})();
 /* bell / notif panel (transplanted #x-bell / #x-notif pattern) */
-function toggleNotif(){$("#x-notif").classList.toggle("on");renderNotifs();}
+function unseenNotifs(){return Math.max(0,(S.notifs||[]).length-(S.notifSeen||0));}
+function toggleNotif(){const p=$("#x-notif");const opening=!p.classList.contains("on");p.classList.toggle("on");if(opening){renderNotifs();/* opened = read: badge clears, rows lose the unseen tint on next open */S.notifSeen=S.notifs.length;save();const bn=$("#x-bell-n");bn.style.display="none";$$("#x-notif .nrow").forEach(r=>r.addEventListener("click",()=>p.classList.remove("on")));}}
 $("#x-bell").addEventListener("click",toggleNotif);
 function renderNotifs(){
- const list=$("#x-notif-list");
+ const list=$("#x-notif-list");const unseen=unseenNotifs();
  list.innerHTML=S.notifs.length?"":'<div style="padding:14px;color:#536471;font-size:13px">まだ通知はないよ</div>';
- S.notifs.forEach(n=>{const a=ACC[n.a];const row=document.createElement("div");row.className="nrow";
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a];const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"");
   row.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" width="34" height="34" alt="">':avaTxt(a.n))+"<div><b></b><span class='tx2'></span><small></small></div>";
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
- const bn=$("#x-bell-n");bn.style.display=S.notifs.length?"block":"none";bn.textContent=S.notifs.length||"";
+ const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
  const men=$("#x-men-list");const emp=$("#x-men-empty");
  if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>men.appendChild(postEl(p,false)));$("#x-men-n").textContent="("+S.men.length+")";}
 }
@@ -675,10 +687,22 @@ $$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b
 $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 (function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?"井汲大翔さんをフォローしたよ":"井汲大翔さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
 /* trends + search */
-function renderTrends(){$("#x-pane-trend").innerHTML=TRENDS.map(t=>'<div class="trend"><small>'+t[0]+" ― トレンド</small><b>"+t[1]+"</b><small>"+t[2]+"</small></div>").join("");
- $("#x-sug").innerHTML=["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ミュージック・ステージ"].map(w=>"<span>"+w+"</span>").join("");
- $("#x-search-results").innerHTML="";TRENDS.forEach(t=>{const d=document.createElement("div");d.className="trend";d.innerHTML="<small>"+t[0]+"</small><b>"+t[1]+"</b><small>"+t[2]+"</small>";$("#x-search-results").appendChild(d);});}
-$("#x-search-btn").addEventListener("click",()=>{const q=$("#x-q").value.trim();if(!q)return;$("#x-search-results").innerHTML="";S.posts.filter(p=>(p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))).forEach(p=>$("#x-search-results").appendChild(postEl(p,false)));if(!$("#x-search-results").children.length)$("#x-search-results").innerHTML='<div style="padding:20px;color:#536471;font-size:13.5px">「'+q+'」のポストはまだ見つからない</div>';});
+function trendEl(t){const d=document.createElement("div");d.className="trend";d.innerHTML="<small></small><b></b><small class='c'></small>";d.querySelector("small").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".c").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+function renderTrends(){$("#x-pane-trend").innerHTML="";TRENDS.forEach(t=>$("#x-pane-trend").appendChild(trendEl(t)));
+ const sug=$("#x-sug");sug.innerHTML="";["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ミュージック・ステージ"].forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
+ renderSearchTab("topic");}
+let searchTab="topic";
+function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
+ const box=$("#x-search-results");if(!box)return;box.innerHTML="";
+ const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
+ if(k==="topic"){TRENDS.forEach(t=>box.appendChild(trendEl(t)));return;}
+ const list=TRENDS.filter(t=>cat===null||t[0]===cat);
+ if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
+ list.forEach(t=>box.appendChild(trendEl(t)));}
+$$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
+function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q)))).forEach(p=>box.appendChild(postEl(p,false)));if(!box.children.length){const d=document.createElement("div");d.style.cssText="padding:20px;color:#536471;font-size:13.5px";d.textContent="「"+q+"」のポストはまだ見つからない";box.appendChild(d);}$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
+$("#x-search-btn").addEventListener("click",runSearch);
+$("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
 /* event card (Status addition) */
 function renderEvent(){
  const slot=$("#eventslot"),ch=CH[S.ch-1];slot.innerHTML="";
@@ -742,16 +766,17 @@ function updateBdg(){const n=S?S.threads.filter(t=>t.unread).length:0;const bd=$
 function renderDmList(){
  const list=$("#dmlist");$("#dmthread").classList.add("hidden");list.classList.remove("hidden");
  list.innerHTML=S.threads.length?"":'<div class="sysnote">まだDMはないよ。物語が進むと届く。</div>';
- S.threads.forEach(t=>{const a=ACC[t.who];const b=document.createElement("button");b.className="dmrow";
+ S.threads.forEach(t=>{const a=ACC[t.who];const b=document.createElement("button");b.className="dmrow"+(t.unread?" unreadrow":"");
   b.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" width="46" height="46" alt="">':avaTxt(a.n))+'<div style="flex:1;min-width:0"><b></b><div class="pv"></div></div>'+(t.unread?'<span class="unread"></span>':"");
   b.querySelector("b").textContent=a.n;b.querySelector(".pv").textContent=t.msgs[t.msgs.length-1]||"";b.onclick=()=>openThread(t);list.appendChild(b);});
  updateBdg();
 }
-function openThread(t){curThread=t;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmthread").classList.remove("hidden");const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="34" height="34" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;renderThreadMsgs();updateBdg();save();}
+function scrollDmBottom(smooth){const sc=$("#x-scroll");requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.scrollTo({top:sc.scrollHeight,behavior:smooth?"smooth":"auto"});}));}
+function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmthread").classList.remove("hidden");const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="34" height="34" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;renderThreadMsgs();updateBdg();save();scrollDmBottom(false);}
 function renderThreadMsgs(){const t=curThread;if(!t)return;const box=$("#th-msgs");box.innerHTML="";
  t.msgs.forEach((m,i)=>{const d=document.createElement("div");d.className="msg "+(t.replyIdx===i?"me":"them");d.textContent=m;box.appendChild(d);});
  const cb=$("#th-choices");cb.innerHTML="";
- if(!t.done)t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);t.msgs.push(c.r);if(t.special)S.hirotoDm="done";applyFx(c.fx);renderThreadMsgs();save();};cb.appendChild(b);});}
+ if(!t.done)t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);t.msgs.push(c.r);if(t.special)S.hirotoDm="done";applyFx(c.fx);renderThreadMsgs();scrollDmBottom(true);save();};cb.appendChild(b);});}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();};
 /* profile */
 function renderProfile(){if(!S||!S.started)return;
