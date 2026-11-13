@@ -40,8 +40,10 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .view.on{display:flex}
 .appbar{padding:calc(14px + env(safe-area-inset-top)) 14px 9px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5ea;flex:none;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:5}
 .appbar .back{border:none;background:none;font-size:19px;cursor:pointer;color:#111;padding:2px 4px}
-.appbar .t{font-size:16.5px;font-weight:800}
-.appbar .s{font-size:11px;color:var(--sub)}
+.appbar .t{font-size:16.5px;font-weight:800;white-space:nowrap;flex:none}
+.appbar .s{font-size:11px;color:var(--sub);white-space:nowrap;flex:none}
+.appbar.v738-search .t{display:none}
+.appbar.v738-search #x-bell{display:none}
 .appbar .x-searchbar{display:none!important}
 .appbar.v738-search .x-searchbar{display:flex!important;flex:1;margin-left:6px;padding:0!important}
 .scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(140px + env(safe-area-inset-bottom));scroll-behavior:smooth;scrollbar-width:none}
@@ -318,7 +320,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v16</p>
+  <p class="ver">v17</p>
 </section>
 
 <section class="screen" id="scr-world" style="background:#000">
@@ -424,7 +426,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v16</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v17</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -517,7 +519,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v16</p>
+  <p class="ver">v17</p>
 </section>
 </div>
 <div id="changes"></div>
