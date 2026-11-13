@@ -38,7 +38,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 /* ===== X vessel: CSS transplanted from hiroto-tinder (base layer) ===== */
 .view{position:relative;display:none;flex-direction:column;background:#fff;color:var(--ink);height:100dvh}
 .view.on{display:flex}
-.appbar{padding:14px 14px 9px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5ea;flex:none;background:#fff;z-index:5}
+.appbar{padding:calc(14px + env(safe-area-inset-top)) 14px 9px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5ea;flex:none;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:5}
 .appbar .back{border:none;background:none;font-size:19px;cursor:pointer;color:#111;padding:2px 4px}
 .appbar .t{font-size:16.5px;font-weight:800}
 .appbar .s{font-size:11px;color:var(--sub)}
@@ -83,13 +83,17 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .rp-btn.rped{color:#00ba7c !important;font-weight:800}
 .x-searchbar{display:flex;gap:8px;padding:10px 12px 2px}
 .x-searchbar input{flex:1;border:1px solid #cfd9de;background:#eff3f4;border-radius:999px;padding:8px 14px;font-size:16px;font-family:inherit;min-width:0}
+input,textarea{font-size:16px}
 .x-searchbar button{background:#1d9bf0;color:#fff;border:none;border-radius:999px;padding:8px 15px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit}
-.xtabs{display:flex;border-bottom:1px solid #eff3f4;background:#fff}
+.xtabs{display:flex;border-bottom:1px solid #eff3f4;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .xtabs button{flex:1;background:none;border:none;padding:11px 2px;font-size:13.5px;font-weight:700;color:#536471;cursor:pointer;font-family:inherit;border-bottom:3px solid transparent;transition:color .18s ease,border-color .18s ease}
 .xtabs button.act{color:#0f1419;font-weight:800;border-bottom-color:#1d9bf0}
+.xtabs button:active{background:#eff3f4}
 @keyframes panein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 [id^="x-pane-"]{animation:panein .18s ease}
-.x-ptabs{display:flex;border-bottom:1px solid #eff3f4;margin-top:10px}
+#hometabs{position:sticky;top:0;z-index:6;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#x-stabs{position:sticky;top:0;z-index:6;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.x-ptabs{display:flex;border-bottom:1px solid #eff3f4;margin-top:10px;position:sticky;top:49px;z-index:6;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .x-ptabs button{flex:1;background:none;border:none;padding:11px 0 9px;font-size:13.5px;font-weight:600;color:#536471;cursor:pointer;font-family:inherit;position:relative}
 .x-ptabs button.act{color:#0f1419;font-weight:800}
 .x-ptabs button.act::after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:52px;height:3.5px;border-radius:2px;background:#1d9bf0}
@@ -156,16 +160,18 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .xc-note{color:#536471;font-size:13px;margin:10px 16px 2px;flex:none}
 #postopts{padding:2px 16px 24px;overflow-y:auto}
 #x-nav{position:absolute;left:0;right:0;bottom:0;height:calc(58px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
-#x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center}
+#x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center;transition:background .15s ease}
 #x-nav svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9}
-#x-nav button.sel svg{stroke:#1d9bf0}
+#x-nav button.sel svg{stroke:#1d9bf0;stroke-width:2.6}
+#x-nav svg{transition:transform .12s ease}
+#x-nav button:active svg{transform:scale(.84)}
 #x-nav button:active{background:#f7f9f9}
 #x-nav .bdg{position:absolute;top:4px;right:calc(50% - 20px);background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
 #x-bell{margin-left:auto;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;padding:8px;border-radius:50%}
 #x-bell:active{background:#eff3f4}
 #x-bell svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9}
 #x-bell-n{position:absolute;top:-4px;right:-6px;background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
-#x-notif{position:absolute;top:52px;right:10px;width:min(330px,92vw);max-height:60dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:16px;box-shadow:0 12px 34px rgba(0,0,0,.2);z-index:90;display:none}
+#x-notif{position:absolute;top:calc(52px + env(safe-area-inset-top));right:10px;width:min(330px,92vw);max-height:60dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:16px;box-shadow:0 12px 34px rgba(0,0,0,.2);z-index:90;display:none}
 #x-notif.on{display:block;animation:panein .18s ease}
 #x-notif .nrow{display:flex;gap:10px;padding:11px 13px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5;cursor:pointer;transition:background .15s ease}
 #x-notif .nrow:active{background:#f7f9f9}
@@ -217,7 +223,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .choice:disabled{opacity:.55}
 .choice.sel{border-color:#1d9bf0;background:rgba(29,155,240,.09)}
 .evcard .result{margin-top:11px;font-size:14px;line-height:1.65;color:#6d5b00;border-top:1px dashed #d8bd55;padding-top:10px}
-#actbar{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));padding:8px 14px;z-index:64;display:flex;gap:9px;background:rgba(255,255,255,.92)}
+#actbar{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));padding:8px 14px;z-index:64;display:flex;gap:9px;background:rgba(255,255,255,.92);border-top:1px solid rgba(239,243,244,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #actbar button{flex:1;padding:11px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer}
 #btn-activity{background:#eff3f4;border:1px solid #cfd9de;color:#0f1419}
 #btn-nextday{background:#1d9bf0;color:#fff;border:none;display:none}
@@ -229,7 +235,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .sheet{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:20px 18px 34px;max-height:82dvh;overflow-y:auto}
 .sheet h3{font-size:17px;margin-bottom:6px}.sheet p.desc{color:#536471;font-size:13px;line-height:1.6}
 .sheet .close{float:right;color:#536471;font-size:20px;background:none;border:none}
-#changes{position:fixed;top:56px;left:50%;transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none;width:max-content;max-width:94vw}
+#changes{position:fixed;top:calc(56px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none;width:max-content;max-width:94vw}
 .chg{background:rgba(15,20,25,.95);border:1px solid #1d9bf0;color:#fff;padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.35);animation:pop .25s ease both;text-align:center;transition:opacity .4s ease,transform .4s ease}
 .chg.out{opacity:0;transform:translateY(-6px)}
 .chg.dist{border-color:#f91880;color:#ffb3d1}.chg.bad{border-color:#f4212e;color:#ff8a93}
@@ -271,7 +277,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v11</p>
+  <p class="ver">v12</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -352,7 +358,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v11</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v12</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -445,7 +451,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v11</p>
+  <p class="ver">v12</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -694,7 +700,7 @@ renderOpts($("#firsts"),FIRSTS,x=>x.t,x=>x.d,it=>{selF=it;$("#btn-first").disabl
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();show("scr-persona");};
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-first");};
-$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー"});startChapter(1);show("v-x");save();};
+$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー"});startChapter(1);show("v-x");showPane("tl");save();};
 /* fx + Changes (Status addition) */
 function applyFx(fx){if(!fx)return;const b=stanceObj().bonus,out={};
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
