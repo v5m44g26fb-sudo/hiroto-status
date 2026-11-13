@@ -266,6 +266,33 @@ input,textarea{font-size:16px}
 #ptr.ready{color:#0f1419}
 @keyframes ptrspin{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
+/* ===== Phase B: Status-style intro + HUD + Changes ===== */
+.flowsteps{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.flowsteps span{border:1px solid #2f3336;color:#9aa0a6;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700;letter-spacing:.08em}
+.flowsteps span b{color:#f91880}
+.opt.locked{opacity:.45}
+.opt .locktag{display:inline-block;margin-top:6px;border:1px solid #2f3336;border-radius:999px;padding:2px 9px;font-size:11px;color:#9aa0a6}
+.worldnote{border:1px solid #7856ff;background:rgba(120,86,255,.12);border-radius:14px;padding:11px 13px;font-size:13px;line-height:1.6;color:#d9d2ff;margin-bottom:16px}
+.worldnote b{color:#fff}
+#status-hud{margin:10px 12px 2px;border:1.5px solid #0f1419;border-radius:16px;padding:11px 13px 10px;background:linear-gradient(180deg,#fff,#fbfcfe);box-shadow:0 3px 12px rgba(15,20,25,.07)}
+.hud-top{display:flex;align-items:center;gap:11px}
+.hud-lv{background:#0f1419;color:#ffd400;font-weight:900;font-size:14px;border-radius:10px;padding:6px 9px;flex:none;letter-spacing:.03em}
+.hud-xpwrap{flex:1;min-width:0}
+.hud-xplab{display:flex;justify-content:space-between;font-size:11px;color:#536471;font-weight:700;margin-bottom:4px}
+.hud-xpbar{height:8px;border-radius:4px;background:#eff3f4;overflow:hidden}
+.hud-xpbar i{display:block;height:100%;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:4px;transition:width .5s ease}
+.hud-fol{text-align:right;flex:none}
+.hud-fol small{display:block;color:#536471;font-size:10.5px;font-weight:700}
+.hud-fol b{font-size:21px;line-height:1.1}
+.hud-bot{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
+.hud-world{border:1px solid #cfd9de;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;color:#0f1419}
+.hud-energy{font-size:12px;font-weight:800;color:#0f1419}
+.hud-day{margin-left:auto;font-size:11.5px;color:#536471;font-weight:700;white-space:nowrap}
+.hud-energy{white-space:nowrap}
+.hud-note{font-size:11px;color:#536471;line-height:1.55;margin-top:7px}
+.chg.good{border-color:#00ba7c;color:#8fe6c3}
+.chg.levelup{border-color:#ffd400;color:#ffd400;font-size:14.5px;padding:11px 18px;background:rgba(60,48,0,.96)}
+.evcard img.evimg{width:100%;border-radius:12px;margin-top:10px;display:block;border:1px solid #e3c766}
 </style>
 </head>
 <body>
@@ -274,15 +301,27 @@ input,textarea{font-size:16px}
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
   <p class="sub">デビューしたての新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>そして、先輩歌手・井汲大翔に、少しずつ近づけるか。</p>
+  <div class="flowsteps"><span><b>1</b> ワールド選択</span><span><b>2</b> ペルソナ作成</span><span><b>3</b> 最初のフォロワー</span><span><b>4</b> フィードへ</span></div>
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v12</p>
+  <p class="ver">v13</p>
+</section>
+
+<section class="screen" id="scr-world" style="background:#000">
+  <div class="setup">
+    <div class="step">STEP 1 / 3 ― WORLD SELECT</div>
+    <h2>どの世界で生きる？</h2>
+    <p class="desc">Statusでは、まず「ワールド」を選んでから世界に入る。この物語のワールドは芸能界。選んだ世界のルール――フォロワー、評判、炎上――で、毎日が動き出す。</p>
+    <div id="worlds"></div>
+    <button class="btn" id="btn-world" disabled>この世界に入る</button>
+  </div>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
   <div class="setup">
-    <div class="step">STEP 1 / 2</div>
+    <div class="step">STEP 2 / 3 ― PERSONA</div>
+    <div class="worldnote" id="persona-world-note">ワールド：<b>芸能界 ― アイドルワールド</b><br>有名になるか、キャンセル（炎上）されるか。それがこの世界の評判の軸。</div>
     <h2>公式アカウント開設</h2>
     <p class="desc">ソロでデビューが決まった、新人アイドルの「なお」。今日、公式Xを開設する。ハンドルと、アイドルとしてのコンセプトを決めよう。</p>
     <p class="secttl" style="padding-left:0;color:#fff">公式ハンドル</p>
@@ -295,9 +334,9 @@ input,textarea{font-size:16px}
 
 <section class="screen" id="scr-first" style="background:#000">
   <div class="setup">
-    <div class="step">STEP 2 / 2</div>
+    <div class="step">STEP 3 / 3 ― FIRST FOLLOWER</div>
     <h2>最初のフォロワー</h2>
-    <p class="desc">開設から数時間。フォロワー第1号は誰だったかで、スタートの空気が変わる。</p>
+    <p class="desc">開設から数時間。Statusでは、最初のフォロワーが物語の起点になる。フォロワー第1号は誰だったかで、スタートの空気が変わる。</p>
     <div id="firsts"></div>
     <button class="btn" id="btn-first" disabled>この人で始める</button>
   </div>
@@ -326,6 +365,19 @@ input,textarea{font-size:16px}
         <button data-htab="fol">フォロー中</button>
       </div>
       <div id="stories"></div>
+      <div id="status-hud">
+        <div class="hud-top">
+          <span class="hud-lv" id="hud-lv">Lv 1</span>
+          <div class="hud-xpwrap"><div class="hud-xplab"><span>XP ― 次のレベルまで</span><span id="hud-xptext">0 / 50</span></div><div class="hud-xpbar"><i id="hud-xpfill" style="width:0%"></i></div></div>
+          <div class="hud-fol"><small>フォロワー</small><b id="hud-fol">1</b></div>
+        </div>
+        <div class="hud-bot">
+          <span class="hud-world" id="hud-world">ワールド：芸能界</span>
+          <span class="hud-energy" id="hud-energy">今日のAction 残り3/3</span>
+          <span class="hud-day" id="hud-day">Day 1 / 5</span>
+        </div>
+        <div class="hud-note" id="hud-note">投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。</div>
+      </div>
       <div id="daybanner" class="sysnote"></div>
       <div id="eventslot"></div>
       <div id="tl-posts"></div>
@@ -358,7 +410,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v12</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v13</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -451,7 +503,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v12</p>
+  <p class="ver">v13</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -476,6 +528,10 @@ const ACC={
  fan1:{n:"ゆな｜なお推し1号",h:"@yuna_nao"},
  fan2:{n:"一般の通行人",h:"@tsukonin_jp"}
 };
+const WORLDS=[
+ {id:"idol",t:"芸能界 ― アイドルワールド",d:"ステージ、歌番組、配信、まとめ垢。フォロワーと評判で物語が動く、この物語のワールド。",locked:false},
+ {id:"daily",t:"日常ワールド",d:"学校とバイトと、静かな毎日が続く世界線。",locked:true},
+ {id:"celeb",t:"セレブワールド",d:"最初から誰もが知っている、有名人の世界線。",locked:true}];
 const HANDLES=[
  {h:"@nao_official",t:"王道の公式感",d:"事務所公認っぽい安心感。メディアに拾われやすい。"},
  {h:"@nao_uta",t:"「歌の人」推し",d:"音楽好きに刺さる。世間の認知度が伸びやすい名前。"},
@@ -559,13 +615,13 @@ posts:[
 {tx:"本日『ミュージック・ステージ』に出演します。\n初めての歌番組、緊張で手が冷たいです。でも歌う時は、ちゃんと届けます。見てくれたら嬉しいです。",img:"assets/nao-stage.jpg",fx:{fol:160,cog:12,xp:10,dist:2,flm:0},react:[
 {a:"fan1",tx:"なおちゃんのテレビ初歌唱、泣いた。手冷たいって言ってたのに声は全然震えてなかった。",lk:210,rp:34,rc:11},
 {a:"media",tx:"新人・なお、初出演で生歌唱を披露。堂々としたステージに反響が届いています。",lk:430,rp:66,rc:14}]},
-{tx:"収録終わりました。同じ番組に憧れの先輩がいて、背筋が伸びる思いでした。いつか「共演」と言える日が来るように。",fx:{fol:130,cog:10,xp:10,dist:6,flm:3},react:[
+{tx:"収録終わりました。同じ番組に憧れの先輩がいて、背筋が伸びる思いでした。いつか「共演」と言える日が来るように。",img:"assets/nao-backstage-selfie.jpg",fx:{fol:130,cog:10,xp:10,dist:6,flm:3},react:[
 {a:"matome",tx:"新人・なお、井汲大翔と同番組出演に「背筋が伸びる思い」。憧れエピソードに注目集まる",lk:355,rp:58,rc:41},
 {a:"fan2",tx:"同じ番組に出ただけでもすごいのに。夢、一段進んだな。",lk:47,rp:3,rc:2}]},
 {tx:"テレビの自分、反省点ばっかりでした。でもこれが今の実力。次は絶対もっと上手くなります。",fx:{fol:95,cog:8,xp:14,dist:1,flm:0},react:[
 {a:"sora",tx:"反省をちゃんと言葉にできる新人、伸びるタイプだと思う。",lk:74,rp:8,rc:3},
 {a:"fan1",tx:"反省なんてしなくていいくらい良かったよ！！",lk:66,rp:5,rc:6}]}],
-event:{tag:"EVENT ― 楽屋が隣",title:"楽屋のドアプレートに、並んだ名前",body:"収録後、廊下で大翔とすれ違った。本人から声をかけてきたのは初めてで――「今日の、よかったです」それだけ言って、少し照れたように去っていった。どう返したことにする？",
+event:{tag:"EVENT ― 楽屋が隣",title:"楽屋のドアプレートに、並んだ名前",body:"収録後、廊下で大翔とすれ違った。本人から声をかけてきたのは初めてで――「今日の、よかったです」それだけ言って、少し照れたように去っていった。どう返したことにする？",img:"assets/nao-makeup.jpg",
 choices:[
 {t:"「ありがとうございます！」と元気いっぱいに返す",r:"彼は小さく笑って「おつかれさまです」とだけ。短い。でも、確かに目を見て言ってくれた。",fx:{fol:0,cog:0,xp:8,dist:10,flm:0}},
 {t:"緊張で「あ、はい…！」しか言えない",r:"最悪だ、と思った帰り道。でも後でスタッフが教えてくれた。「大翔さん、あの後もなおさんの歌の話してましたよ」",fx:{fol:0,cog:0,xp:6,dist:8,flm:0}},
@@ -614,7 +670,7 @@ posts:[
 {a:"matome",tx:"新人・なお「ただのプリン好き」弁明ポスト、かえって拡散。匂わせ疑惑、トレンド入り寸前",lk:1890,rp:402,rc:377},
 {a:"fan2",tx:"プリン被りで騒ぐの面白すぎる。でも本人ちょっと可哀想ではある。",lk:210,rp:19,rc:44},
 {a:"fan1",tx:"守りたい、このプリン好きを。",lk:340,rp:28,rc:15}]},
-{tx:"今日は配信の最終リハでした。明日、大事なお知らせがあります。",fx:{fol:150,cog:10,xp:10,dist:3,flm:0},react:[
+{tx:"今日は配信の最終リハでした。明日、大事なお知らせがあります。",img:"assets/nao-stream-selfie.jpg",fx:{fol:150,cog:10,xp:10,dist:3,flm:0},react:[
 {a:"fan1",tx:"大事なお知らせ！？ コラボ正式決定であれー！！",lk:190,rp:22,rc:13},
 {a:"media",tx:"新人・なお、明日「大事なお知らせ」と予告。コラボ配信の正式発表か、注目が集まります。",lk:520,rp:71,rc:9}]},
 {tx:"（今日は何も投稿しない。静かに練習の写真だけ、言葉なしで置く）",img:"assets/nao-lesson.jpg",fx:{fol:60,cog:5,xp:12,dist:2,flm:-4},react:[
@@ -682,7 +738,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[]};}
+function defState(){return{started:false,world:"",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[]};}
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
@@ -692,22 +748,26 @@ function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
 let postSeq=0;
 function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
-let selH=null,selSt=null,selF=null;
+let selH=null,selSt=null,selF=null,selW=null;
+(function(){const box=$("#worlds");if(!box)return;WORLDS.forEach(w=>{const b=document.createElement("button");b.className="opt"+(w.locked?" locked":"");b.innerHTML="<b></b><span></span>"+(w.locked?'<span class="locktag">この物語ではロック中</span>':"");b.querySelector("b").textContent=w.t;b.querySelector("span").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
 function renderOpts(el,items,gt,gd,cb){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>";b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.t+" ― "+x.d,it=>{selH=it;chkP();});
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d+"（伸びやすい："+x.bonusTx+"）",it=>{selSt=it;chkP();});
 renderOpts($("#firsts"),FIRSTS,x=>x.t,x=>x.d,it=>{selF=it;$("#btn-first").disabled=false;});
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
-$("#btn-start").onclick=()=>{S=defState();show("scr-persona");};
+$("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
+$("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-first");};
-$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー"});startChapter(1);show("v-x");showPane("tl");save();};
+$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
 /* fx + Changes (Status addition) */
-function applyFx(fx){if(!fx)return;const b=stanceObj().bonus,out={};
+function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);const b=stanceObj().bonus,out={};
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
  if(out.fol)S.fol=Math.max(0,S.fol+out.fol);if(out.xp)S.xp+=out.xp;
  if(out.cog)S.cog=Math.max(0,Math.min(100,S.cog+out.cog));if(out.flm)S.flm=Math.max(0,Math.min(100,S.flm+out.flm));if(out.dist)S.dist=Math.max(0,Math.min(100,S.dist+out.dist));
  const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:"ひろとの距離"};const box=$("#changes");
- Object.keys(out).forEach((k,i)=>{const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(k==="flm"&&out[k]>0?" bad":""));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);});
+ Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);});
+ const lvAfter=1+Math.floor((S.xp||0)/50);
+ if(lvAfter>lvBefore){const n=Object.keys(out).length;const d=document.createElement("div");d.className="chg levelup";d.textContent="LEVEL UP！ Lv "+lvAfter+" に上がった";d.style.animationDelay=(n*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),3400+n*90);setTimeout(()=>d.remove(),3900+n*90);}
  renderProfile();save();}
 function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
@@ -887,7 +947,7 @@ $("#thread-back").addEventListener("click",()=>{
 });
 /* profile tabs (real-X linkage: post / reply / media grid / likes) */
 let meTab="post",hisTab="post";
-const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg"];
+const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg","assets/nao-stream-selfie.jpg","assets/nao-backstage-selfie.jpg","assets/nao-makeup.jpg"];
 function emptyTab(t,s){return '<div class="emptytab"><b></b><span></span></div>';}
 function mkEmpty(t,s){const d=document.createElement("div");d.innerHTML=emptyTab(t,s);d.querySelector("b").textContent=t;d.querySelector("span").textContent=s;return d.firstChild;}
 function mediaGrid(imgs){const g=document.createElement("div");g.className="mediagrid";imgs.forEach(u=>{const im=document.createElement("img");im.src=u;im.alt="";g.appendChild(im);});return g;}
@@ -938,7 +998,8 @@ function renderEvent(){
  const slot=$("#eventslot"),ch=CH[S.ch-1];slot.innerHTML="";
  if(S.evDone)return;
  const ev=ch.event;const card=document.createElement("div");card.className="evcard";
- card.innerHTML='<div class="tag"></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
+ card.innerHTML='<div class="tag"></div><h3></h3><p></p><div class="evimg"></div><div class="evc"></div><div class="evr"></div>';
+ if(ev.img){const im=document.createElement("img");im.className="evimg";im.src=ev.img;im.alt="";card.querySelector(".evimg").appendChild(im);}
  card.querySelector(".tag").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
  ev.choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();save();};box.appendChild(b);});
@@ -961,7 +1022,7 @@ function startChapter(n){
  }
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
 }
-function checkNext(){$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";}
+function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";}
 $("#btn-nextday").onclick=()=>{if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}};
 /* compose (real-X flow): tap a draft choice to load it into the composer like
    typed text - avatar + 17px preview + reply-scope line + char ring - then the
@@ -1042,7 +1103,17 @@ function renderProfile(){if(!S||!S.started)return;
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
- $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);}
+ $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);renderHud();}
+function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50),inLv=(S.xp||0)%50;
+ const el=id=>$(id);if(el("#hud-lv"))el("#hud-lv").textContent="Lv "+lv;
+ if(el("#hud-xptext"))el("#hud-xptext").textContent=inLv+" / 50（累計 "+S.xp+" XP）";
+ if(el("#hud-xpfill"))el("#hud-xpfill").style.width=(inLv/50*100)+"%";
+ if(el("#hud-fol"))el("#hud-fol").textContent=fmt(S.fol);
+ if(el("#hud-day"))el("#hud-day").textContent="Day "+S.ch+" / 5";
+ if(el("#hud-world"))el("#hud-world").textContent="ワールド：芸能界";
+ const used=[S.posted,S.evDone,S.actDone].filter(Boolean).length,remain=3-used;
+ if(el("#hud-energy"))el("#hud-energy").textContent="今日のAction "+"☕".repeat(remain)+(remain<3?" "+"☆".repeat(used):"")+" 残り"+remain+"/3";
+ if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";}
 /* ending */
 function ending(){let title,body;const hot=S.dist>=40;
  if(S.flm>=55){title="炎上END ― 燃えてしまった件";body="匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「プリン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
@@ -1057,7 +1128,7 @@ function resetAll(){localStorage.removeItem(KEY);location.reload();}
 $("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-restart").onclick=resetAll;
 renderTrends();
 const saved=load();
-if(saved&&saved.started){S=Object.assign(defState(),saved);
+if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
  $("#btn-continue").onclick=()=>{show("v-x");$("#daybanner").textContent=CH[S.ch-1].day+" ― "+CH[S.ch-1].banner;$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
