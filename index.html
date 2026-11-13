@@ -214,8 +214,16 @@ input,textarea{font-size:16px}
 .sv-zone.right{right:0;width:66%}
 .sysnote{padding:10px 15px;color:#536471;font-size:13px;border-bottom:1px solid #eff3f4;background:#f7f9fa;line-height:1.6}
 /* game additions: event card / actbar / changes / sheets / dm */
-.evcard{margin:13px 14px;border:1px solid #e3c766;background:linear-gradient(180deg,#fffbe8,#fff7d1);border-radius:18px;padding:16px;color:#0f1419}
-.evcard .tag{color:#9a7b00;font-size:12px;font-weight:800;letter-spacing:.12em}
+.evcard{margin:13px 14px;border:1px solid #e3c766;background:linear-gradient(180deg,#fffbe8,#fff7d1);border-radius:18px;padding:16px;color:#0f1419;box-shadow:0 12px 32px rgba(180,140,0,.20);animation:evin .5s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes evin{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:none}}
+.evcard .tag{display:inline-flex;align-items:center;gap:5px;background:#f7c948;color:#5b4300;font-size:11.5px;font-weight:800;letter-spacing:.1em;padding:4px 11px;border-radius:999px;box-shadow:0 2px 8px rgba(180,140,0,.35)}
+.evcard .tag svg{width:11px;height:11px;fill:#5b4300;flex:none}
+.actlab{font-size:12.5px;font-weight:800;color:#536471;letter-spacing:.06em;margin:14px 0 2px}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chip{padding:8px 14px;border-radius:999px;border:1px solid #cfd9de;background:#fff;font-size:13.5px;font-weight:700;color:#0f1419;cursor:pointer;transition:background .15s ease,color .15s ease,transform .1s ease;font-family:inherit}
+.chip:active{transform:scale(.96)}
+.chip.sel{background:#0f1419;color:#fff;border-color:#0f1419}
+#act-go{margin-top:16px}
 .evcard h3{font-size:17px;margin:7px 0 6px}
 .evcard p{font-size:14px;line-height:1.65;color:#3d3a28}
 .choice{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 13px;border:1px solid #cfd9de;border-radius:12px;background:#fff;font-size:14px;line-height:1.5;color:#0f1419;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .1s ease}
@@ -305,7 +313,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v14</p>
+  <p class="ver">v15</p>
 </section>
 
 <section class="screen" id="scr-world" style="background:#000">
@@ -410,7 +418,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v14</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v15</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -503,14 +511,17 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v14</p>
+  <p class="ver">v15</p>
 </section>
 </div>
 <div id="changes"></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
   <button class="close" data-close="scrim-act">✕</button>
-  <h3>Activity</h3><p class="desc">1チャプターに1回だけ。何をする？</p>
-  <div id="actopts"></div>
+  <h3>Activity</h3><p class="desc">1日に1回だけ。タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
+  <div id="actsec-title"><p class="actlab">タイトル ― 何をする？</p><div id="actopts"></div></div>
+  <div id="actsec-who" class="hidden"><p class="actlab">相手 ― 誰と？（複数選んでも、効果は同じ）</p><div id="actwho" class="chiprow"></div></div>
+  <div id="actsec-time" class="hidden"><p class="actlab">時間帯 ― いつやる？</p><div id="acttime" class="chiprow"></div></div>
+  <button class="btn hidden" id="act-go" disabled>この内容で実行する</button>
   <div id="actresult" style="margin-top:12px;font-size:14px;line-height:1.75"></div>
 </div></div>
 <script>
@@ -577,9 +588,9 @@ choices:[
 {t:"「いつか先輩方と並べるように」と意気込みを添える",r:"意気込みが大翔ファンの目にも留まったらしい。ざわつきは少しだけ。",fx:{fol:70,cog:9,xp:8,dist:3,flm:4}},
 {t:"記事を自画自賛気味に連投する",r:"熱量は伝わったけど「調子に乗ってる？」の声も。炎上の芽、小さく1つ。",fx:{fol:55,cog:6,xp:5,dist:0,flm:9}}]},
 activity:[
-{t:"デビュー曲のサビをアカペラで投稿する",r:"30秒のアカペラ動画。「生歌つよい」のコメントが付き始めた。",fx:{fol:35,cog:5,xp:10,dist:0,flm:0}},
-{t:"同期あかりの投稿にリプで絡みに行く",r:"あかり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
-{t:"大翔の新曲ポストに、感想リプをそっと置く",r:"数百件のリプに埋もれたはず。……でも、その投稿のいいね欄に、後で自分の名前が残ることになる。",fx:{fol:5,cog:1,xp:6,dist:3,flm:2}}],
+{t:"デビュー曲のサビをアカペラで投稿する",who:["ひとりで"],r:"30秒のアカペラ動画。「生歌つよい」のコメントが付き始めた。",fx:{fol:35,cog:5,xp:10,dist:0,flm:0}},
+{t:"同期あかりの投稿にリプで絡みに行く",who:["あかり"],r:"あかり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
+{t:"大翔の新曲ポストに、感想リプをそっと置く",who:["井汲大翔"],r:"数百件のリプに埋もれたはず。……でも、その投稿のいいね欄に、後で自分の名前が残ることになる。",fx:{fol:5,cog:1,xp:6,dist:3,flm:2}}],
 dm:{who:"miku",msgs:["デビューおめでとう！！ 私、フォロワー1号だからね！？","X見てるよ。緊張してない？"],
 choices:[{t:"「ありがとう、1号は特別だよ」と返す",r:"みく「特別いただきました！！ 全力で布教するね」",fx:{fol:15,xp:4,dist:0,flm:0,cog:1}},
 {t:"「正直めっちゃ緊張してる」と本音を返す",r:"みく「大丈夫、歌はほんとに良いから。自信もって」",fx:{fol:5,xp:6,dist:0,flm:0,cog:0}}]}},
@@ -606,9 +617,9 @@ choices:[
 {t:"お礼の気持ちで、大翔の最新ポストにいいねを返す",r:"言葉は交わしてない。でも「いいねの往復」だけが、静かに残った。",fx:{fol:10,cog:1,xp:6,dist:8,flm:1}},
 {t:"喜びをそのままポストしてしまう",r:"「先輩にいいねもらえた…！」のポストがまとめに拾われ、小さく拡散。嬉しさと恥ずかしさと、ざわつき半分ずつ。",fx:{fol:80,cog:5,xp:5,dist:5,flm:8}}]},
 activity:[
-{t:"音楽番組の収録見学に行く（関係者席）",r:"ステージ袖から見る先輩たちの本番。大翔の歌い出しで、思わず息を止めた。いつか、あの並びに。",fx:{fol:0,cog:3,xp:12,dist:4,flm:0}},
-{t:"新曲の感想募集ポストに丁寧に返信して回る",r:"一人ひとりへの返信が「神対応の新人」と小さく話題に。",fx:{fol:55,cog:5,xp:8,dist:0,flm:0}},
-{t:"大翔が出る配信イベントを視聴して感想をポスト",r:"感想ポスト、控えめなのに具体的に書いた。それが回り回って、本人の目に留まる距離まで届いた気がする。",fx:{fol:30,cog:4,xp:8,dist:5,flm:2}}],
+{t:"音楽番組の収録見学に行く（関係者席）",who:["ひとりで"],r:"ステージ袖から見る先輩たちの本番。大翔の歌い出しで、思わず息を止めた。いつか、あの並びに。",fx:{fol:0,cog:3,xp:12,dist:4,flm:0}},
+{t:"新曲の感想募集ポストに丁寧に返信して回る",who:["ファン"],r:"一人ひとりへの返信が「神対応の新人」と小さく話題に。",fx:{fol:55,cog:5,xp:8,dist:0,flm:0}},
+{t:"大翔が出る配信イベントを視聴して感想をポスト",who:["井汲大翔"],r:"感想ポスト、控えめなのに具体的に書いた。それが回り回って、本人の目に留まる距離まで届いた気がする。",fx:{fol:30,cog:4,xp:8,dist:5,flm:2}}],
 dm:{who:"akari",msgs:["なおー！ あかりだよ、同期の！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
 choices:[{t:"「行こ行こ！ あかりのステージも観たよ」と返す",r:"あかり「やった！ 推し同士みたいな同期になろ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
 {t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"あかり「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
@@ -634,9 +645,9 @@ choices:[
 {t:"緊張で「あ、はい…！」しか言えない",r:"最悪だ、と思った帰り道。でも後でスタッフが教えてくれた。「大翔さん、あの後もなおさんの歌の話してましたよ」",fx:{fol:0,cog:0,xp:6,dist:8,flm:0}},
 {t:"思い切って「いつか一緒に歌いたいです」と言う",r:"彼は少し驚いて、「…頑張ってください」と。遠い約束みたいな言い方。でも、嫌な顔じゃなかった。",fx:{fol:15,cog:2,xp:8,dist:12,flm:3}}]},
 activity:[
-{t:"番組の感想をくれたファンへお礼ポスト",r:"お礼ポストに「テレビで見つけた」という新規ファンが続々と。",fx:{fol:70,cog:6,xp:8,dist:0,flm:0}},
-{t:"スタッフ佐藤さんと次の曲の打ち合わせ",r:"「次は、誰かに届く歌にしましょう」地味だけど確実な一歩。",fx:{fol:0,cog:3,xp:12,dist:0,flm:0}},
-{t:"楽屋で隣だったことを匂わせずに「隣の先輩が優しかった」とだけポスト",r:"誰のことか書いてない。なのに界隈はざわついた。「隣って大翔さんじゃ…？」火種は小さい。でも距離の記憶は濃い。",fx:{fol:45,cog:4,xp:6,dist:7,flm:7}}],
+{t:"番組の感想をくれたファンへお礼ポスト",who:["ファン"],r:"お礼ポストに「テレビで見つけた」という新規ファンが続々と。",fx:{fol:70,cog:6,xp:8,dist:0,flm:0}},
+{t:"スタッフ佐藤さんと次の曲の打ち合わせ",who:["佐藤（スタッフ）"],r:"「次は、誰かに届く歌にしましょう」地味だけど確実な一歩。",fx:{fol:0,cog:3,xp:12,dist:0,flm:0}},
+{t:"楽屋で隣だったことを匂わせずに「隣の先輩が優しかった」とだけポスト",who:["ひとりで"],r:"誰のことか書いてない。なのに界隈はざわついた。「隣って大翔さんじゃ…？」火種は小さい。でも距離の記憶は濃い。",fx:{fol:45,cog:4,xp:6,dist:7,flm:7}}],
 dm:{who:"staff",msgs:["佐藤です。番組お疲れさまでした","反響いいですよ。……あと、楽屋の件、大翔さんのマネージャーさんから「歌、良かったですね」と伝言もらってます"],
 choices:[{t:"「本当ですか…！ ありがとうございます」と返す",r:"佐藤「本当です。伝言、預かってましたから」",fx:{fol:0,xp:6,dist:6,flm:0,cog:2}},
 {t:"「伝言、直接もらえる日が来るよう頑張ります」と返す",r:"佐藤「その意気です。焦らず行きましょう」",fx:{fol:0,xp:8,dist:4,flm:0,cog:1}}]}},
@@ -662,9 +673,9 @@ choices:[
 {t:"「歌で選ばれる人になります」とだけ宣言する",r:"誰のことか言ってないのに、みんな分かってしまった。でも炎上ではなく、期待でバズった。",fx:{fol:140,cog:10,xp:10,dist:6,flm:2}},
 {t:"嬉しさを隠しきれず、意味深なポストをしてしまう",r:"「夢って、近づくと怖いですね」――まとめが即キャッチ。「匂わせ？」の声と応援の声で真っ二つ。",fx:{fol:170,cog:9,xp:6,dist:7,flm:12}}]},
 activity:[
-{t:"ひろとも出る配信イベントに、観客として参加する",r:"コメント欄で静かに見ていただけ。なのに演者紹介のとき、彼が一瞬こっちの名前を読んだ気がした。気のせい、かもしれない。",fx:{fol:10,cog:2,xp:8,dist:7,flm:1}},
-{t:"新曲の感想を、大翔へ公開リプで送る",r:"「先輩の新曲、低音の入り方ずっと聴いてます」丁寧な感想リプ。彼のファンにも好意的に受け取られた。",fx:{fol:60,cog:5,xp:8,dist:6,flm:3}},
-{t:"ファンと一緒にデビュー曲のレポをまとめる",r:"ファン発のレポまとめが公式より読まれてて笑った。界隈が温かい。",fx:{fol:80,cog:5,xp:8,dist:0,flm:0}}],
+{t:"ひろとも出る配信イベントに、観客として参加する",who:["井汲大翔","ファン"],r:"コメント欄で静かに見ていただけ。なのに演者紹介のとき、彼が一瞬こっちの名前を読んだ気がした。気のせい、かもしれない。",fx:{fol:10,cog:2,xp:8,dist:7,flm:1}},
+{t:"新曲の感想を、大翔へ公開リプで送る",who:["井汲大翔"],r:"「先輩の新曲、低音の入り方ずっと聴いてます」丁寧な感想リプ。彼のファンにも好意的に受け取られた。",fx:{fol:60,cog:5,xp:8,dist:6,flm:3}},
+{t:"ファンと一緒にデビュー曲のレポをまとめる",who:["ファン"],r:"ファン発のレポまとめが公式より読まれてて笑った。界隈が温かい。",fx:{fol:80,cog:5,xp:8,dist:0,flm:0}}],
 dm:null /* hiroto DM is special, see logic */},
 {day:"Day 5 ― 運命のポスト",
 banner:"最終日。コラボ配信の正式発表が近い。そして今朝、ある「偶然」が界隈を騒がせ始めた。",
@@ -689,9 +700,9 @@ choices:[
 {t:"何も言わず、明日のお知らせに集中する",r:"沈黙が憶測を呼んだけど、明日の発表が全部持っていく形になった。",fx:{fol:120,cog:9,xp:10,dist:4,flm:5}},
 {t:"「プリンはみんなのものです」とユーモアで返す",r:"大翔ファンからも「この子おもしろい」の声。炎上寸前が、好感バズに化けた。……ただし、彼のファンの一部は複雑そう。",fx:{fol:260,cog:13,xp:10,dist:8,flm:9}}]},
 activity:[
-{t:"明日の発表に備えて、スタッフと最終確認",r:"「何があっても、歌で返しましょう」佐藤さんの言葉で腹が決まった。",fx:{fol:0,cog:3,xp:12,dist:1,flm:-2}},
-{t:"ファンへの感謝ポストを予約投稿する",r:"「見つけてくれて、ありがとう」短い感謝が、騒ぎの中でも温かく広がった。",fx:{fol:90,cog:6,xp:8,dist:0,flm:-3}},
-{t:"大翔のプリンポストに、いいねだけしていく",r:"言葉はゼロ。いいねひとつ。それが一番、正直だったかもしれない。",fx:{fol:0,cog:0,xp:6,dist:9,flm:4}}],
+{t:"明日の発表に備えて、スタッフと最終確認",who:["佐藤（スタッフ）"],r:"「何があっても、歌で返しましょう」佐藤さんの言葉で腹が決まった。",fx:{fol:0,cog:3,xp:12,dist:1,flm:-2}},
+{t:"ファンへの感謝ポストを予約投稿する",who:["ファン"],r:"「見つけてくれて、ありがとう」短い感謝が、騒ぎの中でも温かく広がった。",fx:{fol:90,cog:6,xp:8,dist:0,flm:-3}},
+{t:"大翔のプリンポストに、いいねだけしていく",who:["井汲大翔"],r:"言葉はゼロ。いいねひとつ。それが一番、正直だったかもしれない。",fx:{fol:0,cog:0,xp:6,dist:9,flm:4}}],
 dm:null}
 ];
 const HIROTO_DM={msgs:["はじめまして、井汲です","この前の番組、ありがとうございました","歌、よかったです"],
@@ -1012,7 +1023,7 @@ function renderEvent(){
  const ev=ch.event;const card=document.createElement("div");card.className="evcard";
  card.innerHTML='<div class="tag"></div><h3></h3><p></p><div class="evimg"></div><div class="evc"></div><div class="evr"></div>';
  if(ev.img){const im=document.createElement("img");im.className="evimg";im.src=ev.img;im.alt="";card.querySelector(".evimg").appendChild(im);}
- card.querySelector(".tag").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
+ card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
  ev.choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();save();};box.appendChild(b);});
  slot.appendChild(card);
@@ -1082,11 +1093,36 @@ function doPost(o){
  S.posts=[mine].concat(reacts,S.posts);
  S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();save();
 }
-/* activity (Status addition) */
+/* activity (Status-style: pick a title, partner(s) and a time slot, then run.
+   Partner/time are presentation only - the 1-per-day rule and fx are unchanged) */
+let actSel=null,actTime="";
 $("#btn-activity").onclick=()=>{
- const box=$("#actopts"),res=$("#actresult");box.innerHTML="";res.innerHTML="";
- if(S.actDone){res.textContent="今日のActivityはもう済んでるよ。";}
- else CH[S.ch-1].activity.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.t;b.onclick=()=>{box.innerHTML="";res.textContent=o.r;S.actDone=true;applyFx(o.fx);save();};box.appendChild(b);});
+ const box=$("#actopts"),res=$("#actresult"),whoBox=$("#actwho"),tmBox=$("#acttime"),go=$("#act-go");
+ box.innerHTML="";res.innerHTML="";whoBox.innerHTML="";tmBox.innerHTML="";actSel=null;actTime="";
+ ["#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
+ go.classList.add("hidden");go.disabled=true;
+ $("#actsec-title").classList.remove("hidden");
+ if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";}
+ else CH[S.ch-1].activity.forEach(o=>{
+  const b=document.createElement("button");b.className="choice";b.textContent=o.t;
+  b.onclick=()=>{
+   box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");actSel=o;
+   whoBox.innerHTML="";
+   (o.who||["ひとりで"]).forEach((w,i)=>{const c=document.createElement("button");c.className="chip"+(i===0?" sel":"");c.textContent=w;c.onclick=()=>c.classList.toggle("sel");whoBox.appendChild(c);});
+   $("#actsec-who").classList.remove("hidden");
+   tmBox.innerHTML="";actTime="夜";
+   ["朝","昼","夕方","夜"].forEach(t=>{const c=document.createElement("button");c.className="chip"+(t==="夜"?" sel":"");c.textContent=t;c.onclick=()=>{tmBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");actTime=t;};tmBox.appendChild(c);});
+   $("#actsec-time").classList.remove("hidden");
+   go.classList.remove("hidden");go.disabled=false;
+  };
+  box.appendChild(b);});
+ go.onclick=()=>{
+  if(!actSel||S.actDone)return;
+  const o=actSel;S.actDone=true;
+  ["#actsec-title","#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
+  go.classList.add("hidden");
+  res.textContent=o.r;applyFx(o.fx);save();
+ };
  $("#scrim-act").classList.add("on");
 };
 $$("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).classList.remove("on"));
