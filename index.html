@@ -87,6 +87,24 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .x-ptabs button{flex:1;background:none;border:none;padding:11px 0 9px;font-size:13.5px;font-weight:600;color:#536471;cursor:pointer;font-family:inherit;position:relative}
 .x-ptabs button.act{color:#0f1419;font-weight:800}
 .x-ptabs button.act::after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:52px;height:3.5px;border-radius:2px;background:#1d9bf0}
+.x-ptabs button{transition:color .15s ease,background .15s ease}
+.x-ptabs button:active{background:#eff3f4}
+.profbar{position:sticky;top:0;z-index:7;display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px)}
+.profbar .pback{border:none;background:none;font-size:23px;line-height:1;padding:7px 9px;border-radius:50%;cursor:pointer;color:#0f1419;font-family:inherit}
+.profbar .pback:active{background:#eff3f4}
+.profbar .pt{min-width:0}
+.profbar .pt b{display:block;font-size:15.5px;line-height:1.25}
+.profbar .pt small{color:#536471;font-size:12px}
+.followbtn{border:1px solid #0f1419;background:#0f1419;color:#fff;font-weight:800;font-size:13.5px;padding:8px 18px;border-radius:999px;cursor:pointer;font-family:inherit;flex:none;transition:transform .12s ease,background .15s ease,color .15s ease}
+.followbtn:active{transform:scale(.93)}
+.followbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de}
+.editbtn{background:#fff;color:#0f1419;border:1px solid #cfd9de;font-weight:800;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;font-family:inherit;flex:none;transition:background .15s ease,transform .12s ease}
+.editbtn:active{background:#eff3f4;transform:scale(.96)}
+.mediagrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding-top:2px;animation:panein .18s ease}
+.mediagrid img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#eff3f4}
+.emptytab{padding:40px 36px;animation:panein .18s ease}
+.emptytab b{display:block;font-size:21px;font-weight:900;margin-bottom:6px}
+.emptytab span{color:#536471;font-size:13.5px;line-height:1.65;display:block}
 .counts span{font-size:13px;color:#536471}.counts b{color:#0f1419}
 .sug{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px}
 .sug span{border:1px solid #cfd9de;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
@@ -175,7 +193,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v5</p>
+  <p class="ver">v6</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -236,13 +254,14 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div id="x-search-results"></div>
     </div>
     <div id="x-pane-me" style="display:none">
+      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div></div>
       <div style="height:96px;background:url(assets/nao-promo.jpg) center 25%/cover"></div>
       <div style="padding:0 14px">
-        <img class="avatar" src="assets/nao-avatar4.jpg" width="62" height="62" style="margin-top:-28px;border:3px solid #fff" alt="">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar" src="assets/nao-avatar4.jpg" width="62" height="62" style="margin-top:-28px;border:3px solid #fff" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
         <div style="font-size:18px;font-weight:900;margin-top:4px">なお</div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_official</div>
         <div style="font-size:13px;margin-top:5px" id="prof-bio">ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。</div>
-        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b>42</b> フォロー中</span></div>
+        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
       </div>
       <div class="statgrid">
         <div class="statbox distbox"><small>ひろとの距離（親密度）</small><b id="st-dist">0</b><div class="gauge"><i id="dist-gauge" style="width:0%"></i></div></div>
@@ -251,26 +270,25 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
         <div class="statbox"><small>XP（レベル <span id="st-lv">1</span>）</small><b id="st-xp">0</b></div>
         <div class="statbox"><small>炎上度</small><b id="st-flm">0</b></div>
       </div>
-      <div style="padding:12px 14px 0;font-weight:800;font-size:13.5px;color:#536471">メディア</div>
-      <div style="padding:8px 14px;display:flex;flex-wrap:wrap;gap:6px"><img src="assets/nao-promo.jpg" alt="" style="width:110px;height:110px;object-fit:cover;border-radius:12px"><img src="assets/nao-stage.jpg" alt="" style="width:110px;height:110px;object-fit:cover;border-radius:12px"><img src="assets/nao-lesson.jpg" alt="" style="width:110px;height:110px;object-fit:cover;border-radius:12px"><img src="assets/nao-rec.jpg" alt="" style="width:110px;height:110px;object-fit:cover;border-radius:12px"><img src="assets/nao-cafe2.jpg" alt="" style="width:110px;height:110px;object-fit:cover;border-radius:12px"></div>
-      <div class="x-ptabs"><button class="act">ポスト</button><button>返信</button><button>メディア</button><button>いいね</button></div>
-      <div id="x-me-posts"></div>
+      <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
+      <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v5</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v6</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
+      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
       <div style="height:104px;background:url(assets/ig-gen-stage.jpg) center 45%/cover"></div>
       <div style="padding:0 14px">
-        <img class="avatar" src="assets/ig-avatar.jpg" width="66" height="66" style="margin-top:-30px;border:3px solid #fff" alt="">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar" src="assets/ig-avatar.jpg" width="66" height="66" style="margin-top:-30px;border:3px solid #fff" alt=""><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
         <div style="font-size:18px;font-weight:900;margin-top:4px">井汲大翔</div>
         <div style="color:#536471;font-size:13px">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px">歌手。歌とステージがすべて。</div>
-        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b>284万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
+        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">284万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
       </div>
-      <div class="x-ptabs"><button class="act">ポスト</button><button>返信</button><button>メディア</button><button>いいね</button></div>
-      <div id="x-his-posts"></div>
+      <div class="x-ptabs" id="his-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
+      <div id="x-his-tabbody"></div>
     </div>
     <div id="x-pane-msg" style="display:none">
       <div id="dmlist"></div>
@@ -312,7 +330,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v5</p>
+  <p class="ver">v6</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -520,28 +538,33 @@ function postEl(p,hot){
     +(p.img?'<img src="'+p.img+'" alt="" style="width:100%;border-radius:16px;margin-top:10px;display:block;border:1px solid #eff3f4">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
-    +cnt("rp-btn",XIC9.rp,rp)
-    +cnt("like-btn",XIC9.heart,lk)
+    +cnt("rp-btn",XIC9.rp,rp+(p.rped?1:0))
+    +cnt("like-btn",XIC9.heart,lk+(p.liked?1:0))
     +'<span class="act views">'+XIC9.views+"<b>"+fmtCnt(vw)+"</b></span>"
     +'<span class="grp"><span class="bmk-btn" role="button">'+XIC9.bmk+'</span><span class="share-btn">'+XIC9.share+"</span></span>"
     +"</div></span>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=p.t;
   const popSvg=el=>{const svg=el.querySelector("svg");if(!svg)return;svg.classList.remove("pop");void svg.getBoundingClientRect();svg.classList.add("pop");};
-  const bind=(sel,cls,fill)=>{const el=d.querySelector(sel);if(!el)return;el.addEventListener("click",e=>{e.stopPropagation();const on=el.dataset.on==="1";let n=parseInt(el.dataset.n||"0",10);n=on?Math.max(0,n-1):n+1;el.dataset.n=n;el.dataset.on=on?"":"1";el.classList.toggle(cls,!on);let b=el.querySelector("b");if(n>0){if(!b){el.insertAdjacentHTML("beforeend","<b></b>");b=el.querySelector("b");}b.textContent=fmtCnt(n);}else if(b){b.remove();}const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",!on?fill:"none");popSvg(el);});};
-  bind(".like-btn","liked","#f91880"); bind(".rp-btn","rped",null);
-  const bk=d.querySelector(".bmk-btn");if(bk)bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);});
+  const syncEngage=()=>{try{if(!p.id||typeof S==="undefined"||!S)return;[S.posts,S.men].forEach(list=>{if(!list)return;list.forEach(o=>{if(o&&o!==p&&o.id===p.id){o.liked=p.liked;o.rped=p.rped;o.bmked=p.bmked;}});});}catch(_){}};
+  const persist=()=>{syncEngage();try{save();}catch(_){}};
+  const initTog=(sel,cls,fill,on)=>{const el=d.querySelector(sel);if(!el||!on)return;el.dataset.on="1";el.classList.add(cls);const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",fill);};
+  initTog(".like-btn","liked","#f91880",!!p.liked); initTog(".rp-btn","rped",null,!!p.rped);
+  const bind=(sel,cls,fill,key)=>{const el=d.querySelector(sel);if(!el)return;el.addEventListener("click",e=>{e.stopPropagation();const on=el.dataset.on==="1";let n=parseInt(el.dataset.n||"0",10);n=on?Math.max(0,n-1):n+1;el.dataset.n=n;el.dataset.on=on?"":"1";el.classList.toggle(cls,!on);p[key]=!on;let b=el.querySelector("b");if(n>0){if(!b){el.insertAdjacentHTML("beforeend","<b></b>");b=el.querySelector("b");}b.textContent=fmtCnt(n);}else if(b){b.remove();}const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",!on?fill:"none");popSvg(el);persist();});};
+  bind(".like-btn","liked","#f91880","liked"); bind(".rp-btn","rped",null,"rped");
+  const bk=d.querySelector(".bmk-btn");if(bk){if(p.bmked){bk.dataset.on="1";bk.classList.add("bmked");const s0=bk.querySelector("svg");if(s0)s0.setAttribute("fill","#1d9bf0");}bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);p.bmked=!on;const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);persist();});}
   return d;
 }
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[]};}
+function defState(){return{started:false,handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false};}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
 function fmt(n){return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,"")+"万":Number(n).toLocaleString("ja-JP");}
 function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
-function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
+let postSeq=0;
+function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
 let selH=null,selSt=null,selF=null;
 function renderOpts(el,items,gt,gd,cb){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>";b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
@@ -573,7 +596,8 @@ function showPane(k){
  $("#actbar").style.display=k==="tl"?"flex":"none";
  $$("#x-nav button").forEach(b=>b.classList.toggle("sel",b.dataset.pane===k||(k==="tl"&&b.dataset.pane==="home")));
  $("#x-scroll").scrollTop=0;
- if(k==="me")renderProfile();
+ if(k==="me"){renderProfile();renderMeTab();}
+ if(k==="hisprof")renderHisTab();
  if(k==="msg")renderDmList();
 }
 $$("#x-xtabs [data-xtab]").forEach(b=>b.addEventListener("click",()=>showPane(b.dataset.xtab)));
@@ -619,8 +643,37 @@ function renderFeed(){
  renderMePosts();renderHisPosts();
 }
 $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#hometabs [data-htab]").forEach(x=>x.classList.remove("act"));b.classList.add("act");S._htab=b.dataset.htab;renderFeed();save();}));
-function renderMePosts(){const box=$("#x-me-posts");box.innerHTML="";S.posts.filter(p=>p.mine).forEach(p=>box.appendChild(postEl(p,false)));}
-function renderHisPosts(){const box=$("#x-his-posts");box.innerHTML="";S.posts.filter(p=>p.a==="hiroto"&&!p.sys).forEach(p=>box.appendChild(postEl(p,false)));}
+/* profile tabs (real-X linkage: post / reply / media grid / likes) */
+let meTab="post",hisTab="post";
+const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg"];
+function emptyTab(t,s){return '<div class="emptytab"><b></b><span></span></div>';}
+function mkEmpty(t,s){const d=document.createElement("div");d.innerHTML=emptyTab(t,s);d.querySelector("b").textContent=t;d.querySelector("span").textContent=s;return d.firstChild;}
+function mediaGrid(imgs){const g=document.createElement("div");g.className="mediagrid";imgs.forEach(u=>{const im=document.createElement("img");im.src=u;im.alt="";g.appendChild(im);});return g;}
+function renderMePosts(){renderMeTab();}
+function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
+ $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
+ const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>p.mine).length+" ポスト";
+ if(meTab==="post"){const mine=S.posts.filter(p=>p.mine);if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="reply"){box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。"));}
+ else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(mediaGrid(imgs));}
+ else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
+}
+function renderHisPosts(){renderHisTab();}
+function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;const on=!!S.followHiroto;b.textContent=on?"フォロー中":"フォロー";b.classList.toggle("on",on);}
+function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
+ $$("#his-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===hisTab));
+ const his=S.posts.filter(p=>p.a==="hiroto"&&!p.sys);
+ const pc=$("#his-pcount");if(pc)pc.textContent=his.length+" ポスト";
+ renderFollowBtn();
+ if(hisTab==="post"){if(!his.length)box.appendChild(mkEmpty("まだポストがない",""));else his.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(hisTab==="reply"){box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。"));}
+ else if(hisTab==="media"){const imgs=[];his.forEach(p=>{if(p.img&&!imgs.includes(p.img))imgs.push(p.img);});if(!imgs.length)box.appendChild(mkEmpty("メディアはまだない","写真つきポストをすると、ここに並ぶよ。"));else box.appendChild(mediaGrid(imgs));}
+ else if(hisTab==="like"){box.appendChild(mkEmpty("いいねは非公開です","井汲大翔さんがいいねしたポストは、他の人には表示されないよ。"));}
+}
+$$("#me-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{meTab=b.dataset.ptab;renderMeTab();}));
+$$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b.dataset.ptab;renderHisTab();}));
+$$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
+(function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?"井汲大翔さんをフォローしたよ":"井汲大翔さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
 /* trends + search */
 function renderTrends(){$("#x-pane-trend").innerHTML=TRENDS.map(t=>'<div class="trend"><small>'+t[0]+" ― トレンド</small><b>"+t[1]+"</b><small>"+t[2]+"</small></div>").join("");
  $("#x-sug").innerHTML=["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ミュージック・ステージ"].map(w=>"<span>"+w+"</span>").join("");
@@ -705,6 +758,7 @@ function renderProfile(){if(!S||!S.started)return;
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
+ const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);}
 /* ending */
@@ -722,6 +776,7 @@ $("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-resta
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);
+ (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
  $("#btn-continue").onclick=()=>{show("v-x");$("#daybanner").textContent=CH[S.ch-1].day+" ― "+CH[S.ch-1].banner;$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
 </script>
