@@ -305,7 +305,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v13</p>
+  <p class="ver">v14</p>
 </section>
 
 <section class="screen" id="scr-world" style="background:#000">
@@ -336,7 +336,7 @@ input,textarea{font-size:16px}
   <div class="setup">
     <div class="step">STEP 3 / 3 ― FIRST FOLLOWER</div>
     <h2>最初のフォロワー</h2>
-    <p class="desc">開設から数時間。Statusでは、最初のフォロワーが物語の起点になる。フォロワー第1号は誰だったかで、スタートの空気が変わる。</p>
+    <p class="desc">開設から数時間。Statusでは、最初のフォロワーが物語の起点になる。記念すべき第1号は、同じアイドルの世界の誰かだった――誰だったかで、スタートの空気が変わる。</p>
     <div id="firsts"></div>
     <button class="btn" id="btn-first" disabled>この人で始める</button>
   </div>
@@ -410,7 +410,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v13</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v14</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -503,7 +503,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v13</p>
+  <p class="ver">v14</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -523,6 +523,8 @@ const ACC={
  staff:{n:"佐藤｜事務所スタッフ",h:"@sato_staff"},
  sora:{n:"そら｜音楽好き",h:"@sora_music"},
  akari:{n:"あかり｜同期アイドル",h:"@akari_idol"},
+ sea:{n:"セア｜LUNARIS リーダー",h:"@sea_lunaris"},
+ mina:{n:"ミナ｜韓国ソロ歌手",h:"@mina_solo_kr"},
  media:{n:"ミュージック番組公式",h:"@music_stage_tv"},
  matome:{n:"芸能まとめ速報",h:"@geinou_matome"},
  fan1:{n:"ゆな｜なお推し1号",h:"@yuna_nao"},
@@ -541,9 +543,14 @@ const STANCES=[
  {id:"cool",t:"クール・ミステリアス系",d:"言葉少なめ、世界観で魅せる。世間の認知度が伸びやすい。",bonus:"cog",bonusTx:"世間の認知度"},
  {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残すタイプ。ひろとの距離が縮まりやすいが、失言は炎上の元。",bonus:"dist",bonusTx:"ひろとの距離"}];
 const FIRSTS=[
- {id:"miku",t:"みく｜デビュー前から知る幼なじみ",d:"昔から歌を聴いてきた幼なじみ。第1号を名乗り出て、全力で拡散してくれる。"},
- {id:"staff",t:"佐藤｜事務所の先輩スタッフ",d:"事務所の公式まわりを仕切るスタッフ。堅実な滑り出しになる。"},
- {id:"sora",t:"そら｜たまたま見つけた音楽好き",d:"デモ音源の切り抜きで偶然見つけた一般の音楽好き。口コミの起点になる。"}];
+ {id:"sea",t:"セア｜韓国ガールズグループ「LUNARIS」のリーダー",d:"音楽番組の楽屋で挨拶したら、その場でフォローしてくれた。海外のファンへ届く起点になる。"},
+ {id:"akari",t:"あかり｜同期デビューのソロアイドル",d:"同じ日にデビューした、ライバルであり戦友。同期の輪が、ここから広がっていく。"},
+ {id:"mina",t:"ミナ｜韓国で活動する先輩ソロ歌手",d:"大先輩からのフォロー第1号。その事実だけで、メディアがざわつき始める。"}];
+/* welcome post each idol first-follower drops at the top of the Day 1 feed */
+const FIRST_WELCOME={
+ sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。楽屋で聴いた歌声、ずっと頭に残ってます。また同じステージで会いましょう。",lk:842,rp:126,rc:37},
+ akari:{tx:"なお、デビューおめでとう！！ 同じ日デビューの同期として、負けないからね。……でも、ほんとにおめでとう。",lk:154,rp:23,rc:11},
+ mina:{tx:"後輩のデビューは、いつも嬉しいものです。なおさん、応援しています。",lk:2314,rp:487,rc:96}};
 </script>
 <script>
 /* chapters: seed feed, post options, event, activity, fan DM */
@@ -758,7 +765,12 @@ function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-first");};
-$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
+$("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);
+ const w=FIRST_WELCOME[S.first];
+ if(w){const wp=mkPost(S.first,w.tx,w.lk,w.rp,w.rc,false);S.posts.unshift(wp);
+  if(S.first==="mina")S.notifs.unshift({a:"matome",tx:"が「先輩ソロ歌手・ミナが新人なおを初フォロー」と報じました",sub:"最初のフォロワー ― メディアがざわついた"});
+  renderFeed();renderNotifs();save();}
+ show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
 /* fx + Changes (Status addition) */
 function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);const b=stanceObj().bonus,out={};
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
@@ -840,7 +852,7 @@ $("#x-bell").addEventListener("click",toggleNotif);
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  list.innerHTML=S.notifs.length?"":'<div style="padding:14px;color:#536471;font-size:13px">まだ通知はないよ</div>';
- S.notifs.forEach((n,i)=>{const a=ACC[n.a];const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"");
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"");
   row.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" width="34" height="34" alt="">':avaTxt(a.n))+"<div><b></b><span class='tx2'></span><small></small></div>";
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
