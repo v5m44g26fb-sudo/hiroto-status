@@ -224,6 +224,11 @@ input,textarea{font-size:16px}
 .chip:active{transform:scale(.96)}
 .chip.sel{background:#0f1419;color:#fff;border-color:#0f1419}
 #act-go{margin-top:16px}
+#hud-chg{display:block;margin-top:9px;background:none;border:none;padding:2px 0;color:#1d9bf0;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.chgrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:9px 2px;border-bottom:1px solid #eff3f4;font-size:14px;color:#0f1419}
+.chgrow .d{color:#536471;font-size:12px;margin-right:6px}
+.chgrow .v{font-weight:800;flex:none}
+.chgrow .v.good{color:#00ba7c}.chgrow .v.bad{color:#f4212e}.chgrow .v.dist{color:#f91880}.chgrow .v.lv{color:#b8860b}
 .evcard h3{font-size:17px;margin:7px 0 6px}
 .evcard p{font-size:14px;line-height:1.65;color:#3d3a28}
 .choice{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 13px;border:1px solid #cfd9de;border-radius:12px;background:#fff;font-size:14px;line-height:1.5;color:#0f1419;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .1s ease}
@@ -313,7 +318,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v15</p>
+  <p class="ver">v16</p>
 </section>
 
 <section class="screen" id="scr-world" style="background:#000">
@@ -385,6 +390,7 @@ input,textarea{font-size:16px}
           <span class="hud-day" id="hud-day">Day 1 / 5</span>
         </div>
         <div class="hud-note" id="hud-note">投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。</div>
+        <button id="hud-chg" type="button">これまでの Changes を見る ▸</button>
       </div>
       <div id="daybanner" class="sysnote"></div>
       <div id="eventslot"></div>
@@ -418,7 +424,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v15</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v16</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -511,10 +517,15 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v15</p>
+  <p class="ver">v16</p>
 </section>
 </div>
 <div id="changes"></div>
+<div class="scrim" id="scrim-chg"><div class="sheet">
+  <button class="close" data-close="scrim-chg">✕</button>
+  <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、ひろとの距離はピンクで表示される。</p>
+  <div id="chglist"></div>
+</div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
   <button class="close" data-close="scrim-act">✕</button>
   <h3>Activity</h3><p class="desc">1日に1回だけ。タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
@@ -756,7 +767,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[]};}
+function defState(){return{started:false,world:"",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[]};}
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
@@ -788,11 +799,28 @@ function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);con
  if(out.fol)S.fol=Math.max(0,S.fol+out.fol);if(out.xp)S.xp+=out.xp;
  if(out.cog)S.cog=Math.max(0,Math.min(100,S.cog+out.cog));if(out.flm)S.flm=Math.max(0,Math.min(100,S.flm+out.flm));if(out.dist)S.dist=Math.max(0,Math.min(100,S.dist+out.dist));
  const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:"ひろとの距離"};const box=$("#changes");
- Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);});
+ if(!S.chgLog)S.chgLog=[];
+ Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);
+  S.chgLog.push({day:S.ch,name:names[k],v:out[k],cls:k==="dist"?"dist":(bad?"bad":(good?"good":""))});});
+ if(S.chgLog.length>80)S.chgLog.splice(0,S.chgLog.length-80);
  const lvAfter=1+Math.floor((S.xp||0)/50);
+ if(lvAfter>lvBefore)S.chgLog.push({day:S.ch,name:"LEVEL UP",v:lvAfter,cls:"lv"});
  if(lvAfter>lvBefore){const n=Object.keys(out).length;const d=document.createElement("div");d.className="chg levelup";d.textContent="LEVEL UP！ Lv "+lvAfter+" に上がった";d.style.animationDelay=(n*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),3400+n*90);setTimeout(()=>d.remove(),3900+n*90);}
  renderProfile();save();}
 function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
+/* Changes history sheet (opened from the HUD) */
+function renderChgLog(){
+ const box=$("#chglist");const log=(S&&S.chgLog)||[];
+ if(!log.length){box.innerHTML='<div style="padding:12px 2px;color:#536471;font-size:13.5px;line-height:1.7">まだChangesはないよ。投稿・Event・Activityで変化が起きると、ここに溜まっていく。</div>';return;}
+ box.innerHTML="";
+ [...log].reverse().forEach(e=>{
+  const r=document.createElement("div");r.className="chgrow";
+  const l=document.createElement("span");const d=document.createElement("span");d.className="d";d.textContent="Day "+e.day;l.appendChild(d);
+  l.appendChild(document.createTextNode(e.cls==="lv"?("LEVEL UP！ Lv "+e.v+" に上がった"):e.name));
+  const v=document.createElement("span");v.className="v "+(e.cls||"");v.textContent=e.cls==="lv"?"":((e.v>0?"+":"")+e.v);
+  r.appendChild(l);r.appendChild(v);box.appendChild(r);});
+}
+$("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 const PANES=["tl","trend","mention","me","search","msg","hisprof","thread"];
 let curPane="tl";
