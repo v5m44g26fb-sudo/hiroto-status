@@ -10,24 +10,27 @@
 html,body{background:#0a0a0a;font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
 #phone{max-width:430px;margin:0 auto;min-height:100dvh;background:#000;position:relative}
 .screen{display:none;min-height:100dvh;flex-direction:column}
-.screen.on{display:flex;animation:scrin .22s ease}
+.screen.on{display:flex;animation:screenin .3s cubic-bezier(.2,.8,.3,1)}
+@keyframes screenin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes scrin{from{opacity:0}to{opacity:1}}
 .view.on{animation:scrin .22s ease}
 button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 /* ===== setup / title / ending (new, minimal) ===== */
 #scr-title,#scr-ending{background:#000;color:#e7e9ea;align-items:center;justify-content:center;text-align:center;padding:32px 24px}
-#scr-title h1{font-size:26px;line-height:1.5;font-weight:800;color:#fff}
+#scr-title h1{font-size:29px;line-height:1.5;font-weight:900;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.6);letter-spacing:.02em}
+#scr-title .xlogo{filter:drop-shadow(0 0 18px rgba(249,24,128,.55))}
 #scr-title .sub,#scr-ending p{color:#9aa0a6;margin:14px 0 6px;font-size:14px;line-height:1.85}
 #scr-ending p{color:#cfd3d6;text-align:left;white-space:pre-wrap}
 #scr-ending h2{font-size:23px;line-height:1.5;margin:12px 0;color:#fff}
 #scr-ending .tag{color:#ffd400;letter-spacing:.2em;font-size:12px;font-weight:800}
 .xlogo{width:60px;height:60px;margin-bottom:16px}
 .ver{color:#3a3f44;font-size:12px;margin-top:10px}
-.btn{display:block;width:100%;max-width:320px;margin:12px auto 0;padding:14px;border-radius:999px;background:#f91880;color:#fff;font-weight:700;font-size:16px;border:none}
-.btn.ghost{background:transparent;border:1px solid #2f3336;color:#e7e9ea}
+.btn{display:block;width:100%;max-width:320px;margin:12px auto 0;padding:16px;border-radius:999px;background:linear-gradient(90deg,#7856ff,#f91880);box-shadow:0 10px 26px rgba(249,24,128,.35);color:#fff;font-weight:800;font-size:16.5px;border:none;transition:transform .15s ease,opacity .15s ease,box-shadow .15s ease}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.25);color:#e7e9ea;box-shadow:none;backdrop-filter:blur(6px)}
 .btn:disabled{opacity:.4}
 .setup{background:#000;color:#e7e9ea;padding:22px 20px 40px;flex:1}
-.setup h2{font-size:21px;margin:8px 0 6px}
+.setup h2{font-size:23px;margin:8px 0 6px;font-weight:900;text-shadow:0 2px 16px rgba(0,0,0,.55)}
 .setup p.desc{color:#9aa0a6;font-size:14px;line-height:1.7;margin-bottom:18px}
 .opt{border:1px solid #2f3336;border-radius:16px;padding:15px 16px;margin-bottom:11px;text-align:left;width:100%;display:block;background:none;color:#e7e9ea}
 .opt.sel{border-color:#1d9bf0;background:rgba(29,155,240,.1)}
@@ -282,9 +285,32 @@ input,textarea{font-size:16px}
 @keyframes ptrspin{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
 /* ===== Phase B: Status-style intro + HUD + Changes ===== */
-.flowsteps{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:16px}
-.flowsteps span{border:1px solid #2f3336;color:#9aa0a6;border-radius:999px;padding:5px 11px;font-size:11px;font-weight:700;letter-spacing:.08em}
-.flowsteps span b{color:#f91880}
+.flowsteps{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:20px;max-width:100%}
+.flowsteps span{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:999px;color:#c3ccd2;padding:5px 11px 5px 6px;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.04em;white-space:nowrap;backdrop-filter:blur(6px)}
+.flowsteps span b{background:linear-gradient(135deg,#7856ff,#f91880);color:#fff;width:17px;height:17px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;flex:none}
+/* ===== v18: intro flow overhaul (world-view backdrop / progress / big cards) ===== */
+.screen.intro{position:relative;background:#07070f;overflow:hidden}
+.screen.intro::before{content:"";position:absolute;inset:-26px;background-image:var(--bgimg);background-size:cover;background-position:center;filter:blur(17px) brightness(.48) saturate(1.2);z-index:0}
+.screen.intro::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,9,28,.42),rgba(5,5,12,.9) 72%);z-index:0}
+.screen.intro>*{position:relative;z-index:1}
+.prog{display:flex;align-items:center;gap:11px;margin:12px 0 20px}
+.prog .track{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.15);overflow:hidden}
+.prog .track i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#7856ff,#f91880);box-shadow:0 0 12px rgba(249,24,128,.6)}
+.prog .pnum{font-size:11px;font-weight:800;color:#9aa0a6;letter-spacing:.14em;white-space:nowrap}
+.prog .pnum b{color:#fff;font-size:14px}
+.setup .opt{border:1.5px solid rgba(255,255,255,.17);border-radius:20px;padding:17px 18px;margin-bottom:13px;background:rgba(255,255,255,.05);color:#fff;position:relative;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease}
+.setup .opt:active{transform:scale(.985)}
+.setup .opt b{font-size:16.5px;color:#fff}
+.setup .opt span{color:#a7b0b8}
+.setup .opt.sel{border-color:#f91880;background:rgba(249,24,128,.13);box-shadow:0 0 0 1px #f91880,0 12px 32px rgba(249,24,128,.32);transform:scale(1.02)}
+.setup .opt.sel::after{content:"✓";position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#f91880;color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(249,24,128,.5)}
+.setup .opt.card{display:flex;gap:14px;align-items:flex-start;text-align:left}
+.opt .cava{width:54px;height:54px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:900;color:#fff!important;border:2px solid rgba(255,255,255,.45);box-shadow:0 5px 16px rgba(0,0,0,.4)}
+.opt .cmain{flex:1;min-width:0}
+.opt .cmain b{display:block}
+.opt .pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.opt .pill{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.09);color:#eef1f3!important;border-radius:999px;padding:2.5px 9px;font-size:11px;font-weight:700;line-height:1.5}
+.opt.locked{opacity:.5}
 .opt.locked{opacity:.45}
 .opt .locktag{display:inline-block;margin-top:6px;border:1px solid #2f3336;border-radius:999px;padding:2px 9px;font-size:11px;color:#9aa0a6}
 .worldnote{border:1px solid #7856ff;background:rgba(120,86,255,.12);border-radius:14px;padding:11px 13px;font-size:13px;line-height:1.6;color:#d9d2ff;margin-bottom:16px}
@@ -312,7 +338,7 @@ input,textarea{font-size:16px}
 </head>
 <body>
 <div id="phone">
-<section class="screen on" id="scr-title">
+<section class="screen intro on" id="scr-title" style="--bgimg:url(assets/nao-promo.jpg)">
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
   <p class="sub">デビューしたての新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>そして、先輩歌手・井汲大翔に、少しずつ近づけるか。</p>
@@ -320,12 +346,13 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v17</p>
+  <p class="ver">v18</p>
 </section>
 
-<section class="screen" id="scr-world" style="background:#000">
+<section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
   <div class="setup">
     <div class="step">STEP 1 / 3 ― WORLD SELECT</div>
+    <div class="prog"><div class="track"><i style="width:33.3%"></i></div><span class="pnum"><b>1</b> / 3</span></div>
     <h2>どの世界で生きる？</h2>
     <p class="desc">Statusでは、まず「ワールド」を選んでから世界に入る。この物語のワールドは芸能界。選んだ世界のルール――フォロワー、評判、炎上――で、毎日が動き出す。</p>
     <div id="worlds"></div>
@@ -333,9 +360,10 @@ input,textarea{font-size:16px}
   </div>
 </section>
 
-<section class="screen" id="scr-persona" style="background:#000">
+<section class="screen intro" id="scr-persona" style="--bgimg:url(assets/nao-stage.jpg)">
   <div class="setup">
     <div class="step">STEP 2 / 3 ― PERSONA</div>
+    <div class="prog"><div class="track"><i style="width:66.6%"></i></div><span class="pnum"><b>2</b> / 3</span></div>
     <div class="worldnote" id="persona-world-note">ワールド：<b>芸能界 ― アイドルワールド</b><br>有名になるか、キャンセル（炎上）されるか。それがこの世界の評判の軸。</div>
     <h2>公式アカウント開設</h2>
     <p class="desc">ソロでデビューが決まった、新人アイドルの「なお」。今日、公式Xを開設する。ハンドルと、アイドルとしてのコンセプトを決めよう。</p>
@@ -347,9 +375,10 @@ input,textarea{font-size:16px}
   </div>
 </section>
 
-<section class="screen" id="scr-first" style="background:#000">
+<section class="screen intro" id="scr-first" style="--bgimg:url(assets/nao-backstage-selfie.jpg)">
   <div class="setup">
     <div class="step">STEP 3 / 3 ― FIRST FOLLOWER</div>
+    <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>3</b> / 3</span></div>
     <h2>最初のフォロワー</h2>
     <p class="desc">開設から数時間。Statusでは、最初のフォロワーが物語の起点になる。記念すべき第1号は、同じアイドルの世界の誰かだった――誰だったかで、スタートの空気が変わる。</p>
     <div id="firsts"></div>
@@ -426,7 +455,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v17</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v18</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -519,7 +548,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v17</p>
+  <p class="ver">v18</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -780,11 +809,11 @@ let postSeq=0;
 function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
 let selH=null,selSt=null,selF=null,selW=null;
-(function(){const box=$("#worlds");if(!box)return;WORLDS.forEach(w=>{const b=document.createElement("button");b.className="opt"+(w.locked?" locked":"");b.innerHTML="<b></b><span></span>"+(w.locked?'<span class="locktag">この物語ではロック中</span>':"");b.querySelector("b").textContent=w.t;b.querySelector("span").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
+(function(){const box=$("#worlds");if(!box)return;const WV={idol:["芸","linear-gradient(135deg,#f91880,#7856ff)"],daily:["日","linear-gradient(135deg,#536471,#8899a6)"],celeb:["セ","linear-gradient(135deg,#c9a227,#ffd400)"]};WORLDS.forEach(w=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");const v=WV[w.id]||["世","linear-gradient(135deg,#536471,#8899a6)"];b.innerHTML='<span class="cava" style="background:'+v[1]+'">'+v[0]+'</span><span class="cmain"><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">この物語ではロック中</span>':"")+"</span>";b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
 function renderOpts(el,items,gt,gd,cb){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>";b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.t+" ― "+x.d,it=>{selH=it;chkP();});
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d+"（伸びやすい："+x.bonusTx+"）",it=>{selSt=it;chkP();});
-renderOpts($("#firsts"),FIRSTS,x=>x.t,x=>x.d,it=>{selF=it;$("#btn-first").disabled=false;});
+(function(){const box=$("#firsts");if(!box)return;const FV={sea:["linear-gradient(135deg,#1d9bf0,#7856ff)",["LUNARIS","リーダー","韓国活動"]],akari:["linear-gradient(135deg,#f91880,#ff9f43)",["同期デビュー","ソロアイドル"]],mina:["linear-gradient(135deg,#8e6bff,#e3b341)",["先輩ソロ歌手","韓国活動"]]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const v=FV[f.id]||["linear-gradient(135deg,#536471,#8899a6)",[]];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");b.innerHTML='<span class="cava" style="background:'+v[0]+'">'+nm.charAt(0)+'</span><span class="cmain"><b></b><span class="d"></span><span class="pills">'+v[1].map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
