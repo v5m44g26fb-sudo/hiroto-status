@@ -10,8 +10,10 @@
 html,body{background:#0a0a0a;font-family:-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}
 #phone{max-width:430px;margin:0 auto;min-height:100dvh;background:#000;position:relative}
 .screen{display:none;min-height:100dvh;flex-direction:column}
-.screen.on{display:flex}
-button{font-family:inherit;cursor:pointer}
+.screen.on{display:flex;animation:scrin .22s ease}
+@keyframes scrin{from{opacity:0}to{opacity:1}}
+.view.on{animation:scrin .22s ease}
+button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 /* ===== setup / title / ending (new, minimal) ===== */
 #scr-title,#scr-ending{background:#000;color:#e7e9ea;align-items:center;justify-content:center;text-align:center;padding:32px 24px}
 #scr-title h1{font-size:26px;line-height:1.5;font-weight:800;color:#fff}
@@ -42,7 +44,8 @@ button{font-family:inherit;cursor:pointer}
 .appbar .s{font-size:11px;color:var(--sub)}
 .appbar .x-searchbar{display:none!important}
 .appbar.v738-search .x-searchbar{display:flex!important;flex:1;margin-left:6px;padding:0!important}
-.scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:130px}
+.scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(140px + env(safe-area-inset-bottom));scroll-behavior:smooth;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
 .ava-txt{width:38px;height:38px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex:none}
 .avatar{border-radius:50%;object-fit:cover;background:#ddd;flex:none}
 .post{display:flex;gap:12px;padding:12px 16px;transition:background .15s ease;border-bottom:1px solid #eff3f4;animation:fadeup .4s ease;text-align:left;width:100%;background:#fff;border-left:none;border-right:none;border-top:none;font-family:inherit;cursor:default}
@@ -90,28 +93,31 @@ button{font-family:inherit;cursor:pointer}
 .trend{padding:12px 16px;border-bottom:1px solid #eff3f4}
 .trend small{color:#536471}.trend b{display:block;font-size:15px;margin:2px 0}
 /* compose (transplanted shell: #x-compose-btn / #x-compose) */
-#x-compose-btn{position:absolute;right:16px;bottom:150px;width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
+#x-compose-btn{position:absolute;right:16px;bottom:calc(150px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
 #x-compose-btn:active{transform:scale(.9)}
 #x-compose-btn.fab-hide{opacity:0;pointer-events:none;transform:translateY(12px)}
 #x-compose{position:absolute;inset:0;background:#fff;z-index:80;display:none;flex-direction:column;padding:16px}
 #x-compose.on{display:flex;animation:composeup .26s cubic-bezier(.2,.8,.25,1)}
 @keyframes composeup{from{transform:translateY(26px);opacity:.3}to{transform:none;opacity:1}}
-#x-nav{position:absolute;left:0;right:0;bottom:0;height:58px;background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:6px}
+#x-nav{position:absolute;left:0;right:0;bottom:0;height:calc(58px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
 #x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center}
 #x-nav svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9}
 #x-nav button.sel svg{stroke:#1d9bf0}
+#x-nav button:active{background:#f7f9f9}
 #x-nav .bdg{position:absolute;top:4px;right:calc(50% - 20px);background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
-#x-bell{margin-left:auto;background:none;border:none;cursor:pointer;position:relative;color:#0f1419}
+#x-bell{margin-left:auto;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;padding:8px;border-radius:50%}
+#x-bell:active{background:#eff3f4}
 #x-bell svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9}
 #x-bell-n{position:absolute;top:-4px;right:-6px;background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
 #x-notif{position:absolute;top:52px;right:10px;width:min(330px,92vw);max-height:60dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:16px;box-shadow:0 12px 34px rgba(0,0,0,.2);z-index:90;display:none}
-#x-notif.on{display:block}
+#x-notif.on{display:block;animation:panein .18s ease}
 #x-notif .nrow{display:flex;gap:10px;padding:11px 13px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5}
 #x-notif .nrow small{color:#536471;display:block}
 /* stories row (Status addition, minimal) */
 #stories{display:flex;gap:13px;padding:11px 14px 7px;overflow-x:auto;border-bottom:1px solid #eff3f4}
 .story{text-align:center;width:62px;flex:none;background:none;border:none}
-.story .ring{width:56px;height:56px;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#f91880,#7856ff,#1d9bf0,#f91880);margin:0 auto}
+.story .ring{width:56px;height:56px;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#f91880,#7856ff,#1d9bf0,#f91880);margin:0 auto;transition:transform .15s ease}
+.story:active .ring{transform:scale(.93)}
 .story .ring img,.story .ring .ava-txt{width:100%;height:100%;border:2px solid #fff}
 .story span{font-size:11px;color:#536471;display:block;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sysnote{padding:10px 15px;color:#536471;font-size:13px;border-bottom:1px solid #eff3f4;background:#f7f9fa;line-height:1.6}
@@ -120,16 +126,20 @@ button{font-family:inherit;cursor:pointer}
 .evcard .tag{color:#9a7b00;font-size:12px;font-weight:800;letter-spacing:.12em}
 .evcard h3{font-size:17px;margin:7px 0 6px}
 .evcard p{font-size:14px;line-height:1.65;color:#3d3a28}
-.choice{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 13px;border:1px solid #cfd9de;border-radius:12px;background:#fff;font-size:14px;line-height:1.5;color:#0f1419;cursor:pointer}
+.choice{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 13px;border:1px solid #cfd9de;border-radius:12px;background:#fff;font-size:14px;line-height:1.5;color:#0f1419;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .1s ease}
+.choice:active{background:#f7f9f9;transform:scale(.99)}
 .choice:disabled{opacity:.55}
 .choice.sel{border-color:#1d9bf0;background:rgba(29,155,240,.09)}
 .evcard .result{margin-top:11px;font-size:14px;line-height:1.65;color:#6d5b00;border-top:1px dashed #d8bd55;padding-top:10px}
-#actbar{position:absolute;left:0;right:0;bottom:60px;padding:8px 14px;z-index:64;display:flex;gap:9px;background:rgba(255,255,255,.92)}
+#actbar{position:absolute;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));padding:8px 14px;z-index:64;display:flex;gap:9px;background:rgba(255,255,255,.92)}
 #actbar button{flex:1;padding:11px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer}
 #btn-activity{background:#eff3f4;border:1px solid #cfd9de;color:#0f1419}
 #btn-nextday{background:#1d9bf0;color:#fff;border:none;display:none}
 .scrim{position:absolute;inset:0;background:rgba(36,46,54,.5);z-index:95;display:none;align-items:flex-end}
-.scrim.on{display:flex}
+.scrim.on{display:flex;animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+.scrim.on .sheet{animation:sheetup .28s cubic-bezier(.2,.8,.25,1)}
+@keyframes sheetup{from{transform:translateY(42px)}to{transform:none}}
 .sheet{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:20px 18px 34px;max-height:82dvh;overflow-y:auto}
 .sheet h3{font-size:17px;margin-bottom:6px}.sheet p.desc{color:#536471;font-size:13px;line-height:1.6}
 .sheet .close{float:right;color:#536471;font-size:20px;background:none;border:none}
@@ -165,7 +175,7 @@ button{font-family:inherit;cursor:pointer}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v4</p>
+  <p class="ver">v5</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -246,7 +256,7 @@ button{font-family:inherit;cursor:pointer}
       <div class="x-ptabs"><button class="act">ポスト</button><button>返信</button><button>メディア</button><button>いいね</button></div>
       <div id="x-me-posts"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v4</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v5</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -302,7 +312,7 @@ button{font-family:inherit;cursor:pointer}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v4</p>
+  <p class="ver">v5</p>
 </section>
 </div>
 <div id="changes"></div>
