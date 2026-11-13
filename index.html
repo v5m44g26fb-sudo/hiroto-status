@@ -68,6 +68,12 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .post .mt .grp>span{display:inline-flex;padding:6px;margin:-6px;border-radius:999px;cursor:pointer}
 .post .mt .grp>span:active{background:rgba(29,155,240,.12)}
 .bmk-btn.bmked{color:#1d9bf0 !important}
+.post{cursor:pointer}
+.post.detail{cursor:default}
+.post.detail .tx{font-size:17px;line-height:1.5}
+.post.detail .mt{max-width:none;border-top:1px solid #eff3f4;border-bottom:1px solid #eff3f4;padding:5px 6px 5px 0;margin-top:10px}
+.dtmeta{color:#536471;font-size:14px;margin-top:10px}
+.thread-rh{padding:10px 16px 8px;font-weight:800;font-size:15px;border-bottom:1px solid #eff3f4}
 @keyframes icopop{0%{transform:scale(1)}35%{transform:scale(1.32)}100%{transform:scale(1)}}
 .post .mt .pop{animation:icopop .32s ease}
 .post .mt .hot{color:#f91880;font-weight:700}
@@ -203,7 +209,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v7</p>
+  <p class="ver">v8</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -283,7 +289,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v7</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v8</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -299,6 +305,12 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       </div>
       <div class="x-ptabs" id="his-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-his-tabbody"></div>
+    </div>
+    <div id="x-pane-thread" style="display:none">
+      <div class="profbar"><button class="pback" id="thread-back" aria-label="戻る">‹</button><div class="pt"><b>ポスト</b><small id="thread-sub"></small></div></div>
+      <div id="thread-main"></div>
+      <div class="thread-rh">返信</div>
+      <div id="thread-replies"></div>
     </div>
     <div id="x-pane-msg" style="display:none">
       <div id="dmlist"></div>
@@ -340,7 +352,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v7</p>
+  <p class="ver">v8</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -554,6 +566,10 @@ function postEl(p,hot){
     +'<span class="grp"><span class="bmk-btn" role="button">'+XIC9.bmk+'</span><span class="share-btn">'+XIC9.share+"</span></span>"
     +"</div></span>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=p.t;
+  const avEl=d.firstChild;
+  if(avEl&&avEl.addEventListener&&(p.a==="hiroto"||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="hiroto"?"hisprof":"me");}catch(_){}});}
+  const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>e.stopPropagation());
+  d.addEventListener("click",()=>{try{openPostThread(p);}catch(_){}});
   const popSvg=el=>{const svg=el.querySelector("svg");if(!svg)return;svg.classList.remove("pop");void svg.getBoundingClientRect();svg.classList.add("pop");};
   const syncEngage=()=>{try{if(!p.id||typeof S==="undefined"||!S)return;[S.posts,S.men].forEach(list=>{if(!list)return;list.forEach(o=>{if(o&&o!==p&&o.id===p.id){o.liked=p.liked;o.rped=p.rped;o.bmked=p.bmked;}});});}catch(_){}};
   const persist=()=>{syncEngage();try{save();}catch(_){}};
@@ -595,17 +611,19 @@ function applyFx(fx){if(!fx)return;const b=stanceObj().bonus,out={};
  renderProfile();save();}
 function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
-const PANES=["tl","trend","mention","me","search","msg","hisprof"];
+const PANES=["tl","trend","mention","me","search","msg","hisprof","thread"];
+let curPane="tl";
 function showPane(k){
+ if(k!=="thread")curPane=k;
  $("#x-notif").classList.remove("on");
  PANES.forEach(p=>{const el=$("#x-pane-"+p);if(el)el.style.display=p===k?"block":"none";});
  $$("#x-xtabs [data-xtab]").forEach(x=>x.classList.toggle("act",x.dataset.xtab===k));
  $("#x-appbar").classList.toggle("v738-search",k==="search");
- $("#x-xtabs").style.display=(k==="me"||k==="hisprof"||k==="msg")?"none":"flex";
+ $("#x-xtabs").style.display=(k==="me"||k==="hisprof"||k==="msg"||k==="thread")?"none":"flex";
  $("#hometabs").style.display=k==="tl"?"flex":"none";
  $("#x-compose-btn").style.display=k==="tl"?"block":"none";
  $("#actbar").style.display=k==="tl"?"flex":"none";
- $$("#x-nav button").forEach(b=>b.classList.toggle("sel",b.dataset.pane===k||(k==="tl"&&b.dataset.pane==="home")));
+ if(k!=="thread")$$("#x-nav button").forEach(b=>b.classList.toggle("sel",b.dataset.pane===k||(k==="tl"&&b.dataset.pane==="home")));
  $("#x-scroll").scrollTop=0;
  if(k==="me"){renderProfile();renderMeTab();}
  if(k==="hisprof")renderHisTab();
@@ -655,6 +673,39 @@ function renderFeed(){
  renderMePosts();renderHisPosts();
 }
 $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#hometabs [data-htab]").forEach(x=>x.classList.remove("act"));b.classList.add("act");S._htab=b.dataset.htab;renderFeed();save();}));
+/* post detail (thread): tap a post -> large main post + replies, like real X */
+let threadStack=[],threadFrom="tl",threadScroll=0;
+function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};return num(2)*23+num(1)*61+num(0)*197+89;}
+function threadReplies(p){
+ if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[]);const seen=new Set(),out=[];p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);out.push(o);}});if(out.length)return out;}
+ const idx=(S.posts||[]).indexOf(p);if(idx<0)return[];
+ return S.posts.slice(idx+1).filter(q=>q&&!q.sys&&q.a!==p.a).slice(0,3);
+}
+function renderThread(p){
+ $("#thread-sub").textContent=p.n;
+ const tm=$("#thread-main");tm.innerHTML="";
+ const main=postEl(p,false);main.classList.add("detail");
+ const mt=main.querySelector(".mt");
+ if(mt&&mt.parentNode){const meta=document.createElement("div");meta.className="dtmeta";meta.textContent=(p.tm||"今")+" ・ "+fmtCnt(viewsOf(p))+" 回表示";mt.parentNode.insertBefore(meta,mt);}
+ tm.appendChild(main);
+ const box=$("#thread-replies");box.innerHTML="";
+ const reps=threadReplies(p);
+ if(!reps.length)box.appendChild(mkEmpty("まだ返信はない","このポストへの返信がつくと、ここに表示されるよ。"));
+ else reps.forEach(r=>box.appendChild(postEl(r,false)));
+}
+function openPostThread(p){
+ if(!p||p.sys)return;
+ const open=$("#x-pane-thread").style.display==="block";
+ if(open&&threadStack.length&&threadStack[threadStack.length-1].id===p.id)return;
+ if(!open){threadFrom=curPane;threadScroll=$("#x-scroll").scrollTop;threadStack=[];}
+ threadStack.push(p);
+ showPane("thread");renderThread(p);
+}
+$("#thread-back").addEventListener("click",()=>{
+ threadStack.pop();
+ if(threadStack.length){renderThread(threadStack[threadStack.length-1]);$("#x-scroll").scrollTop=0;}
+ else{if(threadFrom==="tl")renderFeed();showPane(threadFrom||"tl");$("#x-scroll").scrollTop=threadScroll;}
+});
 /* profile tabs (real-X linkage: post / reply / media grid / likes) */
 let meTab="post",hisTab="post";
 const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg"];
@@ -749,6 +800,7 @@ function doPost(o){
    if(r.likeOnly){reacts.push({sys:true,tx:"井汲大翔さんがあなたのポストをいいねしました",a:"hiroto",t:"",m:["0","0","0"]});S.notifs.unshift({a:"hiroto",tx:"さんがあなたのポストをいいねしました",sub:CH[S.ch-1].day});}
    else{const rp=mkPost(r.a,r.tx,r.lk,r.rp,r.rc,false,r.img);reacts.push(rp);if(r.a==="matome"||r.a==="media")S.men.unshift(rp);}
  });
+ mine.replyIds=reacts.filter(r=>!r.sys).map(r=>r.id);
  S.posts=[mine].concat(reacts,S.posts);
  S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();save();
 }
