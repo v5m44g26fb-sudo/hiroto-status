@@ -197,6 +197,12 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .endgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:18px;text-align:left}
 .endgrid .statbox{background:#16181c;border-color:#2f3336;color:#fff}
 .endgrid .statbox small{color:#9aa0a6}
+/* pull-to-refresh (home timeline only): loader follows the finger, feed order never changes */
+#ptr{height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;color:#1d9bf0;opacity:0;flex:none}
+#ptr svg{width:26px;height:26px;display:block}
+#ptr.spin svg{animation:ptrspin .7s linear infinite}
+#ptr.ready{color:#0f1419}
+@keyframes ptrspin{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
 </style>
 </head>
@@ -209,7 +215,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v8</p>
+  <p class="ver">v9</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -252,6 +258,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
   </div>
   <div class="scroll" id="x-scroll">
     <div id="x-pane-tl">
+      <div id="ptr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke-dasharray="42 15"/></svg></div>
       <div class="xtabs" id="hometabs" style="border-bottom:1px solid #eff3f4">
         <button data-htab="rec" class="act">おすすめ</button>
         <button data-htab="fol">フォロー中</button>
@@ -289,7 +296,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v8</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v9</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -352,7 +359,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v8</p>
+  <p class="ver">v9</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -647,6 +654,32 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
 })();
 /* FAB: hide while scrolling down, return on scroll up (real-X feel) */
 (function(){const sc=$("#x-scroll"),fab=$("#x-compose-btn");if(!sc||!fab)return;let ly=0;sc.addEventListener("scroll",()=>{const y=sc.scrollTop;if(y>ly+8&&y>120)fab.classList.add("fab-hide");else if(y<ly-4||y<60)fab.classList.remove("fab-hide");ly=y;},{passive:true});})();
+/* pull-to-refresh: only on the home timeline at scroll top. Finger-follow (damped,
+   max 80px), threshold 64px. Refresh re-renders the same feed in the same order -
+   no new posts, no reorder. A pull drag suppresses the click it would otherwise fire. */
+(function(){
+ const sc=$("#x-scroll"),ptr=$("#ptr");if(!sc||!ptr)return;
+ const svg=ptr.querySelector("svg"),TH=64,MAX=80;
+ let startY=null,pull=0,active=false,refreshing=false,suppress=false,suppressTimer=null;
+ function armSuppress(){suppress=true;clearTimeout(suppressTimer);suppressTimer=setTimeout(()=>{suppress=false;},400);}
+ function setH(h,anim){ptr.style.transition=anim?"height .26s ease,opacity .26s ease":"none";ptr.style.height=h+"px";ptr.style.opacity=h>4?String(Math.min(1,h/48)):"0";if(svg&&!refreshing)svg.style.transform="rotate("+(h*3)+"deg)";ptr.classList.toggle("ready",h>=TH&&!refreshing);}
+ function canStart(){return !refreshing&&curPane==="tl"&&sc.scrollTop<=0&&!$("#x-compose").classList.contains("on");}
+ function onStart(y){if(!canStart()){active=false;return;}startY=y;pull=0;active=true;}
+ function onMove(y,e){if(!active||startY===null)return;const dy=y-startY;if(dy<=0){if(pull)setH(0,false);pull=0;return;}if(sc.scrollTop>0){active=false;setH(0,false);pull=0;return;}pull=Math.min(MAX,dy*0.5);if(pull>8){if(e&&e.cancelable)e.preventDefault();setH(pull,false);}}
+ function onEnd(){if(!active)return;active=false;if(pull>8)armSuppress();
+  if(pull>=TH){refreshing=true;ptr.classList.add("spin");setH(56,true);
+   setTimeout(()=>{try{renderFeed();}catch(_){ }setH(0,true);setTimeout(()=>{refreshing=false;ptr.classList.remove("spin");if(svg)svg.style.transform="";},280);},700);
+  }else setH(0,true);
+  pull=0;startY=null;}
+ sc.addEventListener("touchstart",e=>{if(e.touches&&e.touches[0])onStart(e.touches[0].clientY);},{passive:true});
+ sc.addEventListener("touchmove",e=>{if(e.touches&&e.touches[0])onMove(e.touches[0].clientY,e);},{passive:false});
+ sc.addEventListener("touchend",onEnd);sc.addEventListener("touchcancel",onEnd);
+ let mouseDown=false;
+ sc.addEventListener("mousedown",e=>{mouseDown=true;onStart(e.clientY);});
+ window.addEventListener("mousemove",e=>{if(mouseDown)onMove(e.clientY,e);});
+ window.addEventListener("mouseup",()=>{if(mouseDown){mouseDown=false;onEnd();}});
+ document.addEventListener("click",e=>{if(suppress){suppress=false;clearTimeout(suppressTimer);e.stopPropagation();e.preventDefault();}},true);
+})();
 /* bell / notif panel (transplanted #x-bell / #x-notif pattern) */
 function unseenNotifs(){return Math.max(0,(S.notifs||[]).length-(S.notifSeen||0));}
 function toggleNotif(){const p=$("#x-notif");const opening=!p.classList.contains("on");p.classList.toggle("on");if(opening){renderNotifs();/* opened = read: badge clears, rows lose the unseen tint on next open */S.notifSeen=S.notifs.length;save();const bn=$("#x-bell-n");bn.style.display="none";$$("#x-notif .nrow").forEach(r=>r.addEventListener("click",()=>p.classList.remove("on")));}}
