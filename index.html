@@ -47,6 +47,8 @@ button{font-family:inherit;cursor:pointer}
 .avatar{border-radius:50%;object-fit:cover;background:#ddd;flex:none}
 .post{display:flex;gap:12px;padding:12px 16px;transition:background .15s ease;border-bottom:1px solid #eff3f4;animation:fadeup .4s ease;text-align:left;width:100%;background:#fff;border-left:none;border-right:none;border-top:none;font-family:inherit;cursor:default}
 @keyframes fadeup{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+@keyframes freshbg{0%{background:rgba(29,155,240,.12)}100%{background:#fff}}
+.post.fresh{animation:fadeup .4s ease,freshbg 1.5s ease}
 .post:active{background:#f7f9f9}
 .post .ava-txt{width:40px;height:40px;font-size:17px}
 .post .nm{font-size:15px;font-weight:800}
@@ -88,9 +90,12 @@ button{font-family:inherit;cursor:pointer}
 .trend{padding:12px 16px;border-bottom:1px solid #eff3f4}
 .trend small{color:#536471}.trend b{display:block;font-size:15px;margin:2px 0}
 /* compose (transplanted shell: #x-compose-btn / #x-compose) */
-#x-compose-btn{position:absolute;right:16px;bottom:150px;width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66}
+#x-compose-btn{position:absolute;right:16px;bottom:150px;width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
+#x-compose-btn:active{transform:scale(.9)}
+#x-compose-btn.fab-hide{opacity:0;pointer-events:none;transform:translateY(12px)}
 #x-compose{position:absolute;inset:0;background:#fff;z-index:80;display:none;flex-direction:column;padding:16px}
-#x-compose.on{display:flex}
+#x-compose.on{display:flex;animation:composeup .26s cubic-bezier(.2,.8,.25,1)}
+@keyframes composeup{from{transform:translateY(26px);opacity:.3}to{transform:none;opacity:1}}
 #x-nav{position:absolute;left:0;right:0;bottom:0;height:58px;background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:6px}
 #x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center}
 #x-nav svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.9}
@@ -117,6 +122,7 @@ button{font-family:inherit;cursor:pointer}
 .evcard p{font-size:14px;line-height:1.65;color:#3d3a28}
 .choice{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 13px;border:1px solid #cfd9de;border-radius:12px;background:#fff;font-size:14px;line-height:1.5;color:#0f1419;cursor:pointer}
 .choice:disabled{opacity:.55}
+.choice.sel{border-color:#1d9bf0;background:rgba(29,155,240,.09)}
 .evcard .result{margin-top:11px;font-size:14px;line-height:1.65;color:#6d5b00;border-top:1px dashed #d8bd55;padding-top:10px}
 #actbar{position:absolute;left:0;right:0;bottom:60px;padding:8px 14px;z-index:64;display:flex;gap:9px;background:rgba(255,255,255,.92)}
 #actbar button{flex:1;padding:11px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer}
@@ -128,7 +134,8 @@ button{font-family:inherit;cursor:pointer}
 .sheet h3{font-size:17px;margin-bottom:6px}.sheet p.desc{color:#536471;font-size:13px;line-height:1.6}
 .sheet .close{float:right;color:#536471;font-size:20px;background:none;border:none}
 #changes{position:fixed;top:56px;left:50%;transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none;width:max-content;max-width:94vw}
-.chg{background:rgba(15,20,25,.95);border:1px solid #1d9bf0;color:#fff;padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.35);animation:pop .25s ease;text-align:center}
+.chg{background:rgba(15,20,25,.95);border:1px solid #1d9bf0;color:#fff;padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.35);animation:pop .25s ease both;text-align:center;transition:opacity .4s ease,transform .4s ease}
+.chg.out{opacity:0;transform:translateY(-6px)}
 .chg.dist{border-color:#f91880;color:#ffb3d1}.chg.bad{border-color:#f4212e;color:#ff8a93}
 @keyframes pop{from{opacity:0;transform:translateY(-8px) scale(.94)}to{opacity:1}}
 .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 16px 4px}
@@ -158,7 +165,7 @@ button{font-family:inherit;cursor:pointer}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v3</p>
+  <p class="ver">v4</p>
 </section>
 
 <section class="screen" id="scr-persona" style="background:#000">
@@ -239,7 +246,7 @@ button{font-family:inherit;cursor:pointer}
       <div class="x-ptabs"><button class="act">ポスト</button><button>返信</button><button>メディア</button><button>いいね</button></div>
       <div id="x-me-posts"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v3</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v4</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -295,7 +302,7 @@ button{font-family:inherit;cursor:pointer}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v3</p>
+  <p class="ver">v4</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -494,7 +501,7 @@ heart:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="curre
 const xcnt9=t=>{const m=String(t==null?"":t).replace(/,/g,"").match(/[\d.]+/);return m?m[0]:"";};
 function fmtCnt(n){n=+n||0;if(n>=10000){const v=n/10000;return (v>=100?String(Math.round(v)):v.toFixed(1).replace(/\.0$/,""))+"\u4e07";}return n.toLocaleString("ja-JP");}
 function postEl(p,hot){
-  const d=document.createElement("div");d.className="post";
+  const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
@@ -541,9 +548,9 @@ function applyFx(fx){if(!fx)return;const b=stanceObj().bonus,out={};
  if(out.fol)S.fol=Math.max(0,S.fol+out.fol);if(out.xp)S.xp+=out.xp;
  if(out.cog)S.cog=Math.max(0,Math.min(100,S.cog+out.cog));if(out.flm)S.flm=Math.max(0,Math.min(100,S.flm+out.flm));if(out.dist)S.dist=Math.max(0,Math.min(100,S.dist+out.dist));
  const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:"ひろとの距離"};const box=$("#changes");
- Object.keys(out).forEach(k=>{const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(k==="flm"&&out[k]>0?" bad":""));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];box.appendChild(d);setTimeout(()=>d.remove(),3000);});
+ Object.keys(out).forEach((k,i)=>{const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(k==="flm"&&out[k]>0?" bad":""));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);});
  renderProfile();save();}
-function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.remove(),2600);}
+function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 const PANES=["tl","trend","mention","me","search","msg","hisprof"];
 function showPane(k){
@@ -575,6 +582,8 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
  const dmBtn=mk("mail","msg",()=>showPane("msg"));
  const bd=document.createElement("span");bd.className="bdg";bd.id="dm-bdg";bd.textContent="!";dmBtn.appendChild(bd);
 })();
+/* FAB: hide while scrolling down, return on scroll up (real-X feel) */
+(function(){const sc=$("#x-scroll"),fab=$("#x-compose-btn");if(!sc||!fab)return;let ly=0;sc.addEventListener("scroll",()=>{const y=sc.scrollTop;if(y>ly+8&&y>120)fab.classList.add("fab-hide");else if(y<ly-4||y<60)fab.classList.remove("fab-hide");ly=y;},{passive:true});})();
 /* bell / notif panel (transplanted #x-bell / #x-notif pattern) */
 function toggleNotif(){$("#x-notif").classList.toggle("on");renderNotifs();}
 $("#x-bell").addEventListener("click",toggleNotif);
@@ -641,16 +650,19 @@ $("#btn-nextday").onclick=()=>{if(S.ch>=5)ending();else{startChapter(S.ch+1);sho
 $("#x-compose-btn").addEventListener("click",()=>{
  if(S.posted){toastChg("今日の投稿は完了してるよ");return;}
  const box=$("#postopts");box.innerHTML="";
- CH[S.ch-1].posts.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.tx;b.onclick=()=>{doPost(o);$("#x-compose").classList.remove("on");};box.appendChild(b);});
+ CH[S.ch-1].posts.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.tx;b.onclick=()=>{if(b.disabled)return;box.querySelectorAll(".choice").forEach(x=>{x.disabled=true;});b.classList.add("sel");b.disabled=false;setTimeout(()=>{doPost(o);$("#x-compose").classList.remove("on");$("#x-scroll").scrollTo({top:0,behavior:"smooth"});},200);};box.appendChild(b);});
  $("#x-compose").classList.add("on");
 });
 $("#xc-cancel").addEventListener("click",()=>$("#x-compose").classList.remove("on"));
 function doPost(o){
- S.posts.unshift(mkPost("nao",o.tx,0,0,0,true,o.img));
+ const mine=mkPost("nao",o.tx,0,0,0,true,o.img);mine.fresh=true;
+ S.posts.forEach(p=>{p.fresh=false;});
+ const reacts=[];
  (o.react||[]).forEach(r=>{
-   if(r.likeOnly){S.posts.unshift({sys:true,tx:"井汲大翔さんがあなたのポストをいいねしました",a:"hiroto",t:"",m:["0","0","0"]});S.notifs.unshift({a:"hiroto",tx:"さんがあなたのポストをいいねしました",sub:CH[S.ch-1].day});}
-   else{const rp=mkPost(r.a,r.tx,r.lk,r.rp,r.rc,false,r.img);S.posts.unshift(rp);if(r.a==="matome"||r.a==="media")S.men.unshift(rp);}
+   if(r.likeOnly){reacts.push({sys:true,tx:"井汲大翔さんがあなたのポストをいいねしました",a:"hiroto",t:"",m:["0","0","0"]});S.notifs.unshift({a:"hiroto",tx:"さんがあなたのポストをいいねしました",sub:CH[S.ch-1].day});}
+   else{const rp=mkPost(r.a,r.tx,r.lk,r.rp,r.rc,false,r.img);reacts.push(rp);if(r.a==="matome"||r.a==="media")S.men.unshift(rp);}
  });
+ S.posts=[mine].concat(reacts,S.posts);
  S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();save();
 }
 /* activity (Status addition) */
