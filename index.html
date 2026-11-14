@@ -2807,7 +2807,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v247</p>
+  <p class="ver">v248</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2981,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v247</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v248</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3252,7 +3252,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v247</p>
+    <p class="ver">v248</p>
   </div>
 </section>
 </div>
@@ -5212,6 +5212,16 @@ function startChapter(n){
  if(n===1){const hp=seeds.find(p=>p.a===tgtKey());if(hp&&!hp.img)hp.img=tgt().cover;}
  let sd=seeds;
  if(tgtKey()==="sakuya"){sd=seeds.filter(p2=>p2.a!=="hiroto");}
+ /* v248 (episode): the first follower checks in once more, on the
+    morning of Day 4 - the same slot, the same display numbers for
+    every run; only the person and their words differ, in their own
+    voice. No fx, no branching: the story and the endings never
+    learn which of the three it was. */
+ if(n===4){const FF={
+  mina:{tx:"なおさんの『The Chase』、何度も聴いています。静かに、でも確かに届く歌声。これからの活動も楽しみにしています。",lk:5214,rp:812,rc:96},
+  sea:{tx:"なおちゃん、ステージおつかれさま。堂々としてて、見ていて誇らしかったよ。ごはんちゃんと食べて、体調管理もしっかりね。これからもよろしくお願いします。",lk:3908,rp:640,rc:88},
+  akari:{tx:"なお姉さん、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
+ }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
  S.posts=sd.concat(S.posts.filter(p=>p.mine));
  renderDayBanner();
  $("#x-head-note").textContent="Day "+n+" / "+TOTAL_DAYS+"";
