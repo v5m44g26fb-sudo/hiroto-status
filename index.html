@@ -1859,10 +1859,50 @@ input,textarea{font-size:16px}
 #x-pane-search .sug span{display:inline-flex;align-items:center;border:1.5px solid #e4e1f6;background:linear-gradient(180deg,#fff,#fbf9ff);padding:8px 13px 8px 11px;box-shadow:0 3px 10px rgba(90,40,160,.07)}
 #x-pane-search .sug span::before{content:"";width:14px;height:14px;margin-right:7px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237856ff' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20.5 20.5 16.6 16.6'/%3E%3C/svg%3E") center/contain no-repeat}
 #x-pane-search .sug span:first-child{border-color:rgba(120,86,255,.5)}
+/* ===== v103: boot splash - a short brand card over a deep field that
+   dissolves into the title poster while the poster itself rises in a
+   stagger. Pure CSS timing; the splash is pointer-events:none from the
+   first frame and removes itself, so the title never waits on it and
+   stays tappable throughout. Boot only: returning to the title later
+   does not replay it. ===== */
+#splash{position:absolute;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;background:radial-gradient(120% 90% at 50% 30%,#1b1030 0%,#0a0618 55%,#050410 100%);pointer-events:none;animation:splashout .5s ease 1.05s forwards}
+#splash .sp-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 28px;animation:spzoom 1.55s cubic-bezier(.2,.8,.25,1) both}
+@keyframes spzoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+@keyframes splashout{to{opacity:0;visibility:hidden}}
+#splash .sp-logo{width:40px;height:40px;padding:15px;border:1px solid rgba(255,255,255,.38);border-radius:50%;background:rgba(255,255,255,.06);box-shadow:0 0 0 7px rgba(255,255,255,.05),0 0 42px rgba(249,24,128,.45);animation:spin .6s cubic-bezier(.2,.8,.25,1) both}
+@keyframes spin{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1)}}
+#splash .sp-eyebrow{margin-top:22px;font-size:10.5px;font-weight:900;letter-spacing:.3em;color:#c9b8ff;animation:spfade .5s ease .18s both}
+#splash .sp-title{margin-top:12px;font-size:27px;font-weight:900;line-height:1.5;letter-spacing:.03em;background:linear-gradient(180deg,#fff 30%,#d9ccff);-webkit-background-clip:text;background-clip:text;color:transparent;animation:spfade .55s ease .3s both}
+@keyframes spfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#splash .sp-bar{margin-top:24px;width:132px;height:3px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden;animation:spfade .5s ease .42s both}
+#splash .sp-bar i{display:block;height:100%;width:0;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880,#ffd400);animation:spfill .78s cubic-bezier(.3,.7,.3,1) .42s both}
+@keyframes spfill{from{width:0}to{width:100%}}
+#splash .sp-cap{margin-top:13px;font-size:11px;font-weight:700;letter-spacing:.14em;color:rgba(220,224,255,.55);animation:spfade .5s ease .5s both}
+#scr-title.booted .xlogo,#scr-title.booted .t-eyebrow,#scr-title.booted h1,#scr-title.booted .t-rule,#scr-title.booted .sub,#scr-title.booted .flowsteps,#scr-title.booted #tsave,#scr-title.booted .btn,#scr-title.booted .ver{animation:titlein .6s cubic-bezier(.2,.8,.25,1) both}
+@keyframes titlein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+#scr-title.booted .xlogo{animation-delay:.62s}
+#scr-title.booted .t-eyebrow{animation-delay:.7s}
+#scr-title.booted h1{animation-delay:.78s}
+#scr-title.booted .t-rule{animation-delay:.88s}
+#scr-title.booted .sub{animation-delay:.94s}
+#scr-title.booted .flowsteps{animation-delay:1.02s}
+#scr-title.booted #tsave{animation-delay:1.08s}
+#scr-title.booted .btn{animation-delay:1.12s}
+#scr-title.booted #btn-continue{animation-delay:1.18s}
+#scr-title.booted #btn-reset0{animation-delay:1.24s}
+#scr-title.booted .ver{animation-delay:1.3s}
+@media (prefers-reduced-motion:reduce){#splash{display:none}#scr-title.booted .xlogo,#scr-title.booted .t-eyebrow,#scr-title.booted h1,#scr-title.booted .t-rule,#scr-title.booted .sub,#scr-title.booted .flowsteps,#scr-title.booted #tsave,#scr-title.booted .btn,#scr-title.booted .ver{animation:none}}
 </style>
 </head>
 <body>
 <div id="phone">
+<div id="splash" aria-hidden="true"><div class="sp-in">
+  <svg class="sp-logo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
+  <p class="sp-eyebrow">NAO ― OFFICIAL X OPENING</p>
+  <p class="sp-title">デビューしたら、<br>彼と同じステージの件</p>
+  <div class="sp-bar"><i></i></div>
+  <p class="sp-cap">STATUS ― 5 DAYS STORY</p>
+</div></div>
 <section class="screen intro on" id="scr-title" style="--bgimg:url(assets/nao-promo.jpg)">
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
   <p class="t-eyebrow">NAO ― OFFICIAL X OPENING</p>
@@ -1884,7 +1924,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v102</p>
+  <p class="ver">v103</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2039,7 +2079,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v102</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v103</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2248,7 +2288,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v102</p>
+    <p class="ver">v103</p>
   </div>
 </section>
 </div>
@@ -3923,6 +3963,12 @@ $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 $("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
+/* v103: boot splash - flags the title for its staggered entrance and
+   removes the splash node once the dissolve has played. The splash is
+   pointer-events:none in CSS, so nothing here can block the title. */
+(function(){const sp=document.getElementById("splash"),sec=document.getElementById("scr-title");
+ if(sec)sec.classList.add("booted");
+ if(sp)setTimeout(()=>{sp.remove();},1750);})();
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
