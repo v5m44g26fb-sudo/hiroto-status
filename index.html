@@ -44,6 +44,7 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .appbar .s{font-size:11px;color:var(--sub);white-space:nowrap;flex:none}
 .appbar.v738-search .t{display:none}
 .appbar.v738-search #x-bell{display:none}
+.appbar.v738-search #x-head-note{display:none}
 .appbar .x-searchbar{display:none!important}
 .appbar.v738-search .x-searchbar{display:flex!important;flex:1;margin-left:6px;padding:0!important}
 .scroll{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-bottom:calc(140px + env(safe-area-inset-bottom));scroll-behavior:smooth;scrollbar-width:none}
@@ -122,10 +123,7 @@ input,textarea{font-size:16px}
 .sug span{border:1px solid #cfd9de;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;transition:background .15s ease,transform .1s ease}
 .sug span:active{background:#eff3f4;transform:scale(.96)}
 #x-pane-search .xtabs button{flex:none;padding-left:14px;padding-right:14px;white-space:nowrap}
-.trend{cursor:pointer;transition:background .15s ease}
-.trend:active{background:#f7f9f9}
-.trend{padding:12px 16px;border-bottom:1px solid #eff3f4}
-.trend small{color:#536471}.trend b{display:block;font-size:15px;margin:2px 0}
+
 /* compose (transplanted shell: #x-compose-btn / #x-compose) */
 #x-compose-btn{position:absolute;right:16px;bottom:calc(150px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
 #x-compose-btn:active{transform:scale(.9)}
@@ -173,12 +171,8 @@ input,textarea{font-size:16px}
 #x-bell:active{background:#eff3f4}
 #x-bell svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9}
 #x-bell-n{position:absolute;top:-4px;right:-6px;background:#e0245e;color:#fff;font-size:9.5px;font-weight:800;border-radius:999px;padding:1px 5px;display:none}
-#x-notif{position:absolute;top:calc(52px + env(safe-area-inset-top));right:10px;width:min(330px,92vw);max-height:60dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:16px;box-shadow:0 12px 34px rgba(0,0,0,.2);z-index:90;display:none}
+#x-notif{position:absolute;top:calc(52px + env(safe-area-inset-top));right:10px;width:min(344px,94vw);max-height:66dvh;overflow-y:auto;background:#fff;border:1px solid #e5e5ea;border-radius:20px;box-shadow:0 18px 44px rgba(15,20,25,.28);z-index:90;display:none}
 #x-notif.on{display:block;animation:panein .18s ease}
-#x-notif .nrow{display:flex;gap:10px;padding:11px 13px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5;cursor:pointer;transition:background .15s ease}
-#x-notif .nrow:active{background:#f7f9f9}
-#x-notif .nrow.unseen{background:rgba(29,155,240,.06)}
-#x-notif .nrow small{color:#536471;display:block}
 /* stories row (Status addition, minimal) */
 #stories{display:flex;gap:13px;padding:11px 14px 7px;overflow-x:auto;border-bottom:1px solid #eff3f4}
 .story{text-align:center;width:62px;flex:none;background:none;border:none}
@@ -533,6 +527,65 @@ input,textarea{font-size:16px}
 .end-chg{display:block;width:100%;margin-top:9px;background:none;border:none;border-top:1px solid rgba(255,255,255,.09);padding:12px 0 3px;color:#4cc3ff;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;text-align:left}
 #scr-ending .btn{margin-top:18px;flex:none}
 #scr-ending .ver{color:rgba(255,255,255,.35)}
+/* ===== v25: notifications panel + explore/trends overhaul ===== */
+/* -- notification panel -- */
+.nhead{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:9px;padding:13px 15px 11px;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #eff3f4}
+.nhead::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,#7856ff,#f91880,#ffd400)}
+.nhead-t{font-size:16.5px;font-weight:900;letter-spacing:.02em}
+.nhead-chip{margin-left:auto;font-size:11px;font-weight:800;color:#536471;background:#eff3f4;border-radius:999px;padding:4px 10px;white-space:nowrap}
+.nhead-chip.has{background:linear-gradient(135deg,#1d9bf0,#7856ff);color:#fff;box-shadow:0 4px 12px rgba(29,155,240,.35)}
+.nempty{padding:22px 16px;color:#536471;font-size:13.5px;text-align:center}
+#x-notif .nrow{display:flex;gap:11px;padding:12px 14px;border-bottom:1px solid #eff3f4;font-size:13.5px;line-height:1.5;cursor:pointer;transition:background .15s ease;align-items:flex-start;position:relative}
+#x-notif .nrow:active{background:#f7f9f9}
+#x-notif .nrow.unseen{background:rgba(29,155,240,.07)}
+#x-notif .nrow.unseen::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#1d9bf0}
+#x-notif .nrow.special{background:linear-gradient(120deg,rgba(249,24,128,.07),rgba(120,86,255,.06))}
+#x-notif .nrow.special.unseen{background:linear-gradient(120deg,rgba(249,24,128,.1),rgba(29,155,240,.07))}
+#x-notif .nrow.special.unseen::before{background:linear-gradient(180deg,#f91880,#7856ff)}
+#x-notif .nmain{flex:1;min-width:0}
+#x-notif .nmain b{font-weight:800}
+#x-notif .nrow small{color:#536471;display:block;font-size:12px;margin-top:1px}
+.nava{position:relative;flex:none;width:40px;height:40px}
+.nava .avatar{width:40px;height:40px}
+.nava .ava-txt{width:40px;height:40px;font-size:17px}
+#x-notif .nrow.unseen .nava .avatar,#x-notif .nrow.unseen .nava .ava-txt{box-shadow:0 0 0 2px #fff,0 0 0 4px #1d9bf0}
+#x-notif .nrow.special .nava{border-radius:50%;padding:2px;background:conic-gradient(from 210deg,#f91880,#7856ff,#ffd400,#f91880);width:44px;height:44px;margin:-2px}
+#x-notif .nrow.special .nava .avatar,#x-notif .nrow.special .nava .ava-txt{width:100%;height:100%;border:2px solid #fff}
+.ntype{position:absolute;right:-3px;bottom:-3px;width:19px;height:19px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;z-index:1}
+.ntype svg{width:11px;height:11px;fill:none;stroke:#fff;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.ntype.t-heart{background:#f91880}.ntype.t-heart svg{fill:#fff;stroke:none}
+.ntype.t-dm{background:#7856ff}
+.ntype.t-follow{background:#1d9bf0}
+.ntype.t-news{background:#ff8a00}
+.ntype.t-bell{background:#536471}
+.ndot{flex:none;width:9px;height:9px;border-radius:50%;background:#1d9bf0;margin-top:6px}
+/* -- trends (pane + search results share .trend) -- */
+.trend-head{display:flex;align-items:baseline;gap:10px;padding:16px 16px 10px}
+.trend-head .th-t{font-size:19px;font-weight:900;letter-spacing:.02em}
+.trend-head .th-s{font-size:12px;color:#536471;font-weight:700}
+.trend{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #eff3f4;cursor:pointer;transition:background .15s ease;text-align:left}
+.trend:active{background:#f7f9f9}
+.trend .trank{flex:none;width:26px;text-align:center;font-size:17px;font-weight:900;color:#b6c2ca;font-variant-numeric:tabular-nums}
+.trend.top .trank{color:#f91880}
+.trend .tmain{flex:1;min-width:0}
+.trend .tcat{display:block;color:#536471;font-size:12px}
+.trend .tmain b{display:block;font-size:15.5px;margin:2px 0 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trend .tcount{display:block;color:#536471;font-size:12.5px}
+.trend .tarr{flex:none;color:#c3ccd2;font-size:19px;font-weight:700}
+/* -- search pane -- */
+#x-stabs{display:flex;gap:4px;background:#eff3f4;border-bottom:none;border-radius:999px;padding:4px;margin:10px 12px 4px;backdrop-filter:none;-webkit-backdrop-filter:none}
+#x-stabs button{flex:none;border-bottom:none;border-radius:999px;padding:7px 13px;font-size:13px;color:#536471}
+#x-stabs button.act{background:#0f1419;color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(15,20,25,.3);border-bottom:none}
+#x-stabs button:active{background:#e1e8ea}
+#x-stabs button.act:active{background:#0f1419}
+.srch-lab{display:flex;align-items:center;gap:8px;padding:14px 16px 0;font-weight:900;font-size:14px;color:#0f1419}
+.srch-lab i{width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,#7856ff,#f91880);flex:none}
+#x-pane-search .sug{padding:10px 14px 4px;gap:8px}
+#x-pane-search .sug span{border:1.5px solid #dfe6ea;background:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;color:#0f1419;box-shadow:0 2px 7px rgba(15,20,25,.06);cursor:pointer;transition:transform .1s ease,background .15s ease}
+#x-pane-search .sug span:active{background:#eff3f4;transform:scale(.96)}
+.srch-res-h{display:flex;align-items:baseline;gap:7px;padding:14px 16px 10px;border-bottom:1px solid #eff3f4;font-size:14px;color:#536471}
+.srch-res-h b{font-size:15.5px;color:#0f1419;font-weight:900}
+.srch-res-h span{margin-left:auto;font-size:12px;font-weight:800;color:#1d9bf0;flex:none}
 </style>
 </head>
 <body>
@@ -545,7 +598,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v24</p>
+  <p class="ver">v25</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -630,7 +683,7 @@ input,textarea{font-size:16px}
     <div id="x-pane-mention" style="display:none"><div style="padding:26px 18px;color:#536471;font-size:13.5px" id="x-men-empty">まだメンションはない。…今のところは。</div><div id="x-men-list"></div></div>
     <div id="x-pane-search" style="display:none">
       <div class="xtabs" id="x-stabs" style="overflow-x:auto"><button data-stab="topic" class="act">話題を検索</button><button data-stab="trend">トレンド</button><button data-stab="news">ニュース</button><button data-stab="sports">スポーツ</button><button data-stab="entame">エンタメ</button></div>
-      <div style="padding:10px 14px 0;font-weight:800;font-size:13.5px;color:#536471">おすすめワード</div>
+      <div class="srch-lab"><i></i>おすすめワード</div>
       <div class="sug" id="x-sug"></div>
       <div id="x-search-results"></div>
     </div>
@@ -654,7 +707,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v24</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v25</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -694,7 +747,7 @@ input,textarea{font-size:16px}
       </div>
     </div>
   </div>
-  <div id="x-notif"><div style="padding:12px 14px 4px;font-weight:800">通知</div><div id="x-notif-list"></div></div>
+  <div id="x-notif"><div class="nhead"><span class="nhead-t">通知</span><span class="nhead-chip" id="nhead-chip"></span></div><div id="x-notif-list"></div></div>
   <div id="actbar">
     <button id="btn-activity">Activity</button>
     <button id="btn-nextday">次の日へ →</button>
@@ -765,7 +818,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v24</p>
+    <p class="ver">v25</p>
   </div>
 </section>
 </div>
@@ -1137,11 +1190,19 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
 function unseenNotifs(){return Math.max(0,(S.notifs||[]).length-(S.notifSeen||0));}
 function toggleNotif(){const p=$("#x-notif");const opening=!p.classList.contains("on");p.classList.toggle("on");if(opening){renderNotifs();/* opened = read: badge clears, rows lose the unseen tint on next open */S.notifSeen=S.notifs.length;save();const bn=$("#x-bell-n");bn.style.display="none";$$("#x-notif .nrow").forEach(r=>r.addEventListener("click",()=>p.classList.remove("on")));}}
 $("#x-bell").addEventListener("click",toggleNotif);
+const NTYPE={
+ heart:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>',
+ dm:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>',
+ follow:'<svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.4"/><path d="M4.5 19.5c.6-3.2 2.7-4.8 5.5-4.8s4.9 1.6 5.5 4.8"/><path d="M18.5 5.5v6M15.5 8.5h6"/></svg>',
+ news:'<svg viewBox="0 0 24 24"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5H16v13.5H6A2 2 0 0 1 4 16.5z"/><path d="M16 9h2.5A1.5 1.5 0 0 1 20 10.5v6a2 2 0 0 1-2 2"/><path d="M7 9h6M7 13h6"/></svg>',
+ bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>'};
+function notifType(n){if(n.a==="hiroto")return"heart";if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
- list.innerHTML=S.notifs.length?"":'<div style="padding:14px;color:#536471;font-size:13px">まだ通知はないよ</div>';
- S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"");
-  row.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" width="34" height="34" alt="">':avaTxt(a.n))+"<div><b></b><span class='tx2'></span><small></small></div>";
+ const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
+ list.innerHTML=S.notifs.length?"":'<div class="nempty">まだ通知はないよ</div>';
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"")+(n.a==="hiroto"?" special":"");
+  row.innerHTML='<span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'<i class="ntype t-'+t+'">'+NTYPE[t]+'</i></span>'+"<div class='nmain'><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
  const men=$("#x-men-list");const emp=$("#x-men-empty");
@@ -1277,20 +1338,20 @@ $$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b
 $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 (function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?"井汲大翔さんをフォローしたよ":"井汲大翔さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
 /* trends + search */
-function trendEl(t){const d=document.createElement("div");d.className="trend";d.innerHTML="<small></small><b></b><small class='c'></small>";d.querySelector("small").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".c").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
-function renderTrends(){$("#x-pane-trend").innerHTML="";TRENDS.forEach(t=>$("#x-pane-trend").appendChild(trendEl(t)));
+function trendEl(t,rank){const d=document.createElement("div");d.className="trend"+(rank===0?" top":"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small></div><span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);TRENDS.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i)));
  const sug=$("#x-sug");sug.innerHTML="";["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ミュージック・ステージ"].forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
- if(k==="topic"){TRENDS.forEach(t=>box.appendChild(trendEl(t)));return;}
+ if(k==="topic"){TRENDS.forEach((t,i)=>box.appendChild(trendEl(t,i)));return;}
  const list=TRENDS.filter(t=>cat===null||t[0]===cat);
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
- list.forEach(t=>box.appendChild(trendEl(t)));}
+ list.forEach((t,i)=>box.appendChild(trendEl(t,i)));}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
-function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q)))).forEach(p=>box.appendChild(postEl(p,false)));if(!box.children.length){const d=document.createElement("div");d.style.cssText="padding:20px;color:#536471;font-size:13.5px";d.textContent="「"+q+"」のポストはまだ見つからない";box.appendChild(d);}$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
+function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
 /* event card (Status addition) */
