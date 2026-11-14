@@ -2325,6 +2325,18 @@ input,textarea{font-size:16px}
 #x-pane-search .trend.dyn::before{border-radius:3px}
 #x-pane-search .trend .tvol{max-width:230px}
 #x-pane-search .srch-lab{padding:16px 16px 0;font-size:13.5px}
+#x-suglive{padding:6px 0 4px}
+.suglive-row{display:flex;align-items:center;gap:11px;width:100%;background:none;border:none;border-bottom:1px solid #f3f5f6;padding:10px 16px;cursor:pointer;font-family:inherit;text-align:left;color:#0f1419}
+.suglive-row:active{background:#f7f9f9}
+.suglive-ic{flex:none;width:36px;height:36px;border-radius:50%;background:#eff3f4;display:flex;align-items:center;justify-content:center;color:#536471}
+.suglive-ic svg{width:17px;height:17px}
+.suglive-ic.hash{font-size:16px;font-weight:900}
+.suglive-av{flex:none;width:36px;height:36px;border-radius:50%;object-fit:cover}
+.suglive-av.txt{background:#dfe6ea;display:flex;align-items:center;justify-content:center;font-weight:900;color:#536471}
+.suglive-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.suglive-main b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.suglive-main small{font-size:12px;color:#536471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.suglive-tx{font-size:14.5px;font-weight:700}
 .hist-lab button{margin-left:auto;border:none;background:none;font:inherit;font-size:12px;font-weight:800;color:#1d9bf0;cursor:pointer;padding:2px 4px}
 #x-pane-search .sug.hist span{display:inline-flex;align-items:center;gap:6px}
 #x-pane-search .sug.hist .hx{font-style:normal;color:#8a94a6;font-weight:900;padding:0 1px}
@@ -2755,7 +2767,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v206</p>
+  <p class="ver">v207</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2879,6 +2891,7 @@ input,textarea{font-size:16px}
     <div id="x-pane-mention" style="display:none"><div style="padding:26px 18px;color:#536471;font-size:13.5px" id="x-men-empty">まだメンションはない。…今のところは。</div><div id="x-men-list"></div></div>
     <div id="x-pane-search" style="display:none">
       <div class="xtabs" id="x-stabs" style="overflow-x:auto"><button data-stab="topic" class="act">話題を検索</button><button data-stab="trend">トレンド</button><button data-stab="news">ニュース</button><button data-stab="sports">スポーツ</button><button data-stab="entame">エンタメ</button></div>
+      <div id="x-suglive" style="display:none"></div>
       <div class="srch-lab"><i></i>おすすめワード</div>
       <div class="sug" id="x-sug"></div>
       <div class="srch-lab hist-lab" id="x-hist-lab" style="display:none"><i></i>最近の検索<button id="x-hist-clear" type="button">クリア</button></div>
@@ -2923,7 +2936,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v206</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v207</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3192,7 +3205,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v206</p>
+    <p class="ver">v207</p>
   </div>
 </section>
 </div>
@@ -4950,6 +4963,7 @@ function hlMarks(el,toks){
  }
 }
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;srchActive=true;pushSrchHist(q);syncQClear();const box=$("#x-search-results");box.innerHTML="";
+ const lv=$("#x-suglive");if(lv){lv.style.display="none";lv.innerHTML="";}sugLiveOn=false;
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";
  const sax=$("#x-sugacc");if(sax)sax.style.display="none";
  const tokens=q.split(/[\s　]+/).map(t=>t.replace(/^#+/,"")).filter(Boolean);
@@ -4990,7 +5004,39 @@ function syncQClear(){const q=$("#x-q"),c=$("#x-q-clear");if(q&&c)c.classList.to
    returns to the current tab's idle view (renderSearchTab flips
    srchActive back off and rebuilds it) */
 function srchReset(){if(srchActive)renderSearchTab(searchTab);}
-$("#x-q").addEventListener("input",()=>{syncQClear();if(!$("#x-q").value)srchReset();});
+$("#x-q").addEventListener("input",()=>{syncQClear();if(!$("#x-q").value)srchReset();renderSugLive();});
+/* v207: live suggestions while typing - the pane's idle blocks step
+   aside for a suggestion list (search-this row, matching accounts,
+   matching trends). Session-only; Enter still runs the real search,
+   and clearing the box restores the idle pane untouched. */
+let sugLiveOn=false;
+function renderSugLive(){
+ const box=$("#x-suglive");if(!box)return;
+ const q=($("#x-q").value||"").trim();
+ if(!q||srchActive){box.style.display="none";box.innerHTML="";if(sugLiveOn&&!srchActive){sugLiveOn=false;renderSearchTab(searchTab);}return;}
+ sugLiveOn=true;
+ ["#x-sug","#x-sugacc","#x-hist","#x-hist-lab"].forEach(s=>{const e=$(s);if(e)e.style.display="none";});
+ $$("#x-pane-search .srch-lab").forEach(e=>{if(!e.classList.contains("hist-lab"))e.style.display="none";});
+ box.innerHTML="";box.style.display="";
+ const ql=q.toLowerCase();
+ const srow=document.createElement("button");srow.className="suglive-row search";
+ srow.innerHTML='<span class="suglive-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></span><span class="suglive-tx"></span>';
+ srow.querySelector(".suglive-tx").textContent="「"+q+"」を検索";
+ srow.addEventListener("click",()=>runSearch());box.appendChild(srow);
+ Object.keys(ACC).filter(k=>{const a=ACC[k];return a&&(a.n.toLowerCase().includes(ql)||a.h.toLowerCase().includes(ql));}).slice(0,4).forEach(k=>{
+  const a=ACC[k];const r=document.createElement("button");r.className="suglive-row";
+  r.innerHTML=(a.av?'<img class="suglive-av" src="'+a.av+'" alt="">':'<span class="suglive-av txt"></span>')+'<span class="suglive-main"><b></b><small></small></span>';
+  if(!a.av)r.querySelector(".suglive-av").textContent=(a.n||"").slice(0,1);
+  r.querySelector("b").textContent=a.n;r.querySelector("small").textContent=a.h;
+  r.addEventListener("click",()=>{if(k==="nao")showPane("me");else if(k===tgtKey())showPane("hisprof");else{$("#x-q").value=a.h;runSearch();}});
+  box.appendChild(r);});
+ curTrends().filter(t=>t[1].toLowerCase().includes(ql)).slice(0,4).forEach(t=>{
+  const r=document.createElement("button");r.className="suglive-row";
+  r.innerHTML='<span class="suglive-ic hash">#</span><span class="suglive-main"><b></b><small></small></span>';
+  r.querySelector("b").textContent=t[1];r.querySelector("small").textContent=t[0]+" ― "+t[2];
+  r.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});
+  box.appendChild(r);});
+}
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Escape"){$("#x-q").value="";syncQClear();srchReset();}});
 $("#x-q-clear").addEventListener("click",()=>{const q=$("#x-q");q.value="";syncQClear();srchReset();q.focus();});
 syncQClear();
