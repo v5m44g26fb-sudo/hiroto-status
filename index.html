@@ -1859,6 +1859,36 @@ input,textarea{font-size:16px}
 #x-pane-search .sug span{display:inline-flex;align-items:center;border:1.5px solid #e4e1f6;background:linear-gradient(180deg,#fff,#fbf9ff);padding:8px 13px 8px 11px;box-shadow:0 3px 10px rgba(90,40,160,.07)}
 #x-pane-search .sug span::before{content:"";width:14px;height:14px;margin-right:7px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237856ff' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20.5 20.5 16.6 16.6'/%3E%3C/svg%3E") center/contain no-repeat}
 #x-pane-search .sug span:first-child{border-color:rgba(120,86,255,.5)}
+/* ===== v109: notification panel, second raise - the unseen face is
+   richer while it is fresh (gradient wash, full-weight name, glowing
+   dot) and then settles in place while you look at it: once the panel
+   has been open a moment it gains .settling and the wash, dot and
+   avatar ring ease away, leaving the read rows sunken. Sub-tabs
+   become a segmented track with a white active pill, and the incoming
+   list swaps in with a short rise. Empty states join the medallion
+   language. Data, destinations and the read-marking itself are
+   unchanged (the settle is a visual layer over the same timing). ===== */
+#x-notif .nrow{animation:nrowin .32s cubic-bezier(.2,.8,.25,1) both;transition:background .7s ease}
+@keyframes nrowin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#x-notif .nrow.unseen{background:linear-gradient(120deg,rgba(29,155,240,.11),rgba(120,86,255,.08))}
+#x-notif .nrow.special.unseen{background:linear-gradient(120deg,rgba(249,24,128,.13),rgba(29,155,240,.08))}
+#x-notif .nrow.unseen .nmain b{font-weight:900}
+#x-notif .nrow:not(.unseen) .nmain b{font-weight:700}
+#x-notif .nrow .ndot{background:linear-gradient(135deg,#1d9bf0,#7856ff);box-shadow:0 0 0 3px rgba(29,155,240,.16),0 0 10px rgba(29,155,240,.55);transition:opacity .6s ease,transform .6s ease}
+#x-notif .nrow.unseen .nava .avatar,#x-notif .nrow.unseen .nava .ava-txt{transition:box-shadow .7s ease}
+#x-notif.settling .nrow.unseen{background:rgba(255,255,255,0)}
+#x-notif.settling .nrow.special.unseen{background:linear-gradient(120deg,rgba(249,24,128,.07),rgba(120,86,255,.06))}
+#x-notif.settling .nrow .ndot{opacity:0;transform:scale(.3)}
+#x-notif.settling .nrow.unseen .nava .avatar,#x-notif.settling .nrow.unseen .nava .ava-txt{box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(29,155,240,0)}
+.nsubs{background:#eef1f3;border-radius:999px;padding:4px;gap:4px;margin:10px 12px 6px}
+.nsubs button{border:none;background:transparent;transition:background .25s ease,color .25s ease,box-shadow .25s ease,transform .1s ease}
+.nsubs button.act{background:#fff;color:#0f1419;box-shadow:0 2px 9px rgba(15,20,25,.16)}
+#x-notif-list.nswap,#x-notif-men.nswap{animation:nswapin .24s cubic-bezier(.2,.8,.25,1)}
+@keyframes nswapin{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.nempty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:30px 22px 34px}
+.nempty .ne-ic{width:54px;height:54px;border-radius:50%;background:#f0eafd;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.nempty .ne-ic svg{width:25px;height:25px;fill:none;stroke:#7856ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nempty b{color:#0f1419;font-size:15px;font-weight:900}
 /* ===== v103: boot splash - a short brand card over a deep field that
    dissolves into the title poster while the poster itself rises in a
    stagger. Pure CSS timing; the splash is pointer-events:none from the
@@ -1968,7 +1998,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v108</p>
+  <p class="ver">v109</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2123,7 +2153,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v108</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v109</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2332,7 +2362,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v108</p>
+    <p class="ver">v109</p>
   </div>
 </section>
 </div>
@@ -3066,13 +3096,17 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
 })();
 /* bell / notif panel (transplanted #x-bell / #x-notif pattern) */
 function unseenNotifs(){return Math.max(0,(S.notifs||[]).length-(S.notifSeen||0));}
-function closeNotif(){const p=$("#x-notif");if(!p.classList.contains("on")||p.classList.contains("closing"))return;p.classList.add("closing");setTimeout(()=>{p.classList.remove("on");p.classList.remove("closing");},155);}
-function toggleNotif(){const p=$("#x-notif");if(p.classList.contains("on")){closeNotif();return;}p.classList.remove("closing");p.classList.add("on");renderNotifs();/* opened = read: badge clears, rows lose the unseen tint on next open */S.notifSeen=S.notifs.length;save();const bn=$("#x-bell-n");bn.style.display="none";$$("#x-notif .nrow").forEach(r=>r.addEventListener("click",()=>closeNotif()));}
+function closeNotif(){const p=$("#x-notif");if(!p.classList.contains("on")||p.classList.contains("closing"))return;p.classList.add("closing");setTimeout(()=>{p.classList.remove("on");p.classList.remove("closing");p.classList.remove("settling");},155);}
+function toggleNotif(){const p=$("#x-notif");if(p.classList.contains("on")){closeNotif();return;}p.classList.remove("closing","settling");p.classList.add("on");renderNotifs();/* opened = read: badge clears, rows lose the unseen tint on next open */S.notifSeen=S.notifs.length;save();const bn=$("#x-bell-n");bn.style.display="none";$$("#x-notif .nrow").forEach(r=>r.addEventListener("click",()=>closeNotif()));
+ /* v109: while the panel stays open, the unseen face settles in place */
+ setTimeout(()=>{if(p.classList.contains("on"))p.classList.add("settling");},1100);}
 $("#x-bell").addEventListener("click",toggleNotif);
 /* mentions live in the notification panel now (real-X sub-tabs: すべて /
    @メンション). The mention pane list is still rendered for parity, but the
    panel is the reachable route since the xtabs row was removed in v34. */
-function nsubSet(men){const l=$("#x-notif-list"),m=$("#x-notif-men");if(!l||!m)return;l.style.display=men?"none":"";m.style.display=men?"":"none";$("#nsub-all").classList.toggle("act",!men);$("#nsub-men").classList.toggle("act",men);}
+function nsubSet(men){const l=$("#x-notif-list"),m=$("#x-notif-men");if(!l||!m)return;l.style.display=men?"none":"";m.style.display=men?"":"none";$("#nsub-all").classList.toggle("act",!men);$("#nsub-men").classList.toggle("act",men);
+ /* v109: the incoming list rises in on every switch */
+ const inc=men?m:l;inc.classList.remove("nswap");void inc.offsetWidth;inc.classList.add("nswap");}
 (function(){const a=$("#nsub-all"),m=$("#nsub-men");if(a)a.addEventListener("click",()=>nsubSet(false));if(m)m.addEventListener("click",()=>nsubSet(true));const nm=$("#x-notif-men");if(nm)nm.addEventListener("click",()=>closeNotif(),true);})();
 const NTYPE={
  heart:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>',
@@ -3086,8 +3120,8 @@ function notifType(n){if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").incl
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
- list.innerHTML=S.notifs.length?"":'<div class="nempty">まだ通知はないよ</div>';
- S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");
+ list.innerHTML=S.notifs.length?"":'<div class="nempty"><span class="ne-ic">'+NTYPE.bell+'</span><b>まだ通知はないよ</b></div>';
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");row.style.animationDelay=Math.min(i*0.045,0.3)+"s";
   row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
@@ -3097,7 +3131,7 @@ function renderNotifs(){
  /* v64: the mention sub-tab opens with its own section head, same language as the panel */
  if(nmen){nmen.innerHTML="";const mh=document.createElement("div");mh.className="nmen-head";mh.textContent="あなたへのメンション";nmen.appendChild(mh);
   if(S.men.length)S.men.forEach(p=>nmen.appendChild(postEl(p,false)));
-  else{const e=document.createElement("div");e.className="nempty";e.textContent="まだメンションはないよ";nmen.appendChild(e);}}
+  else{const e=document.createElement("div");e.className="nempty";e.innerHTML='<span class="ne-ic">'+NTYPE.dm+'</span><b>まだメンションはないよ</b>';nmen.appendChild(e);}}
 }
 /* stories (Status addition): tap a ring -> fullscreen viewer.
    One segment per story entry, auto-advance, tap right = next / left = back,
