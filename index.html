@@ -1897,6 +1897,7 @@ input,textarea{font-size:16px}
 .xc-card .xc-body>img.avatar{box-shadow:0 0 0 2.5px rgba(120,86,255,.38),0 3px 9px rgba(15,20,25,.14)}
 .xc-reply{display:inline-flex;align-items:center;gap:5px;background:rgba(29,155,240,.10);border-bottom:none;border-radius:999px;padding:3.5px 11px 3.5px 8px;font-size:12.5px;margin:3px 0 9px}
 .xc-pwrap{position:relative;margin-top:9px}
+#xc-pimg{cursor:pointer}
 .xc-pwrap .xc-pimg{margin-top:0;width:100%}
 .xc-pchip{position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:5px;background:rgba(10,12,16,.62);color:#fff;font-size:11.5px;font-weight:700;border-radius:999px;padding:4.5px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);pointer-events:none}
 .xc-pchip svg{width:13px;height:13px}
@@ -2749,7 +2750,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v182</p>
+  <p class="ver">v183</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2921,7 +2922,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v182</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v183</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3186,7 +3187,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v182</p>
+    <p class="ver">v183</p>
   </div>
 </section>
 </div>
@@ -4962,6 +4963,10 @@ $("#btn-nextday").onclick=()=>{showDayResult();};
    close, and Changes pops only fire once the sheet is gone. */
 let xcSel=null,xcBusy=false;
 const XC_MAX=140,XC_CIRC=56.5,XC_PLACEHOLDER="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+/* v183: tapping the draft's photo preview opens it in the photo
+   viewer (a draft item - no post id, so the viewer's jump button
+   stays hidden there) */
+$("#xc-pimg").addEventListener("click",()=>{if(!xcSel||!xcSel.img)return;try{openPhoto([{src:xcSel.img,name:"なお",handle:S?S.handle:"",av:(ACC.nao&&ACC.nao.av)||null,cap:xcSel.tx||"",date:"下書き",meta:""}],0);}catch(_){}});
 function xcRenderDraft(){
  const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg"),pw=$("#xc-pwrap"),cd=$(".xc-card");
  if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pw)pw.classList.add("hidden");if(pi)pi.src=XC_PLACEHOLDER;if(cd)cd.classList.remove("loaded");return;}
