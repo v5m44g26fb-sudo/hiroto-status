@@ -2772,7 +2772,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v193</p>
+  <p class="ver">v194</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2944,7 +2944,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v193</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v194</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3211,7 +3211,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v193</p>
+    <p class="ver">v194</p>
   </div>
 </section>
 </div>
@@ -5321,7 +5321,10 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
  set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+TOTAL_DAYS+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
  /* v91: the CHAPTER banner carries the same per-chapter photo as the
     v88 day card, dimmed under its gradient (presentation only) */
- const bgEl=$("#db-bg");if(bgEl){const src=DI_BG[S.ch]||"";if(src&&bgEl.getAttribute("src")!==src)bgEl.src=src;}}
+ const bgEl=$("#db-bg");if(bgEl){const src=DI_BG[S.ch]||"";if(src&&bgEl.getAttribute("src")!==src)bgEl.src=src;}
+ /* v194: the banner's day photo opens in the photo viewer */
+ const bnEl=$("#daybanner");
+ if(bnEl&&!bnEl.dataset.pv){bnEl.dataset.pv="1";bnEl.style.cursor="pointer";bnEl.addEventListener("click",()=>{const src2=DI_BG[S.ch];if(!src2)return;const chp=curCH()[S.ch-1];const pp=chp?(chp.day||"").split(" ― "):[];try{openPhoto([{src:src2,name:"なお",handle:S.handle||"",av:(ACC.nao&&ACC.nao.av)||null,cap:pp.length>1?pp.slice(1).join(" ― "):"",date:"Day "+S.ch,meta:"CHAPTER "+S.ch+" ― ステージ写真"}],0);}catch(_){}});}}
 /* v57: chapter presentation - a cinematic title card opens each Day, and
    ending a Day first lands on a Status-style RESULT screen. The result is
    summed from the day's own chgLog entries (already recorded per action),
