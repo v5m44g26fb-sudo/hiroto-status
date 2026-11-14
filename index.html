@@ -1725,6 +1725,27 @@ input,textarea{font-size:16px}
 .post .mt .grp>span:active{color:#1d9bf0}
 #thread-main .post.detail .p-head{display:block}
 #thread-main .post.detail .tm{display:none}
+/* ===== v96: the app frame raised to the screens' standard - the top
+   bar becomes deeper glass (blur + saturate) closed by the app's
+   gradient hairline, her avatar gains a violet ring, and the Day
+   note turns into a chip. The bottom nav turns to the same glass;
+   the active tab swaps its line icon for the solid variant the nav
+   builder now ships alongside (real-X behaviour) over a small
+   gradient dot, and the bell / nav badges share one white-cutout
+   design. Pane switching and badge conditions are unchanged. ===== */
+.appbar{position:relative;background:rgba(255,255,255,.86);backdrop-filter:blur(18px) saturate(1.7);-webkit-backdrop-filter:blur(18px) saturate(1.7);border-bottom:none}
+.appbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,rgba(120,86,255,.6),rgba(249,24,128,.6),rgba(255,212,0,.6));pointer-events:none}
+#x-myava{width:32px;height:32px;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(120,86,255,.55);cursor:pointer}
+.appbar .t{font-size:17px;letter-spacing:.01em}
+#x-head-note{background:#eff3f4;border-radius:999px;padding:3.5px 10px;font-weight:700;color:#3d4750;font-size:11.5px}
+#x-bell-n{border:2px solid #fff;min-width:18px;height:18px;line-height:14px;text-align:center;padding:0 4px;box-sizing:border-box;top:-3px;right:-5px;box-shadow:0 1px 4px rgba(15,20,25,.25)}
+#x-nav{background:rgba(255,255,255,.88);backdrop-filter:blur(18px) saturate(1.7);-webkit-backdrop-filter:blur(18px) saturate(1.7);border-top:1px solid rgba(239,243,244,.7)}
+#x-nav button:active{background:rgba(15,20,25,.05)}
+#x-nav button .ic-f{display:none}
+#x-nav button.sel .ic-l{display:none}
+#x-nav button.sel .ic-f{display:block;fill:#0f1419;stroke:none}
+#x-nav button.sel::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:calc(3px + env(safe-area-inset-bottom));width:4px;height:4px;border-radius:50%;background:linear-gradient(90deg,#7856ff,#f91880)}
+#x-nav .bdg{border:2px solid #fff;line-height:13px;box-sizing:border-box}
 </style>
 </head>
 <body>
@@ -1739,7 +1760,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v95</p>
+  <p class="ver">v96</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1894,7 +1915,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v95</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v96</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2103,7 +2124,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v95</p>
+    <p class="ver">v96</p>
   </div>
 </section>
 </div>
@@ -2778,7 +2799,14 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
  search:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg>',
  bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>',
  mail:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>'};
- const mk=(ic,pane,fn)=>{const b=document.createElement("button");b.type="button";b.dataset.pane=pane;b.innerHTML=ICN[ic];b.addEventListener("click",fn);nav.appendChild(b);return b;};
+ /* v96: filled variants for the active tab, like real X (line icon at
+    rest, solid icon when selected). Pure display: same buttons, same
+    panes, same badge logic. */
+ const ICF={home:'<svg class="ic-f" viewBox="0 0 24 24"><path d="M12 3l9 8h-2.6v8.2c0 .5-.4.8-.8.8H14v-6h-4v6H6.4c-.5 0-.8-.4-.8-.8V11H3l9-8z"/></svg>',
+ search:'<svg class="ic-f" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M10.2 3.6a6.6 6.6 0 1 0 4 11.9l4.1 4.1a1.05 1.05 0 0 0 1.5-1.5l-4.1-4.1a6.6 6.6 0 0 0-5.5-10.4zm0 2.1a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9z"/></svg>',
+ bell:'<svg class="ic-f" viewBox="0 0 24 24"><path d="M12 2.9a6.1 6.1 0 0 1 6.1 6.1v4.2l1.7 3.4c.25.45-.1.9-.6.9H4.8c-.5 0-.85-.45-.6-.9L5.9 13.2V9A6.1 6.1 0 0 1 12 2.9zM9.7 19.1h4.6a2.3 2.3 0 0 1-4.6 0z"/></svg>',
+ mail:'<svg class="ic-f" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 4h16c.6 0 1 .4 1 1v14c0 .6-.4 1-1 1H4c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1zm-1 1 9 8L21 5H3z"/></svg>'};
+ const mk=(ic,pane,fn)=>{const b=document.createElement("button");b.type="button";b.dataset.pane=pane;b.innerHTML=ICN[ic].replace("<svg",'<svg class="ic-l"')+(ICF[ic]||"");b.addEventListener("click",fn);nav.appendChild(b);return b;};
  mk("home","home",()=>showPane("tl"));
  mk("search","search",()=>{showPane("search");const q=$("#x-q");if(q)q.focus();});
  mk("bell","notif",()=>toggleNotif());
