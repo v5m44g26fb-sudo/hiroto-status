@@ -2807,7 +2807,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v249</p>
+  <p class="ver">v250</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2981,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v249</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v250</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3252,7 +3252,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v249</p>
+    <p class="ver">v250</p>
   </div>
 </section>
 </div>
@@ -3722,6 +3722,20 @@ const TARGETS={
  hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/ig-gen-stage.jpg",typo:"HIROTO IKUMI",bio:"日プ（PRODUCE 101 JAPAN）シーズン1出身。中国・創造営、韓国・BOYS PLANETと、国を跨いで挑戦を続けてきた歌手。歌とステージがすべて。",fol:"12.4万",cardT:"井汲大翔｜先輩歌手",cardD:"憧れの先輩歌手。何度挑戦しても折れない人。言葉少なめ、でも目が離せない。",tags:["先輩歌手","ソロ","鯖番出身"]},
  sakuya:{key:"sakuya",name:"サクヤ",short:"サクヤ",handle:"@sakuya_nctwish",av:"assets/sakuya-av.jpg",cover:"assets/sakuya-cover.jpg",typo:"SAKUYA ― NCT WISH",bio:"NCT WISHの末っ子。パンと、静かな時間が好き。",fol:"312万",cardT:"サクヤ｜NCT WISH",cardD:"不思議な感性と、丁寧な言葉選びの先輩。",tags:["NCT WISH","先輩"]}};
 const TARGET_DMS={hiroto:HIROTO_DM,sakuya:SAKUYA_DM};
+/* v250 (episode): a second, shorter exchange that reaches the same
+   thread on Day 5 - only if the first one was answered. His warmth
+   travels by action, not by word count. */
+const HIROTO_DM2={msgs:["見返しました、昨日の番組","歌、よかったです","プリン、楽屋に置いておきました。……よかったら"],
+choices:[
+{t:"「ありがとうございます！ いただきます」と返す",r:"「どうぞ」「……感想は、また今度で」短い返事。でも、冷蔵庫のプリンには付箋で一言、『おつかれさま』。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
+{t:"「大翔さんも、おつかれさまでした」と返す",r:"少し間があって――「ありがとうございます」「なおさんも、ゆっくり休んでください」敬語のまま。でも、名前で呼ばれた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:0}},
+{t:"「今度は私が何か置いておきます」と返す",r:"「……楽しみにしてます」即レスだった。らしくない速さに、こっちが動揺した。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
+const SAKUYA_DM2={msgs:["昨日の番組、帰ってからも思い出していました","なおさんの声、夕方の光みたいでした","クロワッサン、明日の楽屋に置いておきます。焼きたての時間に、合わせておきますね"],
+choices:[
+{t:"「ありがとうございます！ 楽しみにしています」と返す",r:"「約束です」「パンの約束は、破ったことがないんです」丁寧で、少し不思議で、でも確かに嬉しそうだった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
+{t:"「サクヤさんも、おつかれさまでした」と返す",r:"少し間があって――「なおさんも、ゆっくり休んでくださいね」「声は、休めた分だけ遠くまで届きます」言葉選びが、やっぱり丁寧だった。",fx:{dist:8,xp:5,fol:0,cog:0,flm:0}},
+{t:"「今度は私が何か置いておきます」と返す",r:"「交換ですね」「ぼくは、プリンにします。なおさんの好きなものを、置いておきたいので」――サラッと、こちらの好みを覚えていた。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
+const TARGET_DM2={hiroto:HIROTO_DM2,sakuya:SAKUYA_DM2};
 /* pass-1 minimal feed presence for the sakuya route (superseded by CH_S in v33; kept for reference) */
 const SAKUYA_SEED=[
  {tx:"今日デビューしたグループの曲、聴きました。声がまっすぐで、いい朝になりました。",lk:15234,rp:2902,rc:612,img:"assets/sakuya-stage.jpg"},
@@ -5241,6 +5255,14 @@ function startChapter(n){
    S.threads.unshift({id:tgtKey(),who:tgtKey(),msgs:TDM.msgs.slice(),choices:TDM.choices,done:false,unread:true,special:true,replyIdx:-1});
    S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"初めての、本人からの連絡"});
  }
+ /* v250 (episode): the follow-up exchange (TARGET_DM2) continues
+    the same thread on Day 5, if the first one was answered */
+ const TDM2=TARGET_DM2[tgtKey()];
+ if(n===5&&TDM2&&S.hirotoDm==="done"){
+   const th=S.threads.find(x=>x.id===tgtKey()&&x.special);
+   if(th&&!th.round2){th.round2=true;th.msgs=th.msgs.concat(TDM2.msgs);th.choices=TDM2.choices;th.done=false;th.unread=true;
+     S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"本人からの、つづきの連絡"});}
+ }
  injectBuzz(n>=2?1:0,0);
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
  showDayIntro();
@@ -5460,9 +5482,14 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
  /* v144: the open cascade is consumed here - later renders (my reply
     landing, his answer arriving) keep their own single-beat motion */
  const entering=thEnter;thEnter=false;
- t.msgs.forEach((m,i)=>{const side=t.replyIdx===i?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(t.replyIdx===i-1?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(t.done&&side==="me"){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
+ /* v250: a thread can hold a second reply (replyIdx2) once the
+    episode's follow-up exchange lands; the read mark stays single,
+    under the latest of her replies */
+ const isMe=j=>j===t.replyIdx||(t.replyIdx2!=null&&j===t.replyIdx2);
+ const lastMe=Math.max((t.replyIdx==null?-1:t.replyIdx),(t.replyIdx2==null?-1:t.replyIdx2));
+ t.msgs.forEach((m,i)=>{const side=isMe(i)?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(isMe(i-1)?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(t.done&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
- if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
+ if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
    /* v118: his reply types for a beat before it lands (the save
       waits for the pair, so a closed app never keeps half a talk) */
    const ty=document.createElement("div");ty.className="msg them typing";ty.innerHTML="<i></i><i></i><i></i>";$("#th-msgs").appendChild(ty);scrollDmBottom(true);
