@@ -814,9 +814,6 @@ input,textarea{font-size:16px}
 #x-pane-tl{padding-bottom:64px}
 /* notification panel: mentions sub-tab (real-X style), the route that
    replaces the removed xtabs "mention" entry */
-.nsubs{display:flex;gap:6px;padding:9px 12px 4px}
-.nsubs button{flex:1;border:1px solid #e5e5ea;background:#f7f9f9;color:#0f1419;font-family:inherit;font-size:12.5px;font-weight:700;border-radius:999px;padding:6px 0;cursor:pointer}
-.nsubs button.act{background:#0f1419;color:#fff;border-color:#0f1419}
 #x-notif-men .post{border-bottom:1px solid #eff3f4}
 /* ===== v42: floating-element sweep (user's real-device screenshots) =====
    The bottom stack is layout now, not overlays: #v-x is a flex column of
@@ -891,8 +888,6 @@ input,textarea{font-size:16px}
 .btn:active{transform:scale(.98);opacity:.94}
 .sheet .close{transition:transform .12s ease,background .15s ease;border-radius:50%}
 .sheet .close:active{transform:scale(.88);background:#eff3f4}
-.nsubs button{transition:background .15s ease,color .15s ease,transform .1s ease}
-.nsubs button:active{transform:scale(.96)}
 .thread-composer{transition:background .15s ease,transform .1s ease}
 .thread-composer:active{background:#f7f9f9;transform:scale(.99)}
 .mediagrid img{transition:opacity .15s ease}
@@ -1680,10 +1675,6 @@ input,textarea{font-size:16px}
 #x-notif .nlab.t-follow{color:#1d9bf0}
 #x-notif .nlab.t-news{color:#e67700}
 #x-notif .nlab.t-bell{color:#8a94a6}
-.nsubs{gap:0;padding:0 6px;border-bottom:1px solid #eff3f4}
-.nsubs button{border:none;background:none;border-radius:0;padding:11px 0 9px;position:relative;font-size:13.5px;font-weight:700;color:#536471;box-shadow:none}
-.nsubs button.act{background:none;color:#0f1419;border-color:transparent;font-weight:900}
-.nsubs button.act::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:58px;height:3.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880)}
 .nmen-head{display:flex;align-items:center;gap:8px;padding:13px 15px 9px;font-size:13.5px;font-weight:900;letter-spacing:.03em}
 .nmen-head::before{content:"";width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#7856ff,#f91880);flex:none}
 /* ===== v65: ending overhaul - the ending is staged as a reveal (emblem
@@ -2376,14 +2367,10 @@ input,textarea{font-size:16px}
 #x-notif.settling .nrow.special.unseen{background:linear-gradient(120deg,rgba(249,24,128,.07),rgba(120,86,255,.06))}
 #x-notif.settling .nrow .ndot{opacity:0;transform:scale(.3)}
 #x-notif.settling .nrow.unseen .nava .avatar,#x-notif.settling .nrow.unseen .nava .ava-txt{box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(29,155,240,0)}
-.nsubs{background:#eef1f3;border-radius:999px;padding:4px;gap:4px;margin:10px 12px 6px}
-.nfilter{display:flex;gap:7px;padding:4px 16px 8px;overflow-x:auto;scrollbar-width:none}
-.nfilter::-webkit-scrollbar{display:none}
+.nfilter{display:flex;flex-wrap:wrap;gap:7px;padding:4px 16px 10px}
 .nfilter button{flex:none;border:1.5px solid #e3e8ec;background:#fff;color:#0f1419;font:inherit;font-size:12px;font-weight:800;border-radius:999px;padding:5px 12px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
 .nfilter button:active{transform:scale(.96)}
 .nfilter button.act{background:#0f1419;border-color:#0f1419;color:#fff}
-.nsubs button{border:none;background:transparent;transition:background .25s ease,color .25s ease,box-shadow .25s ease,transform .1s ease}
-.nsubs button.act{background:#fff;color:#0f1419;box-shadow:0 2px 9px rgba(15,20,25,.16)}
 #x-notif-list.nswap,#x-notif-men.nswap{animation:nswapin .24s cubic-bezier(.2,.8,.25,1)}
 @keyframes nswapin{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 .nempty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:30px 22px 34px}
@@ -2781,7 +2768,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v203</p>
+  <p class="ver">v204</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2953,7 +2940,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v203</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v204</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3044,7 +3031,7 @@ input,textarea{font-size:16px}
       </div>
     </div>
   </div>
-  <div id="x-notif"><div class="nhead"><span class="nhead-t">通知</span><span class="nhead-chip" id="nhead-chip"></span></div><div class="nsubs"><button id="nsub-all" class="act">すべて</button><button id="nsub-men">@メンション <span id="nmen-n"></span></button></div><div class="nfilter" id="nfilter"><button data-nf="all" class="act">すべて</button><button data-nf="tgt">あの人から</button><button data-nf="heart">いいね</button><button data-nf="dm">DM</button><button data-nf="follow">フォロー</button><button data-nf="news">世間</button></div><div id="x-notif-list"></div><div id="x-notif-men" style="display:none"></div></div>
+  <div id="x-notif"><div class="nhead"><span class="nhead-t">通知</span><span class="nhead-chip" id="nhead-chip"></span></div><div class="nfilter" id="nfilter"><button data-nf="all" class="act">すべて</button><button data-nf="men">@メンション <span id="nmen-n"></span></button><button data-nf="tgt">あの人から</button><button data-nf="heart">いいね</button><button data-nf="dm">DM</button><button data-nf="follow">フォロー</button><button data-nf="news">世間</button></div><div id="x-notif-list"></div><div id="x-notif-men" style="display:none"></div></div>
   <div id="actbar">
     <div class="dock-strip">
       <span class="dock-day" id="dock-day">DAY 1 / 6</span>
@@ -3222,7 +3209,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v203</p>
+    <p class="ver">v204</p>
   </div>
 </section>
 </div>
@@ -4137,16 +4124,23 @@ $("#x-bell").addEventListener("click",toggleNotif);
 /* mentions live in the notification panel now (real-X sub-tabs: すべて /
    @メンション). The mention pane list is still rendered for parity, but the
    panel is the reachable route since the xtabs row was removed in v34. */
-function nsubSet(men){const l=$("#x-notif-list"),m=$("#x-notif-men");if(!l||!m)return;l.style.display=men?"none":"";m.style.display=men?"":"none";$("#nsub-all").classList.toggle("act",!men);$("#nsub-men").classList.toggle("act",men);
- const nf=$("#nfilter");if(nf)nf.style.display=men?"none":"";
+/* v204: the old two-tier filter (sub-tabs over kind chips) is one
+   chip row now - mentions are simply one of the chips. nsubSet only
+   swaps which list container shows; the chips own the state. */
+let notifMenMode=false;
+function nsubSet(men){const l=$("#x-notif-list"),m=$("#x-notif-men");if(!l||!m)return;notifMenMode=men;l.style.display=men?"none":"";m.style.display=men?"":"none";
  /* v109: the incoming list rises in on every switch */
  const inc=men?m:l;inc.classList.remove("nswap");void inc.offsetWidth;inc.classList.add("nswap");}
-(function(){const a=$("#nsub-all"),m=$("#nsub-men");if(a)a.addEventListener("click",()=>nsubSet(false));if(m)m.addEventListener("click",()=>nsubSet(true));const nm=$("#x-notif-men");if(nm)nm.addEventListener("click",()=>closeNotif(),true);})();
+(function(){const nm=$("#x-notif-men");if(nm)nm.addEventListener("click",()=>closeNotif(),true);})();
 /* v173: notification type filter - session-local chip row under
    the sub-tabs (all tab only); the list build below reads it */
 let notifFilter="all";
 function notifMatch(n){if(notifFilter==="all")return true;if(notifFilter==="tgt")return n.a===tgtKey();const t=notifType(n);if(notifFilter==="heart")return t==="heart"&&n.a!==tgtKey();if(notifFilter==="news")return t==="news"||t==="bell";return t===notifFilter;}
-(function(){const f=$("#nfilter");if(!f)return;f.querySelectorAll("[data-nf]").forEach(c=>c.addEventListener("click",()=>{notifFilter=c.dataset.nf;f.querySelectorAll("[data-nf]").forEach(x=>x.classList.toggle("act",x===c));renderNotifs();}));})();
+(function(){const f=$("#nfilter");if(!f)return;f.querySelectorAll("[data-nf]").forEach(c=>c.addEventListener("click",()=>{const k=c.dataset.nf;f.querySelectorAll("[data-nf]").forEach(x=>x.classList.toggle("act",x===c));
+ /* v204: one row owns both jobs - the mention chip swaps the list
+    container, the kind chips filter the main list (and swap back) */
+ if(k==="men"){if(!notifMenMode)nsubSet(true);}
+ else{notifFilter=k;if(notifMenMode)nsubSet(false);renderNotifs();}}));})();
 const NTYPE={
  heart:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.4.9 4.4 2.4C13 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>',
  dm:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>',
