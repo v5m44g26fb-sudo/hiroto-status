@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v305</p>
+  <p class="ver">v306</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v305</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v306</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v305</p>
+    <p class="ver">v306</p>
   </div>
 </section>
 </div>
@@ -3755,10 +3755,10 @@ choices:[
 {t:"緊張して、丁寧すぎる長文を送ってしまう",r:"しまった、と思った直後。「大丈夫ですよ。言葉は、多いほうが伝わります」「無理せず、ゆっくりで」やわらかい一言。距離が、少しだけ縮んだ音がした。",fx:{dist:9,xp:6,fol:0,cog:0,flm:1}}]};
 /* Sakuya-route ending bodies (v33); kinds/thresholds shared with the hiroto route */
 const END_S_BODY={
-collab:()=>"年末の音楽特番で、NCT WISH × Hearts2Hearts なお のスペシャルコラボステージが正式発表された。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへのサクヤのリプは、丁寧で、少しだけ独特だった。「同じ空気を吸うステージ、楽しみにしています」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「クロワッサン、買っておきますね。……二人分」\n憧れは、少しずつ、秘密の約束に変わっていく。",
-flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「クロワッサン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。",
-quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、収録の帰り道。サクヤが少し離れたところから、丁寧に言った。「なおさんの声は、雨上がりの空みたいです。……好きです」\nそれを聞いたのは、誰もいない廊下で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
-start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\nサクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
+collab:()=>"年末の音楽特番で、NCT WISH × Hearts2Hearts なお のスペシャルコラボステージが正式発表された。\n練習生の頃、上のフロアの人だった。デビューでは先輩になった、その人と並んで立つ。あの「いいね」から始まった距離が、公の場で「共演」になった。10年越しの景色だった。\n発表ポストへのサクヤのリプは、丁寧で、少しだけ独特だった。「同じ空気を吸うステージ、楽しみにしています」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「クロワッサン、買っておきますね。……二人分。ヌナ、楽しみにしてます」\n憧れは、少しずつ、秘密の約束に変わっていく。",
+flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「クロワッサン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。10年かけて、やっと立った場所だった。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。",
+quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、収録の帰り道。サクヤが少し離れたところから、丁寧に言った。「ヌナの声は、雨上がりの空みたいです。……好きです」\n公の場では絶対に言わない呼び方が、誰もいない廊下で、ふたりの間だけに出た。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
+start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでも、10年待った人間に、焦りはない。ステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\nサクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 新曲","96 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#プリン被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["エンタメ","井汲大翔 ファンミーティング","3,108 ポスト"]];
 const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["carmen","カルメン"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
