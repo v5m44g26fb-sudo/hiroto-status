@@ -864,6 +864,23 @@ input,textarea{font-size:16px}
 /* count badges: fixed pill geometry so numbers sit centered */
 #x-nav .bdg{top:2px;right:calc(50% - 22px);min-width:17px;height:17px;line-height:17px;text-align:center;padding:0 5px;font-size:10px;box-shadow:0 1px 4px rgba(15,20,25,.25)}
 #x-bell-n{top:-5px;right:-7px;min-width:17px;height:17px;line-height:17px;text-align:center;padding:0 5px;font-size:10px;box-shadow:0 1px 4px rgba(15,20,25,.25)}
+/* ===== v49: ending finish (vertical rhythm + FINAL RESULT numbers) ===== */
+/* center the column so tall screens do not leave a dead lower half */
+.end-inner{flex:1;justify-content:center;padding:calc(24px + env(safe-area-inset-top)) 24px calc(26px + env(safe-area-inset-bottom))}
+.end-tagrow{margin-bottom:17px}
+#end-title .et-main{font-size:32px}
+#end-title .et-sub{margin-top:9px}
+.end-card{padding:18px 19px;margin:18px 0 17px}
+.end-panel{padding:17px 18px 13px}
+.end-panel-h{margin-bottom:7px}
+.end-lvb{font-size:15px}
+.erow{gap:12px;padding:11px 0}
+.erow .elab{width:98px}
+.erow b{font-size:20px;letter-spacing:.01em}
+.erow.fol b{font-size:26px}
+.erow .egauge{height:7px}
+.end-chg{margin-top:10px;padding:13px 0 4px}
+#scr-ending .btn{margin-top:20px}
 </style>
 </head>
 <body>
@@ -878,7 +895,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v48</p>
+  <p class="ver">v49</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1000,7 +1017,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v48</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v49</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1113,7 +1130,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v48</p>
+    <p class="ver">v49</p>
   </div>
 </section>
 </div>
