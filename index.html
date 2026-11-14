@@ -1747,6 +1747,19 @@ input,textarea{font-size:16px}
 .hstat.cog .hs-bar i{background:linear-gradient(90deg,#4cc3ff,#7856ff)}
 .hstat.flm .hs-bar i{background:linear-gradient(90deg,#ffb03a,#f4212e)}
 .hstat.dist .hs-bar i{background:linear-gradient(90deg,#7856ff,#f91880)}
+/* ===== v117: HUD numbers in motion - the follower count counts
+   between values instead of swapping, the level badge and the three
+   stat figures bump once when their value actually changes, and the
+   XP fill carries a slow shine sweep. renderHud is called often, so
+   every motion is gated on a real change; the numbers themselves
+   and where they come from are unchanged. ===== */
+#hud-xpfill{position:relative}
+#hud-xpfill::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 32%,rgba(255,255,255,.45) 50%,transparent 68%);transform:translateX(-110%);animation:hudshine 3.2s ease-in-out infinite}
+@keyframes hudshine{0%,58%{transform:translateX(-110%)}88%,100%{transform:translateX(110%)}}
+@keyframes hudbump{0%{transform:scale(1.24)}100%{transform:scale(1)}}
+.hudbump{animation:hudbump .38s cubic-bezier(.2,.8,.3,1)}
+.hud-lv{display:inline-block}
+#hud-fol{display:inline-block}
 /* ===== v92: ending afterglow - a staff-roll credits block closes the
    work under the JOURNEY panel: a gradient rule, the work's title card
    in the ending's accent, the cast-and-record rows read back from the
@@ -2109,7 +2122,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v116</p>
+  <p class="ver">v117</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2264,7 +2277,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v116</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v117</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2475,7 +2488,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v116</p>
+    <p class="ver">v117</p>
   </div>
 </section>
 </div>
@@ -3063,7 +3076,7 @@ renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
 (function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["Hearts2Hearts","リーダー","同期"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
-$("#btn-start").onclick=()=>{S=defState();S.folScale=2;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
+$("#btn-start").onclick=()=>{S=defState();S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-target");};
 (function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;$("#btn-target").disabled=false;};box.appendChild(b);});})();
@@ -4068,11 +4081,16 @@ function renderRep(){if(!S||!S.started)return;const tt=$("#rep-title");if(!tt)re
  const dEl=$("#rep-fol-d");
  if(pts.length>1){const diff=S.fol-pts[0].fol;dEl.textContent="デビュー時 "+fmt(pts[0].fol)+" → 現在 "+fmt(S.fol)+"（+"+fmt(diff)+"）";}
  else dEl.textContent="現在 "+fmt(S.fol)+" 人";}
+let hudFolShown=null,hudFolTok=0;
 function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50),inLv=(S.xp||0)%50;
- const el=id=>$(id);if(el("#hud-lv"))el("#hud-lv").textContent="Lv "+lv;
+ const el=id=>$(id);
+ /* v117: set-with-a-bump for the small figures (fires only on change) */
+ const setB=(id,txt)=>{const e=el(id);if(!e)return;if(e.textContent!==String(txt)){e.textContent=txt;e.classList.remove("hudbump");void e.offsetWidth;e.classList.add("hudbump");}};
+ setB("#hud-lv","Lv "+lv);
  if(el("#hud-xptext"))el("#hud-xptext").textContent=inLv+" / 50（累計 "+S.xp+" XP）";
  if(el("#hud-xpfill"))el("#hud-xpfill").style.width=(inLv/50*100)+"%";
- if(el("#hud-fol"))el("#hud-fol").textContent=fmt(S.fol);
+ /* v117: followers count between values (same final figure) */
+ {const fe=el("#hud-fol");if(fe){if(hudFolShown===null||hudFolShown===S.fol){fe.textContent=fmt(S.fol);hudFolShown=S.fol;}else{const from=hudFolShown,to=S.fol,tok=++hudFolTok,t0=performance.now();hudFolShown=S.fol;const step=t=>{if(tok!==hudFolTok)return;const k=Math.min(1,(t-t0)/650);fe.textContent=fmt(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}}}
  if(el("#hud-day"))el("#hud-day").textContent="Day "+S.ch+" / 5";
  if(el("#hud-world"))el("#hud-world").textContent="ワールド：芸能界";
  const used=[S.posted,S.evDone,S.actDone].filter(Boolean).length,remain=3-used;
@@ -4084,9 +4102,9 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  /* v91: status card stat cells + mission counter (display only; the
     numbers are the same state the profile and ending already read) */
  if(el("#hud-mcount"))el("#hud-mcount").textContent="MISSION "+used+" / 3";
- if(el("#hud-cog"))el("#hud-cog").textContent=S.cog;
- if(el("#hud-flm"))el("#hud-flm").textContent=S.flm;
- if(el("#hud-dist"))el("#hud-dist").textContent=S.dist;
+ setB("#hud-cog",S.cog);
+ setB("#hud-flm",S.flm);
+ setB("#hud-dist",S.dist);
  if(el("#hud-cog-g"))el("#hud-cog-g").style.width=Math.min(100,S.cog)+"%";
  if(el("#hud-flm-g"))el("#hud-flm-g").style.width=Math.min(100,S.flm)+"%";
  if(el("#hud-dist-g"))el("#hud-dist-g").style.width=Math.min(100,S.dist)+"%";
