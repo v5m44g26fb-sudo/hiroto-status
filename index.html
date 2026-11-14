@@ -795,6 +795,39 @@ input,textarea{font-size:16px}
 .rep-bar.now i{background:linear-gradient(180deg,#ffd400,#f91880)}
 .rep-bar small{font-size:10px;color:#8a94a6;font-weight:700}
 .rep-bar b{font-size:10.5px;color:#0f1419}
+/* ===== v46: transitions & tap feedback (real-device motion) ===== */
+/* thread pushes in from the right, like real X */
+@keyframes threadin{from{opacity:.35;transform:translateX(52px)}to{opacity:1;transform:none}}
+#x-pane-thread{animation:threadin .24s cubic-bezier(.2,.8,.3,1)}
+/* profiles push in from the right too */
+@keyframes profin{from{opacity:.4;transform:translateX(30px)}to{opacity:1;transform:none}}
+#x-pane-me,#x-pane-hisprof{animation:profin .22s cubic-bezier(.2,.8,.3,1)}
+/* returning from a pushed screen: settle back in from the left */
+@keyframes paneinl{from{opacity:.5;transform:translateX(-16px)}to{opacity:1;transform:none}}
+.pane-pop{animation:paneinl .2s ease!important}
+/* DM thread slides in like a pushed chat screen */
+#dmthread.dmin{animation:threadin .22s cubic-bezier(.2,.8,.3,1)}
+/* sheet exit: slide back down + scrim fade (entry stays sheetup) */
+.scrim.closing{animation:fadeout .17s ease forwards}
+.scrim.closing .sheet{animation:sheetdown .17s cubic-bezier(.3,.7,.4,1) forwards}
+@keyframes sheetdown{to{transform:translateY(46px)}}
+@keyframes fadeout{to{opacity:0}}
+/* unified tap feedback on tappables that lacked it */
+.post:active{background:#f7f9f9}
+.followbtn:active{transform:scale(.94)}
+.editbtn:active{transform:scale(.94);background:#eff3f4}
+#xc-post:active{transform:scale(.96)}
+#actbar button{transition:transform .12s ease,background .15s ease,opacity .15s ease}
+#actbar button:active{transform:scale(.97)}
+.btn:active{transform:scale(.98);opacity:.94}
+.sheet .close{transition:transform .12s ease,background .15s ease;border-radius:50%}
+.sheet .close:active{transform:scale(.88);background:#eff3f4}
+.nsubs button{transition:background .15s ease,color .15s ease,transform .1s ease}
+.nsubs button:active{transform:scale(.96)}
+.thread-composer{transition:background .15s ease,transform .1s ease}
+.thread-composer:active{background:#f7f9f9;transform:scale(.99)}
+.mediagrid img{transition:opacity .15s ease}
+.mediagrid img:active{opacity:.82}
 </style>
 </head>
 <body>
@@ -809,7 +842,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v45</p>
+  <p class="ver">v46</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -931,7 +964,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v45</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v46</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1044,7 +1077,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v45</p>
+    <p class="ver">v46</p>
   </div>
 </section>
 </div>
@@ -1619,6 +1652,8 @@ function showPane(k){
  if(k==="hisprof")renderHisTab();
  if(k==="msg")renderDmList();
 }
+/* one-shot "settle from the left" animation for back navigation */
+function panePop(el){if(!el)return;el.classList.remove("pane-pop");void el.offsetWidth;el.classList.add("pane-pop");setTimeout(()=>el.classList.remove("pane-pop"),240);}
 $("#x-myava").addEventListener("click",()=>showPane("me"));
 /* bottom nav (transplanted mk() builder from Tinder x-nav; icons swapped to SVG) */
 (function(){
@@ -1830,8 +1865,8 @@ function openPostThread(p){
 }
 $("#thread-back").addEventListener("click",()=>{
  threadStack.pop();
- if(threadStack.length){renderThread(threadStack[threadStack.length-1]);$("#x-scroll").scrollTop=0;}
- else{if(threadFrom==="tl")renderFeed();showPane(threadFrom||"tl");$("#x-scroll").scrollTop=threadScroll;}
+ if(threadStack.length){renderThread(threadStack[threadStack.length-1]);$("#x-scroll").scrollTop=0;panePop($("#x-pane-thread"));}
+ else{if(threadFrom==="tl")renderFeed();showPane(threadFrom||"tl");$("#x-scroll").scrollTop=threadScroll;panePop($("#x-pane-"+curPane));}
 });
 /* profile tabs (real-X linkage: post / reply / media grid / likes) */
 let meTab="post",hisTab="post";
@@ -2019,7 +2054,7 @@ $("#btn-activity").onclick=()=>{
  };
  $("#scrim-act").classList.add("on");
 };
-$$("[data-close]").forEach(b=>b.onclick=()=>$("#"+b.dataset.close).classList.remove("on"));
+$$("[data-close]").forEach(b=>b.onclick=()=>{const s=$("#"+b.dataset.close);if(!s||!s.classList.contains("on")||s.classList.contains("closing"))return;s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);});
 /* DM (pane pattern from Tinder #x-pane-msg) */
 let curThread=null;
 function updateBdg(){const n=S?S.threads.filter(t=>t.unread).length:0;const bd=$("#dm-bdg");if(bd)bd.style.display=n?"block":"none";}
@@ -2037,7 +2072,7 @@ function renderDmList(){
  updateBdg();
 }
 function scrollDmBottom(smooth){const sc=$("#x-scroll");requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.scrollTo({top:sc.scrollHeight,behavior:smooth?"smooth":"auto"});}));}
-function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
+function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),260);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
  const ti=$("#th-intro");ti.innerHTML='<span class="ti-avw">'+(a.av?'<img class="avatar" src="'+a.av+'" width="64" height="64" alt="">':avaTxt(a.n))+'</span><div class="ti-name"></div><div class="ti-handle">'+a.h+'</div>'+(t.special?'<div class="ti-pill">初めての、本人からの連絡</div>':"");
  ti.querySelector(".ti-name").textContent=a.n;
  renderThreadMsgs();updateBdg();save();scrollDmBottom(false);}
@@ -2045,7 +2080,7 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;const box=$("#th-msgs
  t.msgs.forEach((m,i)=>{const d=document.createElement("div");d.className="msg "+(t.replyIdx===i?"me":"them");d.textContent=m;box.appendChild(d);});
  const cb=$("#th-choices");cb.innerHTML="";
  if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="返信を選ぶ";cb.appendChild(lab);t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice dmchoice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);t.msgs.push(c.r);if(t.special)S.hirotoDm="done";applyFx(c.fx);renderThreadMsgs();scrollDmBottom(true);save();};cb.appendChild(b);});}}
-$("#dm-back").onclick=()=>{curThread=null;renderDmList();};
+$("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
 /* profile */
 function renderProfile(){if(!S||!S.started)return;
  renderTargetProfile();
