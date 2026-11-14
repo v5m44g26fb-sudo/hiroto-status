@@ -2807,7 +2807,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v250</p>
+  <p class="ver">v251</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2981,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v250</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v251</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3252,7 +3252,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v250</p>
+    <p class="ver">v251</p>
   </div>
 </section>
 </div>
@@ -3821,6 +3821,20 @@ function injectBuzz(maxN,pos){
   if(e.a==="matome"){S.men.unshift(p);S.notifs.unshift({a:"matome",tx:"があなたについて報じました",sub:"世間の反応 ― "+curCH()[S.ch-1].day});}
   added++;
  }
+}
+/* v251 (episode - heat): on the evening of the Day 5 rumor event,
+   he posts once himself. Nothing is said outright - the restraint
+   is the leak. Hiroto hides behind the pudding; Sakuya behind the
+   morning light. Display numbers only, no fx, once per run (the
+   event itself can only complete once). */
+const EV_GLOW5={
+ hiroto:{tx:"プリンは、好きなんで。……それだけです",lk:8400,rp:920,rc:1300},
+ sakuya:{tx:"クロワッサンは、朝の光の味がします。……それだけです",lk:18600,rp:2100,rc:2900}};
+function evAfterglow(){
+ if(!S||S.ch!==5)return;const g=EV_GLOW5[tgtKey()];if(!g)return;
+ S.posts.unshift(mkPost(tgtKey(),g.tx,g.lk,g.rp,g.rc,false,null));
+ S.notifs.unshift({a:tgtKey(),tx:"さんがポストしました",sub:"Day 5 ― 匂わせ疑惑の夜"});
+ renderFeed();renderNotifs();updateBdg();
 }
 function curStory(){return tgtKey()==="sakuya"?STORY_S:STORY;}
 function svImg(k){if(k==="nao")return naoStory().img;if(k===tgtKey())return tgt().cover;return undefined;}
@@ -5222,7 +5236,7 @@ function renderEvent(){
   hero.addEventListener("click",()=>{try{openPhoto([{src:ev.img,name:"なお",handle:S.handle||"",av:(ACC.nao&&ACC.nao.av)||null,cap:ev.title||"",date:"Day "+S.ch,meta:"MAIN QUEST ― CHAPTER "+S.ch}],0);}catch(_){}});}
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
- ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");save();};box.appendChild(b);});
+ ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();save();};box.appendChild(b);});
  slot.appendChild(card);
 }
 /* chapter flow */
