@@ -112,7 +112,7 @@ async def play_day(pg, post_mode="best", ev_mode="best", act_mode="best", steer=
     await dismiss_dm_modal(pg)
     # 1) post
     if not await ev(pg, "() => S.posted"):
-        chs = await ev(pg, "() => curCH()[S.ch-1].posts.map(p=>({t:p.tx, fx:p.fx||{}, mis:!!p.mispost}))")
+        chs = await ev(pg, "() => curCH()[S.ch-1].posts.map(p=>({t:p.tx, fx:p.fx||{}, mis:!!p.mispost||((p.img||'').includes('mispost'))}))")
         if post_mode in ("best", "nomispost"):
             cand = [(score(c["fx"]), i) for i, c in enumerate(chs) if not c["mis"]]
             idx = max(cand)[1] if cand else 0
