@@ -1174,6 +1174,41 @@ input,textarea{font-size:16px}
 .nsubs button.act::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:58px;height:3.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880)}
 .nmen-head{display:flex;align-items:center;gap:8px;padding:13px 15px 9px;font-size:13.5px;font-weight:900;letter-spacing:.03em}
 .nmen-head::before{content:"";width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#7856ff,#f91880);flex:none}
+/* ===== v65: ending overhaul - the ending is staged as a reveal (emblem
+   in the ending's accent, tag row and title rising in sequence) and the
+   five days read back in one JOURNEY panel under the FINAL RESULT:
+   follower trajectory bars, the world's final verdict, and the distance
+   stage with its dots. Judgement and body text are unchanged. ===== */
+.end-emblem{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--acc);border:1.5px solid var(--acc);background:rgba(0,0,0,.38);box-shadow:0 0 34px color-mix(in srgb,var(--acc) 45%,transparent),inset 0 0 18px rgba(0,0,0,.35);margin-bottom:16px;animation:endemblem .7s cubic-bezier(.2,.8,.3,1) both}
+.end-emblem svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@keyframes endemblem{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:none}}
+#scr-ending .end-tagrow{animation:fadeup .5s ease .1s both}
+#scr-ending #end-title{animation:fadeup .55s ease .18s both}
+#scr-ending #end-title .et-main{font-size:34px;background:linear-gradient(180deg,#fff 55%,color-mix(in srgb,var(--acc) 72%,#fff));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 4px 22px rgba(0,0,0,.55))}
+.end-journey{width:100%;margin-top:14px;background:linear-gradient(180deg,rgba(23,23,36,.92),rgba(12,12,20,.95));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:15px 16px 13px;box-shadow:0 18px 40px rgba(0,0,0,.45);text-align:left;animation:fadeup .5s ease .34s both}
+.ej-h{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.ej-t{font-weight:900;letter-spacing:.18em;font-size:12.5px;color:#fff}
+.ej-h small{margin-left:auto;color:#9aa0a6;font-size:11.5px;font-weight:700}
+.ej-fol-h{display:flex;align-items:baseline;justify-content:space-between;margin-top:10px;gap:10px}
+.ej-fol-h span{font-size:12px;font-weight:800;color:#c3ccd2;flex:none}
+.ej-fol-h b{font-size:11.5px;color:var(--acc);text-align:right}
+.ej-bars{display:flex;align-items:flex-end;gap:8px;height:74px;margin-top:9px;padding:0 2px}
+.ej-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.ej-bar i{display:block;width:100%;max-width:36px;height:0;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#4cc3ff,#7856ff);transition:height .8s cubic-bezier(.2,.8,.3,1) .45s}
+.ej-bars.grow .ej-bar i{height:var(--h)}
+.ej-bar.now i{background:linear-gradient(180deg,var(--acc),#f91880)}
+.ej-bar small{font-size:10px;color:#8a94a6;font-weight:700;white-space:nowrap}
+.ej-bar b{font-size:10.5px;color:#fff;white-space:nowrap}
+.ej-row{display:flex;align-items:center;gap:10px;padding:10px 0 2px;margin-top:8px;border-top:1px solid rgba(255,255,255,.09)}
+.ej-lab{font-size:12px;color:#c3ccd2;font-weight:700;flex:none}
+.ej-title{margin-left:auto;font-size:12.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#1d9bf0,#7856ff);border-radius:999px;padding:4px 12px;text-align:right}
+.ej-title.hot{background:linear-gradient(90deg,#f91880,#7856ff)}
+.ej-title.fire{background:linear-gradient(90deg,#f4212e,#ff7a1a)}
+.ej-stage{margin-left:auto;font-size:12.5px;font-weight:800;color:#ff8ac2;text-align:right}
+.ej-dots{display:inline-flex;gap:4px;flex:none}
+.ej-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
+.ej-dots i.on{background:linear-gradient(135deg,#7856ff,#f91880)}
+.ej-words{margin:11px 0 2px;font-size:12px;line-height:1.7;color:#9aa0a6}
 </style>
 </head>
 <body>
@@ -1188,7 +1223,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v64</p>
+  <p class="ver">v65</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1329,7 +1364,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v64</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v65</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1467,6 +1502,7 @@ input,textarea{font-size:16px}
 
 <section class="screen" id="scr-ending">
   <div class="end-inner">
+    <div class="end-emblem" id="end-emblem" aria-hidden="true"></div>
     <div class="end-tagrow"><span class="end-tag">ENDING</span><span class="end-theme" id="end-theme"></span></div>
     <h2 id="end-title"></h2>
     <div class="end-card"><p id="end-body"></p></div>
@@ -1478,8 +1514,16 @@ input,textarea{font-size:16px}
       <div class="erow dist"><span class="elab" id="end-dist-lab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
+    <div class="end-journey" id="end-journey">
+      <div class="ej-h"><span class="ej-t">5 DAYS JOURNEY</span><small>5日間の軌跡</small></div>
+      <div class="ej-fol-h"><span>フォロワーの推移</span><b id="ej-fol-d"></b></div>
+      <div class="ej-bars" id="ej-bars"></div>
+      <div class="ej-row"><span class="ej-lab">最終的な世間の評価</span><span class="ej-title" id="ej-title"></span></div>
+      <div class="ej-row"><span class="ej-lab" id="ej-dist-lab">ひろとの距離</span><span class="ej-stage" id="ej-stage"></span><span class="ej-dots" id="ej-dots"></span></div>
+      <p class="ej-words" id="ej-words"></p>
+    </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v64</p>
+    <p class="ver">v65</p>
   </div>
 </section>
 </div>
@@ -2656,6 +2700,35 @@ function maybeShowDmUnlock(){if(duShown||typeof S==="undefined"||!S||S.hirotoDm!
  $("#dmunlock").classList.add("on");}
 $("#du-open").addEventListener("click",()=>{$("#dmunlock").classList.remove("on");const t=(S.threads||[]).find(x=>x.id===tgtKey());if(t)openThread(t);});
 $("#du-later").addEventListener("click",()=>{$("#dmunlock").classList.remove("on");});
+/* v65: ending journey recap - the five days read back on one screen:
+   follower trajectory (day-start snapshots + final), the world's final
+   verdict (the same repTitle the profile used), and the distance stage.
+   Display only; ending judgement and body text are untouched. */
+const END_EMBLEM={
+ collab:'<svg viewBox="0 0 24 24"><path d="M9 18.2V6.1l10-2v11.7"/><circle cx="6.4" cy="18.2" r="2.6"/><circle cx="16.4" cy="15.8" r="2.6"/></svg>',
+ flame:'<svg viewBox="0 0 24 24"><path d="M12 3.2s5.2 4.8 5.2 9.6a5.2 5.2 0 0 1-10.4 0C6.8 8 12 3.2 12 3.2z"/><path d="M12 21a2.9 2.9 0 0 1-2.9-2.9c0-1.2.7-2 1.4-2.8.5-.5 1-1 1.5-1.7.5.7 1 1.2 1.5 1.7.7.8 1.4 1.6 1.4 2.8A2.9 2.9 0 0 1 12 21z"/></svg>',
+ quiet:'<svg viewBox="0 0 24 24"><path d="M20 13.6A8.2 8.2 0 1 1 10.4 4a6.6 6.6 0 0 0 9.6 9.6z"/></svg>',
+ start:'<svg viewBox="0 0 24 24"><path d="M12 21v-7.5"/><path d="M12 13.5c0-3.1 2.3-5.2 6.2-5.2 0 3.6-2.3 5.2-6.2 5.2z"/><path d="M12 11.4C12 8.8 9.9 7 6.3 7c0 3.1 1.9 4.4 5.7 4.4z"/></svg>'};
+function renderEndJourney(){
+ const bars=$("#ej-bars");if(!bars)return;
+ const pts=((S.folHist)||[]).slice();
+ if(!pts.length||pts[pts.length-1].fol!==S.fol)pts.push({day:S.ch,fol:S.fol,now:true});
+ const max=Math.max(1,...pts.map(e=>e.fol));
+ bars.innerHTML="";
+ pts.forEach(e=>{const w=document.createElement("div");w.className="ej-bar"+(e.now?" now":"");
+  const v=document.createElement("b");v.textContent=fmt(e.fol);
+  const bar=document.createElement("i");bar.style.setProperty("--h",Math.max(8,Math.round(e.fol/max*100))+"%");
+  const l=document.createElement("small");l.textContent=e.now?"最終":"Day "+e.day;
+  w.appendChild(v);w.appendChild(bar);w.appendChild(l);bars.appendChild(w);});
+ const dEl=$("#ej-fol-d");
+ if(dEl)dEl.textContent=pts.length>1?("デビュー時 "+fmt(pts[0].fol)+" → "+fmt(S.fol)+"（+"+fmt(S.fol-pts[0].fol)+"）"):fmt(S.fol);
+ const T=repTitle();const tt=$("#ej-title");if(tt){tt.textContent=T.t;tt.className="ej-title"+(T.cls?" "+T.cls:"");}
+ const dl=$("#ej-dist-lab");if(dl)dl.textContent=distLab();
+ const si=distStageIdx();const st=$("#ej-stage");if(st)st.textContent="STAGE "+(si+1)+" ― "+DIST_STAGES[si].lab;
+ const dots=$("#ej-dots");if(dots){dots.innerHTML="";for(let i=0;i<5;i++){const d=document.createElement("i");if(i<=si)d.className="on";dots.appendChild(d);}}
+ const wd=$("#ej-words");if(wd)wd.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた5日間。";
+ setTimeout(()=>bars.classList.add("grow"),90);
+}
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
@@ -2675,7 +2748,8 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  $("#end-fol").textContent=fmt(S.fol);$("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
  $("#end-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));
  $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
- show("scr-ending");save();}
+ const em=$("#end-emblem");if(em)em.innerHTML=END_EMBLEM[kind]||"";
+ show("scr-ending");renderEndJourney();save();}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
 $("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-restart").onclick=resetAll;
