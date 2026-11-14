@@ -2778,7 +2778,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v199</p>
+  <p class="ver">v200</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2950,7 +2950,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v199</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v200</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3219,7 +3219,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v199</p>
+    <p class="ver">v200</p>
   </div>
 </section>
 </div>
@@ -4323,7 +4323,12 @@ function renderStorySeg(){
  id.innerHTML='<span class="sv-ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"</span><span><b></b><small></small></span>";
  id.querySelector("b").textContent=a.n;id.querySelector("small").textContent=a.h;
  const segs=$("#sv-segs");segs.innerHTML="";
- storyList().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
+ storyList().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";
+  /* v200: a segment tap jumps straight to that story (the tap
+     zones live on their own elements, so this never fights them) */
+  d.style.cursor="pointer";d.setAttribute("role","button");d.setAttribute("aria-label","ストーリー "+(i+1)+" へ移動");
+  d.addEventListener("click",ev=>{ev.stopPropagation();if(i===svIdx)return;svIdx=i;renderStorySeg();svStartTimer();});
+  segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
  const capEl=$("#sv-cap");if(capEl){capEl.textContent=e.cap||"";capEl.classList.remove("on");if(e.cap){void capEl.offsetWidth;capEl.classList.add("on");}}
  const lk=$("#sv-like");if(lk)lk.classList.remove("liked");$$("#storyviewer .sv-burst").forEach(x=>x.remove());$$("#sv-reacts button").forEach(x=>x.classList.remove("picked"));
  if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(e.uid)){S.storySeen.push(e.uid);save();}}
