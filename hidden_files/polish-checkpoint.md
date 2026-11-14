@@ -1231,3 +1231,7 @@
 ### v226 RESULTから STATUS LOG へ
 - RESULT 画面のシェアカード下に「変化の記録を STATUS LOG で見る ›」を追加。あわせて、RESULT オーバーレイ（z-index 118）が全シートより上にあるため、STATUS LOG の scrim だけをその上に載せるよう調整（通常導線では競合しない）。
 - 検証（Playwright、/tmp/verify_v226.py）：RESULT 上にログが開いて操作でき、閉じると RESULT に戻る、scrollW=390、エラー0。
+
+### v227 エンディングからも STATUS LOG へ
+- エンディング画面のボタン列に「変化の記録を STATUS LOG で見る」を追加（あゆみ／コピーと並ぶ記録導線）。
+- 検証（Playwright、/tmp/verify_v227.py）：エンディング→ログが開いて Day6 見出し、閉じて戻る、scrollW=390、エラー0。
