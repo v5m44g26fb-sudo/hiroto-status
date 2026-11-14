@@ -2567,6 +2567,10 @@ input,textarea{font-size:16px}
    what it holds before the tap. Built from the chapter data at show
    time; the card's timing, photos and dismissal are unchanged. ===== */
 .di-missions{margin-top:16px;display:flex;flex-direction:column;gap:7px;width:min(300px,100%);animation:diup .6s .4s cubic-bezier(.2,.8,.25,1) both}
+.di-recap{margin-top:14px;width:min(300px,100%);background:rgba(10,12,28,.55);border:1px solid rgba(255,255,255,.22);border-radius:14px;padding:10px 13px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:diup .6s .32s cubic-bezier(.2,.8,.25,1) both}
+.di-rc-lab{display:block;font-size:9px;font-weight:900;letter-spacing:.24em;color:#ffd76e}
+.di-rc-tx{display:block;margin-top:4px;font-size:12px;line-height:1.55;color:rgba(255,255,255,.92)}
+.di-rc-tx b{color:#fff}
 .di-mrow{display:flex;align-items:center;gap:9px;background:rgba(10,8,26,.45);border:1px solid rgba(255,255,255,.16);border-radius:11px;padding:7px 11px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);text-align:left}
 .di-mchip{flex:none;font-size:9px;font-weight:900;letter-spacing:.14em;color:#0c0a18;background:var(--mc,#fff);border-radius:6px;padding:3px 7px}
 .di-mtx{flex:1;min-width:0;font-size:12px;font-weight:700;color:rgba(240,242,255,.92);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2725,7 +2729,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v173</p>
+  <p class="ver">v174</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2897,7 +2901,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v173</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v174</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3077,6 +3081,7 @@ input,textarea{font-size:16px}
       <div class="di-rule"></div>
       <b class="di-title" id="di-title">デビュー発表の日</b>
       <p class="di-sub" id="di-sub"></p>
+      <div class="di-recap" id="di-recap" style="display:none"></div>
       <div class="di-missions" id="di-missions"></div>
       <span class="di-tap">TAP TO START</span>
       <div class="di-dots" id="di-dots"><i></i><i></i><i></i><i></i><i></i></div>
@@ -3156,7 +3161,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v173</p>
+    <p class="ver">v174</p>
   </div>
 </section>
 </div>
@@ -5213,6 +5218,14 @@ function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.d
  set("#di-lab","CHAPTER "+S.ch);
  /* v149: the day's mission preview (event row reads the chapter title) */
  const dm=$("#di-missions");if(dm){dm.innerHTML="";[["POST","今日の投稿を選ぶ","#7cc4ff"],["EVENT",ch.event?ch.event.title:"","#f7c948"],["ACTIVITY","今日の行動を選ぶ（1日1回）","#ff8fc0"]].forEach(r=>{if(!r[1])return;const d=document.createElement("div");d.className="di-mrow";d.innerHTML='<span class="di-mchip" style="--mc:'+r[2]+'">'+r[0]+'</span><span class="di-mtx"></span>';d.querySelector(".di-mtx").textContent=r[1];dm.appendChild(d);});}
+ /* v174: yesterday recap - the day-start snapshots bracket the
+    previous day, and the distance stage at this moment is exactly
+    where yesterday ended; Day 1 has no yesterday to recap */
+ const rc=$("#di-recap");
+ if(rc){const prev=(S.folHist||[]).find(e=>e.day===S.ch-1),curE=(S.folHist||[]).find(e=>e.day===S.ch);
+  if(S.ch>1&&prev){const nowF=curE?curE.fol:S.fol,d=nowF-prev.fol,si=distStageIdx();
+   rc.innerHTML='<span class="di-rc-lab">DAY '+(S.ch-1)+' CLEAR</span><span class="di-rc-tx">フォロワー <b>'+fmt(prev.fol)+' → '+fmt(nowF)+'</b>（'+(d>=0?"+":"−")+fmt(Math.abs(d))+'）<br>距離は <b>STAGE '+(si+1)+'「'+DIST_STAGES[si].lab+'」</b> で朝を迎えた</span>';rc.style.display="";}
+  else rc.style.display="none";}
  const dbg=$("#di-bg");if(dbg)dbg.src=DI_BG[S.ch]||DI_BG[1];
  const dd=$("#di-dots");if(dd){if(dd.children.length!==TOTAL_DAYS){dd.innerHTML="";for(let i=0;i<TOTAL_DAYS;i++)dd.appendChild(document.createElement("i"));}[...dd.children].forEach((el,i)=>el.classList.toggle("on",i<S.ch));}
  const diEl=$("#dayintro");if(diEl)diEl.classList.toggle("final",S.ch>=TOTAL_DAYS);
