@@ -1556,6 +1556,7 @@ input,textarea{font-size:16px}
 .foltabs button.act{color:#0f1419}
 .foltabs button.act::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:58px;height:3.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880)}
 .folrow{display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #f4f6f7;align-items:flex-start;animation:panein .18s ease}
+.fol-qnote{padding:10px 16px 2px;font-size:12.5px;font-weight:800;color:#536471}
 .folrow .avatar,.folrow .ava-txt{width:44px;height:44px;flex:none;font-size:17px}
 .folrow .fr-main{flex:1;min-width:0}
 .folrow .fr-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2771,7 +2772,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v210</p>
+  <p class="ver">v211</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2940,7 +2941,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v210</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v211</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3209,7 +3210,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v210</p>
+    <p class="ver">v211</p>
   </div>
 </section>
 </div>
@@ -4748,6 +4749,8 @@ function renderFolRows(){
  let keys=(sets[folTab]||[]).slice();
  if(folQ){const q=folQ.toLowerCase();keys=keys.filter(k=>{const a=ACC[k];return a&&(a.n.toLowerCase().includes(q)||a.h.toLowerCase().includes(q)||(FOL_BIO[k]||"").toLowerCase().includes(q));});}
  if(!keys.length){box.appendChild(folQ?mkEmpty("見つからない","その言葉に合うアカウントは、いまのリストにはいないよ。"):mkEmpty("まだいない","物語が進むと、ここに並んでいくよ。"));return;}
+ /* v211: a filtered follow list says how many it found */
+ if(folQ){const note=document.createElement("div");note.className="fol-qnote";note.textContent="「"+folQ+"」― "+keys.length+" 件";box.appendChild(note);}
  keys.forEach((key,i)=>{const a=ACC[key];if(!a)return;
   const row=document.createElement("div");row.className="folrow";row.style.animationDelay=Math.min(i*35,350)+"ms";
   const following=folOwner==="nao"&&key===tgtKey()?!!S.followHiroto:folIsFollowing(folOwner,key);
