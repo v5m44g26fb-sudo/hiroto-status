@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v318</p>
+  <p class="ver">v319</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v318</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v319</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v318</p>
+    <p class="ver">v319</p>
   </div>
 </section>
 </div>
@@ -5983,10 +5983,10 @@ function renderEndJourney(){
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
- if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="熱愛報道は、本物の炎上になった。後追い記事が次々と出て、盾のない彼の個人アカウントには、毎分、言葉が投げつけられた。\n"+(hot?"距離が近いほど、記事の『証拠』は本物らしく並んだ。秒速のいいねも、楽屋のプリンも、全部が後付けで意味を持った。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n出演予定だった番組は『当面見合わせ』に。歌に戻るには、長い時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
+ if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="熱愛報道は、本物の炎上になった。後追い記事が次々と出て、盾のない彼の個人アカウントには、毎分、言葉が投げつけられた。\n"+(hot?"距離が近いほど、記事の『証拠』は本物らしく並んだ。秒速のいいねも、楽屋のプリンも、全部が後付けで意味を持った。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n出演予定だった番組は『当面見合わせ』に。10年以上かけて、やっと立った場所だった。歌に戻るには、長い時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
  else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title=(tgtKey()==="sakuya"?"コラボEND ― 同じステージの件":"乗り越えたEND ― 消えなかった件");body="公式には、何も認められなかった。ステージも、発表も、約束された未来もない。事務所のコメントは定型文で、彼の沈黙は最後まで続いた。\nそれでも、騒ぎが少しずつ引いていった頃。彼の投稿に、彼女の好きな歌のフレーズが、さりげなく混ざっていた。誰にも気づかれないように。――二人だけが分かる形で。\n関係は、消えなかった。公の場ではなく、静かな場所で、続いている。";}
  else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="報道は出た。でも、燃え広がる前に、界隈の熱は冷めていった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にも、記事にもならない距離が、ここにある。それで、今は十分だった。";}
- else{kind="start";title="これからEND ― まだ始まったばかりの件";body="熱愛報道のわりには、静かなデビュー期間だった。記事は出たけれど、決め手にはならなかった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
+ else{kind="start";title="これからEND ― まだ始まったばかりの件";body="記事は出たけれど、決め手にはならなかった。熱愛報道のわりには、静かな6日間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。10年以上待った人間に、焦りはない。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
  if(tgtKey()==="sakuya")body=END_S_BODY[kind](hot);
  /* v299 (episode - mispost aftermath, endings): if she actually made
     the Day 5 mispost, the ending text remembers it. Kinds, thresholds
