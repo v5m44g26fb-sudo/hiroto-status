@@ -103,6 +103,8 @@ input,textarea{font-size:16px}
 .x-ptabs button{transition:color .15s ease,background .15s ease}
 .x-ptabs button:active{background:#eff3f4}
 .profbar{position:sticky;top:0;z-index:7;display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px)}
+.profbar .pshare{margin-left:auto;flex:none;width:34px;height:34px;border:none;border-radius:50%;background:none;color:#0f1419;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.profbar .pshare:active{background:#eff3f4;transform:scale(.94)}
 .profbar .pback{border:none;background:none;font-size:23px;line-height:1;padding:7px 9px;border-radius:50%;cursor:pointer;color:#0f1419;font-family:inherit}
 .profbar .pback:active{background:#eff3f4}
 .profbar .pt{min-width:0}
@@ -2789,7 +2791,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v222</p>
+  <p class="ver">v223</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2926,7 +2928,7 @@ input,textarea{font-size:16px}
       <div id="x-search-results"></div>
     </div>
     <div id="x-pane-me" style="display:none">
-      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div></div>
+      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div><button class="pshare" id="me-share" type="button" aria-label="プロフィールを共有"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 7 5-5 5 5"/><path d="M5 12v8h14v-8"/></svg></button></div>
       <div class="pf-cover"><div class="pf-covstat"><span id="me-cov-day">DAY 1 / 6</span><span id="me-cov-lv">Lv 1</span></div><span class="pf-covname" aria-hidden="true">NAO</span><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
@@ -2962,7 +2964,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v222</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v223</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2993,7 +2995,7 @@ input,textarea{font-size:16px}
       </div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
-      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b id="his-name-bar">井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
+      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b id="his-name-bar">井汲大翔</b><small id="his-pcount">0 ポスト</small></div><button class="pshare" id="his-share" type="button" aria-label="プロフィールを共有"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 7 5-5 5 5"/><path d="M5 12v8h14v-8"/></svg></button></div>
       <div class="pf-cover his-cover" id="his-cover"><div class="his-cover-typo"><b id="his-typo">HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div><div class="his-covstat"><span id="his-cov-fol"></span><span id="his-cov-tag"></span></div></div>
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><span class="his-avawrap"><img class="avatar his-ava" id="his-ava" src="assets/ig-avatar.jpg" width="88" height="88" alt=""></span><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
@@ -3231,7 +3233,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v222</p>
+    <p class="ver">v223</p>
   </div>
 </section>
 </div>
@@ -4851,6 +4853,14 @@ $("#fol-back").addEventListener("click",()=>showPane(folBackTo));
     the counts row on her profile does */
  const hfol=$("#status-hud .hud-fol");
  if(hfol){hfol.style.cursor="pointer";hfol.addEventListener("click",()=>openFollow("nao","folwers"));}
+ /* v223: both profile bars carry a share button - the same
+    share-or-copy behaviour as a post's share (v190), with the
+    game's public URL (v222) */
+ const shareProfile=(name,handle)=>{const txt=name+"（"+handle+"）― 『デビューしたら、彼と同じステージの件』\nhttps://v5m44g26fb-sudo.github.io/hiroto-status/";
+  if(navigator.share){navigator.share({title:name,text:txt}).catch(()=>{});return;}
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(()=>toastChg("リンクをコピーしたよ")).catch(()=>{});};
+ const msh=$("#me-share");if(msh)msh.addEventListener("click",()=>shareProfile("なお",S?S.handle:""));
+ const hsh=$("#his-share");if(hsh)hsh.addEventListener("click",()=>{const T=tgt();shareProfile(T.name,T.handle);});
  const hs=$$("#x-pane-hisprof .counts span");
  if(hs[0])hs[0].addEventListener("click",()=>openFollow(tgtKey(),"folwers"));
  if(hs[1])hs[1].addEventListener("click",()=>openFollow(tgtKey(),"folwing"));})();
