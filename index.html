@@ -354,10 +354,6 @@ input,textarea{font-size:16px}
 .hud-fol small{display:block;color:#536471;font-size:10.5px;font-weight:700}
 .hud-fol b{font-size:21px;line-height:1.1}
 .hud-bot{display:flex;align-items:center;gap:8px;margin-top:9px;flex-wrap:wrap}
-.hud-world{border:1px solid #cfd9de;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;color:#0f1419}
-.hud-energy{font-size:12px;font-weight:800;color:#0f1419}
-.hud-day{margin-left:auto;font-size:11.5px;color:#536471;font-weight:700;white-space:nowrap}
-.hud-energy{white-space:nowrap}
 .hud-note{font-size:11px;color:#536471;line-height:1.55;margin-top:7px}
 .chg.good{border-color:#00ba7c;color:#8fe6c3}
 .chg.levelup{border-color:#ffd400;color:#ffd400;font-size:14.5px;padding:11px 18px;background:rgba(60,48,0,.96)}
@@ -382,9 +378,6 @@ input,textarea{font-size:16px}
 .hud-fol small{color:#a7b0c4}
 .hud-fol b{color:#fff;font-size:23px}
 .hud-bot{gap:7px;margin-top:11px}
-.hud-world{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#fff;padding:4px 10px}
-.hud-energy{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px 10px;color:#ffd9a8;font-size:11.5px}
-.hud-day{color:#a7b0c4}
 .hud-note{color:#8b96ad}
 #hud-chg{color:#4cc3ff}
 #daybanner{background:linear-gradient(90deg,#141b34,#3a1050);color:#fff;font-weight:800;font-size:13.5px;letter-spacing:.03em;border-bottom:none;padding:12px 15px;box-shadow:inset 4px 0 0 #f91880;line-height:1.55}
@@ -1036,7 +1029,6 @@ input,textarea{font-size:16px}
 .mchip{font-size:11px;font-weight:800;color:#c6cfe2;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:3.5px 10px;background:rgba(255,255,255,.05);transition:background .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease}
 .mchip.done{background:linear-gradient(90deg,#7856ff,#f91880);border-color:transparent;color:#fff;box-shadow:0 3px 10px rgba(249,24,128,.4)}
 .mchip.done::before{content:"✓ "}
-.hud-mission .hud-energy{margin-left:auto}
 #status-hud .hud-bot{margin-top:11px}
 /* ===== v161: follower-trend sparkline in the player card - the same
    day-start snapshots the profile's reputation panel graphs
@@ -1049,11 +1041,6 @@ input,textarea{font-size:16px}
 .hud-spark i{flex:1;min-width:7px;max-width:46px;border-radius:3px 3px 1px 1px;background:rgba(255,255,255,.32)}
 .hud-spark i.now{background:linear-gradient(180deg,#f91880,#7856ff);box-shadow:0 0 8px rgba(249,24,128,.45)}
 .hud-trend-d{font-size:11.5px;font-weight:800;color:#7ee2ae;font-variant-numeric:tabular-nums;white-space:nowrap;padding-bottom:3px}
-.hud-mile{display:flex;align-items:center;gap:8px;margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,.09);font-size:11.5px;color:rgba(235,238,255,.78)}
-.hud-mile .hm-lab{flex:none;font-size:8.5px;font-weight:900;letter-spacing:.16em;color:#231a00;background:linear-gradient(90deg,#ffd400,#ff9f43);border-radius:5px;padding:3px 6px}
-.hud-mile .hm-tx{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hud-mile .hm-tx b{color:#ffd98a;font-weight:900}
-.hud-mile .hm-need{flex:none;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
 #hud-chg{margin:0 0 0 auto;display:inline-block}
 #status-hud .hud-note{margin-top:8px}
 #eventslot .evcard{margin-top:14px}
@@ -2768,7 +2755,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v204</p>
+  <p class="ver">v205</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2864,13 +2851,12 @@ input,textarea{font-size:16px}
           <div class="hud-id"><b>なお</b><span id="hud-handle">@nao_324</span></div>
           <div class="hud-fol"><small>フォロワー</small><b id="hud-fol">1</b></div>
         </div>
-        <div class="hud-xpwrap"><div class="hud-xplab"><span>XP ― 次のレベルまで</span><span id="hud-xptext">0 / 50</span></div><div class="hud-xpbar"><i id="hud-xpfill" style="width:0%"></i></div></div>
+        <div class="hud-xpwrap"><div class="hud-xplab"><span id="hud-xplab">XP ― 次のレベルまで</span><span id="hud-xptext">0 / 50</span></div><div class="hud-xpbar"><i id="hud-xpfill" style="width:0%"></i></div></div>
         <div class="hud-mission">
           <span class="hud-mlab">TODAY'S MISSION</span>
           <span class="mchip" id="mc-post">投稿</span>
           <span class="mchip" id="mc-event">Event</span>
           <span class="mchip" id="mc-act">Activity</span>
-          <span class="hud-energy" id="hud-energy">今日のAction 残り3/3</span>
         </div>
         <div class="hud-stats">
           <div class="hstat cog"><span class="hs-lab">世間の認知度</span><b id="hud-cog">0</b><span class="hs-bar"><i id="hud-cog-g"></i></span></div>
@@ -2878,10 +2864,7 @@ input,textarea{font-size:16px}
           <div class="hstat dist"><span class="hs-lab" id="hud-dist-lab">ひろとの距離</span><b id="hud-dist">0</b><span class="hs-bar"><i id="hud-dist-g"></i></span></div>
         </div>
         <div class="hud-trend"><span class="hud-trend-lab">フォロワーの推移</span><div class="hud-spark" id="hud-spark"></div><b class="hud-trend-d" id="hud-trend-d"></b></div>
-        <div class="hud-mile" id="hud-mile"></div>
         <div class="hud-bot">
-          <span class="hud-world" id="hud-world">ワールド：芸能界</span>
-          <span class="hud-day" id="hud-day">Day 1 / 6</span>
           <button id="hud-chg" type="button">これまでの Changes を見る ▸</button>
         </div>
         <div class="hud-note" id="hud-note">投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。</div>
@@ -2940,7 +2923,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v204</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v205</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3209,7 +3192,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v204</p>
+    <p class="ver">v205</p>
   </div>
 </section>
 </div>
@@ -5315,15 +5298,19 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  /* v117: set-with-a-bump for the small figures (fires only on change) */
  const setB=(id,txt)=>{const e=el(id);if(!e)return;if(e.textContent!==String(txt)){e.textContent=txt;e.classList.remove("hudbump");void e.offsetWidth;e.classList.add("hudbump");}};
  {const hl=el("#hud-lv");if(hl){const t="Lv "+lv+"<span class=\"hud-lv-t\">"+lvTitle(lv)+"</span>";if(hl.innerHTML!==t)hl.innerHTML=t;}}
- if(el("#hud-xptext"))el("#hud-xptext").textContent=inLv+" / 50（累計 "+S.xp+" XP）";
+ /* v205: the milestone line folds into the XP row - the label now
+    names the next title (or the arrival at the top), the figure
+    gives the XP still needed plus the running total */
+ if(el("#hud-xplab"))el("#hud-xplab").textContent=lv>=5?"XP ― 最高ランク到達":"XP ― 次の称号「"+lvTitle(lv+1)+"」まで";
+ if(el("#hud-xptext"))el("#hud-xptext").textContent=lv>=5?("累計 "+S.xp+" XP"):("あと "+(50-inLv)+" XP（累計 "+S.xp+" XP）");
  if(el("#hud-xpfill"))el("#hud-xpfill").style.width=(inLv/50*100)+"%";
  /* v117: followers count between values (same final figure) */
  {const fe=el("#hud-fol");if(fe){if(hudFolShown===null||hudFolShown===S.fol){fe.textContent=fmt(S.fol);hudFolShown=S.fol;}else{const from=hudFolShown,to=S.fol,tok=++hudFolTok,t0=performance.now();hudFolShown=S.fol;const step=t=>{if(tok!==hudFolTok)return;const k=Math.min(1,(t-t0)/650);fe.textContent=fmt(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}}}
- if(el("#hud-day"))el("#hud-day").textContent="Day "+S.ch+" / "+TOTAL_DAYS+"";
- if(el("#hud-world"))el("#hud-world").textContent="ワールド：芸能界";
  const used=[S.posted,S.evDone,S.actDone].filter(Boolean).length,remain=3-used;
- if(el("#hud-energy"))el("#hud-energy").textContent="今日のAction "+"☕".repeat(remain)+(remain<3?" "+"☆".repeat(used):"")+" 残り"+remain+"/3";
- if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";
+ /* v205: the standing tutorial line leaves the card (the how-to
+    lives in Settings); the note only appears in the one state it
+    says something specific - actions spent, progress unblocked */
+ if(el("#hud-note")){const hn=el("#hud-note");if(remain>0){hn.style.display="none";}else{hn.style.display="";hn.textContent="今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";}}
  const mc=(id,on)=>{const e=el(id);if(e)e.classList.toggle("done",!!on);};
  mc("#mc-post",S.posted);mc("#mc-event",S.evDone);mc("#mc-act",S.actDone);
  if(el("#btn-activity"))el("#btn-activity").classList.toggle("done",!!S.actDone);
@@ -5353,14 +5340,9 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
    const max=Math.max(1,...pts.map(e=>e.fol));
    pts.forEach(e=>{const i=document.createElement("i");if(e.now)i.className="now";i.style.height=Math.max(12,Math.round(e.fol/max*100))+"%";i.title="Day "+e.day+" ― "+fmt(e.fol);sp.appendChild(i);});
    const dEl=el("#hud-trend-d");if(dEl){if(pts.length>1){const diff=S.fol-pts[0].fol;dEl.textContent=(diff>=0?"+":"−")+fmt(Math.abs(diff));dEl.style.color=diff>=0?"#7ee2ae":"#ff9d9d";}else dEl.textContent="";}}}}
- /* v170: next-rank milestone - the mirror of his profile's
-    next-stage line (v148): what the next title is and how much XP
-    is left to it, or the arrival line at the top title. Derived
-    from the same lv / xp the card already shows */
- {const hm=el("#hud-mile");if(hm){const t=lv>=5
-   ?'<span class="hm-lab">RANK</span><span class="hm-tx">最高称号<b>「トップアイドル」</b>に到達</span>'
-   :'<span class="hm-lab">NEXT RANK</span><span class="hm-tx">次の称号<b>「'+lvTitle(lv+1)+'」</b></span><span class="hm-need">あと XP '+(lv*50-(S.xp||0))+'</span>';
-  if(hm.innerHTML!==t)hm.innerHTML=t;}}
+ /* v205: the v170 milestone row is retired - its content (next
+    title + XP to go, or the top-rank arrival) moved into the XP
+    label/figure above, so rank progress shows exactly once */
 }
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
