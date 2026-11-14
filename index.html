@@ -896,6 +896,17 @@ input,textarea{font-size:16px}
 .choice{font-size:14.5px;line-height:1.55}
 /* sheet descriptions match the empty-tab leading */
 .sheet p.desc{line-height:1.65}
+/* ===== v51: intro flow finish (card depth, chips, button touch) ===== */
+/* selection cards gain a quiet depth and a press response */
+.setup .opt{box-shadow:0 4px 16px rgba(0,0,0,.28);transition:background .15s ease,border-color .15s ease,transform .1s ease,box-shadow .15s ease}
+.setup .opt:active{transform:scale(.99);background:rgba(255,255,255,.07)}
+.setup .opt.sel{box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.opt .cimg{box-shadow:0 4px 12px rgba(0,0,0,.35)}
+/* effect chips and persona pills share one geometry */
+.opt .pill{padding:2.5px 10px}
+/* intro buttons: the shadow settles when pressed; ghost buttons answer too */
+.screen.intro .btn:active{box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.screen.intro .btn.ghost:active{background:rgba(255,255,255,.12);box-shadow:none}
 </style>
 </head>
 <body>
@@ -910,7 +921,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v50</p>
+  <p class="ver">v51</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1032,7 +1043,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v50</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v51</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1145,7 +1156,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v50</p>
+    <p class="ver">v51</p>
   </div>
 </section>
 </div>
