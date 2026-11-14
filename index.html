@@ -662,6 +662,8 @@ input,textarea{font-size:16px}
 .screen.intro .btn:disabled{opacity:.32;box-shadow:none}
 /* steps / progress: hairline */
 .step{color:#9aa3ab;font-size:10.5px;font-weight:800;letter-spacing:.3em}
+.setup-back{display:block;background:none;border:none;padding:0 0 10px;font-family:inherit;font-size:13px;font-weight:800;color:#cfd6dc;cursor:pointer}
+.setup-back:active{opacity:.6}
 .prog{margin:14px 0 22px}
 .prog .track{height:2px;border-radius:1px;background:rgba(255,255,255,.16)}
 .prog .track i{background:#fff;border-radius:1px;box-shadow:none}
@@ -2777,7 +2779,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v215</p>
+  <p class="ver">v216</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2795,6 +2797,7 @@ input,textarea{font-size:16px}
 <section class="screen intro" id="scr-persona" style="--bgimg:url(assets/nao-stage.jpg)">
   <div class="setup">
     <span class="setup-ghost" aria-hidden="true">02</span>
+    <button class="setup-back" data-backto="scr-world" type="button">‹ もどる</button>
     <div class="step">STEP 2 / 4 ― PERSONA</div>
     <div class="prog"><div class="track"><i style="width:50%"></i></div><span class="pnum"><b>2</b> / 4</span></div>
     <div class="worldnote" id="persona-world-note"><span class="wn-lab">WORLD</span><b>芸能界 ― アイドルワールド</b></div>
@@ -2811,6 +2814,7 @@ input,textarea{font-size:16px}
 <section class="screen intro" id="scr-target" style="--bgimg:url(assets/nao-stage-sailor.jpg)">
   <div class="setup">
     <span class="setup-ghost" aria-hidden="true">03</span>
+    <button class="setup-back" data-backto="scr-persona" type="button">‹ もどる</button>
     <div class="step">STEP 3 / 4 ― TARGET</div>
     <div class="prog"><div class="track"><i style="width:75%"></i></div><span class="pnum"><b>3</b> / 4</span></div>
     <div class="worldnote hidden" id="target-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
@@ -2824,6 +2828,7 @@ input,textarea{font-size:16px}
 <section class="screen intro" id="scr-first" style="--bgimg:url(assets/nao-backstage-selfie.jpg)">
   <div class="setup">
     <span class="setup-ghost" aria-hidden="true">04</span>
+    <button class="setup-back" data-backto="scr-target" type="button">‹ もどる</button>
     <div class="step">STEP 4 / 4 ― FIRST FOLLOWER</div>
     <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>4</b> / 4</span></div>
     <div class="worldnote hidden" id="first-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
@@ -2946,7 +2951,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v215</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v216</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3215,7 +3220,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v215</p>
+    <p class="ver">v216</p>
   </div>
 </section>
 </div>
@@ -3941,6 +3946,10 @@ function updSetupNotes(){
 }
 $("#btn-start").onclick=()=>{S=defState();S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
+/* v216: the setup flow walks back as well as forward - selections
+   live in module state and on the cards, so stepping back keeps
+   what was picked and re-advancing simply overwrites */
+$$(".setup-back").forEach(b=>b.addEventListener("click",()=>show(b.dataset.backto)));
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;updSetupNotes();show("scr-target");};
 (function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="cfol">フォロワー '+T.fol+'</span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;const bt=$("#btn-target");bt.disabled=false;bt.textContent=T.name+"で始める";};box.appendChild(b);});})();
 $("#btn-target").onclick=()=>{if(!selT)return;S.target=selT.key;updSetupNotes();show("scr-first");};
