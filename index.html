@@ -2388,6 +2388,8 @@ input,textarea{font-size:16px}
 .ss-row span{flex:none;width:118px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#9aa3ab}
 .ss-row b{flex:1;min-width:0;font-size:14px;color:#fff;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ss-row b.unset{color:#6d767e;font-weight:600}
+/* v145: the HUD level chip carries the rank title next to the number */
+.hud-lv-t{font-size:10.5px;font-weight:800;margin-left:6px;opacity:.72;letter-spacing:.04em}
 /* ===== v144: DM thread, second raise - opening a conversation now
    cascades the history in (top to bottom, capped) instead of every
    bubble popping at once, and the reply dock reads as a dock: a
@@ -2434,7 +2436,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v144</p>
+  <p class="ver">v145</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2601,7 +2603,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v144</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v145</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2840,7 +2842,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v144</p>
+    <p class="ver">v145</p>
   </div>
 </section>
 </div>
@@ -3518,6 +3520,16 @@ const FOL_MULT=400;
    constant. Saves written by the five-day version keep working: a
    save parked at the old final day simply gains its Day 6. */
 const TOTAL_DAYS=6;
+/* v145: level carries a rank title and a small engagement bonus.
+   Bands are calibrated on measured XP (both routes share the same XP
+   skeleton: standard play totals ~192 XP, best ~227, worst ~158):
+   Lv2 lands on Day 2, Lv3 on Day 3-4 and Lv4 on Day 5-6 of a standard
+   run (three title changes), and Lv5 needs 200+ XP, so the top title
+   is a good-play reward. Lv stays derived from XP - no new save field,
+   and no ending condition, threshold, fx or chapter number changes. */
+function lvNum(){return 1+Math.floor(((typeof S!=="undefined"&&S&&S.xp)||0)/50);}
+function lvTitle(lv){if(lv==null)lv=lvNum();const T=["新人","期待の新人","話題の人","実力派","トップアイドル"];return T[Math.max(0,Math.min(T.length-1,lv-1))];}
+function lvMult(){return Math.min(1+0.1*(lvNum()-1),1.5);}
 function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);const b=stanceObj().bonus,out={};
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
  if(out.fol)out.fol*=FOL_MULT;
@@ -3530,7 +3542,7 @@ function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);con
  if(S.chgLog.length>80)S.chgLog.splice(0,S.chgLog.length-80);
  const lvAfter=1+Math.floor((S.xp||0)/50);
  if(lvAfter>lvBefore)S.chgLog.push({day:S.ch,name:"LEVEL UP",v:lvAfter,cls:"lv"});
- if(lvAfter>lvBefore){const n=Object.keys(out).length;const d=document.createElement("div");d.className="chg levelup";d.textContent="LEVEL UP！ Lv "+lvAfter+" に上がった";d.style.animationDelay=(n*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),3400+n*90);setTimeout(()=>d.remove(),3900+n*90);}
+ if(lvAfter>lvBefore){const n=Object.keys(out).length;const d=document.createElement("div");d.className="chg levelup";d.textContent="LEVEL UP！ Lv "+lvAfter+" に上がった"+(lvTitle(lvAfter)!==lvTitle(lvBefore)?" ― 新称号「"+lvTitle(lvAfter)+"」":"");d.style.animationDelay=(n*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),3400+n*90);setTimeout(()=>d.remove(),3900+n*90);}
  renderProfile();save();}
 function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
 /* Changes history sheet (opened from the HUD) - v81: grouped by Day */
@@ -3562,7 +3574,7 @@ function renderChgLog(){
   Object.keys(nets).forEach(ax=>{const nt=nets[ax];if(!nt.sum)return;const c=document.createElement("span");c.className="chgnet";c.style.setProperty("--c",CHG_AXIS[ax].c);c.innerHTML="<i></i>"+nt.name+" <b></b>";c.querySelector("b").textContent=chgValTx({name:nt.name,v:nt.sum});nn.appendChild(c);});
   hd.appendChild(nn);sec.appendChild(hd);
   entries.forEach(e=>{
-   if(e.cls==="lv"){const b=document.createElement("div");b.className="chg-lv";b.innerHTML=CHG_AXIS.lv.svg+"<span></span>";b.querySelector("span").textContent="LEVEL UP！ Lv "+e.v+" に上がった";sec.appendChild(b);return;}
+   if(e.cls==="lv"){const b=document.createElement("div");b.className="chg-lv";b.innerHTML=CHG_AXIS.lv.svg+"<span></span>";b.querySelector("span").textContent="LEVEL UP！ Lv "+e.v+" に上がった ― 称号「"+lvTitle(e.v)+"」";sec.appendChild(b);return;}
    const ax=CHG_AXIS[chgAxisOf(e)];
    const r=document.createElement("div");r.className="chgrow2";
    r.innerHTML='<span class="chg-ic" style="--c:'+ax.c+'">'+ax.svg+'</span><span class="chg-nm"></span>';
@@ -4478,8 +4490,12 @@ function doPost(o){
  S.posted=true;applyFx(o.fx);
  /* v62: her own posts carry engagement on the same scale as her follower
     count - seeded once at posting time from the post-fx follower total
-    (m = [replies, reposts, likes]; views derive from these as usual) */
- mine.m=[String(Math.max(1,Math.round(S.fol*0.002))),String(Math.round(S.fol*0.006)),String(Math.round(S.fol*0.05))];
+    (m = [replies, reposts, likes]; views derive from these as usual).
+    v145: the seed is scaled by the level bonus (Lv1 x1.0, +10% per
+    level, capped at x1.5) - display numbers of new posts only; posts
+    already made keep the numbers they were seeded with. */
+ const lm=lvMult();
+ mine.m=[String(Math.max(1,Math.round(S.fol*0.002*lm))),String(Math.round(S.fol*0.006*lm)),String(Math.round(S.fol*0.05*lm))];
  injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
 }
 /* activity (Status-style: pick a title, then run. v142: the partner and
@@ -4595,12 +4611,12 @@ function renderProfile(){if(!S||!S.started)return;
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
- const svD=$("#set-sv-day");if(svD){svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
+ const svD=$("#set-sv-day");if(svD){svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+lvNum()+"・"+lvTitle();$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
- $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);
+ $("#st-xp").textContent=S.xp;$("#st-lv").textContent=lvNum()+"・"+lvTitle();
  const lvN=1+Math.floor(S.xp/50),usedN=[S.posted,S.evDone,S.actDone].filter(Boolean).length,setT=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- setT("#me-cov-day","DAY "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-cov-lv","Lv "+lvN);setT("#me-now-lv","Lv "+lvN);setT("#me-now-day","Day "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-now-act","残り "+(3-usedN));
+ setT("#me-cov-day","DAY "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-now-act","残り "+(3-usedN));
  renderRep();renderHud();}
 /* v44: reputation - how the world currently sees her, derived from the axes */
 function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
@@ -4636,7 +4652,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  const el=id=>$(id);
  /* v117: set-with-a-bump for the small figures (fires only on change) */
  const setB=(id,txt)=>{const e=el(id);if(!e)return;if(e.textContent!==String(txt)){e.textContent=txt;e.classList.remove("hudbump");void e.offsetWidth;e.classList.add("hudbump");}};
- setB("#hud-lv","Lv "+lv);
+ {const hl=el("#hud-lv");if(hl){const t="Lv "+lv+"<span class=\"hud-lv-t\">"+lvTitle(lv)+"</span>";if(hl.innerHTML!==t)hl.innerHTML=t;}}
  if(el("#hud-xptext"))el("#hud-xptext").textContent=inLv+" / 50（累計 "+S.xp+" XP）";
  if(el("#hud-xpfill"))el("#hud-xpfill").style.width=(inLv/50*100)+"%";
  /* v117: followers count between values (same final figure) */
@@ -4725,7 +4741,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   countUp(val,r.now-r.d,r.now,r.useFmt);
   if(r.gauge>=0){const g=row.querySelector(".dr-gauge i");requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.width=Math.max(0,Math.min(100,r.gauge))+"%";}));}});
  const lv=$("#dr-lvup");
- if(dd.lvup>0){lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった";lv.classList.remove("hidden");}else lv.classList.add("hidden");
+ if(dd.lvup>0){const tUp=lvTitle(dd.lvup)!==lvTitle(dd.lvup-1);lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった ― "+(tUp?"新称号":"称号")+"「"+lvTitle(dd.lvup)+"」";lv.classList.remove("hidden");}else lv.classList.add("hidden");
  $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
  /* v104: the go button reads as a destination bar - main label plus the
     next chapter's own day line, read from the chapter data. */
@@ -4806,7 +4822,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  /* v114: the follower count counts up to the same final figure */
  {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.min(1,(t-t0)/850);folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
  $("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
- $("#end-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));
+ $("#end-lv").textContent="Lv "+lvNum()+"・"+lvTitle();
  $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
  const em=$("#end-emblem");if(em)em.innerHTML=END_EMBLEM[kind]||"";
  show("scr-ending");renderEndJourney();renderCredits(kind);save();}
@@ -4823,7 +4839,7 @@ function renderCredits(kind){
  const T=tgt();set("#ec-target",T.name+"（"+T.handle+"）");
  const F=ACC[S.first];set("#ec-first",F?F.n:"―");
  set("#ec-end",({collab:"コラボEND",flame:"炎上END",quiet:"静かなEND",start:"これからEND"})[kind]||"");
- set("#ec-record","Lv "+(1+Math.floor((S.xp||0)/50))+" ・ フォロワー "+fmt(S.fol)+" ・ "+distLab()+" STAGE "+(distStageIdx()+1));
+ set("#ec-record","Lv "+lvNum()+"（"+lvTitle()+"） ・ フォロワー "+fmt(S.fol)+" ・ "+distLab()+" STAGE "+(distStageIdx()+1));
  set("#ec-changes",(S.chgLog||[]).length+" 件の Changes");
  const bc=$("#btn-continue"),br=$("#btn-reset0");
  if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
@@ -4842,7 +4858,7 @@ function renderTitleSave(){
  set("#ts-day","Day "+S.ch+" / "+TOTAL_DAYS+"");
  set("#ts-chap",parts.length>1?parts.slice(1).join(" ― "):(ch?(ch.day||""):""));
  set("#ts-target",T.short);set("#ts-handle",S.handle||"");
- set("#ts-fol",fmt(S.fol));set("#ts-lv","Lv "+(1+Math.floor((S.xp||0)/50)));
+ set("#ts-fol",fmt(S.fol));set("#ts-lv","Lv "+lvNum()+"・"+lvTitle());
  const pg=$("#ts-prog");if(pg){if(pg.children.length!==TOTAL_DAYS){pg.innerHTML="";for(let d=0;d<TOTAL_DAYS;d++)pg.appendChild(document.createElement("i"));}[...pg.children].forEach((el,i)=>{el.className=i<S.ch?"on":"";if(i===S.ch-1)el.classList.add("now");});}
  /* v141: the card also carries the distance line (stage + pips, the
     same read as his profile band) */
