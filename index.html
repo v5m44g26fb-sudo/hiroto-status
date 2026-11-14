@@ -16,13 +16,10 @@ html,body{background:#0a0a0a;font-family:-apple-system,"Hiragino Kaku Gothic Pro
 .view.on{animation:scrin .22s ease}
 button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 /* ===== setup / title / ending (new, minimal) ===== */
-#scr-title,#scr-ending{background:#000;color:#e7e9ea;align-items:center;justify-content:center;text-align:center;padding:32px 24px}
+#scr-title{background:#000;color:#e7e9ea;align-items:center;justify-content:center;text-align:center;padding:32px 24px}
 #scr-title h1{font-size:29px;line-height:1.5;font-weight:900;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.6);letter-spacing:.02em}
 #scr-title .xlogo{filter:drop-shadow(0 0 18px rgba(249,24,128,.55))}
-#scr-title .sub,#scr-ending p{color:#9aa0a6;margin:14px 0 6px;font-size:14px;line-height:1.85}
-#scr-ending p{color:#cfd3d6;text-align:left;white-space:pre-wrap}
-#scr-ending h2{font-size:23px;line-height:1.5;margin:12px 0;color:#fff}
-#scr-ending .tag{color:#ffd400;letter-spacing:.2em;font-size:12px;font-weight:800}
+#scr-title .sub{color:#9aa0a6;margin:14px 0 6px;font-size:14px;line-height:1.85}
 .xlogo{width:60px;height:60px;margin-bottom:16px}
 .ver{color:#3a3f44;font-size:12px;margin-top:10px}
 .btn{display:block;width:100%;max-width:320px;margin:12px auto 0;padding:16px;border-radius:999px;background:linear-gradient(90deg,#7856ff,#f91880);box-shadow:0 10px 26px rgba(249,24,128,.35);color:#fff;font-weight:800;font-size:16.5px;border:none;transition:transform .15s ease,opacity .15s ease,box-shadow .15s ease}
@@ -274,9 +271,7 @@ input,textarea{font-size:16px}
 .msg{max-width:78%;padding:10px 13px;border-radius:18px;font-size:15px;line-height:1.55;margin:9px 14px;width:fit-content;white-space:pre-wrap;animation:msgin .24s cubic-bezier(.2,.8,.25,1)}
 .msg.them{background:#eff3f4;margin-right:auto;border-bottom-left-radius:4px;transform-origin:bottom left}
 .msg.me{background:#1d9bf0;color:#fff;margin-left:auto;border-bottom-right-radius:4px;transform-origin:bottom right}
-.endgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-top:18px;text-align:left}
-.endgrid .statbox{background:#16181c;border-color:#2f3336;color:#fff}
-.endgrid .statbox small{color:#9aa0a6}
+
 /* pull-to-refresh (home timeline only): loader follows the finger, feed order never changes */
 #ptr{height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;color:#1d9bf0;opacity:0;flex:none}
 #ptr svg{width:26px;height:26px;display:block}
@@ -500,6 +495,44 @@ input,textarea{font-size:16px}
 .choice.xcopt.sel{border-color:#f91880;background:rgba(249,24,128,.05);box-shadow:0 0 0 1px #f91880,0 10px 26px rgba(249,24,128,.22);transform:scale(1.012)}
 .choice.xcopt.sel .xcopt-no{background:linear-gradient(135deg,#f91880,#7856ff);color:#fff}
 .choice.xcopt.sel .xcopt-check{display:flex}
+/* ===== v24: ending overhaul (per-ending blurred world backdrop + FINAL RESULT panel) ===== */
+#scr-ending{position:relative;background:#05050c;color:#e7e9ea;overflow:hidden;--acc:#ffd400}
+#scr-ending.end-flame{--acc:#ff6a5e}
+#scr-ending.end-quiet{--acc:#4fe3c1}
+#scr-ending.end-start{--acc:#7db4ff}
+#scr-ending::before{content:"";position:absolute;inset:-26px;background-image:var(--bgimg);background-size:cover;background-position:center;filter:blur(18px) brightness(.52) saturate(1.25);z-index:0}
+#scr-ending::after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,5,14,.34),rgba(5,5,12,.87) 66%,rgba(3,3,8,.97))}
+#scr-ending.end-flame::after{background:linear-gradient(180deg,rgba(46,4,8,.42),rgba(24,3,6,.9) 66%,rgba(12,2,4,.98))}
+#scr-ending.end-quiet::after{background:linear-gradient(180deg,rgba(4,26,30,.4),rgba(3,16,20,.9) 66%,rgba(2,9,12,.98))}
+#scr-ending.end-start::after{background:linear-gradient(180deg,rgba(10,14,44,.4),rgba(6,8,26,.9) 66%,rgba(3,4,14,.98))}
+.end-inner{position:relative;z-index:1;width:100%;max-width:430px;margin:0 auto;padding:calc(30px + env(safe-area-inset-top)) 22px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;text-align:center}
+.end-tagrow{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.end-tag{color:#0b0b10;background:linear-gradient(90deg,var(--acc),rgba(255,255,255,.85));letter-spacing:.28em;font-size:11.5px;font-weight:900;border-radius:999px;padding:6px 13px 6px 16px;box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.end-theme{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--acc);border:1px solid var(--acc);border-radius:999px;padding:5px 11px;background:rgba(0,0,0,.35)}
+#end-title{font-weight:900;color:#fff;text-shadow:0 4px 26px rgba(0,0,0,.65);margin:0}
+#end-title .et-main{display:block;font-size:31px;line-height:1.3;letter-spacing:.05em}
+#end-title .et-sub{display:block;font-size:19px;line-height:1.45;font-weight:800;color:var(--acc);margin-top:7px;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.end-card{width:100%;background:rgba(8,8,16,.55);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:16px 17px;margin:16px 0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-align:left;animation:fadeup .5s ease .12s both}
+#end-body{color:#e8ebee;font-size:14.5px;line-height:1.9;white-space:pre-wrap;margin:0}
+.end-panel{width:100%;background:linear-gradient(180deg,rgba(23,23,36,.92),rgba(12,12,20,.95));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:15px 16px 12px;box-shadow:0 18px 40px rgba(0,0,0,.45);text-align:left;animation:fadeup .5s ease .22s both}
+.end-panel-h{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+.end-lvb{background:linear-gradient(135deg,#7856ff,#f91880);color:#fff;font-weight:900;font-size:14.5px;border-radius:10px;padding:6px 11px;letter-spacing:.03em;box-shadow:0 6px 16px rgba(249,24,128,.35);flex:none}
+.end-panel-h .eph-t{font-weight:900;letter-spacing:.18em;font-size:12.5px;color:#fff}
+.end-panel-h small{margin-left:auto;color:#9aa0a6;font-size:11.5px;font-weight:700;flex:none}
+.erow{display:flex;align-items:center;gap:11px;padding:10px 0}
+.erow+.erow{border-top:1px solid rgba(255,255,255,.09)}
+.erow .elab{font-size:13px;color:#c3ccd2;font-weight:700;width:92px;flex:none}
+.erow b{font-size:19px;color:#fff;margin-left:auto;font-variant-numeric:tabular-nums;flex:none}
+.erow.fol b{font-size:23px;color:var(--acc)}
+.erow .egauge{flex:1;height:8px;border-radius:4px;background:rgba(255,255,255,.13);overflow:hidden;min-width:40px}
+.erow .egauge i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#4cc3ff,#7856ff);width:0;transition:width .8s cubic-bezier(.2,.8,.3,1) .35s}
+.erow.fire .egauge i{background:linear-gradient(90deg,#ffb03a,#f4212e)}
+.erow.fire b{color:#ff9d94}
+.erow.dist .egauge i{background:linear-gradient(90deg,#7856ff,#f91880)}
+.erow.dist b{color:#ff8ac2}
+.end-chg{display:block;width:100%;margin-top:9px;background:none;border:none;border-top:1px solid rgba(255,255,255,.09);padding:12px 0 3px;color:#4cc3ff;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;text-align:left}
+#scr-ending .btn{margin-top:18px;flex:none}
+#scr-ending .ver{color:rgba(255,255,255,.35)}
 </style>
 </head>
 <body>
@@ -512,7 +545,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v23</p>
+  <p class="ver">v24</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -621,7 +654,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v23</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v24</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -719,17 +752,21 @@ input,textarea{font-size:16px}
 </section>
 
 <section class="screen" id="scr-ending">
-  <div class="tag">ENDING</div>
-  <h2 id="end-title"></h2>
-  <p id="end-body"></p>
-  <div class="endgrid">
-    <div class="statbox"><small>フォロワー</small><b id="end-fol"></b></div>
-    <div class="statbox"><small>ひろとの距離</small><b id="end-dist"></b></div>
-    <div class="statbox"><small>世間の認知度</small><b id="end-cog"></b></div>
-    <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
+  <div class="end-inner">
+    <div class="end-tagrow"><span class="end-tag">ENDING</span><span class="end-theme" id="end-theme"></span></div>
+    <h2 id="end-title"></h2>
+    <div class="end-card"><p id="end-body"></p></div>
+    <div class="end-panel">
+      <div class="end-panel-h"><span class="end-lvb" id="end-lv">Lv 1</span><span class="eph-t">FINAL RESULT</span><small>5日間の成績</small></div>
+      <div class="erow fol"><span class="elab">フォロワー</span><b id="end-fol"></b></div>
+      <div class="erow"><span class="elab">世間の認知度</span><span class="egauge"><i id="end-cog-g"></i></span><b id="end-cog"></b></div>
+      <div class="erow fire"><span class="elab">炎上度</span><span class="egauge"><i id="end-flm-g"></i></span><b id="end-flm"></b></div>
+      <div class="erow dist"><span class="elab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
+      <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
+    </div>
+    <button class="btn" id="btn-restart">もう一度はじめる</button>
+    <p class="ver">v24</p>
   </div>
-  <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v23</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -1419,17 +1456,26 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-energy"))el("#hud-energy").textContent="今日のAction "+"☕".repeat(remain)+(remain<3?" "+"☆".repeat(used):"")+" 残り"+remain+"/3";
  if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";}
 /* ending */
-function ending(){let title,body;const hot=S.dist>=40;
- if(S.flm>=55){title="炎上END ― 燃えてしまった件";body="匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「プリン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
- else if(S.fol>=450&&S.cog>=40&&S.dist>=38){title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
- else if(S.dist>=30){title="静かなEND ― いちばん近くの件";body="大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。";}
- else{title="これからEND ― まだ始まったばかりの件";body="バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
- $("#end-title").textContent=title;$("#end-body").textContent=body;
+function ending(){let title,body,kind;const hot=S.dist>=40;
+ if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「プリン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
+ else if(S.fol>=450&&S.cog>=40&&S.dist>=38){kind="collab";title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
+ else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。";}
+ else{kind="start";title="これからEND ― まだ始まったばかりの件";body="バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
+ const sec=$("#scr-ending");sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
+ sec.style.setProperty("--bgimg","url("+({collab:"assets/nao-stage.jpg",flame:"assets/night.jpg",quiet:"assets/nao-cafe2.jpg",start:"assets/nao-promo.jpg"})[kind]+")");
+ $("#end-theme").textContent=({collab:"COLLAB END",flame:"FLAME END",quiet:"QUIET END",start:"START END"})[kind];
+ const tp=title.split(" ― ");const th=$("#end-title");th.innerHTML="";
+ const tm=document.createElement("span");tm.className="et-main";tm.textContent=tp[0];th.appendChild(tm);
+ if(tp[1]){const ts=document.createElement("span");ts.className="et-sub";ts.textContent=tp[1];th.appendChild(ts);}
+ $("#end-body").textContent=body;
  $("#end-fol").textContent=fmt(S.fol);$("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
+ $("#end-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));
+ $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
  show("scr-ending");save();}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
 $("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-restart").onclick=resetAll;
+$("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
