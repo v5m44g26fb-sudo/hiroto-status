@@ -1917,6 +1917,25 @@ input,textarea{font-size:16px}
 .dr-go-main{font-size:16.5px;font-weight:800;line-height:1.3}
 .dr-go-sub{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.78);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dr-go-arrow{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900}
+/* ===== v105: typography unification - one hierarchy across the app.
+   The scale: display 30 / H1 21 / H2 17 / H3 15 / body 14 / small 13 /
+   note 12.5 / meta 11.5 / label 10.5 (900, tracked). Values set
+   deliberately per screen in earlier waves stay as documented
+   exceptions (post body 15px v95, profile bio 14px/1.65 v84, DM
+   preview 14px v71, the gold cover typo, setup eyebrows); this pass
+   only pulls same-role drift back onto the scale - sheet titles to
+   H2 17, list names to H3 15, both profiles' count numbers to one
+   size, settings notes to the 12.5 note tier, save-card cell labels
+   to the 10.5 label tier - and makes numeric readouts tabular
+   everywhere they are compared or counted. ===== */
+:root{--t-display:30px;--t-h1:21px;--t-h2:17px;--t-h3:15px;--t-body:14px;--t-small:13px;--t-note:12.5px;--t-meta:11.5px;--t-lab:10.5px}
+.sheet h3{font-size:var(--t-h2)}
+.counts b{font-size:15px;font-variant-numeric:tabular-nums}
+#x-pane-hisprof .counts b{font-size:15px}
+.dmrow .dm-name{font-size:15px}
+.set-main small{font-size:12.5px}
+.ts-cell small{font-size:10.5px;letter-spacing:.2em}
+.ts-cell b,.trend .tcount,.ptab-head span{font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -1949,7 +1968,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v104</p>
+  <p class="ver">v105</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2104,7 +2123,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v104</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v105</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2313,7 +2332,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v104</p>
+    <p class="ver">v105</p>
   </div>
 </section>
 </div>
