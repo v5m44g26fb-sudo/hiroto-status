@@ -116,6 +116,8 @@ input,textarea{font-size:16px}
 .mediagrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding-top:2px;animation:panein .18s ease}
 .mediagrid img{width:100%;aspect-ratio:1;object-fit:cover;object-position:center 16%;display:block;background:#eff3f4}
 .emptytab{padding:40px 36px;animation:panein .18s ease}
+.tab-door{display:block;margin:-16px auto 26px;background:#0f1419;border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:800;border-radius:999px;padding:9px 20px;cursor:pointer}
+.tab-door:active{transform:scale(.96)}
 .emptytab b{display:block;font-size:21px;font-weight:900;margin-bottom:6px}
 .emptytab span{color:#536471;font-size:13.5px;line-height:1.65;display:block}
 .counts span{font-size:13px;color:#536471}.counts b{color:#0f1419}
@@ -2787,7 +2789,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v220</p>
+  <p class="ver">v221</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2960,7 +2962,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v220</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v221</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3229,7 +3231,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v220</p>
+    <p class="ver">v221</p>
   </div>
 </section>
 </div>
@@ -4741,6 +4743,9 @@ const ET_ICONS={
 function emptyTab(t,s,ic){return '<div class="emptytab"><span class="et-ic">'+(ET_ICONS[ic]||ET_ICONS.post)+'</span><b></b><span class="et-sub"></span></div>';}
 function mkEmpty(t,s,ic){const d=document.createElement("div");d.innerHTML=emptyTab(t,s,ic);d.querySelector("b").textContent=t;d.querySelector(".et-sub").textContent=s;return d.firstChild;}
 function tabHead(lab,count){const d=document.createElement("div");d.className="ptab-head";d.innerHTML="<b></b><span></span>";d.querySelector("b").textContent=lab;d.querySelector("span").textContent=count;return d;}
+/* v221: empty profile tabs offer the door back to the timeline,
+   where the missing posts actually happen */
+function tabDoor(){const b=document.createElement("button");b.type="button";b.className="tab-door";b.textContent="タイムラインへ ›";b.addEventListener("click",()=>showPane("tl"));return b;}
 function mediaGrid(imgs,owner){const g=document.createElement("div");g.className="mediagrid";imgs.forEach((u,i)=>{const im=document.createElement("img");im.src=u;im.alt="";im.addEventListener("click",()=>{try{openMediaPhoto(imgs,owner||"nao",i);}catch(_){}});g.appendChild(im);});return g;}
 function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
@@ -4754,13 +4759,13 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
   const minePosts=S.posts.filter(p=>p.mine&&!p.isReply),debut=minePosts[minePosts.length-1];
   if(debut){const w=document.createElement("div");w.className="rpwrap";w.appendChild(pinHeadEl());w.appendChild(postEl(debut,false));box.appendChild(w);}
   if(!list.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
- else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length){box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));box.appendChild(tabDoor());}else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
- else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length){box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));box.appendChild(tabDoor());}else liked.forEach(p=>box.appendChild(postEl(p,false)));}
  /* v177: saved (bookmarked) posts finally get their listing - the
     bookmark toggle has persisted bmked all along; this tab reads
     the same flags across the feed and mention pools, deduped */
- else if(meTab==="bmk"){const seen=new Set(),saved=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.bmked&&!seen.has(p.id)){seen.add(p.id);saved.push(p);}});box.appendChild(tabHead("保存したポスト",saved.length+" 件"));if(!saved.length)box.appendChild(mkEmpty("保存したポストはまだない","ポストのブックマークを押すと、ここに集まるよ。","post"));else saved.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="bmk"){const seen=new Set(),saved=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.bmked&&!seen.has(p.id)){seen.add(p.id);saved.push(p);}});box.appendChild(tabHead("保存したポスト",saved.length+" 件"));if(!saved.length){box.appendChild(mkEmpty("保存したポストはまだない","ポストのブックマークを押すと、ここに集まるよ。","post"));box.appendChild(tabDoor());}else saved.forEach(p=>box.appendChild(postEl(p,false)));}
 }
 function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);
