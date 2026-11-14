@@ -1645,6 +1645,28 @@ input,textarea{font-size:16px}
 .pv-nav.next{right:10px}
 .pv-nav.off{opacity:.22}
 #photoviewer.clean .pv-top,#photoviewer.clean .pv-info,#photoviewer.clean .pv-nav{opacity:0;pointer-events:none}
+/* ===== v115: photo viewer, second raise - moving between photos now
+   reads as travel: the incoming photo slides in from the side it
+   lives on, a swipe drags the photo with the finger and snaps it
+   home or over the threshold, a hairline progress track under the
+   top bar fills to the current position, and clean (immersive) mode
+   sinks the chrome away with a slight vertical drift while the
+   photo itself breathes a fraction larger. Entry points and photo
+   sets are unchanged. ===== */
+.pv-prog{height:2.5px;background:#eff3f4;margin:1px 14px 0;border-radius:2px;overflow:hidden;transition:opacity .25s ease}
+.pv-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#1d9bf0,#7856ff);border-radius:2px;transition:width .32s cubic-bezier(.2,.8,.3,1)}
+#photoviewer.clean .pv-prog{opacity:0}
+.pv-top{transition:opacity .25s ease,transform .28s ease}
+.pv-info{transition:opacity .25s ease,transform .28s ease}
+#photoviewer.clean .pv-top{transform:translateY(-7px)}
+#photoviewer.clean .pv-info{transform:translateY(9px)}
+.pv-stage img{transition:transform .22s ease}
+#photoviewer.clean .pv-stage img{transform:scale(1.02)}
+.pv-stage img.in-r{animation:pvinr .32s cubic-bezier(.2,.8,.3,1)}
+.pv-stage img.in-l{animation:pvinl .32s cubic-bezier(.2,.8,.3,1)}
+@keyframes pvinr{from{opacity:.25;transform:translateX(34px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes pvinl{from{opacity:.25;transform:translateX(-34px) scale(.985)}to{opacity:1;transform:none}}
+.pv-stage img.drag{transition:none}
 /* ===== v90: intro flow raised to an opening-titles sequence - the four
    setup screens (WORLD / PERSONA / TARGET / FIRST FOLLOWER) now open
    like film credits: each backdrop photo drifts in a slow Ken Burns
@@ -2087,7 +2109,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v114</p>
+  <p class="ver">v115</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2242,7 +2264,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v114</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v115</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2365,6 +2387,7 @@ input,textarea{font-size:16px}
       <div class="pv-date" id="pv-date"></div>
       <div class="pv-count" id="pv-count"></div>
     </div>
+    <div class="pv-prog" aria-hidden="true"><i id="pv-prog-fill"></i></div>
     <div class="pv-stage" id="pv-stage"><img id="pv-img" alt=""></div>
     <div class="pv-info">
       <div class="pv-who"><span id="pv-av"></span><span class="pv-who-t"><b id="pv-name"></b><small id="pv-handle"></small></span></div>
@@ -2452,7 +2475,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v114</p>
+    <p class="ver">v115</p>
   </div>
 </section>
 </div>
@@ -3396,22 +3419,27 @@ function openMediaPhoto(imgs,owner,idx){
  openPhoto(set,idx);
 }
 function openPhoto(set,idx){pvSet=set||[];pvIdx=Math.max(0,Math.min(pvSet.length-1,idx||0));const v=$("#photoviewer");v.classList.add("on");v.classList.remove("clean");pvRender();}
-function pvRender(){const it=pvSet[pvIdx];if(!it)return;const im=$("#pv-img");im.src=it.src;im.classList.remove("go");void im.offsetWidth;im.classList.add("go");
+function pvRender(dir){const it=pvSet[pvIdx];if(!it)return;const im=$("#pv-img");im.src=it.src;im.style.transform="";im.classList.remove("go","in-r","in-l","drag");void im.offsetWidth;im.classList.add(dir>0?"in-r":dir<0?"in-l":"go");
  $("#pv-date").textContent=it.date||"";
  $("#pv-count").textContent=pvSet.length>1?(pvIdx+1)+" / "+pvSet.length:"";
+ const pf=$("#pv-prog-fill");if(pf)pf.style.width=(pvSet.length>1?((pvIdx+1)/pvSet.length*100):100)+"%";
  $("#pv-av").innerHTML=it.av?'<img class="avatar" src="'+it.av+'" width="34" height="34" alt="">':avaTxt(it.name||"");
  $("#pv-name").textContent=it.name||"";$("#pv-handle").textContent=it.handle||"";
  const cap=$("#pv-cap");cap.textContent=it.cap||"";cap.style.display=it.cap?"":"none";
  const meta=$("#pv-meta");meta.textContent=it.meta||"";meta.style.display=it.meta?"":"none";
  $("#pv-prev").classList.toggle("off",pvIdx<=0);$("#pv-next").classList.toggle("off",pvIdx>=pvSet.length-1);}
-function pvStep(d){const n=pvIdx+d;if(n<0||n>=pvSet.length)return;pvIdx=n;pvRender();}
+function pvStep(d){const n=pvIdx+d;if(n<0||n>=pvSet.length)return;pvIdx=n;pvRender(d);}
 function closePhoto(){$("#photoviewer").classList.remove("on");}
 $("#pv-close").addEventListener("click",closePhoto);
 $("#pv-prev").addEventListener("click",e=>{e.stopPropagation();pvStep(-1);});
 $("#pv-next").addEventListener("click",e=>{e.stopPropagation();pvStep(1);});
 let pvTx=null,pvSwipeAt=0;
-$("#pv-stage").addEventListener("pointerdown",e=>{pvTx=e.clientX;});
-$("#pv-stage").addEventListener("pointerup",e=>{if(pvTx===null)return;const dx=e.clientX-pvTx;pvTx=null;if(Math.abs(dx)>48){pvStep(dx<0?1:-1);pvSwipeAt=Date.now();}});
+/* v115: the photo follows the finger while swiping (rubber-banded),
+   then either crosses into the next photo or snaps back home */
+$("#pv-stage").addEventListener("pointerdown",e=>{pvTx=e.clientX;const im=$("#pv-img");if(im)im.classList.add("drag");});
+$("#pv-stage").addEventListener("pointermove",e=>{if(pvTx===null)return;const dx=e.clientX-pvTx;const im=$("#pv-img");if(im)im.style.transform="translateX("+(Math.max(-130,Math.min(130,dx))*0.55)+"px)";});
+$("#pv-stage").addEventListener("pointerup",e=>{if(pvTx===null)return;const dx=e.clientX-pvTx;pvTx=null;const im=$("#pv-img");if(im)im.classList.remove("drag");if(Math.abs(dx)>48){const before=pvIdx;pvStep(dx<0?1:-1);pvSwipeAt=Date.now();if(pvIdx===before&&im)im.style.transform="";}else if(im)im.style.transform="";});
+$("#pv-stage").addEventListener("pointercancel",()=>{pvTx=null;const im=$("#pv-img");if(im){im.classList.remove("drag");im.style.transform="";}});
 $("#pv-stage").addEventListener("click",()=>{if(Date.now()-pvSwipeAt<350)return;$("#photoviewer").classList.toggle("clean");});
 document.addEventListener("keydown",e=>{if(!$("#photoviewer").classList.contains("on"))return;if(e.key==="Escape")closePhoto();else if(e.key==="ArrowRight")pvStep(1);else if(e.key==="ArrowLeft")pvStep(-1);});
 /* feed */
