@@ -1272,6 +1272,18 @@ input,textarea{font-size:16px}
 .choice.dmchoice{background:#fff;width:100%;text-align:left;position:relative;padding-right:32px}
 .choice.dmchoice::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:19px;color:#c3ced4;font-weight:400}
 #dmthread.special .choice.dmchoice{border-color:rgba(249,24,128,.35)}
+/* ===== v118: DM replies breathe - picking a reply no longer lands
+   both bubbles in the same instant: hers goes out, a typing bubble
+   breathes on his side for a beat, then his reply rises in. The
+   conversation text, choices and fx are unchanged; the fx land
+   with his reply instead of with the tap. ===== */
+.msg.new{animation:msgin .3s cubic-bezier(.2,.8,.3,1)}
+@keyframes msgin{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.msg.typing{display:flex;gap:4px;align-items:center;padding:13px 14px}
+.msg.typing i{width:6px;height:6px;border-radius:50%;background:#8b98a5;animation:typdot 1s ease-in-out infinite}
+.msg.typing i:nth-child(2){animation-delay:.15s}
+.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes typdot{0%,60%,100%{transform:none;opacity:.45}30%{transform:translateY(-3px);opacity:1}}
 /* ===== v82: settings & save management. There was no settings surface -
    just a bare button and a grey line at the foot of the profile. The same
    items (version, save reset with its existing single-action behaviour)
@@ -2122,7 +2134,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v117</p>
+  <p class="ver">v118</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2277,7 +2289,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v117</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v118</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2488,7 +2500,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v117</p>
+    <p class="ver">v118</p>
   </div>
 </section>
 </div>
@@ -4037,7 +4049,11 @@ function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#d
 function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const box=$("#th-msgs");box.innerHTML="";
  t.msgs.forEach((m,i)=>{const side=t.replyIdx===i?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(t.replyIdx===i-1?"me":"them")===side)?" grp":"");d.textContent=m;box.appendChild(d);if(t.done&&side==="me"){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
- if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="返信を選ぶ";cb.appendChild(lab);t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice dmchoice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);t.msgs.push(c.r);if(t.special)S.hirotoDm="done";applyFx(c.fx);renderThreadMsgs();scrollDmBottom(true);save();};cb.appendChild(b);});}}
+ if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="返信を選ぶ";cb.appendChild(lab);t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice dmchoice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
+   /* v118: his reply types for a beat before it lands (the save
+      waits for the pair, so a closed app never keeps half a talk) */
+   const ty=document.createElement("div");ty.className="msg them typing";ty.innerHTML="<i></i><i></i><i></i>";$("#th-msgs").appendChild(ty);scrollDmBottom(true);
+   setTimeout(()=>{t.msgs.push(c.r);applyFx(c.fx);if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},780);};cb.appendChild(b);});}}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
 /* profile */
 function renderProfile(){if(!S||!S.started)return;
