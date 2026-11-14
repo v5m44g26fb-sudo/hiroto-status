@@ -1793,13 +1793,29 @@ input,textarea{font-size:16px}
 .sv-photo{width:min(80vw,320px);animation:svcard 5.8s ease-out both}
 @keyframes svcard{0%{opacity:0;transform:scale(.94) translateY(10px)}12%{opacity:1;transform:scale(1) translateY(0)}100%{transform:scale(1.045) translateY(0)}}
 #storyviewer.paused .sv-photo{animation-play-state:paused}
-.sv-cap{bottom:calc(88px + env(safe-area-inset-bottom));font-size:16.5px;letter-spacing:.01em}
+/* v267: captions clear the whole bottom layer (reactions row +
+   reply bar), the way the real viewer stacks them */
+.sv-cap{bottom:calc(122px + env(safe-area-inset-bottom));font-size:16.5px;letter-spacing:.01em}
 .sv-cap.on{animation:svcapin .45s cubic-bezier(.2,.8,.25,1) both}
 @keyframes svcapin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .sv-pause{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;display:flex;gap:9px;opacity:0;transition:opacity .18s ease;pointer-events:none}
 .sv-pause i{width:7px;height:30px;border-radius:3px;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.4)}
 #storyviewer.paused .sv-pause{opacity:1}
-.sv-actions{position:absolute;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;gap:10px}
+.sv-actions{position:absolute;right:14px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;gap:10px}
+/* v267: the real story bottom layer - a reply pill under the
+   action cluster, and a viewer count on her own stories */
+.sv-replybar{position:absolute;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:6}
+.sv-replyrow{display:flex;align-items:center;gap:10px}
+.sv-replyrow input{flex:1;min-width:0;background:rgba(10,12,16,.25);border:1.5px solid rgba(255,255,255,.65);border-radius:999px;color:#fff;font-size:13.5px;padding:10px 16px;outline:none;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.sv-replyrow input::placeholder{color:rgba(255,255,255,.78)}
+.sv-send{flex:none;width:38px;height:38px;border-radius:50%;border:none;background:none;display:none;place-items:center;cursor:pointer;padding:0}
+.sv-send.on{display:grid}
+.sv-send svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))}
+.sv-views{display:none;align-items:center;gap:6px;color:#fff;font-size:12px;font-weight:700;margin:0 0 8px 4px;text-shadow:0 1px 4px rgba(0,0,0,.45)}
+.sv-views svg{width:17px;height:17px;fill:none;stroke:#fff;stroke-width:1.8}
+#storyviewer.own .sv-views{display:flex}
+#storyviewer.own .sv-replyrow{display:none}
+#storyviewer.own .sv-actions{bottom:calc(58px + env(safe-area-inset-bottom))}
 /* v165: quick-reaction pill next to the story like button - emoji
    reactions are message content here (as in real story UIs), and a
    tap answers with the same rising burst as the heart, in emoji. */
@@ -2807,7 +2823,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v266</p>
+  <p class="ver">v267</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2997,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v266</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v267</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3135,6 +3151,7 @@ input,textarea{font-size:16px}
     <div class="sv-cap" id="sv-cap"></div>
     <div class="sv-pause" aria-hidden="true"><i></i><i></i></div>
     <div class="sv-actions"><div class="sv-reacts" id="sv-reacts"><button type="button" data-r="🔥" aria-label="すごい">🔥</button><button type="button" data-r="👏" aria-label="拍手">👏</button><button type="button" data-r="😮" aria-label="驚き">😮</button><button type="button" data-r="😍" aria-label="大好き">😍</button></div><button class="sv-like" id="sv-like" aria-label="いいね"><svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.3C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg></button></div>
+    <div class="sv-replybar"><div class="sv-views" id="sv-views"><svg viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg><span id="sv-views-n"></span></div><div class="sv-replyrow"><input id="sv-reply" type="text" autocomplete="off" enterkeyhint="send" placeholder="返信を送信…"><button class="sv-send" id="sv-send" aria-label="返信を送信"><svg viewBox="0 0 24 24"><path d="M21 3L10.2 13.8M21 3l-6.8 18-3.4-7.6L3 10z"/></svg></button></div></div>
     <button class="sv-zone left" id="sv-prev" aria-label="前へ"></button>
     <button class="sv-zone right" id="sv-next" aria-label="次へ"></button>
   </div>
@@ -3252,7 +3269,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v266</p>
+    <p class="ver">v267</p>
   </div>
 </section>
 </div>
@@ -4502,6 +4519,11 @@ function renderStorySeg(){
   segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
  const capEl=$("#sv-cap");if(capEl){capEl.textContent=e.cap||"";capEl.classList.remove("on");if(e.cap){void capEl.offsetWidth;capEl.classList.add("on");}}
  const lk=$("#sv-like");if(lk)lk.classList.remove("liked");$$("#storyviewer .sv-burst").forEach(x=>x.remove());$$("#sv-reacts button").forEach(x=>x.classList.remove("picked"));
+ /* v267: the bottom layer follows the owner - her own story
+    shows viewers instead of a reply field, like the real thing */
+ const vw=$("#storyviewer");if(vw)vw.classList.toggle("own",e.k==="nao");
+ const rp=$("#sv-reply");if(rp){rp.value="";rp.placeholder=a.n+"さんに返信…";const sb=$("#sv-send");if(sb)sb.classList.remove("on");}
+ if(e.k==="nao"){const vn=$("#sv-views-n");if(vn)vn.textContent=fmt(Math.max(3,Math.round(((S&&S.fol)||1)*0.16)))+"人が視聴";}
  if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(e.uid)){S.storySeen.push(e.uid);save();}}
  svElapsed=0;
 }
@@ -4554,7 +4576,25 @@ $$("#sv-reacts button").forEach(btn=>btn.addEventListener("click",e=>{e.stopProp
  $$("#sv-reacts button").forEach(x=>x.classList.toggle("picked",x===btn));
  const host=btn.closest(".sv-actions");if(!host)return;
  for(let i=0;i<5;i++){const s=document.createElement("span");s.className="sv-burst em";s.textContent=btn.dataset.r;s.style.setProperty("--bx",(Math.round(Math.random()*52)-40)+"px");s.style.setProperty("--br",(Math.round(Math.random()*36)-18)+"deg");s.style.animationDelay=(i*50)+"ms";s.style.right=(66+Math.round(Math.random()*44))+"px";host.appendChild(s);setTimeout(()=>s.remove(),1700);}}));
-document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains("on"))return;if(e.key==="Escape")closeStory();else if(e.key==="ArrowRight")svStep(1);else if(e.key==="ArrowLeft")svStep(-1);});
+document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains("on"))return;if(e.target&&e.target.id==="sv-reply")return;if(e.key==="Escape")closeStory();else if(e.key==="ArrowRight")svStep(1);else if(e.key==="ArrowLeft")svStep(-1);});
+/* v267: story replies work like the real viewer - typing pauses
+   the story, the send plane appears once there is text, and a
+   sent reply answers with the heart burst and a plain toast.
+   The text itself goes nowhere in the fiction (no thread is
+   touched and nothing is saved). */
+(function(){
+ const inp=$("#sv-reply"),snd=$("#sv-send");if(!inp||!snd)return;
+ const HEART='<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.3C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>';
+ inp.addEventListener("focus",()=>{svPaused=true;$("#storyviewer").classList.add("paused");});
+ inp.addEventListener("blur",()=>{svPaused=false;$("#storyviewer").classList.remove("paused");});
+ inp.addEventListener("input",()=>snd.classList.toggle("on",!!inp.value.trim()));
+ function send(){const v=inp.value.trim();if(!v)return;const e=storyList()[svIdx];const host=$("#sv-like")?$("#sv-like").parentElement:null;
+  if(host)for(let i=0;i<5;i++){const s=document.createElement("span");s.className="sv-burst";s.innerHTML=HEART;s.style.setProperty("--bx",(Math.round(Math.random()*44)-30)+"px");s.style.setProperty("--br",(Math.round(Math.random()*36)-18)+"deg");s.style.animationDelay=(i*45)+"ms";s.style.right=(8+Math.round(Math.random()*10))+"px";host.appendChild(s);setTimeout(()=>s.remove(),1600);}
+  inp.value="";snd.classList.remove("on");inp.blur();
+  toastChg((e&&ACC[e.k]?ACC[e.k].n+"さんに":"")+"返信を送りました");}
+ snd.addEventListener("click",e=>{e.stopPropagation();send();});
+ inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();send();}});
+})();
 /* ===== v76: photo viewer (white, real-device style) - entry points are
    post photos (openPostPhoto) and profile media grids (openMediaPhoto);
    the info block reuses the post's own author / text / counts. ===== */
