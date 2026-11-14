@@ -733,7 +733,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v29</p>
+  <p class="ver">v30</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -842,7 +842,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v29</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v30</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -954,7 +954,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v29</p>
+    <p class="ver">v30</p>
   </div>
 </section>
 </div>
@@ -984,16 +984,16 @@ input,textarea{font-size:16px}
 const ACC={
  hiroto:{n:"井汲大翔",h:"@193hiroto",av:"assets/ig-avatar.jpg"},
  nao:{n:"なお",h:"@nao_324",av:"assets/nao-avatar4.jpg"},
- miku:{n:"みく｜幼なじみ",h:"@miku_osana",av:"assets/av-miku.jpg"},
- staff:{n:"佐藤｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
- sora:{n:"そら｜音楽好き",h:"@sora_music",av:"assets/av-sora.jpg"},
- akari:{n:"あかり｜同期アイドル",h:"@akari_idol",av:"assets/av-akari.jpg"},
- sea:{n:"セア｜LUNARIS リーダー",h:"@sea_lunaris",av:"assets/av-sea.jpg"},
- mina:{n:"ミナ｜韓国ソロ歌手",h:"@mina_solo_kr",av:"assets/av-mina.jpg"},
- media:{n:"ミュージック番組公式",h:"@music_stage_tv",av:"assets/av-media.jpg"},
- matome:{n:"芸能まとめ速報",h:"@geinou_matome",av:"assets/av-matome.jpg"},
- fan1:{n:"ゆな｜なお推し1号",h:"@yuna_nao",av:"assets/av-fan1.jpg"},
- fan2:{n:"一般の通行人",h:"@tsukonin_jp",av:"assets/av-fan2.jpg"}
+ miku:{n:"佐倉みく",h:"@miku_osana",av:"assets/av-miku.jpg"},
+ staff:{n:"佐藤大輔｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
+ sora:{n:"青木そら",h:"@sora_music",av:"assets/av-sora.jpg"},
+ akari:{n:"伊達さゆり",h:"@sayuri_date",av:"assets/av-akari.jpg"},
+ sea:{n:"カリナ｜aespa リーダー",h:"@karina_aespa",av:"assets/av-sea.jpg"},
+ mina:{n:"ミナ｜TWICE",h:"@mina_twice",av:"assets/av-mina.jpg"},
+ media:{n:"『ライブステージ』公式",h:"@livestage_tv",av:"assets/av-media.jpg"},
+ matome:{n:"エンタメ速報＠まとめ",h:"@entame_sokuhou",av:"assets/av-matome.jpg"},
+ fan1:{n:"小林ゆな",h:"@yuna_nao",av:"assets/av-fan1.jpg"},
+ fan2:{n:"中村健太",h:"@tsukonin_jp",av:"assets/av-fan2.jpg"}
 };
 const WORLDS=[
  {id:"idol",t:"芸能界 ― アイドルワールド",d:"ステージと評判で、毎日が動く世界。",locked:false},
@@ -1008,14 +1008,14 @@ const STANCES=[
  {id:"cool",t:"クール・ミステリアス系",d:"言葉少なめ、世界観で魅せる。",bonus:"cog",bonusTx:"世間の認知度"},
  {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残す、天然タイプ。",bonus:"dist",bonusTx:"ひろとの距離"}];
 const FIRSTS=[
- {id:"sea",t:"セア｜韓国ガールズグループ「LUNARIS」のリーダー",d:"楽屋で挨拶したら、その場でフォローしてくれた。"},
- {id:"akari",t:"あかり｜同期デビューのソロアイドル",d:"同じ日にデビューした、ライバルであり戦友。"},
- {id:"mina",t:"ミナ｜韓国で活動する先輩ソロ歌手",d:"大先輩からの、フォロー第1号。"}];
+ {id:"sea",t:"カリナ｜韓国ガールズグループ「aespa」のリーダー",d:"楽屋で挨拶したら、その場でフォローしてくれた。"},
+ {id:"akari",t:"伊達さゆり｜同期デビューのアイドル",d:"同じ日にデビューした、ライバルであり戦友。"},
+ {id:"mina",t:"ミナ｜TWICEのメンバー、先輩アイドル",d:"大先輩からの、フォロー第1号。"}];
 /* welcome post each idol first-follower drops at the top of the Day 1 feed */
 const FIRST_WELCOME={
- sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。楽屋で聴いた歌声、ずっと頭に残ってます。また同じステージで会いましょう。",lk:842,rp:126,rc:37},
+ sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。楽屋で聴いた歌声、ずっと頭に残ってます。無理せず、自分のペースで。また同じステージで会いましょう。",lk:842,rp:126,rc:37},
  akari:{tx:"なお、デビューおめでとう！！ 同じ日デビューの同期として、負けないからね。……でも、ほんとにおめでとう。",lk:154,rp:23,rc:11},
- mina:{tx:"後輩のデビューは、いつも嬉しいものです。なおさん、応援しています。",lk:2314,rp:487,rc:96}};
+ mina:{tx:"デビュー、おめでとうございます。歌、聴きました。……静かに、応援しています。",lk:2314,rp:487,rc:96}};
 </script>
 <script>
 /* chapters: seed feed, post options, event, activity, fan DM */
@@ -1043,7 +1043,7 @@ choices:[
 {t:"記事を自画自賛気味に連投する",r:"熱量は伝わったけど「調子に乗ってる？」の声も。炎上の芽、小さく1つ。",fx:{fol:55,cog:6,xp:5,dist:0,flm:9}}]},
 activity:[
 {t:"デビュー曲のサビをアカペラで投稿する",who:["ひとりで"],r:"30秒のアカペラ動画。「生歌つよい」のコメントが付き始めた。",fx:{fol:35,cog:5,xp:10,dist:0,flm:0}},
-{t:"同期あかりの投稿にリプで絡みに行く",who:["あかり"],r:"あかり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
+{t:"同期さゆりの投稿にリプで絡みに行く",who:["さゆり"],r:"さゆり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
 {t:"大翔の新曲ポストに、感想リプをそっと置く",who:["井汲大翔"],r:"数百件のリプに埋もれたはず。……でも、その投稿のいいね欄に、後で自分の名前が残ることになる。",fx:{fol:5,cog:1,xp:6,dist:3,flm:2}}],
 dm:{who:"miku",msgs:["デビューおめでとう！！ 私、フォロワー1号だからね！？","X見てるよ。緊張してない？"],
 choices:[{t:"「ありがとう、1号は特別だよ」と返す",r:"みく「特別いただきました！！ 全力で布教するね」",fx:{fol:15,xp:4,dist:0,flm:0,cog:1}},
@@ -1074,17 +1074,17 @@ activity:[
 {t:"音楽番組の収録見学に行く（関係者席）",who:["ひとりで"],r:"ステージ袖から見る先輩たちの本番。大翔の歌い出しで、思わず息を止めた。いつか、あの並びに。",fx:{fol:0,cog:3,xp:12,dist:4,flm:0}},
 {t:"新曲の感想募集ポストに丁寧に返信して回る",who:["ファン"],r:"一人ひとりへの返信が「神対応の新人」と小さく話題に。",fx:{fol:55,cog:5,xp:8,dist:0,flm:0}},
 {t:"大翔が出る配信イベントを視聴して感想をポスト",who:["井汲大翔"],r:"感想ポスト、控えめなのに具体的に書いた。それが回り回って、本人の目に留まる距離まで届いた気がする。",fx:{fol:30,cog:4,xp:8,dist:5,flm:2}}],
-dm:{who:"akari",msgs:["なおー！ あかりだよ、同期の！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
-choices:[{t:"「行こ行こ！ あかりのステージも観たよ」と返す",r:"あかり「やった！ 推し同士みたいな同期になろ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
-{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"あかり「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
+dm:{who:"akari",msgs:["なおー！ さゆりだよ、同期の！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
+choices:[{t:"「行こ行こ！ さゆりのステージも観たよ」と返す",r:"さゆり「やった！ 推し同士みたいな同期になろ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
+{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"さゆり「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
 {day:"Day 3 ― 同じ番組の日",
-banner:"音楽番組『ミュージック・ステージ』収録日。出演者リストに、大翔と、なお。同じ紙に名前が載った。",
+banner:"音楽番組『ライブステージ』収録日。出演者リストに、大翔と、なお。同じ紙に名前が載った。",
 seed:[
-{a:"media",tx:"今夜の『ミュージック・ステージ』出演：井汲大翔、あかり、新人・なお ほか。お楽しみに！",lk:3210,rp:640,rc:98},
+{a:"media",tx:"今夜の『ライブステージ』出演：井汲大翔、伊達さゆり、新人・なお ほか。お楽しみに！",lk:3210,rp:640,rc:98},
 {a:"fan1",tx:"なおちゃんテレビ出演！！ 録画予約した！！",lk:88,rp:12,rc:5},
 {a:"hiroto",tx:"今日は収録です。頑張ります。",lk:9870,rp:1502,rc:233}],
 posts:[
-{tx:"本日『ミュージック・ステージ』に出演します。\n初めての歌番組、緊張で手が冷たいです。でも歌う時は、ちゃんと届けます。見てくれたら嬉しいです。",img:"assets/nao-stage.jpg",fx:{fol:160,cog:12,xp:10,dist:2,flm:0},react:[
+{tx:"本日『ライブステージ』に出演します。\n初めての歌番組、緊張で手が冷たいです。でも歌う時は、ちゃんと届けます。見てくれたら嬉しいです。",img:"assets/nao-stage.jpg",fx:{fol:160,cog:12,xp:10,dist:2,flm:0},react:[
 {a:"fan1",tx:"なおちゃんのテレビ初歌唱、泣いた。手冷たいって言ってたのに声は全然震えてなかった。",lk:210,rp:34,rc:11},
 {a:"media",tx:"新人・なお、初出演で生歌唱を披露。堂々としたステージに反響が届いています。",lk:430,rp:66,rc:14}]},
 {tx:"収録終わりました。同じ番組に憧れの先輩がいて、背筋が伸びる思いでした。いつか「共演」と言える日が来るように。",img:"assets/nao-backstage-selfie.jpg",fx:{fol:130,cog:10,xp:10,dist:6,flm:3},react:[
@@ -1165,7 +1165,7 @@ choices:[
 {t:"「伝言、スタッフ経由で聞きました。直接いただけて嬉しいです」と返す",r:"「伝えてくれてたんですね」「また同じ番組、出られたら」――それで終わり。なのに、一日中そわそわした。",fx:{dist:12,xp:8,fol:0,cog:0,flm:0}},
 {t:"緊張して、丁寧すぎる長文を送ってしまう",r:"しまった、と思った直後。「大丈夫ですよ」「無理せんとで」関西弁の、やわらかい一言。距離が、少しだけ縮んだ音がした。",fx:{dist:9,xp:6,fol:0,cog:0,flm:1}}]};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 新曲","58,910 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#プリン被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
-const STORY=[["hiroto","井汲大翔"],["akari","あかり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+const STORY=[["hiroto","井汲大翔"],["akari","伊達さゆり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
 </script>
 <script>
 "use strict";
@@ -1225,7 +1225,7 @@ let selH=null,selSt=null,selF=null,selW=null;
 function renderOpts(el,items,gt,gd,cb,gc){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>"+(gc?'<span class="chip"></span>':"");b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);if(gc)b.querySelector(".chip").textContent=gc(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
-(function(){const box=$("#firsts");if(!box)return;const FV={sea:["LUNARIS","リーダー","韓国活動"],akari:["同期デビュー","ソロアイドル"],mina:["先輩ソロ歌手","韓国活動"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
+(function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["同期デビュー","アイドル"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
@@ -1233,7 +1233,7 @@ $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-first
 $("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);
  const w=FIRST_WELCOME[S.first];
  if(w){const wp=mkPost(S.first,w.tx,w.lk,w.rp,w.rc,false);S.posts.unshift(wp);
-  if(S.first==="mina")S.notifs.unshift({a:"matome",tx:"が「先輩ソロ歌手・ミナが新人なおを初フォロー」と報じました",sub:"最初のフォロワー ― メディアがざわついた"});
+  if(S.first==="mina")S.notifs.unshift({a:"matome",tx:"が「TWICE・ミナが新人なおを初フォロー」と報じました",sub:"最初のフォロワー ― メディアがざわついた"});
   renderFeed();renderNotifs();save();}
  show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
 /* fx + Changes (Status addition) */
@@ -1482,7 +1482,7 @@ $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 /* trends + search */
 function trendEl(t,rank){const d=document.createElement("div");d.className="trend"+(rank===0?" top":"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small></div><span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);TRENDS.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i)));
- const sug=$("#x-sug");sug.innerHTML="";["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ミュージック・ステージ"].forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
+ const sug=$("#x-sug");sug.innerHTML="";["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ライブステージ"].forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
