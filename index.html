@@ -2390,6 +2390,37 @@ input,textarea{font-size:16px}
 .ss-row b.unset{color:#6d767e;font-weight:600}
 /* v145: the HUD level chip carries the rank title next to the number */
 .hud-lv-t{font-size:10.5px;font-weight:800;margin-left:6px;opacity:.72;letter-spacing:.04em}
+/* ===== v146: my profile recomposed as an artist page - the cover
+   becomes a stage (taller, with a ghost NAO masthead and the day /
+   level chips as glass pills along the top), the name row carries
+   the rank title as a gold plate, the avatar gets the gradient ring,
+   and the reputation panel flips from a light card to a dark PRESS
+   block so the page reads cover -> identity -> press -> status.
+   Every id, value and renderer is untouched; his profile is out of
+   scope (all rules are #x-pane-me-scoped). ===== */
+#x-pane-me .pf-cover{height:198px;background-position:center 12%}
+#x-pane-me .pf-cover::after{background:linear-gradient(180deg,rgba(10,8,28,.28) 0%,rgba(10,8,28,0) 34%,rgba(10,8,28,.18) 62%,rgba(10,8,28,.66) 100%)}
+#x-pane-me .pf-covstat{left:14px;bottom:auto;top:12px}
+#x-pane-me .pf-covstat span{background:rgba(13,10,30,.48);border-color:rgba(255,255,255,.65);padding:5px 11px}
+.pf-covname{position:absolute;right:12px;bottom:0;z-index:1;font-size:74px;font-weight:900;font-style:italic;line-height:.95;letter-spacing:.01em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.4);pointer-events:none}
+#x-pane-me .pf-cover-chip{bottom:auto;top:12px;right:12px}
+#x-pane-me .pf-ava{box-sizing:border-box;padding:3px;background:linear-gradient(135deg,#f6d67c,#f91880 55%,#7856ff);border-radius:50%;box-shadow:0 10px 26px rgba(120,40,120,.35)}
+#x-pane-me .pf-name{font-size:23px}
+.pf-rank{flex:none;font-size:11px;font-weight:900;letter-spacing:.1em;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:999px;padding:4px 11px;box-shadow:0 3px 10px rgba(247,201,72,.4)}
+#x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
+#x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
+#x-pane-me .rep-lab{color:#f7c948}
+#x-pane-me .rep-title{background:none;border-radius:0;padding:0;font-size:19px;line-height:1.4;color:#fff;box-shadow:none}
+#x-pane-me .rep-quote{color:#c9bfe8}
+#x-pane-me .rep-m-lab{color:#a99fd0}
+#x-pane-me .rep-m-val{color:#fff}
+#x-pane-me .rep-fol-h{color:#a99fd0}
+#x-pane-me .rep-fol-h b{color:#fff}
+#x-pane-me .rep-bar small{color:#9aa7c7}
+#x-pane-me .rep-bar b{color:#fff}
+#x-pane-me .me-seclab{color:#6d5aa8}
+#x-pane-me .me-seclab::before{content:"";flex:none;width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,#f7c948,#f91880)}
+#x-pane-me .statbox.distbox{border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(120deg,#f91880,#7856ff) border-box}
 /* ===== v144: DM thread, second raise - opening a conversation now
    cascades the history in (top to bottom, capped) instead of every
    bubble popping at once, and the reply dock reads as a dock: a
@@ -2436,7 +2467,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v145</p>
+  <p class="ver">v146</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2568,10 +2599,10 @@ input,textarea{font-size:16px}
     </div>
     <div id="x-pane-me" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div></div>
-      <div class="pf-cover"><div class="pf-covstat"><span id="me-cov-day">DAY 1 / 6</span><span id="me-cov-lv">Lv 1</span></div><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
+      <div class="pf-cover"><div class="pf-covstat"><span id="me-cov-day">DAY 1 / 6</span><span id="me-cov-lv">Lv 1</span></div><span class="pf-covname" aria-hidden="true">NAO</span><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
-        <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
+        <div class="pf-name">なお<span class="pf-badge-off">公式</span><span class="pf-rank" id="me-rank">新人</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_324</div>
         <div style="font-size:14px;line-height:1.65;margin-top:6px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
         <div class="counts" style="display:flex;gap:22px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
@@ -2603,7 +2634,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v145</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v146</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2842,7 +2873,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v145</p>
+    <p class="ver">v146</p>
   </div>
 </section>
 </div>
@@ -4616,7 +4647,7 @@ function renderProfile(){if(!S||!S.started)return;
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=lvNum()+"・"+lvTitle();
  const lvN=1+Math.floor(S.xp/50),usedN=[S.posted,S.evDone,S.actDone].filter(Boolean).length,setT=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- setT("#me-cov-day","DAY "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-now-act","残り "+(3-usedN));
+ setT("#me-cov-day","DAY "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-now-act","残り "+(3-usedN));setT("#me-rank",lvTitle(lvN));
  renderRep();renderHud();}
 /* v44: reputation - how the world currently sees her, derived from the axes */
 function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
