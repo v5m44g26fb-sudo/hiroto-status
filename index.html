@@ -768,6 +768,33 @@ input,textarea{font-size:16px}
    in-flow stack (nav 64px + actbar ~58px + 16px air). */
 #threadbar{display:none;flex:none;background:#fff;border-top:1px solid #eff3f4;padding:10px 14px}
 #thread-replies{padding-bottom:14px}
+/* ===== v44: reputation panel on the own profile (how the world sees her) =====
+   Qualitative layer over the raw numbers in the stat grid above it: a title
+   badge derived from cog/flm/dist/fol, one line of "the world's voice",
+   word-labelled gauges, and a follower-history bar chart fed by the
+   day-start snapshots in S.folHist. Profile-only; never on the title screen. */
+.reppanel{margin:14px 14px 2px;padding:15px 15px 13px;border-radius:20px;background:#fff;border:1px solid #e8edf0;box-shadow:0 8px 22px rgba(15,20,25,.07)}
+.rep-head{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.rep-lab{font-size:10.5px;font-weight:900;letter-spacing:.12em;color:#8a94a6}
+.rep-title{font-size:13.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#1d9bf0,#7856ff);border-radius:999px;padding:4px 12px}
+.rep-title.hot{background:linear-gradient(90deg,#f91880,#7856ff)}
+.rep-title.fire{background:linear-gradient(90deg,#f4212e,#ff7a1a)}
+.rep-quote{margin:10px 0 2px;font-size:13px;line-height:1.65;color:#3d4750}
+.rep-meter{display:flex;align-items:center;gap:9px;margin-top:9px}
+.rep-m-lab{flex:none;width:44px;font-size:12px;font-weight:800;color:#536471}
+.rep-gauge{flex:1;height:8px;border-radius:99px;background:#eff3f4;overflow:hidden}
+.rep-gauge i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#1d9bf0,#7856ff);transition:width .4s ease}
+.rep-meter.fire .rep-gauge i{background:linear-gradient(90deg,#ff7a1a,#f4212e)}
+.rep-m-val{flex:none;font-size:12px;font-weight:800;color:#0f1419;min-width:86px;text-align:right}
+.rep-fol-h{display:flex;align-items:baseline;justify-content:space-between;margin-top:14px}
+.rep-fol-h span{font-size:12px;font-weight:800;color:#536471}
+.rep-fol-h b{font-size:12px;color:#f91880}
+.rep-bars{display:flex;align-items:flex-end;gap:8px;height:64px;margin-top:8px;padding:0 2px}
+.rep-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
+.rep-bar i{display:block;width:100%;max-width:34px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#f91880,#7856ff);min-height:5px}
+.rep-bar.now i{background:linear-gradient(180deg,#ffd400,#f91880)}
+.rep-bar small{font-size:10px;color:#8a94a6;font-weight:700}
+.rep-bar b{font-size:10.5px;color:#0f1419}
 </style>
 </head>
 <body>
@@ -782,7 +809,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v43</p>
+  <p class="ver">v44</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -893,10 +920,18 @@ input,textarea{font-size:16px}
         <div class="statbox"><small>XP（レベル <span id="st-lv">1</span>）</small><b id="st-xp">0</b></div>
         <div class="statbox"><small>炎上度</small><b id="st-flm">0</b></div>
       </div>
+      <div class="reppanel">
+        <div class="rep-head"><span class="rep-lab">世間の評価 ― REPUTATION</span><span class="rep-title" id="rep-title">デビューしたての新人</span></div>
+        <p class="rep-quote" id="rep-quote"></p>
+        <div class="rep-meter"><span class="rep-m-lab">認知度</span><div class="rep-gauge"><i id="rep-cog-g"></i></div><b class="rep-m-val" id="rep-cog-t"></b></div>
+        <div class="rep-meter fire"><span class="rep-m-lab">炎上度</span><div class="rep-gauge"><i id="rep-flm-g"></i></div><b class="rep-m-val" id="rep-flm-t"></b></div>
+        <div class="rep-fol-h"><span>フォロワーの推移</span><b id="rep-fol-d"></b></div>
+        <div class="rep-bars" id="rep-bars"></div>
+      </div>
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v43</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v44</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1009,7 +1044,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v43</p>
+    <p class="ver">v44</p>
   </div>
 </section>
 </div>
@@ -1510,7 +1545,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[]};}
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[]};}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -1874,6 +1909,8 @@ function renderEvent(){
 /* chapter flow */
 function startChapter(n){
  S.ch=n;S.posted=false;S.evDone=false;S.actDone=false;
+ if(!S.folHist)S.folHist=[];
+ const fh=S.folHist.find(e=>e.day===n);if(fh)fh.fol=S.fol;else S.folHist.push({day:n,fol:S.fol});
  const ch=curCH()[n-1];
  const seeds=ch.seed.map(p=>{const o=mkPost(p.a,p.tx,p.lk,p.rp,p.rc,false,p.img);return o;});
  if(n===1){const hp=seeds.find(p=>p.a===tgtKey());if(hp&&!hp.img)hp.img=tgt().cover;}
@@ -2015,7 +2052,36 @@ function renderProfile(){if(!S||!S.started)return;
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
- $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);renderHud();}
+ $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);renderRep();renderHud();}
+/* v44: reputation - how the world currently sees her, derived from the axes */
+function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
+ if(f>=55)return{t:"炎上の渦中",cls:"fire",q:"まとめ垢の見出しに名前が躍る毎日。歌より先に、騒ぎの方が届いてしまう。"};
+ if(f>=35)return{t:"匂わせ疑惑の渦中",cls:"fire",q:"「偶然にしては多すぎる」――界隈の探偵たちが、投稿の細部を検証している。"};
+ if(d>=30&&f>=15)return{t:"あの先輩との距離が噂の新人",cls:"hot",q:"「距離、近くない？」ファンのざわつきが、少しずつ表に出てきた。"};
+ if(c>=55&&f<20)return{t:"実力派として話題の新人",cls:"hot",q:"「生歌つよい」――切り抜き経由で見つかる人が続出。歌で殴るタイプ、と見られている。"};
+ if(c>=35)return{t:"話題の新人",cls:"hot",q:"メディアの新人特集に名前が載り始めた。界隈の外にも、届き始めてる。"};
+ if(fo>=250)return{t:"じわ伸び中の注目株",cls:"hot",q:"バズではない。でも毎日、確実に増えている。見つかる直前の空気。"};
+ if(c>=15)return{t:"界隈で噂の新人",cls:"",q:"音楽垢の間で、少しずつ名前が出るようになった。まだ界隈の中の話。"};
+ return{t:"デビューしたての新人",cls:"",q:"世間はまだ、なおのことを知らない。どう見つかるかは、ここからの投稿次第。"};}
+function cogWord(c){return c>=70?"メディアの常連候補":c>=50?"新人特集に名前が載る":c>=35?"界隈の外にも届き始めた":c>=20?"音楽垢の間で話題":c>=10?"見つかる直前":"まだ無名";}
+function flmWord(f){return f>=55?"炎上中":f>=40?"騒ぎが大きい":f>=28?"ざわつきが目立つ":f>=15?"小さな火種あり":f>=5?"ほぼ平和":"平和";}
+function renderRep(){if(!S||!S.started)return;const tt=$("#rep-title");if(!tt)return;const T=repTitle();
+ tt.textContent=T.t;tt.className="rep-title"+(T.cls?" "+T.cls:"");
+ $("#rep-quote").textContent=T.q;
+ $("#rep-cog-g").style.width=S.cog+"%";$("#rep-cog-t").textContent=cogWord(S.cog);
+ $("#rep-flm-g").style.width=S.flm+"%";$("#rep-flm-t").textContent=flmWord(S.flm);
+ const pts=((S.folHist)||[]).slice();
+ if(!pts.length||pts[pts.length-1].fol!==S.fol)pts.push({day:S.ch,fol:S.fol,now:true});
+ const max=Math.max(1,...pts.map(e=>e.fol));
+ const box=$("#rep-bars");box.innerHTML="";
+ pts.forEach(e=>{const w=document.createElement("div");w.className="rep-bar"+(e.now?" now":"");
+  const v=document.createElement("b");v.textContent=fmt(e.fol);
+  const bar=document.createElement("i");bar.style.height=Math.max(8,Math.round(e.fol/max*100))+"%";
+  const l=document.createElement("small");l.textContent="Day "+e.day;
+  w.appendChild(v);w.appendChild(bar);w.appendChild(l);box.appendChild(w);});
+ const dEl=$("#rep-fol-d");
+ if(pts.length>1){const diff=S.fol-pts[0].fol;dEl.textContent="デビュー時 "+fmt(pts[0].fol)+" → 現在 "+fmt(S.fol)+"（+"+fmt(diff)+"）";}
+ else dEl.textContent="現在 "+fmt(S.fol)+" 人";}
 function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50),inLv=(S.xp||0)%50;
  const el=id=>$(id);if(el("#hud-lv"))el("#hud-lv").textContent="Lv "+lv;
  if(el("#hud-xptext"))el("#hud-xptext").textContent=inLv+" / 50（累計 "+S.xp+" XP）";
