@@ -2755,7 +2755,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v205</p>
+  <p class="ver">v206</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2923,7 +2923,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v205</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v206</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3192,7 +3192,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v205</p>
+    <p class="ver">v206</p>
   </div>
 </section>
 </div>
@@ -4063,8 +4063,10 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
  bell:'<svg class="ic-f" viewBox="0 0 24 24"><path d="M12 2.9a6.1 6.1 0 0 1 6.1 6.1v4.2l1.7 3.4c.25.45-.1.9-.6.9H4.8c-.5 0-.85-.45-.6-.9L5.9 13.2V9A6.1 6.1 0 0 1 12 2.9zM9.7 19.1h4.6a2.3 2.3 0 0 1-4.6 0z"/></svg>',
  mail:'<svg class="ic-f" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 4h16c.6 0 1 .4 1 1v14c0 .6-.4 1-1 1H4c-.6 0-1-.4-1-1V5c0-.6.4-1 1-1zm-1 1 9 8L21 5H3z"/></svg>'};
  const mk=(ic,pane,fn)=>{const b=document.createElement("button");b.type="button";b.dataset.pane=pane;b.innerHTML=ICN[ic].replace("<svg",'<svg class="ic-l"')+(ICF[ic]||"");b.addEventListener("click",fn);nav.appendChild(b);return b;};
- mk("home","home",()=>showPane("tl"));
- mk("search","search",()=>{showPane("search");const q=$("#x-q");if(q)q.focus();});
+ /* v206: re-tapping the nav icon of the pane you are already on
+    rides the scroller back to the top, like the real thing */
+ mk("home","home",()=>{if(curPane==="tl"){$("#x-scroll").scrollTo({top:0,behavior:"smooth"});return;}showPane("tl");});
+ mk("search","search",()=>{if(curPane==="search"){$("#x-scroll").scrollTo({top:0,behavior:"smooth"});return;}showPane("search");const q=$("#x-q");if(q)q.focus();});
  mk("bell","notif",()=>toggleNotif());
  const dmBtn=mk("mail","msg",()=>showPane("msg"));
  const bd=document.createElement("span");bd.className="bdg";bd.id="dm-bdg";bd.textContent="!";dmBtn.appendChild(bd);
