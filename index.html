@@ -363,6 +363,29 @@ input,textarea{font-size:16px}
 .evcard{border-radius:20px;padding:18px 16px;box-shadow:0 16px 38px rgba(180,140,0,.28);position:relative;overflow:hidden}
 .evcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 .evcard h3{font-size:18px}
+/* ===== v20: my-profile overhaul (cover / avatar / status panel / segmented tabs / media) ===== */
+#x-pane-me .pf-cover{position:relative;height:138px;background:url(assets/nao-promo.jpg) center 22%/cover}
+#x-pane-me .pf-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,28,0) 42%,rgba(10,8,28,.55) 100%)}
+#x-pane-me .pf-cover-chip{position:absolute;right:12px;bottom:10px;z-index:1;font-size:10px;font-weight:800;letter-spacing:.14em;color:#fff;background:rgba(15,20,25,.55);border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:4px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#x-pane-me .pf-ava{width:84px!important;height:84px!important;margin-top:-42px;border:4px solid #fff;box-shadow:0 8px 22px rgba(15,20,25,.28),0 0 0 3px rgba(249,24,128,.55)}
+#x-pane-me .pf-name{font-size:21px;font-weight:900;margin-top:8px;display:flex;align-items:center;gap:7px}
+#x-pane-me .pf-badge-off{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#fff;background:linear-gradient(90deg,#f91880,#7856ff);border-radius:999px;padding:3px 9px}
+#x-pane-me .counts{margin-top:11px;display:flex;gap:22px}
+#x-pane-me .counts span{font-size:13.5px;color:#536471}
+#x-pane-me .counts b{font-size:15px}
+#x-pane-me .statgrid{margin:14px 14px 2px;padding:14px;border-radius:20px;background:linear-gradient(135deg,#171d38 0%,#0f1420 58%,#1c1030 100%);box-shadow:0 10px 26px rgba(15,18,48,.30),inset 0 1px 0 rgba(255,255,255,.09)}
+#x-pane-me .statgrid .statbox{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#eef1f6}
+#x-pane-me .statgrid .statbox small{color:#a7b0c4}
+#x-pane-me .statgrid .statbox.distbox{border-color:rgba(249,24,128,.55);background:rgba(249,24,128,.14)}
+#x-pane-me .statgrid .gauge{background:rgba(255,255,255,.14)}
+#x-pane-me .x-ptabs{margin:14px 14px 0;padding:0;border-bottom:none;background:transparent;gap:5px}
+#x-pane-me .x-ptabs button{flex:1;background:#eef2f4;border-radius:999px;padding:9px 0;font-size:13.5px}
+#x-pane-me .x-ptabs button.act{background:#0f1419;color:#fff;box-shadow:0 4px 12px rgba(15,20,25,.25)}
+#x-pane-me .x-ptabs button.act::after{display:none}
+#x-pane-me .mediagrid{gap:3px;padding:3px 3px 0}
+#x-pane-me .mediagrid img{border-radius:12px;transition:transform .12s ease,opacity .12s ease}
+#x-pane-me .mediagrid img:active{transform:scale(.96);opacity:.85}
+#x-pane-me .editbtn{box-shadow:0 3px 12px rgba(15,20,25,.12);padding:9px 18px}
 </style>
 </head>
 <body>
@@ -375,7 +398,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v19</p>
+  <p class="ver">v20</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -466,10 +489,10 @@ input,textarea{font-size:16px}
     </div>
     <div id="x-pane-me" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div></div>
-      <div style="height:96px;background:url(assets/nao-promo.jpg) center 25%/cover"></div>
+      <div class="pf-cover"><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
       <div style="padding:0 14px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar" src="assets/nao-avatar4.jpg" width="62" height="62" style="margin-top:-28px;border:3px solid #fff" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
-        <div style="font-size:18px;font-weight:900;margin-top:4px">なお</div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
+        <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_official</div>
         <div style="font-size:13px;margin-top:5px" id="prof-bio">ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
@@ -484,7 +507,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v19</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v20</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -577,7 +600,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v19</p>
+  <p class="ver">v20</p>
 </section>
 </div>
 <div id="changes"></div>
