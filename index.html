@@ -1128,6 +1128,9 @@ input,textarea{font-size:16px}
 .drs-sub small{display:block;font-size:9.5px;font-weight:800;color:#536471;white-space:nowrap;overflow:hidden}
 .drs-sub b{font-size:16.5px;font-weight:900;font-variant-numeric:tabular-nums}
 .drs-best{margin-top:10px;font-size:12px;font-weight:800;color:#7c2d5e;background:rgba(249,24,128,.09);border-radius:10px;padding:7px 11px}
+.drs-copy{display:block;margin:12px auto 0;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .15s ease,transform .1s ease}
+.drs-copy:active{transform:scale(.96)}
+.drs-copy.done{background:rgba(23,191,99,.25);border-color:rgba(23,191,99,.6)}
 .drs-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid rgba(15,20,25,.08);font-size:10px;font-weight:800;color:#8a94a6}
 .drs-dots{display:inline-flex;gap:4px}
 .drs-dots i{width:6px;height:6px;border-radius:50%;background:rgba(15,20,25,.16)}
@@ -2772,7 +2775,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v194</p>
+  <p class="ver">v195</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2944,7 +2947,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v194</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v195</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3151,6 +3154,7 @@ input,textarea{font-size:16px}
         <div class="drs-best" id="drs-best"></div>
         <div class="drs-foot"><span>デビューしたら、彼と同じステージの件</span><span class="drs-dots" id="drs-dots"></span></div>
       </div>
+      <button class="drs-copy" id="drs-copy" type="button">結果をテキストでコピー</button>
       <p class="dr-note" id="dr-note"></p>
       <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
@@ -3211,7 +3215,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v194</p>
+    <p class="ver">v195</p>
   </div>
 </section>
 </div>
@@ -5359,6 +5363,7 @@ function dayDeltas(){const agg={fol:0,xp:0,cog:0,flm:0,dist:0};let lvup=0;const 
 function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
  function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3),v=Math.round(from+(to-from)*e);el.textContent=useFmt?fmt(v):String(v);if(p<1)requestAnimationFrame(step);}
  requestAnimationFrame(step);}
+let drsText="";
 function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
  $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT";
@@ -5411,6 +5416,9 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  shSet("#drs-distlab",distLab());
  const shDots=$("#drs-dots");if(shDots){shDots.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";shDots.appendChild(i);}}
  shSet("#drs-best",bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
+ /* v195: the same summary as copyable text for the button under
+    the card (built from the very values the card just showed) */
+ drsText="『デビューしたら、彼と同じステージの件』DAY "+S.ch+" RESULT\nフォロワー "+fmt(S.fol)+"（"+(agg.fol>=0?"+":"−")+fmt(Math.abs(agg.fol))+"）\nLv "+lvNum()+"・"+lvTitle()+" ／ 認知度 "+S.cog+" ／ "+distLab()+" "+S.dist+"\n"+(bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
  $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
  /* v104: the go button reads as a destination bar - main label plus the
     next chapter's own day line, read from the chapter data. */
@@ -5419,6 +5427,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
  $("#dayresult").classList.add("on");}
 $("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}});
+$("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
 /* v58: the target as a "special person" - distance is staged, and both his
    profile and the special DM thread read the current stage. Unlocking his
    DM gets a one-shot celebration the first time the message pane is opened
