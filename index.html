@@ -1887,6 +1887,8 @@ input,textarea{font-size:16px}
 #x-search-results .folrow .avatar,#x-search-results .folrow .ava-txt{width:48px;height:48px;font-size:18px}
 .srise{animation:folrise .3s ease both}
 .srch-more{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:#fff;border:none;border-bottom:1px solid #f4f6f7;font-family:inherit;font-size:13.5px;font-weight:800;color:#7856ff;cursor:pointer}
+.srch-trend-door{display:block;margin:2px auto 20px;background:#0f1419;border:none;color:#fff;font-family:inherit;font-size:13.5px;font-weight:800;border-radius:999px;padding:10px 22px;cursor:pointer}
+.srch-trend-door:active{transform:scale(.96)}
 .srch-more:active{background:#f7f4ff}
 /* pre-existing, found in this pass's audit: once the clear button
    appears, the appbar search bar could not shrink below its content
@@ -2783,7 +2785,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v218</p>
+  <p class="ver">v219</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2956,7 +2958,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v218</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v219</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3225,7 +3227,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v218</p>
+    <p class="ver">v219</p>
   </div>
 </section>
 </div>
@@ -5045,7 +5047,12 @@ function runSearch(){const q=$("#x-q").value.trim();if(!q)return;srchActive=true
   if(accKeys.length>3){const more=document.createElement("button");more.className="srch-more";more.textContent="すべてのアカウントを見る（"+accKeys.length+"件）";more.addEventListener("click",()=>{accKeys.slice(3).forEach(addAcc);more.remove();});aw.appendChild(more);}}
  if(hits.length){const pth=tabHead("ポスト",hits.length+" 件");box.appendChild(pth);srchParts.postHead=pth;hits.forEach(p=>{const el=postEl(p,false);el.dataset.hasimg=p.img?"1":"";srchParts.postEls.push(el);hlMarks(el.querySelector(".nm"),toks);hlMarks(el.querySelector(".tx"),toks);const qt=el.querySelector(".qt-tx");if(qt)hlMarks(qt,toks);rise(el);box.appendChild(el);});}
  const mnote=document.createElement("div");mnote.className="srch-mnote hidden";mnote.textContent="写真つきのポストは見つからなかった";box.appendChild(mnote);srchParts.mediaNote=mnote;
- if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
+ if(!accKeys.length&&!hits.length){box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));
+  /* v219: the no-hit state's own advice is a door - one tap to
+     the trend tab it points at */
+  const tb=document.createElement("button");tb.type="button";tb.className="srch-trend-door";tb.textContent="トレンドを見る ›";
+  tb.addEventListener("click",()=>{renderSearchTab("trend");const st=document.querySelector('#x-stabs [data-stab="trend"]');if(st)st.scrollIntoView({block:"nearest",inline:"center"});});
+  box.appendChild(tb);}$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-hist-clear").addEventListener("click",()=>{srchHist=[];renderSrchHist();});
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
