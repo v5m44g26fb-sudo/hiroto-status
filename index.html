@@ -1196,6 +1196,23 @@ input,textarea{font-size:16px}
 #tl-posts.feed-in .post:nth-child(4){animation-delay:.15s}
 #tl-posts.feed-in .post:nth-child(n+5){animation-delay:.2s}
 @keyframes feedin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* ===== v127: HOME redesigned as one screen - the chapter banner
+   and the player card fuse into a single STAGE block (the card
+   overlaps the banner's lower edge), the stories move below the
+   stage under their own section header on a tinted band, the MAIN
+   QUEST card goes full-bleed as a banner band, and the feed gets a
+   section header of its own. The stories block physically moves
+   below the stage in the markup (ids, contents, numbers and
+   destinations are all unchanged). ===== */
+#daybanner{margin:12px 12px 0;border-radius:22px 22px 8px 8px;padding:17px 18px 34px}
+#status-hud{margin:-20px 12px 0;z-index:3}
+.sec-lab{display:flex;align-items:center;gap:8px;padding:18px 16px 0;font-size:11px;font-weight:900;letter-spacing:.16em;color:#7c8698}
+.sec-lab i{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#7856ff,#f91880);flex:none}
+.sec-lab span{font-size:11px;font-weight:700;letter-spacing:.06em;color:#a6aebd}
+.sec-lab::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#e4e7f0,rgba(228,231,240,0))}
+#stories{background:linear-gradient(180deg,#f8f6fd,#fdfdff);border-top:1px solid #efedf7;border-bottom:1px solid #efedf7;margin-top:10px;padding:12px 14px}
+#eventslot .evcard{margin:16px 0 0;border-radius:0;border-left:none;border-right:none;padding:22px 18px 19px}
+#tl-posts{border-top:none;margin-top:10px}
 /* ===== v89: quote cards and repost headers, built to real X. The game
    had no quote rendering at all; postEl now embeds a quote card when
    one is derivable from existing data (see qtDerive) - bordered card,
@@ -2190,7 +2207,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v126</p>
+  <p class="ver">v127</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2261,7 +2278,6 @@ input,textarea{font-size:16px}
         <button data-htab="rec" class="act">おすすめ</button>
         <button data-htab="fol">フォロー中</button>
       </div>
-      <div id="stories"></div>
       <div id="daybanner">
         <img class="db-bg" id="db-bg" alt="" aria-hidden="true">
         <span class="db-big" id="db-big" aria-hidden="true">1</span>
@@ -2297,7 +2313,10 @@ input,textarea{font-size:16px}
         </div>
         <div class="hud-note" id="hud-note">投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。</div>
       </div>
+      <div class="sec-lab sec-stories"><i></i>STORIES<span>みんなの今</span></div>
+      <div id="stories"></div>
       <div id="eventslot"></div>
+      <div class="sec-lab sec-tl"><i></i>TIMELINE<span>タイムライン</span></div>
       <div id="tl-posts"></div>
     </div>
     <div id="x-pane-trend" style="display:none"></div>
@@ -2345,7 +2364,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v126</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v127</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2556,7 +2575,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v126</p>
+    <p class="ver">v127</p>
   </div>
 </section>
 </div>
