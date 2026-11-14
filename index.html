@@ -2363,6 +2363,31 @@ input,textarea{font-size:16px}
 #x-pane-me .pf-ava{width:88px!important;height:88px!important;margin-top:-44px}
 #x-pane-me .pf-name,#x-pane-hisprof .pf-name{margin-top:10px;letter-spacing:.01em}
 #x-pane-me .counts,#x-pane-hisprof .counts{margin-top:12px;padding-top:12px;border-top:1px solid #eff3f4}
+/* ===== v143: intro flow, second raise - every step now enters with a
+   staggered rise (the screen's own .on animation only faded the whole
+   step at once), steps 3-4 carry a recap note of the choices made so
+   far, step 4 ends with a YOUR SETUP summary card the picks fill in
+   live, and the CTAs name the current pick. Flow, options, data and
+   the start sequence are exactly as before. ===== */
+@keyframes setupin{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+.screen.intro.on .setup>*:not(.setup-ghost){animation:setupin .5s cubic-bezier(.22,.9,.3,1) both}
+.screen.intro.on .setup>*:nth-child(2){animation-delay:.03s}
+.screen.intro.on .setup>*:nth-child(3){animation-delay:.07s}
+.screen.intro.on .setup>*:nth-child(4){animation-delay:.11s}
+.screen.intro.on .setup>*:nth-child(5){animation-delay:.15s}
+.screen.intro.on .setup>*:nth-child(6){animation-delay:.19s}
+.screen.intro.on .setup>*:nth-child(7){animation-delay:.23s}
+.screen.intro.on .setup>*:nth-child(8){animation-delay:.27s}
+.screen.intro.on .setup>*:nth-child(9){animation-delay:.31s}
+.screen.intro.on .setup>*:nth-child(10){animation-delay:.35s}
+.screen.intro.on .setup>*:nth-child(11){animation-delay:.39s}
+.setup-sum{border:1px solid rgba(255,255,255,.18);border-radius:18px;background:rgba(255,255,255,.045);padding:15px 17px 7px;margin:4px 0 16px;position:relative;overflow:hidden}
+.setup-sum::before{content:"";position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.ss-head{font-size:9.5px;font-weight:800;letter-spacing:.3em;color:#9aa3ab;margin-bottom:9px}
+.ss-row{display:flex;align-items:baseline;gap:14px;padding:8px 0;border-top:1px solid rgba(255,255,255,.09)}
+.ss-row span{flex:none;width:118px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#9aa3ab}
+.ss-row b{flex:1;min-width:0;font-size:14px;color:#fff;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-row b.unset{color:#6d767e;font-weight:600}
 </style>
 </head>
 <body>
@@ -2396,7 +2421,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v142</p>
+  <p class="ver">v143</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2432,6 +2457,7 @@ input,textarea{font-size:16px}
     <span class="setup-ghost" aria-hidden="true">03</span>
     <div class="step">STEP 3 / 4 ― TARGET</div>
     <div class="prog"><div class="track"><i style="width:75%"></i></div><span class="pnum"><b>3</b> / 4</span></div>
+    <div class="worldnote hidden" id="target-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
     <h2>誰に近づく？</h2>
     <p class="desc">憧れの人は、選べる。どちらの背中を追うかで、物語が変わる。</p>
     <div id="targets"></div>
@@ -2444,9 +2470,18 @@ input,textarea{font-size:16px}
     <span class="setup-ghost" aria-hidden="true">04</span>
     <div class="step">STEP 4 / 4 ― FIRST FOLLOWER</div>
     <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>4</b> / 4</span></div>
+    <div class="worldnote hidden" id="first-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
     <h2>最初のフォロワー</h2>
     <p class="desc">開設から数時間。最初のフォロワーが、物語の起点になる。</p>
     <div id="firsts"></div>
+    <div class="setup-sum" id="setup-sum">
+      <div class="ss-head">YOUR SETUP ― 物語の設計図</div>
+      <div class="ss-row"><span>世界</span><b id="ss-world">―</b></div>
+      <div class="ss-row"><span>ハンドル</span><b id="ss-handle">―</b></div>
+      <div class="ss-row"><span>コンセプト</span><b id="ss-stance">―</b></div>
+      <div class="ss-row"><span>近づく相手</span><b id="ss-target">―</b></div>
+      <div class="ss-row"><span>最初のフォロワー</span><b id="ss-first" class="unset">未選択</b></div>
+    </div>
     <button class="btn" id="btn-first" disabled>この人で始める</button>
   </div>
 </section>
@@ -2553,7 +2588,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v142</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v143</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2792,7 +2827,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v142</p>
+    <p class="ver">v143</p>
   </div>
 </section>
 </div>
@@ -3430,17 +3465,27 @@ let postSeq=0;
 function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
 let selH=null,selSt=null,selF=null,selW=null,selT=null;
-(function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
+(function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;const bw=$("#btn-world");bw.disabled=false;bw.textContent=w.t+"に入る";};}box.appendChild(b);});})();
 function renderOpts(el,items,gt,gd,cb,gc){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>"+(gc?'<span class="chip"></span>':"");b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);if(gc)b.querySelector(".chip").textContent=gc(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
-(function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["Hearts2Hearts","リーダー","同期"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
+(function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["Hearts2Hearts","リーダー","同期"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;const bf=$("#btn-first");bf.disabled=false;bf.textContent=nm+"ではじめる";updSetupNotes();};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
+/* v143: the recap notes on steps 3-4 and the YOUR SETUP card on step 4
+   read the live picks (same state the option cards show). Text only. */
+function updSetupNotes(){
+ const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ const base=[];if(selW)base.push(selW.t);if(selH)base.push(selH.h);
+ const tr=$("#target-recap");if(tr&&selW&&selH){tr.querySelector("b").textContent=base.join(" ／ ");tr.classList.remove("hidden");}
+ const fr=$("#first-recap");if(fr&&selW&&selH&&selT){fr.querySelector("b").textContent=base.concat(selT.name).join(" ／ ");fr.classList.remove("hidden");}
+ set("#ss-world",selW?selW.t:"―");set("#ss-handle",selH?selH.h:"―");set("#ss-stance",selSt?selSt.t:"―");set("#ss-target",selT?selT.name:"―");
+ const sf=$("#ss-first");if(sf){if(selF){sf.textContent=selF.t.split("｜")[0];sf.classList.remove("unset");}else{sf.textContent="未選択";sf.classList.add("unset");}}
+}
 $("#btn-start").onclick=()=>{S=defState();S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
-$("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-target");};
-(function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;$("#btn-target").disabled=false;};box.appendChild(b);});})();
-$("#btn-target").onclick=()=>{if(!selT)return;S.target=selT.key;show("scr-first");};
+$("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;updSetupNotes();show("scr-target");};
+(function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;const bt=$("#btn-target");bt.disabled=false;bt.textContent=T.name+"で始める";};box.appendChild(b);});})();
+$("#btn-target").onclick=()=>{if(!selT)return;S.target=selT.key;updSetupNotes();show("scr-first");};
 $("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);
  const w=FIRST_WELCOME[S.first];
  if(w){const wp=mkPost(S.first,w.tx,w.lk,w.rp,w.rc,false);S.posts.unshift(wp);
