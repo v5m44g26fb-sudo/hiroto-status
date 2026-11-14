@@ -178,3 +178,13 @@
 - トレンドを動的化：curTrends() が状態に応じて動的ワードを先頭にマージする。flm>=55→「井汲大翔 熱愛疑惑」／「サクヤ 熱愛疑惑」、flm>=30→「#匂わせ疑惑」、dist>=38かつDay4以降→「歌うまコラボSP コラボ予告」、cog>=45→「#なお 歌唱力」、flm>=20かつdist>=25→「大翔 なお 匂わせ」／「サクヤ なお 匂わせ」。ポスト数は数値から算出。素の状態では従来の固定トレンドのまま。
 - 物語の数値・分岐・章の骨格は不変（追加の環境投稿とトレンド表示のみ）。版数3箇所を v41 に統一。
 - 検証：Playwright 390×844 駆動 /tmp/verify_v41.py。ひろと編＝メインループで buzz 6件解放（応援→ざわつきの順に段階解放）、フィード表示、自然発生の動的トレンド「コラボ予告」、強制状態（flm62/dist45）で「熱愛疑惑」「コラボ予告」がトレンド欄DOMに表示されることをスクショ確認（/tmp/v41-H-trends.png）、エンディング到達、buzzフィールド欠落の旧セーブで継続OK。サクヤ編＝buzz 6件（s-キー）、「サクヤ 熱愛疑惑」「#匂わせ疑惑」の動的トレンド、エンディング到達。両ルートともエラー0・壊れ画像0・HTTP>=400なし・scrollW=390。
+
+## v42 全画面・浮き要素の総点検と修正（実機スクショ起点、最優先パス）
+- 根本原因：下部スタック（Activityバー／下部ナビ）が position:absolute の覆い式で、scroll 側の padding-bottom:140px で誤魔化していた。実機（iOS）では Activity の白ピルが MAIN QUEST カードや本文の上に浮いて隠し、スレッドの返信コンポーザー（sticky bottom）も返信リストの途中に浮いて1件目の返信本文を隠していた。
+- 修正方針：浮かせず、フローに置く。#v-x の flex column（appbar／scroll／actbar／threadbar／nav）を活かし、#actbar と #x-nav を通常フロー（position:relative;flex:none）に変更。scroll の padding-bottom は 140px→24px に（tl 末尾の 64px は維持し、最終ポストが FAB の列を抜けられる余白を確保）。
+- 返信コンポーザーはスレッドペイン内から取り出し、新設 #threadbar として scroll の外・下部ナビの直上にドック（showPane("thread") の時だけ表示）。返信リストは scroll 内でその上に流れ、末尾 padding 14px。実測：threadbar 下端＝ナビ上端、scroll 下端＝threadbar 上端、最初と最後の返信が完全に表示域内。
+- 同じ sticky-bottom の癖を持つ DM 入力バーも通常フロー（position:static）に変更し、メッセージに被らないことを実測。
+- FAB（投稿ボタン）は意図的なフローティングとして維持しつつ、新スタック実寸（ナビ64px＋actbar約58px＋16pxの空気）に合わせて bottom:150px→138px に再計測。本文側は既存の右パディング（Dayバナー76px／Event本文64px）で文字がボタン下に入らない。
+- 総点検で「意図的な覆い」として残したもの：Changesトースト（上部120px・自動消滅・pointer-events:none の一時的フィードバック）、通知パネル（ドロップダウン、ペイン切替で閉じる）、シート類（scrim＋モーダル）、ストーリービューア、作曲シート。これらはモーダル／一時表示であり本文を恒常的に隠さない。
+- 版数3箇所を v42 に統一。
+- 検証：Playwright 390×844 駆動 /tmp/verify_v42.py。形状実測（actbar下端＝ナビ上端、scroll下端＝actbar上端、threadbarも同様に一致）、ホーム最下部スクショで最終ポストが Activity バーの上に fully 表示、スレッド先頭／最下部スクショで返信がコンポーザーに隠れないこと、DM・プロフィール・Activityシート・通知パネルのスクショ目視。両ルートともメインループでエンディング到達、エラー0・壊れ画像0・HTTP>=400なし・scrollW=390。スクショ /tmp/v42-H-home-top.png・home-bottom.png・thread-top.png・thread-bottom.png・dm.png・profile.png 他。
