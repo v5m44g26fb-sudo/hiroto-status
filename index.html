@@ -1135,6 +1135,36 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v81: Changes history as a readable STATUS LOG. The record itself
+   (chgLog entries) is unchanged; the sheet now opens with the current
+   state, then groups entries under DAY headers with per-day net chips,
+   an axis icon tile and a signed value pill per row, so the whole run
+   can be scanned like a logbook. ===== */
+#scrim-chg .sheet{position:relative}
+#scrim-chg .sheet::before{content:"";display:block;width:42px;height:4.5px;border-radius:3px;background:#d8dee3;margin:-8px auto 12px}
+.chg-eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#8a5cf6;background:#f0eafd;border-radius:999px;padding:4px 10px}
+.chg-eyebrow svg{width:12px;height:12px;fill:#8a5cf6}
+.chg-now{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.chg-now .cn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#3d4750;background:#f4f6f8;border:1px solid #e8edf0;border-radius:999px;padding:5px 10px}
+.chg-now .cn i{width:7px;height:7px;border-radius:50%;background:var(--c,#999);flex:none}
+.chg-now .cn b{font-weight:800;color:#0f1419}
+.chgday{margin-top:14px}
+.chgday-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:7px;border-bottom:2px solid #eef1f3}
+.chgday-t{font-size:12px;font-weight:900;letter-spacing:.12em;color:#fff;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:7px;padding:3px 9px}
+.chgday-nets{display:flex;flex-wrap:wrap;gap:5px}
+.chgnet{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#536471}
+.chgnet i{width:6px;height:6px;border-radius:50%;background:var(--c,#999)}
+.chgnet b{color:#0f1419;font-weight:800}
+.chgrow2{display:flex;align-items:center;gap:10px;padding:8px 2px;border-bottom:1px solid #f4f6f7;font-size:14px;color:#0f1419;animation:panein .18s ease}
+.chg-ic{width:30px;height:30px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 13%,#fff)}
+.chg-ic svg{width:16px;height:16px;fill:var(--c)}
+.chg-nm{flex:1;min-width:0;font-weight:600}
+.chg-v{flex:none;font-weight:800;font-size:13.5px;border-radius:999px;padding:4px 11px;background:#f4f6f8;color:#536471}
+.chg-v.good{background:#e6f7f0;color:#00a06e}
+.chg-v.bad{background:#fdecec;color:#e0242e}
+.chg-v.dist{background:#fdeef6;color:#e0137c}
+.chg-lv{margin:8px 0 2px;border-radius:11px;padding:9px 13px;font-size:13.5px;font-weight:800;color:#7a5200;background:linear-gradient(90deg,#ffedb0,#ffd968);display:flex;align-items:center;gap:8px}
+.chg-lv svg{width:15px;height:15px;fill:#b8860b;flex:none}
 /* ===== v80: follow / follower list - built to the real-X list design
    (the profile counts were dead text; they now open this pane). Rows are
    avatar / name / handle / one-line bio / follow state, under underline
@@ -1445,7 +1475,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v80</p>
+  <p class="ver">v81</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1586,7 +1616,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v80</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v81</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1768,14 +1798,16 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v80</p>
+    <p class="ver">v81</p>
   </div>
 </section>
 </div>
 <div id="changes"></div>
 <div class="scrim" id="scrim-chg"><div class="sheet">
   <button class="close" data-close="scrim-chg">✕</button>
+  <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zm4 3.5h8V7H8v1.5zm0 4h8V11H8v1.5zm0 4h5V15H8v1.5z"/></svg>STATUS LOG ― 記録</span>
   <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、彼との距離はピンクで表示される。</p>
+  <div class="chg-now" id="chg-now"></div>
   <div id="chglist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
@@ -2344,17 +2376,43 @@ function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);con
  if(lvAfter>lvBefore){const n=Object.keys(out).length;const d=document.createElement("div");d.className="chg levelup";d.textContent="LEVEL UP！ Lv "+lvAfter+" に上がった";d.style.animationDelay=(n*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),3400+n*90);setTimeout(()=>d.remove(),3900+n*90);}
  renderProfile();save();}
 function toastChg(t){const d=document.createElement("div");d.className="chg";d.textContent=t;$("#changes").appendChild(d);setTimeout(()=>d.classList.add("out"),2100);setTimeout(()=>d.remove(),2600);}
-/* Changes history sheet (opened from the HUD) */
+/* Changes history sheet (opened from the HUD) - v81: grouped by Day */
+const CHG_AXIS={
+ fol:{c:"#1d9bf0",svg:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.4 19.2c.8-3.3 2.9-5 5.6-5s4.8 1.7 5.6 5c.1.5-.3.8-.8.8H4.2c-.5 0-.9-.3-.8-.8z"/><circle cx="17.2" cy="9" r="2.6"/><path d="M15.6 14.4c2.3.2 4.1 1.8 4.8 4.8.1.5-.3.8-.8.8h-3.4c-.3-2.2-1-4-2.4-5.3.6-.2 1.2-.3 1.8-.3z"/></svg>'},
+ xp:{c:"#7856ff",svg:'<svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg>'},
+ cog:{c:"#ff8a00",svg:'<svg viewBox="0 0 24 24"><path d="M12 5C6 5 1.8 12 1.8 12S6 19 12 19s10.2-7 10.2-7S18 5 12 5zm0 11.2a4.2 4.2 0 1 1 0-8.4 4.2 4.2 0 0 1 0 8.4z"/></svg>'},
+ flm:{c:"#f4212e",svg:'<svg viewBox="0 0 24 24"><path d="M12.7 2.3c.3 3-.6 5.3-2.4 7.2C9 11 8.4 12.3 8.4 13.8a4.6 4.6 0 0 0 9.2 0c0-1.1-.3-2.1-.9-3.1-.4.8-1 1.5-1.8 2 .4-3.4-.3-7.4-2.2-10.4zM12 21.5A5.8 5.8 0 0 1 6.2 15c0-2.2 1-3.9 2.1-5.4C9.8 7.6 11 5.9 11.2 2.9c0-.6.8-.8 1.2-.3 2.3 2.7 3.2 5.7 2.9 8.6.3-.5.6-1.1.8-1.8.2-.5 1-.6 1.3-.1 1 1.6 1.6 3.4 1.6 5.2A6.9 6.9 0 0 1 12 21.5z" fill-rule="evenodd"/></svg>'},
+ dist:{c:"#f91880",svg:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.3.9 4.4 2.4C13.1 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>'},
+ lv:{c:"#b8860b",svg:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/></svg>'}};
+function chgAxisOf(e){if(e.cls==="lv")return"lv";if(e.name==="フォロワー")return"fol";if(e.name==="XP")return"xp";if(e.name==="世間の認知度")return"cog";if(e.name==="炎上度")return"flm";if((e.name||"").indexOf("距離")>=0)return"dist";return"xp";}
+function chgValTx(e){return(e.v>0?"+":"")+(e.name==="フォロワー"?fmtCnt(e.v):e.v);}
 function renderChgLog(){
+ const now=$("#chg-now");
+ if(now&&S){const lv=1+Math.floor((S.xp||0)/50);
+  now.innerHTML="";
+  [["Lv",lv,"#7856ff"],["フォロワー",fmtCnt(S.fol),"#1d9bf0"],["XP",S.xp,"#7856ff"],["世間の認知度",S.cog,"#ff8a00"],["炎上度",S.flm,"#f4212e"],[distLab(),S.dist,"#f91880"]].forEach(([n,v,c])=>{const s=document.createElement("span");s.className="cn";s.style.setProperty("--c",c);s.innerHTML="<i></i>"+n+" <b></b>";s.querySelector("b").textContent=v;now.appendChild(s);});}
  const box=$("#chglist");const log=(S&&S.chgLog)||[];
  if(!log.length){box.innerHTML='<div style="padding:12px 2px;color:#536471;font-size:13.5px;line-height:1.7">まだChangesはないよ。投稿・Event・Activityで変化が起きると、ここに溜まっていく。</div>';return;}
  box.innerHTML="";
- [...log].reverse().forEach(e=>{
-  const r=document.createElement("div");r.className="chgrow";
-  const l=document.createElement("span");const d=document.createElement("span");d.className="d";d.textContent="Day "+e.day;l.appendChild(d);
-  l.appendChild(document.createTextNode(e.cls==="lv"?("LEVEL UP！ Lv "+e.v+" に上がった"):e.name));
-  const v=document.createElement("span");v.className="v "+(e.cls||"");v.textContent=e.cls==="lv"?"":((e.v>0?"+":"")+(e.name==="フォロワー"?fmtCnt(e.v):e.v));
-  r.appendChild(l);r.appendChild(v);box.appendChild(r);});
+ const days={};[...log].reverse().forEach(e=>{(days[e.day]=days[e.day]||[]).push(e);});
+ Object.keys(days).map(Number).sort((a,b)=>b-a).forEach(day=>{
+  const entries=days[day];
+  const sec=document.createElement("div");sec.className="chgday";
+  const nets={};entries.forEach(e=>{if(e.cls==="lv")return;const ax=chgAxisOf(e);nets[ax]=nets[ax]||{name:e.name,sum:0};nets[ax].sum+=e.v;});
+  const hd=document.createElement("div");hd.className="chgday-h";
+  hd.innerHTML='<span class="chgday-t">DAY '+day+'</span>';
+  const nn=document.createElement("span");nn.className="chgday-nets";
+  Object.keys(nets).forEach(ax=>{const nt=nets[ax];if(!nt.sum)return;const c=document.createElement("span");c.className="chgnet";c.style.setProperty("--c",CHG_AXIS[ax].c);c.innerHTML="<i></i>"+nt.name+" <b></b>";c.querySelector("b").textContent=chgValTx({name:nt.name,v:nt.sum});nn.appendChild(c);});
+  hd.appendChild(nn);sec.appendChild(hd);
+  entries.forEach(e=>{
+   if(e.cls==="lv"){const b=document.createElement("div");b.className="chg-lv";b.innerHTML=CHG_AXIS.lv.svg+"<span></span>";b.querySelector("span").textContent="LEVEL UP！ Lv "+e.v+" に上がった";sec.appendChild(b);return;}
+   const ax=CHG_AXIS[chgAxisOf(e)];
+   const r=document.createElement("div");r.className="chgrow2";
+   r.innerHTML='<span class="chg-ic" style="--c:'+ax.c+'">'+ax.svg+'</span><span class="chg-nm"></span>';
+   r.querySelector(".chg-nm").textContent=e.name;
+   const v=document.createElement("span");v.className="chg-v "+(e.cls||"");v.textContent=chgValTx(e);
+   r.appendChild(v);sec.appendChild(r);});
+  box.appendChild(sec);});
 }
 $("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
