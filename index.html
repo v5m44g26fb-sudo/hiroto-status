@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v290</p>
+  <p class="ver">v291</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v290</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v291</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v290</p>
+    <p class="ver">v291</p>
   </div>
 </section>
 </div>
@@ -4414,11 +4414,11 @@ const STORY_CARD=new Set(["assets/pin-group.jpg"]);
    pudding in hand, the cafe tray, dance practice, the night street).
    Post photo assignments and the common media grid are untouched. */
 const STORY_BASE={
- akari:{img:"assets/av-akari.jpg",imgs:[null,null,null,null,"assets/pin-studio.jpg"],caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","コラボ配信の噂、ほんと？","最終日。ここまで来たね","発表の日。なお、行ってらっしゃい"]},
- carmen:{img:"assets/av-carmen.jpg",caps:["楽屋、わくわくが止まらない〜！","なおの切り抜き、バズってる！","収録の日の楽屋から","配信の噂、ドキドキする","ラスト、いくよ！","発表の日！ 朝からそわそわ"]},
- yeon:{img:"assets/av-yeon.jpg",caps:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","最終日、見ててね","発表、ドキドキする"]},
- fan1:{img:"assets/av-fan1.jpg",imgs:["assets/pin-cafe-coffee.jpg",null,"assets/pin-cafe-cake.jpg",null,null],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","コラボの噂…！？ 震えてる","運命の日、見届けます","発表の日。画面の前で待機"]},
- miku:{img:"assets/av-miku.jpg",caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂の配信、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"]},
+ akari:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-studio-booth.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-makeup.jpg"],caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","コラボ配信の噂、ほんと？","最終日。ここまで来たね","発表の日。なお、行ってらっしゃい"]},
+ carmen:{img:"assets/pin-makeup.jpg",imgs:["assets/pin-makeup.jpg","assets/pin-studio-console.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-dance.jpg","assets/pin-group.jpg"],caps:["楽屋、わくわくが止まらない〜！","なおの切り抜き、バズってる！","収録の日の楽屋から","配信の噂、ドキドキする","ラスト、いくよ！","発表の日！ 朝からそわそわ"]},
+ yeon:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-studio-booth.jpg","assets/pin-studio.jpg","assets/pin-night.jpg","assets/pin-makeup.jpg"],caps:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","最終日、見ててね","発表、ドキドキする"]},
+ fan1:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg","assets/pin-cafe-cake.jpg"],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","コラボの噂…！？ 震えてる","運命の日、見届けます","発表の日。画面の前で待機"]},
+ miku:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-studio-console.jpg","assets/pin-cafe-coffee.jpg","assets/pin-night.jpg","assets/pin-cafe-cake.jpg"],caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂の配信、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"]},
  sea:{img:"assets/pin-karina.jpg",caps:["デビュー、おめでとうございます。応援しています","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","発表の日。おめでとうございます"]},
  mina:{img:"assets/pin-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","発表、見届けます"]},
  tgt:{imgH:["assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg"],
@@ -4468,20 +4468,20 @@ const STORY_CHAIN={
  post:{1:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"デビュー初日、スタート！"},
   2:{tgt:true,imgH:"assets/pin-studio-console.jpg",capH:"収録の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
   3:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日は音楽番組！ 楽屋から"},
-  4:{k:"fan1",lab:"ゆな",img:"assets/av-fan1.jpg",cap:"なおちゃん応援中！"},
+  4:{k:"fan1",lab:"ゆな",img:"assets/pin-cafe-cake.jpg",cap:"なおちゃん応援中！"},
   5:{tgt:true,imgH:"assets/pin-pudding.jpg",capH:"プリン、買えた",imgS:"assets/pin-cafe-onion.jpg",capS:"クロワッサン、買えました"},
   6:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"発表の日、みんなで迎えたよ"}},
  event:{1:{k:"stella",lab:"ステラ",img:"assets/gen-story-news.jpg",cap:"記事みたよ、すごい！"},
   2:{tgt:true,imgH:"assets/pin-studio-booth.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
   3:{k:"juun",lab:"ジュウン",img:"assets/pin-rack.jpg",cap:"楽屋、にぎやかでした"},
-  4:{k:"akari",lab:"ジウ",img:"assets/av-akari.jpg",cap:"コラボSPだって…！ みんな楽しみにしてて"},
+  4:{k:"akari",lab:"ジウ",img:"assets/pin-studio.jpg",cap:"コラボSPだって…！ みんな楽しみにしてて"},
   5:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"最終日、みんなで見守り中"},
   6:{tgt:true,imgH:"assets/pin-studio-booth.jpg",capH:"よろしくお願いします",imgS:"assets/sakuya-bmg.jpg",capS:"よろしくお願いします"}},
- act:{1:{k:"yuha",lab:"ユハ",img:"assets/av-yuha.jpg",cap:"アカペラ聴いた、鳥肌…！"},
+ act:{1:{k:"yuha",lab:"ユハ",img:"assets/pin-dance.jpg",cap:"アカペラ聴いた、鳥肌…！"},
   2:{k:"ian",lab:"イアン",img:"assets/pin-dance.jpg",cap:"先輩たちのステージ、勉強中"},
   3:{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},
   4:{k:"ana",lab:"エイナ",img:"assets/gen-story-stream.jpg",cap:"配信、楽しみにしてます"},
-  5:{k:"miku",lab:"みく",img:"assets/av-miku.jpg",cap:"最終日、応援してるよ"},
+  5:{k:"miku",lab:"みく",img:"assets/pin-night.jpg",cap:"最終日、応援してるよ"},
   6:{k:"fan1",lab:"ゆな",img:"assets/nao-stage-confetti.jpg",cap:"発表、見届けたよ…！"}}};
 /* v128: second-wave chain stories - the same action draws one more
    reaction from the central circle, with a scene photo that fits
