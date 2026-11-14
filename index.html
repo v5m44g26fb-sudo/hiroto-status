@@ -2807,7 +2807,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v262</p>
+  <p class="ver">v263</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2981,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v262</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v263</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3252,7 +3252,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v262</p>
+    <p class="ver">v263</p>
   </div>
 </section>
 </div>
@@ -3464,7 +3464,10 @@ activity:[
 {t:"ひろとも出る配信イベントに、観客として参加する",who:["井汲大翔","ファン"],r:"コメント欄で静かに見ていただけ。なのに演者紹介のとき、彼が一瞬こっちの名前を読んだ気がした。気のせい、かもしれない。",fx:{fol:10,cog:2,xp:8,dist:7,flm:1}},
 {t:"新曲の感想を、大翔へ公開リプで送る",who:["井汲大翔"],r:"「先輩の新曲、低音の入り方ずっと聴いてます」丁寧な感想リプ。彼のファンにも好意的に受け取られた。",fx:{fol:60,cog:5,xp:8,dist:6,flm:3}},
 {t:"ファンと一緒にデビュー曲のレポをまとめる",who:["ファン"],r:"ファン発のレポまとめが公式より読まれてて笑った。界隈が温かい。",fx:{fol:80,cog:5,xp:8,dist:0,flm:0}}],
-dm:null /* hiroto DM is special, see logic */},
+dm:{who:"stella",msgs:["なお姉！ 二人の動画、見たよ！","先輩と声、合いすぎじゃない？ わたし何回もリピートしちゃった","次はわたしとも歌ってね。……順番待ちは、先輩に内緒で"],
+choices:[
+{t:"「もちろん！ ステラとも絶対歌う」と返す",r:"ステラ「やった！ 約束だよ。じゃあわたしも動画が伸びるお手伝いするね」",fx:{fol:15,xp:5,cog:1,dist:0,flm:0}},
+{t:"「内緒の順番って何」と笑って返す",r:"ステラ「ふふ、内緒は内緒。……でも、先輩がうらやましがりそうな顔は浮かぶなぁ」",fx:{fol:10,xp:6,cog:1,dist:1,flm:0}}]} /* hiroto DM is special, see logic */},
 {day:"Day 5 ― 運命のポスト",
 banner:"最終日。コラボ配信の正式発表が近い。そして今朝、ある「偶然」が界隈を騒がせ始めた。",
 seed:[
@@ -3643,7 +3646,10 @@ activity:[
 {t:"サクヤも出る配信イベントに、観客として参加する",who:["サクヤ","ファン"],r:"コメント欄で静かに見ていただけ。なのにMCが「今日は後輩グループの子も見に来てるみたいですよ」と振ったとき、彼が少しだけ笑った気がした。気のせい、かもしれない。",fx:{fol:10,cog:2,xp:8,dist:7,flm:1}},
 {t:"新曲の感想を、サクヤへ公開リプで送る",who:["サクヤ"],r:"「サクヤさんの新曲、サビの入りの静けさ、ずっと聴いてます」丁寧な感想リプ。WISHファンにも好意的に受け取られた。",fx:{fol:60,cog:5,xp:8,dist:6,flm:3}},
 {t:"ファンと一緒にデビュー曲のレポをまとめる",who:["ファン"],r:"ファン発のレポまとめが公式より読まれてて笑った。界隈が温かい。",fx:{fol:80,cog:5,xp:8,dist:0,flm:0}}],
-dm:null /* sakuya DM is special, see logic */},
+dm:{who:"stella",msgs:["なお姉！ 二人の動画、見たよ！","先輩と声、合いすぎじゃない？ わたし何回もリピートしちゃった","次はわたしとも歌ってね。……順番待ちは、先輩に内緒で"],
+choices:[
+{t:"「もちろん！ ステラとも絶対歌う」と返す",r:"ステラ「やった！ 約束だよ。じゃあわたしも動画が伸びるお手伝いするね」",fx:{fol:15,xp:5,cog:1,dist:0,flm:0}},
+{t:"「内緒の順番って何」と笑って返す",r:"ステラ「ふふ、内緒は内緒。……でも、先輩がうらやましがりそうな顔は浮かぶなぁ」",fx:{fol:10,xp:6,cog:1,dist:1,flm:0}}]} /* sakuya DM is special, see logic */},
 {day:"Day 5 ― 運命のポスト",
 banner:"最終日。コラボ配信の正式発表が近い。そして今朝、ある「偶然」が界隈を騒がせ始めた。",
 seed:[
