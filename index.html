@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v294</p>
+  <p class="ver">v295</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v294</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v295</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v294</p>
+    <p class="ver">v295</p>
   </div>
 </section>
 </div>
@@ -3795,6 +3795,12 @@ choices:[
 {t:"「私も、言いたいことあります」と返す",r:"少し長い沈黙。――「お互い様、ですね」「じゃあ、答え合わせはステージで」言葉選びに、少しだけ熱があった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
 {t:"「二人だけに分かるって、どういうことですか」と聞く",r:"「内緒です」「……ヒントは、クロワッサンです」それ以上は教えてくれなかった。でも、十分すぎた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
 const TARGET_DM3={hiroto:HIROTO_DM3,sakuya:SAKUYA_DM3};
+/* v295: if she actually made the Day 5 mispost, his Day 6 morning DM
+   opens on it before the origin reveal - same choices, same fx. The
+   check reads her own posts (existing save data, no new fields). */
+const HIROTO_DM3B={msgs:["昨日の投稿。……消える前に、見ました","送った写真、鍵のほうに上げるつもりだったんですよね","……俺は、消えてよかったとは、思ってません"].concat(HIROTO_DM3.msgs)};
+const SAKUYA_DM3B={msgs:["昨日の写真のことです","……ぼくは、保存していません。でも、目に残っています","消えてしまったものほど、よく見える気がします"].concat(SAKUYA_DM3.msgs)};
+const TARGET_DM3B={hiroto:HIROTO_DM3B,sakuya:SAKUYA_DM3B};
 /* pass-1 minimal feed presence for the sakuya route (superseded by CH_S in v33; kept for reference) */
 const SAKUYA_SEED=[
  {tx:"今日デビューしたグループの曲、聴きました。声がまっすぐで、いい朝になりました。",lk:15234,rp:2902,rc:612,img:"assets/sakuya-stage.jpg"},
@@ -5427,7 +5433,7 @@ function startChapter(n){
  const TDM3=TARGET_DM3[tgtKey()];
  if(n===6&&TDM3&&S.hirotoDm==="done"){
    const th=S.threads.find(x=>x.id===tgtKey()&&x.special);
-   if(th&&th.round2&&th.done&&!th.round3){th.round3=true;th.msgs=th.msgs.concat(TDM3.msgs);th.choices=TDM3.choices;th.done=false;th.unread=true;
+   if(th&&th.round2&&th.done&&!th.round3){th.round3=true;th.msgs=th.msgs.concat(((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))&&TARGET_DM3B[tgtKey()]?TARGET_DM3B[tgtKey()]:TDM3).msgs);th.choices=TDM3.choices;th.done=false;th.unread=true;
      S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"発表の日の朝に"});}
  }
  /* v261 (episode - heat): on the announcement morning, if the
