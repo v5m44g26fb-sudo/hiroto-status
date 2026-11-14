@@ -1053,6 +1053,36 @@ input,textarea{font-size:16px}
 #th-dist .thd-gauge{flex:1;height:5px;border-radius:3px;background:rgba(15,20,25,.1);overflow:hidden}
 #th-dist .thd-gauge i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#f91880,#7856ff);transition:width .7s cubic-bezier(.2,.8,.25,1)}
 #th-dist .thd-num{font-size:13px;font-weight:900;color:#c2185b;font-variant-numeric:tabular-nums}
+/* ===== v59: explore overhaul - live trend band, ranked rows with volume
+   bars, state-driven trends glow with a surge chip, category head bands,
+   and a richer search-result header. Search mechanics unchanged. ===== */
+.trend-head{position:relative;align-items:center;padding:18px 16px 14px;background:linear-gradient(120deg,#141b34,#2a1150);overflow:hidden}
+.trend-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.trend-head .th-t{color:#fff;font-size:20px}
+.trend-head .th-s{color:#aebadd}
+.th-live{flex:none;width:8px;height:8px;border-radius:50%;background:#f91880;animation:livepulse 1.8s ease-out infinite}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(249,24,128,.5)}70%{box-shadow:0 0 0 8px rgba(249,24,128,0)}100%{box-shadow:0 0 0 0 rgba(249,24,128,0)}}
+.trend{gap:13px;padding:13px 16px 12px;position:relative}
+.trend .trank{font-size:19px;width:30px}
+.trend.rk1 .trank{background:linear-gradient(180deg,#f91880,#7856ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:23px}
+.trend.rk2 .trank{color:#7856ff;font-size:21px}
+.trend.rk3 .trank{color:#1d9bf0;font-size:20px}
+.trend .tcat{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.04em}
+.trend .tcat::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#7856ff,#f91880);flex:none}
+.trend .tvol{display:block;height:3.5px;border-radius:2px;background:#eff3f4;margin-top:6px;overflow:hidden;max-width:190px}
+.trend .tvol i{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,#1d9bf0,#7856ff)}
+.trend.dyn{background:linear-gradient(90deg,rgba(249,24,128,.07),rgba(249,24,128,0) 65%)}
+.trend.dyn::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(180deg,#f91880,#7856ff)}
+.trend.dyn .tvol i{background:linear-gradient(90deg,#f91880,#ff7a1a)}
+.tdyn{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:900;letter-spacing:.08em;color:#e0115f;background:rgba(249,24,128,.1);border:1px solid rgba(249,24,128,.35);border-radius:999px;padding:3.5px 9px}
+.tdyn i{width:6px;height:6px;border-radius:50%;background:#f91880;animation:livepulse 1.8s ease-out infinite}
+.trend.top .tmain b{font-size:16.5px}
+.cat-head{padding:16px 16px 12px;border-bottom:1px solid #eff3f4;background:linear-gradient(180deg,#fbfcfe,#fff)}
+.cat-head .ch-eyebrow{display:block;font-size:9.5px;font-weight:900;letter-spacing:.3em;color:#7856ff;margin-bottom:4px}
+.cat-head b{display:block;font-size:18px;font-weight:900;letter-spacing:.02em;color:#0f1419}
+.cat-head small{display:block;color:#536471;font-size:12px;margin-top:2px}
+.srch-res-h{position:relative;background:#f7f9fb;border-bottom:1px solid #e8edf0;padding:13px 16px 11px}
+.srch-res-h::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(180deg,#7856ff,#f91880)}
 </style>
 </head>
 <body>
@@ -1067,7 +1097,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v58</p>
+  <p class="ver">v59</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1201,7 +1231,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v58</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v59</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1351,7 +1381,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v58</p>
+    <p class="ver">v59</p>
   </div>
 </section>
 </div>
@@ -2191,19 +2221,26 @@ $$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b
 $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 (function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?tgt().name+"さんをフォローしたよ":tgt().name+"さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
 /* trends + search */
-function trendEl(t,rank){const d=document.createElement("div");d.className="trend"+(rank===0?" top":"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small></div><span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
-function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);curTrends().forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i)));
+/* v59: a trend whose word is not in the route's base list is state-driven
+   (it rose because of cog/flm/dist) - it gets the "dyn" glow + surge chip.
+   The volume bar is presentation only, scaled to the list's max count. */
+function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
+function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+function renderTrends(){$("#x-pane-trend").innerHTML="";const list=curTrends(),maxV=Math.max(1,...list.map(trendNum));const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-live'></span><span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);list.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i,maxV)));
  const sug=$("#x-sug");sug.innerHTML="";(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#クロワッサン被り","ライブステージ"]:["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ライブステージ"]).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
+const STAB_HEADS={topic:["EXPLORE","話題を検索","いま世間で話題になっていること"],trend:["TRENDING","トレンド","投稿数の多い順に並ぶ、いまの話題"],news:["NEWS","ニュース","音楽番組と業界の動き"],entame:["ENTERTAINMENT","エンタメ","推しと界隈の話題"],sports:["SPORTS","スポーツ","スポーツ界のいま"]};
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="";if(sl)sl.style.display="";
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
+ const hd=STAB_HEADS[k];if(hd){const hh=document.createElement("div");hh.className="cat-head";hh.innerHTML="<span class='ch-eyebrow'></span><b></b><small></small>";hh.querySelector(".ch-eyebrow").textContent=hd[0];hh.querySelector("b").textContent=hd[1];hh.querySelector("small").textContent=hd[2];box.appendChild(hh);}
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
- if(k==="topic"){curTrends().forEach((t,i)=>box.appendChild(trendEl(t,i)));return;}
- const list=curTrends().filter(t=>cat===null||t[0]===cat);
+ const all=curTrends(),maxV=Math.max(1,...all.map(trendNum));
+ if(k==="topic"){all.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));return;}
+ const list=all.filter(t=>cat===null||t[0]===cat);
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
- list.forEach((t,i)=>box.appendChild(trendEl(t,i)));}
+ list.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
