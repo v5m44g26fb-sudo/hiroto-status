@@ -1332,6 +1332,30 @@ input,textarea{font-size:16px}
 .xc-seclab::before{content:"";width:4px;height:16px;border-radius:2px;background:linear-gradient(180deg,#f91880,#7856ff);align-self:center;flex:none}
 .choice.xcopt{border-radius:20px}
 .xcopt-img{width:60px;height:60px;border-radius:14px}
+/* ===== v74: Event (MAIN QUEST) overhaul - the chapter's climax gets a
+   cinematic scene card: a full-bleed hero header (the scene photo when the
+   event has one, a gradient band with a ghost chapter numeral when it does
+   not) carrying the MAIN QUEST eyebrow and tag, a larger title, airier body
+   copy, and a picked choice that answers with a gold pulse and a check.
+   Event text, choices and effects are unchanged. ===== */
+.evcard{padding:0 17px 18px;overflow:hidden;animation:evin .38s ease both}
+@keyframes evin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ev-hero{position:relative;margin:0 -17px 16px;height:112px;background:linear-gradient(140deg,#241245,#3d1663 55%,#5c1547);overflow:hidden}
+.ev-hero.hasimg{height:206px}
+.ev-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 16%;display:block}
+.ev-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,6,32,.16),rgba(14,6,32,0) 42%,rgba(14,6,32,.78))}
+.ev-ghost{position:absolute;right:2px;top:-30px;font-size:128px;font-weight:900;font-style:italic;line-height:1;color:rgba(255,255,255,.12);pointer-events:none}
+.ev-hero-in{position:absolute;left:17px;right:17px;bottom:13px;display:flex;flex-direction:column;align-items:flex-start;gap:9px}
+.ev-hero .ev-eyebrow{margin-bottom:0;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.evcard h3{font-size:21px;line-height:1.42;margin:2px 0 8px}
+.evcard p{font-size:14.5px;line-height:1.82;color:#d9d0f7}
+.evcard .choice.evchoice{border-radius:16px;padding:14px 15px}
+.evcard .choice.evchoice.picked{animation:evpick .55s ease-out}
+@keyframes evpick{0%{box-shadow:0 0 0 0 rgba(247,201,72,.55),0 0 0 1px #f7c948}100%{box-shadow:0 0 0 16px rgba(247,201,72,0),0 0 0 1px #f7c948}}
+.evcard .choice.evchoice.picked .evc-no{font-size:0}
+.evcard .choice.evchoice.picked .evc-no::after{content:"✓";font-size:14px;font-weight:900}
+.evcard .result{animation:evres .4s ease both}
+@keyframes evres{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -1346,7 +1370,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v73</p>
+  <p class="ver">v74</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1487,7 +1511,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v73</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v74</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1649,7 +1673,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v73</p>
+    <p class="ver">v74</p>
   </div>
 </section>
 </div>
@@ -2668,8 +2692,8 @@ function renderEvent(){
  const slot=$("#eventslot"),ch=curCH()[S.ch-1];slot.innerHTML="";
  if(S.evDone)return;
  const ev=ch.event;const card=document.createElement("div");card.className="evcard";
- card.innerHTML='<div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務</span></div><div class="tag"></div><h3></h3><p></p><div class="evimg"></div><div class="evc"></div><div class="evr"></div>';
- if(ev.img){const im=document.createElement("img");im.className="evimg";im.src=ev.img;im.alt="";card.querySelector(".evimg").appendChild(im);}
+ card.innerHTML='<div class="ev-hero'+(ev.img?" hasimg":"")+'">'+(ev.img?'<img class="ev-hero-img" alt="">':"")+'<div class="ev-hero-shade"></div><div class="ev-ghost">'+S.ch+'</div><div class="ev-hero-in"><div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div></div></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
+ if(ev.img)card.querySelector(".ev-hero-img").src=ev.img;
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
  ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");save();};box.appendChild(b);});
