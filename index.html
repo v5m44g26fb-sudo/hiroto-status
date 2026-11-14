@@ -586,19 +586,69 @@ input,textarea{font-size:16px}
 .srch-res-h{display:flex;align-items:baseline;gap:7px;padding:14px 16px 10px;border-bottom:1px solid #eff3f4;font-size:14px;color:#536471}
 .srch-res-h b{font-size:15.5px;color:#0f1419;font-weight:900}
 .srch-res-h span{margin-left:auto;font-size:12px;font-weight:800;color:#1d9bf0;flex:none}
+/* ===== v27: intro flow overhaul (title / world / persona / first) ===== */
+.screen.intro::before{filter:blur(11px) brightness(.52) saturate(1.15)}
+.screen.intro::after{background:linear-gradient(180deg,rgba(8,6,20,.38),rgba(4,4,10,.88) 74%)}
+.screen.intro .ver{color:rgba(255,255,255,.42)}
+/* title */
+#scr-title .xlogo{width:44px;height:44px;margin-bottom:20px;filter:none}
+.t-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.42em;color:#c9b8ff;text-indent:.42em;margin-bottom:14px}
+#scr-title h1{font-size:30px;letter-spacing:.05em;text-shadow:0 4px 34px rgba(0,0,0,.65)}
+.t-rule{width:44px;height:1px;background:rgba(255,255,255,.55);margin:20px auto 4px}
+#scr-title .sub{color:#ccd3d9;font-size:13.5px;line-height:1.95;margin-top:12px}
+.flowsteps{gap:0;margin-top:26px}
+.flowsteps span{background:none;border:none;border-radius:0;backdrop-filter:none;color:#8f979e;padding:0 13px;font-size:10.5px;font-weight:700;letter-spacing:.14em;position:relative}
+.flowsteps span+span::before{content:"";position:absolute;left:0;top:50%;width:1px;height:10px;background:rgba(255,255,255,.28);transform:translateY(-50%)}
+.flowsteps span b{display:none}
+/* intro primary buttons: monochrome premium */
+.screen.intro .btn{background:#fff;color:#0f1419;box-shadow:0 10px 28px rgba(0,0,0,.4);letter-spacing:.06em}
+.screen.intro .btn.ghost{background:rgba(255,255,255,.05);color:#e7e9ea;border:1px solid rgba(255,255,255,.32);box-shadow:none}
+.screen.intro .btn:disabled{opacity:.32;box-shadow:none}
+/* steps / progress: hairline */
+.step{color:#9aa3ab;font-size:10.5px;font-weight:800;letter-spacing:.3em}
+.prog{margin:14px 0 22px}
+.prog .track{height:2px;border-radius:1px;background:rgba(255,255,255,.16)}
+.prog .track i{background:#fff;border-radius:1px;box-shadow:none}
+.prog .pnum{color:#9aa3ab;letter-spacing:.2em}
+.prog .pnum b{color:#fff}
+/* setup text */
+.setup{background:transparent}
+.setup h2{font-size:22px;letter-spacing:.03em}
+.setup p.desc{color:#a9b2ba;font-size:13px;line-height:1.8;margin-bottom:20px}
+.setup .secttl{font-size:11px;font-weight:800;letter-spacing:.24em;color:#9aa3ab;padding:16px 0 10px}
+.worldnote{border:none;border-left:2px solid rgba(255,255,255,.55);border-radius:0;background:none;padding:3px 0 3px 13px;font-size:13px;color:#c9cfd4;margin-bottom:18px;line-height:1.5}
+.worldnote .wn-lab{display:block;font-size:9.5px;font-weight:800;letter-spacing:.32em;color:#9aa3ab;margin-bottom:3px}
+.worldnote b{color:#fff;font-size:14px;letter-spacing:.03em}
+/* selection cards: quiet, hairline, typographic */
+.setup .opt{border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:15px 17px;margin-bottom:10px;background:rgba(255,255,255,.04)}
+.setup .opt b{font-size:15.5px;font-weight:800;letter-spacing:.02em;margin-bottom:2px}
+.setup .opt span{color:#9aa7b1;font-size:12.5px;line-height:1.55}
+.setup .opt.sel{border-color:rgba(255,255,255,.9);background:rgba(255,255,255,.09);box-shadow:none;transform:none}
+.setup .opt.sel::after{background:#fff;color:#0f1419;width:20px;height:20px;font-size:11px;box-shadow:none;top:13px;right:13px}
+.setup .opt.card{align-items:center}
+.opt .wlab{display:block;font-size:9.5px;font-weight:800;letter-spacing:.3em;color:#9aa3ab;margin-bottom:6px}
+.opt .arr{flex:none;margin-left:10px;color:#9aa3ab;font-size:19px;font-weight:400}
+.opt .chip{display:inline-block;margin-top:9px;border:1px solid rgba(255,255,255,.3);background:none;color:#e3e8ec;border-radius:999px;padding:2.5px 10px;font-size:10.5px;font-weight:700;letter-spacing:.1em;line-height:1.5}
+.opt .cimg{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;border:1px solid rgba(255,255,255,.3);background:#222}
+.opt .pills{margin-top:9px}
+.opt .pill{border:1px solid rgba(255,255,255,.24);background:none;color:#ccd3d9;border-radius:999px;padding:2px 9px;font-size:10.5px;font-weight:700;letter-spacing:.05em}
+.opt.locked{opacity:.5}
+.opt .locktag{display:inline-block;margin-top:8px;border:1px solid rgba(255,255,255,.25);background:none;border-radius:999px;padding:2px 9px;font-size:9.5px;font-weight:800;letter-spacing:.22em;color:#9aa3ab}
 </style>
 </head>
 <body>
 <div id="phone">
 <section class="screen intro on" id="scr-title" style="--bgimg:url(assets/nao-promo.jpg)">
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
+  <p class="t-eyebrow">NAO ― OFFICIAL X OPENING</p>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
-  <p class="sub">デビューしたての新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>そして、先輩歌手・井汲大翔に、少しずつ近づけるか。</p>
-  <div class="flowsteps"><span><b>1</b> ワールド選択</span><span><b>2</b> ペルソナ作成</span><span><b>3</b> 最初のフォロワー</span><span><b>4</b> フィードへ</span></div>
+  <div class="t-rule"></div>
+  <p class="sub">デビューしたての新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>あの先輩歌手に、少しずつ近づけるか。</p>
+  <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>最初のフォロワー</span><span>フィードへ</span></div>
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v26</p>
+  <p class="ver">v27</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -606,7 +656,7 @@ input,textarea{font-size:16px}
     <div class="step">STEP 1 / 3 ― WORLD SELECT</div>
     <div class="prog"><div class="track"><i style="width:33.3%"></i></div><span class="pnum"><b>1</b> / 3</span></div>
     <h2>どの世界で生きる？</h2>
-    <p class="desc">Statusでは、まず「ワールド」を選んでから世界に入る。この物語のワールドは芸能界。選んだ世界のルール――フォロワー、評判、炎上――で、毎日が動き出す。</p>
+    <p class="desc">この物語の舞台は、芸能界。フォロワーと評判と炎上で、毎日が動き出す。</p>
     <div id="worlds"></div>
     <button class="btn" id="btn-world" disabled>この世界に入る</button>
   </div>
@@ -616,12 +666,12 @@ input,textarea{font-size:16px}
   <div class="setup">
     <div class="step">STEP 2 / 3 ― PERSONA</div>
     <div class="prog"><div class="track"><i style="width:66.6%"></i></div><span class="pnum"><b>2</b> / 3</span></div>
-    <div class="worldnote" id="persona-world-note">ワールド：<b>芸能界 ― アイドルワールド</b><br>有名になるか、キャンセル（炎上）されるか。それがこの世界の評判の軸。</div>
+    <div class="worldnote" id="persona-world-note"><span class="wn-lab">WORLD</span><b>芸能界 ― アイドルワールド</b></div>
     <h2>公式アカウント開設</h2>
-    <p class="desc">ソロでデビューが決まった、新人アイドルの「なお」。今日、公式Xを開設する。ハンドルと、アイドルとしてのコンセプトを決めよう。</p>
-    <p class="secttl" style="padding-left:0;color:#fff">公式ハンドル</p>
+    <p class="desc">デビューしたての新人アイドル「なお」。今日、公式Xを開設する。</p>
+    <p class="secttl">公式ハンドル</p>
     <div id="handles"></div>
-    <p class="secttl" style="padding-left:0;color:#fff">コンセプト</p>
+    <p class="secttl">コンセプト</p>
     <div id="stances"></div>
     <button class="btn" id="btn-persona" disabled>次へ</button>
   </div>
@@ -632,7 +682,7 @@ input,textarea{font-size:16px}
     <div class="step">STEP 3 / 3 ― FIRST FOLLOWER</div>
     <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>3</b> / 3</span></div>
     <h2>最初のフォロワー</h2>
-    <p class="desc">開設から数時間。Statusでは、最初のフォロワーが物語の起点になる。記念すべき第1号は、同じアイドルの世界の誰かだった――誰だったかで、スタートの空気が変わる。</p>
+    <p class="desc">開設から数時間。最初のフォロワーが、物語の起点になる。</p>
     <div id="firsts"></div>
     <button class="btn" id="btn-first" disabled>この人で始める</button>
   </div>
@@ -693,7 +743,7 @@ input,textarea{font-size:16px}
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
         <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
-        <div style="color:#536471;font-size:13px" id="prof-handle">@nao_official</div>
+        <div style="color:#536471;font-size:13px" id="prof-handle">@nao_324</div>
         <div style="font-size:13px;margin-top:5px" id="prof-bio">ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
       </div>
@@ -707,7 +757,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v26</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v27</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -818,7 +868,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v26</p>
+    <p class="ver">v27</p>
   </div>
 </section>
 </div>
@@ -842,7 +892,7 @@ input,textarea{font-size:16px}
 /* accounts: data swapped for this work; handles/avatars follow Tinder-ver X usage */
 const ACC={
  hiroto:{n:"井汲大翔",h:"@193hiroto",av:"assets/ig-avatar.jpg"},
- nao:{n:"なお",h:"@nao_official",av:"assets/nao-avatar4.jpg"},
+ nao:{n:"なお",h:"@nao_324",av:"assets/nao-avatar4.jpg"},
  miku:{n:"みく｜幼なじみ",h:"@miku_osana",av:"assets/av-miku.jpg"},
  staff:{n:"佐藤｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
  sora:{n:"そら｜音楽好き",h:"@sora_music",av:"assets/av-sora.jpg"},
@@ -855,21 +905,21 @@ const ACC={
  fan2:{n:"一般の通行人",h:"@tsukonin_jp",av:"assets/av-fan2.jpg"}
 };
 const WORLDS=[
- {id:"idol",t:"芸能界 ― アイドルワールド",d:"ステージ、歌番組、配信、まとめ垢。フォロワーと評判で物語が動く、この物語のワールド。",locked:false},
- {id:"daily",t:"日常ワールド",d:"学校とバイトと、静かな毎日が続く世界線。",locked:true},
- {id:"celeb",t:"セレブワールド",d:"最初から誰もが知っている、有名人の世界線。",locked:true}];
+ {id:"idol",t:"芸能界 ― アイドルワールド",d:"ステージと評判で、毎日が動く世界。",locked:false},
+ {id:"daily",t:"日常ワールド",d:"学校とバイトと、静かな毎日。",locked:true},
+ {id:"celeb",t:"セレブワールド",d:"最初から、誰もが知っている世界。",locked:true}];
 const HANDLES=[
- {h:"@nao_official",t:"王道の公式感",d:"事務所公認っぽい安心感。メディアに拾われやすい。"},
- {h:"@nao_uta",t:"「歌の人」推し",d:"音楽好きに刺さる。世間の認知度が伸びやすい名前。"},
- {h:"@nao_fresh324",t:"誕生日入りの新人感",d:"親しみやすさ重視。ファンが付きやすい名前。"}];
+ {h:"@nao_324",t:"公式感",d:"名前と数字だけ。王道の公式アカウント。",fx:"メディア・フォロワー"},
+ {h:"@nao_voice",t:"歌推し",d:"「歌の人」として届ける、まっすぐな名前。",fx:"認知度"},
+ {h:"@hello_nao",t:"新人感",d:"はじめまして、から始まる距離の近さ。",fx:"ファン"}];
 const STANCES=[
- {id:"smile",t:"王道・笑顔系",d:"明るくて親しみやすい正統派。フォロワーが伸びやすい。",bonus:"fol",bonusTx:"フォロワー"},
- {id:"cool",t:"クール・ミステリアス系",d:"言葉少なめ、世界観で魅せる。世間の認知度が伸びやすい。",bonus:"cog",bonusTx:"世間の認知度"},
- {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残すタイプ。ひろとの距離が縮まりやすいが、失言は炎上の元。",bonus:"dist",bonusTx:"ひろとの距離"}];
+ {id:"smile",t:"王道・笑顔系",d:"明るく、親しみやすい正統派。",bonus:"fol",bonusTx:"フォロワー"},
+ {id:"cool",t:"クール・ミステリアス系",d:"言葉少なめ、世界観で魅せる。",bonus:"cog",bonusTx:"世間の認知度"},
+ {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残す、天然タイプ。",bonus:"dist",bonusTx:"ひろとの距離"}];
 const FIRSTS=[
- {id:"sea",t:"セア｜韓国ガールズグループ「LUNARIS」のリーダー",d:"音楽番組の楽屋で挨拶したら、その場でフォローしてくれた。海外のファンへ届く起点になる。"},
- {id:"akari",t:"あかり｜同期デビューのソロアイドル",d:"同じ日にデビューした、ライバルであり戦友。同期の輪が、ここから広がっていく。"},
- {id:"mina",t:"ミナ｜韓国で活動する先輩ソロ歌手",d:"大先輩からのフォロー第1号。その事実だけで、メディアがざわつき始める。"}];
+ {id:"sea",t:"セア｜韓国ガールズグループ「LUNARIS」のリーダー",d:"楽屋で挨拶したら、その場でフォローしてくれた。"},
+ {id:"akari",t:"あかり｜同期デビューのソロアイドル",d:"同じ日にデビューした、ライバルであり戦友。"},
+ {id:"mina",t:"ミナ｜韓国で活動する先輩ソロ歌手",d:"大先輩からの、フォロー第1号。"}];
 /* welcome post each idol first-follower drops at the top of the Day 1 feed */
 const FIRST_WELCOME={
  sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。楽屋で聴いた歌声、ずっと頭に残ってます。また同じステージで会いましょう。",lk:842,rp:126,rc:37},
@@ -1080,11 +1130,11 @@ let postSeq=0;
 function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
 let selH=null,selSt=null,selF=null,selW=null;
-(function(){const box=$("#worlds");if(!box)return;const WV={idol:["芸","linear-gradient(135deg,#f91880,#7856ff)"],daily:["日","linear-gradient(135deg,#536471,#8899a6)"],celeb:["セ","linear-gradient(135deg,#c9a227,#ffd400)"]};WORLDS.forEach(w=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");const v=WV[w.id]||["世","linear-gradient(135deg,#536471,#8899a6)"];b.innerHTML='<span class="cava" style="background:'+v[1]+'">'+v[0]+'</span><span class="cmain"><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">この物語ではロック中</span>':"")+"</span>";b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
-function renderOpts(el,items,gt,gd,cb){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>";b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
-renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.t+" ― "+x.d,it=>{selH=it;chkP();});
-renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d+"（伸びやすい："+x.bonusTx+"）",it=>{selSt=it;chkP();});
-(function(){const box=$("#firsts");if(!box)return;const FV={sea:["linear-gradient(135deg,#1d9bf0,#7856ff)",["LUNARIS","リーダー","韓国活動"]],akari:["linear-gradient(135deg,#f91880,#ff9f43)",["同期デビュー","ソロアイドル"]],mina:["linear-gradient(135deg,#8e6bff,#e3b341)",["先輩ソロ歌手","韓国活動"]]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const v=FV[f.id]||["linear-gradient(135deg,#536471,#8899a6)",[]];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");b.innerHTML='<span class="cava" style="background:'+v[0]+'">'+nm.charAt(0)+'</span><span class="cmain"><b></b><span class="d"></span><span class="pills">'+v[1].map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
+(function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
+function renderOpts(el,items,gt,gd,cb,gc){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>"+(gc?'<span class="chip"></span>':"");b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);if(gc)b.querySelector(".chip").textContent=gc(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
+renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
+renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
+(function(){const box=$("#firsts");if(!box)return;const FV={sea:["LUNARIS","リーダー","韓国活動"],akari:["同期デビュー","ソロアイドル"],mina:["先輩ソロ歌手","韓国活動"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
