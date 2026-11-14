@@ -1973,6 +1973,8 @@ input,textarea{font-size:16px}
 .actres-prog .ap-chips{display:inline-flex;gap:5px}
 .actres-prog .ap-chips i{font-style:normal;font-size:11px;font-weight:800;color:#7a6a35;background:rgba(255,255,255,.55);border:1px solid rgba(138,109,26,.3);border-radius:999px;padding:3px 9px}
 .actres-prog .ap-chips i.done{background:#8a6d1a;border-color:#8a6d1a;color:#fff}
+.actres-prog .ap-chips .ap-link{font-family:inherit;font-size:11px;font-weight:800;color:#5c4d14;background:#fff;border:1px solid rgba(138,109,26,.55);border-radius:999px;padding:3px 9px;cursor:pointer}
+.actres-prog .ap-chips .ap-link:active{transform:scale(.95)}
 .actres-prog .ap-all{font-size:11px;font-weight:900;color:#8a6d1a}
 .actres-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
 #actresult.done::after{content:"完了";position:absolute;top:10px;right:12px;width:44px;height:44px;border:2px solid rgba(184,134,11,.5);border-radius:50%;color:rgba(184,134,11,.72);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;transform:rotate(10deg);letter-spacing:.08em;pointer-events:none}
@@ -2775,7 +2777,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v214</p>
+  <p class="ver">v215</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2944,7 +2946,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v214</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v215</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3213,7 +3215,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v214</p>
+    <p class="ver">v215</p>
   </div>
 </section>
 </div>
@@ -5235,9 +5237,22 @@ $("#btn-activity").onclick=()=>{
    res.querySelector(".actres-t").textContent=o.r;
    res.querySelector(".actres-meta").textContent="実行内容 ― "+o.t;
    /* v176: the receipt closes with today's mission state, in the
-      same chip language as the feed-end progress card */
+      same chip language as the feed-end progress card.
+      v215: unfinished chips are doors here too - they close the
+      sheet and jump to the remaining action, like the feed-end
+      card's chips (the Activity chip is always done by now) */
    const mp=[["投稿",S.posted],["Event",S.evDone],["Activity",S.actDone]];
-   res.querySelector(".actres-prog").innerHTML='<span class="ap-lab">今日のミッション</span><span class="ap-chips">'+mp.map(m=>'<i class="'+(m[1]?"done":"")+'">'+(m[1]?"✓ ":"")+m[0]+"</i>").join("")+"</span>"+(mp.every(m=>m[1])?'<span class="ap-all">全部完了 ― おつかれさま</span>':"");
+   {const prog=res.querySelector(".actres-prog");prog.innerHTML="";
+   const lab=document.createElement("span");lab.className="ap-lab";lab.textContent="今日のミッション";prog.appendChild(lab);
+   const cw=document.createElement("span");cw.className="ap-chips";prog.appendChild(cw);
+   mp.forEach((m,i)=>{let c;
+    if(m[1]){c=document.createElement("i");c.className="done";c.textContent="✓ "+m[0];}
+    else{c=document.createElement("button");c.type="button";c.className="ap-link";c.textContent=m[0]+" ›";
+     c.addEventListener("click",()=>{const sc=$("#scrim-act");if(sc)sc.classList.remove("on");
+      if(i===0){const b=$("#x-compose-btn");if(b)b.click();}
+      else if(i===1){const ev=$("#eventslot");if(ev)ev.scrollIntoView({behavior:"smooth",block:"start"});}});}
+    cw.appendChild(c);});
+   if(mp.every(m=>m[1])){const al=document.createElement("span");al.className="ap-all";al.textContent="全部完了 ― おつかれさま";prog.appendChild(al);}}
    res.classList.add("show","done");
    $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+TOTAL_DAYS+" ・ 今日の分は完了";
    applyFx(o.fx);addStory("act");save();
