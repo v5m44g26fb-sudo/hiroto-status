@@ -2807,7 +2807,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v253</p>
+  <p class="ver">v254</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2981,7 +2981,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v253</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v254</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3252,7 +3252,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v253</p>
+    <p class="ver">v254</p>
   </div>
 </section>
 </div>
@@ -3736,6 +3736,21 @@ choices:[
 {t:"「サクヤさんも、おつかれさまでした」と返す",r:"少し間があって――「なおさんも、ゆっくり休んでくださいね」「声は、休めた分だけ遠くまで届きます」言葉選びが、やっぱり丁寧だった。",fx:{dist:8,xp:5,fol:0,cog:0,flm:0}},
 {t:"「今度は私が何か置いておきます」と返す",r:"「交換ですね」「ぼくは、プリンにします。なおさんの好きなものを、置いておきたいので」――サラッと、こちらの好みを覚えていた。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
 const TARGET_DM2={hiroto:HIROTO_DM2,sakuya:SAKUYA_DM2};
+/* v254 (episode - heat, the far end of the leak): a third exchange
+   on the morning of Day 6, only if the second was answered. He
+   starts to say it, stops - and moves it to the stage. The Kansai
+   softness is saved for the peak, as designed. */
+const HIROTO_DM3={msgs:["発表、出ましたね","……言いかけたこと、あります","ステージで、直接言います"],
+choices:[
+{t:"「楽しみにしてます」と返す",r:"「はい」「……待っててください」短い。でも今度は、逃げなかった。",fx:{dist:6,xp:5,fol:0,cog:0,flm:0}},
+{t:"「私も、言いたいことあります」と返す",r:"少し長い沈黙。――「じゃあ、お互い様ですね」声のトーンが、少しだけ柔らかかった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
+{t:"「関西弁で言ってください」と冗談めかして返す",r:"「……あかん、それは反則です」笑い混じりの文字。最後に――「ほんまに、楽しみにしてます」関西弁が漏れた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
+const SAKUYA_DM3={msgs:["発表、出ましたね","本当は、もっと早く伝えたかったことがあります","ステージの上で、言います。……二人だけに分かるように"],
+choices:[
+{t:"「楽しみにしてます」と返す",r:"「はい」「待っていてください。……約束です」丁寧なまま。でも、今度は逃げなかった。",fx:{dist:6,xp:5,fol:0,cog:0,flm:0}},
+{t:"「私も、言いたいことあります」と返す",r:"少し長い沈黙。――「お互い様、ですね」「じゃあ、答え合わせはステージで」言葉選びに、少しだけ熱があった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
+{t:"「二人だけに分かるって、どういうことですか」と聞く",r:"「内緒です」「……ヒントは、クロワッサンです」それ以上は教えてくれなかった。でも、十分すぎた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
+const TARGET_DM3={hiroto:HIROTO_DM3,sakuya:SAKUYA_DM3};
 /* pass-1 minimal feed presence for the sakuya route (superseded by CH_S in v33; kept for reference) */
 const SAKUYA_SEED=[
  {tx:"今日デビューしたグループの曲、聴きました。声がまっすぐで、いい朝になりました。",lk:15234,rp:2902,rc:612,img:"assets/sakuya-stage.jpg"},
@@ -5288,6 +5303,14 @@ function startChapter(n){
    if(th&&!th.round2){th.round2=true;th.msgs=th.msgs.concat(TDM2.msgs);th.choices=TDM2.choices;th.done=false;th.unread=true;
      S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"本人からの、つづきの連絡"});}
  }
+ /* v254 (episode): the third exchange (TARGET_DM3) lands on the
+    morning of Day 6, if the second was answered */
+ const TDM3=TARGET_DM3[tgtKey()];
+ if(n===6&&TDM3&&S.hirotoDm==="done"){
+   const th=S.threads.find(x=>x.id===tgtKey()&&x.special);
+   if(th&&th.round2&&th.done&&!th.round3){th.round3=true;th.msgs=th.msgs.concat(TDM3.msgs);th.choices=TDM3.choices;th.done=false;th.unread=true;
+     S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"発表の日の朝に"});}
+ }
  injectBuzz(n>=2?1:0,0);
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
  showDayIntro();
@@ -5510,11 +5533,11 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
  /* v250: a thread can hold a second reply (replyIdx2) once the
     episode's follow-up exchange lands; the read mark stays single,
     under the latest of her replies */
- const isMe=j=>j===t.replyIdx||(t.replyIdx2!=null&&j===t.replyIdx2);
- const lastMe=Math.max((t.replyIdx==null?-1:t.replyIdx),(t.replyIdx2==null?-1:t.replyIdx2));
+ const isMe=j=>j===t.replyIdx||(t.replyIdx2!=null&&j===t.replyIdx2)||(t.replyIdx3!=null&&j===t.replyIdx3);
+ const lastMe=Math.max((t.replyIdx==null?-1:t.replyIdx),(t.replyIdx2==null?-1:t.replyIdx2),(t.replyIdx3==null?-1:t.replyIdx3));
  t.msgs.forEach((m,i)=>{const side=isMe(i)?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(isMe(i-1)?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(t.done&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
- if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
+ if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;if(t.special&&t.replyIdx2!=null&&t.replyIdx2>=0)t.replyIdx3=t.msgs.length;else if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
    /* v118: his reply types for a beat before it lands (the save
       waits for the pair, so a closed app never keeps half a talk) */
    const ty=document.createElement("div");ty.className="msg them typing";ty.innerHTML="<i></i><i></i><i></i>";$("#th-msgs").appendChild(ty);scrollDmBottom(true);
