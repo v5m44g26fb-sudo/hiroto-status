@@ -2803,7 +2803,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v233</p>
+  <p class="ver">v234</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2976,7 +2976,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v233</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v234</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3247,7 +3247,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v233</p>
+    <p class="ver">v234</p>
   </div>
 </section>
 </div>
@@ -3869,7 +3869,7 @@ function postEl(p,hot){
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
   d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(p.tm||"\u4eca")+'</span></div><div class="tx"></div>'
-    +(p.img?'<img class="pimg" src="'+p.img+'" alt="">':"")
+    +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'" alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
     +cnt("rp-btn",XIC9.rp,rp+(p.rped?1:0))
@@ -3888,7 +3888,7 @@ function postEl(p,hot){
      as a real-X quote card. Nothing is written back to the save. */
   const qtSnap=p.qt||qtDerive(p);
   if(qtSnap){const qc=document.createElement("div");qc.className="qtcard";
-   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" src="'+qtSnap.img+'" alt="">':"")+'</div>';
+   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" loading="lazy" decoding="async" src="'+qtSnap.img+'" alt="">':"")+'</div>';
    qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;linkifyTx(qc.querySelector(".qt-tx"),dispTx(qtSnap.tx));
    qc.addEventListener("click",e=>{e.stopPropagation();try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o.id===qtSnap.id);if(orig)openPostThread(orig);}catch(_){}});
    d.querySelector(".tx").after(qc);}
@@ -4763,7 +4763,7 @@ function tabHead(lab,count){const d=document.createElement("div");d.className="p
 /* v221: empty profile tabs offer the door back to the timeline,
    where the missing posts actually happen */
 function tabDoor(){const b=document.createElement("button");b.type="button";b.className="tab-door";b.textContent="タイムラインへ ›";b.addEventListener("click",()=>showPane("tl"));return b;}
-function mediaGrid(imgs,owner){const g=document.createElement("div");g.className="mediagrid";imgs.forEach((u,i)=>{const im=document.createElement("img");im.src=u;im.alt="";im.addEventListener("click",()=>{try{openMediaPhoto(imgs,owner||"nao",i);}catch(_){}});g.appendChild(im);});return g;}
+function mediaGrid(imgs,owner){const g=document.createElement("div");g.className="mediagrid";imgs.forEach((u,i)=>{const im=document.createElement("img");im.loading="lazy";im.decoding="async";im.src=u;im.alt="";im.addEventListener("click",()=>{try{openMediaPhoto(imgs,owner||"nao",i);}catch(_){}});g.appendChild(im);});return g;}
 function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
