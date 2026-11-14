@@ -1135,6 +1135,30 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v84: his profile, cover to tabs. His gold identity (avatar ring,
+   dark-and-gold follow button, cream distance band) stays and warms
+   toward pink with the distance stage, as before - what changes is the
+   finish: live chips on the cover like her v60 cover (follower count +
+   lead tag), his existing tags as a pill row under the bio, a larger
+   bio, and the v58 distance band promoted to the profile's centrepiece
+   with a five-stage pip row under the meter and a warmer glow at the
+   later stages. His photos, posts and numbers are unchanged. ===== */
+.his-covstat{position:absolute;right:12px;top:10px;z-index:1;display:flex;gap:6px}
+.his-covstat span{font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#fff;background:rgba(15,20,25,.55);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:4px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.his-covstat span:empty{display:none}
+#x-pane-hisprof #his-bio{font-size:14px!important;line-height:1.65}
+.his-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.his-tags span{font-size:11.5px;font-weight:800;color:#8a6d1f;background:#faf3da;border:1px solid #e8ddba;border-radius:999px;padding:4px 11px;transition:color .4s ease,background .4s ease,border-color .4s ease}
+#x-pane-hisprof.dstage-3 .his-tags span,#x-pane-hisprof.dstage-4 .his-tags span{color:#c2185b;background:#fdeef6;border-color:#f8c8dd}
+#x-pane-hisprof .counts b{font-size:15.5px}
+#his-dist{padding:14px 15px 12px}
+#his-dist .hd-stage{font-size:13.5px}
+#his-dist .hd-num{font-size:19px}
+#his-dist .hd-note{font-size:12.5px;line-height:1.65}
+.hd-pips{display:flex;gap:5px;margin-top:9px}
+.hd-pips i{flex:1;height:4px;border-radius:2px;background:#ece1bd;transition:background .5s ease}
+.hd-pips i.on{background:linear-gradient(90deg,#c9a227,#f91880)}
+#x-pane-hisprof.dstage-3 #his-dist,#x-pane-hisprof.dstage-4 #his-dist{box-shadow:0 10px 28px rgba(249,24,128,.16)}
 /* ===== v83: DM thread body, rebuilt to real-X DM. The list got its
    rebuild in v71; the thread itself now follows: his bubbles go to the
    real app's flat grey (the special thread keeps its pink-tinted white),
@@ -1523,7 +1547,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v83</p>
+  <p class="ver">v84</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1666,7 +1690,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v83</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v84</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1675,16 +1699,18 @@ input,textarea{font-size:16px}
     </div>
     <div id="x-pane-hisprof" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b id="his-name-bar">井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
-      <div class="pf-cover his-cover" id="his-cover"><div class="his-cover-typo"><b id="his-typo">HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div></div>
+      <div class="pf-cover his-cover" id="his-cover"><div class="his-cover-typo"><b id="his-typo">HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div><div class="his-covstat"><span id="his-cov-fol"></span><span id="his-cov-tag"></span></div></div>
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><span class="his-avawrap"><img class="avatar his-ava" id="his-ava" src="assets/ig-avatar.jpg" width="88" height="88" alt=""></span><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
         <div class="pf-name"><span id="his-name">井汲大翔</span><svg class="his-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg></div>
         <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。歌とステージがすべて。</div>
+        <div class="his-tags" id="his-tags"></div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">12.4万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
         <div id="his-dist">
           <div class="hd-top"><span class="hd-lab">二人の距離</span><span class="hd-stage" id="hd-stage">STAGE 1 ― まだ、遠い存在</span><b class="hd-num" id="hd-num">0</b></div>
           <div class="hd-meter"><i id="hd-fill"></i><span class="hd-tick" style="left:5%"></span><span class="hd-tick" style="left:15%"></span><span class="hd-tick" style="left:30%"></span><span class="hd-tick" style="left:45%"></span></div>
+          <div class="hd-pips" id="hd-pips"><i></i><i></i><i></i><i></i><i></i></div>
           <p class="hd-note" id="hd-note">まだ、画面の向こうの人。</p>
         </div>
       </div>
@@ -1853,7 +1879,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v83</p>
+    <p class="ver">v84</p>
   </div>
 </section>
 </div>
@@ -2927,6 +2953,8 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
 }
 function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);
+ set("#his-cov-fol","フォロワー "+T.fol);set("#his-cov-tag",(T.tags&&T.tags[0])||"");
+ const tg=$("#his-tags");if(tg){tg.innerHTML="";(T.tags||[]).forEach(t=>{const s=document.createElement("span");s.textContent=t;tg.appendChild(s);});}
  const av=$("#his-ava");if(av)av.src=T.av;
  const cv=$("#his-cover");if(cv)cv.style.backgroundImage="url("+T.cover+")";
  const dl=$("#st-dist-lab");if(dl)dl.textContent=distLab()+"（親密度）";
@@ -3315,7 +3343,8 @@ function renderDistProfile(){if(typeof S==="undefined"||!S)return;const si=distS
  const pane=$("#x-pane-hisprof");if(pane){for(let i=0;i<5;i++)pane.classList.remove("dstage-"+i);pane.classList.add("dstage-"+si);}
  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#hd-stage","STAGE "+(si+1)+" ― "+st.lab);set("#hd-num",String(S.dist||0));set("#hd-note",st.note);
- const f=$("#hd-fill");if(f)f.style.width=Math.max(0,Math.min(100,S.dist||0))+"%";}
+ const f=$("#hd-fill");if(f)f.style.width=Math.max(0,Math.min(100,S.dist||0))+"%";
+ const pp=$$("#hd-pips i");pp.forEach((el,i)=>el.classList.toggle("on",i<=si));}
 function renderThDist(){const bar=$("#th-dist");if(!bar)return;const on=!!(curThread&&curThread.special);bar.classList.toggle("hidden",!on);if(!on)return;const si=distStageIdx();
  const st=$("#thd-stage");if(st)st.textContent="STAGE "+(si+1)+" ― "+DIST_STAGES[si].lab;
  const num=$("#thd-num");if(num)num.textContent=String((S&&S.dist)||0);
