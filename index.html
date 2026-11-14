@@ -2496,6 +2496,14 @@ input,textarea{font-size:16px}
 /* ===== v154: the cleared-quest card that stays on the home ===== */
 #eventslot .evcleared{margin:16px 0 0;display:flex;align-items:center;gap:13px;padding:15px 18px;background:linear-gradient(163deg,#1a1233,#271549);color:#f4f0ff;border-top:1px solid rgba(247,201,72,.55);border-bottom:1px solid rgba(247,201,72,.55);animation:evin .38s ease both}
 #eventslot .evcleared.final{background:linear-gradient(163deg,#241a08,#33240a);border-top-color:#f7c948;border-bottom-color:#f7c948}
+/* ===== v155: day RESULT, third raise - a PLAYER rank plate under
+   the title (the same Lv + rank title the HUD carries) and a gold
+   BEST tag on the row that gained the most today. ===== */
+.dr-rank{display:flex;align-items:center;gap:9px;margin-top:11px}
+.dr-rank-lab{font-size:9.5px;font-weight:900;letter-spacing:.3em;color:#8a97a3}
+.dr-rank b{font-size:12.5px;font-weight:900;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:999px;padding:4px 12px;box-shadow:0 3px 10px rgba(247,201,72,.35)}
+.dr-row.best{border-color:rgba(247,201,72,.75);background:linear-gradient(180deg,rgba(247,201,72,.13),rgba(247,201,72,.04))}
+.dr-best{flex:none;font-size:9px;font-weight:900;letter-spacing:.18em;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:6px;padding:3px 7px;margin-left:8px}
 .evc-seal{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffd95e,#f7c948);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 16px rgba(247,201,72,.45)}
 .evc-seal svg{width:20px;height:20px;fill:#4a3200}
 .evc-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -2563,7 +2571,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v154</p>
+  <p class="ver">v155</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2730,7 +2738,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v154</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v155</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2913,6 +2921,7 @@ input,textarea{font-size:16px}
     <div class="dr-inner">
       <span class="dr-lab" id="dr-lab">DAY 1 ― RESULT</span>
       <b class="dr-title">1日が終わった</b>
+      <div class="dr-rank" id="dr-rank"></div>
       <div class="dr-rows" id="dr-rows"></div>
       <div class="dr-lvup hidden" id="dr-lvup"></div>
       <p class="dr-note" id="dr-note"></p>
@@ -2972,7 +2981,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v154</p>
+    <p class="ver">v155</p>
   </div>
 </section>
 </div>
@@ -4888,8 +4897,12 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   {lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true,cls:"fire",ic:DR_IC.flm},
   {lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true,cls:"pink",ic:DR_IC.dist}];
  const box=$("#dr-rows");box.innerHTML="";
- rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.cls?" "+r.cls:"");row.style.animationDelay=(i*0.09)+"s";
-  row.innerHTML='<span class="dr-ic">'+r.ic+'</span><span class="dr-rmain"><span class="dr-rlab"></span><span class="dr-rval">0</span></span><span class="dr-rd"></span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"");
+ /* v155: the day's biggest gain (followers / XP / recognition /
+    distance) is tagged BEST on its row */
+ let bestI=-1,bestV=0;rows.forEach((r,i)=>{if(!r.fire&&r.d>bestV){bestV=r.d;bestI=i;}});
+ const rk=$("#dr-rank");if(rk)rk.innerHTML='<span class="dr-rank-lab">PLAYER</span><b>Lv '+lvNum()+"・"+lvTitle()+"</b>";
+ rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.cls?" "+r.cls:"")+(i===bestI?" best":"");row.style.animationDelay=(i*0.09)+"s";
+  row.innerHTML='<span class="dr-ic">'+r.ic+'</span><span class="dr-rmain"><span class="dr-rlab"></span><span class="dr-rval">0</span></span><span class="dr-rd"></span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"")+(i===bestI?'<span class="dr-best">BEST</span>':"");
   row.querySelector(".dr-rlab").textContent=r.lab;
   const val=row.querySelector(".dr-rval"),chip=row.querySelector(".dr-rd");
   chip.textContent=r.d===0?"±0":((r.d>0?"▲ +":"▼ ")+r.d);
