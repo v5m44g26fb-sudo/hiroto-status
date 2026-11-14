@@ -2655,7 +2655,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v163</p>
+  <p class="ver">v164</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2824,7 +2824,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v163</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v164</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3074,7 +3074,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v163</p>
+    <p class="ver">v164</p>
   </div>
 </section>
 </div>
@@ -4268,6 +4268,15 @@ function feedEndCard(){const used=[["投稿",S.posted],["Event",S.evDone],["Acti
  const go=d.querySelector(".fe-go");if(go)go.addEventListener("click",()=>{const b=$("#btn-nextday");if(b)b.click();});
  return d;}
 $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#hometabs [data-htab]").forEach(x=>x.classList.remove("act"));b.classList.add("act");S._htab=b.dataset.htab;renderFeed();save();}));
+/* v164: profile-cover parallax - while a profile pane is open, its
+   cover photo drifts a few px against the scroll (background-position
+   calc from each cover's own base %), so the artist pages feel deep
+   instead of flat. rAF-throttled on the one scroll container, and it
+   only ever touches the visible profile's cover. */
+(function(){const sc=$("#x-scroll");if(!sc)return;let tick=false;
+ const covs=[["#x-pane-me .pf-cover",12,"me"],["#x-pane-hisprof .pf-cover",42,"hisprof"]];
+ function upd(){tick=false;const cv=covs.find(c=>curPane===c[2]);if(!cv)return;const el=$(cv[0]);if(!el)return;const r=el.getBoundingClientRect();const dy=Math.max(0,Math.min(170,-r.top))*0.14;el.style.backgroundPosition="center calc("+cv[1]+"% + "+dy.toFixed(1)+"px)";}
+ sc.addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});})();
 /* post detail (thread): tap a post -> large main post + replies, like real X */
 let threadStack=[],threadFrom="tl",threadScroll=0;
 function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};return num(2)*23+num(1)*61+num(0)*197+89;}
