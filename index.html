@@ -462,6 +462,44 @@ input,textarea{font-size:16px}
 .dm-inputbar .dm-send{margin-left:auto;width:31px;height:31px;flex:none;border-radius:50%;background:#1d9bf0;display:flex;align-items:center;justify-content:center}
 .dm-inputbar .dm-send svg{width:15px;height:15px;fill:#fff}
 #dmthread.special .dm-send{background:linear-gradient(135deg,#f91880,#7856ff)}
+/* ===== v23: compose overhaul (Status ACTION sheet) ===== */
+#x-compose{background:linear-gradient(180deg,#ffffff,#fcf9ff)}
+.xc-title{font-size:15px;font-weight:900}
+#xc-post{background:linear-gradient(135deg,#1d9bf0,#7856ff);padding:10px 22px;font-size:15px;box-shadow:0 5px 16px rgba(120,86,255,.35)}
+#xc-post:disabled{background:#cfd9de;box-shadow:none;opacity:1;color:#fff}
+#xc-post.posting{background:linear-gradient(135deg,#0d7ec2,#5b3df0)}
+.xc-action{margin:6px 16px 2px;display:flex;align-items:center;gap:11px;background:linear-gradient(120deg,#141433,#2a1650 60%,#3d1050);border-radius:16px;padding:12px 14px;color:#fff;box-shadow:0 8px 22px rgba(30,16,80,.28);flex:none}
+.xc-action-tag{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#f91880,#7856ff);font-size:11px;font-weight:900;letter-spacing:.12em;border-radius:8px;padding:5px 8px;flex:none}
+.xc-action-tag svg{width:12px;height:12px;fill:#ffd400}
+.xc-action-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.xc-action-tx b{font-size:15px}
+.xc-action-tx span{font-size:11.5px;color:#c9c2e8}
+.xc-action-day{flex:none;font-size:11px;font-weight:800;color:#ffd400;border:1px solid rgba(255,212,0,.5);border-radius:999px;padding:4px 9px;white-space:nowrap}
+.xc-card{margin:12px 16px 0;border:1.5px solid #e3e9ec;border-radius:18px;background:#fff;box-shadow:0 6px 20px rgba(15,20,25,.07);padding:6px 0 4px;flex:none}
+.xc-card .xc-body{padding:10px 14px 0}
+.xc-card .xc-tools{border-top:1px solid #eff3f4;margin-top:8px;padding:8px 12px 4px 66px}
+.xc-who{display:flex;align-items:baseline;gap:6px;margin-bottom:1px;min-width:0}
+.xc-who b{font-size:15px;flex:none}
+.xc-who span{color:#536471;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xc-pimg{display:block;width:100%;border-radius:14px;margin-top:9px;object-fit:cover;max-height:300px}
+.xc-ring{width:27px;height:27px}
+.xc-count{font-size:13px}
+.xc-seclab{display:flex;align-items:baseline;gap:8px;margin:18px 16px 4px;font-size:14px;font-weight:900;flex:none}
+.xc-seclab span{font-size:11.5px;color:#536471;font-weight:700}
+.choice.xcopt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid #e3e9ec;border-radius:18px;padding:14px;margin-top:11px;box-shadow:0 2px 8px rgba(15,20,25,.05);position:relative}
+.xcopt-no{width:26px;height:26px;flex:none;border-radius:50%;background:#eff3f4;color:#536471;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.xcopt-main{flex:1;min-width:0}
+.xcopt-tx{display:block;font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.xcopt-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.xchip{font-size:10.5px;font-weight:800;border-radius:999px;padding:2.5px 8px;background:rgba(29,155,240,.1);color:#0f7ae5}
+.xchip.dist{background:rgba(249,24,128,.1);color:#d60f70}
+.xchip.bad{background:rgba(244,33,46,.09);color:#d3121f}
+.xchip.xp{background:rgba(120,86,255,.12);color:#5b3df0}
+.xcopt-img{width:56px;height:56px;flex:none;border-radius:12px;object-fit:cover}
+.xcopt-check{position:absolute;top:-8px;right:-6px;width:24px;height:24px;border-radius:50%;background:#f91880;color:#fff;font-size:13px;font-weight:900;display:none;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(249,24,128,.5)}
+.choice.xcopt.sel{border-color:#f91880;background:rgba(249,24,128,.05);box-shadow:0 0 0 1px #f91880,0 10px 26px rgba(249,24,128,.22);transform:scale(1.012)}
+.choice.xcopt.sel .xcopt-no{background:linear-gradient(135deg,#f91880,#7856ff);color:#fff}
+.choice.xcopt.sel .xcopt-check{display:flex}
 </style>
 </head>
 <body>
@@ -474,7 +512,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v22</p>
+  <p class="ver">v23</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -583,7 +621,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v22</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v23</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -632,12 +670,21 @@ input,textarea{font-size:16px}
   <div id="x-compose">
     <div class="xc-head">
       <button id="xc-cancel">キャンセル</button>
+      <span class="xc-title">ポストを作成</span>
       <button id="xc-post" disabled>ポストする</button>
     </div>
+    <div class="xc-action">
+      <span class="xc-action-tag"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.5 22 19 10h-6.5L13 2z"/></svg>ACTION</span>
+      <div class="xc-action-tx"><b>今日の投稿</b><span>投稿すると、世界が反応します</span></div>
+      <span class="xc-action-day" id="xc-day"></span>
+    </div>
+    <div class="xc-card">
     <div class="xc-body">
       <img class="avatar" src="assets/nao-avatar4.jpg" width="40" height="40" alt="">
       <div class="xc-main">
+        <div class="xc-who"><b>なお</b><span id="xc-handle"></span></div>
         <div id="xc-preview" class="xc-preview empty">いまどうしてる？</div>
+        <img id="xc-pimg" class="xc-pimg hidden" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
         <div class="xc-reply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3.5 9h17M3.5 15h17M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>全員が返信できます</div>
       </div>
     </div>
@@ -650,7 +697,8 @@ input,textarea{font-size:16px}
       <span class="xc-count" id="xc-count"></span>
       <svg class="xc-ring" width="24" height="24" viewBox="0 0 24 24"><circle class="bgc" cx="12" cy="12" r="9"/><circle class="fgc" id="xc-ring-fg" cx="12" cy="12" r="9" stroke-dasharray="56.5" stroke-dashoffset="56.5"/></svg>
     </div>
-    <p class="xc-note">今日の話題に合った投稿案。タップで下書きにセット、右上の「ポストする」で投稿。</p>
+    </div>
+    <div class="xc-seclab">投稿案を選ぶ<span>タップで下書きにセット、右上の「ポストする」で投稿</span></div>
     <div id="postopts"></div>
   </div>
   <div id="storyviewer" role="dialog" aria-label="ストーリー">
@@ -681,7 +729,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v22</p>
+  <p class="ver">v23</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -1245,11 +1293,12 @@ $("#btn-nextday").onclick=()=>{if(S.ch>=5)ending();else{startChapter(S.ch+1);sho
    Switching drafts before posting is free; cancel/post share a slide-down
    close, and Changes pops only fire once the sheet is gone. */
 let xcSel=null,xcBusy=false;
-const XC_MAX=140,XC_CIRC=56.5;
+const XC_MAX=140,XC_CIRC=56.5,XC_PLACEHOLDER="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 function xcRenderDraft(){
- const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg");
- if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}return;}
+ const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg");
+ if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pi){pi.classList.add("hidden");pi.src=XC_PLACEHOLDER;}return;}
  pv.textContent=xcSel.tx;pv.classList.remove("empty");btn.disabled=xcBusy;
+ if(pi){if(xcSel.img){pi.src=xcSel.img;pi.classList.remove("hidden");}else{pi.classList.add("hidden");pi.src=XC_PLACEHOLDER;}}
  const len=[...xcSel.tx.replace(/\n/g,"")].length;
  cnt.textContent=String(len);cnt.className="xc-count"+(len>XC_MAX?" over":(len>XC_MAX-20?" warn":""));
  if(fg){fg.style.strokeDashoffset=String(XC_CIRC*(1-Math.min(1,len/XC_MAX)));fg.style.stroke=len>XC_MAX?"#f4212e":(len>XC_MAX-20?"#ffad1f":"#1d9bf0");}
@@ -1262,8 +1311,15 @@ function xcCloseSheet(done){
 $("#x-compose-btn").addEventListener("click",()=>{
  if(S.posted){toastChg("今日の投稿は完了してるよ");return;}
  xcSel=null;xcBusy=false;xcRenderDraft();
+ $("#xc-day").textContent="Day "+S.ch+" / 5";
+ $("#xc-handle").textContent=S.handle||"";
  const box=$("#postopts");box.innerHTML="";
- CH[S.ch-1].posts.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.tx;b.onclick=()=>{if(xcBusy)return;box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");xcSel=o;xcRenderDraft();};box.appendChild(b);});
+ CH[S.ch-1].posts.forEach((o,oi)=>{const b=document.createElement("button");b.className="choice xcopt";
+  const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
+  let chips="";FXL.forEach(([k,lab,cls])=>{const v=o.fx?o.fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+v+"</span>";}});
+  b.innerHTML='<span class="xcopt-no">'+(oi+1)+'</span><span class="xcopt-main"><span class="xcopt-tx"></span>'+(chips?'<span class="xcopt-chips">'+chips+"</span>":"")+"</span>"+(o.img?'<img class="xcopt-img" src="'+o.img+'" alt="">':"")+'<span class="xcopt-check">✓</span>';
+  b.querySelector(".xcopt-tx").textContent=o.tx;
+  b.onclick=()=>{if(xcBusy)return;box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");xcSel=o;xcRenderDraft();};box.appendChild(b);});
  $("#x-compose").classList.add("on");
 });
 $("#xc-post").addEventListener("click",()=>{
