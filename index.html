@@ -1532,6 +1532,7 @@ input,textarea{font-size:16px}
 .chgday{margin-top:14px}
 .chgday-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-bottom:7px;border-bottom:2px solid #eef1f3}
 .chgday-t{font-size:12px;font-weight:900;letter-spacing:.12em;color:#fff;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:7px;padding:3px 9px}
+.chgday-ttl{font-size:12.5px;font-weight:800;color:#0f1419}
 .chgday-nets{display:flex;flex-wrap:wrap;gap:5px}
 .chgnet{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#536471}
 .chgnet i{width:6px;height:6px;border-radius:50%;background:var(--c,#999)}
@@ -2772,7 +2773,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v211</p>
+  <p class="ver">v212</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2941,7 +2942,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v211</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v212</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3210,7 +3211,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v211</p>
+    <p class="ver">v212</p>
   </div>
 </section>
 </div>
@@ -4023,6 +4024,9 @@ function renderChgLog(){
   const nets={};entries.forEach(e=>{if(e.cls==="lv")return;const ax=chgAxisOf(e);nets[ax]=nets[ax]||{name:e.name,sum:0};nets[ax].sum+=e.v;});
   const hd=document.createElement("div");hd.className="chgday-h";
   hd.innerHTML='<span class="chgday-t">DAY '+day+'</span>';
+  /* v212: the day head also names the chapter, the same wording
+     the JOURNEY sheet uses for the day */
+  {const chp=curCH()[day-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl){const ts=document.createElement("span");ts.className="chgday-ttl";ts.textContent=ttl;hd.appendChild(ts);}}
   const nn=document.createElement("span");nn.className="chgday-nets";
   Object.keys(nets).forEach(ax=>{const nt=nets[ax];if(!nt.sum)return;const c=document.createElement("span");c.className="chgnet";c.style.setProperty("--c",CHG_AXIS[ax].c);c.innerHTML="<i></i>"+nt.name+" <b></b>";c.querySelector("b").textContent=chgValTx({name:nt.name,v:nt.sum});nn.appendChild(c);});
   hd.appendChild(nn);sec.appendChild(hd);
