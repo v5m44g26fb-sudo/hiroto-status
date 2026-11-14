@@ -238,6 +238,15 @@ input,textarea{font-size:16px}
 #actbar button{flex:1;padding:11px;border-radius:999px;font-weight:700;font-size:14px;cursor:pointer}
 #btn-activity{background:#eff3f4;border:1px solid #cfd9de;color:#0f1419}
 #btn-nextday{background:#1d9bf0;color:#fff;border:none;display:none}
+/* ===== v122: the day dock answers - the next-day button (the day's
+   goal) grows in when it unlocks instead of blinking on, and the
+   Activity button settles into a dimmed, checked state once today's
+   run is spent. Visibility rules and actions are unchanged. ===== */
+#btn-nextday{animation:nextin .45s cubic-bezier(.2,.8,.3,1.15) both;box-shadow:0 8px 22px rgba(29,155,240,.4)}
+@keyframes nextin{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+#btn-activity{transition:opacity .3s ease,filter .3s ease}
+#btn-activity.done{opacity:.55;filter:saturate(.4)}
+#btn-activity.done::after{content:" ✓"}
 .scrim{position:absolute;inset:0;background:rgba(36,46,54,.5);z-index:95;display:none;align-items:flex-end}
 .scrim.on{display:flex;animation:fadein .2s ease}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
@@ -2164,7 +2173,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v121</p>
+  <p class="ver">v122</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2319,7 +2328,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v121</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v122</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2530,7 +2539,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v121</p>
+    <p class="ver">v122</p>
   </div>
 </section>
 </div>
@@ -4149,6 +4158,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";
  const mc=(id,on)=>{const e=el(id);if(e)e.classList.toggle("done",!!on);};
  mc("#mc-post",S.posted);mc("#mc-event",S.evDone);mc("#mc-act",S.actDone);
+ if(el("#btn-activity"))el("#btn-activity").classList.toggle("done",!!S.actDone);
  if(el("#hud-handle"))el("#hud-handle").textContent=S.handle||"";
  /* v91: status card stat cells + mission counter (display only; the
     numbers are the same state the profile and ending already read) */
