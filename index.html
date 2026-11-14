@@ -1746,6 +1746,37 @@ input,textarea{font-size:16px}
 #x-nav button.sel .ic-f{display:block;fill:#0f1419;stroke:none}
 #x-nav button.sel::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:calc(3px + env(safe-area-inset-bottom));width:4px;height:4px;border-radius:50%;background:linear-gradient(90deg,#7856ff,#f91880)}
 #x-nav .bdg{border:2px solid #fff;line-height:13px;box-sizing:border-box}
+/* ===== v97: one design language for the small surfaces - sheets,
+   dialogs and toasts. The scrim softens (lighter colour, a hint of
+   blur); every sheet shares one radius and one shadow, and the text
+   close glyph becomes the same circular button everywhere (the
+   Activity sheet's dark-header variant keeps its own colours via
+   its scoped rules). The Changes toasts become glass pills with a
+   glowing status dot in the type colour - blue by default, green
+   for good changes, red for bad, pink for distance, gold for a
+   level-up. The reset confirmation sheet is built from these same
+   parts. Texts, flows and the reset action itself are unchanged. */
+.scrim{background:rgba(24,30,38,.52);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.sheet{border-radius:26px 26px 0 0;box-shadow:0 -14px 44px rgba(15,20,25,.28)}
+.sheet .close{width:32px;height:32px;border-radius:50%;background:#eff3f4;color:#0f1419;font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s ease,transform .12s ease}
+.sheet .close:active{background:#e3e9ec;transform:scale(.9)}
+.chg{display:inline-flex;align-items:center;gap:8px;background:rgba(15,20,25,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:9px 16px 9px 13px;box-shadow:0 8px 26px rgba(0,0,0,.35)}
+.chg::before{content:"";width:7px;height:7px;border-radius:50%;background:#4cc3ff;flex:none;box-shadow:0 0 9px #4cc3ff}
+.chg.good{border-color:rgba(0,186,124,.75)}
+.chg.good::before{background:#00ba7c;box-shadow:0 0 9px #00ba7c}
+.chg.bad::before{background:#f4212e;box-shadow:0 0 9px #f4212e}
+.chg.dist::before{background:#f91880;box-shadow:0 0 9px #f91880}
+.chg.levelup{border-color:rgba(255,212,0,.85);color:#ffe98a}
+.chg.levelup::before{background:#ffd400;box-shadow:0 0 9px #ffd400}
+.reset-sheet{text-align:center;padding:24px 22px 30px}
+.reset-sheet::before{content:"";display:block;width:42px;height:4.5px;border-radius:3px;background:#d8dee3;margin:-12px auto 16px}
+.rs-ic{width:52px;height:52px;border-radius:50%;background:rgba(244,33,46,.1);color:#f4212e;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.rs-ic svg{width:25px;height:25px;fill:currentColor}
+.reset-sheet h3{font-size:17.5px;margin-bottom:6px}
+.rs-danger{display:block;width:100%;margin-top:18px;padding:14px;border:none;border-radius:999px;background:#f4212e;color:#fff;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 8px 22px rgba(244,33,46,.35);transition:transform .12s ease}
+.rs-danger:active{transform:scale(.97)}
+.rs-cancel{display:block;width:100%;margin-top:9px;padding:13px;border:1px solid #cfd9de;border-radius:999px;background:#fff;color:#0f1419;font-size:14.5px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .15s ease}
+.rs-cancel:active{background:#f7f9f9}
 </style>
 </head>
 <body>
@@ -1760,7 +1791,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v96</p>
+  <p class="ver">v97</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1915,7 +1946,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v96</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v97</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2124,7 +2155,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v96</p>
+    <p class="ver">v97</p>
   </div>
 </section>
 </div>
@@ -2150,6 +2181,13 @@ input,textarea{font-size:16px}
   <div id="actsec-time" class="hidden"><p class="actlab">時間帯 ― いつやる？</p><div id="acttime" class="chiprow"></div></div>
   <button class="btn hidden" id="act-go" disabled>この内容で実行する</button>
   <div id="actresult" style="margin-top:12px;font-size:14px;line-height:1.75"></div>
+</div></div>
+<div class="scrim" id="scrim-reset"><div class="sheet reset-sheet">
+  <span class="rs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg></span>
+  <h3>セーブを消して最初からにする？</h3>
+  <p class="desc">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
+  <button class="rs-danger" id="btn-reset-yes">消して最初から</button>
+  <button class="rs-cancel" data-close="scrim-reset">やめておく</button>
 </div></div>
 <script>
 "use strict";
@@ -3749,7 +3787,14 @@ function renderCredits(kind){
   bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
-$("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-restart").onclick=resetAll;
+/* v97: the destructive reset now asks first, in a confirmation sheet
+   built from the same scrim/sheet parts as every other small surface.
+   resetAll itself is untouched; all three entry points (settings,
+   title, ending) route through the same sheet. */
+const askReset=()=>{const s=$("#scrim-reset");if(s){s.classList.remove("closing");s.classList.add("on");}};
+$("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-restart").onclick=askReset;
+$("#btn-reset-yes").onclick=resetAll;
+(function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 $("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 renderTrends();
