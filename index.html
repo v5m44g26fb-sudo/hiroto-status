@@ -771,7 +771,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v40</p>
+  <p class="ver">v41</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -885,7 +885,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v40</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v41</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -998,7 +998,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v40</p>
+    <p class="ver">v41</p>
   </div>
 </section>
 </div>
@@ -1400,7 +1400,59 @@ function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
 function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
 function distLab(){return tgt().short+"との距離";}
 function curCH(){return tgtKey()==="sakuya"?CH_S:CH;}
-function curTrends(){return tgtKey()==="sakuya"?TRENDS_S:TRENDS;}
+function curTrends(){const base=(tgtKey()==="sakuya"?TRENDS_S:TRENDS).slice();
+ if(!S||!S.started)return base;
+ const sk=tgtKey()==="sakuya",fp=n=>n.toLocaleString("ja-JP")+" ポスト",dyn=[];
+ if(S.flm>=55)dyn.push(["トレンド",sk?"サクヤ 熱愛疑惑":"井汲大翔 熱愛疑惑",fp(42000+S.flm*310)]);
+ else if(S.flm>=30)dyn.push(["トレンド","#匂わせ疑惑",fp(9800+S.flm*260)]);
+ if(S.dist>=38&&S.ch>=4)dyn.push(["エンタメ","歌うまコラボSP コラボ予告",fp(15000+S.dist*180)]);
+ else if(S.cog>=45)dyn.push(["エンタメ","#なお 歌唱力",fp(6000+S.cog*150)]);
+ if(S.flm>=20&&S.dist>=25)dyn.push(["エンタメ",sk?"サクヤ なお 匂わせ":"大翔 なお 匂わせ",fp(5000+S.flm*120+S.dist*60)]);
+ if(!dyn.length)return base;
+ const used=new Set(dyn.map(t=>t[1]));
+ return dyn.concat(base.filter(t=>!used.has(t[1]))).slice(0,7);}
+/* v41: ambient world buzz - extra matome / fan / general posts unlocked by the
+   current cog/fol/flm/dist tone. Injected once each at chapter start and after
+   posting, so the world's temperature visibly shifts as the numbers move.
+   Numbers, branches and the chapter skeleton are untouched. */
+const BUZZ=[
+ {k:"h-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、サビで一気に駆け出す感じが癖になる。最年長メンバーの声、安定感が違う",lk:210,rp:18,rc:9},
+ {k:"h-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、大翔さんの動きとタイミング被りすぎ問題。偶然にしては多くない？",lk:388,rp:66,rc:92},
+ {k:"h-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおの投稿に、井汲大翔ファン界隈がざわつき始めた。『距離、近くない？』の声",lk:1120,rp:240,rc:188},
+ {k:"h-w2",a:"fan1",cond:s=>s.fol>=150,tx:"なおのフォロワー、また増えてる…！ デビュー初日から見てるけど、見つかっていく過程に立ち会えるの嬉しい",lk:96,rp:8,rc:14},
+ {k:"h-s3",a:"sora",cond:s=>s.flm>=20,tx:"音楽の話がしたいのに、界隈は匂わせ探しで大盛り上がり。……いやまず歌を聴こうよ",lk:264,rp:31,rc:18},
+ {k:"h-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、歌唱切り抜きが連日じわ伸び。『歌で見つかる』王道コースを歩み始めたか",lk:840,rp:130,rc:64},
+ {k:"h-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。匂わせか天然か、界隈で論争に発展",lk:1980,rp:430,rc:355},
+ {k:"h-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"正直、最初は様子見だった。でも歌番組の生歌で完全に落ちた。なお、推せる",lk:154,rp:12,rc:21},
+ {k:"h-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は全然違うからな。なおはどっち側で残るか見もの",lk:512,rp:88,rc:140},
+ {k:"h-a3",a:"matome",cond:s=>s.flm>=45,tx:"新人・なお、騒ぎの大きさが実力の評価に追いつき始めた。事務所の対応に注目が集まる",lk:2760,rp:590,rc:470}];
+const BUZZ_S=[
+ {k:"s-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、夢みたいなイントロから駆け出す感じが最高。最年長メンバーの声、芯がある",lk:210,rp:18,rc:9},
+ {k:"s-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、サクヤの動きとタイミング被りすぎ問題。同じ事務所でも、これは多くない？",lk:388,rp:66,rc:92},
+ {k:"s-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおとNCT WISH サクヤ、同じ事務所の先輩後輩の距離感に界隈がざわつき始めた",lk:1120,rp:240,rc:188},
+ {k:"s-w2",a:"fan1",cond:s=>s.fol>=150,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
+ {k:"s-s3",a:"sora",cond:s=>s.flm>=20,tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
+ {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、歌唱切り抜きが連日じわ伸び。同じ事務所の先輩・サクヤとの接点にも注目が集まり始めた",lk:840,rp:130,rc:64},
+ {k:"s-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。事務所の後輩という立場も相まって、論争に発展",lk:1980,rp:430,rc:355},
+ {k:"s-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"様子見してたけど、歌番組の生歌で落ちた。なおの声、現場だとさらに化ける",lk:154,rp:12,rc:21},
+ {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
+ {k:"s-a3",a:"matome",cond:s=>s.flm>=45,tx:"新人・なお、騒ぎの大きさが実力に追いつき始めた。同じ事務所の先輩との距離も含め、対応に注目集まる",lk:2760,rp:590,rc:470}];
+function injectBuzz(maxN,pos){
+ if(!S||!S.started||!maxN)return;
+ if(!S.buzz)S.buzz=[];
+ const pool=tgtKey()==="sakuya"?BUZZ_S:BUZZ;let added=0;
+ for(const e of pool){
+  if(added>=maxN)break;
+  if(S.buzz.includes(e.k))continue;
+  let ok=false;try{ok=!!e.cond(S);}catch(_){ok=false;}
+  if(!ok)continue;
+  S.buzz.push(e.k);
+  const p=mkPost(e.a,e.tx,e.lk,e.rp,e.rc,false);
+  if(pos)S.posts.splice(Math.min(pos,S.posts.length),0,p);else S.posts.unshift(p);
+  if(e.a==="matome"){S.men.unshift(p);S.notifs.unshift({a:"matome",tx:"があなたについて報じました",sub:"世間の反応 ― "+curCH()[S.ch-1].day});}
+  added++;
+ }
+}
 function curStory(){return tgtKey()==="sakuya"?STORY_S:STORY;}
 function svImg(k){if(k==="nao")return "assets/nao-promo.jpg";if(k===tgtKey())return tgt().cover;return undefined;}
 </script>
@@ -1447,8 +1499,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[]};}
-
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[]};}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -1820,6 +1871,7 @@ function startChapter(n){
    S.threads.unshift({id:tgtKey(),who:tgtKey(),msgs:TDM.msgs.slice(),choices:TDM.choices,done:false,unread:true,special:true,replyIdx:-1});
    S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"初めての、本人からの連絡"});
  }
+ injectBuzz(n>=2?1:0,0);
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
 }
 function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";}
@@ -1876,7 +1928,7 @@ function doPost(o){
  });
  mine.replyIds=reacts.filter(r=>!r.sys).map(r=>r.id);
  S.posts=[mine].concat(reacts,S.posts);
- S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();addStory("post");save();
+ S.posted=true;applyFx(o.fx);injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
 }
 /* activity (Status-style: pick a title, partner(s) and a time slot, then run.
    Partner/time are presentation only - the 1-per-day rule and fx are unchanged) */
