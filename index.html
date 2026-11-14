@@ -1677,6 +1677,23 @@ input,textarea{font-size:16px}
 .hstat.cog .hs-bar i{background:linear-gradient(90deg,#4cc3ff,#7856ff)}
 .hstat.flm .hs-bar i{background:linear-gradient(90deg,#ffb03a,#f4212e)}
 .hstat.dist .hs-bar i{background:linear-gradient(90deg,#7856ff,#f91880)}
+/* ===== v92: ending afterglow - a staff-roll credits block closes the
+   work under the JOURNEY panel: a gradient rule, the work's title card
+   in the ending's accent, the cast-and-record rows read back from the
+   run's own state (hero / target / first follower / outcome / the
+   five-day record / total Changes), a FIN mark, and a quiet way back
+   to the title that keeps the save (もう一度はじめる still resets).
+   The ending's text, branching and numbers are unchanged. ===== */
+.end-credits{width:100%;margin-top:28px;text-align:center;animation:fadeup .6s ease .5s both}
+.ec-rule{width:54px;height:2px;border-radius:1px;background:linear-gradient(90deg,#7856ff,#f91880,#ffd400);margin:0 auto 20px}
+.ec-eyebrow{font-size:10px;font-weight:900;letter-spacing:.42em;text-indent:.42em;color:var(--acc)}
+.ec-title{font-size:21px;font-weight:900;line-height:1.55;letter-spacing:.06em;color:#fff;margin-top:11px;text-shadow:0 3px 18px rgba(0,0,0,.6)}
+.ec-sub{font-size:9.5px;font-weight:800;letter-spacing:.3em;text-indent:.3em;color:#9aa0a6;margin-top:9px}
+.ec-rows{margin:20px auto 0;max-width:302px;text-align:left}
+.ec-row{display:flex;align-items:baseline;gap:12px;padding:7.5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.ec-row span{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#8a94a6;flex:none;width:97px;white-space:nowrap}
+.ec-row b{font-size:13px;font-weight:800;color:#e7e9ea;margin-left:auto;text-align:right}
+.ec-fin{margin-top:23px;font-size:12px;font-weight:900;letter-spacing:.5em;text-indent:.5em;color:#fff}
 </style>
 </head>
 <body>
@@ -1691,7 +1708,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v91</p>
+  <p class="ver">v92</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1846,7 +1863,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v91</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v92</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2038,8 +2055,24 @@ input,textarea{font-size:16px}
       <div class="ej-row"><span class="ej-lab" id="ej-dist-lab">ひろとの距離</span><span class="ej-stage" id="ej-stage"></span><span class="ej-dots" id="ej-dots"></span></div>
       <p class="ej-words" id="ej-words"></p>
     </div>
+    <div class="end-credits" id="end-credits">
+      <div class="ec-rule" aria-hidden="true"></div>
+      <p class="ec-eyebrow">CREDITS</p>
+      <p class="ec-title">デビューしたら、<br>彼と同じステージの件</p>
+      <p class="ec-sub">STATUS × X ― A FIVE-DAY STORY</p>
+      <div class="ec-rows">
+        <div class="ec-row"><span>主人公</span><b id="ec-hero"></b></div>
+        <div class="ec-row"><span>近づいた相手</span><b id="ec-target"></b></div>
+        <div class="ec-row"><span>最初のフォロワー</span><b id="ec-first"></b></div>
+        <div class="ec-row"><span>到達した結末</span><b id="ec-end"></b></div>
+        <div class="ec-row"><span>5日間の記録</span><b id="ec-record"></b></div>
+        <div class="ec-row"><span>変化の総数</span><b id="ec-changes"></b></div>
+      </div>
+      <p class="ec-fin">― FIN ―</p>
+      <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
+    </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v91</p>
+    <p class="ver">v92</p>
   </div>
 </section>
 </div>
@@ -3629,11 +3662,30 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  $("#end-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));
  $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
  const em=$("#end-emblem");if(em)em.innerHTML=END_EMBLEM[kind]||"";
- show("scr-ending");renderEndJourney();save();}
+ show("scr-ending");renderEndJourney();renderCredits(kind);save();}
+/* v92: staff-roll credits under the ending - the work's title card and
+   a read-back of the five days, derived only from state that already
+   exists (handle / target / first follower / outcome / record /
+   chgLog). Nothing is written to the save; the ending's text, its
+   branching and its numbers are unchanged. Returning to the title
+   keeps the save, so つづきから is surfaced there even when this
+   session started fresh (boot only unhides it for a loaded save). */
+function renderCredits(kind){
+ const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ set("#ec-hero","なお "+(S.handle||""));
+ const T=tgt();set("#ec-target",T.name+"（"+T.handle+"）");
+ const F=ACC[S.first];set("#ec-first",F?F.n:"―");
+ set("#ec-end",({collab:"コラボEND",flame:"炎上END",quiet:"静かなEND",start:"これからEND"})[kind]||"");
+ set("#ec-record","Lv "+(1+Math.floor((S.xp||0)/50))+" ・ フォロワー "+fmt(S.fol)+" ・ "+distLab()+" STAGE "+(distStageIdx()+1));
+ set("#ec-changes",(S.chgLog||[]).length+" 件の Changes");
+ const bc=$("#btn-continue"),br=$("#btn-reset0");
+ if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
+  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
 $("#btn-reset").onclick=resetAll;$("#btn-reset0").onclick=resetAll;$("#btn-restart").onclick=resetAll;
 $("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
+$("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
