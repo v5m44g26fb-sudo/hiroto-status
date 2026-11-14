@@ -1135,6 +1135,26 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v89: quote cards and repost headers, built to real X. The game
+   had no quote rendering at all; postEl now embeds a quote card when
+   one is derivable from existing data (see qtDerive) - bordered card,
+   mini author row, three-line clamp, media thumbnail on the right, and
+   a tap through to the original's thread. Her reposted posts join her
+   profile's post tab under a repost header line, as on real X. ===== */
+.qtcard{border:1px solid #cfd9de;border-radius:14px;padding:10px 12px;margin-top:9px;cursor:pointer;transition:background .15s ease;background:#fff}
+.qtcard:active{background:#f7f9f9}
+.qt-h{display:flex;align-items:center;gap:6px;font-size:13px;min-width:0}
+.qt-av{width:20px;height:20px;border-radius:50%;object-fit:cover;flex:none}
+.qt-n{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qt-hd{color:#536471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qt-flex{display:flex;gap:10px;margin-top:3px}
+.qt-tx{flex:1;min-width:0;font-size:14px;line-height:1.55;color:#0f1419;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.qt-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;object-position:center 20%;flex:none;border:1px solid #eff3f4}
+.rpwrap{border-bottom:1px solid #eff3f4}
+.rpwrap .post{border-bottom:none}
+.rp-head{display:flex;align-items:center;gap:7px;padding:11px 16px 0 68px;font-size:13px;font-weight:700;color:#536471;animation:panein .18s ease}
+.rp-head .rp-ic{display:flex}
+.rp-head .rp-ic svg{width:15px;height:15px;fill:#00a06e}
 /* ===== v88: day card and RESULT, raised to film grade. The intro gains
    a per-chapter photo backdrop (her own photos, Ken Burns drift) under a
    cinematic shade, letterbox bars that close in, a CHAPTER n label, a
@@ -1591,7 +1611,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v88</p>
+  <p class="ver">v89</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1734,7 +1754,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v88</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v89</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1927,7 +1947,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v88</p>
+    <p class="ver">v89</p>
   </div>
 </section>
 </div>
@@ -2420,6 +2440,17 @@ const xcnt9=t=>{const m=String(t==null?"":t).replace(/,/g,"").match(/[\d.]+/);re
    longer appears anywhere in the file. */
 const dispTx=t=>String(t==null?"":t).replace(/\u30e9\u30a4\u30d6\u30b9\u30c6\u30fc\u30b8/g,"MUSIC STAGE");
 function fmtCnt(n){n=+n||0;if(n>=10000){const v=n/10000;return (v>=100?String(Math.round(v)):v.toFixed(1).replace(/\.0$/,""))+"\u4e07";}return n.toLocaleString("ja-JP");}
+/* v89: find the quoted original for a post, if one unambiguously exists:
+   a bracketed fragment of 5+ chars that appears verbatim in one of her
+   own posts. Returns a display snapshot or null. */
+function qtDerive(p){try{
+ if(!p||p.mine||typeof S==="undefined"||!S||!S.posts)return null;
+ const m=/「([^」]{5,})」/.exec(p.t||"");if(!m)return null;
+ const orig=S.posts.find(o=>o.mine&&o.t&&(o.t.includes(m[1])||m[1].includes(o.t.slice(0,12))));
+ if(!orig)return null;
+ return{id:orig.id,n:orig.n,h:orig.h,av:orig.av,tx:orig.t,img:orig.img};
+}catch(_){return null;}}
+function rpHeadEl(name){const d=document.createElement("div");d.className="rp-head";d.innerHTML='<span class="rp-ic">'+XIC9.rp+'</span><span></span>';d.querySelector("span:last-child").textContent=name+"さんがリポスト";return d;}
 function postEl(p,hot){
   const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
@@ -2436,6 +2467,16 @@ function postEl(p,hot){
     +'<span class="grp"><span class="bmk-btn" role="button">'+XIC9.bmk+'</span><span class="share-btn">'+XIC9.share+"</span></span>"
     +"</div></span>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=dispTx(p.t);
+  /* v89: quote card - derived at render time only, from data that already
+     exists: when a non-mine post quotes her words in brackets and the
+     fragment matches one of her own posts verbatim, that post is embedded
+     as a real-X quote card. Nothing is written back to the save. */
+  const qtSnap=p.qt||qtDerive(p);
+  if(qtSnap){const qc=document.createElement("div");qc.className="qtcard";
+   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span><span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" src="'+qtSnap.img+'" alt="">':"")+'</div>';
+   qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;qc.querySelector(".qt-tx").textContent=dispTx(qtSnap.tx);
+   qc.addEventListener("click",e=>{e.stopPropagation();try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o.id===qtSnap.id);if(orig)openPostThread(orig);}catch(_){}});
+   d.querySelector(".tx").after(qc);}
   const avEl=d.firstChild;
   if(avEl&&avEl.addEventListener&&(p.a===tgtKey()||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}});}
   const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>e.stopPropagation());
@@ -3000,8 +3041,8 @@ function mediaGrid(imgs,owner){const g=document.createElement("div");g.className
 function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
- const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>p.mine&&!p.isReply).length+" ポスト";
- if(meTab==="post"){const mine=S.posts.filter(p=>p.mine&&!p.isReply);box.appendChild(tabHead("ポスト",mine.length+" 件"));if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
+ const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>(p.mine||p.rped)&&!p.isReply).length+" ポスト";
+ if(meTab==="post"){const list=S.posts.filter(p=>(p.mine||p.rped)&&!p.isReply);box.appendChild(tabHead("ポスト",list.length+" 件"));if(!list.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
  else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
  else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
