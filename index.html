@@ -1335,6 +1335,7 @@ input,textarea{font-size:16px}
 .post .fflag{font-size:11.5px;font-weight:800;color:#f91880;letter-spacing:.04em;margin-bottom:2px}
 .post .tx-tag,.post .tx-men{color:#1d9bf0;cursor:pointer}
 .post .tx-tag:active,.post .tx-men:active{opacity:.6}
+.xc-preview .tx-tag,.xc-preview .tx-men{color:#1d9bf0}
 .rp-head.pin-head{color:#7856ff}
 .rp-head .rp-ic{display:flex}
 .rp-head .rp-ic svg{width:15px;height:15px;fill:#00a06e}
@@ -2780,7 +2781,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v201</p>
+  <p class="ver">v202</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2952,7 +2953,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v201</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v202</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3221,7 +3222,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v201</p>
+    <p class="ver">v202</p>
   </div>
 </section>
 </div>
@@ -3796,14 +3797,15 @@ const dispTx=t=>String(t==null?"":t).replace(/\u30e9\u30a4\u30d6\u30b9\u30c6\u30
    thing - a tag runs a search for it; a mention opens the profile
    when the account has one (her / the target) and searches otherwise.
    Built with DOM APIs only, so post text stays inert data. */
-function linkifyTx(el,text){
+function linkifyTx(el,text,passive){
  if(!el)return;text=String(text==null?"":text);el.textContent="";
  const re=/(#[^\s#@、。“”「」『』（）()!！?？:：;；・…]+)|(@[A-Za-z0-9_]+)/g;
  let last=0,m;const plain=s=>{if(s)el.appendChild(document.createTextNode(s));};
  while((m=re.exec(text))){
   plain(text.slice(last,m.index));
   const sp=document.createElement("span");sp.textContent=m[0];
-  if(m[1]){sp.className="tx-tag";const tag=m[1].slice(1);
+  if(passive){sp.className=m[1]?"tx-tag":"tx-men";}
+  else if(m[1]){sp.className="tx-tag";const tag=m[1].slice(1);
    sp.addEventListener("click",e=>{e.stopPropagation();const q=$("#x-q");if(q)q.value=tag;showPane("search");runSearch();});}
   else{sp.className="tx-men";const hdl=m[2];
    sp.addEventListener("click",e=>{e.stopPropagation();const key=Object.keys(ACC).find(k=>ACC[k].h===hdl);
@@ -5086,7 +5088,7 @@ $("#xc-pimg").addEventListener("click",()=>{if(!xcSel||!xcSel.img)return;try{ope
 function xcRenderDraft(){
  const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg"),pw=$("#xc-pwrap"),cd=$(".xc-card");
  if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pw)pw.classList.add("hidden");if(pi)pi.src=XC_PLACEHOLDER;if(cd)cd.classList.remove("loaded");return;}
- pv.textContent=xcSel.tx;pv.classList.remove("empty");pv.classList.remove("swap");void pv.offsetWidth;pv.classList.add("swap");btn.disabled=xcBusy;btn.classList.remove("ready");void btn.offsetWidth;btn.classList.add("ready");
+ linkifyTx(pv,xcSel.tx,true);pv.classList.remove("empty");pv.classList.remove("swap");void pv.offsetWidth;pv.classList.add("swap");btn.disabled=xcBusy;btn.classList.remove("ready");void btn.offsetWidth;btn.classList.add("ready");
  if(pi&&pw){if(xcSel.img){pi.src=xcSel.img;pw.classList.remove("hidden");}else{pw.classList.add("hidden");pi.src=XC_PLACEHOLDER;}}
  if(cd)cd.classList.add("loaded");
  const len=[...xcSel.tx.replace(/\n/g,"")].length;
