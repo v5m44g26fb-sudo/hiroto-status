@@ -827,6 +827,14 @@ input,textarea{font-size:16px}
 /* returning from a pushed screen: settle back in from the left */
 @keyframes paneinl{from{opacity:.5;transform:translateX(-16px)}to{opacity:1;transform:none}}
 .pane-pop{animation:paneinl .2s ease!important}
+/* ===== v121: pane travel - switching panes is no longer a hard cut:
+   the incoming pane slides in from the side it lives on in the pane
+   order (forward = from the right, back = from the left) with a
+   short fade. The thread pane keeps its own pop paths and the very
+   first entry stays still. ===== */
+@keyframes paneinr{from{opacity:.5;transform:translateX(16px)}to{opacity:1;transform:none}}
+.pane-in-r{animation:paneinr .26s cubic-bezier(.2,.8,.3,1)}
+.pane-in-l{animation:paneinl .26s cubic-bezier(.2,.8,.3,1)}
 /* DM thread slides in like a pushed chat screen */
 #dmthread.dmin{animation:threadin .22s cubic-bezier(.2,.8,.3,1)}
 /* sheet exit: slide back down + scrim fade (entry stays sheetup) */
@@ -2156,7 +2164,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v120</p>
+  <p class="ver">v121</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2311,7 +2319,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v120</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v121</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2522,7 +2530,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v120</p>
+    <p class="ver">v121</p>
   </div>
 </section>
 </div>
@@ -3186,10 +3194,15 @@ $("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").class
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 const PANES=["tl","trend","mention","me","search","msg","hisprof","thread","follow"];
 let curPane="tl";
+let panePrev=null;
 function showPane(k){
+ const prevK=panePrev;
  if(k!=="thread")curPane=k;
  const np=$("#x-notif");np.classList.remove("on");np.classList.remove("closing");
  PANES.forEach(p=>{const el=$("#x-pane-"+p);if(el)el.style.display=p===k?"block":"none";});
+ /* v121: the incoming pane travels in from its side of the order */
+ if(prevK&&prevK!==k&&k!=="thread"){const el=$("#x-pane-"+k);if(el){const fwd=PANES.indexOf(k)>PANES.indexOf(prevK);el.classList.remove("pane-in-r","pane-in-l");void el.offsetWidth;el.classList.add(fwd?"pane-in-r":"pane-in-l");}}
+ panePrev=k;
  $("#x-appbar").classList.toggle("v738-search",k==="search");
  $("#hometabs").style.display=k==="tl"?"flex":"none";
  $("#x-compose-btn").style.display=k==="tl"?"block":"none";
