@@ -2450,6 +2450,20 @@ input,textarea{font-size:16px}
 .di-mchip{flex:none;font-size:9px;font-weight:900;letter-spacing:.14em;color:#0c0a18;background:var(--mc,#fff);border-radius:6px;padding:3px 7px}
 .di-mtx{flex:1;min-width:0;font-size:12px;font-weight:700;color:rgba(240,242,255,.92);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #dayintro.final .di-mchip{box-shadow:0 0 0 1px rgba(247,201,72,.5)}
+/* ===== v150: explore, third raise - the number-one trend leaves the
+   ranked list and leads as a dark TOP TREND hero card (big title,
+   meta row, full-width volume bar); the remaining trends keep their
+   true ranks below it. Category tabs keep the plain ranked list. ===== */
+.trend-hero{position:relative;margin:13px 14px 4px;border-radius:19px;padding:16px 17px 15px;background:linear-gradient(135deg,#141b34,#2a1150 70%,#3a1160);color:#fff;cursor:pointer;overflow:hidden;box-shadow:0 14px 32px rgba(20,10,50,.35);transition:transform .12s ease}
+.trend-hero:active{transform:scale(.985)}
+.trend-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.trend-hero .th-eyebrow{display:flex;align-items:center;gap:7px;font-size:9.5px;font-weight:900;letter-spacing:.26em;color:#f7c948}
+.trend-hero .th-eyebrow i{width:7px;height:7px;border-radius:50%;background:#f4212e;box-shadow:0 0 0 0 rgba(244,33,46,.5);animation:livepulse 1.8s ease-out infinite}
+.trend-hero .th-title{display:block;font-size:21.5px;font-weight:900;line-height:1.35;letter-spacing:.01em;margin-top:9px}
+.trend-hero .th-meta{display:flex;align-items:center;gap:10px;margin-top:7px;font-size:12px;color:#aebadd;font-weight:700}
+.trend-hero .th-meta .tdyn{margin-left:auto}
+.trend-hero .th-vol{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.16);margin-top:12px;overflow:hidden}
+.trend-hero .th-vol i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#1d9bf0,#7856ff,#f91880)}
 #x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
 #x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 #x-pane-me .rep-lab{color:#f7c948}
@@ -2510,7 +2524,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v149</p>
+  <p class="ver">v150</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2677,7 +2691,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v149</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v150</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2918,7 +2932,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v149</p>
+    <p class="ver">v150</p>
   </div>
 </section>
 </div>
@@ -4347,10 +4361,18 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
  const hd=STAB_HEADS[k];if(hd){const hh=document.createElement("div");hh.className="cat-head";hh.innerHTML="<span class='ch-eyebrow'></span><b></b><small></small>";hh.querySelector(".ch-eyebrow").textContent=hd[0];hh.querySelector("b").textContent=hd[1];hh.querySelector("small").textContent=hd[2];box.appendChild(hh);}
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
  const all=curTrends(),maxV=Math.max(1,...all.map(trendNum));
- if(k==="topic"){all.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));return;}
+ if(k==="topic"){if(all.length){box.appendChild(trendHero(all[0],maxV));all.slice(1).forEach((t,i)=>box.appendChild(trendEl(t,i+1,maxV)));}return;}
  const list=all.filter(t=>cat===null||t[0]===cat);
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
+ if(cat===null){box.appendChild(trendHero(list[0],maxV));list.slice(1).forEach((t,i)=>box.appendChild(trendEl(t,i+1,maxV)));return;}
  list.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));}
+/* v150: the top trend of the explore / trending tabs gets a hero card
+   (same data, same tap-to-search as the row it replaces) */
+function trendHero(t,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend-hero"+(dyn?" dyn":"");
+ d.innerHTML='<span class="th-eyebrow"><i></i>TOP TREND ― いま最も熱い話題</span><b class="th-title"></b><div class="th-meta"><span class="th-cat"></span><span class="th-count"></span>'+(dyn?'<span class="tdyn"><i></i>急上昇</span>':"")+'</div><span class="th-vol"><i></i></span>';
+ d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]+" ― トレンド";d.querySelector(".th-count").textContent=t[2];
+ d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";
+ d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
 /* v87: search results composed like real X - an accounts section of
    card rows (the v80 follow-list design) above the posts section, each
