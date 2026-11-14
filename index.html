@@ -1679,6 +1679,14 @@ input,textarea{font-size:16px}
 .ej-fol-h span{font-size:12px;font-weight:800;color:#c3ccd2;flex:none}
 .ej-fol-h b{font-size:11.5px;color:var(--acc);text-align:right}
 .ej-bars{display:flex;align-items:flex-end;gap:8px;height:74px;margin-top:9px;padding:0 2px}
+.ej-strip-wrap{margin-top:13px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1)}
+.ej-strip-h{display:flex;align-items:baseline;gap:8px}
+.ej-strip-h span{font-size:10px;font-weight:900;letter-spacing:.22em;color:#ffb3d1}
+.ej-strip-h small{font-size:10.5px;color:rgba(235,238,255,.6)}
+.ej-strip{display:flex;gap:8px;margin-top:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.ej-strip::-webkit-scrollbar{display:none}
+.ej-strip img{width:58px;height:58px;flex:none;border-radius:12px;object-fit:cover;object-position:top;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35);transition:transform .1s ease}
+.ej-strip img:active{transform:scale(.96)}
 .ej-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px;min-width:0}
 .ej-bar i{display:block;width:100%;max-width:36px;height:0;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#4cc3ff,#7856ff);transition:height .8s cubic-bezier(.2,.8,.3,1) .45s}
 .ej-bars.grow .ej-bar i{height:var(--h)}
@@ -2712,7 +2720,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v171</p>
+  <p class="ver">v172</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2884,7 +2892,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v171</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v172</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3122,6 +3130,7 @@ input,textarea{font-size:16px}
       <div class="ej-row"><span class="ej-lab">最終的な世間の評価</span><span class="ej-title" id="ej-title"></span></div>
       <div class="ej-row"><span class="ej-lab" id="ej-dist-lab">ひろとの距離</span><span class="ej-stage" id="ej-stage"></span><span class="ej-dots" id="ej-dots"></span></div>
       <p class="ej-words" id="ej-words"></p>
+      <div class="ej-strip-wrap" id="ej-strip-wrap" style="display:none"><div class="ej-strip-h"><span>HIGHLIGHTS</span><small>6日間の写真</small></div><div class="ej-strip" id="ej-strip"></div></div>
     </div>
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
@@ -3142,7 +3151,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v171</p>
+    <p class="ver">v172</p>
   </div>
 </section>
 </div>
@@ -5310,6 +5319,13 @@ function renderEndJourney(){
  const si=distStageIdx();const st=$("#ej-stage");if(st)st.textContent="STAGE "+(si+1)+" ― "+DIST_STAGES[si].lab;
  const dots=$("#ej-dots");if(dots){dots.innerHTML="";for(let i=0;i<5;i++){const d=document.createElement("i");if(i<=si)d.className="on";dots.appendChild(d);}}
  const wd=$("#ej-words");if(wd)wd.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた6日間。";
+ /* v172: highlights strip - her own posted photos in posting
+    order (the post array is newest first, so it is read back to
+    front), deduplicated; a tap opens the photo viewer on the set */
+ const sw=$("#ej-strip-wrap"),sb=$("#ej-strip");
+ if(sw&&sb){const seen=new Set(),imgs=[];(S.posts||[]).slice().reverse().forEach(p=>{if(p&&p.mine&&p.img&&!seen.has(p.img)){seen.add(p.img);imgs.push(p.img);}});
+  sb.innerHTML="";imgs.forEach((u,i)=>{const im=document.createElement("img");im.src=u;im.alt="";im.addEventListener("click",()=>{try{openMediaPhoto(imgs,"nao",i);}catch(_){}});sb.appendChild(im);});
+  sw.style.display=imgs.length?"":"none";}
  setTimeout(()=>bars.classList.add("grow"),90);
 }
 /* ending */
