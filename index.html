@@ -1187,6 +1187,15 @@ input,textarea{font-size:16px}
 #thread-replies .post:nth-child(5){animation-delay:.2s}
 #thread-replies .post:nth-child(n+6){animation-delay:.25s}
 @keyframes thrin{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+/* ===== v125: new-feed entrance - when renderFeed's gate decides the
+   feed is genuinely new (a new day, a new post at the top), the
+   posts rise in with a short stagger; plain re-renders stay still. */
+#tl-posts.feed-in .post{animation:feedin .4s cubic-bezier(.2,.8,.3,1) both}
+#tl-posts.feed-in .post:nth-child(2){animation-delay:.05s}
+#tl-posts.feed-in .post:nth-child(3){animation-delay:.1s}
+#tl-posts.feed-in .post:nth-child(4){animation-delay:.15s}
+#tl-posts.feed-in .post:nth-child(n+5){animation-delay:.2s}
+@keyframes feedin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 /* ===== v89: quote cards and repost headers, built to real X. The game
    had no quote rendering at all; postEl now embeds a quote card when
    one is derivable from existing data (see qtDerive) - bordered card,
@@ -2181,7 +2190,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v124</p>
+  <p class="ver">v125</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2336,7 +2345,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v124</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v125</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2547,7 +2556,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v124</p>
+    <p class="ver">v125</p>
   </div>
 </section>
 </div>
@@ -3544,8 +3553,15 @@ $("#pv-stage").addEventListener("pointercancel",()=>{pvTx=null;const im=$("#pv-i
 $("#pv-stage").addEventListener("click",()=>{if(Date.now()-pvSwipeAt<350)return;$("#photoviewer").classList.toggle("clean");});
 document.addEventListener("keydown",e=>{if(!$("#photoviewer").classList.contains("on"))return;if(e.key==="Escape")closePhoto();else if(e.key==="ArrowRight")pvStep(1);else if(e.key==="ArrowLeft")pvStep(-1);});
 /* feed */
+let feedKey="";
 function renderFeed(){
- const tl=$("#tl-posts");tl.innerHTML="";
+ const tl=$("#tl-posts");
+ /* v125: a genuinely new feed (a new day, a new post at the top)
+    rises in with a short stagger; plain re-renders - tab switches,
+    coming back from a thread - stay still. */
+ const fk=S.ch+"|"+S.posts.length+"|"+(S.posts[0]?S.posts[0].id:"");
+ tl.classList.toggle("feed-in",fk!==feedKey);feedKey=fk;
+ tl.innerHTML="";
  const tab=S._htab||"rec";
  let posts=S.posts.filter(p=>!p.isReply);
  if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
