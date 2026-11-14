@@ -1968,7 +1968,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v105</p>
+  <p class="ver">v106</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2123,7 +2123,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v105</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v106</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2332,7 +2332,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v105</p>
+    <p class="ver">v106</p>
   </div>
 </section>
 </div>
@@ -2787,11 +2787,13 @@ const BUZZ_S=[
  {k:"s-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおとNCT WISH サクヤ、同じ事務所の先輩後輩の距離感に界隈がざわつき始めた",lk:1120,rp:240,rc:188,img:"assets/nao-sakuya-sighting.jpg"},
  {k:"s-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
  {k:"s-s3",a:"sora",cond:s=>s.flm>=20,img:"assets/nao-sakuya-back.jpg",tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
+ {k:"s-s4",a:"fan2",cond:s=>s.dist>=25,img:"assets/nao-sakuya-van.jpg",tx:"深夜、SMの社屋前でサクヤとなおが同じバンに乗り込むとこ見たって写真、回ってきた…。二人ともフード被ってたけど、笑い合ってた。仕事だよね、仕事…？",lk:860,rp:150,rc:230},
  {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、歌唱切り抜きが連日じわ伸び。同じ事務所の先輩・サクヤとの接点にも注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"s-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。事務所の後輩という立場も相まって、論争に発展",lk:1980,rp:430,rc:355,img:"assets/nao-sakuya-conveni.jpg"},
  {k:"s-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"様子見してたけど、歌番組の生歌で落ちた。なおの声、現場だとさらに化ける",lk:154,rp:12,rc:21},
  {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,img:"assets/nao-sakuya-train.jpg",tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
- {k:"s-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-sakuya-car.jpg",tx:"新人・なお、騒ぎの大きさが実力に追いつき始めた。同じ事務所の先輩との距離も含め、対応に注目集まる",lk:2760,rp:590,rc:470}];
+ {k:"s-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-sakuya-car.jpg",tx:"新人・なお、騒ぎの大きさが実力に追いつき始めた。同じ事務所の先輩との距離も含め、対応に注目集まる",lk:2760,rp:590,rc:470},
+ {k:"s-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-hug.jpg",tx:"【決定的】NCT WISH サクヤと新人・なお、深夜の宿舎前で抱擁する姿が撮られたと報じられる。同じ事務所の先輩後輩という説明では収まらない距離感に、韓国でも拡散が始まった",lk:3400,rp:760,rc:590}];
 function injectBuzz(maxN,pos){
  if(!S||!S.started||!maxN)return;
  if(!S.buzz)S.buzz=[];
