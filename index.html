@@ -2008,6 +2008,8 @@ input,textarea{font-size:16px}
 .pv-who-t small{font-size:12.5px;color:#536471}
 .pv-cap{margin-top:9px;font-size:14px;line-height:1.65;color:#0f1419;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .pv-meta{margin-top:7px;font-size:12px;color:#8b98a5;letter-spacing:.02em}
+.pv-goto{margin-top:11px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:7px 15px;cursor:pointer;transition:background .15s ease,transform .1s ease}
+.pv-goto:active{transform:scale(.96);background:rgba(255,255,255,.16)}
 .pv-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border:none;cursor:pointer;border-radius:50%;background:rgba(240,243,244,.94);color:#0f1419;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(15,20,25,.14);transition:opacity .25s ease;z-index:2}
 .pv-nav svg{width:18px;height:18px}
 .pv-nav.prev{left:10px}
@@ -2738,7 +2740,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v178</p>
+  <p class="ver">v179</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2910,7 +2912,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v178</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v179</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3079,6 +3081,7 @@ input,textarea{font-size:16px}
       <div class="pv-who"><span id="pv-av"></span><span class="pv-who-t"><b id="pv-name"></b><small id="pv-handle"></small></span></div>
       <p class="pv-cap" id="pv-cap"></p>
       <div class="pv-meta" id="pv-meta"></div>
+      <button class="pv-goto" id="pv-goto" type="button" style="display:none">このポストを見る →</button>
     </div>
     <button class="pv-nav prev" id="pv-prev" aria-label="前の写真"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 5.5-6 6.5 6 6.5"/></svg></button>
     <button class="pv-nav next" id="pv-next" aria-label="次の写真"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6 6.5-6 6.5"/></svg></button>
@@ -3174,7 +3177,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v178</p>
+    <p class="ver">v179</p>
   </div>
 </section>
 </div>
@@ -4313,7 +4316,7 @@ document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains
    the info block reuses the post's own author / text / counts. ===== */
 let pvSet=[],pvIdx=0;
 function pvItemFromPost(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
- return{src:p.img,name:p.n,handle:p.h,av:p.av||null,cap:dispTx(p.t||""),date:p.tm||"",meta:"返信 "+fmtCnt(num(0))+" ・ リポスト "+fmtCnt(num(1))+" ・ いいね "+fmtCnt(num(2))};}
+ return{src:p.img,name:p.n,handle:p.h,av:p.av||null,pid:p.id||null,cap:dispTx(p.t||""),date:p.tm||"",meta:"返信 "+fmtCnt(num(0))+" ・ リポスト "+fmtCnt(num(1))+" ・ いいね "+fmtCnt(num(2))};}
 function openPostPhoto(p){
  const list=(S?S.posts:[]).filter(x=>x&&x.img&&!x.isReply);
  let idx=list.findIndex(x=>x.id===p.id);
@@ -4339,10 +4342,13 @@ function pvRender(dir){const it=pvSet[pvIdx];if(!it)return;const im=$("#pv-img")
  $("#pv-name").textContent=it.name||"";$("#pv-handle").textContent=it.handle||"";
  const cap=$("#pv-cap");cap.textContent=it.cap||"";cap.style.display=it.cap?"":"none";
  const meta=$("#pv-meta");meta.textContent=it.meta||"";meta.style.display=it.meta?"":"none";
+ /* v179: photos that came from a post can jump back to it */
+ const gt=$("#pv-goto");if(gt)gt.style.display=it.pid?"":"none";
  $("#pv-prev").classList.toggle("off",pvIdx<=0);$("#pv-next").classList.toggle("off",pvIdx>=pvSet.length-1);pvStripSync();}
 function pvStep(d){const n=pvIdx+d;if(n<0||n>=pvSet.length)return;pvIdx=n;pvRender(d);}
 function closePhoto(){$("#photoviewer").classList.remove("on");}
 $("#pv-close").addEventListener("click",closePhoto);
+$("#pv-goto").addEventListener("click",()=>{const it=pvSet[pvIdx];if(!it||!it.pid||!S)return;const p=(S.posts||[]).concat(S.men||[]).find(x=>x&&x.id===it.pid);if(!p)return;closePhoto();openPostThread(p);});
 $("#pv-prev").addEventListener("click",e=>{e.stopPropagation();pvStep(-1);});
 $("#pv-next").addEventListener("click",e=>{e.stopPropagation();pvStep(1);});
 let pvTx=null,pvSwipeAt=0;
