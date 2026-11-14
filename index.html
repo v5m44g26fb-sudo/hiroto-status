@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v303</p>
+  <p class="ver">v304</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v303</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v304</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v303</p>
+    <p class="ver">v304</p>
   </div>
 </section>
 </div>
@@ -3830,6 +3830,8 @@ function curTrends(){const base=(tgtKey()==="sakuya"?TRENDS_S:TRENDS).slice();
    posting, so the world's temperature visibly shifts as the numbers move.
    Numbers, branches and the chapter skeleton are untouched. */
 const BUZZ=[
+{k:"h-r1",a:"fan2",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),tx:"報道で盛り上がってるけど、例の誤投稿のスクショ、まだ持ってる人いるよね。……あれ、本当に間違いだったのかな",lk:480,rp:66,rc:52},
+{k:"h-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。あの子、隠しごとが下手なだけだと思う",lk:520,rp:54,rc:41},
  {k:"h-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、サビで一気に駆け出す感じが癖になる。最年長メンバーの声、安定感が違う",lk:210,rp:18,rc:9},
  {k:"h-s2",a:"fan2",cond:s=>s.flm>=12,img:"assets/nao-hiroto-mansion.jpg",tx:"なおの投稿、大翔さんの動きとタイミング被りすぎ問題。偶然にしては多くない？",lk:388,rp:66,rc:92},
  {k:"h-s1",a:"matome",cond:s=>s.dist>=15,img:"assets/nao-hiroto-office.jpg",tx:"新人・なおの投稿に、井汲大翔ファン界隈がざわつき始めた。『距離、近くない？』の声",lk:1120,rp:240,rc:188},
@@ -3867,14 +3869,14 @@ const BUZZ=[
 {k:"h-t1",a:"media",cond:s=>s.ch>=2&&s.cog>=15,tx:"10年、練習生として過ごした末のデビュー。最年長で、グループ唯一の日本人。日本のメディアが、なおの物語を拾い始めた",lk:1120,rp:230,rc:88},
 {k:"h-t2",a:"fan1",cond:s=>s.ch>=3,tx:"メンバーが呼ぶ「オンニ」、ただの年上呼びじゃないんだって。練習生の大先輩への、敬意と甘えの半分ずつ",lk:430,rp:48,rc:36},
 {k:"h-m1",a:"matome",cond:s=>s.ch>=5,tx:"例の誤投稿、スクショはいまだにひっそり回っている。本人は何も言わず、事務所も無言。言わないのが、いちばん効いている",lk:760,rp:150,rc:64},
-{k:"h-r1",a:"fan2",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),tx:"発表で盛り上がってるけど、例の誤投稿のスクショ、まだ持ってる人いるよね。……あれ、本当に間違いだったのかな",lk:480,rp:66,rc:52},
-{k:"h-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。あの子、隠しごとが下手なだけだと思う",lk:520,rp:54,rc:41},
  {k:"h-d6",a:"matome",cond:s=>s.ch>=6&&s.cog>=40,tx:"報道まとめ：新人・なおと井汲大翔に熱愛報道。事務所は定型文、井汲側は沈黙。界隈は騒然としている",lk:2400,rp:480,rc:210},
  {k:"h-f6",a:"fan2",cond:s=>s.ch>=6&&s.flm>=30,tx:"発表は嬉しいけど、匂わせの件はまだ決着ついてない。ここからが本当の勝負だと思う",lk:380,rp:44,rc:67},
  /* v252 (episode): looking back, a fan notices he was there from
     the very first day - the earliest seed of all */
  {k:"h-e1",a:"fan2",cond:s=>s.ch>=2&&s.dist>=5,tx:"そういえば、デビューの日。大翔くん、『The Chase』の切り抜きポストに真っ先にいいねしてなかった？ 秒速だった気がするんだけど",lk:148,rp:16,rc:38}];
 const BUZZ_S=[
+{k:"s-r1",a:"fan2",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"発表で盛り上がってるけど、例の誤投稿のスクショ、まだ持ってる人いるよね。サクヤさんとの距離、あれは近すぎた",lk:480,rp:66,rc:52},
+{k:"s-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。いいねしたサクヤさんも含めて",lk:520,rp:54,rc:41},
  {k:"s-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、夢みたいなイントロから駆け出す感じが最高。最年長メンバーの声、芯がある",lk:210,rp:18,rc:9},
  {k:"s-s2",a:"fan2",cond:s=>s.flm>=12,img:"assets/nao-sakuya-mansion.jpg",tx:"なおの投稿、サクヤの動きとタイミング被りすぎ問題。同じ事務所でも、これは多くない？",lk:388,rp:66,rc:92},
  {k:"s-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおとNCT WISH サクヤ、同じ事務所の先輩後輩の距離感に界隈がざわつき始めた",lk:1120,rp:240,rc:188,img:"assets/nao-sakuya-sighting.jpg"},
@@ -3910,8 +3912,6 @@ const BUZZ_S=[
 {k:"s-t1",a:"fan2",cond:s=>s.ch>=3,tx:"社内の人の話だと、なおさんは練習生を10年やっていた人。デビューはサクヤさんが先でも、練習生歴はなおさんのほうがだいぶ上なんだって。……この二人、どっちが先輩なんだろう",lk:540,rp:76,rc:58},
 {k:"s-t2",a:"fan1",cond:s=>s.ch>=3,tx:"メンバーが呼ぶ「オンニ」、ただの年上呼びじゃないんだって。練習生の大先輩への、敬意と甘えの半分ずつ",lk:430,rp:48,rc:36},
 {k:"s-m1",a:"matome",cond:s=>s.ch>=5,tx:"例の誤投稿、スクショはいまだにひっそり回っている。本人は何も言わず、事務所も無言。言わないのが、いちばん効いている",lk:760,rp:150,rc:64},
-{k:"s-r1",a:"fan2",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"発表で盛り上がってるけど、例の誤投稿のスクショ、まだ持ってる人いるよね。サクヤさんとの距離、あれは近すぎた",lk:480,rp:66,rc:52},
-{k:"s-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。いいねしたサクヤさんも含めて",lk:520,rp:54,rc:41},
  /* v252 (episode): the same backward glance, on this route */
  {k:"s-e1",a:"fan2",cond:s=>s.ch>=2&&s.dist>=5,tx:"そういえば、デビューの日。サクヤ、『The Chase』の切り抜きポストに真っ先にいいねしてなかった？ あの速さ、普通じゃなかった",lk:148,rp:16,rc:38}];
 function injectBuzz(maxN,pos){
@@ -5961,7 +5961,7 @@ function renderEndJourney(){
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
  if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="熱愛報道は、本物の炎上になった。後追い記事が次々と出て、盾のない彼の個人アカウントには、毎分、言葉が投げつけられた。\n"+(hot?"距離が近いほど、記事の『証拠』は本物らしく並んだ。秒速のいいねも、楽屋のプリンも、全部が後付けで意味を持った。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n出演予定だった番組は『当面見合わせ』に。歌に戻るには、長い時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
- else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title="乗り越えたEND ― 消えなかった件";body="公式には、何も認められなかった。ステージも、発表も、約束された未来もない。事務所のコメントは定型文で、彼の沈黙は最後まで続いた。\nそれでも、騒ぎが少しずつ引いていった頃。彼の投稿に、彼女の好きな歌のフレーズが、さりげなく混ざっていた。誰にも気づかれないように。――二人だけが分かる形で。\n関係は、消えなかった。公の場ではなく、静かな場所で、続いている。";}
+ else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title=(tgtKey()==="sakuya"?"コラボEND ― 同じステージの件":"乗り越えたEND ― 消えなかった件");body="公式には、何も認められなかった。ステージも、発表も、約束された未来もない。事務所のコメントは定型文で、彼の沈黙は最後まで続いた。\nそれでも、騒ぎが少しずつ引いていった頃。彼の投稿に、彼女の好きな歌のフレーズが、さりげなく混ざっていた。誰にも気づかれないように。――二人だけが分かる形で。\n関係は、消えなかった。公の場ではなく、静かな場所で、続いている。";}
  else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="報道は出た。でも、燃え広がる前に、界隈の熱は冷めていった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にも、記事にもならない距離が、ここにある。それで、今は十分だった。";}
  else{kind="start";title="これからEND ― まだ始まったばかりの件";body="熱愛報道のわりには、静かなデビュー期間だった。記事は出たけれど、決め手にはならなかった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
  if(tgtKey()==="sakuya")body=END_S_BODY[kind](hot);
