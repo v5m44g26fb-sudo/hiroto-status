@@ -2207,7 +2207,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v127</p>
+  <p class="ver">v128</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2364,7 +2364,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v127</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v128</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2575,7 +2575,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v127</p>
+    <p class="ver">v128</p>
   </div>
 </section>
 </div>
@@ -3443,18 +3443,40 @@ const STORY_CHAIN={
   3:{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},
   4:{k:"ana",lab:"エイナ",img:"assets/gen-story-stream.jpg",cap:"配信、楽しみにしてます"},
   5:{k:"miku",lab:"みく",img:"assets/av-miku.jpg",cap:"最終日、応援してるよ"}}};
+/* v128: second-wave chain stories - the same action draws one more
+   reaction from the central circle, with a scene photo that fits
+   the moment. Same storyDyn frame, same allow-list, no new save
+   fields; older saves pick the extra entry up the next time the
+   same kind of action fires that day. */
+const STORY_CHAIN2={
+ post:{1:{k:"fan1",lab:"ゆな",img:"assets/nao-stage.jpg",cap:"デビュー曲、初披露見たよ…！"},
+  2:{k:"miku",lab:"みく",img:"assets/night.jpg",cap:"帰り道、ニュースで見て二度見した"},
+  4:{k:"ian",lab:"イアン",img:"assets/ig-gen-studio.jpg",cap:"今日のレッスン、なおと一緒だった"}},
+ event:{2:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"楽屋なう、なおと一緒"},
+  3:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"収録、モニターで見てたよ"},
+  4:{k:"yuha",lab:"ユハ",img:"assets/nao-stage-confetti.jpg",cap:"なおのステージ、袖で泣きそうだった"}},
+ act:{3:{k:"stella",lab:"ステラ",img:"assets/ig-gen-stage.jpg",cap:"ステージ袖から見てた、かっこよかった"},
+  5:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"最終日、みんなで乗り切ろうね"}}};
 function addStory(kind){
  if(!S||!S.started)return;
- const def=(STORY_CHAIN[kind]||{})[S.ch];if(!def)return;
+ const def=(STORY_CHAIN[kind]||{})[S.ch];
+ const def2=(STORY_CHAIN2[kind]||{})[S.ch];
+ if(!def&&!def2)return;
  if(!Array.isArray(S.storyDyn))S.storyDyn=[];
- const uid="d-"+kind+"-"+S.ch;
- if(S.storyDyn.some(d=>d.uid===uid))return;
- let e;
- if(def.tgt){const sk=tgtKey()==="sakuya";e={uid:uid,k:tgtKey(),lab:tgt().name,img:sk?def.imgS:def.imgH,cap:sk?def.capS:def.capH};}
- else e={uid:uid,k:def.k,lab:def.lab,img:def.img,cap:def.cap};
- S.storyDyn.push(e);
- try{toastChg(e.lab+"がストーリーを追加したよ");}catch(_){}
- renderStories();save();
+ let changed=false;
+ if(def){const uid="d-"+kind+"-"+S.ch;
+  if(!S.storyDyn.some(d=>d.uid===uid)){
+   let e;
+   if(def.tgt){const sk=tgtKey()==="sakuya";e={uid:uid,k:tgtKey(),lab:tgt().name,img:sk?def.imgS:def.imgH,cap:sk?def.capS:def.capH};}
+   else e={uid:uid,k:def.k,lab:def.lab,img:def.img,cap:def.cap};
+   S.storyDyn.push(e);changed=true;
+   try{toastChg(e.lab+"がストーリーを追加したよ");}catch(_){}
+  }}
+ if(def2){const uid2="d-"+kind+"-"+S.ch+"-b";
+  if(!S.storyDyn.some(d=>d.uid===uid2)){
+   S.storyDyn.push({uid:uid2,k:def2.k,lab:def2.lab,img:def2.img,cap:def2.cap});changed=true;
+  }}
+ if(changed){renderStories();save();}
 }
 function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
