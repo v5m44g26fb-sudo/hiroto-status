@@ -1332,6 +1332,7 @@ input,textarea{font-size:16px}
 .rpwrap{border-bottom:1px solid #eff3f4}
 .rpwrap .post{border-bottom:none}
 .rp-head{display:flex;align-items:center;gap:7px;padding:11px 16px 0 68px;font-size:13px;font-weight:700;color:#536471;animation:panein .18s ease}
+.post .fflag{font-size:11.5px;font-weight:800;color:#f91880;letter-spacing:.04em;margin-bottom:2px}
 .rp-head.pin-head{color:#7856ff}
 .rp-head .rp-ic{display:flex}
 .rp-head .rp-ic svg{width:15px;height:15px;fill:#00a06e}
@@ -2777,7 +2778,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v198</p>
+  <p class="ver">v199</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2949,7 +2950,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v198</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v199</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3218,7 +3219,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v198</p>
+    <p class="ver">v199</p>
   </div>
 </section>
 </div>
@@ -3826,6 +3827,10 @@ function postEl(p,hot){
     +'<span class="grp"><span class="bmk-btn" role="button">'+XIC9.bmk+'</span><span class="share-btn">'+XIC9.share+"</span></span>"
     +"</div></div>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=dispTx(p.t);
+  /* v199: the first follower's welcome post carries its marker -
+     identified by the exact authored welcome text for whoever she
+     chose, so no save flag is needed and old saves light up too */
+  try{if(typeof S!=="undefined"&&S&&S.first&&p.a===S.first&&typeof FIRST_WELCOME!=="undefined"&&FIRST_WELCOME[S.first]&&p.t===FIRST_WELCOME[S.first].tx){const pm=d.querySelector(".p-main");if(pm){const fl=document.createElement("div");fl.className="fflag";fl.textContent="最初のフォロワー ― 物語の起点";pm.insertBefore(fl,pm.firstChild);}}}catch(_){}
   /* v89: quote card - derived at render time only, from data that already
      exists: when a non-mine post quotes her words in brackets and the
      fragment matches one of her own posts verbatim, that post is embedded
