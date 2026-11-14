@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v286</p>
+  <p class="ver">v287</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v286</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v287</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v286</p>
+    <p class="ver">v287</p>
   </div>
 </section>
 </div>
@@ -3852,6 +3852,7 @@ const BUZZ=[
  {k:"h-j3",a:"media",cond:s=>s.ch>=5&&s.cog>=30,tx:"日本の音楽番組の公式アカウントも、なおの切り抜きを引用し始めた。「ハツハ唯一の日本人」の凱旋に、日本側の熱も上がっている",lk:1350,rp:270,rc:84},
  {k:"h-f0",a:"fan2",cond:s=>s.ch>=2&&s.dist>=5,tx:"大翔さんのファン、数は多くないけど7年ついてきた古参ばっかり。コメント欄の熱と速さ、全然違うんだよ",lk:280,rp:30,rc:44},
  {k:"h-x1",a:"matome",cond:s=>s.ch>=2&&s.fol>=20000,tx:"新人・なお、フォロワー数で井汲大翔を上回る。デビュー直後の勢いと、7年積み上げた先輩の数字。並べてみると、界隈が静かにざわついた",lk:890,rp:170,rc:96},
+ {k:"h-f9",a:"fan2",cond:s=>s.ch>=6&&s.dist>=25,tx:"大翔さん、なおさんをフォローした…！ あの人が後輩の子をフォローするの、古参でも初めて見た",lk:640,rp:88,rc:73},
  {k:"h-d6",a:"matome",cond:s=>s.ch>=6&&s.cog>=40,tx:"発表まとめ：新人・なおと井汲大翔のコラボが正式発表。デビュー6日目の到達に、界隈から驚きと祝福が集まっている",lk:2400,rp:480,rc:210},
  {k:"h-f6",a:"fan2",cond:s=>s.ch>=6&&s.flm>=30,tx:"発表は嬉しいけど、匂わせの件はまだ決着ついてない。ここからが本当の勝負だと思う",lk:380,rp:44,rc:67},
  /* v252 (episode): looking back, a fan notices he was there from
@@ -3888,6 +3889,7 @@ const BUZZ_S=[
  {k:"s-j3",a:"media",cond:s=>s.ch>=5&&s.cog>=30,tx:"日本のメディアが「韓国で活動する日本人同士」として、サクヤとなおを並べ始めた。本人たちは静かでも、周りが先に騒いでいる",lk:1290,rp:250,rc:91},
  {k:"s-d6",a:"matome",cond:s=>s.ch>=6&&s.cog>=40,tx:"発表まとめ：新人・なおとサクヤのコラボが正式発表。デビュー6日目の到達に、界隈から驚きと祝福が集まっている",lk:2400,rp:480,rc:210},
  {k:"s-f6",a:"fan2",cond:s=>s.ch>=6&&s.flm>=30,tx:"発表は嬉しいけど、匂わせの件はまだ決着ついてない。ここからが本当の勝負だと思う",lk:380,rp:44,rc:67},
+ {k:"s-f9",a:"fan2",cond:s=>s.ch>=6&&s.dist>=25,tx:"サクヤさん、なおさんをフォローした…。事務所の先輩後輩って言っても、これはざわつくやつ",lk:610,rp:80,rc:66},
  /* v252 (episode): the same backward glance, on this route */
  {k:"s-e1",a:"fan2",cond:s=>s.ch>=2&&s.dist>=5,tx:"そういえば、デビューの日。サクヤ、『The Chase』の切り抜きポストに真っ先にいいねしてなかった？ あの速さ、普通じゃなかった",lk:148,rp:16,rc:38}];
 function injectBuzz(maxN,pos){
