@@ -1960,6 +1960,7 @@ input,textarea{font-size:16px}
 .ev-clear{position:absolute;top:17px;right:-36px;transform:rotate(38deg) translateX(64px);background:linear-gradient(90deg,#f7c948,#ffd95e);color:#4a3200;font-size:11px;font-weight:900;letter-spacing:.22em;padding:5px 42px;box-shadow:0 6px 18px rgba(0,0,0,.35);opacity:0;transition:transform .5s cubic-bezier(.2,.8,.3,1.2) .1s,opacity .3s ease .1s;pointer-events:none;z-index:3}
 .ev-zoom{position:absolute;right:12px;bottom:12px;z-index:3;display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:999px;background:rgba(10,12,24,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#fff;font-size:11px;font-weight:800;pointer-events:none}
 .ev-zoom svg{width:13px;height:13px}
+.db-zoom{bottom:10px;right:12px;padding:5px 10px;font-size:10.5px}
 .evcard.cleared .ev-clear{transform:rotate(38deg) translateX(0);opacity:1}
 .evcard.cleared .ev-hero-shade{background:linear-gradient(180deg,rgba(58,38,4,.22),rgba(14,6,32,0) 42%,rgba(46,26,2,.82))}
 .evcard .result{animation:evresin .5s cubic-bezier(.2,.8,.3,1) .12s both}
@@ -2805,7 +2806,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v237</p>
+  <p class="ver">v238</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2896,6 +2897,7 @@ input,textarea{font-size:16px}
         <div class="db-head"><span class="db-day" id="db-day">DAY 1</span><span class="db-prog" id="db-prog">1 / 6</span></div>
         <b class="db-title" id="db-title">デビュー発表の日</b>
         <span class="db-sub" id="db-sub"></span>
+        <span class="ev-zoom db-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.8-4.8M11 8v6M8 11h6"/></svg>写真を見る</span>
       </div>
       <div id="status-hud">
         <div class="hud-eyebrow"><span class="hud-etick" aria-hidden="true"></span><span>PLAYER STATUS</span><span class="hud-mcount" id="hud-mcount"></span></div>
@@ -2978,7 +2980,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v237</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v238</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3249,7 +3251,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v237</p>
+    <p class="ver">v238</p>
   </div>
 </section>
 </div>
