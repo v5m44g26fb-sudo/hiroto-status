@@ -1777,6 +1777,26 @@ input,textarea{font-size:16px}
 .rs-danger:active{transform:scale(.97)}
 .rs-cancel{display:block;width:100%;margin-top:9px;padding:13px;border:1px solid #cfd9de;border-radius:999px;background:#fff;color:#0f1419;font-size:14.5px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .15s ease}
 .rs-cancel:active{background:#f7f9f9}
+/* ===== v100: title navigation overhaul - when a run is in progress the
+   title leads with a save card (day / chapter / target / handle /
+   followers / level, all read back from the live state) and promotes
+   つづきから to the primary slot; はじめる steps back to a ghost and the
+   reset shrinks to a quiet text action. With no save the classic poster
+   stands untouched, はじめる still the hero. Save format untouched. ===== */
+#tsave{width:100%;max-width:320px;margin:20px auto 2px;text-align:left;border-radius:18px;padding:15px 16px 13px;background:linear-gradient(160deg,rgba(23,18,48,.72),rgba(10,8,24,.8));border:1px solid rgba(255,255,255,.22);box-shadow:0 16px 38px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);position:relative;overflow:hidden;animation:fadeup .45s ease}
+#tsave::before{content:"";position:absolute;left:0;right:0;top:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.ts-top{display:flex;align-items:center;gap:8px}
+.ts-lab{font-size:9.5px;font-weight:900;letter-spacing:.3em;color:#c9b8ff}
+.ts-day{margin-left:auto;font-size:11px;font-weight:900;color:#0f1419;background:#fff;border-radius:999px;padding:3px 10px;letter-spacing:.06em;flex:none}
+.ts-chap{font-size:16.5px;font-weight:900;color:#fff;margin-top:9px;letter-spacing:.02em;line-height:1.4}
+.ts-prog{display:flex;gap:5px;margin-top:11px}
+.ts-prog i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}
+.ts-prog i.on{background:linear-gradient(90deg,#7856ff,#f91880)}
+.ts-prog i.now{animation:livepulse 1.8s ease-out infinite}
+.ts-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14)}
+.ts-cell small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.18em;color:#9aa3ab;margin-bottom:2px}
+.ts-cell b{display:block;font-size:13.5px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#scr-title.has-save #btn-reset0{background:none;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;width:auto;padding:8px 10px;margin-top:4px;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -1788,10 +1808,21 @@ input,textarea{font-size:16px}
   <div class="t-rule"></div>
   <p class="sub">新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>あの人に、少しずつ近づけるか。</p>
   <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>相手選択</span><span>最初のフォロワー</span></div>
+  <div id="tsave" class="hidden">
+    <div class="ts-top"><span class="ts-lab">SAVE DATA</span><span class="ts-day" id="ts-day">Day 1 / 5</span></div>
+    <div class="ts-chap" id="ts-chap"></div>
+    <div class="ts-prog" id="ts-prog"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="ts-grid">
+      <div class="ts-cell"><small>相手</small><b id="ts-target"></b></div>
+      <div class="ts-cell"><small>アカウント</small><b id="ts-handle"></b></div>
+      <div class="ts-cell"><small>フォロワー</small><b id="ts-fol"></b></div>
+      <div class="ts-cell"><small>レベル</small><b id="ts-lv"></b></div>
+    </div>
+  </div>
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v99</p>
+  <p class="ver">v100</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1946,7 +1977,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v99</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v100</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2155,7 +2186,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v99</p>
+    <p class="ver">v100</p>
   </div>
 </section>
 </div>
@@ -3786,7 +3817,29 @@ function renderCredits(kind){
  set("#ec-changes",(S.chgLog||[]).length+" 件の Changes");
  const bc=$("#btn-continue"),br=$("#btn-reset0");
  if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
-  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}}
+  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
+ renderTitleSave();}
+/* v100: title save card - reads only state that already exists (day /
+   chapter title / target / handle / followers / level) and promotes
+   つづきから to the primary slot while a run is in progress: the
+   continue button moves ahead of はじめる and drops its ghost styling,
+   はじめる steps back to a ghost, and the section gains .has-save so
+   the reset can shrink to a quiet text action. Nothing is written. */
+function renderTitleSave(){
+ const card=$("#tsave");if(!card||typeof S==="undefined"||!S||!S.started)return;
+ const T=tgt(),ch=curCH()[S.ch-1],parts=ch?(ch.day||"").split(" ― "):[];
+ const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ set("#ts-day","Day "+S.ch+" / 5");
+ set("#ts-chap",parts.length>1?parts.slice(1).join(" ― "):(ch?(ch.day||""):""));
+ set("#ts-target",T.short);set("#ts-handle",S.handle||"");
+ set("#ts-fol",fmt(S.fol));set("#ts-lv","Lv "+(1+Math.floor((S.xp||0)/50)));
+ const pg=$("#ts-prog");if(pg)[...pg.children].forEach((el,i)=>{el.className=i<S.ch?"on":"";if(i===S.ch-1)el.classList.add("now");});
+ card.classList.remove("hidden");
+ const bc=$("#btn-continue"),bs=$("#btn-start"),br=$("#btn-reset0"),sec=$("#scr-title");
+ if(sec)sec.classList.add("has-save");
+ if(bc){bc.classList.remove("hidden","ghost");if(bs&&bc.parentNode===bs.parentNode)bs.parentNode.insertBefore(bc,bs);}
+ if(bs)bs.classList.add("ghost");
+ if(br)br.classList.remove("hidden");}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
 /* v97: the destructive reset now asks first, in a confirmation sheet
@@ -3806,7 +3859,8 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
  if(S.folScale!==2){S.fol=(S.fol||0)*FOL_MULT;(S.folHist||[]).forEach(e=>{e.fol*=FOL_MULT;});(S.chgLog||[]).forEach(e=>{if(e.name==="フォロワー")e.v*=FOL_MULT;});S.folScale=2;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
- $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
+ $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};
+ renderTitleSave();}
 </script>
 </body>
 </html>
