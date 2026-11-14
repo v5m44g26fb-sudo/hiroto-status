@@ -1799,6 +1799,11 @@ input,textarea{font-size:16px}
 .dm-fchip.act{background:#0f1419;border-color:#0f1419;color:#fff}
 .dm-fchip .dm-fn{margin-left:4px;color:#1d9bf0;font-weight:900}
 .dm-fchip .dm-fn:empty{display:none}
+.srch-frow{display:flex;gap:8px;padding:12px 16px 2px}
+.srch-fchip{border:1.5px solid #e3e8ec;background:#fff;color:#0f1419;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:6px 13px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
+.srch-fchip:active{transform:scale(.96)}
+.srch-fchip.act{background:#0f1419;border-color:#0f1419;color:#fff}
+.srch-mnote{padding:22px 18px;color:#536471;font-size:13.5px;text-align:center}
 .dm-fchip.act .dm-fn{color:#7cc4ff}
 .dmrow{gap:12px;padding:13px 16px;align-items:center}
 .dmrow .dm-avw img.avatar,.dmrow .dm-avw .ava-txt{width:48px;height:48px}
@@ -2707,7 +2712,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v170</p>
+  <p class="ver">v171</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2879,7 +2884,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v170</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v171</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3137,7 +3142,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v170</p>
+    <p class="ver">v171</p>
   </div>
 </section>
 </div>
@@ -4662,6 +4667,15 @@ function renderSrchHist(){const box=$("#x-hist");if(!box)return;box.innerHTML=""
   box.appendChild(s);});
  syncHistVis();}
 function pushSrchHist(q){srchHist=[q].concat(srchHist.filter(x=>x!==q)).slice(0,6);renderSrchHist();}
+/* v171: search-result filter (すべて / ポスト / 写真つき) - pure
+   display toggling over the parts the last runSearch built */
+let srchParts=null;
+function applySrchFilter(m){if(!srchParts)return;const sp=srchParts;
+ sp.acc.forEach(e=>{e.style.display=m==="all"?"":"none";});
+ const hasMedia=sp.postEls.some(e=>e.dataset.hasimg==="1");
+ if(sp.postHead)sp.postHead.style.display=(m!=="media"||hasMedia)?"":"none";
+ sp.postEls.forEach(e=>{e.style.display=(m==="media"&&e.dataset.hasimg!=="1")?"none":"";});
+ if(sp.mediaNote)sp.mediaNote.classList.toggle("hidden",!(m==="media"&&!hasMedia));}
 const STAB_HEADS={topic:["EXPLORE","話題を検索","いま世間で話題になっていること"],trend:["TRENDING","トレンド","投稿数の多い順に並ぶ、いまの話題"],news:["NEWS","ニュース","音楽番組と業界の動き"],entame:["ENTERTAINMENT","エンタメ","推しと界隈の話題"],sports:["SPORTS","スポーツ","スポーツ界のいま"]};
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="";if(sl)sl.style.display="";
@@ -4798,14 +4812,19 @@ function runSearch(){const q=$("#x-q").value.trim();if(!q)return;srchActive=true
  const eye=document.createElement("span");eye.className="srh-eye";eye.textContent="SEARCH RESULTS";h.appendChild(eye);
  const hq=document.createElement("b");hq.textContent="「"+q+"」 の検索結果";h.appendChild(hq);
  const hc=document.createElement("span");hc.innerHTML="アカウント <b>"+accKeys.length+"</b> ・ ポスト <b>"+hits.length+"</b>";h.appendChild(hc);box.appendChild(h);
+ srchParts={acc:[],postHead:null,postEls:[],mediaNote:null};
+ if(accKeys.length||hits.length){const fr=document.createElement("div");fr.className="srch-frow";
+  [["all","すべて"],["posts","ポスト"],["media","写真つき"]].forEach(([m,lab])=>{const c=document.createElement("button");c.className="srch-fchip"+(m==="all"?" act":"");c.textContent=lab;c.addEventListener("click",()=>{fr.querySelectorAll(".srch-fchip").forEach(x=>x.classList.toggle("act",x===c));applySrchFilter(m);});fr.appendChild(c);});
+  box.appendChild(fr);}
  const toks=[...new Set(tokens.concat([q.replace(/^#+/,"")]))].filter(t=>t.length>=1).sort((a,b)=>b.length-a.length);
  let ri=0;const rise=el=>{el.classList.add("srise");el.style.animationDelay=Math.min(ri++*40,320)+"ms";};
- if(accKeys.length){box.appendChild(tabHead("アカウント",accKeys.length+" 件"));
-  const aw=document.createElement("div");box.appendChild(aw);
+ if(accKeys.length){const ath=tabHead("アカウント",accKeys.length+" 件");box.appendChild(ath);srchParts.acc.push(ath);
+  const aw=document.createElement("div");box.appendChild(aw);srchParts.acc.push(aw);
   const addAcc=(k)=>{const r=srchAccRow(k);hlMarks(r.querySelector(".fr-name"),toks);hlMarks(r.querySelector(".fr-bio"),toks);rise(r);aw.appendChild(r);};
   accKeys.slice(0,3).forEach(addAcc);
   if(accKeys.length>3){const more=document.createElement("button");more.className="srch-more";more.textContent="すべてのアカウントを見る（"+accKeys.length+"件）";more.addEventListener("click",()=>{accKeys.slice(3).forEach(addAcc);more.remove();});aw.appendChild(more);}}
- if(hits.length){box.appendChild(tabHead("ポスト",hits.length+" 件"));hits.forEach(p=>{const el=postEl(p,false);hlMarks(el.querySelector(".nm"),toks);hlMarks(el.querySelector(".tx"),toks);const qt=el.querySelector(".qt-tx");if(qt)hlMarks(qt,toks);rise(el);box.appendChild(el);});}
+ if(hits.length){const pth=tabHead("ポスト",hits.length+" 件");box.appendChild(pth);srchParts.postHead=pth;hits.forEach(p=>{const el=postEl(p,false);el.dataset.hasimg=p.img?"1":"";srchParts.postEls.push(el);hlMarks(el.querySelector(".nm"),toks);hlMarks(el.querySelector(".tx"),toks);const qt=el.querySelector(".qt-tx");if(qt)hlMarks(qt,toks);rise(el);box.appendChild(el);});}
+ const mnote=document.createElement("div");mnote.className="srch-mnote hidden";mnote.textContent="写真つきのポストは見つからなかった";box.appendChild(mnote);srchParts.mediaNote=mnote;
  if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-hist-clear").addEventListener("click",()=>{srchHist=[];renderSrchHist();});
