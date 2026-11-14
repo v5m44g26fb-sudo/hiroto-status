@@ -1390,6 +1390,32 @@ input,textarea{font-size:16px}
 .setdanger:active{background:#fdf0f0}
 .setdanger svg{width:17px;height:17px;fill:#e0242e;flex:none}
 .set-note{padding:9px 14px 12px;font-size:11.5px;line-height:1.6;color:#9aa0a6;background:#fbfcfc}
+/* ===== v136: settings, second raise - the panel gains the app's
+   gradient hairline, the one-line save summary becomes a save card
+   (four live cells read from state in renderProfile, plus a day
+   segment bar that follows TOTAL_DAYS, current day pulsing like the
+   v100 title card), a STATUS LOG row surfaces the existing Changes
+   sheet from settings, and the reset moves into its own danger panel.
+   The reset still routes through the v97 confirmation sheet;
+   resetAll itself is untouched. ===== */
+.setpanel{position:relative}
+.setpanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948);z-index:1}
+.set-savehead{border-bottom:none;padding-bottom:9px}
+.set-savecard{margin:0 14px 13px;border:1px solid #eef1f3;border-radius:13px;background:linear-gradient(180deg,#fbf9ff,#fff);padding:11px 12px 12px}
+.ssv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ssv small{display:block;font-size:10.5px;font-weight:700;color:#8a94a6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ssv b{display:block;font-size:15.5px;font-weight:800;color:#0f1419;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ssv-segs{display:flex;gap:4px;margin-top:11px}
+.ssv-segs i{flex:1;height:5px;border-radius:3px;background:#e8edf0}
+.ssv-segs i.done{background:linear-gradient(90deg,#7856ff,#f91880)}
+.ssv-segs i.now{background:linear-gradient(90deg,#7856ff,#f91880);animation:ssvpulse 1.6s ease-in-out infinite}
+@keyframes ssvpulse{0%,100%{opacity:1}50%{opacity:.45}}
+.set-link{width:100%;background:#fff;border:none;border-bottom:none;font-family:inherit;cursor:pointer;text-align:left;transition:background .15s ease}
+.set-link:active{background:#f7f9fa}
+.set-chev{flex:none;font-size:20px;font-weight:700;color:#b6c0c8;line-height:1}
+.setpanel-danger{margin-top:12px;border-color:#f6d9dc}
+.setpanel-danger::before{background:linear-gradient(90deg,#f3b6bc,#e0242e)}
+.setpanel-danger .set-note{background:#fff7f7;color:#b0767c}
 /* ===== v81: Changes history as a readable STATUS LOG. The record itself
    (chgLog entries) is unchanged; the sheet now opens with the current
    state, then groups entries under DAY headers with per-day net chips,
@@ -2280,7 +2306,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v135</p>
+  <p class="ver">v136</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2437,8 +2463,20 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v135</span></div>
-          <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v136</span></div>
+          <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
+          <div class="set-savecard">
+            <div class="ssv-grid">
+              <div class="ssv"><small>進行</small><b id="set-sv-day">―</b></div>
+              <div class="ssv"><small>レベル</small><b id="set-sv-lv">―</b></div>
+              <div class="ssv"><small>フォロワー</small><b id="set-sv-fol">―</b></div>
+              <div class="ssv"><small id="set-sv-distlab">距離</small><b id="set-sv-dist">―</b></div>
+            </div>
+            <div class="ssv-segs" id="set-sv-segs"></div>
+          </div>
+          <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
+        </div>
+        <div class="setpanel setpanel-danger">
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、6日間の記録はすべて最初からになるよ。</p>
         </div>
@@ -2657,7 +2695,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v135</p>
+    <p class="ver">v136</p>
   </div>
 </section>
 </div>
@@ -4351,7 +4389,7 @@ function renderProfile(){if(!S||!S.started)return;
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
- const ssi=$("#set-save-info");if(ssi)ssi.textContent="Day "+S.ch+" / "+TOTAL_DAYS+" ・ Lv "+(1+Math.floor((S.xp||0)/50))+" ・ フォロワー "+fmt(S.fol)+" ・ "+tgt().short+"との距離 "+S.dist;
+ const svD=$("#set-sv-day");if(svD){svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+(1+Math.floor((S.xp||0)/50));$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);
@@ -4610,6 +4648,7 @@ $("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-resta
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 $("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
+(function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});})();
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
