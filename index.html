@@ -1135,6 +1135,27 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v82: settings & save management. There was no settings surface -
+   just a bare button and a grey line at the foot of the profile. The same
+   items (version, save reset with its existing single-action behaviour)
+   now live in a proper settings panel at the other screens' standard,
+   with a live save summary read from the state. No setting or behaviour
+   added or changed. ===== */
+.setwrap{padding:2px 16px 34px}
+.setpanel{border:1px solid #e8edf0;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(15,20,25,.04)}
+.setrow{display:flex;align-items:center;gap:11px;padding:13px 14px;border-bottom:1px solid #f0f3f4}
+.set-ic{width:32px;height:32px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--c) 12%,#fff)}
+.set-ic svg{width:17px;height:17px;fill:var(--c)}
+.set-main{flex:1;min-width:0}
+.set-main b{display:block;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.set-main small{display:block;font-size:12px;color:#536471;margin-top:1px}
+.set-ver{flex:none;font-size:12px;font-weight:900;letter-spacing:.05em;color:#7856ff;background:#f0eafd;border-radius:999px;padding:4px 10px}
+.set-auto{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;color:#00a06e}
+.set-auto i{width:7px;height:7px;border-radius:50%;background:#00ba7c;box-shadow:0 0 0 3px #e6f7f0}
+.setdanger{width:100%;display:flex;align-items:center;gap:10px;padding:13px 14px;background:#fff;border:none;font-family:inherit;font-size:14px;font-weight:800;color:#e0242e;cursor:pointer;text-align:left;transition:background .15s ease}
+.setdanger:active{background:#fdf0f0}
+.setdanger svg{width:17px;height:17px;fill:#e0242e;flex:none}
+.set-note{padding:9px 14px 12px;font-size:11.5px;line-height:1.6;color:#9aa0a6;background:#fbfcfc}
 /* ===== v81: Changes history as a readable STATUS LOG. The record itself
    (chgLog entries) is unchanged; the sheet now opens with the current
    state, then groups entries under DAY headers with per-day net chips,
@@ -1475,7 +1496,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v81</p>
+  <p class="ver">v82</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1615,9 +1636,14 @@ input,textarea{font-size:16px}
       </div>
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
-      <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v81</p>
-        <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
+      <div class="setwrap">
+        <div class="me-seclab">設定 ― SETTINGS</div>
+        <div class="setpanel">
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v82</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
+          <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
+          <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
+        </div>
       </div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
@@ -1798,7 +1824,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v81</p>
+    <p class="ver">v82</p>
   </div>
 </section>
 </div>
@@ -3153,6 +3179,7 @@ function renderProfile(){if(!S||!S.started)return;
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
+ const ssi=$("#set-save-info");if(ssi)ssi.textContent="Day "+S.ch+" / 5 ・ Lv "+(1+Math.floor((S.xp||0)/50))+" ・ フォロワー "+fmt(S.fol)+" ・ "+tgt().short+"との距離 "+S.dist;
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);
