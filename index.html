@@ -2493,6 +2493,15 @@ input,textarea{font-size:16px}
 @keyframes tickmove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 #scr-title h1{background:linear-gradient(100deg,#fff 30%,#ffe9a8 47%,#fff 62%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:h1sweep 7s ease-in-out infinite;filter:drop-shadow(0 4px 26px rgba(0,0,0,.55))}
 @keyframes h1sweep{0%,100%{background-position:110% 0}50%{background-position:-30% 0}}
+/* ===== v154: the cleared-quest card that stays on the home ===== */
+#eventslot .evcleared{margin:16px 0 0;display:flex;align-items:center;gap:13px;padding:15px 18px;background:linear-gradient(163deg,#1a1233,#271549);color:#f4f0ff;border-top:1px solid rgba(247,201,72,.55);border-bottom:1px solid rgba(247,201,72,.55);animation:evin .38s ease both}
+#eventslot .evcleared.final{background:linear-gradient(163deg,#241a08,#33240a);border-top-color:#f7c948;border-bottom-color:#f7c948}
+.evc-seal{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffd95e,#f7c948);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 16px rgba(247,201,72,.45)}
+.evc-seal svg{width:20px;height:20px;fill:#4a3200}
+.evc-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.evc-eyebrow{font-size:9.5px;font-weight:900;letter-spacing:.22em;color:#f7c948}
+.evc-title{font-size:14.5px;font-weight:800;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.evc-sub{font-size:11.5px;color:rgba(205,195,238,.75)}
 #x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
 #x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 #x-pane-me .rep-lab{color:#f7c948}
@@ -2554,7 +2563,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v153</p>
+  <p class="ver">v154</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2721,7 +2730,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v153</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v154</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2963,7 +2972,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v153</p>
+    <p class="ver">v154</p>
   </div>
 </section>
 </div>
@@ -4534,8 +4543,14 @@ function fxChips(fx){
 /* event card (Status addition) */
 function renderEvent(){
  const slot=$("#eventslot"),ch=curCH()[S.ch-1];slot.innerHTML="";
- if(S.evDone)return;
- const ev=ch.event;const card=document.createElement("div");card.className="evcard"+(S.ch>=TOTAL_DAYS?" final":"");
+ const ev=ch.event;
+ /* v154: a cleared quest no longer vanishes from the home - a slim
+    QUEST CLEAR card stays in the slot (derived from the chapter and
+    S.evDone only, so it survives re-renders and reloads alike) */
+ if(S.evDone){const done=document.createElement("div");done.className="evcleared"+(S.ch>=TOTAL_DAYS?" final":"");
+  done.innerHTML='<span class="evc-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6.5 9.5 17 4 11.5l1.8-1.8 3.7 3.7L18.2 4.7z"/></svg></span><span class="evc-main"><span class="evc-eyebrow">QUEST CLEAR ― </span><b class="evc-title"></b><span class="evc-sub">今日のEventは完了。続きは明日の章で。</span></span>';
+  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;slot.appendChild(done);return;}
+ const card=document.createElement("div");card.className="evcard"+(S.ch>=TOTAL_DAYS?" final":"");
  card.innerHTML='<div class="ev-hero'+(ev.img?" hasimg":"")+'">'+(ev.img?'<img class="ev-hero-img" alt="">':"")+'<div class="ev-hero-shade"></div><div class="ev-ghost">'+S.ch+'</div><span class="ev-clear">QUEST CLEAR</span><div class="ev-hero-in"><div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div></div></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  if(ev.img)card.querySelector(".ev-hero-img").src=ev.img;
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
