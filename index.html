@@ -922,6 +922,23 @@ input,textarea{font-size:16px}
 #x-compose .xc-head{position:sticky;top:0;z-index:3;flex:none;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 #postopts{overflow:visible;flex:none}
 .xc-pimg{max-height:min(300px,calc(var(--app-h,100dvh)*.34))}
+/* ===== v53: compose finish — option cards share one rhythm (10px gaps,
+   13px padding), chips align on one line-height, the draft card sits tighter
+   under the ACTION ribbon, thumbnails gain a hairline + soft shadow so they
+   read as photos, and picking a draft pulses the Post button once so the eye
+   lands on the next step. The v52 whole-sheet scroll + sticky head stay. ===== */
+.xc-card{margin-top:8px;padding:4px 0 2px}
+.xc-preview{min-height:64px}
+.xc-card .xc-tools{margin-top:6px;padding-top:7px;padding-bottom:5px}
+.xc-pimg{border:1px solid rgba(15,20,25,.08);box-shadow:0 4px 14px rgba(15,20,25,.1)}
+.xc-seclab{margin-top:16px}
+.choice.xcopt{gap:11px;padding:13px 13px 12px;margin-top:10px}
+.choice.xcopt:first-child{margin-top:8px}
+.xcopt-chips{gap:6px;margin-top:9px;align-items:center}
+.xchip{padding:3px 8px;line-height:1.35}
+.xcopt-img{border:1px solid rgba(15,20,25,.09);box-shadow:0 3px 10px rgba(15,20,25,.12)}
+#xc-post.ready{animation:xcpostcue .45s ease}
+@keyframes xcpostcue{0%{transform:scale(1)}35%{transform:scale(1.08)}100%{transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -936,7 +953,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v52</p>
+  <p class="ver">v53</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1058,7 +1075,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v52</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v53</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1171,7 +1188,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v52</p>
+    <p class="ver">v53</p>
   </div>
 </section>
 </div>
@@ -2078,8 +2095,8 @@ let xcSel=null,xcBusy=false;
 const XC_MAX=140,XC_CIRC=56.5,XC_PLACEHOLDER="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 function xcRenderDraft(){
  const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg");
- if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pi){pi.classList.add("hidden");pi.src=XC_PLACEHOLDER;}return;}
- pv.textContent=xcSel.tx;pv.classList.remove("empty");btn.disabled=xcBusy;
+ if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pi){pi.classList.add("hidden");pi.src=XC_PLACEHOLDER;}return;}
+ pv.textContent=xcSel.tx;pv.classList.remove("empty");btn.disabled=xcBusy;btn.classList.remove("ready");void btn.offsetWidth;btn.classList.add("ready");
  if(pi){if(xcSel.img){pi.src=xcSel.img;pi.classList.remove("hidden");}else{pi.classList.add("hidden");pi.src=XC_PLACEHOLDER;}}
  const len=[...xcSel.tx.replace(/\n/g,"")].length;
  cnt.textContent=String(len);cnt.className="xc-count"+(len>XC_MAX?" over":(len>XC_MAX-20?" warn":""));
