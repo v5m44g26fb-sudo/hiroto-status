@@ -840,3 +840,8 @@
 - 新規の「次のステージまで」行（#hd-next）：DIST_STAGES 表から残り距離を表示し、最終ステージでは到達表記。dstage 3-4 ではピンクに追随
 - 変えなかったもの：金の基調と dstage の色変化、距離の数値・段階定義・描画ロジック（新行の供給のみ追加）
 - 検証（/tmp/verify_v148.py、両ルート）：カバー高、タイポ差し替え（HIROTO IKUMI／SAKUYA ― NCT WISH）、次のステージ行の内容、pageerror 0。スクショ目視も正常
+
+### v149（第22弾）— Dayイントロ第3弾：その日のミッションプレビュー
+- 章タイトルカードに POST／EVENT／ACTIVITY の3行プレビューを追加。EVENT 行はその章の event.title をそのまま表示（showDayIntro が章データから生成）
+- 行は色チップ＋ガラス行で、最終日は金枠が付く。カードの表示時間・写真・タップ dismiss は不変
+- 検証（/tmp/verify_v149.py、サクヤ編）：Day1 と Day6（final）で3行の生成と EVENT 行＝章タイトル一致、pageerror 0。スクショ目視も正常
