@@ -1083,6 +1083,24 @@ input,textarea{font-size:16px}
 .cat-head small{display:block;color:#536471;font-size:12px;margin-top:2px}
 .srch-res-h{position:relative;background:#f7f9fb;border-bottom:1px solid #e8edf0;padding:13px 16px 11px}
 .srch-res-h::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.5px;background:linear-gradient(180deg,#7856ff,#f91880)}
+/* ===== v60: my-page overhaul - taller cover with live status chips, a
+   NOW overview strip under the identity block, the reputation panel
+   promoted above the stat grid behind a gradient frame, section eyebrows,
+   and a hairline-divided counts row. Panel contents / title logic /
+   numbers unchanged; renderProfile only gained text sync for the chips. */
+#x-pane-me .pf-cover{height:152px}
+.pf-covstat{position:absolute;left:108px;bottom:10px;z-index:1;display:flex;gap:6px}
+.pf-covstat span{font-size:10.5px;font-weight:900;letter-spacing:.1em;color:#fff;background:rgba(15,20,25,.55);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:4px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#x-pane-me .counts{border-top:1px solid #eff3f4;padding-top:12px}
+.me-now{margin:14px 14px 0;display:grid;grid-template-columns:repeat(4,1fr);border-radius:16px;background:linear-gradient(135deg,#171d38,#1c1030);box-shadow:0 8px 22px rgba(15,18,48,.26),inset 0 1px 0 rgba(255,255,255,.09);overflow:hidden}
+.me-now-cell{padding:10px 4px 9px;text-align:center;border-left:1px solid rgba(255,255,255,.09)}
+.me-now-cell:first-child{border-left:none}
+.me-now-cell small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#a7b0c4;margin-bottom:3px;white-space:nowrap}
+.me-now-cell b{font-size:13.5px;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+#x-pane-me .reppanel{border:1.5px solid transparent;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#1d9bf0,#7856ff,#f91880) border-box;box-shadow:0 10px 26px rgba(90,40,160,.13)}
+.me-seclab{margin:16px 16px 0;font-size:10.5px;font-weight:900;letter-spacing:.12em;color:#8a94a6;display:flex;align-items:center;gap:8px}
+.me-seclab::after{content:"";flex:1;height:1px;background:#e8edf0}
+#x-pane-me .statgrid{margin-top:8px}
 </style>
 </head>
 <body>
@@ -1097,7 +1115,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v59</p>
+  <p class="ver">v60</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1205,7 +1223,7 @@ input,textarea{font-size:16px}
     </div>
     <div id="x-pane-me" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>なお</b><small id="me-pcount">0 ポスト</small></div></div>
-      <div class="pf-cover"><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
+      <div class="pf-cover"><div class="pf-covstat"><span id="me-cov-day">DAY 1 / 5</span><span id="me-cov-lv">Lv 1</span></div><span class="pf-cover-chip">OFFICIAL ACCOUNT</span></div>
       <div style="padding:0 14px">
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
         <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
@@ -1213,12 +1231,11 @@ input,textarea{font-size:16px}
         <div style="font-size:13px;margin-top:5px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
       </div>
-      <div class="statgrid">
-        <div class="statbox distbox"><small id="st-dist-lab">ひろとの距離（親密度）</small><b id="st-dist">0</b><div class="gauge"><i id="dist-gauge" style="width:0%"></i></div></div>
-        <div class="statbox"><small>フォロワー</small><b id="st-fol">1</b></div>
-        <div class="statbox"><small>世間の認知度</small><b id="st-cog">0</b></div>
-        <div class="statbox"><small>XP（レベル <span id="st-lv">1</span>）</small><b id="st-xp">0</b></div>
-        <div class="statbox"><small>炎上度</small><b id="st-flm">0</b></div>
+      <div class="me-now">
+        <div class="me-now-cell"><small>レベル</small><b id="me-now-lv">Lv 1</b></div>
+        <div class="me-now-cell"><small>進行</small><b id="me-now-day">Day 1 / 5</b></div>
+        <div class="me-now-cell"><small>ワールド</small><b>芸能界</b></div>
+        <div class="me-now-cell"><small>今日のAction</small><b id="me-now-act">残り 3</b></div>
       </div>
       <div class="reppanel">
         <div class="rep-head"><span class="rep-lab">世間の評価 ― REPUTATION</span><span class="rep-title" id="rep-title">デビューしたての新人</span></div>
@@ -1228,10 +1245,18 @@ input,textarea{font-size:16px}
         <div class="rep-fol-h"><span>フォロワーの推移</span><b id="rep-fol-d"></b></div>
         <div class="rep-bars" id="rep-bars"></div>
       </div>
+      <div class="me-seclab">ステータス ― STATUS</div>
+      <div class="statgrid">
+        <div class="statbox distbox"><small id="st-dist-lab">ひろとの距離（親密度）</small><b id="st-dist">0</b><div class="gauge"><i id="dist-gauge" style="width:0%"></i></div></div>
+        <div class="statbox"><small>フォロワー</small><b id="st-fol">1</b></div>
+        <div class="statbox"><small>世間の認知度</small><b id="st-cog">0</b></div>
+        <div class="statbox"><small>XP（レベル <span id="st-lv">1</span>）</small><b id="st-xp">0</b></div>
+        <div class="statbox"><small>炎上度</small><b id="st-flm">0</b></div>
+      </div>
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v59</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v60</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1381,7 +1406,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v59</p>
+    <p class="ver">v60</p>
   </div>
 </section>
 </div>
@@ -2411,7 +2436,10 @@ function renderProfile(){if(!S||!S.started)return;
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
- $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);renderRep();renderHud();}
+ $("#st-xp").textContent=S.xp;$("#st-lv").textContent=1+Math.floor(S.xp/50);
+ const lvN=1+Math.floor(S.xp/50),usedN=[S.posted,S.evDone,S.actDone].filter(Boolean).length,setT=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ setT("#me-cov-day","DAY "+S.ch+" / 5");setT("#me-cov-lv","Lv "+lvN);setT("#me-now-lv","Lv "+lvN);setT("#me-now-day","Day "+S.ch+" / 5");setT("#me-now-act","残り "+(3-usedN));
+ renderRep();renderHud();}
 /* v44: reputation - how the world currently sees her, derived from the axes */
 function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
  if(f>=55)return{t:"炎上の渦中",cls:"fire",q:"まとめ垢の見出しに名前が躍る毎日。歌より先に、騒ぎの方が届いてしまう。"};
