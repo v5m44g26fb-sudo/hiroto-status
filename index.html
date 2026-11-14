@@ -1209,6 +1209,10 @@ input,textarea{font-size:16px}
 .ej-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
 .ej-dots i.on{background:linear-gradient(135deg,#7856ff,#f91880)}
 .ej-words{margin:11px 0 2px;font-size:12px;line-height:1.7;color:#9aa0a6}
+/* ===== v66: story image resolution fix - avatar-grade files (512px)
+   no longer stretch across the fullscreen story viewer; they present
+   as a photo card near native size over the account-hue gradient. ===== */
+.sv-photo{width:min(76vw,296px);aspect-ratio:1;object-fit:cover;object-position:center 22%;border-radius:20px;border:3px solid rgba(255,255,255,.92);box-shadow:0 18px 44px rgba(0,0,0,.5);animation:fadeup .35s ease}
 </style>
 </head>
 <body>
@@ -1223,7 +1227,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v65</p>
+  <p class="ver">v66</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1364,7 +1368,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v65</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v66</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1523,7 +1527,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v65</p>
+    <p class="ver">v66</p>
   </div>
 </section>
 </div>
@@ -2202,7 +2206,10 @@ let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
 function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":"");b.setAttribute("aria-label",e.lab+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 function storyList(){
  const base=curStory().map(x=>({k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]}));
- const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).map(d=>({k:d.k,lab:d.lab,img:d.img,cap:d.cap||"",uid:d.uid}));
+ /* v66: legacy saves may still carry the 150px avatar file as a story
+    backdrop (the old Day-2 event chain entry) - remap it at display time
+    to the studio photo. Save format untouched. */
+ const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).map(d=>({k:d.k,lab:d.lab,img:d.img==="assets/ig-avatar.jpg"?"assets/ig-gen-studio.jpg":d.img,cap:d.cap||"",uid:d.uid}));
  /* v55 (supersedes the v43 order): newest first. Own story stays pinned to
     the left edge; everyone else sorts by when their story began to be
     displayed, newest closest to your own. Chain stories (storyDyn, kept in
@@ -2224,7 +2231,7 @@ const STORY_CHAIN={
   4:{k:"fan1",lab:"ゆな",img:"assets/av-fan1.jpg",cap:"なおちゃん応援中！"},
   5:{tgt:true,imgH:"assets/ig-gen-stage.jpg",capH:"プリン、買えた",imgS:"assets/sakuya-selca.jpg",capS:"クロワッサン、買えました"}},
  event:{1:{k:"stella",lab:"ステラ",img:"assets/av-stella.jpg",cap:"記事みたよ、すごい！"},
-  2:{tgt:true,imgH:"assets/ig-avatar.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
+  2:{tgt:true,imgH:"assets/ig-gen-studio.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
   3:{k:"juun",lab:"ジュウン",img:"assets/av-juun.jpg",cap:"楽屋、にぎやかでした"},
   4:{k:"media",lab:"番組公式",img:"assets/nao-stage.jpg",cap:"コラボSP、近日発表"},
   5:{k:"yeon",lab:"イェオン",img:"assets/av-yeon.jpg",cap:"最終日、みんなで見守り中"}},
@@ -2251,10 +2258,16 @@ function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChil
 function renderStorySeg(){
  const e=storyList()[svIdx];if(!e)return;const a=ACC[e.k];if(!a)return;
  const bg=$("#sv-bg"),img=e.img;
- if(img){bg.style.backgroundImage="url("+img+")";}
+ /* v66: avatar-grade files (512px av-*) are never stretched to fullscreen
+    again - they show as a photo card at native-friendly size over the
+    account-hue gradient, so no upscale blockiness. Hi-res backdrops keep
+    the fullscreen cover treatment. */
+ const lowRes=!!img&&img.indexOf("assets/av-")===0;
+ if(img&&!lowRes){bg.style.backgroundImage="url("+img+")";}
  else{const h=svHue(a.n);bg.style.backgroundImage="linear-gradient(160deg,hsl("+h+",52%,46%),hsl("+((h+50)%360)+",58%,26%))";}
  const center=$("#sv-center");
- if(img){center.className="sv-center";center.innerHTML="";}
+ if(lowRes){center.className="sv-center show";center.innerHTML="";const im=document.createElement("img");im.className="sv-photo";im.src=img;im.alt="";center.appendChild(im);}
+ else if(img){center.className="sv-center";center.innerHTML="";}
  else{center.className="sv-center show";center.innerHTML=avaTxt(a.n);}
  const id=$("#sv-id");
  id.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"<span><b></b><small></small></span>";
