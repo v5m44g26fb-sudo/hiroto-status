@@ -1532,6 +1532,25 @@ input,textarea{font-size:16px}
 .fr-mutual{flex:none;font-size:10.5px;font-weight:700;color:#536471;background:#eff3f4;border-radius:5px;padding:1.5px 6px;white-space:nowrap}
 #x-pane-follow .folbtn{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25);padding:8px 16px}
 #x-pane-follow .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
+/* ===== v158: explore pane gains a WHO TO FOLLOW rail - a horizontal
+   strip of account cards (real ACC accounts, FOL_BIO lines, verified
+   badges from the same VERIFIED set, follow buttons sharing the
+   session-local folOverride toggles with the follow list and search
+   rows). Shown on the topic tab only; hidden while search results are
+   up, exactly like the suggestion chips. Nothing writes to the save. ===== */
+.sa-head{justify-content:flex-start;white-space:nowrap;overflow:hidden}
+.sa-sub{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.16em;color:#8a94a6}
+.sa-rail{display:flex;gap:10px;overflow-x:auto;padding:12px 14px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.sa-rail::-webkit-scrollbar{display:none}
+.sa-card{flex:none;width:128px;border:1px solid #e8edf0;border-radius:18px;background:#fff;box-shadow:0 3px 12px rgba(15,20,25,.06);padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;text-align:center;animation:folrise .3s ease both}
+.sa-card .avatar,.sa-card .ava-txt{width:56px;height:56px;font-size:20px}
+.sa-namerow{display:flex;align-items:center;gap:3px;max-width:100%;margin-top:9px}
+.sa-namerow .sa-name{font-size:13px;font-weight:800;color:#0f1419;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-namerow .p-ver{width:14px;height:14px;flex:none}
+.sa-handle{font-size:11.5px;color:#536471;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-bio{margin-top:5px;font-size:11px;line-height:1.45;color:#536471;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:32px}
+.sa-card .folbtn{margin-top:9px;width:100%;padding:6px 0;font-size:12.5px;background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25)}
+.sa-card .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
 #thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
 #thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
 #thread-main .post.detail .mt{padding-right:2px}
@@ -2595,7 +2614,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v157</p>
+  <p class="ver">v158</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2723,6 +2742,7 @@ input,textarea{font-size:16px}
       <div class="xtabs" id="x-stabs" style="overflow-x:auto"><button data-stab="topic" class="act">話題を検索</button><button data-stab="trend">トレンド</button><button data-stab="news">ニュース</button><button data-stab="sports">スポーツ</button><button data-stab="entame">エンタメ</button></div>
       <div class="srch-lab"><i></i>おすすめワード</div>
       <div class="sug" id="x-sug"></div>
+      <div id="x-sugacc"></div>
       <div id="x-search-results"></div>
     </div>
     <div id="x-pane-me" style="display:none">
@@ -2762,7 +2782,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v157</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v158</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3011,7 +3031,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v157</p>
+    <p class="ver">v158</p>
   </div>
 </section>
 </div>
@@ -4457,6 +4477,7 @@ let searchTab="topic";
 const STAB_HEADS={topic:["EXPLORE","話題を検索","いま世間で話題になっていること"],trend:["TRENDING","トレンド","投稿数の多い順に並ぶ、いまの話題"],news:["NEWS","ニュース","音楽番組と業界の動き"],entame:["ENTERTAINMENT","エンタメ","推しと界隈の話題"],sports:["SPORTS","スポーツ","スポーツ界のいま"]};
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="";if(sl)sl.style.display="";
+ const sa=$("#x-sugacc");if(sa){if(k==="topic"){renderSugAcc();sa.style.display="";}else sa.style.display="none";}
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const hd=STAB_HEADS[k];if(hd){const hh=document.createElement("div");hh.className="cat-head";hh.innerHTML="<span class='ch-eyebrow'></span><b></b><small></small>";hh.querySelector(".ch-eyebrow").textContent=hd[0];hh.querySelector("b").textContent=hd[1];hh.querySelector("small").textContent=hd[2];box.appendChild(hh);}
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
@@ -4494,6 +4515,30 @@ function srchAccRow(key){const a=ACC[key];const row=document.createElement("div"
  const go=()=>{if(key==="nao")showPane("me");else if(key===tgtKey())showPane("hisprof");};
  row.querySelector(".fr-av").style.cursor="pointer";row.querySelector(".fr-av").addEventListener("click",go);
  return row;}
+/* v158: WHO TO FOLLOW rail on the explore topic tab - vertical account
+   cards built from the same ACC / FOL_BIO / VERIFIED data and the same
+   follow semantics as srchAccRow (the target's button jumps to his
+   profile, everyone else toggles the session-local folOverride). */
+function sugAccCard(key){const a=ACC[key];const card=document.createElement("div");card.className="sa-card";
+ const following=key===tgtKey()?!!S.followHiroto:folIsFollowing("nao",key);
+ card.innerHTML='<span class="sa-av"></span><div class="sa-namerow"><span class="sa-name"></span></div><div class="sa-handle"></div><div class="sa-bio"></div>';
+ card.querySelector(".sa-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="56" height="56" alt="">':avaTxt(a.n);
+ card.querySelector(".sa-name").textContent=a.n.replace(/｜.*$/,"");
+ if(VERIFIED.has(key))card.querySelector(".sa-namerow").insertAdjacentHTML("beforeend",VER_BADGE);
+ card.querySelector(".sa-handle").textContent=a.h;
+ card.querySelector(".sa-bio").textContent=FOL_BIO[key]||"";
+ const btn=document.createElement("button");btn.className="folbtn"+(following?" on":"");btn.textContent=following?"フォロー中":"フォローする";
+ btn.addEventListener("click",()=>{if(key===tgtKey()){showPane("hisprof");return;}const now=!folIsFollowing("nao",key);folOverride["nao:"+key]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});
+ card.appendChild(btn);
+ const go=()=>{if(key===tgtKey())showPane("hisprof");};
+ const av=card.querySelector(".sa-av");if(key===tgtKey()){av.style.cursor="pointer";av.addEventListener("click",go);}
+ return card;}
+function renderSugAcc(){const wrap=$("#x-sugacc");if(!wrap)return;wrap.innerHTML="";
+ if(typeof S==="undefined"||!S)return;/* boot-time renderTrends runs before a state exists; the pane re-renders on open */
+ const head=document.createElement("div");head.className="srch-lab sa-head";head.innerHTML="<i></i>おすすめアカウント<span class='sa-sub'>WHO TO FOLLOW</span>";wrap.appendChild(head);
+ const rail=document.createElement("div");rail.className="sa-rail";
+ [tgtKey(),"akari","carmen","yuha","stella","juun","ana","ian","yeon","sea","mina","media"].forEach((k,i)=>{if(!ACC[k])return;const c=sugAccCard(k);c.style.animationDelay=(i*0.04)+"s";rail.appendChild(c);});
+ wrap.appendChild(rail);}
 /* v112: search matching rebuilt - the old runSearch demanded the full
    query as one literal substring of a post's text or author name, so
    compound trend titles ("井汲大翔 新曲") matched nothing and almost
@@ -4551,6 +4596,7 @@ function hlMarks(el,toks){
 }
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();const box=$("#x-search-results");box.innerHTML="";
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";
+ const sax=$("#x-sugacc");if(sax)sax.style.display="none";
  const tokens=q.split(/[\s　]+/).map(t=>t.replace(/^#+/,"")).filter(Boolean);
  const keys=TREND_KEYS[q.replace(/^#+/,"")]||TREND_KEYS[q.replace(/\s+/g," ")]||null;
  const scored=[];(S?S.posts:[]).forEach((p,i)=>{if(!p||p.sys)return;const s=srchScore((p.n||"")+" "+(p.h||"")+" "+(p.t||""),q,tokens,keys);if(s>0)scored.push({p:p,s:s,i:i});});
