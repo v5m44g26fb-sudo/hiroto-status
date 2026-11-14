@@ -188,9 +188,9 @@ input,textarea{font-size:16px}
 .sv-bg{position:absolute;inset:0;background-color:#14181c;background-position:center 28%;background-size:cover;background-repeat:no-repeat;transition:opacity .18s ease}
 #storyviewer.paused .sv-bg{opacity:.82}
 .sv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 76%,rgba(0,0,0,.45));pointer-events:none}
-.sv-top{position:relative;z-index:5;padding:calc(10px + env(safe-area-inset-top)) 12px 0;flex:none}
+.sv-top{position:relative;z-index:5;padding:calc(13px + env(safe-area-inset-top)) 12px 0;flex:none}
 .sv-segs{display:flex;gap:4px}
-.sv-seg{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
+.sv-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
 .sv-seg i{display:block;height:100%;width:0;background:#fff;border-radius:2px}
 .sv-head{display:flex;align-items:center;gap:9px;margin-top:11px}
 .sv-id{display:flex;align-items:center;gap:9px;background:none;border:none;color:#fff;text-align:left;padding:2px;border-radius:999px;min-width:0}
@@ -809,7 +809,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v44</p>
+  <p class="ver">v45</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -931,7 +931,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v44</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v45</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1044,7 +1044,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v44</p>
+    <p class="ver">v45</p>
   </div>
 </section>
 </div>
@@ -1878,6 +1878,7 @@ function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createE
  renderSearchTab("topic");}
 let searchTab="topic";
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
+ const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="";if(sl)sl.style.display="";
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
  if(k==="topic"){curTrends().forEach((t,i)=>box.appendChild(trendEl(t,i)));return;}
@@ -1885,7 +1886,8 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
  list.forEach((t,i)=>box.appendChild(trendEl(t,i)));}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
-function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
+function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";
+ const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
 /* shared fx-chip builder (same labels/colors as the compose sheet) */
