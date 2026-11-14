@@ -2729,7 +2729,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v174</p>
+  <p class="ver">v175</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2901,7 +2901,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v174</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v175</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2913,6 +2913,9 @@ input,textarea{font-size:16px}
             <div class="ssv-segs" id="set-sv-segs"></div>
           </div>
           <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
+          <button class="setrow set-link" id="set-export"><span class="set-ic" style="--c:#17bf63"><svg viewBox="0 0 24 24"><path d="M11 2.5h2v8.7l2.6-2.6 1.4 1.4-5 5-5-5 1.4-1.4 2.6 2.6zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを書き出す</b><small>JSONファイルで保存 ― 機種変更・引き継ぎ用</small></div><span class="set-chev">›</span></button>
+          <button class="setrow set-link" id="set-import"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M11 15.5V6.3L8.4 8.9 7 7.5l5-5 5 5-1.4 1.4-2.6-2.6v9.2zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを読み込む</b><small>書き出したファイルから進行を復元する</small></div><span class="set-chev">›</span></button>
+          <input type="file" id="set-import-file" accept="application/json,.json" style="display:none">
         </div>
         <div class="me-seclab">あそびかた ― HOW TO PLAY</div>
         <div class="setpanel set-howto">
@@ -3161,7 +3164,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v174</p>
+    <p class="ver">v175</p>
   </div>
 </section>
 </div>
@@ -5449,6 +5452,20 @@ $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 $("#btn-end-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 (function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});})();
+/* v175: save portability - export downloads the stored save as a
+   JSON file; import validates the shape minimally (the same fields
+   the boot path relies on), asks once, writes the very same key and
+   reloads. The save format itself is unchanged. */
+(function(){const eb=$("#set-export");
+ if(eb)eb.addEventListener("click",()=>{try{const raw=localStorage.getItem(KEY)||"";if(!raw)throw 0;const blob=new Blob([raw],{type:"application/json"});const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download="debut-status-save.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);toastChg("セーブを書き出したよ");}catch(_){toastChg("書き出しに失敗したよ");}});
+ const ib=$("#set-import"),fl=$("#set-import-file");
+ if(ib&&fl){ib.addEventListener("click",()=>fl.click());
+  fl.addEventListener("change",()=>{const f=fl.files&&fl.files[0];fl.value="";if(!f)return;const r=new FileReader();
+   r.onload=()=>{try{const o=JSON.parse(String(r.result||""));if(!o||typeof o!=="object"||typeof o.fol!=="number"||typeof o.ch!=="number"||!Array.isArray(o.posts))throw 0;
+    if(!confirm("このセーブを読み込む？ いまの進行は置き換わるよ。"))return;
+    localStorage.setItem(KEY,JSON.stringify(o));location.reload();}
+   catch(_){toastChg("そのファイルは読み込めなかったよ");}};
+   r.readAsText(f);});}})();
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
