@@ -1453,6 +1453,18 @@ input,textarea{font-size:16px}
 .chg-eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#8a5cf6;background:#f0eafd;border-radius:999px;padding:4px 10px}
 .chg-eyebrow svg{width:12px;height:12px;fill:#8a5cf6}
 .chg-now{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+/* ===== v160: STATUS LOG axis filter - chips over the log (すべて plus
+   one per axis, with live counts from chgLog) narrow the day sections
+   to a single axis; LEVEL UP bands filter as their own axis. Display
+   only: the log itself, its grouping and its nets math are untouched
+   (nets are computed from the entries actually shown). ===== */
+.chg-filter{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.chgchip{display:inline-flex;align-items:center;gap:6px;border:1px solid #dfe6ea;background:#fff;border-radius:999px;padding:6px 11px;font-family:inherit;font-size:12.5px;font-weight:800;color:#0f1419;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
+.chgchip:active{transform:scale(.96)}
+.chgchip i{width:8px;height:8px;border-radius:50%;background:var(--c,#0f1419);flex:none}
+.chgchip .cf-n{font-size:11px;font-weight:800;color:#8a94a6;font-variant-numeric:tabular-nums}
+.chgchip.act{background:#0f1419;color:#fff;border-color:#0f1419}
+.chgchip.act .cf-n{color:#cdbcf5}
 .chg-now .cn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#3d4750;background:#f4f6f8;border:1px solid #e8edf0;border-radius:999px;padding:5px 10px}
 .chg-now .cn i{width:7px;height:7px;border-radius:50%;background:var(--c,#999);flex:none}
 .chg-now .cn b{font-weight:800;color:#0f1419}
@@ -2623,7 +2635,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v159</p>
+  <p class="ver">v160</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2791,7 +2803,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v159</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v160</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3041,7 +3053,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v159</p>
+    <p class="ver">v160</p>
   </div>
 </section>
 </div>
@@ -3051,6 +3063,7 @@ input,textarea{font-size:16px}
   <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zm4 3.5h8V7H8v1.5zm0 4h8V11H8v1.5zm0 4h5V15H8v1.5z"/></svg>STATUS LOG ― 記録</span>
   <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、彼との距離はピンクで表示される。</p>
   <div class="chg-now" id="chg-now"></div>
+  <div class="chg-filter" id="chg-filter"></div>
   <div id="chglist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
@@ -3754,17 +3767,32 @@ const CHG_AXIS={
  lv:{c:"#b8860b",svg:'<svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-2.9-5.4 2.9 1.1-6L3.2 9.4l6.1-.8z"/></svg>'}};
 function chgAxisOf(e){if(e.cls==="lv")return"lv";if(e.name==="フォロワー")return"fol";if(e.name==="XP")return"xp";if(e.name==="世間の認知度")return"cog";if(e.name==="炎上度")return"flm";if((e.name||"").indexOf("距離")>=0)return"dist";return"xp";}
 function chgValTx(e){return(e.v>0?"+":"")+(e.name==="フォロワー"?fmtCnt(e.v):e.v);}
+let chgFilter="all";
 function renderChgLog(){
  const now=$("#chg-now");
  if(now&&S){const lv=1+Math.floor((S.xp||0)/50);
   now.innerHTML="";
   [["Lv",lv,"#7856ff"],["フォロワー",fmtCnt(S.fol),"#1d9bf0"],["XP",S.xp,"#7856ff"],["世間の認知度",S.cog,"#ff8a00"],["炎上度",S.flm,"#f4212e"],[distLab(),S.dist,"#f91880"]].forEach(([n,v,c])=>{const s=document.createElement("span");s.className="cn";s.style.setProperty("--c",c);s.innerHTML="<i></i>"+n+" <b></b>";s.querySelector("b").textContent=v;now.appendChild(s);});}
  const box=$("#chglist");const log=(S&&S.chgLog)||[];
- if(!log.length){box.innerHTML='<div style="padding:12px 2px;color:#536471;font-size:13.5px;line-height:1.7">まだChangesはないよ。投稿・Event・Activityで変化が起きると、ここに溜まっていく。</div>';return;}
+ const fbox=$("#chg-filter");
+ if(!log.length){if(fbox)fbox.innerHTML="";box.innerHTML='<div style="padding:12px 2px;color:#536471;font-size:13.5px;line-height:1.7">まだChangesはないよ。投稿・Event・Activityで変化が起きると、ここに溜まっていく。</div>';return;}
+ /* v160: axis filter chips (display only; chgFilter is module state,
+    reset to すべて whenever the sheet is opened fresh) */
+ const axisOf=e=>e.cls==="lv"?"lv":chgAxisOf(e);
+ if(fbox){fbox.innerHTML="";
+  const defs=[["all","すべて","#0f1419"],["fol","フォロワー",CHG_AXIS.fol.c],["xp","XP",CHG_AXIS.xp.c],["cog","認知度",CHG_AXIS.cog.c],["flm","炎上度",CHG_AXIS.flm.c],["dist","距離",CHG_AXIS.dist.c],["lv","LEVEL UP",CHG_AXIS.lv.c]];
+  defs.forEach(([k,lab,c])=>{const n=k==="all"?log.length:log.filter(e=>axisOf(e)===k).length;
+   if(k!=="all"&&!n)return;
+   const b=document.createElement("button");b.className="chgchip"+(chgFilter===k?" act":"");b.style.setProperty("--c",c);
+   b.innerHTML="<i></i>"+lab+' <span class="cf-n">'+n+"</span>";
+   b.addEventListener("click",()=>{chgFilter=k;renderChgLog();});
+   fbox.appendChild(b);});}
  box.innerHTML="";
  const days={};[...log].reverse().forEach(e=>{(days[e.day]=days[e.day]||[]).push(e);});
+ let shownAny=false;
  Object.keys(days).map(Number).sort((a,b)=>b-a).forEach(day=>{
-  const entries=days[day];
+  const entries=days[day].filter(e=>chgFilter==="all"||axisOf(e)===chgFilter);
+  if(!entries.length)return;shownAny=true;
   const sec=document.createElement("div");sec.className="chgday";
   const nets={};entries.forEach(e=>{if(e.cls==="lv")return;const ax=chgAxisOf(e);nets[ax]=nets[ax]||{name:e.name,sum:0};nets[ax].sum+=e.v;});
   const hd=document.createElement("div");hd.className="chgday-h";
@@ -3781,8 +3809,9 @@ function renderChgLog(){
    const v=document.createElement("span");v.className="chg-v "+(e.cls||"");v.textContent=chgValTx(e);
    r.appendChild(v);sec.appendChild(r);});
   box.appendChild(sec);});
+ if(!shownAny)box.innerHTML='<div style="padding:12px 2px;color:#536471;font-size:13.5px;line-height:1.7">この軸の記録はまだないよ。</div>';
 }
-$("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
+$("#hud-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 const PANES=["tl","trend","mention","me","search","msg","hisprof","thread","follow"];
 let curPane="tl";
@@ -5160,8 +5189,8 @@ const askReset=()=>{const s=$("#scrim-reset");if(s){s.classList.remove("closing"
 $("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-restart").onclick=askReset;
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
-$("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
-(function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});})();
+$("#btn-end-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
+(function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});})();
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
