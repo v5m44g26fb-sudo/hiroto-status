@@ -1705,6 +1705,32 @@ input,textarea{font-size:16px}
 @keyframes dmrowin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .dmrow.anim{animation:dmrowin .3s ease both}
 .dmrow.unreadrow .dm-day{color:#1d9bf0;font-weight:800}
+/* ===== v138: search results, second raise - the result header becomes
+   a gradient-ruled band carrying the query and the split counts
+   (accounts / posts), matched query terms are highlighted in account
+   names, bios, post authors and post texts (a render-time wrap only;
+   the underlying text and the v112 scoring are untouched), account
+   rows come up to the v135 follow-list standard (48px avatar, badge,
+   mutual chip, gradient button), long account lists open with three
+   rows and a すべて見る expander like real X, and results rise in
+   staggered. ===== */
+#x-search-results .srch-res-h{display:block;background:linear-gradient(120deg,#1b1035,#2c1650 55%,#3a1350);color:#fff;border-bottom:none;padding:14px 16px 13px;position:relative}
+#x-search-results .srch-res-h::before{display:none}
+#x-search-results .srch-res-h .srh-eye{display:block;font-size:10px;font-weight:800;letter-spacing:.22em;color:#cdbcf5;margin-bottom:4px}
+#x-search-results .srch-res-h b{font-size:17px;color:#fff;font-weight:900}
+#x-search-results .srch-res-h span{display:block;margin:5px 0 0;font-size:12px;font-weight:700;color:#b9a8e8}
+#x-search-results .srch-res-h span b{display:inline;font-size:12px;color:#fff}
+.srch-hl{background:linear-gradient(180deg,transparent 55%,rgba(247,201,72,.55) 55%);color:inherit;border-radius:2px;padding:0 1px}
+#x-search-results .folbtn{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25);padding:8px 16px}
+#x-search-results .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
+#x-search-results .folrow .avatar,#x-search-results .folrow .ava-txt{width:48px;height:48px;font-size:18px}
+.srise{animation:folrise .3s ease both}
+.srch-more{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:#fff;border:none;border-bottom:1px solid #f4f6f7;font-family:inherit;font-size:13.5px;font-weight:800;color:#7856ff;cursor:pointer}
+.srch-more:active{background:#f7f4ff}
+/* pre-existing, found in this pass's audit: once the clear button
+   appears, the appbar search bar could not shrink below its content
+   and pushed 17px past the right edge (document scrollW 407). */
+.appbar .x-searchbar{min-width:0}
 /* ===== v72: compose overhaul - the sheet reads as a real X composer:
    the sticky head gains a hairline; the reply-scope line becomes the
    blue pill real X puts above the text; the draft card and the picked
@@ -2324,7 +2350,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v137</p>
+  <p class="ver">v138</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2481,7 +2507,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v137</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v138</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2713,7 +2739,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v137</p>
+    <p class="ver">v138</p>
   </div>
 </section>
 </div>
@@ -4128,9 +4154,14 @@ $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearc
    as before; accounts match on the same query against names/handles. */
 function srchAccRow(key){const a=ACC[key];const row=document.createElement("div");row.className="folrow";
  const following=key===tgtKey()?!!S.followHiroto:folIsFollowing("nao",key);
- row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-name"></div><div class="fr-handle"></div><div class="fr-bio"></div></div>';
- row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="44" height="44" alt="">':avaTxt(a.n);
- row.querySelector(".fr-name").textContent=a.n;row.querySelector(".fr-handle").textContent=key==="nao"?(S.handle||a.h):a.h;row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
+ const sets=folSets("nao"),mutual=sets.folwing.includes(key)&&sets.folwers.includes(key);
+ row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-namerow"><span class="fr-name"></span></div><div class="fr-handle"><span class="fr-h"></span></div><div class="fr-bio"></div></div>';
+ row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
+ row.querySelector(".fr-name").textContent=a.n;
+ if(VERIFIED.has(key))row.querySelector(".fr-namerow").insertAdjacentHTML("beforeend",VER_BADGE);
+ row.querySelector(".fr-h").textContent=key==="nao"?(S.handle||a.h):a.h;
+ if(mutual){const m=document.createElement("span");m.className="fr-mutual";m.textContent="フォローされています";row.querySelector(".fr-handle").appendChild(m);}
+ row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
  if(key!=="nao"){const btn=document.createElement("button");btn.className="folbtn"+(following?" on":"");btn.textContent=following?"フォロー中":"フォローする";
   btn.addEventListener("click",()=>{if(key===tgtKey()){showPane("hisprof");return;}const now=!folIsFollowing("nao",key);folOverride["nao:"+key]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});
   row.appendChild(btn);}
@@ -4175,6 +4206,23 @@ function srchScore(hay,q,tokens,keys){
  if(keys){let km=0;keys.forEach(k=>{if(hayN.indexOf(srchNorm(k))>=0)km++;});if(km)return 40+km;}
  if(m>0)return 20+m;
  return 0;}
+/* v138: wrap matched query terms in a highlight mark. Render-time
+   only - it rewrites the freshly built DOM text nodes, never the
+   post data or the save. */
+function hlMarks(el,toks){
+ if(!el||!toks||!toks.length)return;
+ const node=[...el.childNodes].find(n=>n.nodeType===3);if(!node)return;
+ const text=node.nodeValue;if(!text)return;
+ const low=text.toLowerCase();let idx=-1,tk=null;
+ toks.forEach(t=>{const i=low.indexOf(t.toLowerCase());if(i>=0&&(idx<0||i<idx)){idx=i;tk=t;}});
+ if(idx<0||!tk)return;
+ const frag=document.createDocumentFragment();
+ frag.appendChild(document.createTextNode(text.slice(0,idx)));
+ const m=document.createElement("mark");m.className="srch-hl";m.textContent=text.slice(idx,idx+tk.length);frag.appendChild(m);
+ const rest=document.createElement("span");rest.textContent=text.slice(idx+tk.length);frag.appendChild(rest);
+ el.replaceChild(frag,node);
+ hlMarks(rest,toks);
+}
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();const box=$("#x-search-results");box.innerHTML="";
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";
  const tokens=q.split(/[\s　]+/).map(t=>t.replace(/^#+/,"")).filter(Boolean);
@@ -4184,10 +4232,19 @@ function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();co
  if(!pool.length)pool=scored;
  pool.sort((a,b)=>(b.s-a.s)||(a.i-b.i));
  const hits=pool.map(x=>x.p);
- const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=(hits.length)+" 件";h.appendChild(hc);box.appendChild(h);
  const accKeys=Object.keys(ACC).filter(k=>{const a=ACC[k];return srchScore(a.n+" "+(a.h||"")+" "+(FOL_BIO[k]||""),q,tokens,keys)>0;});
- if(accKeys.length){box.appendChild(tabHead("アカウント",accKeys.length+" 件"));accKeys.forEach(k=>box.appendChild(srchAccRow(k)));}
- if(hits.length){box.appendChild(tabHead("ポスト",hits.length+" 件"));hits.forEach(p=>box.appendChild(postEl(p,false)));}
+ const h=document.createElement("div");h.className="srch-res-h";
+ const eye=document.createElement("span");eye.className="srh-eye";eye.textContent="SEARCH RESULTS";h.appendChild(eye);
+ const hq=document.createElement("b");hq.textContent="「"+q+"」 の検索結果";h.appendChild(hq);
+ const hc=document.createElement("span");hc.innerHTML="アカウント <b>"+accKeys.length+"</b> ・ ポスト <b>"+hits.length+"</b>";h.appendChild(hc);box.appendChild(h);
+ const toks=[...new Set(tokens.concat([q.replace(/^#+/,"")]))].filter(t=>t.length>=1).sort((a,b)=>b.length-a.length);
+ let ri=0;const rise=el=>{el.classList.add("srise");el.style.animationDelay=Math.min(ri++*40,320)+"ms";};
+ if(accKeys.length){box.appendChild(tabHead("アカウント",accKeys.length+" 件"));
+  const aw=document.createElement("div");box.appendChild(aw);
+  const addAcc=(k)=>{const r=srchAccRow(k);hlMarks(r.querySelector(".fr-name"),toks);hlMarks(r.querySelector(".fr-bio"),toks);rise(r);aw.appendChild(r);};
+  accKeys.slice(0,3).forEach(addAcc);
+  if(accKeys.length>3){const more=document.createElement("button");more.className="srch-more";more.textContent="すべてのアカウントを見る（"+accKeys.length+"件）";more.addEventListener("click",()=>{accKeys.slice(3).forEach(addAcc);more.remove();});aw.appendChild(more);}}
+ if(hits.length){box.appendChild(tabHead("ポスト",hits.length+" 件"));hits.forEach(p=>{const el=postEl(p,false);hlMarks(el.querySelector(".nm"),toks);hlMarks(el.querySelector(".tx"),toks);const qt=el.querySelector(".qt-tx");if(qt)hlMarks(qt,toks);rise(el);box.appendChild(el);});}
  if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
