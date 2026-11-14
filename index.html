@@ -1821,6 +1821,44 @@ input,textarea{font-size:16px}
 .story .splus{background:linear-gradient(135deg,#f91880,#7856ff);width:22px;height:22px;font-size:15.5px;box-shadow:0 3px 9px rgba(249,24,128,.45)}
 .story.mine.unseen .ring{animation:none}
 .story.mine.seen .ring{background:#e2e8ec;box-shadow:none;animation:none}
+/* ===== v102: search pane, second raise - the app-bar search field
+   becomes one glass pill (magnifier, focus ring in violet, a clear x
+   while text is present, gradient search button); the tab heads take
+   the dark live band the trend pane got in v59; trend rows inside the
+   search pane become separated cards with disc ranks; suggestions
+   become icon pills under a labelled section. Data, tab filtering and
+   the search mechanics are unchanged; the standalone trend pane keeps
+   its v59 rows. ===== */
+.appbar .x-searchbar{align-items:center;background:#eff3f4;border-radius:999px;transition:background .18s ease,box-shadow .18s ease}
+.appbar .x-searchbar:focus-within{background:#fff;box-shadow:0 0 0 2px #7856ff,0 8px 22px rgba(120,86,255,.20)}
+.appbar .x-searchbar .xs-ic{display:flex;margin-left:12px;color:#536471;flex:none;transition:color .18s ease}
+.appbar .x-searchbar:focus-within .xs-ic{color:#7856ff}
+.appbar .x-searchbar .xs-ic svg{width:17px;height:17px}
+.appbar .x-searchbar input{border:none;background:none;border-radius:0;padding:9px 4px;outline:none}
+#x-q-clear{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:none;background:#cfd9de;color:#fff;padding:0;flex:none;cursor:pointer;margin-right:2px;transition:background .15s ease}
+#x-q-clear svg{width:12px;height:12px}
+#x-q-clear:active{background:#aab8c2}
+.appbar .x-searchbar #x-search-btn{background:linear-gradient(90deg,#7856ff,#f91880);margin:4px;padding:7px 15px;box-shadow:0 4px 12px rgba(249,24,128,.30)}
+#x-pane-search .cat-head{position:relative;background:linear-gradient(120deg,#141b34,#2a1150);border-bottom:none;padding:17px 16px 14px;overflow:hidden}
+#x-pane-search .cat-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+#x-pane-search .cat-head .ch-eyebrow{color:#c9b8ff}
+#x-pane-search .cat-head b{color:#fff}
+#x-pane-search .cat-head small{color:#aebadd}
+#x-pane-search .trend{margin:9px 12px 0;padding:13px 14px 12px;border:1px solid #e8edf0;border-radius:16px;background:#fff;box-shadow:0 3px 12px rgba(15,20,25,.05);overflow:hidden}
+#x-pane-search .trend:last-child{margin-bottom:12px}
+#x-pane-search .trend .trank{width:30px;height:30px;border-radius:50%;background:#eef2f5;color:#536471;font-size:13.5px;display:flex;align-items:center;justify-content:center;flex:none}
+#x-pane-search .trend.rk1 .trank{background:linear-gradient(135deg,#f91880,#7856ff);-webkit-background-clip:border-box;background-clip:border-box;color:#fff;font-size:14.5px}
+#x-pane-search .trend.rk2 .trank{background:rgba(120,86,255,.14);color:#7856ff}
+#x-pane-search .trend.rk3 .trank{background:rgba(29,155,240,.14);color:#1d9bf0}
+#x-pane-search .trend.top{border-color:rgba(249,24,128,.38);background:linear-gradient(180deg,#fff7fb,#fff)}
+#x-pane-search .trend.dyn::before{border-radius:3px}
+#x-pane-search .trend .tvol{max-width:230px}
+#x-pane-search .srch-lab{padding:16px 16px 0;font-size:13.5px}
+#x-pane-search .srch-lab::after{content:"タップでそのまま検索";margin-left:auto;font-size:11px;font-weight:700;color:#8899a6;letter-spacing:.02em}
+#x-pane-search .sug{padding:11px 14px 6px;gap:8px}
+#x-pane-search .sug span{display:inline-flex;align-items:center;border:1.5px solid #e4e1f6;background:linear-gradient(180deg,#fff,#fbf9ff);padding:8px 13px 8px 11px;box-shadow:0 3px 10px rgba(90,40,160,.07)}
+#x-pane-search .sug span::before{content:"";width:14px;height:14px;margin-right:7px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237856ff' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20.5 20.5 16.6 16.6'/%3E%3C/svg%3E") center/contain no-repeat}
+#x-pane-search .sug span:first-child{border-color:rgba(120,86,255,.5)}
 </style>
 </head>
 <body>
@@ -1846,7 +1884,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v101</p>
+  <p class="ver">v102</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1906,7 +1944,7 @@ input,textarea{font-size:16px}
   <div class="appbar" id="x-appbar">
     <img class="avatar" id="x-myava" src="assets/nao-avatar4.jpg" width="30" height="30" alt="">
     <span class="t">𝕏 ホーム</span>
-    <div class="x-searchbar"><input id="x-q" placeholder="キーワード検索" autocomplete="off"><button id="x-search-btn">検索</button></div>
+    <div class="x-searchbar"><span class="xs-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20.5 20.5 16.6 16.6"/></svg></span><input id="x-q" placeholder="キーワード検索" autocomplete="off"><button id="x-q-clear" class="hidden" aria-label="入力をクリア"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button><button id="x-search-btn">検索</button></div>
     <span class="s" style="margin-left:auto" id="x-head-note"></span>
     <button id="x-bell" aria-label="通知"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg><span id="x-bell-n"></span></button>
   </div>
@@ -2001,7 +2039,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v101</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v102</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2210,7 +2248,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v101</p>
+    <p class="ver">v102</p>
   </div>
 </section>
 </div>
@@ -3438,7 +3476,7 @@ function srchAccRow(key){const a=ACC[key];const row=document.createElement("div"
  const go=()=>{if(key==="nao")showPane("me");else if(key===tgtKey())showPane("hisprof");};
  row.querySelector(".fr-av").style.cursor="pointer";row.querySelector(".fr-av").addEventListener("click",go);
  return row;}
-function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";
+function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();const box=$("#x-search-results");box.innerHTML="";
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=(hits.length)+" 件";h.appendChild(hc);box.appendChild(h);
  const ql=q.toLowerCase();const accKeys=Object.keys(ACC).filter(k=>{const a=ACC[k];return a.n.includes(q)||(a.h||"").toLowerCase().includes(ql);});
  if(accKeys.length){box.appendChild(tabHead("アカウント",accKeys.length+" 件"));accKeys.forEach(k=>box.appendChild(srchAccRow(k)));}
@@ -3446,6 +3484,15 @@ function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x
  if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
+/* v102: search-bar clear affordance - the x appears while the field
+   holds text and empties it (focus stays in the field); Escape clears
+   too. runSearch re-syncs it after trend / suggestion taps set the
+   value programmatically. Search mechanics themselves are unchanged. */
+function syncQClear(){const q=$("#x-q"),c=$("#x-q-clear");if(q&&c)c.classList.toggle("hidden",!q.value);}
+$("#x-q").addEventListener("input",syncQClear);
+$("#x-q").addEventListener("keydown",e=>{if(e.key==="Escape"){$("#x-q").value="";syncQClear();}});
+$("#x-q-clear").addEventListener("click",()=>{const q=$("#x-q");q.value="";syncQClear();q.focus();});
+syncQClear();
 /* shared fx-chip builder (same labels/colors as the compose sheet) */
 function fxChips(fx){
  const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
