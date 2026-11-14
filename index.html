@@ -1968,7 +1968,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v107</p>
+  <p class="ver">v108</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2123,7 +2123,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v107</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v108</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2332,7 +2332,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v107</p>
+    <p class="ver">v108</p>
   </div>
 </section>
 </div>
@@ -2778,6 +2778,8 @@ const BUZZ=[
  {k:"h-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-hiroto-car.jpg",tx:"新人・なお、騒ぎの大きさが実力の評価に追いつき始めた。事務所の対応に注目が集まる",lk:2760,rp:590,rc:470},
  {k:"h-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-hiroto-hug.jpg",tx:"【決定的】新人・なおと井汲大翔、深夜の住宅街で抱擁する姿が撮られたと報じられる。拡散が止まらない",lk:3400,rp:760,rc:590},
  {k:"h-a5",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-hotel.jpg",tx:"【特大報】井汲大翔と新人・なお、都内ホテルから出てくる姿が報じられる。事務所の正式コメントに注目が集まる",lk:4300,rp:1020,rc:810},
+ {k:"h-a6",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-doorway.jpg",tx:"【続報】井汲大翔と新人・なお、深夜の玄関先で彼女が彼のジャケットを掴んで離さない姿が撮られたと報じられる。帰り際の数秒が、界隈を眠らせない",lk:4900,rp:1180,rc:940},
+ {k:"h-a7",a:"matome",cond:s=>s.flm>=60,img:"assets/nao-hiroto-mirror.jpg",tx:"【流出か】井汲大翔と新人・なおのものとされる、鏡越しのツーショット写真が拡散中。本人たちしか持ち得ないはずの一枚に、事務所は沈黙を貫く",lk:5700,rp:1420,rc:1180},
  {k:"h-f1",a:"fan2",cond:s=>s.dist>=10,tx:"大翔くんのファンの反応、穏やかなのは古参が多いからだと思う。日プの頃からずっと見てる人たちだから、新人の子にも優しい",lk:186,rp:22,rc:31},
  {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんと大翔くんが同じ歌番組だったの、感慨深い。ボイプラで落ちた日、泣いたの私だけじゃないはず。あの人が今「先輩」って呼ばれる側なんだな",lk:243,rp:29,rc:44},
  {k:"h-f3",a:"sora",cond:s=>s.dist>=25,tx:"大翔さんの現場、規模は大きくないけど熱量が別格だと思う。何度落ちても挑戦し続ける人を、何年も見てるファンがいる強さ",lk:328,rp:41,rc:26}];
@@ -2793,7 +2795,9 @@ const BUZZ_S=[
  {k:"s-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"様子見してたけど、歌番組の生歌で落ちた。なおの声、現場だとさらに化ける",lk:154,rp:12,rc:21},
  {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,img:"assets/nao-sakuya-train.jpg",tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
  {k:"s-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-sakuya-car.jpg",tx:"新人・なお、騒ぎの大きさが実力に追いつき始めた。同じ事務所の先輩との距離も含め、対応に注目集まる",lk:2760,rp:590,rc:470},
- {k:"s-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-hug.jpg",tx:"【決定的】NCT WISH サクヤと新人・なお、深夜の宿舎前で抱擁する姿が撮られたと報じられる。同じ事務所の先輩後輩という説明では収まらない距離感に、韓国でも拡散が始まった",lk:3400,rp:760,rc:590}];
+ {k:"s-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-hug.jpg",tx:"【決定的】NCT WISH サクヤと新人・なお、深夜の宿舎前で抱擁する姿が撮られたと報じられる。同じ事務所の先輩後輩という説明では収まらない距離感に、韓国でも拡散が始まった",lk:3400,rp:760,rc:590},
+ {k:"s-a5",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-elevator.jpg",tx:"【続報】NCT WISH サクヤと新人・なお、深夜のエレベーターホールで彼の腕の中に収まる姿が撮られたと報じられる。同じ事務所の先輩後輩、という言葉の賞味期限が切れた",lk:3900,rp:920,rc:730},
+ {k:"s-a6",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-sakuya-sofa.jpg",tx:"【流出か】サクヤと新人・なおのものとされる、おそろいの部屋着で寄り添う自撮り写真が拡散中。撮ったのが二人しかいないはずの一枚に、韓国でも騒ぎが拡大",lk:4600,rp:1100,rc:880}];
 function injectBuzz(maxN,pos){
  if(!S||!S.started||!maxN)return;
  if(!S.buzz)S.buzz=[];
