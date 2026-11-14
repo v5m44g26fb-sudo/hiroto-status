@@ -247,6 +247,33 @@ input,textarea{font-size:16px}
 #btn-activity{transition:opacity .3s ease,filter .3s ease}
 #btn-activity.done{opacity:.55;filter:saturate(.4)}
 #btn-activity.done::after{content:" ✓"}
+/* ===== v140: the day dock becomes a console - a status strip on top
+   (DAY n / TOTAL chip, the chapter title, and today's mission count,
+   all read in renderHud), then two-line buttons: Activity with a bolt
+   and its remaining state, and the next-day button in the app
+   gradient with its destination named (the RESULT screen's v104
+   destination bar, brought down into the dock). On the final day the
+   strip chip and the next button turn gold, closing the v131-133
+   finale thread. The v122 grow-in and done behaviours are kept;
+   visibility rules and actions are unchanged. ===== */
+#actbar{flex-direction:column;gap:7px;padding:9px 14px 10px}
+.dock-strip{display:flex;align-items:center;gap:8px;min-width:0}
+.dock-day{flex:none;font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#fff;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:999px;padding:3.5px 9px;font-variant-numeric:tabular-nums}
+#actbar.final .dock-day{background:linear-gradient(90deg,#b8860b,#f7c948);color:#4a3500}
+.dock-ch{flex:1;min-width:0;font-size:12.5px;font-weight:700;color:#3d4750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock-mission{flex:none;font-size:11px;font-weight:800;color:#8a94a6;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.dock-btns{display:flex;gap:9px}
+#actbar .dock-btns button{display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 13px;text-align:left}
+#btn-activity svg{width:19px;height:19px;flex:none;fill:#7856ff}
+#btn-activity.done::after{content:none}
+#btn-activity.done svg{fill:#8a94a6}
+.db-tx{flex:1;display:flex;flex-direction:column;gap:0;min-width:0}
+.db-tx b{font-size:14px;font-weight:800;line-height:1.25}
+.db-tx small{font-size:11px;font-weight:700;color:#8a94a6;line-height:1.3}
+#btn-nextday{background:linear-gradient(92deg,#7856ff,#f91880);box-shadow:0 8px 22px rgba(200,40,140,.35)}
+#btn-nextday .db-tx small{color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.db-arrow{flex:none;width:29px;height:29px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
+#actbar.final #btn-nextday{background:linear-gradient(92deg,#b8860b,#f7c948 55%,#f91880);box-shadow:0 10px 26px rgba(247,201,72,.4)}
 .scrim{position:absolute;inset:0;background:rgba(36,46,54,.5);z-index:95;display:none;align-items:flex-end}
 .scrim.on{display:flex;animation:fadein .2s ease}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
@@ -2350,7 +2377,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v139</p>
+  <p class="ver">v140</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2507,7 +2534,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v139</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v140</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2588,8 +2615,15 @@ input,textarea{font-size:16px}
   </div>
   <div id="x-notif"><div class="nhead"><span class="nhead-t">通知</span><span class="nhead-chip" id="nhead-chip"></span></div><div class="nsubs"><button id="nsub-all" class="act">すべて</button><button id="nsub-men">@メンション <span id="nmen-n"></span></button></div><div id="x-notif-list"></div><div id="x-notif-men" style="display:none"></div></div>
   <div id="actbar">
-    <button id="btn-activity">Activity</button>
-    <button id="btn-nextday">次の日へ →</button>
+    <div class="dock-strip">
+      <span class="dock-day" id="dock-day">DAY 1 / 6</span>
+      <span class="dock-ch" id="dock-ch"></span>
+      <span class="dock-mission" id="dock-mission"></span>
+    </div>
+    <div class="dock-btns">
+      <button id="btn-activity"><svg viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L9.8 22 19 10h-6.5L13 2z"/></svg><span class="db-tx"><b>Activity</b><small id="act-sub">あと1回</small></span></button>
+      <button id="btn-nextday"><span class="db-tx"><b id="next-main">次の日へ</b><small id="next-sub"></small></span><span class="db-arrow">→</span></button>
+    </div>
   </div>
   <div id="threadbar"><div class="thread-composer" id="tc-pill" role="button" aria-label="返信を書く"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><span class="tc-ph">返信をポスト</span><span class="tc-btn">返信</span></div><div class="tc-form hidden" id="tc-form"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><div class="tc-fmain"><div class="tc-to" id="tc-to"></div><textarea id="tc-input" rows="2" maxlength="140" placeholder="返信をポスト"></textarea><div class="tc-frow"><span class="tc-count" id="tc-count"></span><button class="tc-cancel" id="tc-cancel" type="button">キャンセル</button><button class="tc-send" id="tc-send" type="button" disabled>返信</button></div></div></div></div>
   <button id="x-compose-btn" aria-label="投稿">＋</button>
@@ -2739,7 +2773,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v139</p>
+    <p class="ver">v140</p>
   </div>
 </section>
 </div>
@@ -4306,7 +4340,12 @@ function startChapter(n){
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
  showDayIntro();
 }
-function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=TOTAL_DAYS?"エンディングへ →":"次の日へ →";}
+function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=(S.posted&&S.evDone)?"flex":"none";
+ /* v140: the dock button names its destination (same words as the
+    RESULT screen's destination bar) instead of a bare label */
+ const nm=$("#next-main"),ns=$("#next-sub");
+ if(S.ch>=TOTAL_DAYS){if(nm)nm.textContent="エンディングへ";if(ns)ns.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
+ else{if(nm)nm.textContent="次の日へ";if(ns){const nx=curCH()[S.ch];ns.textContent=nx?("Day "+(S.ch+1)+" ― "+(nx.day||"").split(" ― ").slice(1).join(" ― ")):"";}}}
 $("#btn-nextday").onclick=()=>{showDayResult();};
 /* compose (real-X flow): tap a draft choice to load it into the composer like
    typed text - avatar + 17px preview + reply-scope line + char ring - then the
@@ -4538,6 +4577,13 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  const mc=(id,on)=>{const e=el(id);if(e)e.classList.toggle("done",!!on);};
  mc("#mc-post",S.posted);mc("#mc-event",S.evDone);mc("#mc-act",S.actDone);
  if(el("#btn-activity"))el("#btn-activity").classList.toggle("done",!!S.actDone);
+ /* v140: day-dock strip + activity sub-label (display only, read from
+    the same state as the HUD) */
+ if(el("#dock-day"))el("#dock-day").textContent="DAY "+S.ch+" / "+TOTAL_DAYS;
+ if(el("#dock-ch")){const chp=curCH()[S.ch-1];el("#dock-ch").textContent=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";}
+ if(el("#dock-mission"))el("#dock-mission").textContent="MISSION "+used+" / 3";
+ if(el("#act-sub"))el("#act-sub").textContent=S.actDone?"今日は完了":"あと1回";
+ if(el("#actbar"))el("#actbar").classList.toggle("final",S.ch>=TOTAL_DAYS);
  if(el("#hud-handle"))el("#hud-handle").textContent=S.handle||"";
  /* v91: status card stat cells + mission counter (display only; the
     numbers are the same state the profile and ending already read) */
