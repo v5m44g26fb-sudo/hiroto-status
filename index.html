@@ -1759,6 +1759,13 @@ input,textarea{font-size:16px}
 .dm-searchrow .dm-sic svg{width:16px;height:16px}
 .dm-searchrow input{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:14.5px;color:#0f1419}
 .dm-searchrow input::placeholder{color:#536471}
+.dm-frow{display:flex;gap:8px;padding:10px 16px 2px}
+.dm-fchip{border:1.5px solid #e3e8ec;background:#fff;color:#0f1419;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:6px 13px;cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease,transform .1s ease}
+.dm-fchip:active{transform:scale(.96)}
+.dm-fchip.act{background:#0f1419;border-color:#0f1419;color:#fff}
+.dm-fchip .dm-fn{margin-left:4px;color:#1d9bf0;font-weight:900}
+.dm-fchip .dm-fn:empty{display:none}
+.dm-fchip.act .dm-fn{color:#7cc4ff}
 .dmrow{gap:12px;padding:13px 16px;align-items:center}
 .dmrow .dm-avw img.avatar,.dmrow .dm-avw .ava-txt{width:48px;height:48px}
 .dmrow.unreadrow .dm-avw::after{display:none}
@@ -2663,7 +2670,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v165</p>
+  <p class="ver">v166</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2832,7 +2839,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v165</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v166</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3082,7 +3089,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v165</p>
+    <p class="ver">v166</p>
   </div>
 </section>
 </div>
@@ -4912,7 +4919,7 @@ let curThread=null,thEnter=false;
 function updateBdg(){const n=S?S.threads.filter(t=>t.unread).length:0;const bd=$("#dm-bdg");if(bd){bd.textContent=n>9?"9+":n;bd.style.display=n?"block":"none";}}
 function dmEmptyState(){const d=document.createElement("div");d.className="dm-empty";d.innerHTML='<span class="dm-empty-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg></span><b>メッセージはまだないよ</b><span>物語が進むと、ファンや関係者からの<br>メッセージがここに届く。</span>';return d;}
 const DM_VERIFIED='<svg class="dm-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
-let dmAnim=true;
+let dmAnim=true,dmUnreadOnly=false;
 function renderDmList(){
  const list=$("#dmlist");$("#dmthread").classList.add("hidden");list.classList.remove("hidden");$("#dmlist-head").classList.remove("hidden");
  const hc=$("#dm-head-c"),unc=S.threads.filter(t=>t.unread).length;
@@ -4924,12 +4931,24 @@ function renderDmList(){
  let sr=$("#dm-searchrow");
  if(!sr){sr=document.createElement("div");sr.id="dm-searchrow";sr.className="dm-searchrow";sr.innerHTML='<span class="dm-sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></span><input id="dm-q" type="text" placeholder="メッセージを検索" autocomplete="off">';list.appendChild(sr);sr.querySelector("#dm-q").addEventListener("input",()=>{dmAnim=false;renderDmList();});}
  sr.style.display=S.threads.length?"":"none";
+ /* v166: unread filter chips under the search pill - session-local
+    (module state, never saved), combines with the text query, and
+    flattens the section split while active like the search does */
+ let fr=$("#dm-frow");
+ if(!fr){fr=document.createElement("div");fr.id="dm-frow";fr.className="dm-frow";
+  fr.innerHTML='<button class="dm-fchip" data-dmf="all">すべて</button><button class="dm-fchip" data-dmf="unread">未読のみ<span class="dm-fn"></span></button>';
+  fr.querySelectorAll(".dm-fchip").forEach(c=>c.addEventListener("click",()=>{dmUnreadOnly=c.dataset.dmf==="unread";dmAnim=false;renderDmList();}));
+  list.appendChild(fr);}
+ fr.style.display=S.threads.length?"":"none";
+ fr.querySelector('[data-dmf="all"]').classList.toggle("act",!dmUnreadOnly);
+ fr.querySelector('[data-dmf="unread"]').classList.toggle("act",dmUnreadOnly);
+ fr.querySelector(".dm-fn").textContent=unc?String(unc):"";
  let rows=$("#dm-rows");if(!rows){rows=document.createElement("div");rows.id="dm-rows";list.appendChild(rows);}
  rows.innerHTML="";
  if(!S.threads.length){rows.appendChild(dmEmptyState());updateBdg();return;}
  const q=(($("#dm-q")||{}).value||"").trim();
- const vis=S.threads.filter(t=>{if(!q)return true;const a=ACC[t.who];const last=t.msgs[t.msgs.length-1]||"";return (a.n+" "+a.h+" "+last).includes(q);});
- if(!vis.length){const d=document.createElement("div");d.className="dm-noresult";d.textContent="「"+q+"」に一致する会話はないよ";rows.appendChild(d);}
+ const vis=S.threads.filter(t=>{if(dmUnreadOnly&&!t.unread)return false;if(!q)return true;const a=ACC[t.who];const last=t.msgs[t.msgs.length-1]||"";return (a.n+" "+a.h+" "+last).includes(q);});
+ if(!vis.length){const d=document.createElement("div");d.className="dm-noresult";d.textContent=q?("「"+q+"」に一致する会話はないよ"):(dmUnreadOnly?"未読の会話はないよ。ぜんぶ読んだ！":"");rows.appendChild(d);}
  const anim=dmAnim;dmAnim=true;
  const mkRow=(t,i)=>{const a=ACC[t.who];const b=document.createElement("button");b.className="dmrow"+(t.unread?" unreadrow":"")+(t.special?" special":"")+(anim?" anim":"");
   if(anim)b.style.animationDelay=Math.min(i*45,315)+"ms";
@@ -4941,7 +4960,7 @@ function renderDmList(){
   if(t.special){const si=distStageIdx();b.querySelector(".dm-distline").textContent="二人の現在地 ― STAGE "+(si+1)+" ・ "+DIST_STAGES[si].lab;}
   b.onclick=()=>openThread(t);return b;};
  const sps=vis.filter(t=>t.special),rest=vis.filter(t=>!t.special);
- if(!q&&sps.length&&rest.length){
+ if(!q&&!dmUnreadOnly&&sps.length&&rest.length){
   const l1=document.createElement("div");l1.className="dm-seclab sp";l1.textContent="特別なスレッド";rows.appendChild(l1);
   sps.forEach((t,i)=>rows.appendChild(mkRow(t,i)));
   const l2=document.createElement("div");l2.className="dm-seclab";l2.textContent="すべての会話";rows.appendChild(l2);
