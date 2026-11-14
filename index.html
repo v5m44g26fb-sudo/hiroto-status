@@ -1271,6 +1271,13 @@ input,textarea{font-size:16px}
 #dayintro .di-dots{display:flex;gap:7px;margin-top:18px;animation:diup .6s .52s cubic-bezier(.2,.8,.25,1) both}
 #dayintro .di-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28)}
 #dayintro .di-dots i.on{background:linear-gradient(135deg,#f91880,#7856ff);box-shadow:0 0 10px rgba(249,24,128,.7)}
+/* ===== v131: the final day's intro wears gold - when the chapter
+   intro opens on the last day, its label, rule and progress dots
+   turn gold (and Day 6 gets its own intro/banner visual + a sixth
+   progress dot, both wired in showDayIntro / DI_BG). ===== */
+#dayintro.final .di-lab{color:#ffd76a}
+#dayintro.final .di-rule{background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
+#dayintro.final .di-dots i.on{background:linear-gradient(135deg,#f7c948,#f91880);box-shadow:0 0 12px rgba(247,201,72,.8)}
 #dayresult .dr-title{letter-spacing:.02em}
 #dayresult .dr-lvup{animation:drin .5s .55s cubic-bezier(.2,.8,.25,1) both}
 #dayresult .dr-note{margin-top:14px;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:11px 14px 12px;animation:drin .5s .68s cubic-bezier(.2,.8,.25,1) both}
@@ -2223,7 +2230,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v130</p>
+  <p class="ver">v131</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2380,7 +2387,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v130</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v131</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、6日間の記録はすべて最初からになるよ。</p>
@@ -2591,7 +2598,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v130</p>
+    <p class="ver">v131</p>
   </div>
 </section>
 </div>
@@ -4343,12 +4350,13 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
    summed from the day's own chgLog entries (already recorded per action),
    so numbers and the save format are untouched - presentation only. */
 let diTimer=null;
-const DI_BG={1:"assets/nao-concept.jpg",2:"assets/nao-stage-ballad.jpg",3:"assets/nao-stage-sailor.jpg",4:"assets/nao-rec.jpg",5:"assets/nao-stage-confetti.jpg"};
+const DI_BG={1:"assets/nao-concept.jpg",2:"assets/nao-stage-ballad.jpg",3:"assets/nao-stage-sailor.jpg",4:"assets/nao-rec.jpg",5:"assets/nao-stage-confetti.jpg",6:"assets/nao-stage-dance.jpg"};
 function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#di-day","DAY "+S.ch);set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
  set("#di-lab","CHAPTER "+S.ch);
  const dbg=$("#di-bg");if(dbg)dbg.src=DI_BG[S.ch]||DI_BG[1];
- const dd=$("#di-dots");if(dd)[...dd.children].forEach((el,i)=>el.classList.toggle("on",i<S.ch));
+ const dd=$("#di-dots");if(dd){if(dd.children.length!==TOTAL_DAYS){dd.innerHTML="";for(let i=0;i<TOTAL_DAYS;i++)dd.appendChild(document.createElement("i"));}[...dd.children].forEach((el,i)=>el.classList.toggle("on",i<S.ch));}
+ const diEl=$("#dayintro");if(diEl)diEl.classList.toggle("final",S.ch>=TOTAL_DAYS);
  const ov=$("#dayintro");ov.classList.remove("on");void ov.offsetWidth;ov.classList.add("on");
  clearTimeout(diTimer);diTimer=setTimeout(hideDayIntro,2800);}
 function hideDayIntro(){clearTimeout(diTimer);const ov=$("#dayintro");if(ov)ov.classList.remove("on");}
