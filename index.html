@@ -2385,6 +2385,8 @@ input,textarea{font-size:16px}
 #x-notif-list.nswap,#x-notif-men.nswap{animation:nswapin .24s cubic-bezier(.2,.8,.25,1)}
 @keyframes nswapin{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 .nempty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:30px 22px 34px}
+.nempty-back{display:block;margin:-14px auto 22px;background:#0f1419;border:none;color:#fff;font-family:inherit;font-size:13px;font-weight:800;border-radius:999px;padding:9px 20px;cursor:pointer}
+.nempty-back:active{transform:scale(.96)}
 .nempty .ne-ic{width:54px;height:54px;border-radius:50%;background:#f0eafd;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
 .nempty .ne-ic svg{width:25px;height:25px;fill:none;stroke:#7856ff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .nempty b{color:#0f1419;font-size:15px;font-weight:900}
@@ -2785,7 +2787,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v219</p>
+  <p class="ver">v220</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2958,7 +2960,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v219</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v220</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3227,7 +3229,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v219</p>
+    <p class="ver">v220</p>
   </div>
 </section>
 </div>
@@ -4188,7 +4190,10 @@ function renderNotifs(){
     their counts are computed within that set, while each row keeps
     its original index for the unseen marking */
  const visN=[];S.notifs.forEach((n,i)=>{if(notifMatch(n))visN.push({n:n,i:i});});
- if(S.notifs.length&&!visN.length){const e=document.createElement("div");e.className="nempty";e.innerHTML='<span class="ne-ic">'+NTYPE.bell+'</span><b>この種類の通知はまだないよ</b>';list.appendChild(e);}
+ if(S.notifs.length&&!visN.length){const e=document.createElement("div");e.className="nempty";e.innerHTML='<span class="ne-ic">'+NTYPE.bell+'</span><b>この種類の通知はまだないよ</b>';list.appendChild(e);
+  /* v220: a filtered-to-empty list offers the way back to all */
+  if(notifFilter!=="all"){const rb=document.createElement("button");rb.type="button";rb.className="nempty-back";rb.textContent="すべての通知を見る";
+   rb.addEventListener("click",()=>{const c=$('#nfilter [data-nf="all"]');if(c)c.click();});list.appendChild(rb);}}
  const headAt={};{let last=null,runStart=-1;visN.forEach((e,vi)=>{const g=e.n.sub&&e.n.sub.indexOf("Day")===0?e.n.sub:null;if(g!==last){if(last&&runStart>=0)headAt[runStart]=vi-runStart;last=g;runStart=g?vi:-1;}});if(last&&runStart>=0)headAt[runStart]=visN.length-runStart;}
  visN.forEach((e,vi)=>{const n=e.n,i=e.i;const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);
   if(headAt[vi]){const hd=document.createElement("div");hd.className="nday-head";hd.innerHTML='<span class="ndh-t"></span><span class="ndh-n">'+headAt[vi]+' 件</span>';
