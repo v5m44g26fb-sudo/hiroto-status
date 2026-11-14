@@ -1504,6 +1504,20 @@ input,textarea{font-size:16px}
    an axis icon tile and a signed value pill per row, so the whole run
    can be scanned like a logbook. ===== */
 #scrim-chg .sheet{position:relative}
+#jlist{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.jrow{border:1.5px solid #e8edf0;border-radius:16px;padding:12px 14px;background:#fff}
+.jrow.now{border-color:#7856ff;box-shadow:0 8px 22px rgba(120,86,255,.16)}
+.jrow.lock{opacity:.55}
+.jrow-h{display:flex;align-items:center;gap:9px}
+.jday{font-size:10px;font-weight:900;letter-spacing:.16em;color:#7856ff}
+.jrow.lock .jday{color:#8b98a5}
+.jtitle{flex:1;font-size:14px;font-weight:900;color:#0f1419;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jstate{flex:none;font-size:9.5px;font-weight:900;letter-spacing:.1em;border-radius:999px;padding:3px 8px;background:#eef6ee;color:#2e7d32}
+.jrow.now .jstate{background:#f3efff;color:#7856ff}
+.jrow.lock .jstate{background:#eff3f4;color:#8b98a5}
+.jfol{margin-top:7px;font-size:12.5px;color:#536471}
+.jfol b{color:#0f1419;font-variant-numeric:tabular-nums}
+.jchips{margin-top:4px;font-size:12px;color:#536471;line-height:1.5}
 #scrim-chg .sheet::before{content:"";display:block;width:42px;height:4.5px;border-radius:3px;background:#d8dee3;margin:-8px auto 12px}
 .chg-eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#8a5cf6;background:#f0eafd;border-radius:999px;padding:4px 10px}
 .chg-eyebrow svg{width:12px;height:12px;fill:#8a5cf6}
@@ -2752,7 +2766,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v186</p>
+  <p class="ver">v187</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2924,7 +2938,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v186</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v187</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2936,6 +2950,7 @@ input,textarea{font-size:16px}
             <div class="ssv-segs" id="set-sv-segs"></div>
           </div>
           <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
+          <button class="setrow set-link" id="set-journey"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M6.5 3a2 2 0 0 1 2 2v14.3a1.7 1.7 0 0 1-2.8 1.3L4 19V5a2 2 0 0 1 2.5-2zM17.5 3A2 2 0 0 0 15.5 5v14.3a1.7 1.7 0 0 0 2.8 1.3L20 19V5a2 2 0 0 0-2.5-2zM10 7h3v1.8h-3zm0 4h3v1.8h-3zm0 4h3v1.8h-3z" transform="translate(-1.5,0)"/></svg></span><div class="set-main"><b>6日間のあゆみ</b><small>JOURNEY ― 日ごとの記録を振り返る</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-export"><span class="set-ic" style="--c:#17bf63"><svg viewBox="0 0 24 24"><path d="M11 2.5h2v8.7l2.6-2.6 1.4 1.4-5 5-5-5 1.4-1.4 2.6 2.6zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを書き出す</b><small>JSONファイルで保存 ― 機種変更・引き継ぎ用</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-import"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M11 15.5V6.3L8.4 8.9 7 7.5l5-5 5 5-1.4 1.4-2.6-2.6v9.2zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを読み込む</b><small>書き出したファイルから進行を復元する</small></div><span class="set-chev">›</span></button>
           <input type="file" id="set-import-file" accept="application/json,.json" style="display:none">
@@ -3189,7 +3204,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v186</p>
+    <p class="ver">v187</p>
   </div>
 </section>
 </div>
@@ -3201,6 +3216,12 @@ input,textarea{font-size:16px}
   <div class="chg-now" id="chg-now"></div>
   <div class="chg-filter" id="chg-filter"></div>
   <div id="chglist"></div>
+</div></div>
+<div class="scrim" id="scrim-journey"><div class="sheet">
+  <button class="close" data-close="scrim-journey">✕</button>
+  <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-2.2A6.8 6.8 0 1 1 12 5.2V8.6l5.4-4.2L12 1v2z" transform="translate(-1.2,1) scale(.94)"/></svg>JOURNEY ― あゆみ</span>
+  <h3>6日間のあゆみ</h3><p class="desc">1日ごとの記録。フォロワーの動きと、その日の変化をまとめているよ。</p>
+  <div id="jlist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
   <button class="close" data-close="scrim-act" aria-label="閉じる">✕</button>
@@ -5534,6 +5555,32 @@ $("#btn-end-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$
     localStorage.setItem(KEY,JSON.stringify(o));location.reload();}
    catch(_){toastChg("そのファイルは読み込めなかったよ");}};
    r.readAsText(f);});}})();
+/* v187: JOURNEY - a per-day chronicle sheet, openable any time from
+   settings. Every number is derived: day-start snapshots bracket
+   each day's follower movement, and the day's gains are aggregated
+   from the change log under dayDeltas' rules. Future days stay
+   locked silhouettes - title only, no invented numbers. */
+function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML="";
+ const CHS=curCH(),hist=S.folHist||[],dl=distLab();
+ const snap=d=>{const e=hist.find(x=>x.day===d);return e?e.fol:null;};
+ for(let d=1;d<=TOTAL_DAYS;d++){
+  const chp=CHS[d-1];if(!chp)continue;const parts=(chp.day||"").split(" ― ");
+  const row=document.createElement("div");const st=d<S.ch?"done":d===S.ch?"now":"lock";
+  row.className="jrow "+st;
+  const head=document.createElement("div");head.className="jrow-h";
+  head.innerHTML='<span class="jday">DAY '+d+'</span><b class="jtitle"></b><span class="jstate">'+(st==="done"?"CLEAR":st==="now"?"進行中":"これから")+"</span>";
+  head.querySelector(".jtitle").textContent=parts.length>1?parts.slice(1).join(" ― "):(chp.day||"");
+  row.appendChild(head);
+  if(st!=="lock"){
+   const s0=snap(d),s1=d<S.ch?snap(d+1):S.fol;
+   if(s0!==null&&s1!==null){const fl=document.createElement("div");fl.className="jfol";const dd=s1-s0;fl.innerHTML="フォロワー <b>"+fmt(s0)+" → "+fmt(s1)+"</b>（"+(dd>=0?"+":"−")+fmt(Math.abs(dd))+"）";row.appendChild(fl);}
+   const agg={xp:0,cog:0,flm:0,dist:0},cnt={xp:0,cog:0,flm:0,dist:0};
+   (S.chgLog||[]).filter(e=>e.day===d).forEach(e=>{if(e.cls==="lv")return;const kk=e.name===dl?"dist":e.name==="XP"?"xp":e.name==="世間の認知度"?"cog":e.name==="炎上度"?"flm":null;if(kk){agg[kk]+=e.v;cnt[kk]++;}});
+   const bits=[];[["XP","xp"],["認知度","cog"],["炎上度","flm"],["距離","dist"]].forEach(([lab,kk])=>{if(cnt[kk]&&agg[kk]!==0)bits.push(lab+" "+(agg[kk]>0?"+":"−")+Math.abs(agg[kk]));});
+   const jc=document.createElement("div");jc.className="jchips";jc.textContent=bits.length?("その日の変化 ― "+bits.join(" ・ ")):"その日の変化は、まだ記録がない";row.appendChild(jc);
+  }
+  box.appendChild(row);}}
+(function(){const jb=$("#set-journey");if(jb)jb.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});})();
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
