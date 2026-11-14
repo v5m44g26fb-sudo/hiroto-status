@@ -248,3 +248,12 @@
 - 効果チップとペルソナピルの余白を同一形状に統一（2.5px 10px）。導入ボタンは押下で影が沈み、ゴーストボタンも背景で応答するようにした。文言・効果は不変。
 - タイトル画面の表示テキストに実名・グループ名が含まれないことを再検証（innerText スキャンで 0 件）。
 - 検証（軽量版）：導入4画面＋エンディング4種のスクショ目視。エラー0・壊れ画像0。
+
+## v52: アプリ内ブラウザでコンポーズ下部が届かないバグ修正（実機報告・最優先）
+- 症状: 公開URL版・iPhoneアプリ内ブラウザでコンポーズを開くと、シート下部が可視範囲からはみ出し、「投稿案を選ぶ」と投稿案カードが最下部に潰れて見えるだけで下端まで辿り着けない。下書きカードと写真は正常。
+- 再現（Playwright 390×690）: 修正前は #postopts の開始位置が y=814（シート下端690より下）、高さ26pxに潰れ、内部スクロールしても最後のカード下端=816でシート内に収まらない。390×844でも投稿案エリアは下端30pxの隙間のみ。固定スタック（ヘッダー+ACTIONリボン+写真300pxの下書きカード+見出し）が約814pxを占有し、唯一の可変部 #postopts に flex/min-height 指定がなく押し潰されていたのが主因。dvh がアプリ内ブラウザで可視領域より大きく返る環境ではシート自体もはみ出す。
+- 修正: (1) 高さ基準を JS 実測に切替え: visualViewport.height / innerHeight を --app-h として :root に設定（resize / orientationchange / visualViewport resize / load後に再計測）。#phone・.screen の min-height、.view の height、.sheet の max-height(×.82)、#x-notif の max-height(×.66) は var(--app-h,100dvh) 基準に置換（dvh はフォールバックとして保持）。
+- (2) コンポーズはシート全体スクロールに変更: #x-compose に overflow-y:auto、#postopts は overflow:visible + flex:none で内容どおりの高さに。ヘッダー（キャンセル/ポストする）は position:sticky で上端に固定し常時到達可能に。下書き写真は max-height:min(300px, --app-h×.34) で短い画面では自動で低くなる。
+- (3) 同族点検: .scroll に min-height:0 を追加（flex縮小の保険）。Activity / Changes の .sheet は max-height 基準の置換で対応済み（690実測: Activity sheet 下端=690、高さ544<上限566、内部スクロール可）。DM は .scroll 経由で同基準。ストーリービューア・通知パネルは .view / var 基準に追随。
+- 検証（Playwright、390×690 と 390×844）: --app-h がビューポート高と一致、下部ナビ下端=ビューポート下端、コンポーズ下端=ビューポート下端、シート全体スクロールで最後の投稿案カードが完全にシート内（690: 下端665.7≤690）、sticky ヘッダーはスクロール後も top=0、エラー0。スクショ: /tmp/v52-short-before.png（修正前）→ /tmp/v52-short-after.png / v52-short-after-scrolled.png（修正後）。
+- 物語本文・数値・分岐・セーブ形式は不変。単体ファイルは作らない（恒常ルール）。

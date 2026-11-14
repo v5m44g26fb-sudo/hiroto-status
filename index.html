@@ -907,6 +907,21 @@ input,textarea{font-size:16px}
 /* intro buttons: the shadow settles when pressed; ghost buttons answer too */
 .screen.intro .btn:active{box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .screen.intro .btn.ghost:active{background:rgba(255,255,255,.12);box-shadow:none}
+/* ===== v52: viewport-height fix (in-app browsers report a shorter visible
+   area than 100dvh, which pushed sheet bottoms out of reach). Heights now
+   come from --app-h, measured in JS from visualViewport/innerHeight, with
+   dvh kept as the no-JS fallback. The compose sheet scrolls as a whole so
+   its options section can never be crushed below the fold again. ===== */
+#phone{min-height:100vh;min-height:var(--app-h,100dvh)}
+.screen{min-height:100vh;min-height:var(--app-h,100dvh)}
+.view{height:100vh;height:var(--app-h,100dvh)}
+.sheet{max-height:calc(var(--app-h,100dvh)*.82);-webkit-overflow-scrolling:touch}
+#x-notif{max-height:calc(var(--app-h,100dvh)*.66)}
+.scroll{min-height:0}
+#x-compose{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+#x-compose .xc-head{position:sticky;top:0;z-index:3;flex:none;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#postopts{overflow:visible;flex:none}
+.xc-pimg{max-height:min(300px,calc(var(--app-h,100dvh)*.34))}
 </style>
 </head>
 <body>
@@ -921,7 +936,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v51</p>
+  <p class="ver">v52</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1043,7 +1058,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v51</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v52</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1156,7 +1171,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v51</p>
+    <p class="ver">v52</p>
   </div>
 </section>
 </div>
@@ -1182,6 +1197,12 @@ input,textarea{font-size:16px}
 </div></div>
 <script>
 "use strict";
+/* v52: measure the real visible height (in-app browser toolbars make dvh
+   overshoot); CSS heights read it back as --app-h */
+(function(){function ah(){var h=window.visualViewport?window.visualViewport.height:window.innerHeight;if(h)document.documentElement.style.setProperty("--app-h",Math.round(h)+"px");}
+ah();window.addEventListener("resize",ah);window.addEventListener("orientationchange",function(){setTimeout(ah,60);});
+if(window.visualViewport)window.visualViewport.addEventListener("resize",ah);
+window.addEventListener("load",function(){ah();setTimeout(ah,350);});})();
 /* accounts: data swapped for this work; handles/avatars follow Tinder-ver X usage */
 const ACC={
  hiroto:{n:"井汲大翔",h:"@193hiroto",av:"assets/ig-avatar.jpg"},
