@@ -334,6 +334,35 @@ input,textarea{font-size:16px}
 .chg.good{border-color:#00ba7c;color:#8fe6c3}
 .chg.levelup{border-color:#ffd400;color:#ffd400;font-size:14.5px;padding:11px 18px;background:rgba(60,48,0,.96)}
 .evcard img.evimg{width:100%;border-radius:12px;margin-top:10px;display:block;border:1px solid #e3c766}
+/* ===== v19: home top overhaul (stories / Status HUD / day banner / event) ===== */
+#stories{gap:14px;padding:13px 14px 10px}
+.story{width:68px}
+.story .ring{width:64px;height:64px;padding:3.5px;position:relative;box-shadow:0 5px 14px rgba(120,86,255,.28)}
+.story .ring img,.story .ring .ava-txt{border:2.5px solid #fff}
+.story span{font-size:11.5px;font-weight:600;color:#0f1419;margin-top:5px}
+.story.seen .ring{background:#d7dee3;box-shadow:none}
+.story.seen span{color:#8899a6;font-weight:500}
+.story .splus{position:absolute;right:-2px;bottom:-2px;width:21px;height:21px;border-radius:50%;background:#1d9bf0;color:#fff;font-size:15px;font-weight:800;font-style:normal;display:flex;align-items:center;justify-content:center;border:2.5px solid #fff;line-height:1;z-index:2}
+#status-hud{margin:10px 12px 4px;border:1px solid #2b3350;border-radius:20px;padding:14px 15px 12px;background:linear-gradient(135deg,#171d38 0%,#0f1420 58%,#1c1030 100%);box-shadow:0 10px 26px rgba(15,18,48,.35),inset 0 1px 0 rgba(255,255,255,.09);color:#eef1f6}
+.hud-lv{background:linear-gradient(135deg,#ffd400,#ff9f43);color:#231a00;font-size:15px;border-radius:11px;padding:7px 11px;box-shadow:0 4px 12px rgba(255,180,0,.35)}
+.hud-xplab{color:#a7b0c4}
+.hud-xplab span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:8px;min-width:0}
+.hud-xplab span:last-child{white-space:nowrap;flex:none}
+.hud-fol small{white-space:nowrap}
+.hud-xpbar{height:10px;border-radius:5px;background:rgba(255,255,255,.13)}
+.hud-xpbar i{background:linear-gradient(90deg,#7856ff,#f91880);box-shadow:0 0 10px rgba(249,24,128,.65);border-radius:5px}
+.hud-fol small{color:#a7b0c4}
+.hud-fol b{color:#fff;font-size:23px}
+.hud-bot{gap:7px;margin-top:11px}
+.hud-world{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.07);color:#fff;padding:4px 10px}
+.hud-energy{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px 10px;color:#ffd9a8;font-size:11.5px}
+.hud-day{color:#a7b0c4}
+.hud-note{color:#8b96ad}
+#hud-chg{color:#4cc3ff}
+#daybanner{background:linear-gradient(90deg,#141b34,#3a1050);color:#fff;font-weight:800;font-size:13.5px;letter-spacing:.03em;border-bottom:none;padding:12px 15px;box-shadow:inset 4px 0 0 #f91880;line-height:1.55}
+.evcard{border-radius:20px;padding:18px 16px;box-shadow:0 16px 38px rgba(180,140,0,.28);position:relative;overflow:hidden}
+.evcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
+.evcard h3{font-size:18px}
 </style>
 </head>
 <body>
@@ -346,7 +375,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v18</p>
+  <p class="ver">v19</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -455,7 +484,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v18</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v19</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -548,7 +577,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v18</p>
+  <p class="ver">v19</p>
 </section>
 </div>
 <div id="changes"></div>
@@ -937,7 +966,7 @@ function renderNotifs(){
 const SV_IMG={hiroto:"assets/ig-gen-stage.jpg",nao:"assets/nao-promo.jpg"};
 const SV_DUR=5000;
 let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];STORY.forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];STORY.forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(s[0]==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
 function renderStorySeg(){
