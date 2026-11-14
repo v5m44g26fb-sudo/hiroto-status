@@ -1564,7 +1564,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v86</p>
+  <p class="ver">v87</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1707,7 +1707,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v86</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v87</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1896,7 +1896,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v86</p>
+    <p class="ver">v87</p>
   </div>
 </section>
 </div>
@@ -3065,8 +3065,27 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
  list.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
+/* v87: search results composed like real X - an accounts section of
+   card rows (the v80 follow-list design) above the posts section, each
+   with its own section head. The query's post hits are computed exactly
+   as before; accounts match on the same query against names/handles. */
+function srchAccRow(key){const a=ACC[key];const row=document.createElement("div");row.className="folrow";
+ const following=key===tgtKey()?!!S.followHiroto:folIsFollowing("nao",key);
+ row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-name"></div><div class="fr-handle"></div><div class="fr-bio"></div></div>';
+ row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="44" height="44" alt="">':avaTxt(a.n);
+ row.querySelector(".fr-name").textContent=a.n;row.querySelector(".fr-handle").textContent=key==="nao"?(S.handle||a.h):a.h;row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
+ if(key!=="nao"){const btn=document.createElement("button");btn.className="folbtn"+(following?" on":"");btn.textContent=following?"フォロー中":"フォローする";
+  btn.addEventListener("click",()=>{if(key===tgtKey()){showPane("hisprof");return;}const now=!folIsFollowing("nao",key);folOverride["nao:"+key]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});
+  row.appendChild(btn);}
+ const go=()=>{if(key==="nao")showPane("me");else if(key===tgtKey())showPane("hisprof");};
+ row.querySelector(".fr-av").style.cursor="pointer";row.querySelector(".fr-av").addEventListener("click",go);
+ return row;}
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";
- const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
+ const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=(hits.length)+" 件";h.appendChild(hc);box.appendChild(h);
+ const ql=q.toLowerCase();const accKeys=Object.keys(ACC).filter(k=>{const a=ACC[k];return a.n.includes(q)||(a.h||"").toLowerCase().includes(ql);});
+ if(accKeys.length){box.appendChild(tabHead("アカウント",accKeys.length+" 件"));accKeys.forEach(k=>box.appendChild(srchAccRow(k)));}
+ if(hits.length){box.appendChild(tabHead("ポスト",hits.length+" 件"));hits.forEach(p=>box.appendChild(postEl(p,false)));}
+ if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
 /* shared fx-chip builder (same labels/colors as the compose sheet) */
