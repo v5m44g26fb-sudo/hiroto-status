@@ -2253,6 +2253,9 @@ input,textarea{font-size:16px}
 #x-pane-search .trend.dyn::before{border-radius:3px}
 #x-pane-search .trend .tvol{max-width:230px}
 #x-pane-search .srch-lab{padding:16px 16px 0;font-size:13.5px}
+.hist-lab button{margin-left:auto;border:none;background:none;font:inherit;font-size:12px;font-weight:800;color:#1d9bf0;cursor:pointer;padding:2px 4px}
+#x-pane-search .sug.hist span{display:inline-flex;align-items:center;gap:6px}
+#x-pane-search .sug.hist .hx{font-style:normal;color:#8a94a6;font-weight:900;padding:0 1px}
 #x-pane-search .srch-lab::after{content:"タップでそのまま検索";margin-left:auto;font-size:11px;font-weight:700;color:#8899a6;letter-spacing:.02em}
 #x-pane-search .sug{padding:11px 14px 6px;gap:8px}
 #x-pane-search .sug span{display:inline-flex;align-items:center;border:1.5px solid #e4e1f6;background:linear-gradient(180deg,#fff,#fbf9ff);padding:8px 13px 8px 11px;box-shadow:0 3px 10px rgba(90,40,160,.07)}
@@ -2670,7 +2673,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v166</p>
+  <p class="ver">v167</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2799,6 +2802,8 @@ input,textarea{font-size:16px}
       <div class="xtabs" id="x-stabs" style="overflow-x:auto"><button data-stab="topic" class="act">話題を検索</button><button data-stab="trend">トレンド</button><button data-stab="news">ニュース</button><button data-stab="sports">スポーツ</button><button data-stab="entame">エンタメ</button></div>
       <div class="srch-lab"><i></i>おすすめワード</div>
       <div class="sug" id="x-sug"></div>
+      <div class="srch-lab hist-lab" id="x-hist-lab" style="display:none"><i></i>最近の検索<button id="x-hist-clear" type="button">クリア</button></div>
+      <div class="sug hist" id="x-hist" style="display:none"></div>
       <div id="x-sugacc"></div>
       <div id="x-search-results"></div>
     </div>
@@ -2839,7 +2844,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v166</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v167</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3089,7 +3094,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v166</p>
+    <p class="ver">v167</p>
   </div>
 </section>
 </div>
@@ -4593,9 +4598,22 @@ function renderTrends(){$("#x-pane-trend").innerHTML="";const list=curTrends(),m
  const sug=$("#x-sug");sug.innerHTML="";(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#クロワッサン被り","MUSIC STAGE"]:["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","MUSIC STAGE"]).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
+/* v167: recent-search chips - session-local only (module state,
+   never written to the save), newest first, capped at six. Shown on
+   the topic tab while no search is on screen; a chip re-runs its
+   query, its x removes just that entry, クリア empties the row. */
+let srchHist=[],srchActive=false;
+function syncHistVis(){const on=srchHist.length>0&&searchTab==="topic"&&!srchActive;const b=$("#x-hist"),l=$("#x-hist-lab");if(b)b.style.display=on?"":"none";if(l)l.style.display=on?"":"none";}
+function renderSrchHist(){const box=$("#x-hist");if(!box)return;box.innerHTML="";
+ srchHist.forEach(w=>{const s=document.createElement("span");s.appendChild(document.createTextNode(w));const x=document.createElement("i");x.className="hx";x.textContent="×";s.appendChild(x);
+  s.addEventListener("click",e=>{if(e.target.classList&&e.target.classList.contains("hx")){srchHist=srchHist.filter(v=>v!==w);renderSrchHist();return;}$("#x-q").value=w.replace(/^#/,"");runSearch();});
+  box.appendChild(s);});
+ syncHistVis();}
+function pushSrchHist(q){srchHist=[q].concat(srchHist.filter(x=>x!==q)).slice(0,6);renderSrchHist();}
 const STAB_HEADS={topic:["EXPLORE","話題を検索","いま世間で話題になっていること"],trend:["TRENDING","トレンド","投稿数の多い順に並ぶ、いまの話題"],news:["NEWS","ニュース","音楽番組と業界の動き"],entame:["ENTERTAINMENT","エンタメ","推しと界隈の話題"],sports:["SPORTS","スポーツ","スポーツ界のいま"]};
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="";if(sl)sl.style.display="";
+ srchActive=false;syncHistVis();
  const sa=$("#x-sugacc");if(sa){if(k==="topic"){renderSugAcc();sa.style.display="";}else sa.style.display="none";}
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const hd=STAB_HEADS[k];if(hd){const hh=document.createElement("div");hh.className="cat-head";hh.innerHTML="<span class='ch-eyebrow'></span><b></b><small></small>";hh.querySelector(".ch-eyebrow").textContent=hd[0];hh.querySelector("b").textContent=hd[1];hh.querySelector("small").textContent=hd[2];box.appendChild(hh);}
@@ -4713,7 +4731,7 @@ function hlMarks(el,toks){
  el.replaceChild(frag,node);
  hlMarks(rest,toks);
 }
-function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();const box=$("#x-search-results");box.innerHTML="";
+function runSearch(){const q=$("#x-q").value.trim();if(!q)return;srchActive=true;pushSrchHist(q);syncQClear();const box=$("#x-search-results");box.innerHTML="";
  const sg=$("#x-sug"),sl=$("#x-pane-search .srch-lab");if(sg)sg.style.display="none";if(sl)sl.style.display="none";
  const sax=$("#x-sugacc");if(sax)sax.style.display="none";
  const tokens=q.split(/[\s　]+/).map(t=>t.replace(/^#+/,"")).filter(Boolean);
@@ -4738,6 +4756,7 @@ function runSearch(){const q=$("#x-q").value.trim();if(!q)return;syncQClear();co
  if(hits.length){box.appendChild(tabHead("ポスト",hits.length+" 件"));hits.forEach(p=>{const el=postEl(p,false);hlMarks(el.querySelector(".nm"),toks);hlMarks(el.querySelector(".tx"),toks);const qt=el.querySelector(".qt-tx");if(qt)hlMarks(qt,toks);rise(el);box.appendChild(el);});}
  if(!accKeys.length&&!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。","post"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
+$("#x-hist-clear").addEventListener("click",()=>{srchHist=[];renderSrchHist();});
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
 /* v102: search-bar clear affordance - the x appears while the field
    holds text and empties it (focus stays in the field); Escape clears
