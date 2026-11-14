@@ -2684,6 +2684,10 @@ input,textarea{font-size:16px}
 .folfeed b{display:block;font-size:15.5px;font-weight:900;color:#0f1419;margin-top:3px}
 .folfeed small{display:block;margin-top:3px;font-size:12px;line-height:1.55;color:#536471}
 .folfeed-empty{margin:18px 14px;padding:16px;border:1px dashed #d5dde3;border-radius:16px;color:#536471;font-size:13.5px;line-height:1.7;text-align:center}
+.folfeed-doors{display:flex;gap:9px;justify-content:center;margin:0 14px 18px}
+.folfeed-door{font-family:inherit;font-size:13px;font-weight:800;color:#0f1419;background:#fff;border:1.5px solid #cfd9de;border-radius:999px;padding:8px 16px;cursor:pointer}
+.folfeed-door.main{background:#0f1419;border-color:#0f1419;color:#fff}
+.folfeed-door:active{transform:scale(.96)}
 .feed-end::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
 .feed-end .fe-head{display:flex;align-items:center;justify-content:space-between}
 .feed-end .fe-lab{font-size:10px;font-weight:900;letter-spacing:.28em;color:#cdbcf5}
@@ -2779,7 +2783,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v217</p>
+  <p class="ver">v218</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2952,7 +2956,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v217</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v218</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3221,7 +3225,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v217</p>
+    <p class="ver">v218</p>
   </div>
 </section>
 </div>
@@ -4492,7 +4496,17 @@ function renderFeed(){
  let posts=S.posts.filter(p=>!p.isReply);
  if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
  if(tab==="fol"){tl.appendChild(folFeedHead(posts.filter(p=>!p.sys).length));
-  if(!posts.length){const e=document.createElement("div");e.className="folfeed-empty";e.textContent="フォロー中のアカウントのポストは、まだここに届いていない。物語が進むと、近しい人たちの近況がここに集まるよ。";tl.appendChild(e);}}
+  if(!posts.length){const e=document.createElement("div");e.className="folfeed-empty";e.textContent="フォロー中のアカウントのポストは、まだここに届いていない。物語が進むと、近しい人たちの近況がここに集まるよ。";tl.appendChild(e);
+   /* v218: the empty following feed gets doors, not just a note -
+      back to おすすめ, and (while she does not follow him yet)
+      straight to his profile */
+   const dw=document.createElement("div");dw.className="folfeed-doors";
+   const b1=document.createElement("button");b1.type="button";b1.className="folfeed-door";b1.textContent="おすすめに戻る";
+   b1.addEventListener("click",()=>{S._htab="rec";$$("#hometabs [data-htab]").forEach(x=>x.classList.toggle("act",x.dataset.htab==="rec"));renderFeed();});
+   dw.appendChild(b1);
+   if(!S.followHiroto){const b2=document.createElement("button");b2.type="button";b2.className="folfeed-door main";b2.textContent=tgt().short+"のプロフィールを見る";
+    b2.addEventListener("click",()=>showPane("hisprof"));dw.appendChild(b2);}
+   tl.appendChild(dw);}}
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
  if(tab==="rec")tl.appendChild(feedEndCard());
  renderMePosts();renderHisPosts();
