@@ -634,6 +634,61 @@ input,textarea{font-size:16px}
 .opt .pill{border:1px solid rgba(255,255,255,.24);background:none;color:#ccd3d9;border-radius:999px;padding:2px 9px;font-size:10.5px;font-weight:700;letter-spacing:.05em}
 .opt.locked{opacity:.5}
 .opt .locktag{display:inline-block;margin-top:8px;border:1px solid rgba(255,255,255,.25);background:none;border-radius:999px;padding:2px 9px;font-size:9.5px;font-weight:800;letter-spacing:.22em;color:#9aa3ab}
+/* ===== v28: Event mission panel + Activity sheet overhaul ===== */
+/* Event: feed card becomes a dark "MAIN QUEST" mission briefing panel */
+.evcard{background:linear-gradient(163deg,#1a1233 0%,#271549 58%,#38124a 100%);border:1px solid rgba(247,201,72,.6);border-radius:22px;padding:19px 17px 17px;color:#f4f0ff;box-shadow:0 18px 44px rgba(24,8,52,.45),0 0 0 1px rgba(120,86,255,.15),0 6px 22px rgba(247,201,72,.14)}
+.evcard::before{height:4px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
+.ev-eyebrow{display:flex;align-items:baseline;gap:9px;font-size:11px;font-weight:900;letter-spacing:.3em;color:#f7c948;margin-bottom:10px}
+.ev-eyebrow .ev-eyebrow-jp{letter-spacing:.14em;font-size:10.5px;color:rgba(244,240,255,.55);font-weight:800}
+.evcard .tag{background:linear-gradient(90deg,#ffd95e,#f7c948);color:#4a3200;box-shadow:0 3px 12px rgba(247,201,72,.45);font-size:11px;padding:5px 12px}
+.evcard h3{font-size:19.5px;font-weight:900;line-height:1.45;letter-spacing:.01em;color:#fff;margin:10px 0 7px}
+.evcard p{font-size:14px;line-height:1.72;color:#cdc3ee}
+.evcard img.evimg{border:1px solid rgba(247,201,72,.55);border-radius:14px;margin-top:12px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+.evcard .choice.evchoice{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;margin-top:10px;padding:13px 14px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:14px;line-height:1.55;position:relative;transition:background .15s ease,border-color .15s ease,transform .1s ease,box-shadow .15s ease}
+.evcard .choice.evchoice:active{background:rgba(255,255,255,.12);transform:scale(.99)}
+.evcard .choice.evchoice:disabled{opacity:.45}
+.evcard .choice.evchoice.picked{opacity:1;border-color:#f7c948;background:rgba(247,201,72,.13);box-shadow:0 0 0 1px #f7c948,0 8px 22px rgba(247,201,72,.22)}
+.evc-no{width:26px;height:26px;flex:none;border-radius:50%;border:1.5px solid rgba(247,201,72,.75);color:#f7c948;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.evcard .choice.evchoice.picked .evc-no{background:#f7c948;color:#4a3200}
+.evc-main{flex:1;min-width:0}
+.evc-tx{display:block;font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.evc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.evcard .xchip{background:rgba(29,155,240,.2);color:#8ecfff}
+.evcard .xchip.dist{background:rgba(249,24,128,.2);color:#ff8fc0}
+.evcard .xchip.bad{background:rgba(244,33,46,.2);color:#ff9aa2}
+.evcard .xchip.xp{background:rgba(120,86,255,.25);color:#c2b1ff}
+.evcard .result{margin-top:13px;font-size:14px;line-height:1.7;color:#ffe9a8;background:linear-gradient(180deg,rgba(247,201,72,.17),rgba(247,201,72,.07));border:1px solid rgba(247,201,72,.5);border-radius:14px;padding:12px 14px}
+.evcard .result::before{content:"RESULT ― 結果";display:block;font-size:10px;font-weight:900;letter-spacing:.24em;color:#f7c948;margin-bottom:5px}
+/* Activity sheet: Status action sheet (scoped to #scrim-act; Changes sheet untouched) */
+#scrim-act .sheet{position:relative;padding:0 0 32px;border-radius:24px 24px 0 0;counter-reset:actstep}
+#scrim-act .sheet::before{content:"";display:block;width:42px;height:4.5px;border-radius:3px;background:#d8dee3;margin:9px auto 2px}
+#scrim-act .sheet>*{margin-left:18px;margin-right:18px}
+.act-head{margin-top:10px;background:linear-gradient(120deg,#191233,#3d1663 58%,#5c1547);border-radius:16px;padding:16px 34px 15px 16px;color:#fff;position:relative;overflow:hidden;box-shadow:0 10px 26px rgba(28,10,60,.3)}
+.act-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
+.act-eyebrow{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:900;letter-spacing:.22em;color:#f7c948}
+.act-eyebrow svg{width:11px;height:11px;fill:#f7c948;flex:none}
+.act-head h3{font-size:20px;font-weight:900;color:#fff;margin:5px 0 4px}
+.act-head .act-desc{color:#cdc3ee;font-size:12.5px;line-height:1.65}
+.act-once{position:absolute;top:14px;right:52px;border:1px solid rgba(247,201,72,.7);color:#f7c948;border-radius:999px;padding:3px 10px;font-size:10.5px;font-weight:800;letter-spacing:.08em}
+#scrim-act .close{position:absolute;top:20px;right:16px;float:none;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:3}
+#scrim-act .actlab{counter-increment:actstep;display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:900;color:#0f1419;letter-spacing:.02em;margin:20px 0 4px}
+#scrim-act .actlab::before{content:"STEP " counter(actstep);flex:none;background:linear-gradient(135deg,#7856ff,#f91880);color:#fff;font-size:9.5px;font-weight:900;letter-spacing:.12em;border-radius:999px;padding:3.5px 9px;box-shadow:0 3px 9px rgba(249,24,128,.3)}
+#scrim-act .choice.actopt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;margin-top:10px;padding:13px 14px;border:1.5px solid #cfd9de;border-radius:14px;background:#fff;font-size:14px;line-height:1.55;color:#0f1419;position:relative;transition:border-color .15s ease,box-shadow .15s ease,transform .12s ease,background .15s ease}
+#scrim-act .choice.actopt:active{transform:scale(.99)}
+#scrim-act .choice.actopt.sel{border-color:#f91880;background:rgba(249,24,128,.05);box-shadow:0 0 0 1px #f91880,0 10px 24px rgba(249,24,128,.18);transform:scale(1.015)}
+.actopt-no{width:26px;height:26px;flex:none;border-radius:50%;background:#eff3f4;color:#536471;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px}
+#scrim-act .choice.actopt.sel .actopt-no{background:linear-gradient(135deg,#f91880,#7856ff);color:#fff}
+.actopt-main{flex:1;min-width:0}
+.actopt-tx{display:block;font-size:14.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+.actopt-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+.actopt-check{position:absolute;top:-8px;right:-6px;width:24px;height:24px;border-radius:50%;background:#f91880;color:#fff;font-size:13px;font-weight:900;display:none;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(249,24,128,.5)}
+#scrim-act .choice.actopt.sel .actopt-check{display:flex}
+#scrim-act .chip{padding:10px 16px;font-size:14px;border-width:1.5px;transition:background .15s ease,color .15s ease,transform .12s ease,box-shadow .15s ease,border-color .15s ease}
+#scrim-act .chip.sel{background:linear-gradient(135deg,#7856ff,#f91880);border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(249,24,128,.32);transform:scale(1.05)}
+#act-go{width:auto;max-width:none;margin-top:22px;padding:17px;font-size:16.5px}
+#act-go::before{content:"⚡ "}
+#actresult:not(:empty){background:linear-gradient(180deg,#fff8e1,#fff2bd);border:1px solid #ecd27a;border-radius:14px;padding:13px 15px;color:#6d5b00;font-weight:600;box-shadow:0 8px 20px rgba(180,140,0,.14)}
+#actresult:not(:empty)::before{content:"RESULT ― 実行結果";display:block;font-size:10px;font-weight:900;letter-spacing:.24em;color:#b8860b;margin-bottom:5px}
 </style>
 </head>
 <body>
@@ -648,7 +703,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v27</p>
+  <p class="ver">v28</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -757,7 +812,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v27</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v28</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -868,7 +923,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v27</p>
+    <p class="ver">v28</p>
   </div>
 </section>
 </div>
@@ -879,8 +934,13 @@ input,textarea{font-size:16px}
   <div id="chglist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
-  <button class="close" data-close="scrim-act">✕</button>
-  <h3>Activity</h3><p class="desc">1日に1回だけ。タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
+  <button class="close" data-close="scrim-act" aria-label="閉じる">✕</button>
+  <div class="act-head">
+    <span class="act-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg>ACTIVITY ― ステータス行動</span>
+    <span class="act-once">1日 1回</span>
+    <h3>Activity</h3>
+    <p class="act-desc">タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
+  </div>
   <div id="actsec-title"><p class="actlab">タイトル ― 何をする？</p><div id="actopts"></div></div>
   <div id="actsec-who" class="hidden"><p class="actlab">相手 ― 誰と？（複数選んでも、効果は同じ）</p><div id="actwho" class="chiprow"></div></div>
   <div id="actsec-time" class="hidden"><p class="actlab">時間帯 ― いつやる？</p><div id="acttime" class="chiprow"></div></div>
@@ -1404,16 +1464,22 @@ $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearc
 function runSearch(){const q=$("#x-q").value.trim();if(!q)return;const box=$("#x-search-results");box.innerHTML="";const hits=S.posts.filter(p=>!p.sys&&((p.t&&p.t.includes(q))||(p.n&&p.n.includes(q))));const h=document.createElement("div");h.className="srch-res-h";const hq=document.createElement("b");hq.textContent="「"+q+"」";h.appendChild(hq);h.appendChild(document.createTextNode(" の検索結果"));const hc=document.createElement("span");hc.textContent=hits.length+" 件";h.appendChild(hc);box.appendChild(h);hits.forEach(p=>box.appendChild(postEl(p,false)));if(!hits.length)box.appendChild(mkEmpty("ポストはまだ見つからない","言葉を変えるか、トレンドから探してみてね。"));$("#x-scroll").scrollTo({top:0,behavior:"smooth"});}
 $("#x-search-btn").addEventListener("click",runSearch);
 $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();runSearch();}});
+/* shared fx-chip builder (same labels/colors as the compose sheet) */
+function fxChips(fx){
+ const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
+ let chips="";FXL.forEach(([k,lab,cls])=>{const v=fx?fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+v+"</span>";}});
+ return chips;
+}
 /* event card (Status addition) */
 function renderEvent(){
  const slot=$("#eventslot"),ch=CH[S.ch-1];slot.innerHTML="";
  if(S.evDone)return;
  const ev=ch.event;const card=document.createElement("div");card.className="evcard";
- card.innerHTML='<div class="tag"></div><h3></h3><p></p><div class="evimg"></div><div class="evc"></div><div class="evr"></div>';
+ card.innerHTML='<div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務</span></div><div class="tag"></div><h3></h3><p></p><div class="evimg"></div><div class="evc"></div><div class="evr"></div>';
  if(ev.img){const im=document.createElement("img");im.className="evimg";im.src=ev.img;im.alt="";card.querySelector(".evimg").appendChild(im);}
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
- ev.choices.forEach(c=>{const b=document.createElement("button");b.className="choice";b.textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();save();};box.appendChild(b);});
+ ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();save();};box.appendChild(b);});
  slot.appendChild(card);
 }
 /* chapter flow */
@@ -1499,8 +1565,8 @@ $("#btn-activity").onclick=()=>{
  go.classList.add("hidden");go.disabled=true;
  $("#actsec-title").classList.remove("hidden");
  if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";}
- else CH[S.ch-1].activity.forEach(o=>{
-  const b=document.createElement("button");b.className="choice";b.textContent=o.t;
+ else CH[S.ch-1].activity.forEach((o,oi)=>{
+  const b=document.createElement("button");b.className="choice actopt";const chips=fxChips(o.fx);b.innerHTML='<span class="actopt-no">'+(oi+1)+'</span><span class="actopt-main"><span class="actopt-tx"></span>'+(chips?'<span class="actopt-chips">'+chips+"</span>":"")+'</span><span class="actopt-check">✓</span>';b.querySelector(".actopt-tx").textContent=o.t;
   b.onclick=()=>{
    box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");actSel=o;
    whoBox.innerHTML="";
