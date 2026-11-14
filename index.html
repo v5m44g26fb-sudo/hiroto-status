@@ -971,6 +971,48 @@ input,textarea{font-size:16px}
 #status-hud .hud-note{margin-top:8px}
 #eventslot .evcard{margin-top:14px}
 #tl-posts{border-top:1px solid #eff3f4;margin-top:12px}
+/* ===== v57: chapter presentation — each Day opens on a cinematic title
+   card (DAY n / chapter title / the day's banner line over a ghost
+   numeral) and closes on a Status-style RESULT screen: the day's own
+   chgLog entries summed per axis, counted up, with distance and flame
+   highlighted. Numbers and the save format are untouched. ===== */
+#dayintro,#dayresult{position:absolute;inset:0;z-index:118;display:none;color:#fff}
+#dayintro.on,#dayresult.on{display:flex}
+#dayintro{background:radial-gradient(120% 90% at 50% -10%,#31125e 0%,#141b42 52%,#070818 100%);align-items:center;justify-content:center;text-align:center;cursor:pointer;overflow:hidden;animation:difade .3s ease}
+@keyframes difade{from{opacity:0}to{opacity:1}}
+#dayintro .di-big{position:absolute;right:-14px;bottom:-64px;font-size:300px;font-weight:900;font-style:italic;line-height:1;color:rgba(255,255,255,.05);pointer-events:none}
+#dayintro .di-inner{position:relative;padding:0 34px;display:flex;flex-direction:column;align-items:center}
+#dayintro .di-lab{font-size:11px;font-weight:900;letter-spacing:.42em;color:#ffb3d1;animation:diup .6s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-day{font-size:64px;font-weight:900;letter-spacing:.04em;line-height:1.05;margin-top:10px;text-shadow:0 10px 34px rgba(249,24,128,.35);animation:diup .6s .08s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-rule{width:64px;height:3px;border-radius:2px;background:linear-gradient(90deg,#f91880,#7856ff,#1d9bf0);margin:18px 0 16px;animation:diup .6s .16s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-title{font-size:21px;font-weight:900;letter-spacing:.03em;animation:diup .6s .24s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-sub{font-size:13px;line-height:1.7;color:rgba(233,236,255,.78);margin-top:9px;max-width:300px;animation:diup .6s .32s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-tap{margin-top:30px;font-size:10px;font-weight:800;letter-spacing:.3em;color:rgba(255,255,255,.45);animation:diup .6s .44s cubic-bezier(.2,.8,.25,1) both,dipulse 1.6s 1.2s ease-in-out infinite}
+@keyframes diup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes dipulse{0%,100%{opacity:.45}50%{opacity:.95}}
+#dayresult{background:linear-gradient(165deg,#131a3d 0%,#0d1024 58%,#220f38 100%);align-items:center;justify-content:center;animation:difade .28s ease;overflow:hidden}
+#dayresult .dr-inner{position:relative;width:100%;max-width:360px;margin:0 20px;max-height:calc(var(--app-h,100dvh)*.92);overflow-y:auto;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:22px 20px 20px;box-shadow:0 24px 54px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.12)}
+#dayresult .dr-inner::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#ffd400)}
+#dayresult .dr-lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:.22em;color:#ffb3d1}
+#dayresult .dr-title{display:block;font-size:20px;font-weight:900;margin-top:6px}
+#dayresult .dr-rows{margin-top:14px}
+.dr-row{display:flex;align-items:center;gap:10px;padding:10px 2px;border-top:1px solid rgba(255,255,255,.09);animation:drin .45s cubic-bezier(.2,.8,.25,1) both}
+@keyframes drin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.dr-rlab{font-size:12.5px;font-weight:700;color:rgba(235,238,255,.75);width:104px;flex:none}
+.dr-rmain{flex:1;display:flex;align-items:center;gap:9px;min-width:0}
+.dr-rval{font-size:23px;font-weight:900;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.dr-row.pink .dr-rval{color:#ff8fc0}
+.dr-row.fire .dr-rval{color:#ff9a86}
+.dr-gauge{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,.13);overflow:hidden}
+.dr-gauge i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#7856ff,#f91880);transition:width .8s .15s cubic-bezier(.2,.8,.25,1)}
+.dr-row.fire .dr-gauge i{background:linear-gradient(90deg,#ffad1f,#f4212e)}
+.dr-rd{flex:none;font-size:12px;font-weight:900;border-radius:999px;padding:3.5px 10px;background:rgba(255,255,255,.1);color:#c6cfe2;font-variant-numeric:tabular-nums}
+.dr-rd.good{background:rgba(29,155,240,.22);color:#8ecfff}
+.dr-rd.bad{background:rgba(244,33,46,.2);color:#ff9a94}
+.dr-rd.pink{background:rgba(249,24,128,.25);color:#ffb3d1}
+#dayresult .dr-lvup{margin-top:13px;text-align:center;font-size:13.5px;font-weight:900;color:#231a00;background:linear-gradient(90deg,#ffd400,#ff9f43);border-radius:12px;padding:8px 10px;box-shadow:0 8px 22px rgba(255,180,0,.35)}
+#dayresult .dr-note{margin-top:13px;font-size:12.5px;line-height:1.65;color:rgba(235,238,255,.72);text-align:center}
+#dayresult .btn{margin-top:16px;width:100%}
 </style>
 </head>
 <body>
@@ -985,7 +1027,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v56</p>
+  <p class="ver">v57</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1119,7 +1161,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v56</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v57</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1215,6 +1257,27 @@ input,textarea{font-size:16px}
     <button class="sv-zone left" id="sv-prev" aria-label="前へ"></button>
     <button class="sv-zone right" id="sv-next" aria-label="次へ"></button>
   </div>
+  <div id="dayintro" role="dialog" aria-label="章の始まり">
+    <span class="di-big" id="di-big" aria-hidden="true">1</span>
+    <div class="di-inner">
+      <span class="di-lab">CHAPTER</span>
+      <div class="di-day" id="di-day">DAY 1</div>
+      <div class="di-rule"></div>
+      <b class="di-title" id="di-title">デビュー発表の日</b>
+      <p class="di-sub" id="di-sub"></p>
+      <span class="di-tap">TAP TO START</span>
+    </div>
+  </div>
+  <div id="dayresult" role="dialog" aria-label="1日の結果">
+    <div class="dr-inner">
+      <span class="dr-lab" id="dr-lab">DAY 1 ― RESULT</span>
+      <b class="dr-title">1日が終わった</b>
+      <div class="dr-rows" id="dr-rows"></div>
+      <div class="dr-lvup hidden" id="dr-lvup"></div>
+      <p class="dr-note" id="dr-note"></p>
+      <button class="btn" id="dr-go">次の日へ →</button>
+    </div>
+  </div>
   <nav id="x-nav"></nav>
 </section>
 
@@ -1232,7 +1295,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v56</p>
+    <p class="ver">v57</p>
   </div>
 </section>
 </div>
@@ -2130,9 +2193,10 @@ function startChapter(n){
  }
  injectBuzz(n>=2?1:0,0);
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
+ showDayIntro();
 }
 function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=(S.posted&&S.evDone)?"block":"none";$("#btn-nextday").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";}
-$("#btn-nextday").onclick=()=>{if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}};
+$("#btn-nextday").onclick=()=>{showDayResult();};
 /* compose (real-X flow): tap a draft choice to load it into the composer like
    typed text - avatar + 17px preview + reply-scope line + char ring - then the
    top-right Post button (disabled until a draft is set) actually posts.
@@ -2300,6 +2364,49 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / 5");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");}
+/* v57: chapter presentation - a cinematic title card opens each Day, and
+   ending a Day first lands on a Status-style RESULT screen. The result is
+   summed from the day's own chgLog entries (already recorded per action),
+   so numbers and the save format are untouched - presentation only. */
+let diTimer=null;
+function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ set("#di-day","DAY "+S.ch);set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
+ const ov=$("#dayintro");ov.classList.remove("on");void ov.offsetWidth;ov.classList.add("on");
+ clearTimeout(diTimer);diTimer=setTimeout(hideDayIntro,2800);}
+function hideDayIntro(){clearTimeout(diTimer);const ov=$("#dayintro");if(ov)ov.classList.remove("on");}
+$("#dayintro").addEventListener("click",hideDayIntro);
+function dayDeltas(){const agg={fol:0,xp:0,cog:0,flm:0,dist:0};let lvup=0;const dl=distLab();
+ (S.chgLog||[]).filter(e=>e.day===S.ch).forEach(e=>{
+  if(e.cls==="lv"){lvup=Math.max(lvup,e.v);return;}
+  if(e.name===dl)agg.dist+=e.v;else if(e.name==="フォロワー")agg.fol+=e.v;else if(e.name==="XP")agg.xp+=e.v;else if(e.name==="世間の認知度")agg.cog+=e.v;else if(e.name==="炎上度")agg.flm+=e.v;});
+ return{agg,lvup};}
+function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
+ function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3),v=Math.round(from+(to-from)*e);el.textContent=useFmt?fmt(v):String(v);if(p<1)requestAnimationFrame(step);}
+ requestAnimationFrame(step);}
+function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
+ const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
+ $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT";
+ const rows=[{lab:"フォロワー",now:S.fol,d:agg.fol,useFmt:true,gauge:-1},
+  {lab:"XP",now:S.xp,d:agg.xp,useFmt:false,gauge:-1},
+  {lab:"世間の認知度",now:S.cog,d:agg.cog,useFmt:false,gauge:S.cog},
+  {lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true},
+  {lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true}];
+ const box=$("#dr-rows");box.innerHTML="";
+ rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.pink?" pink":"")+(r.fire?" fire":"");row.style.animationDelay=(i*0.09)+"s";
+  row.innerHTML='<span class="dr-rlab"></span><span class="dr-rmain"><span class="dr-rval">0</span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"")+'</span><span class="dr-rd"></span>';
+  row.querySelector(".dr-rlab").textContent=r.lab;
+  const val=row.querySelector(".dr-rval"),chip=row.querySelector(".dr-rd");
+  chip.textContent=r.d===0?"±0":((r.d>0?"+":"")+r.d);
+  chip.classList.add(r.d===0?"flat":(((r.fire?r.d<0:r.d>0))?"good":"bad"));if(r.pink&&r.d>0){chip.classList.remove("good");chip.classList.add("pink");}
+  box.appendChild(row);
+  countUp(val,r.now-r.d,r.now,r.useFmt);
+  if(r.gauge>=0){const g=row.querySelector(".dr-gauge i");requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.width=Math.max(0,Math.min(100,r.gauge))+"%";}));}});
+ const lv=$("#dr-lvup");
+ if(dd.lvup>0){lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった";lv.classList.remove("hidden");}else lv.classList.add("hidden");
+ $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=100?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
+ $("#dr-go").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";
+ $("#dayresult").classList.add("on");}
+$("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}});
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
