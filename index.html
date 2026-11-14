@@ -1090,6 +1090,34 @@ input,textarea{font-size:16px}
 #dayresult .dr-lvup{margin-top:13px;text-align:center;font-size:13.5px;font-weight:900;color:#231a00;background:linear-gradient(90deg,#ffd400,#ff9f43);border-radius:12px;padding:8px 10px;box-shadow:0 8px 22px rgba(255,180,0,.35)}
 #dayresult .dr-note{margin-top:13px;font-size:12.5px;line-height:1.65;color:rgba(235,238,255,.72);text-align:center}
 #dayresult .btn{margin-top:16px;width:100%}
+/* v168: share-card summary - one light, image-like card condensing
+   the day (identity, follower headline, three sub-stats, best gain,
+   day dots); everything is derived in showDayResult from the same
+   state + day deltas the rows use */
+.dr-share{margin-top:14px;background:linear-gradient(140deg,#ffffff 0%,#f3efff 55%,#ffeef7 100%);color:#0f1419;border-radius:18px;padding:14px 15px 11px;box-shadow:0 14px 34px rgba(0,0,0,.42);animation:drin .5s .6s cubic-bezier(.2,.8,.25,1) both;text-align:left}
+.drs-top{display:flex;align-items:center;justify-content:space-between}
+.drs-eyebrow{font-size:9.5px;font-weight:900;letter-spacing:.26em;color:#7856ff}
+.drs-day{font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#536471}
+.drs-id{display:flex;align-items:center;gap:10px;margin-top:10px}
+.drs-av{width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:top;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(120,86,255,.35)}
+.drs-idm{flex:1;min-width:0;display:flex;flex-direction:column}
+.drs-idm b{font-size:15.5px;font-weight:900;line-height:1.2}
+.drs-idm small{font-size:12px;color:#536471}
+.drs-rank{flex:none;font-size:11px;font-weight:900;color:#6d28d9;background:rgba(120,86,255,.13);border-radius:999px;padding:5px 10px}
+.drs-folrow{display:flex;align-items:flex-end;justify-content:space-between;margin-top:11px;padding-top:10px;border-top:1px solid rgba(15,20,25,.08)}
+.drs-folm small{display:block;font-size:10px;font-weight:800;letter-spacing:.12em;color:#536471}
+.drs-folm b{font-size:29px;font-weight:900;line-height:1.05;font-variant-numeric:tabular-nums}
+.drs-fd{flex:none;font-size:12px;font-weight:900;color:#0a7d4f;background:rgba(0,186,124,.14);border-radius:999px;padding:4px 10px;font-variant-numeric:tabular-nums}
+.drs-sub{display:flex;gap:8px;margin-top:11px}
+.drs-sub span{flex:1;background:rgba(255,255,255,.65);border:1px solid rgba(15,20,25,.06);border-radius:12px;padding:7px 10px 8px}
+.drs-sub small{display:block;font-size:9.5px;font-weight:800;color:#536471;white-space:nowrap;overflow:hidden}
+.drs-sub b{font-size:16.5px;font-weight:900;font-variant-numeric:tabular-nums}
+.drs-best{margin-top:10px;font-size:12px;font-weight:800;color:#7c2d5e;background:rgba(249,24,128,.09);border-radius:10px;padding:7px 11px}
+.drs-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid rgba(15,20,25,.08);font-size:10px;font-weight:800;color:#8a94a6}
+.drs-dots{display:inline-flex;gap:4px}
+.drs-dots i{width:6px;height:6px;border-radius:50%;background:rgba(15,20,25,.16)}
+.drs-dots i.done{background:#7856ff}
+.drs-dots i.now{background:#f91880;box-shadow:0 0 0 3px rgba(249,24,128,.18)}
 /* ===== v58: the target, staged by distance — his profile warms as the
    distance closes (cover tint, gold-to-pink avatar ring, a STAGE band with
    meter and a one-line reading of where the two of you stand), unlocking
@@ -2673,7 +2701,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v167</p>
+  <p class="ver">v168</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2844,7 +2872,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v167</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v168</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3036,6 +3064,14 @@ input,textarea{font-size:16px}
       <div class="dr-rank" id="dr-rank"></div>
       <div class="dr-rows" id="dr-rows"></div>
       <div class="dr-lvup hidden" id="dr-lvup"></div>
+      <div class="dr-share" id="dr-share">
+        <div class="drs-top"><span class="drs-eyebrow">SHARE CARD</span><span class="drs-day" id="drs-day"></span></div>
+        <div class="drs-id"><img class="drs-av" id="drs-av" alt=""><div class="drs-idm"><b>なお</b><small id="drs-handle"></small></div><span class="drs-rank" id="drs-rank"></span></div>
+        <div class="drs-folrow"><div class="drs-folm"><small>フォロワー</small><b id="drs-fol">0</b></div><span class="drs-fd" id="drs-fd"></span></div>
+        <div class="drs-sub"><span><small>世間の認知度</small><b id="drs-cog"></b></span><span><small id="drs-distlab">距離</small><b id="drs-dist"></b></span><span><small>XP</small><b id="drs-xp"></b></span></div>
+        <div class="drs-best" id="drs-best"></div>
+        <div class="drs-foot"><span>デビューしたら、彼と同じステージの件</span><span class="drs-dots" id="drs-dots"></span></div>
+      </div>
       <p class="dr-note" id="dr-note"></p>
       <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
@@ -3094,7 +3130,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v167</p>
+    <p class="ver">v168</p>
   </div>
 </section>
 </div>
@@ -5157,6 +5193,20 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   if(r.gauge>=0){const g=row.querySelector(".dr-gauge i");requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.width=Math.max(0,Math.min(100,r.gauge))+"%";}));}});
  const lv=$("#dr-lvup");
  if(dd.lvup>0){const tUp=lvTitle(dd.lvup)!==lvTitle(dd.lvup-1);lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった ― "+(tUp?"新称号":"称号")+"「"+lvTitle(dd.lvup)+"」";lv.classList.remove("hidden");}else lv.classList.add("hidden");
+ /* v168: the share card condenses the same numbers the rows just
+    showed - identity and rank, the follower headline with today's
+    delta, three sub-stats and the day's best gain. Derived only. */
+ const shAv=$("#drs-av");if(shAv){const src=(ACC.nao&&ACC.nao.av)||"assets/nao-avatar4.jpg";if(shAv.getAttribute("src")!==src)shAv.src=src;}
+ const shSet=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ shSet("#drs-day","DAY "+S.ch+" / "+TOTAL_DAYS);
+ shSet("#drs-handle",S.handle||"");
+ shSet("#drs-rank","Lv "+lvNum()+"・"+lvTitle());
+ shSet("#drs-fol",fmt(S.fol));
+ shSet("#drs-fd","今日 "+(agg.fol>=0?"+":"−")+fmt(Math.abs(agg.fol)));
+ shSet("#drs-cog",String(S.cog));shSet("#drs-dist",String(S.dist));shSet("#drs-xp",String(S.xp));
+ shSet("#drs-distlab",distLab());
+ const shDots=$("#drs-dots");if(shDots){shDots.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";shDots.appendChild(i);}}
+ shSet("#drs-best",bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
  $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
  /* v104: the go button reads as a destination bar - main label plus the
     next chapter's own day line, read from the chapter data. */
