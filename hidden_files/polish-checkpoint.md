@@ -898,3 +898,8 @@
 - 表示規則はおすすめワードと同格：topic タブでのみ表示、他タブと検索実行中は隠れる（renderSearchTab／runSearch に連動）。起動時（S=null）の renderTrends 経路では空にしておき、ペインを開いた時の再描画で埋まるガード付き。
 - 変えなかったもの：検索の照合・トレンドのデータと並び・STAB_HEADS 文言・セーブ形式。
 - 検証（Playwright、/tmp/verify_v158.py）：レール表示と12カードの名前・壊れ画像0、カルメンのトグル（フォロー中→解除、folOverride=false）、ニュースタブで非表示→topic で復帰、検索実行でレールが隠れアカウント行1件、scrollW=390、エラー0。スクショ /tmp/v158-rail.png 目視OK。
+
+### v159 コラボENDの祝福演出（紙吹雪）
+- コラボEND到達時だけ、エンディング画面全体に紙吹雪が1回舞う（46片、金／ピンク／紫／青／白＝フィナーレのパレット、横揺れと回転付きで落下、5.6秒後にノード除去）。#end-confetti は pointer-events:none の装飾層で、操作・遷移には干渉しない。prefers-reduced-motion では出さない。
+- 他の3結末（炎上／静か／これから）には出さない。エンディングの本文・条件・数値・背景は不変。
+- 検証（Playwright、/tmp/verify_v159.py）：細工状態でコラボEND→46片生成・落下中の opacity 1・pointer-events none・落下後に0片へ掃除、炎上END→0片、エラー0。スクショ /tmp/v159-collab.png 目視OK（上部のトーストは細工状態で ending() を即発火させた検証側アーティファクトで実プレイでは Day6 時点で消えている既知件）。

@@ -1601,6 +1601,15 @@ input,textarea{font-size:16px}
    stage with its dots. Judgement and body text are unchanged. ===== */
 .end-emblem{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--acc);border:1.5px solid var(--acc);background:rgba(0,0,0,.38);box-shadow:0 0 34px color-mix(in srgb,var(--acc) 45%,transparent),inset 0 0 18px rgba(0,0,0,.35);margin-bottom:16px;animation:endemblem .7s cubic-bezier(.2,.8,.3,1) both}
 .end-emblem svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* ===== v159: collab ending celebration - confetti pieces (gold / pink
+   / purple / sky / white, the finale palette) fall once over the
+   ending screen when the collab ending is reached. Pure decoration:
+   pointer-events none, nodes are removed after the fall, nothing is
+   written anywhere. Other endings get no confetti. ===== */
+#end-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:6}
+.cfetti{position:absolute;top:-14px;border-radius:2px;opacity:0;animation-name:confall;animation-timing-function:cubic-bezier(.25,.5,.45,1);animation-fill-mode:both}
+.cfetti.round{border-radius:50%}
+@keyframes confall{0%{opacity:0;transform:translate3d(0,-14px,0) rotate(0deg)}8%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx,0px),calc(var(--app-h,100dvh) + 30px),0) rotate(var(--rot,540deg))}}
 @keyframes endemblem{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:none}}
 #scr-ending .end-tagrow{animation:fadeup .5s ease .1s both}
 #scr-ending #end-title{animation:fadeup .55s ease .18s both}
@@ -2614,7 +2623,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v158</p>
+  <p class="ver">v159</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2782,7 +2791,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v158</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v159</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2992,6 +3001,7 @@ input,textarea{font-size:16px}
 </section>
 
 <section class="screen" id="scr-ending">
+  <div id="end-confetti" aria-hidden="true"></div>
   <div class="end-inner">
     <div class="end-emblem" id="end-emblem" aria-hidden="true"></div>
     <div class="end-tagrow"><span class="end-tag">ENDING</span><span class="end-theme" id="end-theme"></span></div>
@@ -3031,7 +3041,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v158</p>
+    <p class="ver">v159</p>
   </div>
 </section>
 </div>
@@ -5082,7 +5092,21 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  $("#end-lv").textContent="Lv "+lvNum()+"・"+lvTitle();
  $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
  const em=$("#end-emblem");if(em)em.innerHTML=END_EMBLEM[kind]||"";
- show("scr-ending");renderEndJourney();renderCredits(kind);save();}
+ show("scr-ending");renderEndJourney();renderCredits(kind);save();
+ if(kind==="collab")endConfetti();}
+/* v159: one burst of confetti for the collab ending only. Pieces are
+   generated fresh each time and cleaned up after the fall; reduced
+   motion skips it entirely. */
+function endConfetti(){const box=$("#end-confetti");if(!box)return;box.innerHTML="";
+ if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const cols=["#f7c948","#f91880","#7856ff","#1d9bf0","#ffffff"];
+ for(let i=0;i<46;i++){const d=document.createElement("i");d.className="cfetti"+(i%3===0?" round":"");
+  const sz=6+Math.random()*6;d.style.width=sz+"px";d.style.height=(i%3===0?sz:sz*1.7)+"px";
+  d.style.left=(Math.random()*100)+"%";d.style.background=cols[i%cols.length];
+  d.style.setProperty("--dx",((Math.random()*120)-60)+"px");d.style.setProperty("--rot",((Math.random()*620)-310)+"deg");
+  d.style.animationDuration=(2.6+Math.random()*1.7)+"s";d.style.animationDelay=(Math.random()*0.9)+"s";
+  box.appendChild(d);}
+ setTimeout(()=>{box.innerHTML="";},5600);}
 /* v92: staff-roll credits under the ending - the work's title card and
    a read-back of the five days, derived only from state that already
    exists (handle / target / first follower / outcome / record /
