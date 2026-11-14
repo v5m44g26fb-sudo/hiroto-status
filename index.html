@@ -2803,7 +2803,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v235</p>
+  <p class="ver">v236</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2976,7 +2976,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v235</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v236</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3247,7 +3247,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v235</p>
+    <p class="ver">v236</p>
   </div>
 </section>
 </div>
@@ -4221,7 +4221,7 @@ function renderNotifs(){
    {let t=n.sub;const m=/^Day (\d+)/.exec(n.sub||"");if(m){const chp=curCH()[Number(m[1])-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl)t=n.sub+" ― "+ttl;}hd.querySelector(".ndh-t").textContent=t;}
    list.appendChild(hd);}
   const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");row.style.animationDelay=Math.min(i*0.045,0.3)+"s";
-  row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
+  row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
  const men=$("#x-men-list");const emp=$("#x-men-empty");
@@ -4832,7 +4832,7 @@ function renderFolRows(){
   const following=folOwner==="nao"&&key===tgtKey()?!!S.followHiroto:folIsFollowing(folOwner,key);
   const mutual=sets.folwing.includes(key)&&sets.folwers.includes(key);
   row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-namerow"><span class="fr-name"></span></div><div class="fr-handle"><span class="fr-h"></span></div><div class="fr-bio"></div></div>';
-  row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
+  row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
   row.querySelector(".fr-name").textContent=a.n;
   if(VERIFIED.has(key))row.querySelector(".fr-namerow").insertAdjacentHTML("beforeend",VER_BADGE);
   row.querySelector(".fr-h").textContent=a.h;
@@ -4969,7 +4969,7 @@ function srchAccRow(key){const a=ACC[key];const row=document.createElement("div"
  const following=key===tgtKey()?!!S.followHiroto:folIsFollowing("nao",key);
  const sets=folSets("nao"),mutual=sets.folwing.includes(key)&&sets.folwers.includes(key);
  row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-namerow"><span class="fr-name"></span></div><div class="fr-handle"><span class="fr-h"></span></div><div class="fr-bio"></div></div>';
- row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
+ row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
  row.querySelector(".fr-name").textContent=a.n;
  if(VERIFIED.has(key))row.querySelector(".fr-namerow").insertAdjacentHTML("beforeend",VER_BADGE);
  row.querySelector(".fr-h").textContent=key==="nao"?(S.handle||a.h):a.h;
@@ -5384,7 +5384,7 @@ function renderDmList(){
  const mkRow=(t,i)=>{const a=ACC[t.who];const b=document.createElement("button");b.className="dmrow"+(t.unread?" unreadrow":"")+(t.special?" special":"")+(anim?" anim":"");
   if(anim)b.style.animationDelay=Math.min(i*45,315)+"ms";
   const day=t.id.indexOf("fan")===0?("Day "+t.id.slice(3)):"";
-  b.innerHTML='<span class="dm-avw'+(t.special?" spring":"")+'">'+(a.av?'<img class="avatar" src="'+a.av+'" width="52" height="52" alt="">':avaTxt(a.n))+'</span>'
+  b.innerHTML='<span class="dm-avw'+(t.special?" spring":"")+'">'+(a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" width="52" height="52" alt="">':avaTxt(a.n))+'</span>'
    +'<div class="dm-main"><div class="dm-namerow"><span class="dm-name"></span>'+(t.who===tgtKey()?DM_VERIFIED:"")+(t.special?'<span class="dm-spill"><svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.3C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>特別</span>':"")+'<span class="dm-handle">'+a.h+'</span></div><div class="pv"></div>'+(t.special?'<div class="dm-distline"></div>':"")+'</div>'
    +'<div class="dm-meta">'+(day?'<span class="dm-day">'+day+'</span>':"")+(t.unread?'<span class="unread"></span>':"")+'</div>';
   b.querySelector(".dm-name").textContent=a.n;b.querySelector(".pv").textContent=t.msgs[t.msgs.length-1]||"";
