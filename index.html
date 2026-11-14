@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v274</p>
+  <p class="ver">v275</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v274</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v275</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v274</p>
+    <p class="ver">v275</p>
   </div>
 </section>
 </div>
@@ -5373,6 +5373,15 @@ function startChapter(n){
   sea:{tx:"なおちゃん、ステージおつかれさま。堂々としてて、見ていて誇らしかったよ。ごはんちゃんと食べて、体調管理もしっかりね。これからもよろしくお願いします。",lk:3908,rp:640,rc:88},
   akari:{tx:"なおオンニ、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
  }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
+ /* v275 (episode): the first follower returns once more on the
+    morning of the announcement - the bookend to Day 4, in the
+    same slot with display-only numbers. Who it is changes the
+    words, never the story. */
+ if(n===6){const FF6={
+  mina:{tx:"発表の日ですね。なおさんの歌が、今日もたくさんの人に届きますように。静かに、ずっと応援しています。",lk:6800,rp:940,rc:120},
+  sea:{tx:"なおちゃん、発表の日だね。ドキドキすると思うけど、体に気をつけて。いいステージになりますように。おめでとう！",lk:4500,rp:700,rc:95},
+  akari:{tx:"なおオンニ、発表の日！ レッスン室から見てきた努力が、今日ひとつ形になるね。リーダーとして、メンバーとして、誇らしいよ。おめでとう！",lk:1600,rp:260,rc:180}
+ }[S.first];if(FF6)sd.unshift(mkPost(S.first,FF6.tx,FF6.lk,FF6.rp,FF6.rc,false,null));}
  S.posts=sd.concat(S.posts.filter(p=>p.mine));
  renderDayBanner();
  $("#x-head-note").textContent="Day "+n+" / "+TOTAL_DAYS+"";
