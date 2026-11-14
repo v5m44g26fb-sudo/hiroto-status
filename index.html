@@ -2423,6 +2423,23 @@ input,textarea{font-size:16px}
 #scr-ending.on .ec-rows .ec-row:nth-child(5){animation-delay:1.02s}
 #scr-ending.on .ec-rows .ec-row:nth-child(6){animation-delay:1.12s}
 #scr-ending .ec-fin{color:#f7c948;text-shadow:0 2px 14px rgba(247,201,72,.35)}
+/* ===== v148: his profile raised to a senpai artist page - a taller
+   stage cover with a larger masthead, and the distance block rebuilt
+   as a RELATION stage card: gradient gold frame, the stage name set
+   large, chunkier stage segments, and a next-stage line that reads
+   the same DIST_STAGES table (at the final stage it says so). His
+   gold identity and the dstage 3-4 pink shift are kept; values and
+   renderers are untouched apart from the new hint line. ===== */
+#x-pane-hisprof .pf-cover{height:196px}
+#x-pane-hisprof .his-cover-typo b{font-size:23px}
+#x-pane-hisprof .pf-name{font-size:23px}
+#his-dist{border:1.5px solid transparent;background:linear-gradient(165deg,#fffdf4,#fdf3d8) padding-box,linear-gradient(120deg,#f7c948,#c9a227) border-box;border-radius:18px;padding:15px 16px 13px;box-shadow:0 10px 26px rgba(160,120,20,.16)}
+#his-dist .hd-num{font-size:27px}
+#his-dist .hd-stage{font-size:12px;padding:4px 12px}
+.hd-pips{gap:6px;margin-top:11px}
+.hd-pips i{height:6px;border-radius:3px}
+.hd-next{margin-top:9px;padding-top:9px;border-top:1px dashed rgba(160,120,20,.35);font-size:11.5px;font-weight:800;letter-spacing:.05em;color:#8a6d1f}
+#x-pane-hisprof.dstage-3 .hd-next,#x-pane-hisprof.dstage-4 .hd-next{color:#c2185b;border-top-color:rgba(249,24,128,.3)}
 #x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
 #x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 #x-pane-me .rep-lab{color:#f7c948}
@@ -2483,7 +2500,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v147</p>
+  <p class="ver">v148</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2650,7 +2667,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v147</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v148</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2684,6 +2701,7 @@ input,textarea{font-size:16px}
           <div class="hd-meter"><i id="hd-fill"></i><span class="hd-tick" style="left:5%"></span><span class="hd-tick" style="left:15%"></span><span class="hd-tick" style="left:30%"></span><span class="hd-tick" style="left:45%"></span></div>
           <div class="hd-pips" id="hd-pips"><i></i><i></i><i></i><i></i><i></i></div>
           <p class="hd-note" id="hd-note">まだ、画面の向こうの人。</p>
+          <p class="hd-next" id="hd-next"></p>
         </div>
       </div>
       <div class="x-ptabs" id="his-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
@@ -2889,7 +2907,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v147</p>
+    <p class="ver">v148</p>
   </div>
 </section>
 </div>
@@ -4808,6 +4826,7 @@ function renderDistProfile(){if(typeof S==="undefined"||!S)return;const si=distS
  const pane=$("#x-pane-hisprof");if(pane){for(let i=0;i<5;i++)pane.classList.remove("dstage-"+i);pane.classList.add("dstage-"+si);}
  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#hd-stage","STAGE "+(si+1)+" ― "+st.lab);set("#hd-num",String(S.dist||0));set("#hd-note",st.note);
+ set("#hd-next",si<DIST_STAGES.length-1?("次のステージ「"+DIST_STAGES[si+1].lab+"」まで あと "+(DIST_STAGES[si+1].min-(S.dist||0))):"最終ステージに到達 ― これ以上ない近さ");
  const f=$("#hd-fill");if(f)f.style.width=Math.max(0,Math.min(100,S.dist||0))+"%";
  const pp=$$("#hd-pips i");pp.forEach((el,i)=>el.classList.toggle("on",i<=si));}
 function renderThDist(){const bar=$("#th-dist");if(!bar)return;const on=!!(curThread&&curThread.special);bar.classList.toggle("hidden",!on);if(!on)return;const si=distStageIdx();
