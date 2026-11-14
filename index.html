@@ -1812,6 +1812,8 @@ input,textarea{font-size:16px}
 #dmlist-head svg{border:1.5px solid #cfd9de;border-radius:50%;padding:6px;width:32px;height:32px;box-sizing:border-box}
 .dm-searchrow{display:flex;align-items:center;gap:8px;margin:12px 16px 4px;background:#eff3f4;border:1.5px solid transparent;border-radius:999px;padding:9px 14px;transition:background .15s ease,border-color .15s ease}
 .dm-searchrow:focus-within{background:#fff;border-color:#1d9bf0}
+.dm-searchrow #dm-qx{flex:none;width:22px;height:22px;border:none;border-radius:50%;background:#d8dee3;color:#0f1419;font-size:14px;line-height:1;cursor:pointer;font-family:inherit}
+.dm-searchrow #dm-qx:active{transform:scale(.92)}
 .dm-searchrow .dm-sic{display:flex;color:#536471;flex:none}
 .dm-searchrow .dm-sic svg{width:16px;height:16px}
 .dm-searchrow input{flex:1;min-width:0;border:none;outline:none;background:transparent;font:inherit;font-size:14.5px;color:#0f1419}
@@ -2769,7 +2771,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v209</p>
+  <p class="ver">v210</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2938,7 +2940,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v209</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v210</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3207,7 +3209,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v209</p>
+    <p class="ver">v210</p>
   </div>
 </section>
 </div>
@@ -5235,8 +5237,12 @@ function renderDmList(){
     re-renders (rows rebuild into their own container); the empty
     state becomes a welcome block instead of a footnote line */
  let sr=$("#dm-searchrow");
- if(!sr){sr=document.createElement("div");sr.id="dm-searchrow";sr.className="dm-searchrow";sr.innerHTML='<span class="dm-sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></span><input id="dm-q" type="text" placeholder="メッセージを検索" autocomplete="off">';list.appendChild(sr);sr.querySelector("#dm-q").addEventListener("input",()=>{dmAnim=false;renderDmList();});}
+ if(!sr){sr=document.createElement("div");sr.id="dm-searchrow";sr.className="dm-searchrow";sr.innerHTML='<span class="dm-sic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg></span><input id="dm-q" type="text" placeholder="メッセージを検索" autocomplete="off"><button id="dm-qx" type="button" aria-label="検索を消す" style="display:none">×</button>';list.appendChild(sr);sr.querySelector("#dm-q").addEventListener("input",()=>{dmAnim=false;renderDmList();});
+  /* v210: the DM search gets the same clear button the other
+     search boxes already have */
+  sr.querySelector("#dm-qx").addEventListener("click",()=>{const q=sr.querySelector("#dm-q");q.value="";dmAnim=false;renderDmList();q.focus();});}
  sr.style.display=S.threads.length?"":"none";
+ {const qx=sr.querySelector("#dm-qx");if(qx)qx.style.display=(($("#dm-q")||{}).value)?"":"none";}
  /* v166: unread filter chips under the search pill - session-local
     (module state, never saved), combines with the text query, and
     flattens the section split while active like the search does */
