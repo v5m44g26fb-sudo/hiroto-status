@@ -1421,7 +1421,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v77</p>
+  <p class="ver">v78</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1562,7 +1562,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v77</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v78</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1739,7 +1739,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v77</p>
+    <p class="ver">v78</p>
   </div>
 </section>
 </div>
@@ -2205,7 +2205,14 @@ function injectBuzz(maxN,pos){
  }
 }
 function curStory(){return tgtKey()==="sakuya"?STORY_S:STORY;}
-function svImg(k){if(k==="nao")return "assets/nao-promo.jpg";if(k===tgtKey())return tgt().cover;return undefined;}
+function svImg(k){if(k==="nao")return naoStory().img;if(k===tgtKey())return tgt().cover;return undefined;}
+/* v78: your own story changes every day (user: "story, change it daily").
+   Four new user-supplied photos join the set; Day 3 reuses the existing
+   backstage selfie (recording day). Resolved from the current chapter at
+   render time, so in-progress saves get the day's story with no migration
+   and the save format is untouched. */
+const NAO_STORY={1:{img:"assets/nao-story-heart.jpg",cap:"デビュー初日、いってきます"},2:{img:"assets/nao-story-cafe.jpg",cap:"オフのいちごミルク"},3:{img:"assets/nao-backstage-selfie.jpg",cap:"収録の日、楽屋から"},4:{img:"assets/nao-story-towel.jpg",cap:"レッスン終わり、汗だく"},5:{img:"assets/nao-story-night.jpg",cap:"最終日、帰り道"}};
+function naoStory(){const d=(typeof S!=="undefined"&&S&&S.ch)||1;return NAO_STORY[d]||NAO_STORY[1];}
 </script>
 <script>
 "use strict";
@@ -2427,9 +2434,9 @@ function renderNotifs(){
    gradient + initial, so no new photos or story text are introduced. */
 const SV_DUR=5000;
 let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":"");b.setAttribute("aria-label",e.lab+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":"");b.setAttribute("aria-label",e.lab+"のストーリー");const ringImg=(e.k==="nao"&&e.img)?e.img:a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 function storyList(){
- const base=curStory().map(x=>({k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]}));
+ const base=curStory().map(x=>x[0]==="nao"?{k:x[0],lab:x[1],img:naoStory().img,cap:naoStory().cap,uid:x[0]}:{k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]});
  /* v66: legacy saves may still carry the 150px avatar file as a story
     backdrop (the old Day-2 event chain entry) - remap it at display time
     to the studio photo. Save format untouched. */
