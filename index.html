@@ -1694,6 +1694,37 @@ input,textarea{font-size:16px}
 .ec-row span{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#8a94a6;flex:none;width:97px;white-space:nowrap}
 .ec-row b{font-size:13px;font-weight:800;color:#e7e9ea;margin-left:auto;text-align:right}
 .ec-fin{margin-top:23px;font-size:12px;font-weight:900;letter-spacing:.5em;text-indent:.5em;color:#fff}
+/* ===== v95: the post card rebuilt to current real-X - the author row
+   becomes a flex head (bold name + the v95 verified badge, grey
+   handle, fixed time) with ellipsis truncation; body copy tightens
+   to the app's measure; media moves from inline styles into one
+   class with the app's feed crop (top-biased, so faces never crop);
+   the action row spreads the full content width with larger glyphs
+   and a press colour per action. v79 stands (the thread detail's
+   action row stays icon-only; numbers live in the worded summary)
+   and v63 stands (the detail head stacks name over handle, time
+   only in the meta line). Data, tap targets and counts unchanged. */
+.p-main{min-width:0;flex:1}
+.p-head{display:flex;align-items:center;gap:4px;min-width:0;line-height:1.35}
+.p-head .nm-w{display:inline-flex;align-items:center;gap:4px;min-width:0;flex:0 1 auto}
+.post .nm{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-ver{width:16px;height:16px;fill:#1d9bf0;flex:none}
+.qt-h .p-ver{width:14px;height:14px}
+.post .hd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
+.post .tm{font-size:15px;color:#536471;flex:none;white-space:nowrap}
+.post .tx{line-height:1.45;margin-top:1px}
+.post .pimg{width:100%;display:block;border-radius:16px;border:1px solid #e6ebed;background:#eff3f4;object-fit:cover;object-position:center 16%;max-height:400px;margin-top:10px}
+.post.detail .pimg{max-height:600px}
+.post .mt{max-width:none;padding-right:0;margin-top:6px}
+.post .mt .act{font-size:13px;font-variant-numeric:tabular-nums}
+.post .mt .act svg,.post .mt .grp svg{width:19px;height:19px;transition:transform .12s ease}
+.post .mt .act:active svg{transform:scale(.84)}
+.post .mt .reply-btn:active{color:#1d9bf0}
+.post .mt .rp-btn:active{color:#00ba7c}
+.post .mt .like-btn:active{color:#f91880}
+.post .mt .grp>span:active{color:#1d9bf0}
+#thread-main .post.detail .p-head{display:block}
+#thread-main .post.detail .tm{display:none}
 </style>
 </head>
 <body>
@@ -1708,7 +1739,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v94</p>
+  <p class="ver">v95</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1863,7 +1894,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v94</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v95</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2072,7 +2103,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v94</p>
+    <p class="ver">v95</p>
   </div>
 </section>
 </div>
@@ -2576,21 +2607,28 @@ function qtDerive(p){try{
  return{id:orig.id,n:orig.n,h:orig.h,av:orig.av,tx:orig.t,img:orig.img};
 }catch(_){return null;}}
 function rpHeadEl(name){const d=document.createElement("div");d.className="rp-head";d.innerHTML='<span class="rp-ic">'+XIC9.rp+'</span><span></span>';d.querySelector("span:last-child").textContent=name+"さんがリポスト";return d;}
+/* v95: verified accounts in-fiction (idols, the target, the show's
+   official account, and her own official account) carry the real-X
+   badge in the author row. Derived from the account key at render
+   time only; fans / friends / staff / the wire account stay badgeless
+   so the hierarchy reads at a glance. */
+const VERIFIED=new Set(["nao","hiroto","sakuya","media","sea","akari","mina","carmen","yuha","stella","juun","ana","ian","yeon"]);
+const VER_BADGE='<svg class="p-ver" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
 function postEl(p,hot){
   const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
-  d.innerHTML=av+'<span style="min-width:0;flex:1"><span class="nm"></span> <span class="hd">'+p.h+" \u30fb "+(p.tm||"\u4eca")+'</span><div class="tx"></div>'
-    +(p.img?'<img class="pimg" src="'+p.img+'" alt="" style="width:100%;border-radius:16px;margin-top:10px;display:block;border:1px solid #eff3f4">':"")
+  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(p.tm||"\u4eca")+'</span></div><div class="tx"></div>'
+    +(p.img?'<img class="pimg" src="'+p.img+'" alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
     +cnt("rp-btn",XIC9.rp,rp+(p.rped?1:0))
     +cnt("like-btn",XIC9.heart,lk+(p.liked?1:0))
     +'<span class="act views">'+XIC9.views+"<b>"+fmtCnt(vw)+"</b></span>"
     +'<span class="grp"><span class="bmk-btn" role="button">'+XIC9.bmk+'</span><span class="share-btn">'+XIC9.share+"</span></span>"
-    +"</div></span>";
+    +"</div></div>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=dispTx(p.t);
   /* v89: quote card - derived at render time only, from data that already
      exists: when a non-mine post quotes her words in brackets and the
@@ -2598,7 +2636,7 @@ function postEl(p,hot){
      as a real-X quote card. Nothing is written back to the save. */
   const qtSnap=p.qt||qtDerive(p);
   if(qtSnap){const qc=document.createElement("div");qc.className="qtcard";
-   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span><span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" src="'+qtSnap.img+'" alt="">':"")+'</div>';
+   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" src="'+qtSnap.img+'" alt="">':"")+'</div>';
    qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;qc.querySelector(".qt-tx").textContent=dispTx(qtSnap.tx);
    qc.addEventListener("click",e=>{e.stopPropagation();try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o.id===qtSnap.id);if(orig)openPostThread(orig);}catch(_){}});
    d.querySelector(".tx").after(qc);}
