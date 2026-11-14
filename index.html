@@ -1992,6 +1992,21 @@ input,textarea{font-size:16px}
 #xc-post:not(:disabled){box-shadow:0 6px 18px rgba(120,86,255,.42)}
 #xc-post.posting{animation:xcposting 1s ease-in-out infinite}
 @keyframes xcposting{0%,100%{opacity:1}50%{opacity:.72}}
+/* ===== v111: profile headers, second raise - the header body of both
+   profiles is brought onto one rhythm without touching what hangs
+   below it (her NOW strip and reputation panel, his distance band):
+   covers share one height and a deeper seam shade, both profile bars
+   gain the gradient hairline the thread and follow bars already had,
+   her avatar joins his at 88px, name rows share one offset, her bio
+   joins his at 14px/1.65 (set inline below), and both counts rows
+   become one stat row - hairline above, shared gap and offset.
+   Displayed data is unchanged. ===== */
+#x-pane-me .profbar::after,#x-pane-hisprof .profbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+#x-pane-hisprof .pf-cover{height:152px}
+#x-pane-me .pf-cover::after{background:linear-gradient(180deg,rgba(10,8,28,0) 38%,rgba(10,8,28,.62) 100%)}
+#x-pane-me .pf-ava{width:88px!important;height:88px!important;margin-top:-44px}
+#x-pane-me .pf-name,#x-pane-hisprof .pf-name{margin-top:10px;letter-spacing:.01em}
+#x-pane-me .counts,#x-pane-hisprof .counts{margin-top:12px;padding-top:12px;border-top:1px solid #eff3f4}
 </style>
 </head>
 <body>
@@ -2024,7 +2039,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v110</p>
+  <p class="ver">v111</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2149,8 +2164,8 @@ input,textarea{font-size:16px}
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
         <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_324</div>
-        <div style="font-size:13px;margin-top:5px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
-        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
+        <div style="font-size:14px;line-height:1.65;margin-top:6px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
+        <div class="counts" style="display:flex;gap:22px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
       </div>
       <div class="me-now">
         <div class="me-now-cell"><small>レベル</small><b id="me-now-lv">Lv 1</b></div>
@@ -2179,7 +2194,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v110</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v111</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2195,7 +2210,7 @@ input,textarea{font-size:16px}
         <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。歌とステージがすべて。</div>
         <div class="his-tags" id="his-tags"></div>
-        <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">12.4万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
+        <div class="counts" style="display:flex;gap:22px"><span><b id="his-fol-n">12.4万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
         <div id="his-dist">
           <div class="hd-top"><span class="hd-lab">二人の距離</span><span class="hd-stage" id="hd-stage">STAGE 1 ― まだ、遠い存在</span><b class="hd-num" id="hd-num">0</b></div>
           <div class="hd-meter"><i id="hd-fill"></i><span class="hd-tick" style="left:5%"></span><span class="hd-tick" style="left:15%"></span><span class="hd-tick" style="left:30%"></span><span class="hd-tick" style="left:45%"></span></div>
@@ -2388,7 +2403,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v110</p>
+    <p class="ver">v111</p>
   </div>
 </section>
 </div>
