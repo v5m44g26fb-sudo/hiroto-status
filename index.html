@@ -205,6 +205,8 @@ input,textarea{font-size:16px}
 .sv-center{position:relative;z-index:2;flex:1;display:none;align-items:center;justify-content:center;pointer-events:none}
 .sv-center.show{display:flex}
 .sv-center .ava-txt{width:108px;height:108px;font-size:44px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
+.sv-cap{position:absolute;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom));z-index:4;text-align:center;color:#fff;font-size:15.5px;font-weight:700;line-height:1.55;padding:0 36px;text-shadow:0 2px 14px rgba(0,0,0,.85),0 0 3px rgba(0,0,0,.9);pointer-events:none;display:none}
+.sv-cap.on{display:block}
 .sv-zone{position:absolute;top:96px;bottom:0;z-index:3;background:none;border:none;cursor:pointer}
 .sv-zone.left{left:0;width:34%}
 .sv-zone.right{right:0;width:66%}
@@ -769,7 +771,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v38</p>
+  <p class="ver">v39</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -883,7 +885,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v38</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v39</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -975,6 +977,7 @@ input,textarea{font-size:16px}
       </div>
     </div>
     <div class="sv-center" id="sv-center"></div>
+    <div class="sv-cap" id="sv-cap"></div>
     <button class="sv-zone left" id="sv-prev" aria-label="前へ"></button>
     <button class="sv-zone right" id="sv-next" aria-label="次へ"></button>
   </div>
@@ -995,7 +998,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v38</p>
+    <p class="ver">v39</p>
   </div>
 </section>
 </div>
@@ -1444,7 +1447,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[]};}
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[]};}
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
@@ -1597,12 +1600,49 @@ function renderNotifs(){
    gradient + initial, so no new photos or story text are introduced. */
 const SV_DUR=5000;
 let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];curStory().forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(s[0]==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":"");b.setAttribute("aria-label",e.lab+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function storyList(){
+ const base=curStory().map(x=>({k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]}));
+ const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).map(d=>({k:d.k,lab:d.lab,img:d.img,cap:d.cap||"",uid:d.uid}));
+ return base.concat(dyn);
+}
+/* story action chain (Status-style): after each Action, someone adds a story.
+   Entries are keyed by action kind and day; tgt entries resolve to the
+   selected target (hiroto / sakuya) with per-route image and caption. */
+const STORY_CHAIN={
+ post:{1:{k:"akari",lab:"ジウ",img:"assets/av-akari.jpg",cap:"デビュー初日、スタート！"},
+  2:{tgt:true,imgH:"assets/ig-gen-stage.jpg",capH:"収録の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
+  3:{k:"carmen",lab:"カルメン",img:"assets/av-carmen.jpg",cap:"今日は音楽番組！ 楽屋から"},
+  4:{k:"fan1",lab:"ゆな",img:"assets/av-fan1.jpg",cap:"なおちゃん応援中！"},
+  5:{tgt:true,imgH:"assets/ig-gen-stage.jpg",capH:"プリン、買えた",imgS:"assets/sakuya-selca.jpg",capS:"クロワッサン、買えました"}},
+ event:{1:{k:"stella",lab:"ステラ",img:"assets/av-stella.jpg",cap:"記事みたよ、すごい！"},
+  2:{tgt:true,imgH:"assets/ig-avatar.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
+  3:{k:"juun",lab:"ジュウン",img:"assets/av-juun.jpg",cap:"楽屋、にぎやかでした"},
+  4:{k:"media",lab:"番組公式",img:"assets/nao-stage.jpg",cap:"コラボSP、近日発表"},
+  5:{k:"yeon",lab:"イェオン",img:"assets/av-yeon.jpg",cap:"最終日、みんなで見守り中"}},
+ act:{1:{k:"sora",lab:"そら",img:"assets/av-sora.jpg",cap:"アカペラ、すごかった"},
+  2:{k:"ian",lab:"イアン",img:"assets/av-ian.jpg",cap:"先輩たちのステージ、勉強中"},
+  3:{k:"yuha",lab:"ユハ",img:"assets/av-yuha.jpg",cap:"収録終わり、帰り道"},
+  4:{k:"ana",lab:"エイナ",img:"assets/av-ana.jpg",cap:"配信、楽しみにしてます"},
+  5:{k:"miku",lab:"みく",img:"assets/av-miku.jpg",cap:"最終日、応援してるよ"}}};
+function addStory(kind){
+ if(!S||!S.started)return;
+ const def=(STORY_CHAIN[kind]||{})[S.ch];if(!def)return;
+ if(!Array.isArray(S.storyDyn))S.storyDyn=[];
+ const uid="d-"+kind+"-"+S.ch;
+ if(S.storyDyn.some(d=>d.uid===uid))return;
+ let e;
+ if(def.tgt){const sk=tgtKey()==="sakuya";e={uid:uid,k:tgtKey(),lab:tgt().name,img:sk?def.imgS:def.imgH,cap:sk?def.capS:def.capH};}
+ else e={uid:uid,k:def.k,lab:def.lab,img:def.img,cap:def.cap};
+ S.storyDyn.push(e);
+ try{toastChg(e.lab+"がストーリーを追加したよ");}catch(_){}
+ renderStories();save();
+}
 function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
 function renderStorySeg(){
- const s=curStory()[svIdx],a=ACC[s[0]];if(!a)return;
- const bg=$("#sv-bg"),img=svImg(s[0]);
+ const e=storyList()[svIdx];if(!e)return;const a=ACC[e.k];if(!a)return;
+ const bg=$("#sv-bg"),img=e.img;
  if(img){bg.style.backgroundImage="url("+img+")";}
  else{const h=svHue(a.n);bg.style.backgroundImage="linear-gradient(160deg,hsl("+h+",52%,46%),hsl("+((h+50)%360)+",58%,26%))";}
  const center=$("#sv-center");
@@ -1612,8 +1652,9 @@ function renderStorySeg(){
  id.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"<span><b></b><small></small></span>";
  id.querySelector("b").textContent=a.n;id.querySelector("small").textContent=a.h;
  const segs=$("#sv-segs");segs.innerHTML="";
- curStory().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
- if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(s[0])){S.storySeen.push(s[0]);save();}}
+ storyList().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
+ const capEl=$("#sv-cap");if(capEl){capEl.textContent=e.cap||"";capEl.classList.toggle("on",!!e.cap);}
+ if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(e.uid)){S.storySeen.push(e.uid);save();}}
  svElapsed=0;
 }
 function svTick(ts){
@@ -1627,14 +1668,14 @@ function svTick(ts){
 function svStartTimer(){svStopTimer();svElapsed=0;svLastTs=0;svPaused=false;$("#storyviewer").classList.remove("paused");svTimer=requestAnimationFrame(svTick);}
 function svStopTimer(){if(svTimer!==null)cancelAnimationFrame(svTimer);svTimer=null;}
 function svStep(d){
- if(d>0){if(svIdx>=curStory().length-1){closeStory();return;}svIdx++;}
+ if(d>0){if(svIdx>=storyList().length-1){closeStory();return;}svIdx++;}
  else{if(svIdx<=0){svElapsed=0;svStartTimer();return;}svIdx--;}
  renderStorySeg();svStartTimer();
 }
-function openStory(i){svIdx=Math.max(0,Math.min(curStory().length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
+function openStory(i){svIdx=Math.max(0,Math.min(storyList().length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
 function closeStory(){svStopTimer();svPaused=false;$("#storyviewer").classList.remove("on");$("#storyviewer").classList.remove("paused");renderStories();}
 $("#sv-close").addEventListener("click",closeStory);
-$("#sv-id").addEventListener("click",()=>{const a=curStory()[svIdx]&&curStory()[svIdx][0];if(a!==tgtKey()&&a!=="nao")return;closeStory();showPane(a==="nao"?"me":"hisprof");});
+$("#sv-id").addEventListener("click",()=>{const _e=storyList()[svIdx];const a=_e&&_e.k;if(a!==tgtKey()&&a!=="nao")return;closeStory();showPane(a==="nao"?"me":"hisprof");});
 function svZone(el,dir){if(!el)return;
  el.addEventListener("pointerdown",e=>{e.preventDefault();svDownAt=Date.now();svPaused=true;$("#storyviewer").classList.add("paused");});
  const release=nav=>{if(!svPaused&&!svDownAt)return;const held=Date.now()-svDownAt;svDownAt=0;svPaused=false;$("#storyviewer").classList.remove("paused");svLastTs=0;if(nav&&held<300)svStep(dir);};
@@ -1758,7 +1799,7 @@ function renderEvent(){
  if(ev.img){const im=document.createElement("img");im.className="evimg";im.src=ev.img;im.alt="";card.querySelector(".evimg").appendChild(im);}
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
  const box=card.querySelector(".evc");
- ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();save();};box.appendChild(b);});
+ ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");save();};box.appendChild(b);});
  slot.appendChild(card);
 }
 /* chapter flow */
@@ -1835,7 +1876,7 @@ function doPost(o){
  });
  mine.replyIds=reacts.filter(r=>!r.sys).map(r=>r.id);
  S.posts=[mine].concat(reacts,S.posts);
- S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();save();
+ S.posted=true;applyFx(o.fx);renderFeed();renderNotifs();checkNext();addStory("post");save();
 }
 /* activity (Status-style: pick a title, partner(s) and a time slot, then run.
    Partner/time are presentation only - the 1-per-day rule and fx are unchanged) */
@@ -1865,7 +1906,7 @@ $("#btn-activity").onclick=()=>{
   const o=actSel;S.actDone=true;
   ["#actsec-title","#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
   go.classList.add("hidden");
-  res.textContent=o.r;applyFx(o.fx);save();
+  res.textContent=o.r;applyFx(o.fx);addStory("act");save();
  };
  $("#scrim-act").classList.add("on");
 };
