@@ -1020,6 +1020,13 @@ input,textarea{font-size:16px}
 #daybanner .db-day{font-size:11px;font-weight:900;letter-spacing:.18em;color:#ffb3d1}
 #daybanner .db-prog{font-size:10.5px;font-weight:800;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:1.5px 8px}
 #daybanner .db-title{display:block;position:relative;font-size:19.5px;font-weight:900;letter-spacing:.02em;margin-top:5px}
+/* v182: the final day gilds the home chapter banner too, joining
+   the intro, dock, event card and RESULT treatments */
+#daybanner.final{background:linear-gradient(105deg,#241a08 0%,#3a2a08 55%,#57400c 100%);box-shadow:0 12px 28px rgba(60,42,4,.42),inset 0 1px 0 rgba(255,215,106,.25)}
+#daybanner.final::before{background:linear-gradient(180deg,#f7c948,#f91880)}
+#daybanner.final::after{background:linear-gradient(90deg,#f7c948,#f91880,#f7c948)}
+#daybanner.final .db-day{color:#ffd76a}
+#daybanner.final .db-prog{border-color:rgba(247,201,72,.55);color:#ffe9a8}
 #daybanner .db-sub{display:block;position:relative;font-size:12.5px;font-weight:500;line-height:1.6;color:rgba(235,238,255,.8);margin-top:4px}
 #status-hud{margin:12px 12px 2px;border:1px solid rgba(120,86,255,.38);border-radius:22px;padding:15px 16px 13px;background:linear-gradient(140deg,#1a2148 0%,#101527 52%,#2a113f 100%);box-shadow:0 14px 32px rgba(13,16,44,.38),inset 0 1px 0 rgba(255,255,255,.1);position:relative;overflow:hidden}
 #status-hud::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#ffd400)}
@@ -2742,7 +2749,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v181</p>
+  <p class="ver">v182</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2914,7 +2921,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v181</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v182</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3179,7 +3186,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v181</p>
+    <p class="ver">v182</p>
   </div>
 </section>
 </div>
@@ -5240,6 +5247,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
 }
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ const bn=$("#daybanner");if(bn)bn.classList.toggle("final",S.ch>=TOTAL_DAYS);
  set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+TOTAL_DAYS+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
  /* v91: the CHAPTER banner carries the same per-chapter photo as the
     v88 day card, dimmed under its gradient (presentation only) */

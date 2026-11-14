@@ -1032,3 +1032,8 @@
 - RESULT の5行それぞれのラベル下に「昨日 +n」を追加。集計は dayDeltas と同じ規則で chgLog の前日分を数え直したもので、昨日の記録が無い軸には出さない。Day1 の RESULT には一切出ない。
 - 表示の追加のみ。当日のデルタ・BEST 判定・シェアカード・数値・セーブ形式は不変。
 - 検証（Playwright、/tmp/verify_v181.py、Day2／Day3 の chgLog を仕込んだ細工セーブ）：フォロワー「昨日 +1.2万」・XP「+40」・炎上「−2」・距離「+6」が正しく付き、記録の無い認知度には付かず、Day1 では全行なし、scrollW=390、エラー0。
+
+### v182 最終日はホームの CHAPTER バナーも金に
+- 最終日の金アクセントはイントロ（v131）・ドック（v132）・Event カード・RESULT ボタン（v133）にあったが、ホームの CHAPTER バナーだけ通常色だった。同じ金グラデ＋縁バー＋DAY ラベルの金文字で揃えた。
+- 切替は renderDayBanner 内で S.ch>=TOTAL_DAYS を見るだけ。文言・写真・数値・セーブ形式は不変。
+- 検証（Playwright、/tmp/verify_v182.py）：Day5 で金なし→Day6 で金グラデ適用（computed style で確認）→Day5 に戻すと解除、scrollW=390、エラー0。
