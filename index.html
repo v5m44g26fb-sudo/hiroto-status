@@ -1797,6 +1797,30 @@ input,textarea{font-size:16px}
 .ts-cell small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.18em;color:#9aa3ab;margin-bottom:2px}
 .ts-cell b{display:block;font-size:13.5px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #scr-title.has-save #btn-reset0{background:none;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;width:auto;padding:8px 10px;margin-top:4px;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.55);letter-spacing:.04em}
+/* ===== v101: stories row, raised again - unseen rings breathe with a
+   layered pink/violet glow and carry a small gradient "new" spark at
+   the top-right; seen rings sink (flat grey ring, desaturated photo,
+   muted label); her own ring runs on the blue/violet circuit with a
+   gradient + badge, and labels gain a clear weight hierarchy (unseen
+   and hers at 800, seen at 500 grey). Order (v55) and viewer behaviour
+   are unchanged - renderStories only gained the mine/unseen classes. ===== */
+#stories{gap:15px;padding:14px 14px 11px;background:linear-gradient(180deg,#fdfaff,rgba(255,255,255,0))}
+.story{width:70px}
+.story .ring{width:66px;height:66px;padding:3.5px;background:conic-gradient(from 210deg,#f91880,#c86bff,#7856ff,#1d9bf0,#f91880);box-shadow:0 6px 16px rgba(249,24,128,.30),0 4px 12px rgba(120,86,255,.30);transition:transform .15s ease,box-shadow .3s ease,background .3s ease}
+.story.unseen .ring{animation:storyglow 2.8s ease-in-out infinite}
+@keyframes storyglow{0%,100%{box-shadow:0 6px 16px rgba(249,24,128,.28),0 4px 12px rgba(120,86,255,.26)}50%{box-shadow:0 6px 22px rgba(249,24,128,.48),0 4px 16px rgba(120,86,255,.44)}}
+.story.unseen:not(.mine) .ring::after{content:"";position:absolute;top:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,#f91880,#7856ff);border:2px solid #fff;box-shadow:0 2px 7px rgba(249,24,128,.5);z-index:2}
+.story .ring img,.story .ring .ava-txt{transition:filter .3s ease,opacity .3s ease}
+.story.seen .ring{background:#e2e8ec;box-shadow:none;animation:none}
+.story.seen .ring img,.story.seen .ring .ava-txt{filter:grayscale(.55);opacity:.68}
+.story span{font-size:11.5px;margin-top:6px;letter-spacing:.01em}
+.story.unseen span{color:#0f1419;font-weight:800}
+.story.seen span{color:#93a5b1;font-weight:500}
+.story.mine .ring{background:conic-gradient(from 210deg,#1d9bf0,#7856ff,#1d9bf0);box-shadow:0 6px 16px rgba(29,155,240,.32),0 4px 12px rgba(120,86,255,.30)}
+.story.mine span{color:#0f1419;font-weight:800}
+.story .splus{background:linear-gradient(135deg,#f91880,#7856ff);width:22px;height:22px;font-size:15.5px;box-shadow:0 3px 9px rgba(249,24,128,.45)}
+.story.mine.unseen .ring{animation:none}
+.story.mine.seen .ring{background:#e2e8ec;box-shadow:none;animation:none}
 </style>
 </head>
 <body>
@@ -1822,7 +1846,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v100</p>
+  <p class="ver">v101</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1977,7 +2001,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v100</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v101</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2186,7 +2210,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v100</p>
+    <p class="ver">v101</p>
   </div>
 </section>
 </div>
@@ -2954,7 +2978,7 @@ function renderNotifs(){
    gradient + initial, so no new photos or story text are introduced. */
 const SV_DUR=5000;
 let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":"");b.setAttribute("aria-label",e.lab+"のストーリー");const ringImg=(e.k==="nao"&&e.img)?e.img:a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":" unseen")+(e.k==="nao"?" mine":"");b.setAttribute("aria-label",e.lab+"のストーリー");const ringImg=(e.k==="nao"&&e.img)?e.img:a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 function storyList(){
  const base=curStory().map(x=>x[0]==="nao"?{k:x[0],lab:x[1],img:naoStory().img,cap:naoStory().cap,uid:x[0]}:{k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]});
  /* v66: legacy saves may still carry the 150px avatar file as a story
