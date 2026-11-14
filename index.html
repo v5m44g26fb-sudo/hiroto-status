@@ -1013,6 +1013,46 @@ input,textarea{font-size:16px}
 #dayresult .dr-lvup{margin-top:13px;text-align:center;font-size:13.5px;font-weight:900;color:#231a00;background:linear-gradient(90deg,#ffd400,#ff9f43);border-radius:12px;padding:8px 10px;box-shadow:0 8px 22px rgba(255,180,0,.35)}
 #dayresult .dr-note{margin-top:13px;font-size:12.5px;line-height:1.65;color:rgba(235,238,255,.72);text-align:center}
 #dayresult .btn{margin-top:16px;width:100%}
+/* ===== v58: the target, staged by distance — his profile warms as the
+   distance closes (cover tint, gold-to-pink avatar ring, a STAGE band with
+   meter and a one-line reading of where the two of you stand), unlocking
+   his DM gets a one-shot celebration, and the special thread carries a
+   slim "where you are now" strip that tracks the stage live. ===== */
+#his-dist{margin-top:13px;border:1px solid #e8ddba;border-radius:16px;padding:12px 14px 11px;background:linear-gradient(160deg,#fffdf4,#fdf6e0);box-shadow:0 6px 18px rgba(160,120,20,.1)}
+#his-dist .hd-top{display:flex;align-items:center;gap:8px}
+#his-dist .hd-lab{font-size:10.5px;font-weight:900;letter-spacing:.12em;color:#8a6d1f}
+#his-dist .hd-stage{font-size:11.5px;font-weight:900;color:#5b4300;background:linear-gradient(90deg,#ffe98a,#f7c948);border-radius:999px;padding:3px 10px;transition:background .5s ease,color .5s ease}
+#his-dist .hd-num{margin-left:auto;font-size:21px;font-weight:900;color:#0f1419;font-variant-numeric:tabular-nums}
+#his-dist .hd-meter{position:relative;height:7px;border-radius:4px;background:#efe6c8;margin-top:10px}
+#his-dist .hd-meter i#hd-fill{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#c9a227,#f91880);transition:width .8s cubic-bezier(.2,.8,.25,1)}
+#his-dist .hd-tick{position:absolute;top:50%;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(138,109,31,.5);transform:translate(-50%,-50%)}
+#his-dist .hd-note{font-size:12px;line-height:1.6;color:#6d5b00;margin-top:8px}
+#x-pane-hisprof.dstage-3 #his-dist .hd-stage,#x-pane-hisprof.dstage-4 #his-dist .hd-stage{background:linear-gradient(90deg,#f91880,#7856ff);color:#fff}
+#x-pane-hisprof .his-cover::before{content:"";position:absolute;inset:0;background:linear-gradient(205deg,rgba(249,24,128,.55),rgba(120,86,255,.25) 60%,rgba(249,24,128,0));opacity:0;transition:opacity .8s ease;pointer-events:none}
+#x-pane-hisprof.dstage-2 .his-cover::before{opacity:.12}
+#x-pane-hisprof.dstage-3 .his-cover::before{opacity:.22}
+#x-pane-hisprof.dstage-4 .his-cover::before{opacity:.34}
+#x-pane-hisprof.dstage-3 .his-avawrap,#x-pane-hisprof.dstage-4 .his-avawrap{background:linear-gradient(135deg,#f6d67c,#f91880 58%,#7856ff);box-shadow:0 10px 26px rgba(249,24,128,.4)}
+#dmunlock{position:absolute;inset:0;z-index:119;display:none;align-items:center;justify-content:center;background:rgba(7,8,24,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff}
+#dmunlock.on{display:flex;animation:difade .3s ease}
+#dmunlock .du-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding:10px 34px;max-width:330px}
+#dmunlock .du-avw{position:relative;line-height:0;border-radius:50%;padding:3.5px;background:linear-gradient(135deg,#f6d67c,#f91880 55%,#7856ff);box-shadow:0 14px 36px rgba(249,24,128,.45);animation:duin .55s cubic-bezier(.2,.9,.3,1.2) both}
+#dmunlock .du-avw img.avatar{width:76px;height:76px;border:3px solid #fff;display:block}
+#dmunlock .du-avw::before,#dmunlock .du-avw::after{content:"";position:absolute;inset:-3.5px;border-radius:50%;border:1.5px solid rgba(249,24,128,.55);animation:during 2.2s ease-out infinite}
+#dmunlock .du-avw::after{animation-delay:1.1s}
+@keyframes during{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.55);opacity:0}}
+@keyframes duin{from{opacity:0;transform:scale(.7) translateY(14px)}to{opacity:1;transform:none}}
+#dmunlock .du-lab{margin-top:20px;font-size:10.5px;font-weight:900;letter-spacing:.34em;color:#ffb3d1;animation:diup .55s .1s cubic-bezier(.2,.8,.25,1) both}
+#dmunlock .du-title{margin-top:9px;font-size:20px;font-weight:900;line-height:1.45;animation:diup .55s .18s cubic-bezier(.2,.8,.25,1) both}
+#dmunlock .du-sub{margin-top:7px;font-size:13px;line-height:1.65;color:rgba(233,236,255,.78);animation:diup .55s .26s cubic-bezier(.2,.8,.25,1) both}
+#dmunlock .btn{margin-top:22px;min-width:210px;animation:diup .55s .34s cubic-bezier(.2,.8,.25,1) both}
+#dmunlock .du-later{margin-top:12px;background:none;border:none;color:rgba(255,255,255,.6);font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;padding:6px 10px;animation:diup .55s .4s cubic-bezier(.2,.8,.25,1) both}
+#th-dist{display:flex;align-items:center;gap:8px;margin:12px 14px 2px;padding:8px 12px;border-radius:12px;background:linear-gradient(90deg,rgba(249,24,128,.09),rgba(120,86,255,.09));border:1px solid rgba(249,24,128,.25);font-size:11px}
+#th-dist .thd-lab{font-weight:900;letter-spacing:.08em;color:#c2185b;flex:none}
+#th-dist .thd-stage{font-weight:800;color:#0f1419;white-space:nowrap}
+#th-dist .thd-gauge{flex:1;height:5px;border-radius:3px;background:rgba(15,20,25,.1);overflow:hidden}
+#th-dist .thd-gauge i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,#f91880,#7856ff);transition:width .7s cubic-bezier(.2,.8,.25,1)}
+#th-dist .thd-num{font-size:13px;font-weight:900;color:#c2185b;font-variant-numeric:tabular-nums}
 </style>
 </head>
 <body>
@@ -1027,7 +1067,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v57</p>
+  <p class="ver">v58</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1161,7 +1201,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v57</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v58</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1174,6 +1214,11 @@ input,textarea{font-size:16px}
         <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。歌とステージがすべて。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">284万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
+        <div id="his-dist">
+          <div class="hd-top"><span class="hd-lab">二人の距離</span><span class="hd-stage" id="hd-stage">STAGE 1 ― まだ、遠い存在</span><b class="hd-num" id="hd-num">0</b></div>
+          <div class="hd-meter"><i id="hd-fill"></i><span class="hd-tick" style="left:5%"></span><span class="hd-tick" style="left:15%"></span><span class="hd-tick" style="left:30%"></span><span class="hd-tick" style="left:45%"></span></div>
+          <p class="hd-note" id="hd-note">まだ、画面の向こうの人。</p>
+        </div>
       </div>
       <div class="x-ptabs" id="his-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-his-tabbody"></div>
@@ -1195,6 +1240,7 @@ input,textarea{font-size:16px}
           <span id="th-special" class="th-special hidden">特別なスレッド</span>
         </div>
         <div id="th-intro"></div>
+        <div id="th-dist" class="hidden"><span class="thd-lab">二人の現在地</span><span class="thd-stage" id="thd-stage"></span><span class="thd-gauge"><i id="thd-fill"></i></span><b class="thd-num" id="thd-num"></b></div>
         <div id="th-msgs"></div>
         <div id="th-choices" style="padding:6px 14px 4px"></div>
         <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
@@ -1278,6 +1324,16 @@ input,textarea{font-size:16px}
       <button class="btn" id="dr-go">次の日へ →</button>
     </div>
   </div>
+  <div id="dmunlock" role="dialog" aria-label="DMが届いた">
+    <div class="du-inner">
+      <span class="du-avw" id="du-av"></span>
+      <span class="du-lab">NEW MESSAGE</span>
+      <b class="du-title" id="du-title">DMが届いた</b>
+      <p class="du-sub">初めての、本人からの連絡。</p>
+      <button class="btn" id="du-open">開く</button>
+      <button class="du-later" id="du-later">あとで見る</button>
+    </div>
+  </div>
   <nav id="x-nav"></nav>
 </section>
 
@@ -1295,7 +1351,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v57</p>
+    <p class="ver">v58</p>
   </div>
 </section>
 </div>
@@ -1874,7 +1930,7 @@ function showPane(k){
  if(k==="me"){renderProfile();renderMeTab();}
  if(k==="trend"||k==="search")renderTrends();
  if(k==="hisprof")renderHisTab();
- if(k==="msg")renderDmList();
+ if(k==="msg"){renderDmList();setTimeout(maybeShowDmUnlock,80);}
 }
 /* one-shot "settle from the left" animation for back navigation */
 function panePop(el){if(!el)return;el.classList.remove("pane-pop");void el.offsetWidth;el.classList.add("pane-pop");setTimeout(()=>el.classList.remove("pane-pop"),240);}
@@ -2116,7 +2172,7 @@ function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if
  const av=$("#his-ava");if(av)av.src=T.av;
  const cv=$("#his-cover");if(cv)cv.style.backgroundImage="url("+T.cover+")";
  const dl=$("#st-dist-lab");if(dl)dl.textContent=distLab()+"（親密度）";
- const el=$("#end-dist-lab");if(el)el.textContent=distLab();}
+ const el=$("#end-dist-lab");if(el)el.textContent=distLab();renderDistProfile();}
 function renderHisPosts(){renderHisTab();}
 function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;const on=!!S.followHiroto;b.textContent=on?"フォロー中":"フォロー";b.classList.toggle("on",on);}
 function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
@@ -2305,7 +2361,7 @@ function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#d
  const ti=$("#th-intro");ti.innerHTML='<span class="ti-avw">'+(a.av?'<img class="avatar" src="'+a.av+'" width="64" height="64" alt="">':avaTxt(a.n))+'</span><div class="ti-name"></div><div class="ti-handle">'+a.h+'</div>'+(t.special?'<div class="ti-pill">初めての、本人からの連絡</div>':"");
  ti.querySelector(".ti-name").textContent=a.n;
  renderThreadMsgs();updateBdg();save();scrollDmBottom(false);}
-function renderThreadMsgs(){const t=curThread;if(!t)return;const box=$("#th-msgs");box.innerHTML="";
+function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const box=$("#th-msgs");box.innerHTML="";
  t.msgs.forEach((m,i)=>{const side=t.replyIdx===i?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(t.replyIdx===i-1?"me":"them")===side)?" grp":"");d.textContent=m;box.appendChild(d);if(t.done&&side==="me"){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
  if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="返信を選ぶ";cb.appendChild(lab);t.choices.forEach(c=>{const b=document.createElement("button");b.className="choice dmchoice";b.textContent=c.t;b.onclick=()=>{t.done=true;t.replyIdx=t.msgs.length;t.msgs.push(c.t);t.msgs.push(c.r);if(t.special)S.hirotoDm="done";applyFx(c.fx);renderThreadMsgs();scrollDmBottom(true);save();};cb.appendChild(b);});}}
@@ -2407,6 +2463,29 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  $("#dr-go").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";
  $("#dayresult").classList.add("on");}
 $("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}});
+/* v58: the target as a "special person" - distance is staged, and both his
+   profile and the special DM thread read the current stage. Unlocking his
+   DM gets a one-shot celebration the first time the message pane is opened
+   while the thread is still unanswered. Display only: conversation text,
+   unlock conditions and numbers are unchanged. */
+const DIST_STAGES=[{min:0,lab:"まだ、遠い存在",note:"まだ、画面の向こうの人。"},{min:5,lab:"認知され始めた",note:"いいねが届いた。向こうの世界に、名前が届き始めた。"},{min:15,lab:"同じ現場の人",note:"同じ番組、同じステージ。言葉を交わす距離になった。"},{min:30,lab:"二人だけの秘密",note:"DMでつながっている。ここからは、二人だけの話。"},{min:45,lab:"特別な距離",note:"公にはできない近さ。それでも、確かに特別。"}];
+function distStageIdx(){const d=(typeof S!=="undefined"&&S&&S.dist)||0;let s=0;DIST_STAGES.forEach((x,i)=>{if(d>=x.min)s=i;});return s;}
+function renderDistProfile(){if(typeof S==="undefined"||!S)return;const si=distStageIdx(),st=DIST_STAGES[si];
+ const pane=$("#x-pane-hisprof");if(pane){for(let i=0;i<5;i++)pane.classList.remove("dstage-"+i);pane.classList.add("dstage-"+si);}
+ const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ set("#hd-stage","STAGE "+(si+1)+" ― "+st.lab);set("#hd-num",String(S.dist||0));set("#hd-note",st.note);
+ const f=$("#hd-fill");if(f)f.style.width=Math.max(0,Math.min(100,S.dist||0))+"%";}
+function renderThDist(){const bar=$("#th-dist");if(!bar)return;const on=!!(curThread&&curThread.special);bar.classList.toggle("hidden",!on);if(!on)return;const si=distStageIdx();
+ const st=$("#thd-stage");if(st)st.textContent="STAGE "+(si+1)+" ― "+DIST_STAGES[si].lab;
+ const num=$("#thd-num");if(num)num.textContent=String((S&&S.dist)||0);
+ const f=$("#thd-fill");if(f)f.style.width=Math.max(0,Math.min(100,(S&&S.dist)||0))+"%";}
+let duShown=false;
+function maybeShowDmUnlock(){if(duShown||typeof S==="undefined"||!S||S.hirotoDm!=="open")return;const t=(S.threads||[]).find(x=>x.id===tgtKey());if(!t||t.done)return;duShown=true;
+ const a=ACC[tgtKey()],av=$("#du-av");if(av)av.innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="76" height="76" alt="">':avaTxt(a.n);
+ const ti=$("#du-title");if(ti)ti.textContent=tgt().name+"さんからDMが届いた";
+ $("#dmunlock").classList.add("on");}
+$("#du-open").addEventListener("click",()=>{$("#dmunlock").classList.remove("on");const t=(S.threads||[]).find(x=>x.id===tgtKey());if(t)openThread(t);});
+$("#du-later").addEventListener("click",()=>{$("#dmunlock").classList.remove("on");});
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
