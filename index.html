@@ -2109,7 +2109,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v115</p>
+  <p class="ver">v116</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2264,7 +2264,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v115</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v116</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2475,7 +2475,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v115</p>
+    <p class="ver">v116</p>
   </div>
 </section>
 </div>
@@ -3266,22 +3266,34 @@ function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)|
    own temperature, tracking the day's events. Avatar-grade photos
    keep the v66 photo-card treatment in the viewer. */
 const STORY_ALLOW=new Set(["nao","hiroto","sakuya","akari","carmen","yuha","stella","juun","ana","ian","yeon","sea","mina","miku","fan1"]);
+/* v116: Pinterest-sourced story photos. Wide-group material keeps
+   the v66 photo-card treatment instead of the fullscreen cover, so
+   nobody at the edges gets cropped out of the frame. */
+const STORY_CARD=new Set(["assets/pin-group.jpg"]);
+/* v116: Pinterest photos join the stories where the scene matches -
+   per-day imgs arrays for Jiwoo (the empty practice studio on the
+   final day) and Yuna (cafe mornings), Karina's and Mina's own photos
+   as their story faces, Sakuya's bouquet shot for his final-day
+   thank-you, and scene photos through STORY_CHAIN below (group
+   selfie, studio console/booth, makeup desk, costume rack, the
+   pudding in hand, the cafe tray, dance practice, the night street).
+   Post photo assignments and the common media grid are untouched. */
 const STORY_BASE={
- akari:{img:"assets/av-akari.jpg",caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","コラボ配信の噂、ほんと？","最終日。ここまで来たね"]},
+ akari:{img:"assets/av-akari.jpg",imgs:[null,null,null,null,"assets/pin-studio.jpg"],caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","コラボ配信の噂、ほんと？","最終日。ここまで来たね"]},
  carmen:{img:"assets/av-carmen.jpg",caps:["楽屋、わくわくが止まらない〜！","なおの切り抜き、バズってる！","収録の日の楽屋から","配信の噂、ドキドキする","ラスト、いくよ！"]},
  yeon:{img:"assets/av-yeon.jpg",caps:["デビュー…！ どきどき","お姉ちゃんの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","最終日、見ててね"]},
- fan1:{img:"assets/av-fan1.jpg",caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","コラボの噂…！？ 震えてる","運命の日、見届けます"]},
+ fan1:{img:"assets/av-fan1.jpg",imgs:["assets/pin-cafe-coffee.jpg",null,"assets/pin-cafe-cake.jpg",null,null],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","コラボの噂…！？ 震えてる","運命の日、見届けます"]},
  miku:{img:"assets/av-miku.jpg",caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂の配信、ほんとだといいな","今日が山場。応援してる"]},
- sea:{img:"assets/av-sea.jpg",caps:["デビュー、おめでとうございます。応援しています","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで"]},
- mina:{img:"assets/av-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています"]},
+ sea:{img:"assets/pin-karina.jpg",caps:["デビュー、おめでとうございます。応援しています","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで"]},
+ mina:{img:"assets/pin-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています"]},
  tgt:{imgH:["assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg"],
   capH:["新曲、出しました","収録の合間に","今日の収録","配信、決まりました","ありがとうございました"],
-  imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-selca.jpg","assets/sakuya-cover.jpg","assets/sakuya-selca.jpg"],
+  imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-selca.jpg","assets/sakuya-cover.jpg","assets/pin-sakuya-bouquet.jpg"],
   capS:["いい朝になりました","リハの空","今日のステージ","配信、決まりました","ありがとうございました"]}};
 function storyBaseFor(k,day){
  if(k===tgtKey()){const t=STORY_BASE.tgt,sk=k==="sakuya";return{img:(sk?t.imgS:t.imgH)[day-1]||(sk?t.imgS:t.imgH)[0],cap:(sk?t.capS:t.capH)[day-1]||""};}
  const b=STORY_BASE[k];if(!b)return{img:svImg(k),cap:""};
- return{img:b.img,cap:b.caps[day-1]||b.caps[0]||""};}
+ return{img:(b.imgs&&b.imgs[day-1])||b.img,cap:b.caps[day-1]||b.caps[0]||""};}
 function storyList(){
  const day=(typeof S!=="undefined"&&S&&S.ch)||1;
  const base=curStory().filter(x=>STORY_ALLOW.has(x[0])).map(x=>{
@@ -3311,19 +3323,19 @@ function storyList(){
    Entries are keyed by action kind and day; tgt entries resolve to the
    selected target (hiroto / sakuya) with per-route image and caption. */
 const STORY_CHAIN={
- post:{1:{k:"akari",lab:"ジウ",img:"assets/av-akari.jpg",cap:"デビュー初日、スタート！"},
-  2:{tgt:true,imgH:"assets/ig-gen-stage.jpg",capH:"収録の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
-  3:{k:"carmen",lab:"カルメン",img:"assets/av-carmen.jpg",cap:"今日は音楽番組！ 楽屋から"},
+ post:{1:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"デビュー初日、スタート！"},
+  2:{tgt:true,imgH:"assets/pin-studio-console.jpg",capH:"収録の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
+  3:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日は音楽番組！ 楽屋から"},
   4:{k:"fan1",lab:"ゆな",img:"assets/av-fan1.jpg",cap:"なおちゃん応援中！"},
-  5:{tgt:true,imgH:"assets/ig-gen-stage.jpg",capH:"プリン、買えた",imgS:"assets/sakuya-selca.jpg",capS:"クロワッサン、買えました"}},
+  5:{tgt:true,imgH:"assets/pin-pudding.jpg",capH:"プリン、買えた",imgS:"assets/pin-cafe-onion.jpg",capS:"クロワッサン、買えました"}},
  event:{1:{k:"stella",lab:"ステラ",img:"assets/av-stella.jpg",cap:"記事みたよ、すごい！"},
-  2:{tgt:true,imgH:"assets/ig-gen-studio.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
-  3:{k:"juun",lab:"ジュウン",img:"assets/av-juun.jpg",cap:"楽屋、にぎやかでした"},
+  2:{tgt:true,imgH:"assets/pin-studio-booth.jpg",capH:"今日の収録",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
+  3:{k:"juun",lab:"ジュウン",img:"assets/pin-rack.jpg",cap:"楽屋、にぎやかでした"},
   4:{k:"akari",lab:"ジウ",img:"assets/av-akari.jpg",cap:"コラボSPだって…！ みんな楽しみにしてて"},
   5:{k:"yeon",lab:"イェオン",img:"assets/av-yeon.jpg",cap:"最終日、みんなで見守り中"}},
  act:{1:{k:"yuha",lab:"ユハ",img:"assets/av-yuha.jpg",cap:"アカペラ聴いた、鳥肌…！"},
-  2:{k:"ian",lab:"イアン",img:"assets/av-ian.jpg",cap:"先輩たちのステージ、勉強中"},
-  3:{k:"yuha",lab:"ユハ",img:"assets/av-yuha.jpg",cap:"収録終わり、帰り道"},
+  2:{k:"ian",lab:"イアン",img:"assets/pin-dance.jpg",cap:"先輩たちのステージ、勉強中"},
+  3:{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},
   4:{k:"ana",lab:"エイナ",img:"assets/av-ana.jpg",cap:"配信、楽しみにしてます"},
   5:{k:"miku",lab:"みく",img:"assets/av-miku.jpg",cap:"最終日、応援してるよ"}}};
 function addStory(kind){
@@ -3348,7 +3360,7 @@ function renderStorySeg(){
     again - they show as a photo card at native-friendly size over the
     account-hue gradient, so no upscale blockiness. Hi-res backdrops keep
     the fullscreen cover treatment. */
- const lowRes=!!img&&img.indexOf("assets/av-")===0;
+ const lowRes=!!img&&(img.indexOf("assets/av-")===0||STORY_CARD.has(img));
  /* v70: hi-res backdrops drift (Ken Burns); avatar-grade photos get a
     blurred ambient copy of the same photo behind the card; imageless
     stories keep the account-hue gradient */
