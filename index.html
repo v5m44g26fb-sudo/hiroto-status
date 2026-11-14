@@ -1800,7 +1800,14 @@ input,textarea{font-size:16px}
 @keyframes svcapin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .sv-pause{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;display:flex;gap:9px;opacity:0;transition:opacity .18s ease;pointer-events:none}
 .sv-pause i{width:7px;height:30px;border-radius:3px;background:rgba(255,255,255,.92);box-shadow:0 2px 10px rgba(0,0,0,.4)}
-#storyviewer.paused .sv-pause{opacity:1}
+/* v268: holding a story the real way - the photo freezes and
+   ALL chrome fades out (no pause glyph in the real viewer).
+   Typing a reply pauses under a separate class (.typing) so
+   the reply bar itself stays visible while she writes. */
+.sv-top,.sv-actions,.sv-replybar,.sv-cap{transition:opacity .18s ease}
+#storyviewer.paused .sv-pause{opacity:0}
+#storyviewer.paused .sv-top,#storyviewer.paused .sv-actions,#storyviewer.paused .sv-replybar,#storyviewer.paused .sv-cap{opacity:0}
+#storyviewer.paused .sv-bg{opacity:1}
 .sv-actions{position:absolute;right:14px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;gap:10px}
 /* v267: the real story bottom layer - a reply pill under the
    action cluster, and a viewer count on her own stories */
@@ -2823,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v267</p>
+  <p class="ver">v268</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2997,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v267</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v268</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3269,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v267</p>
+    <p class="ver">v268</p>
   </div>
 </section>
 </div>
@@ -4585,8 +4592,8 @@ document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains
 (function(){
  const inp=$("#sv-reply"),snd=$("#sv-send");if(!inp||!snd)return;
  const HEART='<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.7 5c1.7 0 3.3.9 4.3 2.3C13 5.9 14.6 5 16.3 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>';
- inp.addEventListener("focus",()=>{svPaused=true;$("#storyviewer").classList.add("paused");});
- inp.addEventListener("blur",()=>{svPaused=false;$("#storyviewer").classList.remove("paused");});
+ inp.addEventListener("focus",()=>{svPaused=true;$("#storyviewer").classList.add("typing");});
+ inp.addEventListener("blur",()=>{svPaused=false;$("#storyviewer").classList.remove("typing");});
  inp.addEventListener("input",()=>snd.classList.toggle("on",!!inp.value.trim()));
  function send(){const v=inp.value.trim();if(!v)return;const e=storyList()[svIdx];const host=$("#sv-like")?$("#sv-like").parentElement:null;
   if(host)for(let i=0;i<5;i++){const s=document.createElement("span");s.className="sv-burst";s.innerHTML=HEART;s.style.setProperty("--bx",(Math.round(Math.random()*44)-30)+"px");s.style.setProperty("--br",(Math.round(Math.random()*36)-18)+"deg");s.style.animationDelay=(i*45)+"ms";s.style.right=(8+Math.round(Math.random()*10))+"px";host.appendChild(s);setTimeout(()=>s.remove(),1600);}
