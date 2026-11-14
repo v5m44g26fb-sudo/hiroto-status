@@ -1082,6 +1082,7 @@ input,textarea{font-size:16px}
 .dr-row{display:flex;align-items:center;gap:10px;padding:10px 2px;border-top:1px solid rgba(255,255,255,.09);animation:drin .45s cubic-bezier(.2,.8,.25,1) both}
 @keyframes drin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
 .dr-rlab{font-size:12.5px;font-weight:700;color:rgba(235,238,255,.75);width:104px;flex:none}
+.dr-yday{display:block;font-size:10px;font-weight:700;color:rgba(235,238,255,.45);margin-top:2px;letter-spacing:.02em}
 .dr-rmain{flex:1;display:flex;align-items:center;gap:9px;min-width:0}
 .dr-rval{font-size:23px;font-weight:900;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
 .dr-row.pink .dr-rval{color:#ff8fc0}
@@ -2741,7 +2742,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v180</p>
+  <p class="ver">v181</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2913,7 +2914,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v180</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v181</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3178,7 +3179,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v180</p>
+    <p class="ver">v181</p>
   </div>
 </section>
 </div>
@@ -5289,11 +5290,15 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   cog:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
   flm:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>',
   dist:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'};
- const rows=[{lab:"フォロワー",now:S.fol,d:agg.fol,useFmt:true,gauge:-1,ic:DR_IC.fol},
-  {lab:"XP",now:S.xp,d:agg.xp,useFmt:false,gauge:-1,cls:"xp",ic:DR_IC.xp},
-  {lab:"世間の認知度",now:S.cog,d:agg.cog,useFmt:false,gauge:S.cog,cls:"cog",ic:DR_IC.cog},
-  {lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true,cls:"fire",ic:DR_IC.flm},
-  {lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true,cls:"pink",ic:DR_IC.dist}];
+ const rows=[{k:"fol",lab:"フォロワー",now:S.fol,d:agg.fol,useFmt:true,gauge:-1,ic:DR_IC.fol},
+  {k:"xp",lab:"XP",now:S.xp,d:agg.xp,useFmt:false,gauge:-1,cls:"xp",ic:DR_IC.xp},
+  {k:"cog",lab:"世間の認知度",now:S.cog,d:agg.cog,useFmt:false,gauge:S.cog,cls:"cog",ic:DR_IC.cog},
+  {k:"flm",lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true,cls:"fire",ic:DR_IC.flm},
+  {k:"dist",lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true,cls:"pink",ic:DR_IC.dist}];
+ /* v181: yesterday's deltas, aggregated from the same change log
+    with the same rules as dayDeltas, feed each row's sub-line */
+ const yAgg={fol:0,xp:0,cog:0,flm:0,dist:0},yCnt={fol:0,xp:0,cog:0,flm:0,dist:0};
+ if(S.ch>1){const dl2=distLab();(S.chgLog||[]).filter(e=>e.day===S.ch-1).forEach(e=>{if(e.cls==="lv")return;const kk=e.name===dl2?"dist":e.name==="フォロワー"?"fol":e.name==="XP"?"xp":e.name==="世間の認知度"?"cog":e.name==="炎上度"?"flm":null;if(kk){yAgg[kk]+=e.v;yCnt[kk]++;}});}
  const box=$("#dr-rows");box.innerHTML="";
  /* v155: the day's biggest gain (followers / XP / recognition /
     distance) is tagged BEST on its row */
@@ -5302,6 +5307,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.cls?" "+r.cls:"")+(i===bestI?" best":"");row.style.animationDelay=(i*0.09)+"s";
   row.innerHTML='<span class="dr-ic">'+r.ic+'</span><span class="dr-rmain"><span class="dr-rlab"></span><span class="dr-rval">0</span></span><span class="dr-rd"></span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"")+(i===bestI?'<span class="dr-best">BEST</span>':"");
   row.querySelector(".dr-rlab").textContent=r.lab;
+  if(S.ch>1&&yCnt[r.k]>0){const yv=yAgg[r.k],sm=document.createElement("small");sm.className="dr-yday";sm.textContent="昨日 "+(yv===0?"±0":((yv>0?"+":"−")+(r.useFmt?fmt(Math.abs(yv)):Math.abs(yv))));row.querySelector(".dr-rlab").appendChild(sm);}
   const val=row.querySelector(".dr-rval"),chip=row.querySelector(".dr-rd");
   chip.textContent=r.d===0?"±0":((r.d>0?"▲ +":"▼ ")+r.d);
   chip.classList.add(r.d===0?"flat":(((r.fire?r.d<0:r.d>0))?"good":"bad"));if(r.pink&&r.d>0){chip.classList.remove("good");chip.classList.add("pink");}
