@@ -1135,7 +1135,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v61</p>
+  <p class="ver">v62</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1276,7 +1276,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v61</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v62</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1426,7 +1426,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v61</p>
+    <p class="ver">v62</p>
   </div>
 </section>
 </div>
@@ -1853,7 +1853,7 @@ const BUZZ=[
  {k:"h-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、サビで一気に駆け出す感じが癖になる。最年長メンバーの声、安定感が違う",lk:210,rp:18,rc:9},
  {k:"h-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、大翔さんの動きとタイミング被りすぎ問題。偶然にしては多くない？",lk:388,rp:66,rc:92},
  {k:"h-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおの投稿に、井汲大翔ファン界隈がざわつき始めた。『距離、近くない？』の声",lk:1120,rp:240,rc:188},
- {k:"h-w2",a:"fan1",cond:s=>s.fol>=150,tx:"なおのフォロワー、また増えてる…！ デビュー初日から見てるけど、見つかっていく過程に立ち会えるの嬉しい",lk:96,rp:8,rc:14},
+ {k:"h-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワー、また増えてる…！ デビュー初日から見てるけど、見つかっていく過程に立ち会えるの嬉しい",lk:96,rp:8,rc:14},
  {k:"h-s3",a:"sora",cond:s=>s.flm>=20,tx:"音楽の話がしたいのに、界隈は匂わせ探しで大盛り上がり。……いやまず歌を聴こうよ",lk:264,rp:31,rc:18},
  {k:"h-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、歌唱切り抜きが連日じわ伸び。『歌で見つかる』王道コースを歩み始めたか",lk:840,rp:130,rc:64},
  {k:"h-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。匂わせか天然か、界隈で論争に発展",lk:1980,rp:430,rc:355},
@@ -1864,7 +1864,7 @@ const BUZZ_S=[
  {k:"s-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、夢みたいなイントロから駆け出す感じが最高。最年長メンバーの声、芯がある",lk:210,rp:18,rc:9},
  {k:"s-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、サクヤの動きとタイミング被りすぎ問題。同じ事務所でも、これは多くない？",lk:388,rp:66,rc:92},
  {k:"s-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおとNCT WISH サクヤ、同じ事務所の先輩後輩の距離感に界隈がざわつき始めた",lk:1120,rp:240,rc:188},
- {k:"s-w2",a:"fan1",cond:s=>s.fol>=150,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
+ {k:"s-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
  {k:"s-s3",a:"sora",cond:s=>s.flm>=20,tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
  {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、歌唱切り抜きが連日じわ伸び。同じ事務所の先輩・サクヤとの接点にも注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"s-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。事務所の後輩という立場も相まって、論争に発展",lk:1980,rp:430,rc:355},
@@ -1933,7 +1933,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[]};}
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,folScale:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[]};}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -1949,7 +1949,7 @@ renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
 (function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["Hearts2Hearts","リーダー","同期"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
-$("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
+$("#btn-start").onclick=()=>{S=defState();S.folScale=2;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
 $("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-target");};
 (function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;$("#btn-target").disabled=false;};box.appendChild(b);});})();
@@ -1961,13 +1961,21 @@ $("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world=
   renderFeed();renderNotifs();save();}
  show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
 /* fx + Changes (Status addition) */
+/* v62: follower scale - chapter data keeps design units, but followers
+   live on an SM-debut scale (x400): the Day-1 debut post alone lands in
+   the tens of thousands, a day's gains run thousands-to-tens-of-thousands,
+   and Day 5 reads in the hundreds of thousands. Every fol threshold
+   (buzz unlocks, reputation titles, the collab ending, the result note)
+   is scaled by the same factor; all other axes are untouched. */
+const FOL_MULT=400;
 function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);const b=stanceObj().bonus,out={};
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
+ if(out.fol)out.fol*=FOL_MULT;
  if(out.fol)S.fol=Math.max(0,S.fol+out.fol);if(out.xp)S.xp+=out.xp;
  if(out.cog)S.cog=Math.max(0,Math.min(100,S.cog+out.cog));if(out.flm)S.flm=Math.max(0,Math.min(100,S.flm+out.flm));if(out.dist)S.dist=Math.max(0,Math.min(100,S.dist+out.dist));
  const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:distLab()};const box=$("#changes");
  if(!S.chgLog)S.chgLog=[];
- Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);
+ Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+(k==="fol"?fmtCnt(out[k]):out[k]);d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);
   S.chgLog.push({day:S.ch,name:names[k],v:out[k],cls:k==="dist"?"dist":(bad?"bad":(good?"good":""))});});
  if(S.chgLog.length>80)S.chgLog.splice(0,S.chgLog.length-80);
  const lvAfter=1+Math.floor((S.xp||0)/50);
@@ -1984,7 +1992,7 @@ function renderChgLog(){
   const r=document.createElement("div");r.className="chgrow";
   const l=document.createElement("span");const d=document.createElement("span");d.className="d";d.textContent="Day "+e.day;l.appendChild(d);
   l.appendChild(document.createTextNode(e.cls==="lv"?("LEVEL UP！ Lv "+e.v+" に上がった"):e.name));
-  const v=document.createElement("span");v.className="v "+(e.cls||"");v.textContent=e.cls==="lv"?"":((e.v>0?"+":"")+e.v);
+  const v=document.createElement("span");v.className="v "+(e.cls||"");v.textContent=e.cls==="lv"?"":((e.v>0?"+":"")+(e.name==="フォロワー"?fmtCnt(e.v):e.v));
   r.appendChild(l);r.appendChild(v);box.appendChild(r);});
 }
 $("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
@@ -2294,7 +2302,7 @@ $("#x-q").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();
 /* shared fx-chip builder (same labels/colors as the compose sheet) */
 function fxChips(fx){
  const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
- let chips="";FXL.forEach(([k,lab,cls])=>{const v=fx?fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+v+"</span>";}});
+ let chips="";FXL.forEach(([k,lab,cls])=>{const v=fx?fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;const dv=k==="fol"?fmtCnt(v*FOL_MULT):v;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+dv+"</span>";}});
  return chips;
 }
 /* event card (Status addition) */
@@ -2364,7 +2372,7 @@ $("#x-compose-btn").addEventListener("click",()=>{
  const box=$("#postopts");box.innerHTML="";
  curCH()[S.ch-1].posts.forEach((o,oi)=>{const b=document.createElement("button");b.className="choice xcopt";
   const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
-  let chips="";FXL.forEach(([k,lab,cls])=>{const v=o.fx?o.fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+v+"</span>";}});
+  let chips="";FXL.forEach(([k,lab,cls])=>{const v=o.fx?o.fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;const dv=k==="fol"?fmtCnt(v*FOL_MULT):v;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+dv+"</span>";}});
   b.innerHTML='<span class="xcopt-no">'+(oi+1)+'</span><span class="xcopt-main"><span class="xcopt-tx"></span>'+(chips?'<span class="xcopt-chips">'+chips+"</span>":"")+"</span>"+(o.img?'<img class="xcopt-img" src="'+o.img+'" alt="">':"")+'<span class="xcopt-check">✓</span>';
   b.querySelector(".xcopt-tx").textContent=o.tx;
   b.onclick=()=>{if(xcBusy)return;box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");xcSel=o;xcRenderDraft();};box.appendChild(b);});
@@ -2387,7 +2395,12 @@ function doPost(o){
  });
  mine.replyIds=reacts.filter(r=>!r.sys).map(r=>r.id);
  S.posts=[mine].concat(reacts,S.posts);
- S.posted=true;applyFx(o.fx);injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
+ S.posted=true;applyFx(o.fx);
+ /* v62: her own posts carry engagement on the same scale as her follower
+    count - seeded once at posting time from the post-fx follower total
+    (m = [replies, reposts, likes]; views derive from these as usual) */
+ mine.m=[String(Math.max(1,Math.round(S.fol*0.002))),String(Math.round(S.fol*0.006)),String(Math.round(S.fol*0.05))];
+ injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
 }
 /* activity (Status-style: pick a title, partner(s) and a time slot, then run.
    Partner/time are presentation only - the 1-per-day rule and fx are unchanged) */
@@ -2467,7 +2480,7 @@ function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
  if(d>=30&&f>=15)return{t:"あの先輩との距離が噂の新人",cls:"hot",q:"「距離、近くない？」ファンのざわつきが、少しずつ表に出てきた。"};
  if(c>=55&&f<20)return{t:"実力派として話題の新人",cls:"hot",q:"「生歌つよい」――切り抜き経由で見つかる人が続出。歌で殴るタイプ、と見られている。"};
  if(c>=35)return{t:"話題の新人",cls:"hot",q:"メディアの新人特集に名前が載り始めた。界隈の外にも、届き始めてる。"};
- if(fo>=250)return{t:"じわ伸び中の注目株",cls:"hot",q:"バズではない。でも毎日、確実に増えている。見つかる直前の空気。"};
+ if(fo>=100000)return{t:"じわ伸び中の注目株",cls:"hot",q:"バズではない。でも毎日、確実に増えている。見つかる直前の空気。"};
  if(c>=15)return{t:"界隈で噂の新人",cls:"",q:"音楽垢の間で、少しずつ名前が出るようになった。まだ界隈の中の話。"};
  return{t:"デビューしたての新人",cls:"",q:"世間はまだ、なおのことを知らない。どう見つかるかは、ここからの投稿次第。"};}
 function cogWord(c){return c>=70?"メディアの常連候補":c>=50?"新人特集に名前が載る":c>=35?"界隈の外にも届き始めた":c>=20?"音楽垢の間で話題":c>=10?"見つかる直前":"まだ無名";}
@@ -2544,7 +2557,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   if(r.gauge>=0){const g=row.querySelector(".dr-gauge i");requestAnimationFrame(()=>requestAnimationFrame(()=>{g.style.width=Math.max(0,Math.min(100,r.gauge))+"%";}));}});
  const lv=$("#dr-lvup");
  if(dd.lvup>0){lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった";lv.classList.remove("hidden");}else lv.classList.add("hidden");
- $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=100?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
+ $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
  $("#dr-go").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";
  $("#dayresult").classList.add("on");}
 $("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}});
@@ -2575,7 +2588,7 @@ $("#du-later").addEventListener("click",()=>{$("#dmunlock").classList.remove("on
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
  if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「プリン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
- else if(S.fol>=450&&S.cog>=40&&S.dist>=38){kind="collab";title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
+ else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
  else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。";}
  else{kind="start";title="これからEND ― まだ始まったばかりの件";body="バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
  if(tgtKey()==="sakuya")body=END_S_BODY[kind](hot);
@@ -2598,6 +2611,8 @@ $("#btn-end-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").c
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
+ /* v62 migration: saves written on the old follower scale are rescaled once */
+ if(S.folScale!==2){S.fol=(S.fol||0)*FOL_MULT;(S.folHist||[]).forEach(e=>{e.fol*=FOL_MULT;});(S.chgLog||[]).forEach(e=>{if(e.name==="フォロワー")e.v*=FOL_MULT;});S.folScale=2;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
  $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
