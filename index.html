@@ -2504,6 +2504,19 @@ input,textarea{font-size:16px}
 .dr-rank b{font-size:12.5px;font-weight:900;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:999px;padding:4px 12px;box-shadow:0 3px 10px rgba(247,201,72,.35)}
 .dr-row.best{border-color:rgba(247,201,72,.75);background:linear-gradient(180deg,rgba(247,201,72,.13),rgba(247,201,72,.04))}
 .dr-best{flex:none;font-size:9px;font-weight:900;letter-spacing:.18em;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:6px;padding:3px 7px;margin-left:8px}
+/* ===== v156: the feed's closing TODAY'S PROGRESS card ===== */
+.feed-end{margin:16px 14px 20px;border-radius:19px;padding:15px 16px 13px;background:linear-gradient(163deg,#1a1233,#271549 70%,#33154d);color:#f4f0ff;box-shadow:0 14px 32px rgba(24,8,52,.35);position:relative;overflow:hidden}
+.feed-end::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.feed-end .fe-head{display:flex;align-items:center;justify-content:space-between}
+.feed-end .fe-lab{font-size:10px;font-weight:900;letter-spacing:.28em;color:#cdbcf5}
+.feed-end .fe-count{font-size:12px;font-weight:900;color:#fff;font-variant-numeric:tabular-nums}
+.feed-end .fe-chips{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}
+.feed-end .fe-chip{font-size:11.5px;font-weight:800;color:rgba(233,236,255,.55);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px}
+.feed-end .fe-chip.done{color:#0c0a18;background:linear-gradient(90deg,#ffd95e,#f7c948);border-color:transparent}
+.feed-end .fe-note{margin-top:11px;font-size:12px;line-height:1.6;color:rgba(205,195,238,.8)}
+.feed-end .fe-go{margin-top:12px;width:100%;border:none;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#f91880,#7856ff);border-radius:999px;padding:12px 16px;box-shadow:0 8px 22px rgba(249,24,128,.35);transition:transform .12s ease}
+.feed-end .fe-go:active{transform:scale(.98)}
+.feed-end .fe-go span{margin-left:4px}
 .evc-seal{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffd95e,#f7c948);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 16px rgba(247,201,72,.45)}
 .evc-seal svg{width:20px;height:20px;fill:#4a3200}
 .evc-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -2571,7 +2584,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v155</p>
+  <p class="ver">v156</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2738,7 +2751,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v155</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v156</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2981,7 +2994,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v155</p>
+    <p class="ver">v156</p>
   </div>
 </section>
 </div>
@@ -4118,8 +4131,18 @@ function renderFeed(){
  let posts=S.posts.filter(p=>!p.isReply);
  if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
+ if(tab==="rec")tl.appendChild(feedEndCard());
  renderMePosts();renderHisPosts();
 }
+/* v156: the home feed closes with a TODAY'S PROGRESS card - the
+   three missions as chips that check off as they are done, and once
+   all three land, a go button that presses the day dock's own next
+   button (same flow, no second path). Derived from state at render
+   time, so it is correct on every re-render and after reloads. */
+function feedEndCard(){const used=[["投稿",S.posted],["Event",S.evDone],["Activity",S.actDone]];const n=used.filter(u=>u[1]).length,done=n===3;const d=document.createElement("div");d.className="feed-end"+(done?" alldone":"");
+ d.innerHTML='<div class="fe-head"><span class="fe-lab">TODAY\'S PROGRESS</span><span class="fe-count">'+n+' / 3</span></div><div class="fe-chips">'+used.map(u=>'<span class="fe-chip'+(u[1]?" done":"")+'">'+(u[1]?"✓ ":"")+u[0]+"</span>").join("")+"</div>"+(done?'<button class="fe-go" type="button">次の日へ進む <span>→</span></button><p class="fe-note">今日の物語はここまで。RESULTで1日を振り返ろう。</p>':'<p class="fe-note">残りのミッションを終えると、次の日へ進めるよ。</p>');
+ const go=d.querySelector(".fe-go");if(go)go.addEventListener("click",()=>{const b=$("#btn-nextday");if(b)b.click();});
+ return d;}
 $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#hometabs [data-htab]").forEach(x=>x.classList.remove("act"));b.classList.add("act");S._htab=b.dataset.htab;renderFeed();save();}));
 /* post detail (thread): tap a post -> large main post + replies, like real X */
 let threadStack=[],threadFrom="tl",threadScroll=0;
