@@ -1892,6 +1892,31 @@ input,textarea{font-size:16px}
 #scr-title.booted #btn-reset0{animation-delay:1.24s}
 #scr-title.booted .ver{animation-delay:1.3s}
 @media (prefers-reduced-motion:reduce){#splash{display:none}#scr-title.booted .xlogo,#scr-title.booted .t-eyebrow,#scr-title.booted h1,#scr-title.booted .t-rule,#scr-title.booted .sub,#scr-title.booted .flowsteps,#scr-title.booted #tsave,#scr-title.booted .btn,#scr-title.booted .ver{animation:none}}
+/* ===== v104: RESULT aggregation rebuilt - the day's five stats become
+   individual cards: an axis-coloured icon medallion, the label set small
+   over a large tabular value, an arrow delta chip, and the gauge moved
+   to a full-width foot line on the metered rows. The next-day button
+   becomes a destination bar (label + next chapter line + arrow disc).
+   Aggregation, count-up, note text and transitions are unchanged. ===== */
+#dayresult .dr-rows{margin-top:16px}
+.dr-row{flex-wrap:wrap;gap:7px 12px;padding:12px 13px;margin-top:9px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:16px}
+.dr-row:first-child{margin-top:0}
+.dr-ic{width:37px;height:37px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(29,155,240,.16);color:#8ecfff}
+.dr-ic svg{width:19px;height:19px;display:block}
+.dr-row.xp .dr-ic{background:rgba(255,212,0,.15);color:#ffd400}
+.dr-row.cog .dr-ic{background:rgba(120,86,255,.22);color:#c9b8ff}
+.dr-row.fire .dr-ic{background:rgba(244,33,46,.16);color:#ff9a86}
+.dr-row.pink .dr-ic{background:rgba(249,24,128,.18);color:#ff8fc0}
+.dr-rmain{flex-direction:column;align-items:flex-start;gap:1px}
+.dr-rlab{width:auto;font-size:11px;font-weight:800;letter-spacing:.08em;color:rgba(235,238,255,.62)}
+.dr-rval{font-size:24px}
+.dr-gauge{flex:1 1 100%;height:7px;border-radius:4px}
+.dr-rd{font-size:12.5px;padding:5px 11px;letter-spacing:.02em}
+#dayresult #dr-go{display:flex;align-items:center;gap:12px;text-align:left;padding:13px 18px}
+.dr-go-tx{flex:1;display:flex;flex-direction:column;gap:1px;min-width:0}
+.dr-go-main{font-size:16.5px;font-weight:800;line-height:1.3}
+.dr-go-sub{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.78);letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dr-go-arrow{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900}
 </style>
 </head>
 <body>
@@ -1924,7 +1949,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v103</p>
+  <p class="ver">v104</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2079,7 +2104,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v103</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v104</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2233,7 +2258,7 @@ input,textarea{font-size:16px}
       <div class="dr-rows" id="dr-rows"></div>
       <div class="dr-lvup hidden" id="dr-lvup"></div>
       <p class="dr-note" id="dr-note"></p>
-      <button class="btn" id="dr-go">次の日へ →</button>
+      <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
   </div>
   <div id="dmunlock" role="dialog" aria-label="DMが届いた">
@@ -2288,7 +2313,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v103</p>
+    <p class="ver">v104</p>
   </div>
 </section>
 </div>
@@ -3816,17 +3841,25 @@ function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
 function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
  $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT";
- const rows=[{lab:"フォロワー",now:S.fol,d:agg.fol,useFmt:true,gauge:-1},
-  {lab:"XP",now:S.xp,d:agg.xp,useFmt:false,gauge:-1},
-  {lab:"世間の認知度",now:S.cog,d:agg.cog,useFmt:false,gauge:S.cog},
-  {lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true},
-  {lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true}];
+ /* v104: each row carries an axis icon for its medallion; the values,
+    deltas and gauges fed to the cards are exactly the ones computed
+    above - presentation only. */
+ const DR_IC={fol:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  xp:'<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  cog:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  flm:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>',
+  dist:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>'};
+ const rows=[{lab:"フォロワー",now:S.fol,d:agg.fol,useFmt:true,gauge:-1,ic:DR_IC.fol},
+  {lab:"XP",now:S.xp,d:agg.xp,useFmt:false,gauge:-1,cls:"xp",ic:DR_IC.xp},
+  {lab:"世間の認知度",now:S.cog,d:agg.cog,useFmt:false,gauge:S.cog,cls:"cog",ic:DR_IC.cog},
+  {lab:"炎上度",now:S.flm,d:agg.flm,useFmt:false,gauge:S.flm,fire:true,cls:"fire",ic:DR_IC.flm},
+  {lab:distLab(),now:S.dist,d:agg.dist,useFmt:false,gauge:S.dist,pink:true,cls:"pink",ic:DR_IC.dist}];
  const box=$("#dr-rows");box.innerHTML="";
- rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.pink?" pink":"")+(r.fire?" fire":"");row.style.animationDelay=(i*0.09)+"s";
-  row.innerHTML='<span class="dr-rlab"></span><span class="dr-rmain"><span class="dr-rval">0</span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"")+'</span><span class="dr-rd"></span>';
+ rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.cls?" "+r.cls:"");row.style.animationDelay=(i*0.09)+"s";
+  row.innerHTML='<span class="dr-ic">'+r.ic+'</span><span class="dr-rmain"><span class="dr-rlab"></span><span class="dr-rval">0</span></span><span class="dr-rd"></span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"");
   row.querySelector(".dr-rlab").textContent=r.lab;
   const val=row.querySelector(".dr-rval"),chip=row.querySelector(".dr-rd");
-  chip.textContent=r.d===0?"±0":((r.d>0?"+":"")+r.d);
+  chip.textContent=r.d===0?"±0":((r.d>0?"▲ +":"▼ ")+r.d);
   chip.classList.add(r.d===0?"flat":(((r.fire?r.d<0:r.d>0))?"good":"bad"));if(r.pink&&r.d>0){chip.classList.remove("good");chip.classList.add("pink");}
   box.appendChild(row);
   countUp(val,r.now-r.d,r.now,r.useFmt);
@@ -3834,7 +3867,11 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  const lv=$("#dr-lvup");
  if(dd.lvup>0){lv.textContent="LEVEL UP！ Lv "+dd.lvup+" に上がった";lv.classList.remove("hidden");}else lv.classList.add("hidden");
  $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
- $("#dr-go").textContent=S.ch>=5?"エンディングへ →":"次の日へ →";
+ /* v104: the go button reads as a destination bar - main label plus the
+    next chapter's own day line, read from the chapter data. */
+ const goM=$("#dr-go .dr-go-main"),goS=$("#dr-go .dr-go-sub");
+ if(S.ch>=5){goM.textContent="エンディングへ";goS.textContent="5日間の物語の結末へ";}
+ else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
  $("#dayresult").classList.add("on");}
 $("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=5)ending();else{startChapter(S.ch+1);showPane("tl");}});
 /* v58: the target as a "special person" - distance is staged, and both his
