@@ -728,18 +728,18 @@ input,textarea{font-size:16px}
   <p class="t-eyebrow">NAO ― OFFICIAL X OPENING</p>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
   <div class="t-rule"></div>
-  <p class="sub">デビューしたての新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>あの先輩歌手に、少しずつ近づけるか。</p>
-  <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>最初のフォロワー</span><span>フィードへ</span></div>
+  <p class="sub">ガールズグループ「ハツハ」のメンバーとしてデビューした、新人アイドル「なお」の公式X、開設。<br>バズるか、炎上するか。<br>あの人に、少しずつ近づけるか。</p>
+  <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>相手選択</span><span>最初のフォロワー</span></div>
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v30</p>
+  <p class="ver">v31</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
   <div class="setup">
-    <div class="step">STEP 1 / 3 ― WORLD SELECT</div>
-    <div class="prog"><div class="track"><i style="width:33.3%"></i></div><span class="pnum"><b>1</b> / 3</span></div>
+    <div class="step">STEP 1 / 4 ― WORLD SELECT</div>
+    <div class="prog"><div class="track"><i style="width:25%"></i></div><span class="pnum"><b>1</b> / 4</span></div>
     <h2>どの世界で生きる？</h2>
     <p class="desc">この物語の舞台は、芸能界。フォロワーと評判と炎上で、毎日が動き出す。</p>
     <div id="worlds"></div>
@@ -749,11 +749,11 @@ input,textarea{font-size:16px}
 
 <section class="screen intro" id="scr-persona" style="--bgimg:url(assets/nao-stage.jpg)">
   <div class="setup">
-    <div class="step">STEP 2 / 3 ― PERSONA</div>
-    <div class="prog"><div class="track"><i style="width:66.6%"></i></div><span class="pnum"><b>2</b> / 3</span></div>
+    <div class="step">STEP 2 / 4 ― PERSONA</div>
+    <div class="prog"><div class="track"><i style="width:50%"></i></div><span class="pnum"><b>2</b> / 4</span></div>
     <div class="worldnote" id="persona-world-note"><span class="wn-lab">WORLD</span><b>芸能界 ― アイドルワールド</b></div>
     <h2>公式アカウント開設</h2>
-    <p class="desc">デビューしたての新人アイドル「なお」。今日、公式Xを開設する。</p>
+    <p class="desc">ガールズグループ「ハツハ」のメンバーとしてデビューした、新人アイドル「なお」。今日、公式Xを開設する。</p>
     <p class="secttl">公式ハンドル</p>
     <div id="handles"></div>
     <p class="secttl">コンセプト</p>
@@ -762,10 +762,21 @@ input,textarea{font-size:16px}
   </div>
 </section>
 
+<section class="screen intro" id="scr-target" style="--bgimg:url(assets/nao-stage.jpg)">
+  <div class="setup">
+    <div class="step">STEP 3 / 4 ― TARGET</div>
+    <div class="prog"><div class="track"><i style="width:75%"></i></div><span class="pnum"><b>3</b> / 4</span></div>
+    <h2>誰に近づく？</h2>
+    <p class="desc">憧れの人は、選べる。どちらの背中を追うかで、物語が変わる。</p>
+    <div id="targets"></div>
+    <button class="btn" id="btn-target" disabled>この人で始める</button>
+  </div>
+</section>
+
 <section class="screen intro" id="scr-first" style="--bgimg:url(assets/nao-backstage-selfie.jpg)">
   <div class="setup">
-    <div class="step">STEP 3 / 3 ― FIRST FOLLOWER</div>
-    <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>3</b> / 3</span></div>
+    <div class="step">STEP 4 / 4 ― FIRST FOLLOWER</div>
+    <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>4</b> / 4</span></div>
     <h2>最初のフォロワー</h2>
     <p class="desc">開設から数時間。最初のフォロワーが、物語の起点になる。</p>
     <div id="firsts"></div>
@@ -829,11 +840,11 @@ input,textarea{font-size:16px}
         <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar pf-ava" src="assets/nao-avatar4.jpg" width="84" height="84" alt=""><button class="editbtn" id="btn-editprof">プロフィールを編集</button></div>
         <div class="pf-name">なお<span class="pf-badge-off">公式</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_324</div>
-        <div style="font-size:13px;margin-top:5px" id="prof-bio">ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。</div>
+        <div style="font-size:13px;margin-top:5px" id="prof-bio">ガールズグループ「ハツハ」のメンバー「なお」公式。デビュー曲『はじまりの合図』配信中。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
       </div>
       <div class="statgrid">
-        <div class="statbox distbox"><small>ひろとの距離（親密度）</small><b id="st-dist">0</b><div class="gauge"><i id="dist-gauge" style="width:0%"></i></div></div>
+        <div class="statbox distbox"><small id="st-dist-lab">ひろとの距離（親密度）</small><b id="st-dist">0</b><div class="gauge"><i id="dist-gauge" style="width:0%"></i></div></div>
         <div class="statbox"><small>フォロワー</small><b id="st-fol">1</b></div>
         <div class="statbox"><small>世間の認知度</small><b id="st-cog">0</b></div>
         <div class="statbox"><small>XP（レベル <span id="st-lv">1</span>）</small><b id="st-xp">0</b></div>
@@ -842,18 +853,18 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v30</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v31</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
-      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
-      <div class="pf-cover his-cover"><div class="his-cover-typo"><b>HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div></div>
+      <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b id="his-name-bar">井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
+      <div class="pf-cover his-cover" id="his-cover"><div class="his-cover-typo"><b id="his-typo">HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div></div>
       <div style="padding:0 14px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between"><span class="his-avawrap"><img class="avatar his-ava" src="assets/ig-avatar.jpg" width="88" height="88" alt=""></span><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
-        <div class="pf-name">井汲大翔<svg class="his-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg></div>
-        <div style="color:#536471;font-size:13px">@193hiroto</div>
-        <div style="font-size:13px;margin-top:5px">歌手。歌とステージがすべて。</div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><span class="his-avawrap"><img class="avatar his-ava" id="his-ava" src="assets/ig-avatar.jpg" width="88" height="88" alt=""></span><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
+        <div class="pf-name"><span id="his-name">井汲大翔</span><svg class="his-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg></div>
+        <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
+        <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。歌とステージがすべて。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">284万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
       </div>
       <div class="x-ptabs" id="his-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
@@ -950,18 +961,18 @@ input,textarea{font-size:16px}
       <div class="erow fol"><span class="elab">フォロワー</span><b id="end-fol"></b></div>
       <div class="erow"><span class="elab">世間の認知度</span><span class="egauge"><i id="end-cog-g"></i></span><b id="end-cog"></b></div>
       <div class="erow fire"><span class="elab">炎上度</span><span class="egauge"><i id="end-flm-g"></i></span><b id="end-flm"></b></div>
-      <div class="erow dist"><span class="elab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
+      <div class="erow dist"><span class="elab" id="end-dist-lab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v30</p>
+    <p class="ver">v31</p>
   </div>
 </section>
 </div>
 <div id="changes"></div>
 <div class="scrim" id="scrim-chg"><div class="sheet">
   <button class="close" data-close="scrim-chg">✕</button>
-  <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、ひろとの距離はピンクで表示される。</p>
+  <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、彼との距離はピンクで表示される。</p>
   <div id="chglist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
@@ -983,6 +994,7 @@ input,textarea{font-size:16px}
 /* accounts: data swapped for this work; handles/avatars follow Tinder-ver X usage */
 const ACC={
  hiroto:{n:"井汲大翔",h:"@193hiroto",av:"assets/ig-avatar.jpg"},
+ sakuya:{n:"サクヤ",h:"@sakuya_nctwish",av:"assets/sakuya-av.jpg"},
  nao:{n:"なお",h:"@nao_324",av:"assets/nao-avatar4.jpg"},
  miku:{n:"佐倉みく",h:"@miku_osana",av:"assets/av-miku.jpg"},
  staff:{n:"佐藤大輔｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
@@ -1006,7 +1018,7 @@ const HANDLES=[
 const STANCES=[
  {id:"smile",t:"王道・笑顔系",d:"明るく、親しみやすい正統派。",bonus:"fol",bonusTx:"フォロワー"},
  {id:"cool",t:"クール・ミステリアス系",d:"言葉少なめ、世界観で魅せる。",bonus:"cog",bonusTx:"世間の認知度"},
- {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残す、天然タイプ。",bonus:"dist",bonusTx:"ひろとの距離"}];
+ {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残す、天然タイプ。",bonus:"dist",bonusTx:"彼との距離"}];
 const FIRSTS=[
  {id:"sea",t:"カリナ｜韓国ガールズグループ「aespa」のリーダー",d:"楽屋で挨拶したら、その場でフォローしてくれた。"},
  {id:"akari",t:"伊達さゆり｜同期デビューのアイドル",d:"同じ日にデビューした、ライバルであり戦友。"},
@@ -1023,14 +1035,14 @@ const CH=[
 {day:"Day 1 ― デビュー発表の日",
 banner:"デビュー発表の日。フォロワーはまだ、ほぼゼロ。最初の投稿で全部が決まる。",
 seed:[
-{a:"media",tx:"ソロシンガー「なお」がデビュー曲『はじまりの合図』を配信リリース。フレッシュな歌声に注目です。",lk:214,rp:48,rc:12},
+{a:"media",tx:"ガールズグループ「ハツハ」がデビュー曲『はじまりの合図』を配信リリース。メンバー・なおの歌声に注目です。",lk:214,rp:48,rc:12},
 {a:"hiroto",tx:"新曲、出しました。聴いてくれたら嬉しいです。\nよろしくお願いします。",lk:18234,rp:3902,rc:812},
 {a:"sora",tx:"新人さんのデモ切り抜き流れてきて聴いたら、声めっちゃ良くて止まった。なお、っていう子らしい。",lk:96,rp:11,rc:4}],
 posts:[
-{tx:"はじめまして、新人アイドルの なお です！\nデビュー曲『はじまりの合図』配信スタートしました。\nまだ何者でもないけど、ここから頑張ります。よろしくお願いします！",img:"assets/nao-promo.jpg",fx:{fol:60,cog:6,xp:10,dist:0,flm:0},react:[
+{tx:"はじめまして、ガールズグループ「ハツハ」の なお です！\nデビュー曲『はじまりの合図』配信スタートしました。\nまだ何者でもないけど、ここから頑張ります。よろしくお願いします！",img:"assets/nao-promo.jpg",fx:{fol:60,cog:6,xp:10,dist:0,flm:0},react:[
 {a:"fan1",tx:"デビューおめでとうございます！！ 歌声一瞬で好きになりました、推します！",lk:23,rp:3,rc:1},
 {a:"sora",tx:"例の新人さん、公式垢できた。声ほんまに良いから聴いてみて。",lk:58,rp:9,rc:2}]},
-{tx:"デビューしました、なおです。\n憧れの先輩方と同じステージに立てるよう、歌で証明します。",fx:{fol:38,cog:10,xp:12,dist:2,flm:0},react:[
+{tx:"デビューしました、ハツハのなおです。\n憧れの先輩方と同じステージに立てるよう、歌で証明します。",fx:{fol:38,cog:10,xp:12,dist:2,flm:0},react:[
 {a:"matome",tx:"なお、デビュー投稿で「歌で証明します」と宣言。実力派アピールが話題に",lk:141,rp:26,rc:18},
 {a:"fan2",tx:"新人アイドルの子、なんか気になるな。歌うまいらしい。",lk:34,rp:2,rc:1}]},
 {tx:"デビュー当日に大先輩の名前を出しちゃう投稿：「井汲大翔さんの歌に憧れて、歌手を目指しました。いつか同じステージに立ちたいです」",fx:{fol:95,cog:8,xp:8,dist:4,flm:8},react:[
@@ -1166,6 +1178,27 @@ choices:[
 {t:"緊張して、丁寧すぎる長文を送ってしまう",r:"しまった、と思った直後。「大丈夫ですよ」「無理せんとで」関西弁の、やわらかい一言。距離が、少しだけ縮んだ音がした。",fx:{dist:9,xp:6,fol:0,cog:0,flm:1}}]};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 新曲","58,910 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#プリン被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
 const STORY=[["hiroto","井汲大翔"],["akari","伊達さゆり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+/* ===== target select (Status-style): who nao gets closer to ===== */
+const TARGETS={
+ hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/ig-gen-stage.jpg",typo:"HIROTO IKUMI",bio:"歌手。歌とステージがすべて。",fol:"284万",cardT:"井汲大翔｜先輩歌手",cardD:"憧れの先輩歌手。言葉少なめ、でも目が離せない。",tags:["先輩歌手","ソロ"]},
+ sakuya:{key:"sakuya",name:"サクヤ",short:"サクヤ",handle:"@sakuya_nctwish",av:"assets/sakuya-av.jpg",cover:"assets/sakuya-cover.jpg",typo:"SAKUYA ― NCT WISH",bio:"NCT WISHの末っ子。パンと、静かな時間が好き。",fol:"312万",cardT:"サクヤ｜NCT WISH",cardD:"不思議な感性と、丁寧な言葉選びの先輩。",tags:["NCT WISH","先輩"]}};
+const TARGET_DMS={hiroto:HIROTO_DM};
+/* pass-1 minimal feed presence for the sakuya route (replaced by CH_S in v32) */
+const SAKUYA_SEED=[
+ {tx:"今日デビューしたグループの曲、聴きました。声がまっすぐで、いい朝になりました。",lk:15234,rp:2902,rc:612,img:"assets/sakuya-stage.jpg"},
+ {tx:"リハーサル終わりました。今日のステージは、雲の上みたいな気持ちでした。見てくれた方、ありがとうございました。",lk:11980,rp:2010,rc:388},
+ {tx:"今日は収録です。よろしくお願いします。楽屋のお菓子が豊作でした。",lk:9870,rp:1502,rc:233},
+ {tx:"配信、決まりました。詳細はまた。よろしくお願いします。",lk:14230,rp:2590,rc:411},
+ {tx:"朝の駅前のクロワッサン、やっと買えました。うれしい。",lk:16780,rp:2904,rc:601}];
+const TRENDS_S=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","NCT WISH カムバ","61,204 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#クロワッサン被り","8,120 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
+const STORY_S=[["sakuya","サクヤ"],["akari","伊達さゆり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
+function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
+function distLab(){return tgt().short+"との距離";}
+function curCH(){return CH;}
+function curTrends(){return tgtKey()==="sakuya"?TRENDS_S:TRENDS;}
+function curStory(){return tgtKey()==="sakuya"?STORY_S:STORY;}
+function svImg(k){if(k==="nao")return "assets/nao-promo.jpg";if(k===tgtKey())return tgt().cover;return undefined;}
 </script>
 <script>
 "use strict";
@@ -1194,7 +1227,7 @@ function postEl(p,hot){
     +"</div></span>";
   d.querySelector(".nm").textContent=p.n; d.querySelector(".tx").textContent=p.t;
   const avEl=d.firstChild;
-  if(avEl&&avEl.addEventListener&&(p.a==="hiroto"||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="hiroto"?"hisprof":"me");}catch(_){}});}
+  if(avEl&&avEl.addEventListener&&(p.a===tgtKey()||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}});}
   const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>e.stopPropagation());
   d.addEventListener("click",()=>{try{openPostThread(p);}catch(_){}});
   const popSvg=el=>{const svg=el.querySelector("svg");if(!svg)return;svg.classList.remove("pop");void svg.getBoundingClientRect();svg.classList.add("pop");};
@@ -1210,7 +1243,7 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[]};}
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[]};}
 
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
@@ -1220,7 +1253,7 @@ function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
 let postSeq=0;
 function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
 /* setup */
-let selH=null,selSt=null,selF=null,selW=null;
+let selH=null,selSt=null,selF=null,selW=null,selT=null;
 (function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;$("#btn-world").disabled=false;};}box.appendChild(b);});})();
 function renderOpts(el,items,gt,gd,cb,gc){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>"+(gc?'<span class="chip"></span>':"");b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);if(gc)b.querySelector(".chip").textContent=gc(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
@@ -1229,7 +1262,9 @@ renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonus
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
-$("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-first");};
+$("#btn-persona").onclick=()=>{S.handle=selH.h;S.stance=selSt.id;show("scr-target");};
+(function(){const box=$("#targets");if(!box)return;["hiroto","sakuya"].forEach(k=>{const T=TARGETS[k];const b=document.createElement("button");b.className="opt card";b.innerHTML='<img class="cimg" src="'+T.av+'" alt="">'+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+T.tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=T.cardT;b.querySelector(".d").textContent=T.cardD;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selT=T;$("#btn-target").disabled=false;};box.appendChild(b);});})();
+$("#btn-target").onclick=()=>{if(!selT)return;S.target=selT.key;show("scr-first");};
 $("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);
  const w=FIRST_WELCOME[S.first];
  if(w){const wp=mkPost(S.first,w.tx,w.lk,w.rp,w.rc,false);S.posts.unshift(wp);
@@ -1241,7 +1276,7 @@ function applyFx(fx){if(!fx)return;const lvBefore=1+Math.floor((S.xp||0)/50);con
  ["fol","xp","cog","flm","dist"].forEach(k=>{let v=fx[k]||0;if(v>0&&b===k)v+=Math.max(2,Math.round(v*0.3));if(v)out[k]=v;});
  if(out.fol)S.fol=Math.max(0,S.fol+out.fol);if(out.xp)S.xp+=out.xp;
  if(out.cog)S.cog=Math.max(0,Math.min(100,S.cog+out.cog));if(out.flm)S.flm=Math.max(0,Math.min(100,S.flm+out.flm));if(out.dist)S.dist=Math.max(0,Math.min(100,S.dist+out.dist));
- const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:"ひろとの距離"};const box=$("#changes");
+ const names={fol:"フォロワー",xp:"XP",cog:"世間の認知度",flm:"炎上度",dist:distLab()};const box=$("#changes");
  if(!S.chgLog)S.chgLog=[];
  Object.keys(out).forEach((k,i)=>{const bad=(k==="flm"&&out[k]>0)||(k!=="flm"&&out[k]<0);const good=(k==="flm"&&out[k]<0)||(k!=="flm"&&out[k]>0);const d=document.createElement("div");d.className="chg"+(k==="dist"?" dist":(bad?" bad":(good?" good":"")));d.textContent=names[k]+" "+(out[k]>0?"+":"")+out[k];d.style.animationDelay=(i*0.09)+"s";box.appendChild(d);setTimeout(()=>d.classList.add("out"),2500+i*90);setTimeout(()=>d.remove(),3000+i*90);
   S.chgLog.push({day:S.ch,name:names[k],v:out[k],cls:k==="dist"?"dist":(bad?"bad":(good?"good":""))});});
@@ -1280,6 +1315,7 @@ function showPane(k){
  if(k!=="thread")$$("#x-nav button").forEach(b=>b.classList.toggle("sel",b.dataset.pane===k||(k==="tl"&&b.dataset.pane==="home")));
  $("#x-scroll").scrollTop=0;
  if(k==="me"){renderProfile();renderMeTab();}
+ if(k==="trend"||k==="search")renderTrends();
  if(k==="hisprof")renderHisTab();
  if(k==="msg")renderDmList();
 }
@@ -1337,12 +1373,12 @@ const NTYPE={
  follow:'<svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.4"/><path d="M4.5 19.5c.6-3.2 2.7-4.8 5.5-4.8s4.9 1.6 5.5 4.8"/><path d="M18.5 5.5v6M15.5 8.5h6"/></svg>',
  news:'<svg viewBox="0 0 24 24"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5H16v13.5H6A2 2 0 0 1 4 16.5z"/><path d="M16 9h2.5A1.5 1.5 0 0 1 20 10.5v6a2 2 0 0 1-2 2"/><path d="M7 9h6M7 13h6"/></svg>',
  bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>'};
-function notifType(n){if(n.a==="hiroto")return"heart";if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
+function notifType(n){if(n.a===tgtKey())return"heart";if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
  list.innerHTML=S.notifs.length?"":'<div class="nempty">まだ通知はないよ</div>';
- S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"")+(n.a==="hiroto"?" special":"");
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");
   row.innerHTML='<span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'<i class="ntype t-'+t+'">'+NTYPE[t]+'</i></span>'+"<div class='nmain'><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
@@ -1354,15 +1390,14 @@ function renderNotifs(){
    press-and-hold pauses (a quick tap still navigates on release).
    Backdrops reuse photos already in the game; accounts without one get a
    gradient + initial, so no new photos or story text are introduced. */
-const SV_IMG={hiroto:"assets/ig-gen-stage.jpg",nao:"assets/nao-promo.jpg"};
 const SV_DUR=5000;
 let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];STORY.forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(s[0]==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];curStory().forEach((s,i)=>{const a=ACC[s[0]];const b=document.createElement("button");b.className="story"+(seen.includes(s[0])?" seen":"");b.setAttribute("aria-label",s[1]+"のストーリー");b.innerHTML='<div class="ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+(s[0]==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+s[1]+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
 function renderStorySeg(){
- const s=STORY[svIdx],a=ACC[s[0]];if(!a)return;
- const bg=$("#sv-bg"),img=SV_IMG[s[0]];
+ const s=curStory()[svIdx],a=ACC[s[0]];if(!a)return;
+ const bg=$("#sv-bg"),img=svImg(s[0]);
  if(img){bg.style.backgroundImage="url("+img+")";}
  else{const h=svHue(a.n);bg.style.backgroundImage="linear-gradient(160deg,hsl("+h+",52%,46%),hsl("+((h+50)%360)+",58%,26%))";}
  const center=$("#sv-center");
@@ -1372,7 +1407,7 @@ function renderStorySeg(){
  id.innerHTML=(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"<span><b></b><small></small></span>";
  id.querySelector("b").textContent=a.n;id.querySelector("small").textContent=a.h;
  const segs=$("#sv-segs");segs.innerHTML="";
- STORY.forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
+ curStory().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
  if(S&&S.started){if(!Array.isArray(S.storySeen))S.storySeen=[];if(!S.storySeen.includes(s[0])){S.storySeen.push(s[0]);save();}}
  svElapsed=0;
 }
@@ -1387,14 +1422,14 @@ function svTick(ts){
 function svStartTimer(){svStopTimer();svElapsed=0;svLastTs=0;svPaused=false;$("#storyviewer").classList.remove("paused");svTimer=requestAnimationFrame(svTick);}
 function svStopTimer(){if(svTimer!==null)cancelAnimationFrame(svTimer);svTimer=null;}
 function svStep(d){
- if(d>0){if(svIdx>=STORY.length-1){closeStory();return;}svIdx++;}
+ if(d>0){if(svIdx>=curStory().length-1){closeStory();return;}svIdx++;}
  else{if(svIdx<=0){svElapsed=0;svStartTimer();return;}svIdx--;}
  renderStorySeg();svStartTimer();
 }
-function openStory(i){svIdx=Math.max(0,Math.min(STORY.length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
+function openStory(i){svIdx=Math.max(0,Math.min(curStory().length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
 function closeStory(){svStopTimer();svPaused=false;$("#storyviewer").classList.remove("on");$("#storyviewer").classList.remove("paused");renderStories();}
 $("#sv-close").addEventListener("click",closeStory);
-$("#sv-id").addEventListener("click",()=>{const a=STORY[svIdx]&&STORY[svIdx][0];if(a!=="hiroto"&&a!=="nao")return;closeStory();showPane(a==="hiroto"?"hisprof":"me");});
+$("#sv-id").addEventListener("click",()=>{const a=curStory()[svIdx]&&curStory()[svIdx][0];if(a!==tgtKey()&&a!=="nao")return;closeStory();showPane(a==="nao"?"me":"hisprof");});
 function svZone(el,dir){if(!el)return;
  el.addEventListener("pointerdown",e=>{e.preventDefault();svDownAt=Date.now();svPaused=true;$("#storyviewer").classList.add("paused");});
  const release=nav=>{if(!svPaused&&!svDownAt)return;const held=Date.now()-svDownAt;svDownAt=0;svPaused=false;$("#storyviewer").classList.remove("paused");svLastTs=0;if(nav&&held<300)svStep(dir);};
@@ -1409,7 +1444,7 @@ function renderFeed(){
  const tl=$("#tl-posts");tl.innerHTML="";
  const tab=S._htab||"rec";
  let posts=S.posts;
- if(tab==="fol")posts=posts.filter(p=>["hiroto","nao","media","akari"].includes(p.a)||p.mine||p.sys);
+ if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari"].includes(p.a)||p.mine||p.sys);
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
  renderMePosts();renderHisPosts();
 }
@@ -1463,33 +1498,40 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(mediaGrid(imgs));}
  else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
 }
+function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
+ set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);
+ const av=$("#his-ava");if(av)av.src=T.av;
+ const cv=$("#his-cover");if(cv)cv.style.backgroundImage="url("+T.cover+")";
+ const dl=$("#st-dist-lab");if(dl)dl.textContent=distLab()+"（親密度）";
+ const el=$("#end-dist-lab");if(el)el.textContent=distLab();}
 function renderHisPosts(){renderHisTab();}
 function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;const on=!!S.followHiroto;b.textContent=on?"フォロー中":"フォロー";b.classList.toggle("on",on);}
 function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#his-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===hisTab));
- const his=S.posts.filter(p=>p.a==="hiroto"&&!p.sys);
+ renderTargetProfile();
+ const his=S.posts.filter(p=>p.a===tgtKey()&&!p.sys);
  const pc=$("#his-pcount");if(pc)pc.textContent=his.length+" ポスト";
  renderFollowBtn();
  if(hisTab==="post"){if(!his.length)box.appendChild(mkEmpty("まだポストがない",""));else his.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(hisTab==="reply"){box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。"));}
  else if(hisTab==="media"){const imgs=[];his.forEach(p=>{if(p.img&&!imgs.includes(p.img))imgs.push(p.img);});if(!imgs.length)box.appendChild(mkEmpty("メディアはまだない","写真つきポストをすると、ここに並ぶよ。"));else box.appendChild(mediaGrid(imgs));}
- else if(hisTab==="like"){box.appendChild(mkEmpty("いいねは非公開です","井汲大翔さんがいいねしたポストは、他の人には表示されないよ。"));}
+ else if(hisTab==="like"){box.appendChild(mkEmpty("いいねは非公開です",tgt().name+"さんがいいねしたポストは、他の人には表示されないよ。"));}
 }
 $$("#me-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{meTab=b.dataset.ptab;renderMeTab();}));
 $$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b.dataset.ptab;renderHisTab();}));
 $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
-(function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?"井汲大翔さんをフォローしたよ":"井汲大翔さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
+(function(){const fb=$("#btn-follow-hiroto");if(fb)fb.addEventListener("click",()=>{if(!S)return;S.followHiroto=!S.followHiroto;renderFollowBtn();renderProfile();toastChg(S.followHiroto?tgt().name+"さんをフォローしたよ":tgt().name+"さんのフォローを外したよ");save();});const eb=$("#btn-editprof");if(eb)eb.addEventListener("click",()=>toastChg("プロフィールは物語の進行で更新されるよ"));})();
 /* trends + search */
 function trendEl(t,rank){const d=document.createElement("div");d.className="trend"+(rank===0?" top":"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small></div><span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
-function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);TRENDS.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i)));
- const sug=$("#x-sug");sug.innerHTML="";["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ライブステージ"].forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
+function renderTrends(){$("#x-pane-trend").innerHTML="";const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);curTrends().forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i)));
+ const sug=$("#x-sug");sug.innerHTML="";(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#クロワッサン被り","ライブステージ"]:["なお デビュー","井汲大翔","歌うまコラボSP","#プリン被り","ライブステージ"]).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
 function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.classList.toggle("act",b.dataset.stab===k));
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
- if(k==="topic"){TRENDS.forEach((t,i)=>box.appendChild(trendEl(t,i)));return;}
- const list=TRENDS.filter(t=>cat===null||t[0]===cat);
+ if(k==="topic"){curTrends().forEach((t,i)=>box.appendChild(trendEl(t,i)));return;}
+ const list=curTrends().filter(t=>cat===null||t[0]===cat);
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
  list.forEach((t,i)=>box.appendChild(trendEl(t,i)));}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
@@ -1517,17 +1559,20 @@ function renderEvent(){
 /* chapter flow */
 function startChapter(n){
  S.ch=n;S.posted=false;S.evDone=false;S.actDone=false;
- const ch=CH[n-1];
+ const ch=curCH()[n-1];
  const seeds=ch.seed.map(p=>{const o=mkPost(p.a,p.tx,p.lk,p.rp,p.rc,false,p.img);return o;});
- if(n===1){const hp=seeds.find(p=>p.a==="hiroto");if(hp)hp.img="assets/ig-gen-stage.jpg";}
- S.posts=seeds.concat(S.posts.filter(p=>p.mine));
+ if(n===1){const hp=seeds.find(p=>p.a===tgtKey());if(hp&&!hp.img)hp.img=tgt().cover;}
+ let sd=seeds;
+ if(tgtKey()==="sakuya"){sd=seeds.filter(p2=>p2.a!=="hiroto");const sp=SAKUYA_SEED[n-1];if(sp)sd.splice(1,0,mkPost("sakuya",sp.tx,sp.lk,sp.rp,sp.rc,false,sp.img));}
+ S.posts=sd.concat(S.posts.filter(p=>p.mine));
  $("#daybanner").textContent=ch.day+" ― "+ch.banner;
  $("#x-head-note").textContent="Day "+n+" / 5";
  if(ch.dm)S.threads.unshift({id:"fan"+n,who:ch.dm.who,msgs:ch.dm.msgs.slice(),choices:ch.dm.choices,done:false,unread:true,replyIdx:-1});
- if(n>=4&&S.hirotoDm==="locked"&&S.dist>=10){
+ const TDM=TARGET_DMS[tgtKey()];
+ if(n>=4&&TDM&&S.hirotoDm==="locked"&&S.dist>=10){
    S.hirotoDm="open";
-   S.threads.unshift({id:"hiroto",who:"hiroto",msgs:HIROTO_DM.msgs.slice(),choices:HIROTO_DM.choices,done:false,unread:true,special:true,replyIdx:-1});
-   S.notifs.unshift({a:"hiroto",tx:"さんからDMが届きました",sub:"初めての、本人からの連絡"});
+   S.threads.unshift({id:tgtKey(),who:tgtKey(),msgs:TDM.msgs.slice(),choices:TDM.choices,done:false,unread:true,special:true,replyIdx:-1});
+   S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"初めての、本人からの連絡"});
  }
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
 }
@@ -1560,7 +1605,7 @@ $("#x-compose-btn").addEventListener("click",()=>{
  $("#xc-day").textContent="Day "+S.ch+" / 5";
  $("#xc-handle").textContent=S.handle||"";
  const box=$("#postopts");box.innerHTML="";
- CH[S.ch-1].posts.forEach((o,oi)=>{const b=document.createElement("button");b.className="choice xcopt";
+ curCH()[S.ch-1].posts.forEach((o,oi)=>{const b=document.createElement("button");b.className="choice xcopt";
   const FXL=[["fol","フォロワー",""],["cog","認知度",""],["xp","XP","xp"],["dist","距離","dist"],["flm","炎上","bad"]];
   let chips="";FXL.forEach(([k,lab,cls])=>{const v=o.fx?o.fx[k]:0;if(v){const c=k==="flm"?(v>0?"bad":""):cls;chips+='<span class="xchip '+c+'">'+lab+" "+(v>0?"+":"")+v+"</span>";}});
   b.innerHTML='<span class="xcopt-no">'+(oi+1)+'</span><span class="xcopt-main"><span class="xcopt-tx"></span>'+(chips?'<span class="xcopt-chips">'+chips+"</span>":"")+"</span>"+(o.img?'<img class="xcopt-img" src="'+o.img+'" alt="">':"")+'<span class="xcopt-check">✓</span>';
@@ -1580,7 +1625,7 @@ function doPost(o){
  S.posts.forEach(p=>{p.fresh=false;});
  const reacts=[];
  (o.react||[]).forEach(r=>{
-   if(r.likeOnly){reacts.push({sys:true,tx:"井汲大翔さんがあなたのポストをいいねしました",a:"hiroto",t:"",m:["0","0","0"]});S.notifs.unshift({a:"hiroto",tx:"さんがあなたのポストをいいねしました",sub:CH[S.ch-1].day});}
+   if(r.likeOnly){reacts.push({sys:true,tx:tgt().name+"さんがあなたのポストをいいねしました",a:tgtKey(),t:"",m:["0","0","0"]});S.notifs.unshift({a:tgtKey(),tx:"さんがあなたのポストをいいねしました",sub:curCH()[S.ch-1].day});}
    else{const rp=mkPost(r.a,r.tx,r.lk,r.rp,r.rc,false,r.img);reacts.push(rp);if(r.a==="matome"||r.a==="media")S.men.unshift(rp);}
  });
  mine.replyIds=reacts.filter(r=>!r.sys).map(r=>r.id);
@@ -1597,7 +1642,7 @@ $("#btn-activity").onclick=()=>{
  go.classList.add("hidden");go.disabled=true;
  $("#actsec-title").classList.remove("hidden");
  if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";}
- else CH[S.ch-1].activity.forEach((o,oi)=>{
+ else curCH()[S.ch-1].activity.forEach((o,oi)=>{
   const b=document.createElement("button");b.className="choice actopt";const chips=fxChips(o.fx);b.innerHTML='<span class="actopt-no">'+(oi+1)+'</span><span class="actopt-main"><span class="actopt-tx"></span>'+(chips?'<span class="actopt-chips">'+chips+"</span>":"")+'</span><span class="actopt-check">✓</span>';b.querySelector(".actopt-tx").textContent=o.t;
   b.onclick=()=>{
    box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");actSel=o;
@@ -1648,8 +1693,9 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;const box=$("#th-msgs
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();};
 /* profile */
 function renderProfile(){if(!S||!S.started)return;
+ renderTargetProfile();
  $("#prof-handle").textContent=S.handle;
- $("#prof-bio").textContent="ソロシンガー「なお」公式。デビュー曲『はじまりの合図』配信中。コンセプト："+stanceObj().t+"。";
+ $("#prof-bio").textContent="ガールズグループ「ハツハ」のメンバー「なお」公式。デビュー曲『はじまりの合図』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
@@ -1670,6 +1716,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  else if(S.fol>=450&&S.cog>=40&&S.dist>=38){kind="collab";title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
  else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。";}
  else{kind="start";title="これからEND ― まだ始まったばかりの件";body="バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n大翔との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
+ renderTargetProfile();
  const sec=$("#scr-ending");sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
  sec.style.setProperty("--bgimg","url("+({collab:"assets/nao-stage.jpg",flame:"assets/night.jpg",quiet:"assets/nao-cafe2.jpg",start:"assets/nao-promo.jpg"})[kind]+")");
  $("#end-theme").textContent=({collab:"COLLAB END",flame:"FLAME END",quiet:"QUIET END",start:"START END"})[kind];
@@ -1690,7 +1737,7 @@ const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
- $("#btn-continue").onclick=()=>{show("v-x");$("#daybanner").textContent=CH[S.ch-1].day+" ― "+CH[S.ch-1].banner;$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
+ $("#btn-continue").onclick=()=>{show("v-x");$("#daybanner").textContent=curCH()[S.ch-1].day+" ― "+curCH()[S.ch-1].banner;$("#x-head-note").textContent="Day "+S.ch+" / 5";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
 </script>
 </body>
 </html>
