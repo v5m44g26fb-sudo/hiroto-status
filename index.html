@@ -1131,6 +1131,10 @@ input,textarea{font-size:16px}
 #thread-main .post.detail .hd{display:block;margin-top:1px;font-size:14px}
 #thread-main .post.detail.has-replies{position:relative}
 #thread-main .post.detail.has-replies::after{content:"";position:absolute;left:40px;top:68px;bottom:2px;width:2px;border-radius:1px;background:#e3e8eb}
+/* v79: the detail states its counts once - the worded summary above is the
+   single source, so the action row below goes icon-only like real X
+   (the numbers still update in the DOM and every tap keeps working) */
+#thread-main .post.detail .mt .act b{display:none}
 #thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
 #thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
 #thread-main .post.detail .mt{padding-right:2px}
@@ -1421,7 +1425,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v78</p>
+  <p class="ver">v79</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1562,7 +1566,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v78</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v79</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1739,7 +1743,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v78</p>
+    <p class="ver">v79</p>
   </div>
 </section>
 </div>
@@ -2595,10 +2599,43 @@ $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#home
 /* post detail (thread): tap a post -> large main post + replies, like real X */
 let threadStack=[],threadFrom="tl",threadScroll=0;
 function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};return num(2)*23+num(1)*61+num(0)*197+89;}
+/* v79: top-reply seeding - a post whose own counter says dozens of replies
+   exist must never open onto an empty thread (the user's Day-3 post read
+   304 replies and showed none). When the real list (replyIds / the feed
+   heuristic) comes up short and the reply counter is 10+, pin a few
+   hand-written top replies from the context pool into replyIds as ordinary
+   reply posts: the thread then shows the world's answers, they persist in
+   the save, and the composer pins onto the same list. Texts are written
+   per context (your fans/members, his fans, members, the general timeline)
+   - never stitched or concatenated. "No replies yet" now only appears on
+   posts whose counter is genuinely near zero. */
+const TOP_REPLIES={
+ nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なお姉さん、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなお姉さん、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"]],
+ tgt:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人の歌声、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"]],
+ member:[["fan1","なおちゃん推しだけど、この投稿は保存しました"],["sora","メンバーのこういう一言、ぐっときます"],["fan2","Hearts2Hearts、みんな仲が良いの伝わってくる"]],
+ other:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"]]};
+function replyCountOf(p){const v=parseInt(String(p.m&&p.m[0]!=null?p.m[0]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;}
+function seedTopReplies(p,have){
+ if(typeof S==="undefined"||!S||!S.posts)return have;
+ const rc=replyCountOf(p);if(rc<10)return have;
+ const want=rc>=250?4:rc>=60?3:2;
+ if(have.length>=want)return have;
+ const pool=p.a==="nao"?TOP_REPLIES.nao:(p.a===tgtKey()?TOP_REPLIES.tgt:(["akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)?TOP_REPLIES.member:TOP_REPLIES.other));
+ let h=0;for(const c of String(p.id))h=(h*31+c.charCodeAt(0))>>>0;
+ const used=new Set(have.map(r=>r.a));const picks=[];
+ for(let i=0;i<pool.length&&picks.length<want-have.length;i++){const e=pool[(h+i)%pool.length];if(used.has(e[0]))continue;used.add(e[0]);picks.push(e);}
+ if(!picks.length)return have;
+ const seeds=picks.map((e,i)=>{const rp=mkPost(e[0],e[1],24+((h>>(i*3))%160),3+((h>>(i*2))%14),1+((h>>i)%6),false,null);rp.isReply=true;rp.replyTo=p.id;return rp;});
+ seeds.forEach(r=>S.posts.push(r));
+ p.replyIds=(p.replyIds&&p.replyIds.length?p.replyIds.slice():have.map(r=>r.id)).concat(seeds.map(r=>r.id));
+ try{save();}catch(_){}
+ return have.concat(seeds);
+}
 function threadReplies(p){
- if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[]);const seen=new Set(),out=[];p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);out.push(o);}});if(out.length)return out;}
- const idx=(S.posts||[]).indexOf(p);if(idx<0)return[];
- return S.posts.slice(idx+1).filter(q=>q&&!q.sys&&!q.isReply&&q.a!==p.a).slice(0,3);
+ let base=[];
+ if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[]);const seen=new Set();p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);base.push(o);}});}
+ if(!base.length){const idx=(S.posts||[]).indexOf(p);if(idx>=0)base=S.posts.slice(idx+1).filter(q=>q&&!q.sys&&!q.isReply&&q.a!==p.a).slice(0,3);}
+ return seedTopReplies(p,base);
 }
 function renderThread(p){
  $("#thread-sub").textContent=p.n;
