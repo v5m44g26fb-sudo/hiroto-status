@@ -769,7 +769,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v35</p>
+  <p class="ver">v36</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -883,7 +883,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v35</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v36</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -995,7 +995,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v35</p>
+    <p class="ver">v36</p>
   </div>
 </section>
 </div>
@@ -1029,7 +1029,7 @@ const ACC={
  miku:{n:"佐倉みく",h:"@miku_osana",av:"assets/av-miku.jpg"},
  staff:{n:"佐藤大輔｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
  sora:{n:"青木そら",h:"@sora_music",av:"assets/av-sora.jpg"},
- akari:{n:"伊達さゆり",h:"@sayuri_date",av:"assets/av-akari.jpg"},
+ akari:{n:"ジウ｜Hearts2Hearts リーダー",h:"@jiwoo_h2h",av:"assets/av-akari.jpg"},
  sea:{n:"カリナ｜aespa リーダー",h:"@karina_aespa",av:"assets/av-sea.jpg"},
  mina:{n:"ミナ｜TWICE",h:"@mina_twice",av:"assets/av-mina.jpg"},
  media:{n:"『ライブステージ』公式",h:"@livestage_tv",av:"assets/av-media.jpg"},
@@ -1051,12 +1051,12 @@ const STANCES=[
  {id:"variety",t:"天然・バラエティ系",d:"共演で爪痕を残す、天然タイプ。",bonus:"dist",bonusTx:"彼との距離"}];
 const FIRSTS=[
  {id:"sea",t:"カリナ｜韓国ガールズグループ「aespa」のリーダー",d:"楽屋で挨拶したら、その場でフォローしてくれた。"},
- {id:"akari",t:"伊達さゆり｜同期デビューのアイドル",d:"同じ日にデビューした、ライバルであり戦友。"},
+ {id:"akari",t:"ジウ｜Hearts2Heartsのリーダー",d:"同じグループのメンバーとして一緒にデビューした、ライバルであり戦友。"},
  {id:"mina",t:"ミナ｜TWICEのメンバー、先輩アイドル",d:"大先輩からの、フォロー第1号。"}];
 /* welcome post each idol first-follower drops at the top of the Day 1 feed */
 const FIRST_WELCOME={
  sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。楽屋で聴いた歌声、ずっと頭に残ってます。無理せず、自分のペースで。また同じステージで会いましょう。",lk:842,rp:126,rc:37},
- akari:{tx:"なお、デビューおめでとう！！ 同じ日デビューの同期として、負けないからね。……でも、ほんとにおめでとう。",lk:154,rp:23,rc:11},
+ akari:{tx:"なお、デビューおめでとう！！ 同じHearts2Heartsのメンバーとして、ここから一緒に駆け抜けようね。最年長、頼りにしてるよ。……でも、負けないからね。",lk:154,rp:23,rc:11},
  mina:{tx:"デビュー、おめでとうございます。歌、聴きました。……静かに、応援しています。",lk:2314,rp:487,rc:96}};
 </script>
 <script>
@@ -1085,7 +1085,7 @@ choices:[
 {t:"記事を自画自賛気味に連投する",r:"熱量は伝わったけど「調子に乗ってる？」の声も。炎上の芽、小さく1つ。",fx:{fol:55,cog:6,xp:5,dist:0,flm:9}}]},
 activity:[
 {t:"デビュー曲のサビをアカペラで投稿する",who:["ひとりで"],r:"30秒のアカペラ動画。「生歌つよい」のコメントが付き始めた。",fx:{fol:35,cog:5,xp:10,dist:0,flm:0}},
-{t:"同期さゆりの投稿にリプで絡みに行く",who:["さゆり"],r:"さゆり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
+{t:"同期ジウの投稿にリプで絡みに行く",who:["ジウ"],r:"ジウ「なおの声、ずるいくらい好き」なんて言ってくれて、メンバーの絆が深まった。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
 {t:"大翔の新曲ポストに、感想リプをそっと置く",who:["井汲大翔"],r:"数百件のリプに埋もれたはず。……でも、その投稿のいいね欄に、後で自分の名前が残ることになる。",fx:{fol:5,cog:1,xp:6,dist:3,flm:2}}],
 dm:{who:"miku",msgs:["デビューおめでとう！！ 私、フォロワー1号だからね！？","X見てるよ。緊張してない？"],
 choices:[{t:"「ありがとう、1号は特別だよ」と返す",r:"みく「特別いただきました！！ 全力で布教するね」",fx:{fol:15,xp:4,dist:0,flm:0,cog:1}},
@@ -1116,13 +1116,13 @@ activity:[
 {t:"音楽番組の収録見学に行く（関係者席）",who:["ひとりで"],r:"ステージ袖から見る先輩たちの本番。大翔の歌い出しで、思わず息を止めた。いつか、あの並びに。",fx:{fol:0,cog:3,xp:12,dist:4,flm:0}},
 {t:"新曲の感想募集ポストに丁寧に返信して回る",who:["ファン"],r:"一人ひとりへの返信が「神対応の新人」と小さく話題に。",fx:{fol:55,cog:5,xp:8,dist:0,flm:0}},
 {t:"大翔が出る配信イベントを視聴して感想をポスト",who:["井汲大翔"],r:"感想ポスト、控えめなのに具体的に書いた。それが回り回って、本人の目に留まる距離まで届いた気がする。",fx:{fol:30,cog:4,xp:8,dist:5,flm:2}}],
-dm:{who:"akari",msgs:["なおー！ さゆりだよ、同期の！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
-choices:[{t:"「行こ行こ！ さゆりのステージも観たよ」と返す",r:"さゆり「やった！ 推し同士みたいな同期になろ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
-{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"さゆり「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
+dm:{who:"akari",msgs:["なおー！ ジウだよ、リーダーの！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
+choices:[{t:"「行こ行こ！ ジウのパート、今日も最高だったよ」と返す",r:"ジウ「やった！ 最強のメンバー同士でいよ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
+{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"ジウ「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
 {day:"Day 3 ― 同じ番組の日",
 banner:"音楽番組『ライブステージ』収録日。出演者リストに、大翔と、なお。同じ紙に名前が載った。",
 seed:[
-{a:"media",tx:"今夜の『ライブステージ』出演：井汲大翔、伊達さゆり、新人・なお ほか。お楽しみに！",lk:3210,rp:640,rc:98},
+{a:"media",tx:"今夜の『ライブステージ』出演：井汲大翔、Hearts2Hearts、新人・なお ほか。お楽しみに！",lk:3210,rp:640,rc:98},
 {a:"fan1",tx:"なおちゃんテレビ出演！！ 録画予約した！！",lk:88,rp:12,rc:5},
 {a:"hiroto",tx:"今日は収録です。頑張ります。",lk:9870,rp:1502,rc:233}],
 posts:[
@@ -1226,7 +1226,7 @@ choices:[
 {t:"記事を自画自賛気味に連投する",r:"熱量は伝わったけど「調子に乗ってる？」の声も。炎上の芽、小さく1つ。",fx:{fol:55,cog:6,xp:5,dist:0,flm:9}}]},
 activity:[
 {t:"デビュー曲のサビをアカペラで投稿する",who:["ひとりで"],r:"30秒のアカペラ動画。「生歌つよい」のコメントが付き始めた。",fx:{fol:35,cog:5,xp:10,dist:0,flm:0}},
-{t:"同期さゆりの投稿にリプで絡みに行く",who:["さゆり"],r:"さゆり「なおの声、ずるいくらい好き」なんて言ってくれて、同期の輪ができた。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
+{t:"同期ジウの投稿にリプで絡みに行く",who:["ジウ"],r:"ジウ「なおの声、ずるいくらい好き」なんて言ってくれて、メンバーの絆が深まった。",fx:{fol:20,cog:3,xp:8,dist:0,flm:0}},
 {t:"サクヤのカムバポストに、感想リプをそっと置く",who:["サクヤ"],r:"数百件のリプに埋もれたはず。……でも、その投稿のいいね欄に、後で自分の名前が残ることになる。",fx:{fol:5,cog:1,xp:6,dist:3,flm:2}}],
 dm:{who:"miku",msgs:["デビューおめでとう！！ 私、フォロワー1号だからね！？","X見てるよ。緊張してない？"],
 choices:[{t:"「ありがとう、1号は特別だよ」と返す",r:"みく「特別いただきました！！ 全力で布教するね」",fx:{fol:15,xp:4,dist:0,flm:0,cog:1}},
@@ -1257,13 +1257,13 @@ activity:[
 {t:"音楽番組の収録見学に行く（関係者席）",who:["ひとりで"],r:"ステージ袖から見る先輩たちの本番。サクヤのダンスのキレに、思わず息を止めた。いつか、あの並びに。",fx:{fol:0,cog:3,xp:12,dist:4,flm:0}},
 {t:"新曲の感想募集ポストに丁寧に返信して回る",who:["ファン"],r:"一人ひとりへの返信が「神対応の新人」と小さく話題に。",fx:{fol:55,cog:5,xp:8,dist:0,flm:0}},
 {t:"NCT WISHが出る配信イベントを視聴して感想をポスト",who:["サクヤ"],r:"感想ポスト、控えめなのに具体的に書いた。「言葉の選び方が、雨の日の図書館みたいで好きです」――それが回り回って、本人の目に留まる距離まで届いた気がする。",fx:{fol:30,cog:4,xp:8,dist:5,flm:2}}],
-dm:{who:"akari",msgs:["なおー！ さゆりだよ、同期の！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
-choices:[{t:"「行こ行こ！ さゆりのステージも観たよ」と返す",r:"さゆり「やった！ 推し同士みたいな同期になろ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
-{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"さゆり「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
+dm:{who:"akari",msgs:["なおー！ ジウだよ、リーダーの！","切り抜き伸びてるの見た、すごいね。今度ごはん行こ"],
+choices:[{t:"「行こ行こ！ ジウのパート、今日も最高だったよ」と返す",r:"ジウ「やった！ 最強のメンバー同士でいよ」",fx:{fol:20,xp:6,dist:0,flm:0,cog:2}},
+{t:"「ありがとう、でもまだ全然だよ」と謙遜する",r:"ジウ「謙遜も可愛いな！？ ほんと行こね」",fx:{fol:10,xp:5,dist:0,flm:0,cog:1}}]}},
 {day:"Day 3 ― 同じ番組の日",
 banner:"音楽番組『ライブステージ』収録日。出演者リストに、NCT WISHと、Hearts2Hearts。同じ紙に名前が載った。",
 seed:[
-{a:"media",tx:"今夜の『ライブステージ』出演：NCT WISH、伊達さゆり、Hearts2Hearts ほか。お楽しみに！",lk:3210,rp:640,rc:98},
+{a:"media",tx:"今夜の『ライブステージ』出演：NCT WISH、Hearts2Hearts ほか。お楽しみに！",lk:3210,rp:640,rc:98},
 {a:"fan1",tx:"なおちゃんテレビ出演！！ 録画予約した！！",lk:88,rp:12,rc:5},
 {a:"sakuya",tx:"今日は収録です。よろしくお願いします。楽屋のお菓子が豊作でした。",lk:9870,rp:1502,rc:233}],
 posts:[
@@ -1359,7 +1359,7 @@ flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜�
 quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、収録の帰り道。サクヤが少し離れたところから、丁寧に言った。「なおさんの声は、雨上がりの空みたいです。……好きです」\nそれを聞いたのは、誰もいない廊下で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
 start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\nサクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 新曲","58,910 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#プリン被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
-const STORY=[["hiroto","井汲大翔"],["akari","伊達さゆり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
 const TARGETS={
  hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/ig-gen-stage.jpg",typo:"HIROTO IKUMI",bio:"歌手。歌とステージがすべて。",fol:"284万",cardT:"井汲大翔｜先輩歌手",cardD:"憧れの先輩歌手。言葉少なめ、でも目が離せない。",tags:["先輩歌手","ソロ"]},
@@ -1373,7 +1373,7 @@ const SAKUYA_SEED=[
  {tx:"配信、決まりました。詳細はまた。よろしくお願いします。",lk:14230,rp:2590,rc:411},
  {tx:"朝の駅前のクロワッサン、やっと買えました。うれしい。",lk:16780,rp:2904,rc:601}];
 const TRENDS_S=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","NCT WISH カムバ","61,204 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#クロワッサン被り","8,120 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
-const STORY_S=[["sakuya","サクヤ"],["akari","伊達さゆり"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+const STORY_S=[["sakuya","サクヤ"],["akari","ジウ"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
 function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
 function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
 function distLab(){return tgt().short+"との距離";}
@@ -1440,7 +1440,7 @@ let selH=null,selSt=null,selF=null,selW=null,selT=null;
 function renderOpts(el,items,gt,gd,cb,gc){el.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="opt";b.innerHTML="<b></b><span></span>"+(gc?'<span class="chip"></span>':"");b.querySelector("b").textContent=gt(it);b.querySelector("span").textContent=gd(it);if(gc)b.querySelector(".chip").textContent=gc(it);b.onclick=()=>{el.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");cb(it);};el.appendChild(b);});}
 renderOpts($("#handles"),HANDLES,x=>x.h,x=>x.d,it=>{selH=it;chkP();},x=>x.fx);
 renderOpts($("#stances"),STANCES,x=>x.t,x=>x.d,it=>{selSt=it;chkP();},x=>x.bonusTx);
-(function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["同期デビュー","アイドル"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
+(function(){const box=$("#firsts");if(!box)return;const FV={sea:["aespa","リーダー","韓国活動"],akari:["Hearts2Hearts","リーダー","同期"],mina:["TWICE","先輩アイドル"]};FIRSTS.forEach(f=>{const b=document.createElement("button");b.className="opt card";const tags=FV[f.id]||[];const nm=f.t.split("｜")[0],role=(f.t.split("｜")[1]||"");const av=ACC[f.id]&&ACC[f.id].av; b.innerHTML=(av?'<img class="cimg" src="'+av+'" alt="">':'')+'<span class="cmain"><b></b><span class="d"></span><span class="pills">'+tags.map(t=>'<span class="pill">'+t+"</span>").join("")+"</span></span>";b.querySelector("b").textContent=nm+"｜"+role;b.querySelector(".d").textContent=f.d;b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selF=f;$("#btn-first").disabled=false;};box.appendChild(b);});})();
 function chkP(){$("#btn-persona").disabled=!(selH&&selSt);}
 $("#btn-start").onclick=()=>{S=defState();selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
