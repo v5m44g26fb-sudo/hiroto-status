@@ -2350,7 +2350,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v138</p>
+  <p class="ver">v139</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2507,7 +2507,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v138</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v139</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2739,7 +2739,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v138</p>
+    <p class="ver">v139</p>
   </div>
 </section>
 </div>
@@ -3639,7 +3639,14 @@ function storyList(){
  /* v66: legacy saves may still carry the 150px avatar file as a story
     backdrop (the old Day-2 event chain entry) - remap it at display time
     to the studio photo. Save format untouched. */
- const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).filter(d=>STORY_ALLOW.has(d.k)).map(d=>({k:d.k,lab:d.lab,img:d.img==="assets/ig-avatar.jpg"?"assets/ig-gen-studio.jpg":d.img,cap:d.cap||"",uid:d.uid}));
+ /* v139: two v128 second-wave entries carried the target's own photos
+    (ig-gen-stage / ig-gen-studio are Hiroto himself) under other
+    members' stories - a person mismatch. The tables now carry scene
+    photos, and saves that already burned the old paths in are fixed
+    here at display time, keyed by the chain uid so only those two
+    entries are ever rewritten. */
+ const STORY_FIX={"d-post-4-b":"assets/pin-studio.jpg","d-act-3-b":"assets/nao-stage-dance.jpg"};
+ const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).filter(d=>STORY_ALLOW.has(d.k)).map(d=>({k:d.k,lab:d.lab,img:STORY_FIX[d.uid]||(d.img==="assets/ig-avatar.jpg"?"assets/ig-gen-studio.jpg":d.img),cap:d.cap||"",uid:d.uid}));
  /* v55 (supersedes the v43 order): newest first. Own story stays pinned to
     the left edge; everyone else sorts by when their story began to be
     displayed, newest closest to your own. Chain stories (storyDyn, kept in
@@ -3681,13 +3688,13 @@ const STORY_CHAIN={
 const STORY_CHAIN2={
  post:{1:{k:"fan1",lab:"ゆな",img:"assets/nao-stage.jpg",cap:"デビュー曲、初披露見たよ…！"},
   2:{k:"miku",lab:"みく",img:"assets/night.jpg",cap:"帰り道、ニュースで見て二度見した"},
-  4:{k:"ian",lab:"イアン",img:"assets/ig-gen-studio.jpg",cap:"今日のレッスン、なおと一緒だった"},
+  4:{k:"ian",lab:"イアン",img:"assets/pin-studio.jpg",cap:"今日のレッスン、なおと一緒だった"},
   6:{k:"miku",lab:"みく",img:"assets/gen-story-news.jpg",cap:"発表の記事、スクショした"}},
  event:{2:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"楽屋なう、なおと一緒"},
   3:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"収録、モニターで見てたよ"},
   4:{k:"yuha",lab:"ユハ",img:"assets/nao-stage-confetti.jpg",cap:"なおのステージ、袖で泣きそうだった"},
   6:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日のなお、最高の顔してた"}},
- act:{3:{k:"stella",lab:"ステラ",img:"assets/ig-gen-stage.jpg",cap:"ステージ袖から見てた、かっこよかった"},
+ act:{3:{k:"stella",lab:"ステラ",img:"assets/nao-stage-dance.jpg",cap:"ステージ袖から見てた、かっこよかった"},
   5:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"最終日、みんなで乗り切ろうね"},
   6:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"発表の瞬間、みんなで見てた"}}};
 function addStory(kind){
