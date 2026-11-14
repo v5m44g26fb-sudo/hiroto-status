@@ -1213,6 +1213,27 @@ input,textarea{font-size:16px}
    no longer stretch across the fullscreen story viewer; they present
    as a photo card near native size over the account-hue gradient. ===== */
 .sv-photo{width:min(76vw,296px);aspect-ratio:1;object-fit:cover;object-position:center 22%;border-radius:20px;border:3px solid rgba(255,255,255,.92);box-shadow:0 18px 44px rgba(0,0,0,.5);animation:fadeup .35s ease}
+/* ===== v69: thread replies actually work - the docked composer pill
+   expands into a real input form inside #threadbar (the dock stays
+   in-flow above the nav; nothing floats, heights stay --app-h based).
+   Sent replies join the thread at once, persist as ordinary posts in
+   the save, and draw one hand-written reaction (see REPLY_REACT). ===== */
+#tc-pill{cursor:pointer}
+.tc-form{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1.5px solid #1d9bf0;border-radius:18px;padding:10px 12px;box-shadow:0 8px 22px rgba(15,20,25,.10)}
+.tc-form .avatar{flex:none;margin-top:2px}
+.tc-fmain{flex:1;min-width:0}
+.tc-to{font-size:12px;color:#536471;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-to b{color:#1d9bf0;font-weight:400}
+#tc-input{width:100%;border:none;outline:none;resize:none;font:inherit;font-size:15.5px;line-height:1.5;color:#0f1419;background:transparent;padding:0;max-height:110px}
+#tc-input::placeholder{color:#536471}
+.tc-frow{display:flex;align-items:center;gap:8px;margin-top:7px;border-top:1px solid #eff3f4;padding-top:8px}
+.tc-count{font-size:12px;color:#536471;margin-right:auto;font-variant-numeric:tabular-nums}
+.tc-count.warn{color:#ffad1f;font-weight:700}.tc-count.over{color:#f4212e;font-weight:700}
+.tc-cancel{background:none;border:none;font:inherit;font-size:13.5px;font-weight:700;color:#536471;padding:7px 10px;border-radius:999px;cursor:pointer}
+.tc-cancel:active{background:#eff3f4}
+.tc-send{background:linear-gradient(135deg,#1d9bf0,#7856ff);color:#fff;border:none;font:inherit;font-size:13.5px;font-weight:800;border-radius:999px;padding:8px 18px;cursor:pointer;transition:opacity .15s ease,transform .1s ease}
+.tc-send:disabled{opacity:.45;cursor:default}
+.tc-send:not(:disabled):active{transform:scale(.94)}
 </style>
 </head>
 <body>
@@ -1227,7 +1248,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v68</p>
+  <p class="ver">v69</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1368,7 +1389,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v68</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v69</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1419,7 +1440,7 @@ input,textarea{font-size:16px}
     <button id="btn-activity">Activity</button>
     <button id="btn-nextday">次の日へ →</button>
   </div>
-  <div id="threadbar"><div class="thread-composer"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><span class="tc-ph">返信をポスト</span><span class="tc-btn">返信</span></div></div>
+  <div id="threadbar"><div class="thread-composer" id="tc-pill" role="button" aria-label="返信を書く"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><span class="tc-ph">返信をポスト</span><span class="tc-btn">返信</span></div><div class="tc-form hidden" id="tc-form"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><div class="tc-fmain"><div class="tc-to" id="tc-to"></div><textarea id="tc-input" rows="2" maxlength="140" placeholder="返信をポスト"></textarea><div class="tc-frow"><span class="tc-count" id="tc-count"></span><button class="tc-cancel" id="tc-cancel" type="button">キャンセル</button><button class="tc-send" id="tc-send" type="button" disabled>返信</button></div></div></div></div>
   <button id="x-compose-btn" aria-label="投稿">＋</button>
   <div id="x-compose">
     <div class="xc-head">
@@ -1527,7 +1548,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v68</p>
+    <p class="ver">v69</p>
   </div>
 </section>
 </div>
@@ -2031,6 +2052,7 @@ function postEl(p,hot){
   initTog(".like-btn","liked","#f91880",!!p.liked); initTog(".rp-btn","rped",null,!!p.rped);
   const bind=(sel,cls,fill,key)=>{const el=d.querySelector(sel);if(!el)return;el.addEventListener("click",e=>{e.stopPropagation();const on=el.dataset.on==="1";let n=parseInt(el.dataset.n||"0",10);n=on?Math.max(0,n-1):n+1;el.dataset.n=n;el.dataset.on=on?"":"1";el.classList.toggle(cls,!on);p[key]=!on;let b=el.querySelector("b");if(n>0){if(!b){el.insertAdjacentHTML("beforeend","<b></b>");b=el.querySelector("b");}b.textContent=fmtCnt(n);}else if(b){b.remove();}const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",!on?fill:"none");popSvg(el);persist();});};
   bind(".like-btn","liked","#f91880","liked"); bind(".rp-btn","rped",null,"rped");
+  const rb=d.querySelector(".reply-btn");if(rb)rb.addEventListener("click",()=>{try{tcAutoOpen=true;}catch(_){}});
   const bk=d.querySelector(".bmk-btn");if(bk){if(p.bmked){bk.dataset.on="1";bk.classList.add("bmked");const s0=bk.querySelector("svg");if(s0)s0.setAttribute("fill","#1d9bf0");}bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);p.bmked=!on;const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);persist();});}
   return d;
 }
@@ -2182,7 +2204,7 @@ const NTYPE={
  bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>'};
 const NLAB={heart:"いいね",dm:"DM",follow:"フォロー",news:"世間の動き",bell:"お知らせ"};
 /* v64: DM reads as DM even when it comes from him (display classification only) */
-function notifType(n){if((n.tx||"").includes("DM"))return"dm";if(n.a===tgtKey())return"heart";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
+function notifType(n){if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("いいね"))return"heart";if(n.a===tgtKey())return"heart";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
@@ -2313,7 +2335,7 @@ document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains
 function renderFeed(){
  const tl=$("#tl-posts");tl.innerHTML="";
  const tab=S._htab||"rec";
- let posts=S.posts;
+ let posts=S.posts.filter(p=>!p.isReply);
  if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
  renderMePosts();renderHisPosts();
@@ -2325,7 +2347,7 @@ function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[
 function threadReplies(p){
  if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[]);const seen=new Set(),out=[];p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);out.push(o);}});if(out.length)return out;}
  const idx=(S.posts||[]).indexOf(p);if(idx<0)return[];
- return S.posts.slice(idx+1).filter(q=>q&&!q.sys&&q.a!==p.a).slice(0,3);
+ return S.posts.slice(idx+1).filter(q=>q&&!q.sys&&!q.isReply&&q.a!==p.a).slice(0,3);
 }
 function renderThread(p){
  $("#thread-sub").textContent=p.n;
@@ -2353,20 +2375,114 @@ function renderThread(p){
   box.appendChild(el);});
  /* v63: the docked composer names who you are replying to */
  const ph=$(".tc-ph");if(ph)ph.textContent=p.n+" さんへの返信をポスト";
+ /* v69: every thread switch starts from the collapsed pill again; a tap
+    on a post's reply icon asks the composer to open straight away */
+ try{tcResetComposer();}catch(_){}
+ if(tcAutoOpen){tcAutoOpen=false;setTimeout(()=>{try{tcSetForm(true);}catch(_){}},140);}
 }
 function openPostThread(p){
  if(!p||p.sys)return;
  const open=$("#x-pane-thread").style.display==="block";
- if(open&&threadStack.length&&threadStack[threadStack.length-1].id===p.id)return;
+ if(open&&threadStack.length&&threadStack[threadStack.length-1].id===p.id){if(tcAutoOpen){tcAutoOpen=false;setTimeout(()=>{try{tcSetForm(true);}catch(_){}},140);}return;}
  if(!open){threadFrom=curPane;threadScroll=$("#x-scroll").scrollTop;threadStack=[];}
  threadStack.push(p);
  showPane("thread");renderThread(p);
 }
 $("#thread-back").addEventListener("click",()=>{
+ try{tcResetComposer();}catch(_){}
  threadStack.pop();
  if(threadStack.length){renderThread(threadStack[threadStack.length-1]);$("#x-scroll").scrollTop=0;panePop($("#x-pane-thread"));}
  else{if(threadFrom==="tl")renderFeed();showPane(threadFrom||"tl");$("#x-scroll").scrollTop=threadScroll;panePop($("#x-pane-"+curPane));}
 });
+/* ===== v69: replies to posts, working end to end =====
+   The docked pill expands into a real form inside #threadbar. A sent
+   reply becomes an ordinary post object flagged isReply (+ replyTo),
+   appended to the parent's replyIds, so it renders in the thread,
+   survives reloads through the normal save, and shows under the
+   profile 返信 tabs - while the feed and the post tabs filter replies
+   out. Numbers: replies move NO game stats (fol/cog/flm/dist/xp all
+   untouched); the only counts that move are the parent post's own
+   reply counter and, on a like reaction, the reply's own like count.
+   Reactions are hand-written pools per context (never stitched text):
+   the target answers in character, members / fans / official accounts
+   answer in theirs, and a reply under your own post draws a fan or a
+   member. One reaction per sent reply, landing ~1.5-2.4s later even
+   if you have already left the thread. */
+let tcAutoOpen=false;
+function tcParent(){return threadStack.length?threadStack[threadStack.length-1]:null;}
+function tcSetForm(on){
+ const pill=$("#tc-pill"),form=$("#tc-form");if(!pill||!form)return;
+ pill.classList.toggle("hidden",on);form.classList.toggle("hidden",!on);
+ if(on){const p=tcParent(),to=$("#tc-to");
+  if(to){to.innerHTML="";if(p){to.appendChild(document.createTextNode("返信先： "));const b=document.createElement("b");b.textContent=p.h;to.appendChild(b);to.appendChild(document.createTextNode(" さん"));}}
+  tcSyncSend();const inp=$("#tc-input");setTimeout(()=>{try{inp.focus({preventScroll:true});}catch(_){}},60);}
+}
+function tcResetComposer(){const f=$("#tc-form"),p=$("#tc-pill"),i=$("#tc-input");if(i)i.value="";if(f)f.classList.add("hidden");if(p)p.classList.remove("hidden");tcSyncSend();}
+function tcSyncSend(){const inp=$("#tc-input"),btn=$("#tc-send"),cnt=$("#tc-count");if(!inp||!btn)return;const len=[...inp.value.replace(/\n/g,"")].length;btn.disabled=!inp.value.trim();if(cnt){cnt.textContent=inp.value?String(len):"";cnt.className="tc-count"+(len>120?" warn":"");}}
+function tcBumpReplyCount(p,by){try{const v=parseInt(String(p.m&&p.m[0]!=null?p.m[0]:"0").replace(/[^0-9]/g,""),10)||0;p.m=p.m||["0","0","0"];p.m[0]=String(v+by);}catch(_){}}
+function tcScrollToLastReply(){setTimeout(()=>{const els=$$("#thread-replies .post");if(els.length)els[els.length-1].scrollIntoView({behavior:"smooth",block:"center"});},90);}
+function tcSendReply(){
+ const inp=$("#tc-input"),parent=tcParent();if(!inp||!parent||!inp.value.trim())return;
+ const tx=inp.value.trim();
+ /* if the thread was showing heuristic fallback replies, pin them into
+    replyIds first so what is on screen now stays on screen */
+ if(!parent.replyIds||!parent.replyIds.length)parent.replyIds=threadReplies(parent).map(r=>r.id);
+ const rp=mkPost("nao",tx,0,0,0,true,null);rp.isReply=true;rp.replyTo=parent.id;
+ S.posts.push(rp);parent.replyIds.push(rp.id);tcBumpReplyCount(parent,1);
+ inp.value="";tcSetForm(false);save();
+ renderThread(parent);tcScrollToLastReply();
+ tcScheduleReaction(parent,rp);
+}
+const REPLY_REACT={
+ hiroto:{tx:["ありがとう。……読んだよ","うん、ありがとう","……なんか、うれしいな","おつかれさま。無理せんとってな"],like:.45},
+ sakuya:{tx:["わあ、ありがとうございます","その言葉、静かにうれしいです","覚えていてくれて、ありがとうございます","……雲ひとつない気持ちになりました"],like:.4},
+ member:{tx:["なおー！ 見たよ見たよ","わかる、それ言いたかったやつ","最年長、さすがの言葉選び","ねえねえ、あとで楽屋でも話そ"],like:.3},
+ fan:{tx:["ほんとそれです…！","なおちゃん、言葉がまっすぐで好き","引用したいくらい、良い返信","わたしも同じ気持ちでした"],like:.3},
+ official:{tx:["ありがとうございます。引き続き、よろしくお願いいたします","ご注目、ありがとうございます","今後の続報にも、ご期待ください"],like:.35},
+ matome:{tx:["新人・なお、ファンへの返信もまめな模様","【観測】なお、界隈への返信が丁寧と話題に"],like:.3},
+ generic:{tx:["ありがとうございます！","見てくれて、うれしいです","その一言、励みになります"],like:.35},
+ ownpost:{tx:["ほんとそれです…！","なおちゃんの言葉、刺さります","わかる、わかりすぎる"],who:["fan1","fan1","akari"],like:.3}};
+function tcReactCtx(parent){
+ const a=parent.a;
+ if(a==="hiroto"||a==="sakuya")return{pool:REPLY_REACT[a],who:a};
+ if(a==="nao")return{pool:REPLY_REACT.ownpost,who:null};
+ if(["akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(a))return{pool:REPLY_REACT.member,who:a};
+ if(a==="fan1"||a==="fan2")return{pool:REPLY_REACT.fan,who:a};
+ if(a==="media"||a==="staff")return{pool:REPLY_REACT.official,who:a};
+ if(a==="matome")return{pool:REPLY_REACT.matome,who:a};
+ return{pool:REPLY_REACT.generic,who:a};
+}
+function tcScheduleReaction(parent,myReply){
+ const pid=parent.id,rid=myReply.id;
+ setTimeout(()=>{
+  if(!S||!S.started)return;
+  const all=(S.posts||[]).concat(S.men||[]);
+  const par=all.find(x=>x&&x.id===pid);if(!par)return;
+  const ctx=tcReactCtx(par);
+  if(Math.random()<ctx.pool.like){
+   const mine=all.find(x=>x&&x.id===rid);
+   if(mine){const v=parseInt(String(mine.m&&mine.m[2]!=null?mine.m[2]:"0").replace(/[^0-9]/g,""),10)||0;mine.m=mine.m||["0","0","0"];mine.m[2]=String(v+1);}
+   S.notifs.unshift({a:ctx.who||"fan1",tx:"さんがあなたの返信をいいねしました",sub:curCH()[S.ch-1].day});
+   save();try{renderNotifs();}catch(_){}
+   if(tcParent()&&tcParent().id===pid)renderThread(par);
+   return;
+  }
+  let who=ctx.who;
+  if(!who){const ws=REPLY_REACT.ownpost.who;who=ws[Math.floor(Math.random()*ws.length)];}
+  const line=ctx.pool.tx[Math.floor(Math.random()*ctx.pool.tx.length)];
+  const r=mkPost(who,line,Math.floor(Math.random()*24),0,Math.floor(Math.random()*4),false,null);
+  r.isReply=true;r.replyTo=pid;
+  S.posts.push(r);
+  if(!par.replyIds||!par.replyIds.length)par.replyIds=threadReplies(par).map(x=>x.id);
+  if(!par.replyIds.includes(r.id))par.replyIds.push(r.id);
+  tcBumpReplyCount(par,1);save();
+  if(tcParent()&&tcParent().id===pid){renderThread(par);tcScrollToLastReply();}
+ },1500+Math.random()*900);
+}
+$("#tc-pill").addEventListener("click",()=>tcSetForm(true));
+$("#tc-cancel").addEventListener("click",()=>{const i=$("#tc-input");if(i)i.value="";tcSetForm(false);});
+$("#tc-send").addEventListener("click",tcSendReply);
+$("#tc-input").addEventListener("input",tcSyncSend);
 /* profile tabs (real-X linkage: post / reply / media grid / likes) */
 let meTab="post",hisTab="post";
 const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-concept.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg","assets/nao-stream-selfie.jpg","assets/nao-backstage-selfie.jpg","assets/nao-makeup.jpg"];
@@ -2376,9 +2492,9 @@ function mediaGrid(imgs){const g=document.createElement("div");g.className="medi
 function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
- const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>p.mine).length+" ポスト";
- if(meTab==="post"){const mine=S.posts.filter(p=>p.mine);if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(meTab==="reply"){box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。"));}
+ const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>p.mine&&!p.isReply).length+" ポスト";
+ if(meTab==="post"){const mine=S.posts.filter(p=>p.mine&&!p.isReply);if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(mediaGrid(imgs));}
  else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
 }
@@ -2393,11 +2509,11 @@ function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;cons
 function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#his-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===hisTab));
  renderTargetProfile();
- const his=S.posts.filter(p=>p.a===tgtKey()&&!p.sys);
+ const his=S.posts.filter(p=>p.a===tgtKey()&&!p.sys&&!p.isReply);
  const pc=$("#his-pcount");if(pc)pc.textContent=his.length+" ポスト";
  renderFollowBtn();
  if(hisTab==="post"){if(!his.length)box.appendChild(mkEmpty("まだポストがない",""));else his.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(hisTab==="reply"){box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。"));}
+ else if(hisTab==="reply"){const reps=S.posts.filter(p=>p.a===tgtKey()&&p.isReply);if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(hisTab==="media"){const imgs=[];his.forEach(p=>{if(p.img&&!imgs.includes(p.img))imgs.push(p.img);});if(!imgs.length)box.appendChild(mkEmpty("メディアはまだない","写真つきポストをすると、ここに並ぶよ。"));else box.appendChild(mediaGrid(imgs));}
  else if(hisTab==="like"){box.appendChild(mkEmpty("いいねは非公開です",tgt().name+"さんがいいねしたポストは、他の人には表示されないよ。"));}
 }
