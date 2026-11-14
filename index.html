@@ -2173,7 +2173,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v122</p>
+  <p class="ver">v123</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2328,7 +2328,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v122</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v123</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2539,7 +2539,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v122</p>
+    <p class="ver">v123</p>
   </div>
 </section>
 </div>
@@ -3322,7 +3322,7 @@ function renderNotifs(){
    Backdrops reuse photos already in the game; accounts without one get a
    gradient + initial, so no new photos or story text are introduced. */
 const SV_DUR=5000;
-let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0;
+let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0,svDragX=0,svDragY=0,svDragMode=false,svDragDy=0;
 function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":" unseen")+(e.k==="nao"?" mine":"");b.setAttribute("aria-label",e.lab+"のストーリー");const ringImg=(e.k==="nao"&&e.img)?e.img:a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
 /* v107: stories belong to the people at the centre of the story only -
    her, the Hearts2Hearts members, the target, the first follower, Miku
@@ -3468,12 +3468,24 @@ function svStep(d){
  renderStorySeg();svStartTimer();
 }
 function openStory(i){svIdx=Math.max(0,Math.min(storyList().length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
-function closeStory(){svStopTimer();svPaused=false;$("#storyviewer").classList.remove("on");$("#storyviewer").classList.remove("paused");renderStories();}
+function closeStory(){svStopTimer();svPaused=false;const v=$("#storyviewer");v.classList.remove("on");v.classList.remove("paused");v.style.transform="";v.style.opacity="";v.style.transition="";renderStories();}
 $("#sv-close").addEventListener("click",closeStory);
 $("#sv-id").addEventListener("click",()=>{const _e=storyList()[svIdx];const a=_e&&_e.k;if(a!==tgtKey()&&a!=="nao")return;closeStory();showPane(a==="nao"?"me":"hisprof");});
 function svZone(el,dir){if(!el)return;
- el.addEventListener("pointerdown",e=>{e.preventDefault();svDownAt=Date.now();svPaused=true;$("#storyviewer").classList.add("paused");});
- const release=nav=>{if(!svPaused&&!svDownAt)return;const held=Date.now()-svDownAt;svDownAt=0;svPaused=false;$("#storyviewer").classList.remove("paused");svLastTs=0;if(nav&&held<300)svStep(dir);};
+ el.addEventListener("pointerdown",e=>{e.preventDefault();svDownAt=Date.now();svPaused=true;$("#storyviewer").classList.add("paused");svDragX=e.clientX;svDragY=e.clientY;svDragMode=false;svDragDy=0;});
+ /* v123: a downward drag pulls the whole viewer with the finger -
+     past the threshold it dismisses, otherwise it snaps back. The
+     drag only engages on a clearly vertical intent, so taps and
+     holds keep their v70 behaviour. */
+ el.addEventListener("pointermove",e=>{if(!svDownAt)return;const dx=e.clientX-svDragX,dy=e.clientY-svDragY;
+  if(!svDragMode&&dy>16&&Math.abs(dy)>Math.abs(dx)*1.2)svDragMode=true;
+  if(svDragMode){svDragDy=Math.max(0,dy);const v=$("#storyviewer");v.style.transform="translateY("+svDragDy+"px)";v.style.opacity=String(Math.max(.35,1-svDragDy/420));}});
+ const release=nav=>{if(!svPaused&&!svDownAt)return;const held=Date.now()-svDownAt;svDownAt=0;svPaused=false;$("#storyviewer").classList.remove("paused");svLastTs=0;
+  if(svDragMode){const v=$("#storyviewer");const dy=svDragDy;svDragMode=false;svDragDy=0;
+   if(dy>110){v.style.transition="transform .22s ease-in,opacity .22s ease-in";v.style.transform="translateY(60px)";v.style.opacity="0";setTimeout(()=>{closeStory();},190);}
+   else{v.style.transition="transform .25s cubic-bezier(.2,.8,.3,1),opacity .25s ease";v.style.transform="";v.style.opacity="";setTimeout(()=>{v.style.transition="";},260);}
+   return;}
+  if(nav&&held<300)svStep(dir);};
  el.addEventListener("pointerup",()=>release(true));
  el.addEventListener("pointercancel",()=>release(false));
  el.addEventListener("pointerleave",()=>release(false));
