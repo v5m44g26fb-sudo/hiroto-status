@@ -2407,6 +2407,22 @@ input,textarea{font-size:16px}
 #x-pane-me .pf-ava{box-sizing:border-box;padding:3px;background:linear-gradient(135deg,#f6d67c,#f91880 55%,#7856ff);border-radius:50%;box-shadow:0 10px 26px rgba(120,40,120,.35)}
 #x-pane-me .pf-name{font-size:23px}
 .pf-rank{flex:none;font-size:11px;font-weight:900;letter-spacing:.1em;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:999px;padding:4px 11px;box-shadow:0 3px 10px rgba(247,201,72,.4)}
+/* ===== v147: ending, third raise - the finale's two stacked cards
+   (FINAL RESULT and 6 DAYS JOURNEY) merge into one record card: the
+   journey loses its own card chrome and reads as the panel's lower
+   section under a hairline, so the screen composes as title -> story
+   -> one record -> credits. The credits rows now roll in one by one
+   and FIN lands in gold. Also fixes the credits sub, which still
+   read "A FIVE-DAY STORY" after the six-day expansion. ===== */
+#scr-ending .end-panel .end-journey{width:auto;margin-top:13px;background:none;border:none;border-top:1px solid rgba(255,255,255,.13);border-radius:0;box-shadow:none;padding:13px 0 2px;animation:none}
+#scr-ending.on .ec-rows .ec-row{animation:fadeup .5s ease both}
+#scr-ending.on .ec-rows .ec-row:nth-child(1){animation-delay:.62s}
+#scr-ending.on .ec-rows .ec-row:nth-child(2){animation-delay:.72s}
+#scr-ending.on .ec-rows .ec-row:nth-child(3){animation-delay:.82s}
+#scr-ending.on .ec-rows .ec-row:nth-child(4){animation-delay:.92s}
+#scr-ending.on .ec-rows .ec-row:nth-child(5){animation-delay:1.02s}
+#scr-ending.on .ec-rows .ec-row:nth-child(6){animation-delay:1.12s}
+#scr-ending .ec-fin{color:#f7c948;text-shadow:0 2px 14px rgba(247,201,72,.35)}
 #x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
 #x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 #x-pane-me .rep-lab{color:#f7c948}
@@ -2467,7 +2483,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v146</p>
+  <p class="ver">v147</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2634,7 +2650,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v146</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v147</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2846,8 +2862,6 @@ input,textarea{font-size:16px}
       <div class="erow"><span class="elab">世間の認知度</span><span class="egauge"><i id="end-cog-g"></i></span><b id="end-cog"></b></div>
       <div class="erow fire"><span class="elab">炎上度</span><span class="egauge"><i id="end-flm-g"></i></span><b id="end-flm"></b></div>
       <div class="erow dist"><span class="elab" id="end-dist-lab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
-      <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
-    </div>
     <div class="end-journey" id="end-journey">
       <div class="ej-h"><span class="ej-t">6 DAYS JOURNEY</span><small>6日間の軌跡</small></div>
       <div class="ej-fol-h"><span>フォロワーの推移</span><b id="ej-fol-d"></b></div>
@@ -2856,11 +2870,13 @@ input,textarea{font-size:16px}
       <div class="ej-row"><span class="ej-lab" id="ej-dist-lab">ひろとの距離</span><span class="ej-stage" id="ej-stage"></span><span class="ej-dots" id="ej-dots"></span></div>
       <p class="ej-words" id="ej-words"></p>
     </div>
+      <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
+    </div>
     <div class="end-credits" id="end-credits">
       <div class="ec-rule" aria-hidden="true"></div>
       <p class="ec-eyebrow">CREDITS</p>
       <p class="ec-title">デビューしたら、<br>彼と同じステージの件</p>
-      <p class="ec-sub">STATUS × X ― A FIVE-DAY STORY</p>
+      <p class="ec-sub">STATUS × X ― A SIX-DAY STORY</p>
       <div class="ec-rows">
         <div class="ec-row"><span>主人公</span><b id="ec-hero"></b></div>
         <div class="ec-row"><span>近づいた相手</span><b id="ec-target"></b></div>
@@ -2873,7 +2889,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v146</p>
+    <p class="ver">v147</p>
   </div>
 </section>
 </div>
