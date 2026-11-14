@@ -1440,6 +1440,45 @@ input,textarea{font-size:16px}
 .folbtn.on{background:#0f1419;color:#fff;border-color:#0f1419}
 .counts span{cursor:pointer}
 .counts span:active{opacity:.6}
+/* ===== v135: follow list, second raise - the pane gains a network band
+   (both counts as big tabular figures under an eyebrow), a working
+   search pill in the v102 glass language (rows live in their own
+   container, so focus and the query survive re-renders), counts inside
+   the underline tabs, verified badges from the same VERIFIED set the
+   posts use, a real-X mutual chip (フォローされています) on accounts
+   present in both sets, staggered row entrance, and the follow button
+   speaking the app gradient (filled = not yet following, quiet white
+   pill = following). Set derivation, the target row's jump to his
+   profile and the session-local toggles are unchanged; nothing here
+   writes to the save. ===== */
+.folband{background:linear-gradient(120deg,#1b1035,#2c1650 55%,#3a1350);color:#fff;padding:13px 16px 14px}
+.folband-eye{font-size:10.5px;font-weight:800;letter-spacing:.22em;color:#cdbcf5}
+.folband-row{display:flex;align-items:flex-end;gap:22px;margin-top:7px}
+.fbn{display:flex;flex-direction:column;gap:1px}
+.fbn b{font-size:22px;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
+.fbn span{font-size:11.5px;color:#b9a8e8;font-weight:700}
+.fbn-note{flex:1;margin:0 0 2px;font-size:12px;line-height:1.55;color:#d9cff5;text-align:right}
+.folsearch{display:flex;align-items:center;gap:8px;margin:12px 16px 2px;padding:9px 13px;border:1px solid #e3e8ec;border-radius:999px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);transition:border-color .15s ease,box-shadow .15s ease}
+.folsearch:focus-within{border-color:#7856ff;box-shadow:0 0 0 3px rgba(120,86,255,.16)}
+.folsearch svg{width:16px;height:16px;flex:none;fill:none;stroke:#536471;stroke-width:2.2;stroke-linecap:round}
+.folsearch:focus-within svg{stroke:#7856ff}
+.folsearch input{flex:1;min-width:0;border:none;outline:none;background:none;font-family:inherit;font-size:16px;color:#0f1419}
+.folsearch input::placeholder{color:#8899a6}
+#fol-qx{flex:none;width:22px;height:22px;border:none;border-radius:50%;background:#e8edf0;color:#536471;font-size:14px;line-height:1;cursor:pointer;font-family:inherit}
+#fol-qx:active{background:#d7dee3}
+.foltabs button .ftab-n{font-size:12px;font-weight:800;color:#8a94a6;font-variant-numeric:tabular-nums}
+.foltabs button.act .ftab-n{color:#f91880}
+@keyframes folrise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+#x-pane-follow .folrow{animation:folrise .3s ease both;padding:14px 16px}
+#x-pane-follow .folrow .avatar,#x-pane-follow .folrow .ava-txt{width:48px;height:48px;font-size:18px}
+.folrow .fr-namerow{display:flex;align-items:center;gap:4px;min-width:0}
+.folrow .fr-namerow .fr-name{flex:0 1 auto;min-width:0}
+.folrow .fr-namerow .p-ver{width:15px;height:15px}
+.folrow .fr-handle{display:flex;align-items:center;gap:6px}
+.folrow .fr-handle .fr-h{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr-mutual{flex:none;font-size:10.5px;font-weight:700;color:#536471;background:#eff3f4;border-radius:5px;padding:1.5px 6px;white-space:nowrap}
+#x-pane-follow .folbtn{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25);padding:8px 16px}
+#x-pane-follow .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
 #thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
 #thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
 #thread-main .post.detail .mt{padding-right:2px}
@@ -2241,7 +2280,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v134</p>
+  <p class="ver">v135</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2398,7 +2437,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v134</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v135</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、6日間の記録はすべて最初からになるよ。</p>
@@ -2433,7 +2472,16 @@ input,textarea{font-size:16px}
     </div>
     <div id="x-pane-follow" style="display:none">
       <div class="profbar"><button class="pback" id="fol-back" aria-label="戻る">‹</button><div class="pt"><b id="fol-name">なお</b><small id="fol-handle">@nao_324</small></div></div>
-      <div class="foltabs"><button data-ftab="folwing">フォロー中</button><button data-ftab="folwers">フォロワー</button></div>
+      <div class="folband">
+        <div class="folband-eye">FOLLOW NETWORK</div>
+        <div class="folband-row">
+          <div class="fbn"><b id="fol-n-wing">0</b><span>フォロー中</span></div>
+          <div class="fbn"><b id="fol-n-wers">0</b><span>フォロワー</span></div>
+          <p class="fbn-note" id="fol-note"></p>
+        </div>
+      </div>
+      <div class="folsearch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg><input id="fol-q" type="text" placeholder="名前・ハンドル・紹介文で探す" autocomplete="off"><button id="fol-qx" aria-label="検索を消す" style="display:none">×</button></div>
+      <div class="foltabs"><button data-ftab="folwing">フォロー中 <span class="ftab-n" id="ftab-n-wing"></span></button><button data-ftab="folwers">フォロワー <span class="ftab-n" id="ftab-n-wers"></span></button></div>
       <div id="fol-list"></div>
     </div>
     <div id="x-pane-msg" style="display:none">
@@ -2609,7 +2657,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v134</p>
+    <p class="ver">v135</p>
   </div>
 </section>
 </div>
@@ -3926,7 +3974,7 @@ function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;cons
    except the target's row, which reflects and jumps to the real follow
    toggle on his profile. Nothing here writes to the save. */
 const FOL_BIO={hiroto:"歌手。日プシーズン1出身、中国・創造営、韓国・BOYS PLANETと国を跨いで挑戦を続けてきた先輩。",sakuya:"NCT WISH。同じSMの先輩。不思議な感性と、丁寧な言葉選び。",nao:"Hearts2Hearts 最年長メンバー。デビュー曲は『The Chase』。",akari:"同期のリーダー。一緒にデビューした仲間。",carmen:"同期。ムードメーカー。",yuha:"同期。",stella:"同期。",juun:"同期。メインダンサー。",ana:"同期。",ian:"同期。",yeon:"同期。最年少。",sea:"aespaのリーダー。礼儀正しく、面倒見のいい先輩。",mina:"TWICE。静かで上品な先輩。",miku:"幼なじみ。フォロワー1号を自称している。",sora:"音楽好き。歌の話になると熱い。",fan1:"なお推し1号ファン。デビュー初日から見ている。",fan2:"音楽ファン。界隈の動きに早い。",staff:"事務所スタッフ。現場の橋渡し役。",media:"音楽番組『MUSIC STAGE』の公式アカウント。",matome:"エンタメ速報のまとめアカウント。"};
-let folOwner="nao",folTab="folwing",folBackTo="me";const folOverride={};
+let folOwner="nao",folTab="folwing",folBackTo="me",folQ="";const folOverride={};
 function folSets(owner){
  const T=tgtKey(),members=["akari","carmen","yuha","stella","juun","ana","ian","yeon"];
  const uniq=a=>a.filter((v,i)=>a.indexOf(v)===i);
@@ -3934,20 +3982,34 @@ function folSets(owner){
  return{folwing:uniq(["media",...members.slice(0,2)]),folwers:uniq([...(S.followHiroto?["nao"]:[]),"fan2","sora","matome"])};
 }
 function folIsFollowing(owner,key){const o=folOverride[owner+":"+key];if(o!==undefined)return o;return folSets(owner).folwing.includes(key);}
-function openFollow(owner,tab){folOwner=owner;folTab=tab;folBackTo=owner==="nao"?"me":"hisprof";showPane("follow");}
+function openFollow(owner,tab){folOwner=owner;folTab=tab;folBackTo=owner==="nao"?"me":"hisprof";folQ="";const q=$("#fol-q");if(q)q.value="";const qx=$("#fol-qx");if(qx)qx.style.display="none";showPane("follow");}
 function renderFollowList(){
  const A=folOwner==="nao"?{n:"なお",h:S.handle||ACC.nao.h}:{n:tgt().name,h:tgt().handle};
  $("#fol-name").textContent=A.n;$("#fol-handle").textContent=A.h;
+ const sets=folSets(folOwner);
+ $("#fol-n-wing").textContent=sets.folwing.length;$("#fol-n-wers").textContent=sets.folwers.length;
+ $("#ftab-n-wing").textContent=sets.folwing.length;$("#ftab-n-wers").textContent=sets.folwers.length;
+ $("#fol-note").textContent=folOwner==="nao"?"物語に登場するアカウントのつながり。進むにつれて顔ぶれが変わるよ。":tgt().name+"さんのつながり。フォロワーは物語の進行で増えていくよ。";
  $$("#x-pane-follow [data-ftab]").forEach(b=>b.classList.toggle("act",b.dataset.ftab===folTab));
+ renderFolRows();
+}
+function renderFolRows(){
  const box=$("#fol-list");box.innerHTML="";
- const keys=folSets(folOwner)[folTab]||[];
- if(!keys.length){box.appendChild(mkEmpty("まだいない","物語が進むと、ここに並んでいくよ。"));return;}
- keys.forEach(key=>{const a=ACC[key];if(!a)return;
-  const row=document.createElement("div");row.className="folrow";
+ const sets=folSets(folOwner);
+ let keys=(sets[folTab]||[]).slice();
+ if(folQ){const q=folQ.toLowerCase();keys=keys.filter(k=>{const a=ACC[k];return a&&(a.n.toLowerCase().includes(q)||a.h.toLowerCase().includes(q)||(FOL_BIO[k]||"").toLowerCase().includes(q));});}
+ if(!keys.length){box.appendChild(folQ?mkEmpty("見つからない","その言葉に合うアカウントは、いまのリストにはいないよ。"):mkEmpty("まだいない","物語が進むと、ここに並んでいくよ。"));return;}
+ keys.forEach((key,i)=>{const a=ACC[key];if(!a)return;
+  const row=document.createElement("div");row.className="folrow";row.style.animationDelay=Math.min(i*35,350)+"ms";
   const following=folOwner==="nao"&&key===tgtKey()?!!S.followHiroto:folIsFollowing(folOwner,key);
-  row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-name"></div><div class="fr-handle"></div><div class="fr-bio"></div></div>';
-  row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="44" height="44" alt="">':avaTxt(a.n);
-  row.querySelector(".fr-name").textContent=a.n;row.querySelector(".fr-handle").textContent=a.h;row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
+  const mutual=sets.folwing.includes(key)&&sets.folwers.includes(key);
+  row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-namerow"><span class="fr-name"></span></div><div class="fr-handle"><span class="fr-h"></span></div><div class="fr-bio"></div></div>';
+  row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="48" height="48" alt="">':avaTxt(a.n);
+  row.querySelector(".fr-name").textContent=a.n;
+  if(VERIFIED.has(key))row.querySelector(".fr-namerow").insertAdjacentHTML("beforeend",VER_BADGE);
+  row.querySelector(".fr-h").textContent=a.h;
+  if(mutual){const m=document.createElement("span");m.className="fr-mutual";m.textContent="フォローされています";row.querySelector(".fr-handle").appendChild(m);}
+  row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
   const btn=document.createElement("button");btn.className="folbtn"+(following?" on":"");btn.textContent=following?"フォロー中":"フォローする";
   btn.addEventListener("click",()=>{if(folOwner==="nao"&&key===tgtKey()){showPane("hisprof");return;}const now=!folIsFollowing(folOwner,key);folOverride[folOwner+":"+key]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});
   row.appendChild(btn);
@@ -3956,6 +4018,10 @@ function renderFollowList(){
   box.appendChild(row);});
 }
 $$("#x-pane-follow [data-ftab]").forEach(b=>b.addEventListener("click",()=>{folTab=b.dataset.ftab;renderFollowList();}));
+(function(){const q=$("#fol-q"),qx=$("#fol-qx");if(!q)return;
+ q.addEventListener("input",()=>{folQ=q.value.trim();qx.style.display=folQ?"":"none";renderFolRows();});
+ q.addEventListener("keydown",e=>{if(e.key==="Escape"){q.value="";folQ="";qx.style.display="none";renderFolRows();}});
+ qx.addEventListener("click",()=>{q.value="";folQ="";qx.style.display="none";renderFolRows();q.focus();});})();
 $("#fol-back").addEventListener("click",()=>showPane(folBackTo));
 (function(){const me1=$("#x-fol-n"),me2=$("#x-folwing-n");
  if(me1&&me1.parentElement)me1.parentElement.addEventListener("click",()=>openFollow("nao","folwers"));
