@@ -498,3 +498,9 @@
 - 実装メモ：BUZZ の注入（injectBuzz）は mkPost に img を渡していなかったため、e.img を第7引数へ渡す1行だけを通した（img を持たない既存 BUZZ／BUZZ_S 項目は img||null で従来どおり無写真。ひろと編の挙動は不変）。
 - 検証（Playwright 390×844、/tmp/verify93.py・verify93b.py・verify93c.py）：サクヤ編で Day3 公式ポスト＝楽屋ツーショ（naturalWidth 1206）、BUZZ s-s1 解放時のフィード＝目撃カット、Day4 サクヤポスト＝スタジオカット、Day5 最終リハ投稿の下書きプレビュー→投稿後のフィード先頭＝リハスタジオカットを各スクショ目視（両名の顔切れなし・ガビガビなし）。ひろと編は Day3／Day5 とも nao-sakuya 系ファイルの DOM 混入なし、Day5 同投稿は nao-stream-selfie.jpg のまま、BUZZ 注入も従来どおり動作。エラー0・壊れ画像0。スクショ /tmp/v93-S-{day3-backstage,day5-rehearsal,buzz-sighting,day4-studio}.png。
 - 版数3箇所を v93 に統一。
+
+## v94 サクヤとのツーショ追加1枚（ユーザー提示「これも」・サクヤ編専用）
+- ユーザー生成の、なお×サクヤのツーショ1枚を実物確認のうえで assets/ に追加し、サクヤ編専用の場面にだけ割り当てた。両ルート共通のメディア欄（ME_MEDIA）には入れていない。投稿文・fx・連鎖・数値・セーブ形式は不変（写真の割り当てのみ）。
+- 割り当て：夜のコンビニ前 candid（ガードレールに二人で座り、缶ドリンクを持って顔を見合わせて笑うオフの目撃風カット、1206×804）→ **nao-sakuya-conveni.jpg**：サクヤ編 BUZZ_S の s-a1（まとめ垢「【ざわつき】新人・なお、またも"偶然"が重なる。事務所の後輩という立場も相まって、論争に発展」、flm>=30 で解放）に img を追加。出回る目撃写真として拡散ポストに載る形。v93 の s-s1（dist>=15／事務所ビル前を歩くカット）とは解放条件・場面ともに分散させた。
+- 検証（Playwright 390×844、/tmp/verify94.py）：サクヤ編で flm=35 にすると buzz=[s-s2, s-s3, s-a1] が解放され、フィードの s-a1 ポストに conveni 写真（naturalWidth 1206）をスクショ目視（両名の顔切れなし・ガビガビなし）。ひろと編は buzz=[h-s2, h-s3, h-a1] で従来どおり、nao-sakuya-conveni の DOM 混入なし。コンソール／ページエラー0。スクショ /tmp/v94-sakuya-conveni.png。
+- 版数3箇所を v94 に統一。
