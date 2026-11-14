@@ -1646,6 +1646,37 @@ input,textarea{font-size:16px}
 .opt .chip{border-color:rgba(255,255,255,.38);color:#eef1f4}
 .screen.intro .btn{padding:17.5px;font-size:16px;letter-spacing:.1em}
 .setup .btn{margin-top:20px}
+/* ===== v91: home top raised to a Status status-screen - the CHAPTER
+   banner now carries the chapter's own photo (the same frame the v88
+   day card opens on, dimmed under the banner gradient) and the player
+   card becomes a full status card: a PLAYER STATUS eyebrow with the
+   mission counter, her portrait in the identity row beside the level
+   medallion, and a three-cell stat grid (recognition / flame /
+   distance, each with its axis-coloured gauge) under the mission row.
+   Every number is the same state the HUD already showed; the mission
+   judgement, the stack order and the save format are unchanged. ===== */
+#daybanner .db-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:.34;filter:saturate(1.12);z-index:0;transition:opacity .5s ease}
+#daybanner::before,#daybanner::after{z-index:2}
+#daybanner .db-big{z-index:1}
+#daybanner .db-head,#daybanner .db-title,#daybanner .db-sub{z-index:1}
+#daybanner .db-title{font-size:21px}
+#status-hud{border-radius:24px;padding:16px 17px 14px;background:radial-gradient(120% 130% at 88% -10%,rgba(249,24,128,.17),transparent 55%),linear-gradient(140deg,#1c2450 0%,#101527 52%,#2c1242 100%);box-shadow:0 16px 36px rgba(13,16,44,.42),inset 0 1px 0 rgba(255,255,255,.11)}
+.hud-eyebrow{display:flex;align-items:center;gap:8px;font-size:9.5px;font-weight:900;letter-spacing:.26em;color:#aebadd;margin-bottom:12px}
+.hud-etick{width:20px;height:2.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880);flex:none}
+.hud-mcount{margin-left:auto;font-size:10px;font-weight:900;letter-spacing:.14em;color:#ffd9a8}
+.hud-ava{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:center 22%;flex:none;border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 2.5px rgba(120,86,255,.55),0 6px 16px rgba(0,0,0,.4)}
+.hud-lv{padding:8px 11px;border-radius:12px;font-size:15.5px}
+.hud-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1)}
+.hstat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:13px;padding:8px 10px 9px;min-width:0}
+.hstat .hs-lab{display:block;font-size:9.5px;font-weight:800;letter-spacing:.06em;color:#9fb0d0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hstat b{display:block;font-size:17.5px;font-weight:900;color:#fff;line-height:1.25;font-variant-numeric:tabular-nums}
+.hstat.flm b{color:#ff9d94}
+.hstat.dist b{color:#ff8ac2}
+.hs-bar{display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.13);overflow:hidden;margin-top:5px}
+.hs-bar i{display:block;height:100%;width:0;border-radius:2px;transition:width .6s cubic-bezier(.2,.8,.3,1)}
+.hstat.cog .hs-bar i{background:linear-gradient(90deg,#4cc3ff,#7856ff)}
+.hstat.flm .hs-bar i{background:linear-gradient(90deg,#ffb03a,#f4212e)}
+.hstat.dist .hs-bar i{background:linear-gradient(90deg,#7856ff,#f91880)}
 </style>
 </head>
 <body>
@@ -1660,7 +1691,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v90</p>
+  <p class="ver">v91</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1733,13 +1764,16 @@ input,textarea{font-size:16px}
       </div>
       <div id="stories"></div>
       <div id="daybanner">
+        <img class="db-bg" id="db-bg" alt="" aria-hidden="true">
         <span class="db-big" id="db-big" aria-hidden="true">1</span>
         <div class="db-head"><span class="db-day" id="db-day">DAY 1</span><span class="db-prog" id="db-prog">1 / 5</span></div>
         <b class="db-title" id="db-title">デビュー発表の日</b>
         <span class="db-sub" id="db-sub"></span>
       </div>
       <div id="status-hud">
+        <div class="hud-eyebrow"><span class="hud-etick" aria-hidden="true"></span><span>PLAYER STATUS</span><span class="hud-mcount" id="hud-mcount"></span></div>
         <div class="hud-top">
+          <img class="hud-ava" src="assets/nao-avatar4.jpg" alt="">
           <span class="hud-lv" id="hud-lv">Lv 1</span>
           <div class="hud-id"><b>なお</b><span id="hud-handle">@nao_324</span></div>
           <div class="hud-fol"><small>フォロワー</small><b id="hud-fol">1</b></div>
@@ -1751,6 +1785,11 @@ input,textarea{font-size:16px}
           <span class="mchip" id="mc-event">Event</span>
           <span class="mchip" id="mc-act">Activity</span>
           <span class="hud-energy" id="hud-energy">今日のAction 残り3/3</span>
+        </div>
+        <div class="hud-stats">
+          <div class="hstat cog"><span class="hs-lab">世間の認知度</span><b id="hud-cog">0</b><span class="hs-bar"><i id="hud-cog-g"></i></span></div>
+          <div class="hstat flm"><span class="hs-lab">炎上度</span><b id="hud-flm">0</b><span class="hs-bar"><i id="hud-flm-g"></i></span></div>
+          <div class="hstat dist"><span class="hs-lab" id="hud-dist-lab">ひろとの距離</span><b id="hud-dist">0</b><span class="hs-bar"><i id="hud-dist-g"></i></span></div>
         </div>
         <div class="hud-bot">
           <span class="hud-world" id="hud-world">ワールド：芸能界</span>
@@ -1807,7 +1846,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v90</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v91</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2000,7 +2039,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v90</p>
+    <p class="ver">v91</p>
   </div>
 </section>
 </div>
@@ -3453,10 +3492,23 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";
  const mc=(id,on)=>{const e=el(id);if(e)e.classList.toggle("done",!!on);};
  mc("#mc-post",S.posted);mc("#mc-event",S.evDone);mc("#mc-act",S.actDone);
- if(el("#hud-handle"))el("#hud-handle").textContent=S.handle||"";}
+ if(el("#hud-handle"))el("#hud-handle").textContent=S.handle||"";
+ /* v91: status card stat cells + mission counter (display only; the
+    numbers are the same state the profile and ending already read) */
+ if(el("#hud-mcount"))el("#hud-mcount").textContent="MISSION "+used+" / 3";
+ if(el("#hud-cog"))el("#hud-cog").textContent=S.cog;
+ if(el("#hud-flm"))el("#hud-flm").textContent=S.flm;
+ if(el("#hud-dist"))el("#hud-dist").textContent=S.dist;
+ if(el("#hud-cog-g"))el("#hud-cog-g").style.width=Math.min(100,S.cog)+"%";
+ if(el("#hud-flm-g"))el("#hud-flm-g").style.width=Math.min(100,S.flm)+"%";
+ if(el("#hud-dist-g"))el("#hud-dist-g").style.width=Math.min(100,S.dist)+"%";
+ if(el("#hud-dist-lab"))el("#hud-dist-lab").textContent=distLab();}
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / 5");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");}
+ set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / 5");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
+ /* v91: the CHAPTER banner carries the same per-chapter photo as the
+    v88 day card, dimmed under its gradient (presentation only) */
+ const bgEl=$("#db-bg");if(bgEl){const src=DI_BG[S.ch]||"";if(src&&bgEl.getAttribute("src")!==src)bgEl.src=src;}}
 /* v57: chapter presentation - a cinematic title card opens each Day, and
    ending a Day first lands on a Status-style RESULT screen. The result is
    summed from the day's own chgLog entries (already recorded per action),
