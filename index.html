@@ -191,7 +191,7 @@ input,textarea{font-size:16px}
 @keyframes svin{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:none}}
 .sv-bg{position:absolute;inset:0;background-color:#14181c;background-position:center 28%;background-size:cover;background-repeat:no-repeat;transition:opacity .18s ease}
 #storyviewer.paused .sv-bg{opacity:.82}
-.sv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 76%,rgba(0,0,0,.45));pointer-events:none}
+.sv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 24%,rgba(0,0,0,0) 70%,rgba(0,0,0,.58));pointer-events:none}
 .sv-top{position:relative;z-index:5;padding:calc(13px + env(safe-area-inset-top)) 12px 0;flex:none}
 .sv-segs{display:flex;gap:4px}
 .sv-seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden}
@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v289</p>
+  <p class="ver">v290</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v289</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v290</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v289</p>
+    <p class="ver">v290</p>
   </div>
 </section>
 </div>
@@ -4526,22 +4526,17 @@ function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChil
 function renderStorySeg(){
  const e=storyList()[svIdx];if(!e)return;const a=ACC[e.k];if(!a)return;
  const bg=$("#sv-bg"),img=e.img;
- /* v66: avatar-grade files (512px av-*) are never stretched to fullscreen
-    again - they show as a photo card at native-friendly size over the
-    account-hue gradient, so no upscale blockiness. Hi-res backdrops keep
-    the fullscreen cover treatment. */
- const lowRes=!!img&&(img.indexOf("assets/av-")===0||STORY_CARD.has(img));
- /* v70: hi-res backdrops drift (Ken Burns); avatar-grade photos get a
-    blurred ambient copy of the same photo behind the card; imageless
-    stories keep the account-hue gradient */
+ /* v290 (user's device report): EVERY story photo is full-bleed
+    cover, edge to edge, exactly like the real Stories viewer -
+    the v66 framed-card treatment for avatar-grade files is gone
+    (the separate photo viewer keeps its own fit). Imageless
+    stories keep the account-hue gradient. */
  const hueBg=(()=>{const h=svHue(a.n);return "linear-gradient(160deg,hsl("+h+",52%,46%),hsl("+((h+50)%360)+",58%,26%))";})();
  bg.classList.remove("kb","blur");
- if(img&&!lowRes){bg.style.backgroundImage="url("+img+")";void bg.offsetWidth;bg.classList.add("kb");}
- else if(img){bg.style.backgroundImage="url("+img+"),"+hueBg;bg.classList.add("blur");}
+ if(img){bg.style.backgroundImage="url("+img+")";void bg.offsetWidth;bg.classList.add("kb");}
  else{bg.style.backgroundImage=hueBg;}
  const center=$("#sv-center");
- if(lowRes){center.className="sv-center show";center.innerHTML="";const im=document.createElement("img");im.className="sv-photo";im.src=img;im.alt="";center.appendChild(im);}
- else if(img){center.className="sv-center";center.innerHTML="";}
+ if(img){center.className="sv-center";center.innerHTML="";}
  else{center.className="sv-center show";center.innerHTML=avaTxt(a.n);}
  const id=$("#sv-id");
  id.innerHTML='<span class="sv-ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"</span><span><b></b><small></small></span>";
