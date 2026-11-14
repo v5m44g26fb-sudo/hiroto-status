@@ -1041,7 +1041,7 @@ input,textarea{font-size:16px}
 .hud-trend{display:flex;align-items:flex-end;gap:10px;margin-top:11px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14)}
 .hud-trend-lab{font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#cdbcf5;white-space:nowrap;padding-bottom:3px}
 .hud-spark{flex:1;display:flex;align-items:flex-end;gap:4px;height:28px;min-width:0}
-.hud-spark i{flex:1;min-width:7px;border-radius:3px 3px 1px 1px;background:rgba(255,255,255,.32)}
+.hud-spark i{flex:1;min-width:7px;max-width:46px;border-radius:3px 3px 1px 1px;background:rgba(255,255,255,.32)}
 .hud-spark i.now{background:linear-gradient(180deg,#f91880,#7856ff);box-shadow:0 0 8px rgba(249,24,128,.45)}
 .hud-trend-d{font-size:11.5px;font-weight:800;color:#7ee2ae;font-variant-numeric:tabular-nums;white-space:nowrap;padding-bottom:3px}
 #hud-chg{margin:0 0 0 auto;display:inline-block}
@@ -2557,6 +2557,15 @@ input,textarea{font-size:16px}
 .dr-best{flex:none;font-size:9px;font-weight:900;letter-spacing:.18em;color:#4a3200;background:linear-gradient(90deg,#ffd95e,#f7c948);border-radius:6px;padding:3px 7px;margin-left:8px}
 /* ===== v156: the feed's closing TODAY'S PROGRESS card ===== */
 .feed-end{margin:16px 14px 20px;border-radius:19px;padding:15px 16px 13px;background:linear-gradient(163deg,#1a1233,#271549 70%,#33154d);color:#f4f0ff;box-shadow:0 14px 32px rgba(24,8,52,.35);position:relative;overflow:hidden}
+/* ===== v162: the Following tab gets its own head band - a light card
+   over the filtered feed naming the inner circle and counting what is
+   actually shown, plus a proper empty state for when nobody in the
+   circle has posted yet. The filter itself is unchanged. ===== */
+.folfeed{margin:12px 14px 4px;border:1px solid #e8edf0;border-radius:16px;background:linear-gradient(120deg,#f3efff,#fff 62%);padding:12px 14px;box-shadow:0 2px 10px rgba(15,20,25,.05)}
+.folfeed .ff-eye{font-size:10px;font-weight:800;letter-spacing:.18em;color:#7856ff}
+.folfeed b{display:block;font-size:15.5px;font-weight:900;color:#0f1419;margin-top:3px}
+.folfeed small{display:block;margin-top:3px;font-size:12px;line-height:1.55;color:#536471}
+.folfeed-empty{margin:18px 14px;padding:16px;border:1px dashed #d5dde3;border-radius:16px;color:#536471;font-size:13.5px;line-height:1.7;text-align:center}
 .feed-end::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
 .feed-end .fe-head{display:flex;align-items:center;justify-content:space-between}
 .feed-end .fe-lab{font-size:10px;font-weight:900;letter-spacing:.28em;color:#cdbcf5}
@@ -2646,7 +2655,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v161</p>
+  <p class="ver">v162</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2815,7 +2824,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v161</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v162</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3065,7 +3074,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v161</p>
+    <p class="ver">v162</p>
   </div>
 </section>
 </div>
@@ -4218,10 +4227,18 @@ function renderFeed(){
  const tab=S._htab||"rec";
  let posts=S.posts.filter(p=>!p.isReply);
  if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
+ if(tab==="fol"){tl.appendChild(folFeedHead(posts.filter(p=>!p.sys).length));
+  if(!posts.length){const e=document.createElement("div");e.className="folfeed-empty";e.textContent="フォロー中のアカウントのポストは、まだここに届いていない。物語が進むと、近しい人たちの近況がここに集まるよ。";tl.appendChild(e);}}
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
  if(tab==="rec")tl.appendChild(feedEndCard());
  renderMePosts();renderHisPosts();
 }
+/* v162: head band for the Following tab - names the inner circle
+   (the target, the members, the show account and Nao herself) and
+   counts the posts actually on screen. */
+function folFeedHead(n){const d=document.createElement("div");d.className="folfeed";
+ d.innerHTML='<span class="ff-eye">FOLLOWING ― フォロー中</span><b>近しい人たちの近況</b><small>'+tgt().short+"、Hearts2Heartsのメンバー、番組公式と自分のポストだけを集めたタイムライン ― "+n+" 件</small>";
+ return d;}
 /* v156: the home feed closes with a TODAY'S PROGRESS card - the
    three missions as chips that check off as they are done, and once
    all three land, a go button that presses the day dock's own next
