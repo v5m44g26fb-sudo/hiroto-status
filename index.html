@@ -782,7 +782,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v42</p>
+  <p class="ver">v43</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -896,7 +896,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v42</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v43</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1009,7 +1009,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v42</p>
+    <p class="ver">v43</p>
   </div>
 </section>
 </div>
@@ -1667,7 +1667,13 @@ function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)|
 function storyList(){
  const base=curStory().map(x=>({k:x[0],lab:x[1],img:svImg(x[0]),cap:"",uid:x[0]}));
  const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).map(d=>({k:d.k,lab:d.lab,img:d.img,cap:d.cap||"",uid:d.uid}));
- return base.concat(dyn);
+ /* v43: display order only - own story pinned to the left edge, then the
+    action-chain stories in the order they were added, then the base
+    stories in their existing order. Contents / seen-tracking / chain
+    triggers are unchanged. */
+ const mine=base.filter(e=>e.k==="nao");
+ const others=base.filter(e=>e.k!=="nao");
+ return mine.concat(dyn,others);
 }
 /* story action chain (Status-style): after each Action, someone adds a story.
    Entries are keyed by action kind and day; tgt entries resolve to the
