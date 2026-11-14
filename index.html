@@ -2517,6 +2517,17 @@ input,textarea{font-size:16px}
 .feed-end .fe-go{margin-top:12px;width:100%;border:none;cursor:pointer;font-family:inherit;font-size:14.5px;font-weight:900;color:#fff;background:linear-gradient(90deg,#f91880,#7856ff);border-radius:999px;padding:12px 16px;box-shadow:0 8px 22px rgba(249,24,128,.35);transition:transform .12s ease}
 .feed-end .fe-go:active{transform:scale(.98)}
 .feed-end .fe-go span{margin-left:4px}
+/* ===== v157: HOW TO PLAY blocks in settings (the rank ladder is
+   generated from the same TITLES table the game itself uses) ===== */
+.set-howto{padding:6px 0 2px}
+.how-block{padding:11px 16px 12px}
+.how-block + .how-block{border-top:1px solid var(--line)}
+.how-h{display:block;font-size:13px;font-weight:900}
+.how-block p{margin-top:4px;font-size:12.5px;line-height:1.7;color:#536471}
+.how-ranks{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.how-rank{display:inline-flex;align-items:center;gap:6px;background:#f3efff;border:1px solid #e2d9ff;border-radius:999px;padding:4px 11px 4px 8px}
+.how-rank small{font-size:9px;font-weight:900;letter-spacing:.08em;color:#7856ff}
+.how-rank b{font-size:11.5px;font-weight:800;color:#33154d}
 .evc-seal{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#ffd95e,#f7c948);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 16px rgba(247,201,72,.45)}
 .evc-seal svg{width:20px;height:20px;fill:#4a3200}
 .evc-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -2584,7 +2595,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v156</p>
+  <p class="ver">v157</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2751,7 +2762,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v156</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v157</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2763,6 +2774,12 @@ input,textarea{font-size:16px}
             <div class="ssv-segs" id="set-sv-segs"></div>
           </div>
           <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
+        </div>
+        <div class="me-seclab">あそびかた ― HOW TO PLAY</div>
+        <div class="setpanel set-howto">
+          <div class="how-block"><b class="how-h">1日の流れ</b><p>投稿・Event・Activityの3つのミッションをこなすと、1日が終わるよ。選んだ行動でフォロワーや世間の認知度が動いて、反応がフィードに返ってくる。</p></div>
+          <div class="how-block"><b class="how-h">レベルと称号</b><p>行動でXPがたまるとレベルが上がり、アイドルとしての称号も変わるよ。レベルが高いほど、投稿への反応も少し大きくなりゅ。</p><div class="how-ranks" id="set-ranks"></div></div>
+          <div class="how-block"><b class="how-h">結末について</b><p>6日目の終わりに、フォロワー・認知度・あの人との距離・炎上度のバランスで結末が変わるよ。炎上しすぎには注意。</p></div>
         </div>
         <div class="setpanel setpanel-danger">
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
@@ -2994,7 +3011,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v156</p>
+    <p class="ver">v157</p>
   </div>
 </section>
 </div>
@@ -4798,7 +4815,7 @@ function renderProfile(){if(!S||!S.started)return;
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。コンセプト："+stanceObj().t+"。";
  $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
- const svD=$("#set-sv-day");if(svD){svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+lvNum()+"・"+lvTitle();$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
+ const svD=$("#set-sv-day");if(svD){const rkEl=$("#set-ranks");if(rkEl&&!rkEl.childElementCount){for(let i=0;i<5;i++){const s=document.createElement("span");s.className="how-rank";s.innerHTML="<small>Lv "+(i+1)+(i===4?"+":"")+"</small>";const b=document.createElement("b");b.textContent=lvTitle(i+1);s.appendChild(b);rkEl.appendChild(s);}}svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+lvNum()+"・"+lvTitle();$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=lvNum()+"・"+lvTitle();
