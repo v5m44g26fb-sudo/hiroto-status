@@ -1597,6 +1597,55 @@ input,textarea{font-size:16px}
 .pv-nav.next{right:10px}
 .pv-nav.off{opacity:.22}
 #photoviewer.clean .pv-top,#photoviewer.clean .pv-info,#photoviewer.clean .pv-nav{opacity:0;pointer-events:none}
+/* ===== v90: intro flow raised to an opening-titles sequence - the four
+   setup screens (WORLD / PERSONA / TARGET / FIRST FOLLOWER) now open
+   like film credits: each backdrop photo drifts in a slow Ken Burns
+   under a deeper cinematic shade, a giant outlined step numeral haunts
+   the header, the display heading grows to poster size, the option
+   cards become lit glass panels whose selected state takes the app's
+   gradient as a border, and every block of the screen rises in stagger
+   as the screen opens. Options, effects, branching and the
+   no-real-names-on-title rule are unchanged. ===== */
+.screen.intro.on::before{animation:introken 11s ease-out both}
+@keyframes introken{from{transform:scale(1.13)}to{transform:scale(1.02)}}
+.screen.intro:not(#scr-title)::after{background:linear-gradient(180deg,rgba(6,5,16,.52),rgba(4,4,10,.74) 46%,rgba(3,3,8,.94))}
+.setup{position:relative;padding-top:26px}
+.setup-ghost{position:absolute;top:-4px;right:2px;font-size:124px;font-weight:900;font-style:italic;line-height:1;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.14);pointer-events:none;z-index:0;animation:ghostin 1.1s ease .1s both}
+@keyframes ghostin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.setup>*:not(.setup-ghost){position:relative;z-index:1}
+.screen.intro.on .setup>*:not(.setup-ghost){animation:setuprise .6s cubic-bezier(.2,.8,.25,1) both}
+.screen.intro.on .setup>*:nth-child(2){animation-delay:.03s}
+.screen.intro.on .setup>*:nth-child(3){animation-delay:.09s}
+.screen.intro.on .setup>*:nth-child(4){animation-delay:.15s}
+.screen.intro.on .setup>*:nth-child(5){animation-delay:.21s}
+.screen.intro.on .setup>*:nth-child(6){animation-delay:.27s}
+.screen.intro.on .setup>*:nth-child(7){animation-delay:.33s}
+.screen.intro.on .setup>*:nth-child(8){animation-delay:.39s}
+.screen.intro.on .setup>*:nth-child(9){animation-delay:.45s}
+.screen.intro.on .setup>*:nth-child(10){animation-delay:.51s}
+.screen.intro.on .setup>*:nth-child(11){animation-delay:.57s}
+@keyframes setuprise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.setup .step{color:#cdbffa;font-size:11px;letter-spacing:.34em}
+.prog{margin:15px 0 24px}
+.prog .track{height:3px;border-radius:2px;background:rgba(255,255,255,.14)}
+.prog .track i{background:linear-gradient(90deg,#7856ff,#f91880);box-shadow:0 0 12px rgba(249,24,128,.55);border-radius:2px}
+.setup h2{font-size:29px;font-weight:900;letter-spacing:.05em;line-height:1.35;margin:10px 0 8px}
+.setup h2::after{width:48px;height:3px;margin-top:11px}
+.setup p.desc{font-size:13.5px;color:#bcc4cd;line-height:1.85;margin-bottom:22px}
+.worldnote{border-left:2px solid #b18cff}
+.setup .secttl{color:#cdbffa;padding:18px 0 11px}
+.setup .opt{border-radius:18px;padding:18px 19px;margin-bottom:12px;background:linear-gradient(165deg,rgba(255,255,255,.095),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.18);box-shadow:0 16px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.13)}
+.setup .opt b{font-size:16.5px;letter-spacing:.03em}
+.setup .opt span{color:#aeb8c2;font-size:12.5px}
+.setup .opt.sel{border:1.5px solid transparent;background:linear-gradient(165deg,rgba(46,32,92,.97),rgba(26,17,52,.98)) padding-box,linear-gradient(120deg,#7856ff,#f91880,#ffd400) border-box;box-shadow:0 18px 42px rgba(122,40,160,.42),inset 0 1px 0 rgba(255,255,255,.22);transform:none}
+.setup .opt.sel::after{background:linear-gradient(135deg,#7856ff,#f91880);color:#fff;box-shadow:0 4px 14px rgba(249,24,128,.55);top:14px;right:14px}
+.opt .wlab{color:#cdbffa}
+.opt .cimg{width:58px;height:58px;border:2px solid rgba(255,255,255,.42);box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.setup .opt.sel .cimg{border-color:#ff7ab8}
+.opt .pill{border-color:rgba(255,255,255,.32);color:#dde4ea}
+.opt .chip{border-color:rgba(255,255,255,.38);color:#eef1f4}
+.screen.intro .btn{padding:17.5px;font-size:16px;letter-spacing:.1em}
+.setup .btn{margin-top:20px}
 </style>
 </head>
 <body>
@@ -1611,11 +1660,12 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v89</p>
+  <p class="ver">v90</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
   <div class="setup">
+    <span class="setup-ghost" aria-hidden="true">01</span>
     <div class="step">STEP 1 / 4 ― WORLD SELECT</div>
     <div class="prog"><div class="track"><i style="width:25%"></i></div><span class="pnum"><b>1</b> / 4</span></div>
     <h2>どの世界で生きる？</h2>
@@ -1627,6 +1677,7 @@ input,textarea{font-size:16px}
 
 <section class="screen intro" id="scr-persona" style="--bgimg:url(assets/nao-stage.jpg)">
   <div class="setup">
+    <span class="setup-ghost" aria-hidden="true">02</span>
     <div class="step">STEP 2 / 4 ― PERSONA</div>
     <div class="prog"><div class="track"><i style="width:50%"></i></div><span class="pnum"><b>2</b> / 4</span></div>
     <div class="worldnote" id="persona-world-note"><span class="wn-lab">WORLD</span><b>芸能界 ― アイドルワールド</b></div>
@@ -1640,8 +1691,9 @@ input,textarea{font-size:16px}
   </div>
 </section>
 
-<section class="screen intro" id="scr-target" style="--bgimg:url(assets/nao-stage.jpg)">
+<section class="screen intro" id="scr-target" style="--bgimg:url(assets/nao-stage-sailor.jpg)">
   <div class="setup">
+    <span class="setup-ghost" aria-hidden="true">03</span>
     <div class="step">STEP 3 / 4 ― TARGET</div>
     <div class="prog"><div class="track"><i style="width:75%"></i></div><span class="pnum"><b>3</b> / 4</span></div>
     <h2>誰に近づく？</h2>
@@ -1653,6 +1705,7 @@ input,textarea{font-size:16px}
 
 <section class="screen intro" id="scr-first" style="--bgimg:url(assets/nao-backstage-selfie.jpg)">
   <div class="setup">
+    <span class="setup-ghost" aria-hidden="true">04</span>
     <div class="step">STEP 4 / 4 ― FIRST FOLLOWER</div>
     <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>4</b> / 4</span></div>
     <h2>最初のフォロワー</h2>
@@ -1754,7 +1807,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v89</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v90</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1947,7 +2000,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v89</p>
+    <p class="ver">v90</p>
   </div>
 </section>
 </div>
