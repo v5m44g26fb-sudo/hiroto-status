@@ -1791,7 +1791,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v98</p>
+  <p class="ver">v99</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1946,7 +1946,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v98</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v99</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -2155,7 +2155,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v98</p>
+    <p class="ver">v99</p>
   </div>
 </section>
 </div>
@@ -2599,6 +2599,8 @@ const BUZZ=[
  {k:"h-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"正直、最初は様子見だった。でも歌番組の生歌で完全に落ちた。なお、推せる",lk:154,rp:12,rc:21},
  {k:"h-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は全然違うからな。なおはどっち側で残るか見もの",lk:512,rp:88,rc:140},
  {k:"h-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-hiroto-car.jpg",tx:"新人・なお、騒ぎの大きさが実力の評価に追いつき始めた。事務所の対応に注目が集まる",lk:2760,rp:590,rc:470},
+ {k:"h-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-hiroto-hug.jpg",tx:"【決定的】新人・なおと井汲大翔、深夜の住宅街で抱擁する姿が撮られたと報じられる。拡散が止まらない",lk:3400,rp:760,rc:590},
+ {k:"h-a5",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-hotel.jpg",tx:"【特大報】井汲大翔と新人・なお、都内ホテルから出てくる姿が報じられる。事務所の正式コメントに注目が集まる",lk:4300,rp:1020,rc:810},
  {k:"h-f1",a:"fan2",cond:s=>s.dist>=10,tx:"大翔くんのファンの反応、穏やかなのは古参が多いからだと思う。日プの頃からずっと見てる人たちだから、新人の子にも優しい",lk:186,rp:22,rc:31},
  {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんと大翔くんが同じ歌番組だったの、感慨深い。ボイプラで落ちた日、泣いたの私だけじゃないはず。あの人が今「先輩」って呼ばれる側なんだな",lk:243,rp:29,rc:44},
  {k:"h-f3",a:"sora",cond:s=>s.dist>=25,tx:"大翔さんの現場、規模は大きくないけど熱量が別格だと思う。何度落ちても挑戦し続ける人を、何年も見てるファンがいる強さ",lk:328,rp:41,rc:26}];
