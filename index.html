@@ -719,6 +719,24 @@ input,textarea{font-size:16px}
 .thread-composer .avatar{flex:none}
 .tc-ph{flex:1;color:#536471;font-size:14px}
 .tc-btn{flex:none;background:linear-gradient(135deg,#1d9bf0,#7856ff);color:#fff;font-size:13px;font-weight:800;border-radius:999px;padding:7.5px 17px;opacity:.55}
+/* ===== v32: display fixes (measured in the all-screen sweep) ===== */
+/* profile avatars: paint above the cover + its gradient overlay, so the
+   negative-margin overlap no longer clips the top half of the circle */
+#x-pane-me .pf-ava{position:relative;z-index:2}
+#x-pane-hisprof .his-avawrap{position:relative;z-index:2}
+/* Changes toasts: drop below the appbar + xtabs + hometabs stack
+   (66 + 46 + 46 = 158px in CSS px) instead of covering the tab bars */
+#changes{top:calc(166px + env(safe-area-inset-top))}
+/* HUD xp row: label and value no longer fight for one line (label was
+   truncating at 109px of text in a 97px slot) */
+.hud-xplab{flex-direction:column;align-items:flex-start;gap:1px}
+.hud-xplab span:first-child{margin-right:0}
+/* Event headline: keep clear of the compose FAB's column */
+.evcard h3{padding-right:56px}
+/* compose sheet: section hint goes to its own line; ribbon sub copy wraps balanced */
+.xc-seclab{flex-wrap:wrap}
+.xc-seclab span{flex:0 0 100%}
+.xc-action-tx span{text-wrap:balance}
 </style>
 </head>
 <body>
@@ -733,7 +751,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v31</p>
+  <p class="ver">v32</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -853,7 +871,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v31</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v32</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -965,7 +983,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v31</p>
+    <p class="ver">v32</p>
   </div>
 </section>
 </div>
@@ -1712,6 +1730,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-note"))el("#hud-note").textContent=remain>0?"投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。":"今日のActionは使い切った表示。でもエネルギーは見た目だけ――尽きても進行は止まらないよ。";}
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
+ const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
  if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「プリン被り」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
  else if(S.fol>=450&&S.cog>=40&&S.dist>=38){kind="collab";title="コラボEND ― 同じステージの件";body="『歌うまコラボSP』正式発表。井汲大翔 × なお。\nあの「いいね」から始まった距離が、公の場で「共演」になった。発表ポストへの彼のリプは、相変わらず短い。「よろしくお願いします」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「……楽しみにしてます。内緒で」\n憧れは、少しずつ、秘密の約束に変わっていく。";}
  else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、番組の帰り道。彼が小さい声で言った。「なおさんの歌、好きですよ」\nそれを聞いたのは、廊下のスタッフもいない一角で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。";}

@@ -91,3 +91,14 @@
 - サクヤのアカウント新設：サクヤ @sakuya_nctwish。写真は全て既存素材の流用（新規取得なし）：アバター=sakuya-scandal/assets/av-sakuya.jpg（ユーザーが過去に渡したコンセプトフォト）、カバー=sakuya-ig1.jpg（同）、投稿写真=sakuya-stage.jpg（hiroto-tinder/assets/sakuya-post.jpg、ファンサイトのステージ写真）。sakuya-selca.jpg／sakuya-bmg.jpg も assets にコピー済み（v32シナリオ用）。
 - v31時点のサクヤ編フィードは最小限：SAKUYA_SEED（各日1件のサクヤ投稿を seed に差し込み、ひろと seed は除外）。Event／投稿／DM の専用文は v32 で CH_S として実装する（TARGET_DMS は現状ひろとのみ＝サクヤ編では特別DMはまだ開かない）。curCH() は v32 で CH_S 切替に差し替える前提のフック。
 - 検証：Playwright 390×844 で両ルートの導入（STEP表記・相手カード写真読込・タイトル実名なし）、ひろと編プロフィール／距離ラベル／エンディング到達、サクヤ編プロフィール（名前・ハンドル・タイポ・カバー差替・312万）／距離ラベル「サクヤとの距離」／フィードにサクヤ投稿のみ・ひろと投稿なし／ストーリー先頭サクヤ／トレンド NCT WISH 切替／エンディング到達、旧セーブ（target無し）の継続プレイ、エラー0・壊れ画像0・HTTP≥400なし・scrollW=390。駆動 /tmp/drive_v31.py・/tmp/drive_v31b.py、スクショ /tmp/v31-target.png・/tmp/v31-hisprof-s.png。
+
+## v32 表示バグ総点検（ユーザー実機報告対応・表示のみ修正）
+全画面を Playwright 390×844 でスクショ＋幾何計測＋DOM監査して洗い出し。静止状態のアプリバー／Xタブ／ホームタブは 66+46+46px で隙間なく積み重なり重なりなし（実測）。混線監査（ペイン排他・タブ切替の残留・シート開閉の残留・DM一覧⇄スレッド排他）は全項目クリーンで、項目の混線は見つからなかった。見つけて直したのは以下：
+- **【指摘1】タブバーへの被り**：真因は Changes トースト（#changes、position:fixed・top:56px）がアプリバー〜ホームタブの帯（〜158px）に常時重なっていたこと（開始直後・各Action後）。→ トースト表示位置を top:166px＋セーフエリアに下げ、タブ帯の下に表示するよう変更（実測 top=166 ≥ 158）。
+- **【指摘2】プロフィールのアバター半分切れ**：自分・相手とも発生。カバー（position:relative＋::afterグラデ）が、非配置のアバター（margin-top:-42/-46px で食い込み）より上に描画され上半分を覆っていた。→ .pf-ava と .his-avawrap に position:relative;z-index:2 を付与。elementFromPoint でアバター上部・中央とも最前面ヒットを確認、スクショでも完全な円形に。
+- **HUDのXPラベル切れ**：ラベル実測 109px に対し表示枠 97px で「次のレベ…」と省略されていた。→ .hud-xplab を縦並び（ラベル／数値の2段）に変更し、scrollWidth=clientWidth=109 で全文表示を確認。
+- **Event見出しとFABの干渉**：初期位置でFAB（＋ボタン）が Event カード見出しの右端に被り文字が切れていた。→ .evcard h3 に padding-right:56px。Range 実測で文字右端 295px < FAB左端 320px、干渉なしを確認。
+- **エンディング画面にトースト残留**：最終日の Changes トーストがエンディング本文の上に残って被っていた。→ ending() 表示時に #changes をクリア（残留0件を確認）。
+- **コンポーズの細部**：「投稿案を選ぶ」の見出し行でラベルが途中改行していた → ヒント文を2段目に分離（flex-wrap）。ACTIONリボンのサブ文が「す」1文字だけ次行に落ちていた → text-wrap:balance で均等改行に。
+- 検証：両ルートのメインループでエンディング到達、エラー0・壊れ画像0・HTTP≥400なし・scrollW=390。駆動 /tmp/shots_v32.py・/tmp/audit_v32.py・/tmp/verify_v32.py・/tmp/check_evtext.py・/tmp/check_end.py、スクショ /tmp/v32-fix-me.png・/tmp/v32-fix-his.png・/tmp/v32-fix-ending2.png ほか。
+- ※サクヤ編シナリオは次版 v33 に繰り越し（本パスは表示修正のみ、本文・数値・シナリオ不変）。
