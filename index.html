@@ -2396,7 +2396,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v141</p>
+  <p class="ver">v142</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2553,7 +2553,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v141</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v142</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2792,7 +2792,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v141</p>
+    <p class="ver">v142</p>
   </div>
 </section>
 </div>
@@ -2810,13 +2810,11 @@ input,textarea{font-size:16px}
     <span class="act-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg>ACTIVITY ― ステータス行動</span>
     <span class="act-once">1日 1回</span>
     <h3>Activity</h3>
-    <p class="act-desc">タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
+    <p class="act-desc">タイトルを選んで実行する、Status式の行動メニュー。</p>
     <p class="act-today" id="act-today"></p>
-    <div class="act-steps" id="act-steps" aria-hidden="true"><span class="as-dot on">1</span><span class="as-line"></span><span class="as-dot">2</span><span class="as-line"></span><span class="as-dot">3</span></div>
+    <div class="act-steps" id="act-steps" aria-hidden="true"><span class="as-dot on">1</span><span class="as-line"></span><span class="as-dot">2</span></div>
   </div>
   <div id="actsec-title"><p class="actlab">タイトル ― 何をする？</p><div id="actopts"></div></div>
-  <div id="actsec-who" class="hidden"><p class="actlab">相手 ― 誰と？（複数選んでも、効果は同じ）</p><div id="actwho" class="chiprow"></div></div>
-  <div id="actsec-time" class="hidden"><p class="actlab">時間帯 ― いつやる？</p><div id="acttime" class="chiprow"></div></div>
   <button class="btn hidden" id="act-go" disabled>この内容で実行する</button>
   <div id="actresult" style="margin-top:12px;font-size:14px;line-height:1.75"></div>
 </div></div>
@@ -4426,32 +4424,27 @@ function doPost(o){
  mine.m=[String(Math.max(1,Math.round(S.fol*0.002))),String(Math.round(S.fol*0.006)),String(Math.round(S.fol*0.05))];
  injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
 }
-/* activity (Status-style: pick a title, partner(s) and a time slot, then run.
-   Partner/time are presentation only - the 1-per-day rule and fx are unchanged) */
-let actSel=null,actTime="";
-/* v113: the head's step rail fills as the run unlocks (1 title,
-   2 partner/time, 3 run). Presentation only. */
+/* activity (Status-style: pick a title, then run. v142: the partner and
+   time-slot steps are gone by user decision - neither ever fed fx, the
+   result text or stories; the partner only echoed into the receipt's
+   meta row. The chapters' o.who data stays in place, simply unused.
+   The 1-per-day rule and fx are unchanged) */
+let actSel=null;
+/* v113: the head's step rail fills as the run unlocks (1 title, 2 run).
+   Presentation only. */
 function actStage(n){const dots=$$("#act-steps .as-dot"),lines=$$("#act-steps .as-line");dots.forEach((d,i)=>d.classList.toggle("on",i<n));lines.forEach((l,i)=>l.classList.toggle("on",i<n-1));}
 $("#btn-activity").onclick=()=>{
- const box=$("#actopts"),res=$("#actresult"),whoBox=$("#actwho"),tmBox=$("#acttime"),go=$("#act-go");
- box.innerHTML="";res.innerHTML="";res.classList.remove("show","done");whoBox.innerHTML="";tmBox.innerHTML="";actSel=null;actTime="";
- ["#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
+ const box=$("#actopts"),res=$("#actresult"),go=$("#act-go");
+ box.innerHTML="";res.innerHTML="";res.classList.remove("show","done");actSel=null;
  go.classList.add("hidden");go.disabled=true;go.classList.remove("running");go.textContent="この内容で実行する";
  $("#actsec-title").classList.remove("hidden");
- actStage(S.actDone?3:1);
+ actStage(S.actDone?2:1);
  $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+TOTAL_DAYS+" ・ "+(S.actDone?"今日の分は完了":"あと1回だけ実行できる");
  if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";res.classList.add("done");}
  else curCH()[S.ch-1].activity.forEach((o,oi)=>{
   const b=document.createElement("button");b.className="choice actopt";const chips=fxChips(o.fx);b.innerHTML='<span class="actopt-no">'+(oi+1)+'</span><span class="actopt-main"><span class="actopt-tx"></span>'+(chips?'<span class="actopt-chips">'+chips+"</span>":"")+'</span><span class="actopt-check">✓</span>';b.querySelector(".actopt-tx").textContent=o.t;
   b.onclick=()=>{
-   box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");actSel=o;actStage(2);
-   whoBox.innerHTML="";
-   (o.who||["ひとりで"]).forEach((w,i)=>{const c=document.createElement("button");c.className="chip"+(i===0?" sel":"");c.textContent=w;c.onclick=()=>c.classList.toggle("sel");whoBox.appendChild(c);});
-   $("#actsec-who").classList.remove("hidden");
-   tmBox.innerHTML="";actTime="夜";
-   ["朝","昼","夕方","夜"].forEach(t=>{const c=document.createElement("button");c.className="chip"+(t==="夜"?" sel":"");c.textContent=t;c.onclick=()=>{tmBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");actTime=t;};tmBox.appendChild(c);});
-   $("#actsec-time").classList.remove("hidden");
-   ["#actsec-who","#actsec-time"].forEach(s=>{const el=$(s);el.style.animation="none";void el.offsetWidth;el.style.animation="actsecin .32s ease both";});
+   box.querySelectorAll(".choice").forEach(x=>x.classList.remove("sel"));b.classList.add("sel");actSel=o;
    go.classList.remove("hidden");go.disabled=false;
   };
   box.appendChild(b);});
@@ -4461,16 +4454,15 @@ $("#btn-activity").onclick=()=>{
   /* v113: a short run sequence - the button spins, the sections fold
      away, then the receipt lands. fx/story/save fire with the receipt,
      exactly as they fired on the press before. */
-  const whos=[...whoBox.querySelectorAll(".chip.sel")].map(c=>c.textContent);
-  go.classList.add("running");go.textContent="実行中…";actStage(3);
-  ["#actsec-title","#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("actsec-leave"));
+  go.classList.add("running");go.textContent="実行中…";actStage(2);
+  ["#actsec-title"].forEach(s=>$(s).classList.add("actsec-leave"));
   setTimeout(()=>{
-   ["#actsec-title","#actsec-who","#actsec-time"].forEach(s=>{$(s).classList.add("hidden");$(s).classList.remove("actsec-leave");});
+   ["#actsec-title"].forEach(s=>{$(s).classList.add("hidden");$(s).classList.remove("actsec-leave");});
    go.classList.add("hidden");go.classList.remove("running");go.textContent="この内容で実行する";
    const chips=fxChips(o.fx);
    res.innerHTML='<div class="actres-t"></div><div class="actres-meta"></div>'+(chips?'<div class="actres-chips">'+chips+"</div>":"");
    res.querySelector(".actres-t").textContent=o.r;
-   res.querySelector(".actres-meta").textContent="実行内容 ― "+o.t+" ／ "+actTime+(whos.length?" ／ "+whos.join("・"):"");
+   res.querySelector(".actres-meta").textContent="実行内容 ― "+o.t;
    res.classList.add("show","done");
    $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+TOTAL_DAYS+" ・ 今日の分は完了";
    applyFx(o.fx);addStory("act");save();
