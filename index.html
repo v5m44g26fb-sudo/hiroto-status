@@ -1356,6 +1356,25 @@ input,textarea{font-size:16px}
 .evcard .choice.evchoice.picked .evc-no::after{content:"✓";font-size:14px;font-weight:900}
 .evcard .result{animation:evres .4s ease both}
 @keyframes evres{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+/* ===== v75: Activity overhaul - the daily action reads as a Status daily:
+   the head carries today's line (Day n / 5 and whether today's run is still
+   open), the who/time sections rise in as they unlock, the go button answers
+   the press, and running the action returns a receipt - result text, a recap
+   line of what was actually run (title / time / partner), the gained fx
+   chips and a rotated done-stamp in the corner. Action contents, effects
+   and the once-a-day rule are unchanged. ===== */
+.act-today{display:flex;align-items:center;gap:7px;margin-top:11px;font-size:11.5px;font-weight:800;letter-spacing:.06em;color:#ffe9a8}
+.act-today::before{content:"";width:7px;height:7px;border-radius:50%;background:#f7c948;box-shadow:0 0 8px rgba(247,201,72,.9);flex:none}
+@keyframes actsecin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#act-go{transition:transform .12s ease,box-shadow .15s ease}
+#act-go:active{transform:scale(.975)}
+#actresult{position:relative}
+#actresult.show{animation:actresin .45s cubic-bezier(.2,.9,.3,1.15) both}
+@keyframes actresin{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+.actres-t{padding-right:52px}
+.actres-meta{margin-top:8px;font-size:12px;font-weight:700;color:#8a6d1a;letter-spacing:.02em;line-height:1.6}
+.actres-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+#actresult.done::after{content:"完了";position:absolute;top:10px;right:12px;width:44px;height:44px;border:2px solid rgba(184,134,11,.5);border-radius:50%;color:rgba(184,134,11,.72);font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;transform:rotate(10deg);letter-spacing:.08em;pointer-events:none}
 </style>
 </head>
 <body>
@@ -1370,7 +1389,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v74</p>
+  <p class="ver">v75</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1511,7 +1530,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v74</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v75</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1673,7 +1692,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v74</p>
+    <p class="ver">v75</p>
   </div>
 </section>
 </div>
@@ -1690,6 +1709,7 @@ input,textarea{font-size:16px}
     <span class="act-once">1日 1回</span>
     <h3>Activity</h3>
     <p class="act-desc">タイトル・相手・時間帯を選んで実行する、Status式の行動メニュー。</p>
+    <p class="act-today" id="act-today"></p>
   </div>
   <div id="actsec-title"><p class="actlab">タイトル ― 何をする？</p><div id="actopts"></div></div>
   <div id="actsec-who" class="hidden"><p class="actlab">相手 ― 誰と？（複数選んでも、効果は同じ）</p><div id="actwho" class="chiprow"></div></div>
@@ -2790,11 +2810,12 @@ function doPost(o){
 let actSel=null,actTime="";
 $("#btn-activity").onclick=()=>{
  const box=$("#actopts"),res=$("#actresult"),whoBox=$("#actwho"),tmBox=$("#acttime"),go=$("#act-go");
- box.innerHTML="";res.innerHTML="";whoBox.innerHTML="";tmBox.innerHTML="";actSel=null;actTime="";
+ box.innerHTML="";res.innerHTML="";res.classList.remove("show","done");whoBox.innerHTML="";tmBox.innerHTML="";actSel=null;actTime="";
  ["#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
  go.classList.add("hidden");go.disabled=true;
  $("#actsec-title").classList.remove("hidden");
- if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";}
+ $("#act-today").textContent="TODAY ― Day "+S.ch+" / 5 ・ "+(S.actDone?"今日の分は完了":"あと1回だけ実行できる");
+ if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";res.classList.add("done");}
  else curCH()[S.ch-1].activity.forEach((o,oi)=>{
   const b=document.createElement("button");b.className="choice actopt";const chips=fxChips(o.fx);b.innerHTML='<span class="actopt-no">'+(oi+1)+'</span><span class="actopt-main"><span class="actopt-tx"></span>'+(chips?'<span class="actopt-chips">'+chips+"</span>":"")+'</span><span class="actopt-check">✓</span>';b.querySelector(".actopt-tx").textContent=o.t;
   b.onclick=()=>{
@@ -2805,6 +2826,7 @@ $("#btn-activity").onclick=()=>{
    tmBox.innerHTML="";actTime="夜";
    ["朝","昼","夕方","夜"].forEach(t=>{const c=document.createElement("button");c.className="chip"+(t==="夜"?" sel":"");c.textContent=t;c.onclick=()=>{tmBox.querySelectorAll(".chip").forEach(x=>x.classList.remove("sel"));c.classList.add("sel");actTime=t;};tmBox.appendChild(c);});
    $("#actsec-time").classList.remove("hidden");
+   ["#actsec-who","#actsec-time"].forEach(s=>{const el=$(s);el.style.animation="none";void el.offsetWidth;el.style.animation="actsecin .32s ease both";});
    go.classList.remove("hidden");go.disabled=false;
   };
   box.appendChild(b);});
@@ -2813,7 +2835,14 @@ $("#btn-activity").onclick=()=>{
   const o=actSel;S.actDone=true;
   ["#actsec-title","#actsec-who","#actsec-time"].forEach(s=>$(s).classList.add("hidden"));
   go.classList.add("hidden");
-  res.textContent=o.r;applyFx(o.fx);addStory("act");save();
+  const whos=[...whoBox.querySelectorAll(".chip.sel")].map(c=>c.textContent);
+  const chips=fxChips(o.fx);
+  res.innerHTML='<div class="actres-t"></div><div class="actres-meta"></div>'+(chips?'<div class="actres-chips">'+chips+"</div>":"");
+  res.querySelector(".actres-t").textContent=o.r;
+  res.querySelector(".actres-meta").textContent="実行内容 ― "+o.t+" ／ "+actTime+(whos.length?" ／ "+whos.join("・"):"");
+  res.classList.add("show","done");
+  $("#act-today").textContent="TODAY ― Day "+S.ch+" / 5 ・ 今日の分は完了";
+  applyFx(o.fx);addStory("act");save();
  };
  $("#scrim-act").classList.add("on");
 };
