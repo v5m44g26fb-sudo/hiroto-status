@@ -769,7 +769,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v37</p>
+  <p class="ver">v38</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -883,7 +883,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v37</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v38</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -995,7 +995,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v37</p>
+    <p class="ver">v38</p>
   </div>
 </section>
 </div>
@@ -1030,6 +1030,13 @@ const ACC={
  staff:{n:"佐藤大輔｜事務所スタッフ",h:"@sato_staff",av:"assets/av-staff.jpg"},
  sora:{n:"青木そら",h:"@sora_music",av:"assets/av-sora.jpg"},
  akari:{n:"ジウ｜Hearts2Hearts リーダー",h:"@jiwoo_h2h",av:"assets/av-akari.jpg"},
+ carmen:{n:"カルメン｜Hearts2Hearts",h:"@carmen_h2h",av:"assets/av-carmen.jpg"},
+ yuha:{n:"ユハ｜Hearts2Hearts",h:"@yuha_h2h",av:"assets/av-yuha.jpg"},
+ stella:{n:"ステラ｜Hearts2Hearts",h:"@stella_h2h",av:"assets/av-stella.jpg"},
+ juun:{n:"ジュウン｜Hearts2Hearts",h:"@juun_h2h",av:"assets/av-juun.jpg"},
+ ana:{n:"エイナ｜Hearts2Hearts",h:"@ana_h2h",av:"assets/av-ana.jpg"},
+ ian:{n:"イアン｜Hearts2Hearts",h:"@ian_h2h",av:"assets/av-ian.jpg"},
+ yeon:{n:"イェオン｜Hearts2Hearts",h:"@yeon_h2h",av:"assets/av-yeon.jpg"},
  sea:{n:"カリナ｜aespa リーダー",h:"@karina_aespa",av:"assets/av-sea.jpg"},
  mina:{n:"ミナ｜TWICE",h:"@mina_twice",av:"assets/av-mina.jpg"},
  media:{n:"『ライブステージ』公式",h:"@livestage_tv",av:"assets/av-media.jpg"},
@@ -1067,7 +1074,8 @@ banner:"フォロワーはまだ、ほぼゼロ。最初の投稿で全部が決
 seed:[
 {a:"media",tx:"ガールズグループ「Hearts2Hearts」がデビュー曲『The Chase』を配信リリース。最年長メンバー・なおの歌声に注目です。",lk:214,rp:48,rc:12},
 {a:"hiroto",tx:"新曲、出しました。聴いてくれたら嬉しいです。\nよろしくお願いします。",lk:18234,rp:3902,rc:812},
-{a:"sora",tx:"新人さんのデモ切り抜き流れてきて聴いたら、声めっちゃ良くて止まった。なお、っていう子らしい。",lk:96,rp:11,rc:4}],
+{a:"sora",tx:"新人さんのデモ切り抜き流れてきて聴いたら、声めっちゃ良くて止まった。なお、っていう子らしい。",lk:96,rp:11,rc:4},
+{a:"carmen",tx:"Hearts2Hearts、デビューしました！！ カルメンです。最年長のお姉さん・なおと一緒に、ここから駆け抜けます。応援よろしくお願いします！",lk:3204,rp:541,rc:96}],
 posts:[
 {tx:"はじめまして、Hearts2Heartsの なお です！\nデビュー曲『The Chase』配信スタートしました。\nまだ何者でもないけど、ここから頑張ります。よろしくお願いします！",img:"assets/nao-promo.jpg",fx:{fol:60,cog:6,xp:10,dist:0,flm:0},react:[
 {a:"fan1",tx:"デビューおめでとうございます！！ 歌声一瞬で好きになりました、推します！",lk:23,rp:3,rc:1},
@@ -1095,7 +1103,8 @@ banner:"昨日のアカペラ／デビュー曲の切り抜きが、少しずつ
 seed:[
 {a:"fan1",tx:"なおちゃんのデビュー曲サビ、何回も聴いてる。声の伸びが気持ちよすぎる。",lk:187,rp:31,rc:9},
 {a:"hiroto",tx:"今日の収録、ありがとうございました。\nまた呼んでもらえるよう頑張ります。",lk:12980,rp:2210,rc:402},
-{a:"matome",tx:"新人・なおの歌唱切り抜きがじわ伸び。「令和の実力派か」の声",lk:512,rp:88,rc:37,img:"assets/nao-stage.jpg"}],
+{a:"matome",tx:"新人・なおの歌唱切り抜きがじわ伸び。「令和の実力派か」の声",lk:512,rp:88,rc:37,img:"assets/nao-stage.jpg"},
+{a:"stella",tx:"なお姉さんの切り抜き、海外のファンの間でも回ってるの見た！ I am so proud of you〜！",lk:894,rp:121,rc:34}],
 posts:[
 {tx:"切り抜き見てくれた方、ありがとうございます！\nフルで聴くと、夢みたいなイントロから一気に駆け出していくところが一番好きです。よかったらフルでも聴いてください。",fx:{fol:120,cog:8,xp:10,dist:0,flm:0},react:[
 {a:"sora",tx:"なおさんフル聴いた。イントロから駆け出す感じがいちばん良いって本人が言ってるの、正解すぎる。",lk:96,rp:14,rc:3},
@@ -1124,7 +1133,8 @@ banner:"音楽番組『ライブステージ』収録日。出演者リストに
 seed:[
 {a:"media",tx:"今夜の『ライブステージ』出演：井汲大翔、Hearts2Hearts、新人・なお ほか。お楽しみに！",lk:3210,rp:640,rc:98},
 {a:"fan1",tx:"なおちゃんテレビ出演！！ 録画予約した！！",lk:88,rp:12,rc:5},
-{a:"hiroto",tx:"今日は収録です。頑張ります。",lk:9870,rp:1502,rc:233}],
+{a:"hiroto",tx:"今日は収録です。頑張ります。",lk:9870,rp:1502,rc:233},
+{a:"yuha",tx:"今日は『ライブステージ』、Hearts2Heartsも出演します。なお姉さんと一緒のステージ、見届けてください。",lk:1502,rp:233,rc:41}],
 posts:[
 {tx:"本日『ライブステージ』に出演します。\n初めての歌番組、緊張で手が冷たいです。でも歌う時は、ちゃんと届けます。見てくれたら嬉しいです。",img:"assets/nao-stage.jpg",fx:{fol:160,cog:12,xp:10,dist:2,flm:0},react:[
 {a:"fan1",tx:"なおちゃんのテレビ初歌唱、泣いた。手冷たいって言ってたのに声は全然震えてなかった。",lk:210,rp:34,rc:11},
@@ -1152,7 +1162,9 @@ banner:"配信イベント『歌うまコラボSP』の出演候補に、なお�
 seed:[
 {a:"matome",tx:"配信イベント『歌うまコラボSP』、井汲大翔×新人・なお のコラボ案が浮上？ 双方の事務所は「未定」",lk:1204,rp:310,rc:190},
 {a:"akari",tx:"なおの噂ポスト見た！？ 本当ならすごすぎる、応援してる！",lk:154,rp:12,rc:8},
-{a:"hiroto",tx:"配信、決まりました。詳細はまた。",lk:15230,rp:2890,rc:511}],
+{a:"hiroto",tx:"配信、決まりました。詳細はまた。",lk:15230,rp:2890,rc:511},
+{a:"juun",tx:"コラボの噂、メンバーもドキドキしながら見てます。なお姉さん、ふぁいと。振り付けなら任せて。",lk:763,rp:98,rc:27},
+{a:"ian",tx:"噂のやつ、メンバーみんなで見守ってます。なお姉さん、ドキドキしてるの顔に出てるよ〜",lk:521,rp:61,rc:15}],
 posts:[
 {tx:"噂が流れてるみたいですが、決まったことは公式からお知らせします。\n今は目の前の歌を頑張ります。いつも応援ありがとう！",fx:{fol:110,cog:9,xp:10,dist:2,flm:-3},react:[
 {a:"fan1",tx:"冷静な対応、えらい。噂に振り回されないの大人だよ。",lk:88,rp:9,rc:4},
@@ -1178,7 +1190,8 @@ banner:"最終日。コラボ配信の正式発表が近い。そして今朝、
 seed:[
 {a:"hiroto",tx:"朝のコンビニのプリン、やっと買えた。うれしい。",lk:16780,rp:2904,rc:601},
 {a:"matome",tx:"井汲大翔「プリン買えた」ポストにファン歓喜。……なお、新人・なおも数分後に似たポストをしていた件、界隈ざわつく",lk:2310,rp:588,rc:402},
-{a:"fan1",tx:"え、なおちゃんの今朝のポストと大翔さんのプリン、時間近すぎない…？ 偶然だよね…？",lk:240,rp:31,rc:58}],
+{a:"fan1",tx:"え、なおちゃんの今朝のポストと大翔さんのプリン、時間近すぎない…？ 偶然だよね…？",lk:240,rp:31,rc:58},
+{a:"ana",tx:"最終日。なお姉さんの歌が、今日もたくさんの人に届きますように。エイナは信じてる。",lk:642,rp:74,rc:19}],
 posts:[
 {tx:"今朝やっと買えたプリン、おいしかったです。\n……え、なにこの空気。私はただのプリン好きです！！",fx:{fol:230,cog:12,xp:8,dist:6,flm:14},react:[
 {a:"matome",tx:"新人・なお「ただのプリン好き」弁明ポスト、かえって拡散。匂わせ疑惑、トレンド入り寸前",lk:1890,rp:402,rc:377},
@@ -1208,7 +1221,8 @@ banner:"フォロワーはまだ、ほぼゼロ。最初の投稿で全部が決
 seed:[
 {a:"media",tx:"ガールズグループ「Hearts2Hearts」がデビュー曲『The Chase』を配信リリース。最年長メンバー・なおの歌声に注目です。",lk:214,rp:48,rc:12},
 {a:"sakuya",tx:"今日デビューした後輩グループの曲、聴きました。声がまっすぐで、いい朝になりました。",lk:15234,rp:2902,rc:612},
-{a:"sora",tx:"新人さんのデモ切り抜き流れてきて聴いたら、声めっちゃ良くて止まった。なお、っていう子らしい。",lk:96,rp:11,rc:4}],
+{a:"sora",tx:"新人さんのデモ切り抜き流れてきて聴いたら、声めっちゃ良くて止まった。なお、っていう子らしい。",lk:96,rp:11,rc:4},
+{a:"carmen",tx:"Hearts2Hearts、デビューしました！！ カルメンです。最年長のお姉さん・なおと一緒に、ここから駆け抜けます。応援よろしくお願いします！",lk:3204,rp:541,rc:96}],
 posts:[
 {tx:"はじめまして、Hearts2Heartsの なお です！\nデビュー曲『The Chase』配信スタートしました。\nまだ何者でもないけど、ここから頑張ります。よろしくお願いします！",img:"assets/nao-promo.jpg",fx:{fol:60,cog:6,xp:10,dist:0,flm:0},react:[
 {a:"fan1",tx:"デビューおめでとうございます！！ 歌声一瞬で好きになりました、推します！",lk:23,rp:3,rc:1},
@@ -1236,7 +1250,8 @@ banner:"昨日のアカペラ／デビュー曲の切り抜きが、少しずつ
 seed:[
 {a:"fan1",tx:"なおちゃんのデビュー曲サビ、何回も聴いてる。声の伸びが気持ちよすぎる。",lk:187,rp:31,rc:9},
 {a:"sakuya",tx:"リハーサル終わりました。今日のステージは、雲の上みたいな気持ちでした。見てくれた方、ありがとうございました。",lk:11980,rp:2010,rc:388},
-{a:"matome",tx:"新人・なおの歌唱切り抜きがじわ伸び。「令和の実力派か」の声",lk:512,rp:88,rc:37,img:"assets/nao-stage.jpg"}],
+{a:"matome",tx:"新人・なおの歌唱切り抜きがじわ伸び。「令和の実力派か」の声",lk:512,rp:88,rc:37,img:"assets/nao-stage.jpg"},
+{a:"stella",tx:"なお姉さんの切り抜き、海外のファンの間でも回ってるの見た！ I am so proud of you〜！",lk:894,rp:121,rc:34}],
 posts:[
 {tx:"切り抜き見てくれた方、ありがとうございます！\nフルで聴くと、夢みたいなイントロから一気に駆け出していくところが一番好きです。よかったらフルでも聴いてください。",fx:{fol:120,cog:8,xp:10,dist:0,flm:0},react:[
 {a:"sora",tx:"なおさんフル聴いた。イントロから駆け出す感じがいちばん良いって本人が言ってるの、正解すぎる。",lk:96,rp:14,rc:3},
@@ -1265,7 +1280,8 @@ banner:"音楽番組『ライブステージ』収録日。出演者リストに
 seed:[
 {a:"media",tx:"今夜の『ライブステージ』出演：NCT WISH、Hearts2Hearts ほか。お楽しみに！",lk:3210,rp:640,rc:98},
 {a:"fan1",tx:"なおちゃんテレビ出演！！ 録画予約した！！",lk:88,rp:12,rc:5},
-{a:"sakuya",tx:"今日は収録です。よろしくお願いします。楽屋のお菓子が豊作でした。",lk:9870,rp:1502,rc:233}],
+{a:"sakuya",tx:"今日は収録です。よろしくお願いします。楽屋のお菓子が豊作でした。",lk:9870,rp:1502,rc:233},
+{a:"yuha",tx:"今日は『ライブステージ』、Hearts2Heartsも出演します。なお姉さんと一緒のステージ、見届けてください。",lk:1502,rp:233,rc:41}],
 posts:[
 {tx:"本日『ライブステージ』に出演します。\nHearts2Heartsとして初めての歌番組、緊張で手が冷たいです。でも歌う時は、ちゃんと届けます。見てくれたら嬉しいです。",img:"assets/nao-stage.jpg",fx:{fol:160,cog:12,xp:10,dist:2,flm:0},react:[
 {a:"fan1",tx:"なおちゃんのテレビ初歌唱、泣いた。手冷たいって言ってたのに声は全然震えてなかった。",lk:210,rp:34,rc:11},
@@ -1293,7 +1309,9 @@ banner:"配信イベント『歌うまコラボSP』の出演候補に、なお�
 seed:[
 {a:"matome",tx:"配信イベント『歌うまコラボSP』、NCT WISH サクヤ×新人・なお のコラボ案が浮上？ 双方の事務所は「未定」",lk:1204,rp:310,rc:190},
 {a:"akari",tx:"なおの噂ポスト見た！？ 本当ならすごすぎる、応援してる！",lk:154,rp:12,rc:8},
-{a:"sakuya",tx:"配信、決まりました。詳細はまた。よろしくお願いします。",lk:14230,rp:2590,rc:411}],
+{a:"sakuya",tx:"配信、決まりました。詳細はまた。よろしくお願いします。",lk:14230,rp:2590,rc:411},
+{a:"juun",tx:"コラボの噂、メンバーもドキドキしながら見てます。なお姉さん、ふぁいと。振り付けなら任せて。",lk:763,rp:98,rc:27},
+{a:"ian",tx:"噂のやつ、メンバーみんなで見守ってます。なお姉さん、ドキドキしてるの顔に出てるよ〜",lk:521,rp:61,rc:15}],
 posts:[
 {tx:"噂が流れてるみたいですが、決まったことは公式からお知らせします。\n今は目の前の歌を頑張ります。いつも応援ありがとう！",fx:{fol:110,cog:9,xp:10,dist:2,flm:-3},react:[
 {a:"fan1",tx:"冷静な対応、えらい。噂に振り回されないの大人だよ。",lk:88,rp:9,rc:4},
@@ -1319,7 +1337,8 @@ banner:"最終日。コラボ配信の正式発表が近い。そして今朝、
 seed:[
 {a:"sakuya",tx:"朝の駅前のクロワッサン、やっと買えました。うれしい。",lk:16780,rp:2904,rc:601},
 {a:"matome",tx:"サクヤ「クロワッサン買えた」ポストにファン歓喜。……なお、新人・なおも数分後に似たポストをしていた件、界隈ざわつく",lk:2310,rp:588,rc:402},
-{a:"fan1",tx:"え、なおちゃんの今朝のポストとサクヤのクロワッサン、時間近すぎない…？ 偶然だよね…？",lk:240,rp:31,rc:58}],
+{a:"fan1",tx:"え、なおちゃんの今朝のポストとサクヤのクロワッサン、時間近すぎない…？ 偶然だよね…？",lk:240,rp:31,rc:58},
+{a:"ana",tx:"最終日。なお姉さんの歌が、今日もたくさんの人に届きますように。エイナは信じてる。",lk:642,rp:74,rc:19}],
 posts:[
 {tx:"今朝やっと買えたクロワッサン、おいしかったです。\n……え、なにこの空気。私はただのパン好きです！！",fx:{fol:230,cog:12,xp:8,dist:6,flm:14},react:[
 {a:"matome",tx:"新人・なお「ただのパン好き」弁明ポスト、かえって拡散。匂わせ疑惑、トレンド入り寸前",lk:1890,rp:402,rc:377},
@@ -1359,7 +1378,7 @@ flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜�
 quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、収録の帰り道。サクヤが少し離れたところから、丁寧に言った。「なおさんの声は、雨上がりの空みたいです。……好きです」\nそれを聞いたのは、誰もいない廊下で、二人だけ。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
 start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\nサクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 新曲","58,910 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#プリン被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
-const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["carmen","カルメン"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
 const TARGETS={
  hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/ig-gen-stage.jpg",typo:"HIROTO IKUMI",bio:"歌手。歌とステージがすべて。",fol:"284万",cardT:"井汲大翔｜先輩歌手",cardD:"憧れの先輩歌手。言葉少なめ、でも目が離せない。",tags:["先輩歌手","ソロ"]},
@@ -1373,7 +1392,7 @@ const SAKUYA_SEED=[
  {tx:"配信、決まりました。詳細はまた。よろしくお願いします。",lk:14230,rp:2590,rc:411},
  {tx:"朝の駅前のクロワッサン、やっと買えました。うれしい。",lk:16780,rp:2904,rc:601}];
 const TRENDS_S=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","NCT WISH カムバ","61,204 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#クロワッサン被り","8,120 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"]];
-const STORY_S=[["sakuya","サクヤ"],["akari","ジウ"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["nao","あなた"]];
+const STORY_S=[["sakuya","サクヤ"],["akari","ジウ"],["carmen","カルメン"],["media","番組公式"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
 function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
 function distLab(){return tgt().short+"との距離";}
@@ -1630,7 +1649,7 @@ function renderFeed(){
  const tl=$("#tl-posts");tl.innerHTML="";
  const tab=S._htab||"rec";
  let posts=S.posts;
- if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari"].includes(p.a)||p.mine||p.sys);
+ if(tab==="fol")posts=posts.filter(p=>["hiroto","sakuya","nao","media","akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)||p.mine||p.sys);
  posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
  renderMePosts();renderHisPosts();
 }
