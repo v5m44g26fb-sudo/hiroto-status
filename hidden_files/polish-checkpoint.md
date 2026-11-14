@@ -1227,3 +1227,7 @@
 ### v225 あそびかたの表に現在地マーカー
 - 設定「あそびかた」のランク表と距離ステージ表で、今の自分のチップが反転して分かるようにした（チップは初回だけ生成し、マーカーは開くたびに現在値へ同期）。
 - 検証（Playwright、/tmp/verify_v225.py）：Lv3／STAGE3 にマーカー、セッション内で Lv5／STAGE5 へ進めると追随、scrollW=390、エラー0。
+
+### v226 RESULTから STATUS LOG へ
+- RESULT 画面のシェアカード下に「変化の記録を STATUS LOG で見る ›」を追加。あわせて、RESULT オーバーレイ（z-index 118）が全シートより上にあるため、STATUS LOG の scrim だけをその上に載せるよう調整（通常導線では競合しない）。
+- 検証（Playwright、/tmp/verify_v226.py）：RESULT 上にログが開いて操作でき、閉じると RESULT に戻る、scrollW=390、エラー0。

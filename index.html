@@ -279,6 +279,10 @@ input,textarea{font-size:16px}
 .db-arrow{flex:none;width:29px;height:29px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff}
 #actbar.final #btn-nextday{background:linear-gradient(92deg,#b8860b,#f7c948 55%,#f91880);box-shadow:0 10px 26px rgba(247,201,72,.4)}
 .scrim{position:absolute;inset:0;background:rgba(36,46,54,.5);z-index:95;display:none;align-items:flex-end}
+/* v226: the STATUS LOG also opens over the RESULT overlay
+   (z 118), so its scrim alone rides above it - in the normal
+   flow nothing else sits that high while the log is open */
+#scrim-chg{z-index:130}
 .scrim.on{display:flex;animation:fadein .2s ease}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
 .scrim.on .sheet{animation:sheetup .28s cubic-bezier(.2,.8,.25,1)}
@@ -1120,6 +1124,8 @@ input,textarea{font-size:16px}
 .drs-copy{display:block;margin:12px auto 0;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .15s ease,transform .1s ease}
 .drs-copy:active{transform:scale(.96)}
 .drs-copy.done{background:rgba(23,191,99,.25);border-color:rgba(23,191,99,.6)}
+.drs-loglink{display:block;margin:10px auto 0;background:none;border:none;color:#cdbffa;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer;padding:4px 8px}
+.drs-loglink:active{opacity:.65}
 .drs-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid rgba(15,20,25,.08);font-size:10px;font-weight:800;color:#8a94a6}
 .drs-dots{display:inline-flex;gap:4px}
 .drs-dots i{width:6px;height:6px;border-radius:50%;background:rgba(15,20,25,.16)}
@@ -2794,7 +2800,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v225</p>
+  <p class="ver">v226</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2967,7 +2973,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v225</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v226</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3175,6 +3181,7 @@ input,textarea{font-size:16px}
         <div class="drs-foot"><span>デビューしたら、彼と同じステージの件</span><span class="drs-dots" id="drs-dots"></span></div>
       </div>
       <button class="drs-copy" id="drs-copy" type="button">結果をテキストでコピー</button>
+      <button class="drs-loglink" id="dr-loglink" type="button">変化の記録を STATUS LOG で見る ›</button>
       <p class="dr-note" id="dr-note"></p>
       <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
@@ -3236,7 +3243,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v225</p>
+    <p class="ver">v226</p>
   </div>
 </section>
 </div>
@@ -5606,6 +5613,9 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  $("#dayresult").classList.add("on");}
 $("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
+/* v226: the RESULT screen links onward to the full record too -
+   the scrims layer over it, like they do over the ending (v192) */
+$("#dr-loglink").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 /* v58: the target as a "special person" - distance is staged, and both his
    profile and the special DM thread read the current stage. Unlocking his
    DM gets a one-shot celebration the first time the message pane is opened
