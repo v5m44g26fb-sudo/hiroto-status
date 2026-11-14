@@ -391,7 +391,8 @@ input,textarea{font-size:16px}
 .evcard::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 .evcard h3{font-size:18px}
 /* ===== v20: my-profile overhaul (cover / avatar / status panel / segmented tabs / media) ===== */
-#x-pane-me .pf-cover{position:relative;height:138px;background:url(assets/nao-promo.jpg) center 10%/cover}
+#x-pane-me .pf-cover{position:relative;height:138px;background:url(assets/nao-promo.jpg) center 10%/cover;cursor:pointer}
+#x-pane-hisprof .pf-cover{cursor:pointer}
 #x-pane-me .pf-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,8,28,0) 42%,rgba(10,8,28,.55) 100%)}
 #x-pane-me .pf-cover-chip{position:absolute;right:12px;bottom:10px;z-index:1;font-size:10px;font-weight:800;letter-spacing:.14em;color:#fff;background:rgba(15,20,25,.55);border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:4px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 #x-pane-me .pf-ava{width:84px!important;height:84px!important;margin-top:-42px;border:4px solid #fff;box-shadow:0 8px 22px rgba(15,20,25,.28),0 0 0 3px rgba(249,24,128,.55)}
@@ -2750,7 +2751,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v183</p>
+  <p class="ver">v184</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2922,7 +2923,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v183</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v184</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3187,7 +3188,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v183</p>
+    <p class="ver">v184</p>
   </div>
 </section>
 </div>
@@ -4690,6 +4691,13 @@ $("#fol-back").addEventListener("click",()=>showPane(folBackTo));
 (function(){const me1=$("#x-fol-n"),me2=$("#x-folwing-n");
  if(me1&&me1.parentElement)me1.parentElement.addEventListener("click",()=>openFollow("nao","folwers"));
  if(me2&&me2.parentElement)me2.parentElement.addEventListener("click",()=>openFollow("nao","folwing"));
+ /* v184: both profile covers open in the photo viewer - hers is
+    her promo photo, his is his own cover photo (loose items: no
+    post jump) */
+ const mcov=$("#x-pane-me .pf-cover");
+ if(mcov)mcov.addEventListener("click",()=>{try{openPhoto([{src:"assets/nao-promo.jpg",name:"なお",handle:S?S.handle:"",av:(ACC.nao&&ACC.nao.av)||null,cap:"",date:"",meta:"プロフィールのカバー写真"}],0);}catch(_){}});
+ const hcov=$("#his-cover");
+ if(hcov)hcov.addEventListener("click",()=>{try{const T=tgt();openPhoto([{src:T.cover,name:T.name,handle:T.handle,av:T.av||null,cap:"",date:"",meta:"プロフィールのカバー写真"}],0);}catch(_){}});
  const hs=$$("#x-pane-hisprof .counts span");
  if(hs[0])hs[0].addEventListener("click",()=>openFollow(tgtKey(),"folwers"));
  if(hs[1])hs[1].addEventListener("click",()=>openFollow(tgtKey(),"folwing"));})();
