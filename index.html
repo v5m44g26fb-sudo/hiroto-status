@@ -386,6 +386,25 @@ input,textarea{font-size:16px}
 #x-pane-me .mediagrid img{border-radius:12px;transition:transform .12s ease,opacity .12s ease}
 #x-pane-me .mediagrid img:active{transform:scale(.96);opacity:.85}
 #x-pane-me .editbtn{box-shadow:0 3px 12px rgba(15,20,25,.12);padding:9px 18px}
+/* ===== v21: hiroto profile overhaul (senior-artist grade: stage cover / gold ring / verified) ===== */
+#x-pane-hisprof .pf-cover{position:relative;height:150px;background:url(assets/ig-gen-stage.jpg) center 42%/cover}
+#x-pane-hisprof .pf-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,12,.08) 30%,rgba(5,5,12,.66) 100%)}
+#x-pane-hisprof .his-cover-typo{position:absolute;right:14px;bottom:12px;z-index:1;text-align:right;color:#fff}
+#x-pane-hisprof .his-cover-typo b{display:block;font-size:19px;font-weight:900;letter-spacing:.22em;text-shadow:0 2px 12px rgba(0,0,0,.55)}
+#x-pane-hisprof .his-cover-typo span{display:block;font-size:9.5px;font-weight:800;letter-spacing:.34em;color:#f6d67c;margin-top:3px}
+#x-pane-hisprof .his-avawrap{display:inline-block;margin-top:-46px;padding:3px;border-radius:50%;background:linear-gradient(135deg,#f6d67c,#c9a227 55%,#8a6d1f);box-shadow:0 10px 24px rgba(120,90,10,.42);line-height:0}
+#x-pane-hisprof .his-ava{width:88px!important;height:88px!important;border:3px solid #fff;display:block}
+#x-pane-hisprof .pf-name{font-size:21px;font-weight:900;margin-top:8px;display:flex;align-items:center;gap:6px}
+#x-pane-hisprof .his-verified{width:19px;height:19px;fill:#c9a227;flex:none;filter:drop-shadow(0 1px 3px rgba(160,120,20,.45))}
+#x-pane-hisprof .followbtn{padding:10px 26px;font-size:14.5px;background:linear-gradient(135deg,#141414,#2e2410);border:1px solid #c9a227;color:#f6d67c;box-shadow:0 6px 18px rgba(160,120,20,.35)}
+#x-pane-hisprof .followbtn.on{background:#fff;color:#0f1419;border-color:#d8c58a;box-shadow:none}
+#x-pane-hisprof .counts{margin-top:11px;display:flex;gap:22px}
+#x-pane-hisprof .counts span{font-size:13.5px;color:#536471}
+#x-pane-hisprof .counts b{font-size:15px}
+#x-pane-hisprof .x-ptabs button.act::after{width:58px;height:4px;background:linear-gradient(90deg,#c9a227,#f6d67c)}
+#x-pane-hisprof .mediagrid{gap:3px;padding:3px 3px 0}
+#x-pane-hisprof .mediagrid img{border-radius:10px;transition:transform .12s ease,opacity .12s ease}
+#x-pane-hisprof .mediagrid img:active{transform:scale(.96);opacity:.85}
 </style>
 </head>
 <body>
@@ -398,7 +417,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v20</p>
+  <p class="ver">v21</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -507,16 +526,16 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v20</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v21</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b>井汲大翔</b><small id="his-pcount">0 ポスト</small></div></div>
-      <div style="height:104px;background:url(assets/ig-gen-stage.jpg) center 45%/cover"></div>
+      <div class="pf-cover his-cover"><div class="his-cover-typo"><b>HIROTO IKUMI</b><span>OFFICIAL ACCOUNT</span></div></div>
       <div style="padding:0 14px">
-        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar" src="assets/ig-avatar.jpg" width="66" height="66" style="margin-top:-30px;border:3px solid #fff" alt=""><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
-        <div style="font-size:18px;font-weight:900;margin-top:4px">井汲大翔</div>
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><span class="his-avawrap"><img class="avatar his-ava" src="assets/ig-avatar.jpg" width="88" height="88" alt=""></span><button class="followbtn" id="btn-follow-hiroto">フォロー</button></div>
+        <div class="pf-name">井汲大翔<svg class="his-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg></div>
         <div style="color:#536471;font-size:13px">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px">歌手。歌とステージがすべて。</div>
         <div class="counts" style="margin-top:9px;display:flex;gap:18px"><span><b id="his-fol-n">284万</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
@@ -600,7 +619,7 @@ input,textarea{font-size:16px}
     <div class="statbox"><small>炎上度</small><b id="end-flm"></b></div>
   </div>
   <button class="btn" id="btn-restart">もう一度はじめる</button>
-  <p class="ver">v20</p>
+  <p class="ver">v21</p>
 </section>
 </div>
 <div id="changes"></div>
