@@ -2464,6 +2464,16 @@ input,textarea{font-size:16px}
 .trend-hero .th-meta .tdyn{margin-left:auto}
 .trend-hero .th-vol{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.16);margin-top:12px;overflow:hidden}
 .trend-hero .th-vol i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#1d9bf0,#7856ff,#f91880)}
+/* ===== v151: photo viewer, third raise - a filmstrip under the stage
+   (one thumb per photo in the set, active thumb ringed, tap to jump,
+   auto-scrolled into view). It joins the chrome that fades out in
+   the viewer's clean / immersive mode. Single-photo sets hide it. ===== */
+#pv-strip{display:flex;gap:8px;padding:10px 14px 2px;overflow-x:auto;scrollbar-width:none;transition:opacity .25s ease,transform .25s ease}
+#pv-strip::-webkit-scrollbar{display:none}
+#photoviewer.clean #pv-strip{opacity:0;pointer-events:none;transform:translateY(9px)}
+.pv-thumb{flex:none;width:52px;height:52px;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:#eef1f3;cursor:pointer;opacity:.55;transition:opacity .2s ease,border-color .2s ease,transform .15s ease}
+.pv-thumb img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.pv-thumb.act{opacity:1;border-color:#1d9bf0;transform:scale(1.05)}
 #x-pane-me .reppanel{background:linear-gradient(165deg,#131022 0%,#1d1038 62%,#2a1245 100%);border:1px solid rgba(247,201,72,.35);box-shadow:0 16px 36px rgba(16,8,40,.4);color:#e9e4fb;position:relative;overflow:hidden}
 #x-pane-me .reppanel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f7c948,#f91880,#7856ff)}
 #x-pane-me .rep-lab{color:#f7c948}
@@ -2524,7 +2534,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる →</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v150</p>
+  <p class="ver">v151</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2691,7 +2701,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v150</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v151</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2845,6 +2855,7 @@ input,textarea{font-size:16px}
     </div>
     <div class="pv-prog" aria-hidden="true"><i id="pv-prog-fill"></i></div>
     <div class="pv-stage" id="pv-stage"><img id="pv-img" alt=""></div>
+    <div id="pv-strip" aria-label="写真一覧"></div>
     <div class="pv-info">
       <div class="pv-who"><span id="pv-av"></span><span class="pv-who-t"><b id="pv-name"></b><small id="pv-handle"></small></span></div>
       <p class="pv-cap" id="pv-cap"></p>
@@ -2932,7 +2943,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v150</p>
+    <p class="ver">v151</p>
   </div>
 </section>
 </div>
@@ -4020,7 +4031,12 @@ function openMediaPhoto(imgs,owner,idx){
  const set=imgs.map(u=>{const p=(S?S.posts:[]).find(x=>x&&x.img===u&&(owner==="nao"?x.mine:x.a===owner));return p?pvItemFromPost(p):{src:u,name:A.n,handle:A.h,av:A.av||null,cap:"",date:"",meta:""};});
  openPhoto(set,idx);
 }
-function openPhoto(set,idx){pvSet=set||[];pvIdx=Math.max(0,Math.min(pvSet.length-1,idx||0));const v=$("#photoviewer");v.classList.add("on");v.classList.remove("clean");pvRender();}
+function openPhoto(set,idx){pvSet=set||[];pvIdx=Math.max(0,Math.min(pvSet.length-1,idx||0));const v=$("#photoviewer");v.classList.add("on");v.classList.remove("clean");pvStripBuild();pvRender();}
+/* v151: filmstrip - one thumb per photo in the set, rebuilt per set;
+   pvRender only moves the active mark and keeps it in view */
+let pvStripSig="";
+function pvStripBuild(){const st=$("#pv-strip");if(!st)return;const sig=pvSet.map(x=>x.src).join("|");if(sig===pvStripSig)return;pvStripSig=sig;st.innerHTML="";st.style.display=pvSet.length>1?"":"none";pvSet.forEach((it,i)=>{const b=document.createElement("button");b.className="pv-thumb";b.setAttribute("aria-label",(i+1)+"枚目");b.innerHTML='<img src="'+it.src+'" alt="">';b.addEventListener("click",ev=>{ev.stopPropagation();if(i!==pvIdx){const d=i>pvIdx?1:-1;pvIdx=i;pvRender(d);}});st.appendChild(b);});}
+function pvStripSync(){const st=$("#pv-strip");if(!st)return;[...st.children].forEach((b,i)=>b.classList.toggle("act",i===pvIdx));const act=st.children[pvIdx];if(act)act.scrollIntoView({block:"nearest",inline:"center",behavior:"smooth"});}
 function pvRender(dir){const it=pvSet[pvIdx];if(!it)return;const im=$("#pv-img");im.src=it.src;im.style.transform="";im.classList.remove("go","in-r","in-l","drag");void im.offsetWidth;im.classList.add(dir>0?"in-r":dir<0?"in-l":"go");
  $("#pv-date").textContent=it.date||"";
  $("#pv-count").textContent=pvSet.length>1?(pvIdx+1)+" / "+pvSet.length:"";
@@ -4029,7 +4045,7 @@ function pvRender(dir){const it=pvSet[pvIdx];if(!it)return;const im=$("#pv-img")
  $("#pv-name").textContent=it.name||"";$("#pv-handle").textContent=it.handle||"";
  const cap=$("#pv-cap");cap.textContent=it.cap||"";cap.style.display=it.cap?"":"none";
  const meta=$("#pv-meta");meta.textContent=it.meta||"";meta.style.display=it.meta?"":"none";
- $("#pv-prev").classList.toggle("off",pvIdx<=0);$("#pv-next").classList.toggle("off",pvIdx>=pvSet.length-1);}
+ $("#pv-prev").classList.toggle("off",pvIdx<=0);$("#pv-next").classList.toggle("off",pvIdx>=pvSet.length-1);pvStripSync();}
 function pvStep(d){const n=pvIdx+d;if(n<0||n>=pvSet.length)return;pvIdx=n;pvRender(d);}
 function closePhoto(){$("#photoviewer").classList.remove("on");}
 $("#pv-close").addEventListener("click",closePhoto);
