@@ -2789,7 +2789,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v221</p>
+  <p class="ver">v222</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2962,7 +2962,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v221</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v222</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3231,7 +3231,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v221</p>
+    <p class="ver">v222</p>
   </div>
 </section>
 </div>
@@ -5579,7 +5579,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  shSet("#drs-best",bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
  /* v195: the same summary as copyable text for the button under
     the card (built from the very values the card just showed) */
- drsText="『デビューしたら、彼と同じステージの件』DAY "+S.ch+" RESULT\nフォロワー "+fmt(S.fol)+"（"+(agg.fol>=0?"+":"−")+fmt(Math.abs(agg.fol))+"）\nLv "+lvNum()+"・"+lvTitle()+" ／ 認知度 "+S.cog+" ／ "+distLab()+" "+S.dist+"\n"+(bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
+ drsText="『デビューしたら、彼と同じステージの件』DAY "+S.ch+" RESULT\nフォロワー "+fmt(S.fol)+"（"+(agg.fol>=0?"+":"−")+fmt(Math.abs(agg.fol))+"）\nLv "+lvNum()+"・"+lvTitle()+" ／ 認知度 "+S.cog+" ／ "+distLab()+" "+S.dist+"\n"+(bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ")+"\nhttps://v5m44g26fb-sudo.github.io/hiroto-status/";
  $("#dr-note").textContent=agg.flm>=12?"今日はざわつきも大きかった。炎上度が上がっている。":(agg.dist>=6?distLab()+"が、確かに縮まった日。":(agg.fol>=40000?"フォロワーが大きく伸びた日。":"静かに、でも確かに前へ進んだ日。"));
  /* v104: the go button reads as a destination bar - main label plus the
     next chapter's own day line, read from the chapter data. */
@@ -5794,7 +5794,7 @@ $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollT
 $("#btn-end-journey").addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});
 /* v196: the ending's final result as copyable text (title read
    back from the screen itself, stats from the state) */
-$("#btn-end-copy").addEventListener("click",()=>{const b=$("#btn-end-copy");if(!navigator.clipboard||!navigator.clipboard.writeText)return;const si=distStageIdx();const txt="『デビューしたら、彼と同じステージの件』ENDING ― "+(($("#end-title")||{}).textContent||"")+"\nフォロワー "+fmt(S.fol)+" ／ Lv "+lvNum()+"・"+lvTitle()+"\n認知度 "+S.cog+" ／ 炎上度 "+S.flm+" ／ "+distLab()+" "+S.dist+"（STAGE "+(si+1)+"「"+DIST_STAGES[si].lab+"」）";navigator.clipboard.writeText(txt).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";setTimeout(()=>{b.textContent=old;},1600);}).catch(()=>{});});
+$("#btn-end-copy").addEventListener("click",()=>{const b=$("#btn-end-copy");if(!navigator.clipboard||!navigator.clipboard.writeText)return;const si=distStageIdx();const txt="『デビューしたら、彼と同じステージの件』ENDING ― "+(($("#end-title")||{}).textContent||"")+"\nフォロワー "+fmt(S.fol)+" ／ Lv "+lvNum()+"・"+lvTitle()+"\n認知度 "+S.cog+" ／ 炎上度 "+S.flm+" ／ "+distLab()+" "+S.dist+"（STAGE "+(si+1)+"「"+DIST_STAGES[si].lab+"」）"+"\nhttps://v5m44g26fb-sudo.github.io/hiroto-status/";navigator.clipboard.writeText(txt).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";setTimeout(()=>{b.textContent=old;},1600);}).catch(()=>{});});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
    pointer-events:none in CSS, so nothing here can block the title. */
