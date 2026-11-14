@@ -1121,6 +1121,25 @@ input,textarea{font-size:16px}
 .setup h2::after{content:"";display:block;width:34px;height:3px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880);margin-top:9px}
 .prog .track i{background:linear-gradient(90deg,#7856ff,#f91880)}
 .setup .opt.sel{box-shadow:inset 0 2px 0 rgba(255,255,255,.85)}
+/* ===== v63: thread (post detail) overhaul - the parent post becomes the
+   hero: two-line author block, a worded engagement summary under the
+   time/views meta, a larger action row, and a real thread chain - a
+   connector drops from the parent avatar, runs behind the reply avatars
+   and ends at the last reply's avatar; each reply carries the real-X
+   "replying to" context line. Reply text and numbers are untouched. ===== */
+#thread-main .post.detail .nm{display:block;font-size:16.5px;line-height:1.35}
+#thread-main .post.detail .hd{display:block;margin-top:1px;font-size:14px}
+#thread-main .post.detail.has-replies{position:relative}
+#thread-main .post.detail.has-replies::after{content:"";position:absolute;left:40px;top:68px;bottom:2px;width:2px;border-radius:1px;background:#e3e8eb}
+#thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
+#thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
+#thread-main .post.detail .mt{padding-right:2px}
+#thread-main .post.detail .mt .act svg{width:20px;height:20px}
+#thread-main .post.detail .mt .act b{font-weight:700}
+#thread-replies .post:last-child::before{bottom:auto;height:34px}
+#thread-replies .rto{font-size:13px;color:#536471;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#thread-replies .rto b{color:#1d9bf0;font-weight:400}
+.thread-composer .tc-ph{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body>
@@ -1135,7 +1154,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v62</p>
+  <p class="ver">v63</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1276,7 +1295,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v62</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v63</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1426,7 +1445,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v62</p>
+    <p class="ver">v63</p>
   </div>
 </section>
 </div>
@@ -2212,15 +2231,29 @@ function threadReplies(p){
 function renderThread(p){
  $("#thread-sub").textContent=p.n;
  const tm=$("#thread-main");tm.innerHTML="";
- const main=postEl(p,false);main.classList.add("detail");
+ const reps=threadReplies(p);
+ const main=postEl(p,false);main.classList.add("detail");if(reps.length)main.classList.add("has-replies");
+ /* v63: detail author block is name + handle only (time lives in the meta line) */
+ const hdEl=main.querySelector(".hd");if(hdEl)hdEl.textContent=p.h;
  const mt=main.querySelector(".mt");
- if(mt&&mt.parentNode){const meta=document.createElement("div");meta.className="dtmeta";meta.textContent=(p.tm||"今")+" ・ "+fmtCnt(viewsOf(p))+" 回表示";mt.parentNode.insertBefore(meta,mt);}
+ if(mt&&mt.parentNode){
+  const meta=document.createElement("div");meta.className="dtmeta";meta.textContent=(p.tm||"今")+" ・ "+fmtCnt(viewsOf(p))+" 回表示";mt.parentNode.insertBefore(meta,mt);
+  /* v63: worded engagement summary, like real X (12 件のリポスト / 34 件のいいね) */
+  const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
+  const stats=[[num(0),"件の返信"],[num(1)+(p.rped?1:0),"件のリポスト"],[num(2)+(p.liked?1:0),"件のいいね"]].filter(x=>x[0]>0);
+  if(stats.length){const sd=document.createElement("div");sd.className="dtstats";sd.innerHTML=stats.map(x=>"<span><b>"+fmtCnt(x[0])+"</b>"+x[1]+"</span>").join("");mt.parentNode.insertBefore(sd,mt);}
+ }
  tm.appendChild(main);
  const box=$("#thread-replies");box.innerHTML="";
- const reps=threadReplies(p);
  const rcEl=$("#thread-rcount");if(rcEl)rcEl.textContent=reps.length?reps.length+" 件":"";
  if(!reps.length)box.appendChild(mkEmpty("まだ返信はない","このポストへの返信がつくと、ここに表示されるよ。"));
- else reps.forEach(r=>box.appendChild(postEl(r,false)));
+ else reps.forEach(r=>{const el=postEl(r,false);
+  /* v63: real-X reply context line (display only; reply text untouched) */
+  const txEl=el.querySelector(".tx");
+  if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=p.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" さん"));txEl.parentNode.insertBefore(rto,txEl);}
+  box.appendChild(el);});
+ /* v63: the docked composer names who you are replying to */
+ const ph=$(".tc-ph");if(ph)ph.textContent=p.n+" さんへの返信をポスト";
 }
 function openPostThread(p){
  if(!p||p.sys)return;
