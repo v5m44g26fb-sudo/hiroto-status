@@ -2655,7 +2655,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v162</p>
+  <p class="ver">v163</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2824,7 +2824,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v162</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v163</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3074,7 +3074,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v162</p>
+    <p class="ver">v163</p>
   </div>
 </section>
 </div>
@@ -3698,6 +3698,25 @@ function postEl(p,hot){
   bind(".like-btn","liked","#f91880","liked"); bind(".rp-btn","rped",null,"rped");
   const rb=d.querySelector(".reply-btn");if(rb)rb.addEventListener("click",()=>{try{tcAutoOpen=true;}catch(_){}});
   const bk=d.querySelector(".bmk-btn");if(bk){if(p.bmked){bk.dataset.on="1";bk.classList.add("bmked");const s0=bk.querySelector("svg");if(s0)s0.setAttribute("fill","#1d9bf0");}bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);p.bmked=!on;const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);persist();});}
+  /* v163: a just-posted own post shows its first seconds of life -
+     the engagement figures climb from a small fraction to their
+     seeded finals (views first, then likes, reposts, replies),
+     like watching a real post catch on. Gated to posts created in
+     the last 12 seconds (the id carries the timestamp), so reloads
+     and re-renders never replay it, and any tap on the post stops
+     the climb so toggles stay exact. Display only - p.m, dataset.n
+     and the save are untouched. */
+  if(p.fresh&&p.mine&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+   const tsPart=String(p.id||"").split("-")[1],born=tsPart?parseInt(tsPart,36):0;
+   if(born&&Date.now()-born<12000){
+    const rows=[[".views b",vw,0,1200],[".like-btn b",lk,150,1500],[".rp-btn b",rp,320,1350],[".reply-btn b",rc,480,1150]].map(([sel,to,delay,dur])=>({el:d.querySelector(sel),to,delay,dur})).filter(r=>r.el&&r.to>0);
+    if(rows.length){rows.forEach(r=>{r.el.textContent=fmtCnt(Math.max(1,Math.round(r.to*0.04)));});
+     let dead=false;d.addEventListener("click",()=>{dead=true;},{once:true,capture:true});
+     const t0=performance.now();
+     const step=t=>{if(dead||!d.isConnected)return;let all=true;
+      rows.forEach(r=>{const k=Math.min(1,Math.max(0,(t-t0-r.delay)/r.dur));if(k<1)all=false;const e=1-Math.pow(1-k,3);r.el.textContent=fmtCnt(Math.max(k>0?1:0,Math.round(r.to*(0.04+0.96*e))));});
+      if(!all)requestAnimationFrame(step);};
+     requestAnimationFrame(step);}}}
   return d;
 }
 /* ===== game state ===== */
