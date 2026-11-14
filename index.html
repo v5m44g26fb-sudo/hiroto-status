@@ -1508,6 +1508,8 @@ input,textarea{font-size:16px}
 #scrim-chg .sheet{position:relative}
 #jlist{display:flex;flex-direction:column;gap:9px;margin-top:12px}
 .jrow{border:1.5px solid #e8edf0;border-radius:16px;padding:12px 14px;background:#fff}
+.jtotal{margin:0 0 12px;padding:11px 14px;border-radius:14px;background:linear-gradient(120deg,#171233,#2a1650);color:#d9d2f5;font-size:12.5px;line-height:1.65}
+.jtotal b{color:#fff;font-weight:900}
 .jrow.now{border-color:#7856ff;box-shadow:0 8px 22px rgba(120,86,255,.16)}
 .jrow.lock{opacity:.55}
 .jrow-h{display:flex;align-items:center;gap:9px}
@@ -2801,7 +2803,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v227</p>
+  <p class="ver">v228</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2974,7 +2976,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v227</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v228</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3245,7 +3247,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v227</p>
+    <p class="ver">v228</p>
   </div>
 </section>
 </div>
@@ -3262,6 +3264,7 @@ input,textarea{font-size:16px}
   <button class="close" data-close="scrim-journey">✕</button>
   <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-2.2A6.8 6.8 0 1 1 12 5.2V8.6l5.4-4.2L12 1v2z" transform="translate(-1.2,1) scale(.94)"/></svg>JOURNEY ― あゆみ</span>
   <h3>6日間のあゆみ</h3><p class="desc">1日ごとの記録。フォロワーの動きと、その日の変化をまとめているよ。</p>
+  <div class="jtotal" id="jtotal"></div>
   <div id="jlist"></div>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
@@ -5791,6 +5794,10 @@ $("#btn-end-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$
    from the change log under dayDeltas' rules. Future days stay
    locked silhouettes - title only, no invented numbers. */
 function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML="";
+ /* v228: a totals strip heads the sheet - where the run started,
+    where it stands, and the distance stage it reached */
+ {const jt=$("#jtotal");if(jt){const h0=(S.folHist||[])[0];const start=h0?h0.fol:1;const si=distStageIdx();
+  jt.innerHTML="フォロワー <b>"+fmt(start)+" → "+fmt(S.fol)+"</b> ／ XP 累計 <b>"+S.xp+"</b> ／ "+distLab()+" <b>STAGE "+(si+1)+"「"+DIST_STAGES[si].lab+"」</b>";}}
  const CHS=curCH(),hist=S.folHist||[],dl=distLab();
  const snap=d=>{const e=hist.find(x=>x.day===d);return e?e.fol:null;};
  for(let d=1;d<=TOTAL_DAYS;d++){
