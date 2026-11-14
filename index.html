@@ -1135,6 +1135,33 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v88: day card and RESULT, raised to film grade. The intro gains
+   a per-chapter photo backdrop (her own photos, Ken Burns drift) under a
+   cinematic shade, letterbox bars that close in, a CHAPTER n label, a
+   larger DAY title and a five-dot progress row. RESULT keeps its exact
+   aggregation, wording and flow - only the staging changes: the verdict
+   becomes a labelled quote block and the level-up band, verdict and
+   button reveal in sequence after the rows. ===== */
+#dayintro .di-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0;transition:opacity .45s ease;z-index:0}
+#dayintro.on .di-bg{opacity:.55;animation:diken 7s ease-out both}
+@keyframes diken{from{transform:scale(1.03)}to{transform:scale(1.13)}}
+#dayintro .di-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,8,24,.5),rgba(7,8,24,.22) 42%,rgba(7,8,24,.8))}
+#dayintro .di-big{z-index:1;color:rgba(255,255,255,.045)}
+.di-bar{position:absolute;left:0;right:0;height:0;background:#000;z-index:2;transition:height .7s cubic-bezier(.2,.8,.25,1)}
+.di-bar.top{top:0}.di-bar.bottom{bottom:0}
+#dayintro.on .di-bar{height:6.5%}
+#dayintro .di-inner{z-index:3}
+#dayintro .di-day{font-size:84px;letter-spacing:.05em}
+#dayintro .di-title{font-size:23px;text-shadow:0 4px 22px rgba(0,0,0,.55)}
+#dayintro .di-sub{text-shadow:0 2px 12px rgba(0,0,0,.65)}
+#dayintro .di-dots{display:flex;gap:7px;margin-top:18px;animation:diup .6s .52s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28)}
+#dayintro .di-dots i.on{background:linear-gradient(135deg,#f91880,#7856ff);box-shadow:0 0 10px rgba(249,24,128,.7)}
+#dayresult .dr-title{letter-spacing:.02em}
+#dayresult .dr-lvup{animation:drin .5s .55s cubic-bezier(.2,.8,.25,1) both}
+#dayresult .dr-note{margin-top:14px;text-align:left;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:11px 14px 12px;animation:drin .5s .68s cubic-bezier(.2,.8,.25,1) both}
+#dayresult .dr-note::before{content:"総評";display:block;font-size:10px;font-weight:900;letter-spacing:.24em;color:#ffb3d1;margin-bottom:4px}
+#dayresult .btn{animation:drin .5s .8s cubic-bezier(.2,.8,.25,1) both}
 /* ===== v85: profile tab bodies (replies / media / likes, both profiles)
    brought to the v60 standard: every tab body opens with a small section
    head (label + count), empty states become centred compositions with an
@@ -1564,7 +1591,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v87</p>
+  <p class="ver">v88</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1707,7 +1734,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v87</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v88</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1840,14 +1867,18 @@ input,textarea{font-size:16px}
     <button class="pv-nav next" id="pv-next" aria-label="次の写真"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 5.5 6 6.5-6 6.5"/></svg></button>
   </div>
   <div id="dayintro" role="dialog" aria-label="章の始まり">
+    <img class="di-bg" id="di-bg" src="assets/nao-concept.jpg" alt="">
+    <div class="di-shade"></div>
     <span class="di-big" id="di-big" aria-hidden="true">1</span>
+    <div class="di-bar top"></div><div class="di-bar bottom"></div>
     <div class="di-inner">
-      <span class="di-lab">CHAPTER</span>
+      <span class="di-lab" id="di-lab">CHAPTER</span>
       <div class="di-day" id="di-day">DAY 1</div>
       <div class="di-rule"></div>
       <b class="di-title" id="di-title">デビュー発表の日</b>
       <p class="di-sub" id="di-sub"></p>
       <span class="di-tap">TAP TO START</span>
+      <div class="di-dots" id="di-dots"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
   </div>
   <div id="dayresult" role="dialog" aria-label="1日の結果">
@@ -1896,7 +1927,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v87</p>
+    <p class="ver">v88</p>
   </div>
 </section>
 </div>
@@ -3337,8 +3368,12 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
    summed from the day's own chgLog entries (already recorded per action),
    so numbers and the save format are untouched - presentation only. */
 let diTimer=null;
+const DI_BG={1:"assets/nao-concept.jpg",2:"assets/nao-stage-ballad.jpg",3:"assets/nao-stage-sailor.jpg",4:"assets/nao-rec.jpg",5:"assets/nao-stage-confetti.jpg"};
 function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#di-day","DAY "+S.ch);set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
+ set("#di-lab","CHAPTER "+S.ch);
+ const dbg=$("#di-bg");if(dbg)dbg.src=DI_BG[S.ch]||DI_BG[1];
+ const dd=$("#di-dots");if(dd)[...dd.children].forEach((el,i)=>el.classList.toggle("on",i<S.ch));
  const ov=$("#dayintro");ov.classList.remove("on");void ov.offsetWidth;ov.classList.add("on");
  clearTimeout(diTimer);diTimer=setTimeout(hideDayIntro,2800);}
 function hideDayIntro(){clearTimeout(diTimer);const ov=$("#dayintro");if(ov)ov.classList.remove("on");}
