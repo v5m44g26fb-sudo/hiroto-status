@@ -1101,6 +1101,26 @@ input,textarea{font-size:16px}
 .me-seclab{margin:16px 16px 0;font-size:10.5px;font-weight:900;letter-spacing:.12em;color:#8a94a6;display:flex;align-items:center;gap:8px}
 .me-seclab::after{content:"";flex:1;height:1px;background:#e8edf0}
 #x-pane-me .statgrid{margin-top:8px}
+/* ===== v61: title & intro overhaul - the title becomes a poster (sharper
+   photo, ringed glowing logo, gradient type and rule, numbered flow
+   stepper); the four setup screens share one accent language: gradient
+   step tick, underlined headings, gradient progress fill, hairline-lit
+   selected cards, arrowed primary buttons. Intro copy, options, effects
+   and the no-real-names-on-title rule are unchanged. ===== */
+#scr-title::before{filter:blur(5px) brightness(.56) saturate(1.22);background-position:center 16%}
+#scr-title .xlogo{width:38px;height:38px;padding:14px;border:1px solid rgba(255,255,255,.38);border-radius:50%;background:rgba(255,255,255,.06);box-shadow:0 0 0 7px rgba(255,255,255,.05),0 0 38px rgba(249,24,128,.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#scr-title h1{background:linear-gradient(180deg,#fff 30%,#d9ccff);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 4px 26px rgba(0,0,0,.55))}
+.t-rule{width:64px;height:2px;border-radius:1px;background:linear-gradient(90deg,#7856ff,#f91880)}
+#scr-title .flowsteps{counter-reset:fs;margin-top:30px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);display:flex;flex-wrap:nowrap;justify-content:center}
+#scr-title .flowsteps span{counter-increment:fs;display:inline-flex;flex-direction:column;align-items:center;gap:5px;padding:0 8px;font-size:10px;white-space:nowrap}
+#scr-title .flowsteps span::before{content:"0" counter(fs);position:static;width:auto;height:auto;background:none;transform:none;display:block;font-size:9px;font-weight:900;letter-spacing:.24em;color:#c9b8ff}
+.screen.intro .btn{box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.screen.intro .btn:not(.ghost)::after{content:"→";margin-left:9px;font-weight:900}
+.setup .step{display:flex;align-items:center;gap:9px}
+.setup .step::before{content:"";width:22px;height:2px;border-radius:1px;background:linear-gradient(90deg,#7856ff,#f91880);flex:none}
+.setup h2::after{content:"";display:block;width:34px;height:3px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880);margin-top:9px}
+.prog .track i{background:linear-gradient(90deg,#7856ff,#f91880)}
+.setup .opt.sel{box-shadow:inset 0 2px 0 rgba(255,255,255,.85)}
 </style>
 </head>
 <body>
@@ -1115,7 +1135,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v60</p>
+  <p class="ver">v61</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1256,7 +1276,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v60</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v61</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1406,7 +1426,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v60</p>
+    <p class="ver">v61</p>
   </div>
 </section>
 </div>
