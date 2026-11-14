@@ -1135,6 +1135,23 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v85: profile tab bodies (replies / media / likes, both profiles)
+   brought to the v60 standard: every tab body opens with a small section
+   head (label + count), empty states become centred compositions with an
+   icon medallion per tab kind, the tab bar's active underline takes the
+   app gradient, and the media grid radius unifies at 12px on both
+   profiles. The data behind every tab is unchanged. ===== */
+.emptytab{display:flex;flex-direction:column;align-items:center;text-align:center;padding:44px 34px 54px}
+.emptytab .et-ic{width:56px;height:56px;border-radius:50%;background:#f0eafd;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.emptytab .et-ic svg{width:26px;height:26px;fill:#7856ff}
+.emptytab b{font-size:17px;font-weight:900;margin-bottom:6px}
+.emptytab .et-sub{color:#536471;font-size:13.5px;line-height:1.65}
+.ptab-head{display:flex;align-items:center;gap:8px;padding:13px 16px 8px;animation:panein .18s ease}
+.ptab-head::before{content:"";width:4px;height:13px;border-radius:2px;background:linear-gradient(180deg,#7856ff,#f91880);flex:none}
+.ptab-head b{font-size:13px;font-weight:900;letter-spacing:.1em;color:#0f1419}
+.ptab-head span{font-size:12px;color:#536471;font-weight:700}
+.x-ptabs button.act::after{background:linear-gradient(90deg,#7856ff,#f91880)}
+#x-pane-hisprof .mediagrid img{border-radius:12px}
 /* ===== v84: his profile, cover to tabs. His gold identity (avatar ring,
    dark-and-gold follow button, cream distance band) stays and warms
    toward pink with the distance stage, as before - what changes is the
@@ -1547,7 +1564,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v84</p>
+  <p class="ver">v85</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1690,7 +1707,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v84</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 5日間の物語</small></div><span class="set-ver">v85</span></div>
           <div class="setrow"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small id="set-save-info">―</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <button class="setdanger" id="btn-reset"><svg viewBox="0 0 24 24"><path d="M9.2 3h5.6l1 2h4.2v2.2H4V5h4.2l1-2zM6.2 9h11.6l-.9 11.1a1.5 1.5 0 0 1-1.5 1.4H8.6a1.5 1.5 0 0 1-1.5-1.4L6.2 9zm3.8 2.2v7.3h1.7v-7.3H10zm4.3 0v7.3H16v-7.3h-1.7z"/></svg>セーブを消して最初から</button>
           <p class="set-note">セーブを消すと、5日間の記録はすべて最初からになるよ。</p>
@@ -1879,7 +1896,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v84</p>
+    <p class="ver">v85</p>
   </div>
 </section>
 </div>
@@ -2820,7 +2837,7 @@ function renderThread(p){
  tm.appendChild(main);
  const box=$("#thread-replies");box.innerHTML="";
  const rcEl=$("#thread-rcount");if(rcEl)rcEl.textContent=reps.length?reps.length+" 件":"";
- if(!reps.length)box.appendChild(mkEmpty("まだ返信はない","このポストへの返信がつくと、ここに表示されるよ。"));
+ if(!reps.length)box.appendChild(mkEmpty("まだ返信はない","このポストへの返信がつくと、ここに表示されるよ。","reply"));
  else reps.forEach(r=>{const el=postEl(r,false);
   /* v63: real-X reply context line (display only; reply text untouched) */
   const txEl=el.querySelector(".tx");
@@ -2939,17 +2956,24 @@ $("#tc-input").addEventListener("input",tcSyncSend);
 /* profile tabs (real-X linkage: post / reply / media grid / likes) */
 let meTab="post",hisTab="post";
 const ME_MEDIA=["assets/nao-promo.jpg","assets/nao-concept.jpg","assets/nao-stage.jpg","assets/nao-lesson.jpg","assets/nao-rec.jpg","assets/nao-cafe2.jpg","assets/nao-stream-selfie.jpg","assets/nao-backstage-selfie.jpg","assets/nao-makeup.jpg"];
-function emptyTab(t,s){return '<div class="emptytab"><b></b><span></span></div>';}
-function mkEmpty(t,s){const d=document.createElement("div");d.innerHTML=emptyTab(t,s);d.querySelector("b").textContent=t;d.querySelector("span").textContent=s;return d.firstChild;}
+const ET_ICONS={
+ post:'<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+ reply:'<svg viewBox="0 0 24 24"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>',
+ media:'<svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>',
+ like:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 17 3 13.6 3 9.9 3 7.2 5 5 7.6 5c1.7 0 3.3.9 4.4 2.4C13.1 5.9 14.7 5 16.4 5 19 5 21 7.2 21 9.9c0 3.7-3.4 7.1-9 10.8z"/></svg>',
+ lock:'<svg viewBox="0 0 24 24"><path d="M18 8h-1V6a5 5 0 0 0-10 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-3.9-9V6a3.9 3.9 0 1 1 7.8 0v2H8.1z"/></svg>'};
+function emptyTab(t,s,ic){return '<div class="emptytab"><span class="et-ic">'+(ET_ICONS[ic]||ET_ICONS.post)+'</span><b></b><span class="et-sub"></span></div>';}
+function mkEmpty(t,s,ic){const d=document.createElement("div");d.innerHTML=emptyTab(t,s,ic);d.querySelector("b").textContent=t;d.querySelector(".et-sub").textContent=s;return d.firstChild;}
+function tabHead(lab,count){const d=document.createElement("div");d.className="ptab-head";d.innerHTML="<b></b><span></span>";d.querySelector("b").textContent=lab;d.querySelector("span").textContent=count;return d;}
 function mediaGrid(imgs,owner){const g=document.createElement("div");g.className="mediagrid";imgs.forEach((u,i)=>{const im=document.createElement("img");im.src=u;im.alt="";im.addEventListener("click",()=>{try{openMediaPhoto(imgs,owner||"nao",i);}catch(_){}});g.appendChild(im);});return g;}
 function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
  const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>p.mine&&!p.isReply).length+" ポスト";
- if(meTab==="post"){const mine=S.posts.filter(p=>p.mine&&!p.isReply);if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(mediaGrid(imgs,"nao"));}
- else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
+ if(meTab==="post"){const mine=S.posts.filter(p=>p.mine&&!p.isReply);box.appendChild(tabHead("ポスト",mine.length+" 件"));if(!mine.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else mine.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
+ else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
 }
 function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);
@@ -3010,10 +3034,10 @@ function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)re
  const his=S.posts.filter(p=>p.a===tgtKey()&&!p.sys&&!p.isReply);
  const pc=$("#his-pcount");if(pc)pc.textContent=his.length+" ポスト";
  renderFollowBtn();
- if(hisTab==="post"){if(!his.length)box.appendChild(mkEmpty("まだポストがない",""));else his.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(hisTab==="reply"){const reps=S.posts.filter(p=>p.a===tgtKey()&&p.isReply);if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
- else if(hisTab==="media"){const imgs=[];his.forEach(p=>{if(p.img&&!imgs.includes(p.img))imgs.push(p.img);});if(!imgs.length)box.appendChild(mkEmpty("メディアはまだない","写真つきポストをすると、ここに並ぶよ。"));else box.appendChild(mediaGrid(imgs,tgtKey()));}
- else if(hisTab==="like"){box.appendChild(mkEmpty("いいねは非公開です",tgt().name+"さんがいいねしたポストは、他の人には表示されないよ。"));}
+ if(hisTab==="post"){box.appendChild(tabHead("ポスト",his.length+" 件"));if(!his.length)box.appendChild(mkEmpty("まだポストがない","","post"));else his.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(hisTab==="reply"){const reps=S.posts.filter(p=>p.a===tgtKey()&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","言葉少なめな人だから、返信はレア。","reply"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
+ else if(hisTab==="media"){const imgs=[];his.forEach(p=>{if(p.img&&!imgs.includes(p.img))imgs.push(p.img);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));if(!imgs.length)box.appendChild(mkEmpty("メディアはまだない","写真つきポストをすると、ここに並ぶよ。","media"));else box.appendChild(mediaGrid(imgs,tgtKey()));}
+ else if(hisTab==="like"){box.appendChild(tabHead("いいね","非公開"));box.appendChild(mkEmpty("いいねは非公開です",tgt().name+"さんがいいねしたポストは、他の人には表示されないよ。","lock"));}
 }
 $$("#me-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{meTab=b.dataset.ptab;renderMeTab();}));
 $$("#his-ptabs [data-ptab]").forEach(b=>b.addEventListener("click",()=>{hisTab=b.dataset.ptab;renderHisTab();}));
