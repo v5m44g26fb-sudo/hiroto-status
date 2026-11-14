@@ -1135,6 +1135,26 @@ input,textarea{font-size:16px}
    single source, so the action row below goes icon-only like real X
    (the numbers still update in the DOM and every tap keeps working) */
 #thread-main .post.detail .mt .act b{display:none}
+/* ===== v80: follow / follower list - built to the real-X list design
+   (the profile counts were dead text; they now open this pane). Rows are
+   avatar / name / handle / one-line bio / follow state, under underline
+   tabs in the app's gradient. The pane serves both profiles. ===== */
+#x-pane-follow .profbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.5px;background:linear-gradient(90deg,#7856ff,#f91880,#f7c948)}
+.foltabs{display:flex;border-bottom:1px solid #eff3f4;background:#fff}
+.foltabs button{flex:1;border:none;background:none;font-family:inherit;font-size:14.5px;font-weight:700;color:#536471;padding:13px 0 11px;cursor:pointer;position:relative}
+.foltabs button.act{color:#0f1419}
+.foltabs button.act::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:58px;height:3.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880)}
+.folrow{display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #f4f6f7;align-items:flex-start;animation:panein .18s ease}
+.folrow .avatar,.folrow .ava-txt{width:44px;height:44px;flex:none;font-size:17px}
+.folrow .fr-main{flex:1;min-width:0}
+.folrow .fr-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.folrow .fr-handle{font-size:13.5px;color:#536471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.folrow .fr-bio{font-size:13.5px;line-height:1.55;color:#0f1419;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.folbtn{flex:none;border-radius:999px;font-family:inherit;font-size:13px;font-weight:800;padding:7px 15px;cursor:pointer;border:1px solid #cfd9de;background:#fff;color:#0f1419;transition:background .15s ease,color .15s ease,transform .1s ease}
+.folbtn:active{transform:scale(.96)}
+.folbtn.on{background:#0f1419;color:#fff;border-color:#0f1419}
+.counts span{cursor:pointer}
+.counts span:active{opacity:.6}
 #thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
 #thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
 #thread-main .post.detail .mt{padding-right:2px}
@@ -1425,7 +1445,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v79</p>
+  <p class="ver">v80</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1566,7 +1586,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v79</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v80</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1593,6 +1613,11 @@ input,textarea{font-size:16px}
       <div id="thread-main"></div>
       <div class="thread-rh">返信<span class="thread-rcount" id="thread-rcount"></span></div>
       <div id="thread-replies"></div>
+    </div>
+    <div id="x-pane-follow" style="display:none">
+      <div class="profbar"><button class="pback" id="fol-back" aria-label="戻る">‹</button><div class="pt"><b id="fol-name">なお</b><small id="fol-handle">@nao_324</small></div></div>
+      <div class="foltabs"><button data-ftab="folwing">フォロー中</button><button data-ftab="folwers">フォロワー</button></div>
+      <div id="fol-list"></div>
     </div>
     <div id="x-pane-msg" style="display:none">
       <div class="dm-head-bar" id="dmlist-head"><span class="dm-head-t">メッセージ</span><span class="dm-head-c" id="dm-head-c"></span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
@@ -1743,7 +1768,7 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v79</p>
+    <p class="ver">v80</p>
   </div>
 </section>
 </div>
@@ -2333,7 +2358,7 @@ function renderChgLog(){
 }
 $("#hud-chg").addEventListener("click",()=>{renderChgLog();$("#scrim-chg").classList.add("on");});
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
-const PANES=["tl","trend","mention","me","search","msg","hisprof","thread"];
+const PANES=["tl","trend","mention","me","search","msg","hisprof","thread","follow"];
 let curPane="tl";
 function showPane(k){
  if(k!=="thread")curPane=k;
@@ -2350,6 +2375,7 @@ function showPane(k){
  if(k==="trend"||k==="search")renderTrends();
  if(k==="hisprof")renderHisTab();
  if(k==="msg"){renderDmList();setTimeout(maybeShowDmUnlock,80);}
+ if(k==="follow")renderFollowList();
 }
 /* one-shot "settle from the left" animation for back navigation */
 function panePop(el){if(!el)return;el.classList.remove("pane-pop");void el.offsetWidth;el.classList.add("pane-pop");setTimeout(()=>el.classList.remove("pane-pop"),240);}
@@ -2794,6 +2820,49 @@ function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if
  const el=$("#end-dist-lab");if(el)el.textContent=distLab();renderDistProfile();}
 function renderHisPosts(){renderHisTab();}
 function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;const on=!!S.followHiroto;b.textContent=on?"フォロー中":"フォロー";b.classList.toggle("on",on);}
+/* ===== v80: follow / follower list pane (real-X list design) =====
+   Opened from either profile's counts. The lists are the story's named
+   accounts; follow-state buttons on rows are session-local feedback only,
+   except the target's row, which reflects and jumps to the real follow
+   toggle on his profile. Nothing here writes to the save. */
+const FOL_BIO={hiroto:"歌手。日プシーズン1出身、中国・創造営、韓国・BOYS PLANETと国を跨いで挑戦を続けてきた先輩。",sakuya:"NCT WISH。同じSMの先輩。不思議な感性と、丁寧な言葉選び。",nao:"Hearts2Hearts 最年長メンバー。デビュー曲は『The Chase』。",akari:"同期のリーダー。一緒にデビューした仲間。",carmen:"同期。ムードメーカー。",yuha:"同期。",stella:"同期。",juun:"同期。メインダンサー。",ana:"同期。",ian:"同期。",yeon:"同期。最年少。",sea:"aespaのリーダー。礼儀正しく、面倒見のいい先輩。",mina:"TWICE。静かで上品な先輩。",miku:"幼なじみ。フォロワー1号を自称している。",sora:"音楽好き。歌の話になると熱い。",fan1:"なお推し1号ファン。デビュー初日から見ている。",fan2:"音楽ファン。界隈の動きに早い。",staff:"事務所スタッフ。現場の橋渡し役。",media:"音楽番組『MUSIC STAGE』の公式アカウント。",matome:"エンタメ速報のまとめアカウント。"};
+let folOwner="nao",folTab="folwing",folBackTo="me";const folOverride={};
+function folSets(owner){
+ const T=tgtKey(),members=["akari","carmen","yuha","stella","juun","ana","ian","yeon"];
+ const uniq=a=>a.filter((v,i)=>a.indexOf(v)===i);
+ if(owner==="nao")return{folwing:uniq([T,...members,S.first,"miku","media"]),folwers:uniq([S.first,"fan1",...members,"sora","miku","fan2"])};
+ return{folwing:uniq(["media",...members.slice(0,2)]),folwers:uniq([...(S.followHiroto?["nao"]:[]),"fan2","sora","matome"])};
+}
+function folIsFollowing(owner,key){const o=folOverride[owner+":"+key];if(o!==undefined)return o;return folSets(owner).folwing.includes(key);}
+function openFollow(owner,tab){folOwner=owner;folTab=tab;folBackTo=owner==="nao"?"me":"hisprof";showPane("follow");}
+function renderFollowList(){
+ const A=folOwner==="nao"?{n:"なお",h:S.handle||ACC.nao.h}:{n:tgt().name,h:tgt().handle};
+ $("#fol-name").textContent=A.n;$("#fol-handle").textContent=A.h;
+ $$("#x-pane-follow [data-ftab]").forEach(b=>b.classList.toggle("act",b.dataset.ftab===folTab));
+ const box=$("#fol-list");box.innerHTML="";
+ const keys=folSets(folOwner)[folTab]||[];
+ if(!keys.length){box.appendChild(mkEmpty("まだいない","物語が進むと、ここに並んでいくよ。"));return;}
+ keys.forEach(key=>{const a=ACC[key];if(!a)return;
+  const row=document.createElement("div");row.className="folrow";
+  const following=folOwner==="nao"&&key===tgtKey()?!!S.followHiroto:folIsFollowing(folOwner,key);
+  row.innerHTML='<span class="fr-av"></span><div class="fr-main"><div class="fr-name"></div><div class="fr-handle"></div><div class="fr-bio"></div></div>';
+  row.querySelector(".fr-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="44" height="44" alt="">':avaTxt(a.n);
+  row.querySelector(".fr-name").textContent=a.n;row.querySelector(".fr-handle").textContent=a.h;row.querySelector(".fr-bio").textContent=FOL_BIO[key]||"";
+  const btn=document.createElement("button");btn.className="folbtn"+(following?" on":"");btn.textContent=following?"フォロー中":"フォローする";
+  btn.addEventListener("click",()=>{if(folOwner==="nao"&&key===tgtKey()){showPane("hisprof");return;}const now=!folIsFollowing(folOwner,key);folOverride[folOwner+":"+key]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});
+  row.appendChild(btn);
+  const go=()=>{if(key==="nao")showPane("me");else if(key===tgtKey())showPane("hisprof");};
+  row.querySelector(".fr-av").style.cursor="pointer";row.querySelector(".fr-av").addEventListener("click",go);
+  box.appendChild(row);});
+}
+$$("#x-pane-follow [data-ftab]").forEach(b=>b.addEventListener("click",()=>{folTab=b.dataset.ftab;renderFollowList();}));
+$("#fol-back").addEventListener("click",()=>showPane(folBackTo));
+(function(){const me1=$("#x-fol-n"),me2=$("#x-folwing-n");
+ if(me1&&me1.parentElement)me1.parentElement.addEventListener("click",()=>openFollow("nao","folwers"));
+ if(me2&&me2.parentElement)me2.parentElement.addEventListener("click",()=>openFollow("nao","folwing"));
+ const hs=$$("#x-pane-hisprof .counts span");
+ if(hs[0])hs[0].addEventListener("click",()=>openFollow(tgtKey(),"folwers"));
+ if(hs[1])hs[1].addEventListener("click",()=>openFollow(tgtKey(),"folwing"));})();
 function renderHisTab(){const box=$("#x-his-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#his-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===hisTab));
  renderTargetProfile();
