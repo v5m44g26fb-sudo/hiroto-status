@@ -1313,6 +1313,7 @@ input,textarea{font-size:16px}
 .rpwrap{border-bottom:1px solid #eff3f4}
 .rpwrap .post{border-bottom:none}
 .rp-head{display:flex;align-items:center;gap:7px;padding:11px 16px 0 68px;font-size:13px;font-weight:700;color:#536471;animation:panein .18s ease}
+.rp-head.pin-head{color:#7856ff}
 .rp-head .rp-ic{display:flex}
 .rp-head .rp-ic svg{width:15px;height:15px;fill:#00a06e}
 /* ===== v88: day card and RESULT, raised to film grade. The intro gains
@@ -2701,7 +2702,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>新人アイドル、デビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v168</p>
+  <p class="ver">v169</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2872,7 +2873,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v168</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v169</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3130,7 +3131,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v168</p>
+    <p class="ver">v169</p>
   </div>
 </section>
 </div>
@@ -3707,6 +3708,8 @@ function qtDerive(p){try{
  return{id:orig.id,n:orig.n,h:orig.h,av:orig.av,tx:orig.t,img:orig.img};
 }catch(_){return null;}}
 function rpHeadEl(name){const d=document.createElement("div");d.className="rp-head";d.innerHTML='<span class="rp-ic">'+XIC9.rp+'</span><span></span>';d.querySelector("span:last-child").textContent=name+"さんがリポスト";return d;}
+const PIN_SVG='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>';
+function pinHeadEl(){const d=document.createElement("div");d.className="rp-head pin-head";d.innerHTML='<span class="rp-ic">'+PIN_SVG+'</span><span>ピン留めポスト ― デビューの投稿</span>';return d;}
 /* v95: verified accounts in-fiction (idols, the target, the show's
    official account, and her own official account) carry the real-X
    badge in the author row. Derived from the account key at render
@@ -4533,7 +4536,14 @@ function renderMePosts(){renderMeTab();}
 function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)return;box.innerHTML="";
  $$("#me-ptabs [data-ptab]").forEach(b=>b.classList.toggle("act",b.dataset.ptab===meTab));
  const pc=$("#me-pcount");if(pc)pc.textContent=S.posts.filter(p=>(p.mine||p.rped)&&!p.isReply).length+" ポスト";
- if(meTab==="post"){const list=S.posts.filter(p=>(p.mine||p.rped)&&!p.isReply);box.appendChild(tabHead("ポスト",list.length+" 件"));if(!list.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
+ if(meTab==="post"){const list=S.posts.filter(p=>(p.mine||p.rped)&&!p.isReply);box.appendChild(tabHead("ポスト",list.length+" 件"));
+  /* v169: her debut post is pinned above the list, like a real
+     profile - the earliest post she made, derived from the post
+     order (newest first, so it is the last of her own posts). It
+     also stays in the list below, as on real X. */
+  const minePosts=S.posts.filter(p=>p.mine&&!p.isReply),debut=minePosts[minePosts.length-1];
+  if(debut){const w=document.createElement("div");w.className="rpwrap";w.appendChild(pinHeadEl());w.appendChild(postEl(debut,false));box.appendChild(w);}
+  if(!list.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
  else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length)box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
  else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length)box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));else liked.forEach(p=>box.appendChild(postEl(p,false)));}
