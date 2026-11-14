@@ -1140,6 +1140,40 @@ input,textarea{font-size:16px}
 #thread-replies .rto{font-size:13px;color:#536471;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #thread-replies .rto b{color:#1d9bf0;font-weight:400}
 .thread-composer .tc-ph{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ===== v64: notifications overhaul - every row leads with its kind: a
+   tinted type-icon column and a type-coloured left rail, plus a type
+   label above the actor line, so like / DM / follow / world-news reads
+   at a glance. The sub-tabs stop being pills and become real-X
+   underline tabs in the panel's own gradient language, and the mention
+   tab opens with a matching section head. Notification data, order and
+   triggers are untouched. ===== */
+#x-notif .nrow{gap:10px;padding-left:15px}
+#x-notif .nrow::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#e3e8eb}
+#x-notif .nrow.nt-heart::before{background:#f91880}
+#x-notif .nrow.nt-dm::before{background:#7856ff}
+#x-notif .nrow.nt-follow::before{background:#1d9bf0}
+#x-notif .nrow.nt-news::before{background:#ff8a00}
+#x-notif .nrow.nt-bell::before{background:#9aa7b1}
+.ntypecol{flex:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ntypecol svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ntypecol.t-heart{color:#f91880;background:rgba(249,24,128,.12)}
+.ntypecol.t-heart svg{fill:currentColor;stroke:none}
+.ntypecol.t-dm{color:#7856ff;background:rgba(120,86,255,.13)}
+.ntypecol.t-follow{color:#1d9bf0;background:rgba(29,155,240,.12)}
+.ntypecol.t-news{color:#e67700;background:rgba(255,138,0,.15)}
+.ntypecol.t-bell{color:#536471;background:rgba(83,100,113,.12)}
+#x-notif .nlab{font-size:10.5px;font-weight:900;letter-spacing:.14em;line-height:1.3}
+#x-notif .nlab.t-heart{color:#f91880}
+#x-notif .nlab.t-dm{color:#7856ff}
+#x-notif .nlab.t-follow{color:#1d9bf0}
+#x-notif .nlab.t-news{color:#e67700}
+#x-notif .nlab.t-bell{color:#8a94a6}
+.nsubs{gap:0;padding:0 6px;border-bottom:1px solid #eff3f4}
+.nsubs button{border:none;background:none;border-radius:0;padding:11px 0 9px;position:relative;font-size:13.5px;font-weight:700;color:#536471;box-shadow:none}
+.nsubs button.act{background:none;color:#0f1419;border-color:transparent;font-weight:900}
+.nsubs button.act::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:58px;height:3.5px;border-radius:2px;background:linear-gradient(90deg,#7856ff,#f91880)}
+.nmen-head{display:flex;align-items:center;gap:8px;padding:13px 15px 9px;font-size:13.5px;font-weight:900;letter-spacing:.03em}
+.nmen-head::before{content:"";width:4px;height:15px;border-radius:2px;background:linear-gradient(180deg,#7856ff,#f91880);flex:none}
 </style>
 </head>
 <body>
@@ -1154,7 +1188,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v63</p>
+  <p class="ver">v64</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -1295,7 +1329,7 @@ input,textarea{font-size:16px}
       <div class="x-ptabs" id="me-ptabs"><button data-ptab="post" class="act">ポスト</button><button data-ptab="reply">返信</button><button data-ptab="media">メディア</button><button data-ptab="like">いいね</button></div>
       <div id="x-me-tabbody"></div>
       <div style="padding:18px 16px 30px">
-        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v63</p>
+        <p style="color:#9aa0a6;font-size:12px;margin-bottom:10px">デビューしたら、彼と同じステージの件　v64</p>
         <button class="btn ghost" id="btn-reset" style="margin:0;color:#0f1419;border-color:#cfd9de">セーブを消して最初から</button>
       </div>
     </div>
@@ -1445,7 +1479,7 @@ input,textarea{font-size:16px}
       <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v63</p>
+    <p class="ver">v64</p>
   </div>
 </section>
 </div>
@@ -2095,19 +2129,24 @@ const NTYPE={
  follow:'<svg viewBox="0 0 24 24"><circle cx="10" cy="8" r="3.4"/><path d="M4.5 19.5c.6-3.2 2.7-4.8 5.5-4.8s4.9 1.6 5.5 4.8"/><path d="M18.5 5.5v6M15.5 8.5h6"/></svg>',
  news:'<svg viewBox="0 0 24 24"><path d="M4 6.5A1.5 1.5 0 0 1 5.5 5H16v13.5H6A2 2 0 0 1 4 16.5z"/><path d="M16 9h2.5A1.5 1.5 0 0 1 20 10.5v6a2 2 0 0 1-2 2"/><path d="M7 9h6M7 13h6"/></svg>',
  bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>'};
-function notifType(n){if(n.a===tgtKey())return"heart";if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
+const NLAB={heart:"いいね",dm:"DM",follow:"フォロー",news:"世間の動き",bell:"お知らせ"};
+/* v64: DM reads as DM even when it comes from him (display classification only) */
+function notifType(n){if((n.tx||"").includes("DM"))return"dm";if(n.a===tgtKey())return"heart";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
  list.innerHTML=S.notifs.length?"":'<div class="nempty">まだ通知はないよ</div>';
- S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow"+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");
-  row.innerHTML='<span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'<i class="ntype t-'+t+'">'+NTYPE[t]+'</i></span>'+"<div class='nmain'><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
+ S.notifs.forEach((n,i)=>{const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");
+  row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
  const men=$("#x-men-list");const emp=$("#x-men-empty");
  const nmen=$("#x-notif-men");const nn=$("#nmen-n");if(nn)nn.textContent=S.men.length?("("+S.men.length+")"):"";
- if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>men.appendChild(postEl(p,false)));if(nmen){nmen.innerHTML="";S.men.forEach(p=>nmen.appendChild(postEl(p,false)));}}
- else if(nmen){nmen.innerHTML='<div class="nempty">まだメンションはないよ</div>';}
+ if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>men.appendChild(postEl(p,false)));}
+ /* v64: the mention sub-tab opens with its own section head, same language as the panel */
+ if(nmen){nmen.innerHTML="";const mh=document.createElement("div");mh.className="nmen-head";mh.textContent="あなたへのメンション";nmen.appendChild(mh);
+  if(S.men.length)S.men.forEach(p=>nmen.appendChild(postEl(p,false)));
+  else{const e=document.createElement("div");e.className="nempty";e.textContent="まだメンションはないよ";nmen.appendChild(e);}}
 }
 /* stories (Status addition): tap a ring -> fullscreen viewer.
    One segment per story entry, auto-advance, tap right = next / left = back,
