@@ -2255,6 +2255,24 @@ input,textarea{font-size:16px}
 #scr-title.booted #btn-reset0{animation-delay:1.24s}
 #scr-title.booted .ver{animation-delay:1.3s}
 @media (prefers-reduced-motion:reduce){#splash{display:none}#scr-title.booted .xlogo,#scr-title.booted .t-eyebrow,#scr-title.booted h1,#scr-title.booted .t-rule,#scr-title.booted .sub,#scr-title.booted .flowsteps,#scr-title.booted #tsave,#scr-title.booted .btn,#scr-title.booted .ver{animation:none}}
+/* ===== v141: title, second raise - the poster background keeps
+   drifting slowly after the one-shot intro Ken Burns (the ending's
+   endbgdrift language), the SAVE DATA card gains a distance line
+   (stage label + five pips, the same read as his profile band), and
+   its progress segments are generated from TOTAL_DAYS - the static
+   markup still carried five from the five-day era, so a Day-6 save
+   showed a five-segment bar. Buttons gain the arrow the intro CTAs
+   already carry. The no-real-names rule for this screen is kept:
+   the card speaks in the in-fiction short name and stage labels. ===== */
+#scr-title::before{animation:titledrift 18s ease-in-out infinite alternate}
+@keyframes titledrift{from{transform:scale(1.02)}to{transform:scale(1.1) translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){#scr-title::before{animation:none}}
+.ts-dist{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14)}
+.ts-dist-lab{font-size:11px;font-weight:800;letter-spacing:.1em;color:#cdbcf5;white-space:nowrap}
+.ts-pips{display:inline-flex;gap:4px}
+.ts-pips i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22)}
+.ts-pips i.on{background:linear-gradient(135deg,#f91880,#7856ff);box-shadow:0 0 7px rgba(249,24,128,.65)}
+.ts-dist-stage{margin-left:auto;font-size:11.5px;font-weight:900;letter-spacing:.08em;color:#ffd7ea;font-variant-numeric:tabular-nums;white-space:nowrap}
 /* ===== v104: RESULT aggregation rebuilt - the day's five stats become
    individual cards: an axis-coloured icon medallion, the label set small
    over a large tabular value, an arrow delta chip, and the gauge moved
@@ -2373,11 +2391,12 @@ input,textarea{font-size:16px}
       <div class="ts-cell"><small>フォロワー</small><b id="ts-fol"></b></div>
       <div class="ts-cell"><small>レベル</small><b id="ts-lv"></b></div>
     </div>
+    <div class="ts-dist"><span class="ts-dist-lab" id="ts-dist-lab">二人の距離</span><span class="ts-pips" id="ts-pips"><i></i><i></i><i></i><i></i><i></i></span><b class="ts-dist-stage" id="ts-dist-stage"></b></div>
   </div>
-  <button class="btn" id="btn-start">はじめる</button>
-  <button class="btn ghost hidden" id="btn-continue">つづきから</button>
+  <button class="btn" id="btn-start">はじめる →</button>
+  <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v140</p>
+  <p class="ver">v141</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2534,7 +2553,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v140</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v141</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -2773,7 +2792,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v140</p>
+    <p class="ver">v141</p>
   </div>
 </section>
 </div>
@@ -4771,7 +4790,10 @@ function renderTitleSave(){
  set("#ts-chap",parts.length>1?parts.slice(1).join(" ― "):(ch?(ch.day||""):""));
  set("#ts-target",T.short);set("#ts-handle",S.handle||"");
  set("#ts-fol",fmt(S.fol));set("#ts-lv","Lv "+(1+Math.floor((S.xp||0)/50)));
- const pg=$("#ts-prog");if(pg)[...pg.children].forEach((el,i)=>{el.className=i<S.ch?"on":"";if(i===S.ch-1)el.classList.add("now");});
+ const pg=$("#ts-prog");if(pg){if(pg.children.length!==TOTAL_DAYS){pg.innerHTML="";for(let d=0;d<TOTAL_DAYS;d++)pg.appendChild(document.createElement("i"));}[...pg.children].forEach((el,i)=>{el.className=i<S.ch?"on":"";if(i===S.ch-1)el.classList.add("now");});}
+ /* v141: the card also carries the distance line (stage + pips, the
+    same read as his profile band) */
+ const dl=$("#ts-dist-lab");if(dl){dl.textContent=distLab();const si=distStageIdx();set("#ts-dist-stage","STAGE "+(si+1));const pp=$("#ts-pips");if(pp)[...pp.children].forEach((el,i)=>el.classList.toggle("on",i<=si));}
  card.classList.remove("hidden");
  const bc=$("#btn-continue"),bs=$("#btn-start"),br=$("#btn-reset0"),sec=$("#scr-title");
  if(sec)sec.classList.add("has-save");
