@@ -2827,7 +2827,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v349</p>
+  <p class="ver">v350</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3001,7 +3001,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v349</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v350</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3270,7 +3270,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v349</p>
+    <p class="ver">v350</p>
   </div>
 </section>
 </div>
@@ -3765,6 +3765,23 @@ collab:"――年末。約束のステージが来た。\nリハーサルの朝�
 flame:"――季節が巡って、彼女の活動再開が発表された。\n復帰ステージの日、彼のグループのスケジュールは別会場だった。何も起きなかった。何も起きなかったことが、彼なりの守り方だった。\n数日後の雑誌インタビューで、彼は『尊敬する先輩』を聞かれて、少し考えてから言った。『雲ひとつない歌を歌う方です』\n名前は、出なかった。でも、彼女には届いた。",
 quiet:"――あれから、食堂の向かいの席は、彼の定位置になった。\nメロンパンの交換は、いつの間にか二人の間の決まりごとになった。メンバーが『またパン？』と笑う。彼は丁寧に、真面目に答える。『約束なので』\n公の場での二人は、先輩と後輩の、ちょうどいい距離のまま。数字にも記事にもならないものが、静かに積み重なっていく。\nそれで、今は十分だった——はずが、少しずつ、十分じゃなくなってきている。",
 start:"――数週間後、同じ音楽番組に、二つのグループの名前が並んだ。\n進行表の端に、小さく、両方の名前がある。まだ夢の中だった文字が、現実の紙の上にあった。\n廊下ですれ違ったとき、彼はきちんと頭を下げた。彼女も、先輩として、自然に返した。それだけの一瞬が、ファンの誰かの目撃談になった。『普通に、先輩と後輩だった』\nその夜、彼のポストに☁️がひとつ。文脈は、なかった。"}};
+/* v350 (episode - first-follower epilogue differences): the follower
+   she chose at the start leaves a small, different trace in every
+   epilogue. Appended under the route epilogue by the renderer; kinds,
+   thresholds and order untouched, her own lines stay unquoted. */
+const END_EPI_FF={
+sea:{flame:"騒ぎが大きくなった頃、カリナから短いDMが届いた。「私は、デビューの日を待っていた側です」――入所では彼女が先輩、デビューではカリナが先輩。その逆転を知っている人の言葉は、静かで、重かった。",
+collab:"発表の日、カリナのポストは一言だけだった。「やっと、同じ側に立てましたね」入所は彼女の方が先、デビューはカリナが先。ずっと彼女の10年を見てきた人の、短い祝福だった。",
+quiet:"数字の伸びない時期、カリナはたまに短い言葉をくれた。「自分のペースで」デビューを先に経験した人の、急かさない応援が、静かに続いていた。",
+start:"静かな船出の日、カリナから「始まりましたね」とだけ届いた。長く見てきた人ほど、言葉は短くなる。その短さが、彼女には心強かった。"},
+akari:{flame:"騒ぎの中、ジウは毎日「オンニ、ごはん食べた？」とだけ聞いた。同期で、リーダーで、年下。それでも、支える側に回ることを選んだ人の声だった。",
+collab:"発表の日、ジウはレッスン室で小さく跳ねた。「オンニ、すごい！」同期の喜び方は、家族のそれに近かった。",
+quiet:"静かな日々の中でも、ジウの「オンニ、今日もおつかれさま」は欠かさなかった。同期の声は、日常の形をして届く。",
+start:"始まったばかりの日々、ジウは言った。「ここからだよ、オンニ」同期のリーダーの言葉が、彼女の背中をまっすぐにした。"},
+mina:{flame:"騒ぎが落ち着く頃、ミナから短いメッセージが届いた。「歌、また聴かせてください」それだけだった。言葉少なめな人の、それで十分な応援だった。",
+collab:"発表の日、ミナのポストは静かだった。「おめでとうございます。楽しみにしています」言葉少なめな人の祝福は、行間に温度があった。",
+quiet:"静かな時期、ミナはときどき、彼女のポストにいいねをつけた。言葉はない。でも、見ているという合図だけは、欠かさなかった。",
+start:"始まりの日、最初のフォロワーになったミナの「見届けます」という言葉は、そのまま残っている。始まりに立ち会った人は、続きも見届けてくれる。"}};
 const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 大阪","96 ポスト"],["エンタメ","井汲大翔 配信切り抜き","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#肉まん被り","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["エンタメ","井汲大翔 ファンミーティング","3,108 ポスト"]];
 const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["carmen","カルメン"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
@@ -6007,7 +6024,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  const tm=document.createElement("span");tm.className="et-main";tm.textContent=tp[0];th.appendChild(tm);
  if(tp[1]){const ts=document.createElement("span");ts.className="et-sub";ts.textContent=tp[1];th.appendChild(ts);}
  $("#end-body").textContent=body;
- const epiEl=$("#end-epi");if(epiEl)epiEl.textContent=(END_EPI[tgtKey()]||{})[kind]||"";
+ const epiEl=$("#end-epi");if(epiEl){let et=(END_EPI[tgtKey()]||{})[kind]||"";const eff=(END_EPI_FF[S.first]||{})[kind];if(eff)et+="\n\n"+eff;epiEl.textContent=et;}
  /* v114: the follower count counts up to the same final figure */
  {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.min(1,(t-t0)/850);folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
  $("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
