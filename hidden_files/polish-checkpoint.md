@@ -2042,3 +2042,9 @@
 - ついでにDay7のストーリー解決を修正：従来のフォールバックだとDay7で全員がDay1の字幕（「デビューの日」等）に戻ってしまうため、Day6の絵・字幕にクランプ。彼女のストーリーもDay6（雨の窓辺）を使う
 - 照合：fx・cond・BUZZキー完全一致。imgの差異は上記の入替と1件の付け替え（gen-story-stream→pin-studio）のみ
 - 検証：storyBaseFor／naoStory を実データで確認し、全付け替えとDay7クランプが意図どおりに解決すること、エラー0を確認
+
+## v359（2026-11-15）無駄な機能・化石の掃除（本人の許可）
+- 未参照の写真15点を公開ツリーから退避（削除はせず、リポジトリ外の ~/workspace/archived-assets/hiroto-status/ に保全。公開URLで直接開けてしまう状態も解消）：v352で回転から外した3点（nao-hiroto-train／nao-sakuya-conveni／nao-sakuya-car）、元々無参照のツーショット10点（nao-hiroto-back／car／duet／finale／mansion／office、nao-sakuya-back／mansion／rehearsal／train）、ig-gen-studio、pin-pudding。動的参照（誤爆写真の結合生成など）に触れていないことを確認済みで、残った参照アセット88点は全て実在する
+- 文章後日談カードの残骸CSS（.end-card.epi／.epi-lab／#end-epi の3ルール）を削除
+- 点検して残したもの：あゆみ（JOURNEY）／STATUS LOG は設定・結果画面からの導線が生きているため対象外。Day7のセッション生成まわりは現行機能
+- 照合：fx194・img79・cond81・BUZZキー111 完全一致。起動＋Day1実駆動でエラー・404とも0
