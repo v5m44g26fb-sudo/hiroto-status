@@ -949,6 +949,15 @@ input,textarea{font-size:16px}
 .erow.fol b{font-size:26px}
 .erow .egauge{height:7px}
 #scr-ending .btn{margin-top:20px}
+/* Day 7: the ending screen is shown twice - the verdict first
+   (journey, credits and the FIN buttons stay hidden), then FIN
+   after the epilogue day has been played */
+#scr-ending:not(.fin) #end-journey{display:none}
+#scr-ending:not(.fin) #end-credits{display:none}
+#scr-ending:not(.fin) #btn-restart{display:none}
+#scr-ending.fin #btn-day7{display:none}
+#scr-ending.fin #end-bodycard{display:none}
+#btn-day7{display:block;margin:20px auto 0}
 /* ===== v50: type scale unification (same role = same size / leading) ===== */
 /* screen & panel titles: appbar/notif titles already sit at 16.5px */
 .sheet h3{font-size:16.5px}
@@ -2836,7 +2845,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v355</p>
+  <p class="ver">v356</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3010,7 +3019,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v355</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v356</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3244,16 +3253,15 @@ input,textarea{font-size:16px}
     <div class="end-tagrow"><span class="end-tag">ENDING</span><span class="end-theme" id="end-theme"></span></div>
     <div class="end-rule" aria-hidden="true"></div>
     <h2 id="end-title"></h2>
-    <div class="end-card"><p id="end-body"></p></div>
-    <div class="end-card epi"><p class="epi-lab">後日談 ― EPILOGUE</p><p id="end-epi"></p></div>
+    <div class="end-card" id="end-bodycard"><p id="end-body"></p></div>
     <div class="end-panel">
-      <div class="end-panel-h"><span class="end-lvb" id="end-lv">Lv 1</span><span class="eph-t">FINAL RESULT</span><small>6日間の成績</small></div>
+      <div class="end-panel-h"><span class="end-lvb" id="end-lv">Lv 1</span><span class="eph-t">FINAL RESULT</span><small id="end-panel-sub">6日間の成績</small></div>
       <div class="erow fol"><span class="elab">フォロワー</span><b id="end-fol"></b></div>
       <div class="erow"><span class="elab">世間の認知度</span><span class="egauge"><i id="end-cog-g"></i></span><b id="end-cog"></b></div>
       <div class="erow fire"><span class="elab">炎上度</span><span class="egauge"><i id="end-flm-g"></i></span><b id="end-flm"></b></div>
       <div class="erow dist"><span class="elab" id="end-dist-lab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
     <div class="end-journey" id="end-journey">
-      <div class="ej-h"><span class="ej-t">6 DAYS JOURNEY</span><small>6日間の軌跡</small></div>
+      <div class="ej-h"><span class="ej-t">6 DAYS JOURNEY</span><small id="ej-small">6日間の軌跡</small></div>
       <div class="ej-fol-h"><span>フォロワーの推移</span><b id="ej-fol-d"></b></div>
       <div class="ej-bars" id="ej-bars"></div>
       <div class="ej-row"><span class="ej-lab">最終的な世間の評価</span><span class="ej-title" id="ej-title"></span></div>
@@ -3262,6 +3270,7 @@ input,textarea{font-size:16px}
       <div class="ej-strip-wrap" id="ej-strip-wrap" style="display:none"><div class="ej-strip-h"><span>HIGHLIGHTS</span><small>6日間の写真</small></div><div class="ej-strip" id="ej-strip"></div></div>
     </div>
     </div>
+    <button class="btn" id="btn-day7" type="button">Day 7 ― その後の一日へ</button>
     <div class="end-credits" id="end-credits">
       <div class="ec-rule" aria-hidden="true"></div>
       <p class="ec-eyebrow">CREDITS</p>
@@ -3272,14 +3281,14 @@ input,textarea{font-size:16px}
         <div class="ec-row"><span>近づいた相手</span><b id="ec-target"></b></div>
         <div class="ec-row"><span>最初のフォロワー</span><b id="ec-first"></b></div>
         <div class="ec-row"><span>到達した結末</span><b id="ec-end"></b></div>
-        <div class="ec-row"><span>6日間の記録</span><b id="ec-record"></b></div>
+        <div class="ec-row"><span id="ec-record-lab">6日間の記録</span><b id="ec-record"></b></div>
         <div class="ec-row"><span>変化の総数</span><b id="ec-changes"></b></div>
       </div>
       <p class="ec-fin">― FIN ―</p>
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v355</p>
+    <p class="ver">v356</p>
   </div>
 </section>
 </div>
@@ -3849,7 +3858,7 @@ const STORY_S=[["sakuya","サクヤ"],["akari","ジウ"],["carmen","カルメン
 function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
 function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
 function distLab(){return tgt().short+"との距離";}
-function curCH(){return tgtKey()==="sakuya"?CH_S:CH;}
+function curCH(){const b=tgtKey()==="sakuya"?CH_S:CH;return (window.__D7&&__D7.ch7)?b.concat([__D7.ch7]):b;}
 function curTrends(){const base=(tgtKey()==="sakuya"?TRENDS_S:TRENDS).slice();
  if(!S||!S.started)return base;
  const sk=tgtKey()==="sakuya",fp=n=>n.toLocaleString("ja-JP")+" ポスト",dyn=[];
@@ -5975,10 +5984,11 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  /* v104: the go button reads as a destination bar - main label plus the
     next chapter's own day line, read from the chapter data. */
  const goM=$("#dr-go .dr-go-main"),goS=$("#dr-go .dr-go-sub");
- if(S.ch>=TOTAL_DAYS){goM.textContent="エンディングへ";goS.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
+ if(window.__D7&&__D7.active&&S.ch===7){goM.textContent="FINへ";goS.textContent="その後の1日を終えて";}
+ else if(S.ch>=TOTAL_DAYS){goM.textContent="エンディングへ";goS.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
  else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
  $("#dayresult").classList.add("on");}
-$("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}});
+$("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
 /* v226: the RESULT screen links onward to the full record too -
    the scrims layer over it, like they do over the ending (v192) */
@@ -6057,15 +6067,15 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
     and order are untouched - only the prose branches. The gate reads
     her own posts, same as v295; no new save fields. */
  if((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))){const sk=tgtKey()==="sakuya";body+="\n"+({flame:"とどめは、あの誤投稿だった。鍵垢に上げるはずだった私的な一枚のスクショが、『匂わせの証拠』として並べられた。消したはずのものは、消えていなかった。",collab:sk?"発表の日、例のスクショの話題は、コラボの歓声にかき消えた。今ではファンの間で『伝説の誤爆』と笑って振り返られている。本人は、まだ少しだけ耳が赤い。":"例のスクショは、今もたまに蒸し返される。それでも、消えなかったものもある。騒ぎの向こう側で、二人だけが知っている。",quiet:sk?"あの誤投稿の写真も、もう騒がれていない。彼だけが『目に残っています』と言った。その一言だけが、静かに残っている。":"あの誤投稿のスクショも、もう騒がれていない。彼だけが『消えてよかったとは、思ってません』と言った。その一言だけが、静かに残っている。",start:"あの誤投稿のスクショだけが、少し先に有名になった。それも含めて、まだ始まったばかり。"})[kind];}
+ window.__D7={kind:kind,active:false,done:false,ch7:null};
  renderTargetProfile();
- const sec=$("#scr-ending");sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
+ const sec=$("#scr-ending");sec.classList.remove("fin");const etag=sec.querySelector(".end-tag");if(etag)etag.textContent="ENDING";sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
  sec.style.setProperty("--bgimg","url("+({collab:(tgtKey()==="sakuya"?"assets/nao-stage.jpg":"assets/nao-story-night.jpg"),flame:"assets/night.jpg",quiet:"assets/nao-cafe2.jpg",start:"assets/nao-promo.jpg"})[kind]+")");
  $("#end-theme").textContent=({collab:(tgtKey()==="sakuya"?"COLLAB END":"WEATHERED END"),flame:"FLAME END",quiet:"QUIET END",start:"START END"})[kind];
  const tp=title.split(" ― ");const th=$("#end-title");th.innerHTML="";
  const tm=document.createElement("span");tm.className="et-main";tm.textContent=tp[0];th.appendChild(tm);
  if(tp[1]){const ts=document.createElement("span");ts.className="et-sub";ts.textContent=tp[1];th.appendChild(ts);}
  $("#end-body").textContent=body;
- const epiEl=$("#end-epi");if(epiEl){let et=(END_EPI[tgtKey()]||{})[kind]||"";const eff=(END_EPI_FF[S.first]||{})[kind];if(eff)et+="\n\n"+eff;epiEl.textContent=et;}
  /* v114: the follower count counts up to the same final figure */
  {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.min(1,(t-t0)/850);folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
  $("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
@@ -6198,6 +6208,95 @@ $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollT
 (function(){const sp=document.getElementById("splash"),sec=document.getElementById("scr-title");
  if(sec)sec.classList.add("booted");
  if(sp)setTimeout(()=>{sp.remove();},1750);})();
+/* ===== Day 7 - the playable epilogue =====
+   The ending is judged at the end of Day 6 and locked in; Day 7 is
+   one more playable day that reads the verdict but never changes it.
+   Its chapter is built per session (window.__D7.ch7) from the route
+   and the ending kind, and is never written into CH / CH_S. */
+function day7Banner(kind){return (tgtKey()==="sakuya"?{
+ flame:"発表の熱が、騒ぎに変わった朝。それでも、隣に立つと約束した人がいる。",
+ collab:"コラボの朝。同じステージに立った余韻が、まだ耳に残っている。",
+ quiet:"会社の食堂の約束が、まだ胸にある。静かな朝。",
+ start:"発表から一夜。ここからが、本当の始まり。"}:{
+ flame:"報道から一夜。表の活動は止まったままでも、朝は来る。今日をどう生きるかは、自分で決める。",
+ collab:"騒ぎが引いた朝。公式には、何もなかったことになっている。それでも、昨日の配信のBGMを覚えている人がいる。",
+ quiet:"静かな朝。数字はまだ小さい。でも、昨日の夜届いた一通が、画面の中で光っている。",
+ start:"新しい朝。何も終わっていない。何も、まだ始まっていない。――それでも、昨日より少しだけ前にいる。"})[kind]||"";}
+function buildDay7Chapter(kind){
+ const sk=tgtKey()==="sakuya";
+ const seed=sk?[
+  {a:"media",tx:"NCT WISH サクヤ×なお コラボ発表から一夜。関連ワードが、今朝もトレンドの上位に残っている。",lk:3200,rp:540,rc:210},
+  {a:"fan1",tx:"おはようございます。昨日のコラボ、何回も観ました。二人の空気、特別だった。",lk:210,rp:31,rc:9},
+  {a:"carmen",tx:"おはようございます！ カルメンです。なおオンニ、昨日は本当におつかれさまでした！",lk:1500,rp:230,rc:64}]:[
+  {a:"media",tx:"新人・なお、報道から一夜明けた朝。事務所は『確認中』の姿勢を維持。ファンの間では『歌を聴こう』という呼びかけが広がっている。",lk:2600,rp:480,rc:190},
+  {a:"fan1",tx:"おはようございます。昨日の今日で複雑だけど、なおの『The Chase』、今朝も聴きました。やっぱりいい。",lk:180,rp:24,rc:7},
+  {a:"ana",tx:"おはようございます！ エイナです。今日もレッスン、がんばります。オンニと一緒だから大丈夫。",lk:980,rp:120,rc:41}];
+ const posts=sk?[
+  {tx:"おはようございます。昨日の景色、まだ目に残っています。……今日から、また一歩ずつ。",fx:{fol:30,cog:3,xp:8,dist:1,flm:0},react:[
+   {a:"fan1",tx:"おはよう、なおちゃん。昨日のステージ、忘れられないよ。",lk:96,rp:8,rc:3},
+   {a:"fan2",tx:"一歩ずつ、応援してます。",lk:41,rp:2,rc:1}]},
+  {tx:"たくさんの言葉を、ありがとうございました。一つずつ、歌で返していきます。",fx:{fol:38,cog:4,xp:9,dist:0,flm:0},react:[
+   {a:"matome",tx:"新人・なお、発表の翌朝に感謝のポスト。「歌で返す」という言葉に、界隈が静かに頷いている",lk:720,rp:110,rc:38},
+   {a:"fan1",tx:"待ってます。ずっと待ってます。",lk:130,rp:11,rc:4}]},
+  {tx:"次のステージの準備が、もう始まっています。……並んで立てる日を、楽しみにしていてください。",fx:{fol:45,cog:5,xp:10,dist:2,flm:1},react:[
+   {a:"fan2",tx:"「並んで立てる日」って、そういうことだよね……？",lk:88,rp:9,rc:14},
+   {a:"fan1",tx:"楽しみにしてます！！",lk:150,rp:14,rc:5}]}]:[
+  {tx:"おはようございます。……いろいろあったけど、今日もレッスン室から始めます。歌は、ここにあります。",fx:{fol:28,cog:3,xp:8,dist:0,flm:0},react:[
+   {a:"fan1",tx:"おはよう、なおちゃん。歌は、ちゃんとここにあるよ。",lk:84,rp:7,rc:3},
+   {a:"fan2",tx:"レッスン室から始める人、強い。",lk:39,rp:2,rc:1}]},
+  {tx:"心配してくれたみんな、ありがとう。私は元気です。元気なふりじゃなくて、本当に。……少しずつ、歌で返していきます。",fx:{fol:36,cog:4,xp:9,dist:1,flm:0},react:[
+   {a:"matome",tx:"新人・なお、報道の翌朝に「元気です」とポスト。「歌で返していく」という言葉が、小さく広がっている",lk:690,rp:98,rc:31},
+   {a:"fan1",tx:"よかった……。待ってるからね。",lk:120,rp:10,rc:4}]},
+  {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
+   {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
+   {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
+ const event=sk?{tag:"EVENT ― レッスン室の前で",title:"彼と、短く言葉を交わした",body:"朝のレッスン室の前。彼が、メロンパンの袋を下げて立っていた。「……おはようございます、ヌナ」",
+  choices:[
+  {t:"「おはよう。……それ、私の？」と笑う",r:"彼は少し笑って、袋を差し出した。「駅前の、あそこのです」――約束は、日常の顔で果たされた。",fx:{fol:0,cog:0,xp:8,dist:8,flm:0}},
+  {t:"「ありがとう。今日もよろしくね」と受け取る",r:"「はい」短い返事。でも、渡す手がほんの少しだけ震えていたのは、緊張のせいだけじゃなかった気がした。",fx:{fol:0,cog:1,xp:7,dist:6,flm:0}},
+  {t:"何も言わず、隣に立って一緒に食べる",r:"言葉はなかった。廊下の隅で、二人で半分こしたメロンパン。……それが、今日の全部だった。",fx:{fol:0,cog:0,xp:9,dist:10,flm:0}}]}:
+ {tag:"EVENT ― 事務所で",title:"佐藤さんと、今後の話をした",body:"朝の事務所。佐藤さんが、温かいお茶を置いた。「無理に前を向かなくていいんですよ。……でも、歌う場所は、ちゃんと残します」",
+  choices:[
+  {t:"「歌で返していきたいです」と答える",r:"佐藤さんは頷いた。「その言葉、待ってました」――小さな次の予定が、カレンダーに一つ入った。",fx:{fol:0,cog:2,xp:9,dist:0,flm:0}},
+  {t:"「少しだけ、休ませてください」と答える",r:"「もちろんです」即答だった。10年以上走ってきた人間の『少し休む』を、止める人はいなかった。",fx:{fol:0,cog:0,xp:7,dist:0,flm:0}},
+  {t:"「……彼には、迷惑をかけました」とこぼす",r:"佐藤さんは首を振った。「彼は、自分の意思で静かにしてたんですよ」――その言い方に、彼の全部が詰まっていた。",fx:{fol:0,cog:1,xp:8,dist:5,flm:0}}]};
+ const activity=sk?[
+  {t:"メンバーと朝ごはんを食べながら、昨日の話をする",who:["メンバー"],r:"笑いながら昨日の映像を見返した。『オンニ、幸せそうだった』と言われて、耳が赤くなった。",fx:{fol:10,cog:1,xp:7,dist:0,flm:0}},
+  {t:"一人でレッスン室に残って、次の曲を聴き込む",who:["ひとりで"],r:"次の曲のデモを、何度も聴いた。10年以上待った人間に、焦りはない。でも、楽しみはある。",fx:{fol:0,cog:1,xp:10,dist:0,flm:0}},
+  {t:"みくに「昨日はありがとう」と電話する",who:["みく"],r:"みくは笑った。「あんたの人生、いつも特等席で見せてもらってる」――幼なじみの言葉が、いちばん効いた。",fx:{fol:5,cog:0,xp:6,dist:0,flm:0}}]:[
+  {t:"レッスン室で一人、デビュー曲を歌い直す",who:["ひとりで"],r:"誰もいないレッスン室で、最初から最後まで歌った。……うん、大丈夫。歌は、ここにある。",fx:{fol:0,cog:1,xp:10,dist:0,flm:0}},
+  {t:"メンバーと朝ごはんを食べる",who:["メンバー"],r:"何も聞かないで、隣に座ってくれる人たち。エイナが卵焼きを分けてくれた。それだけで十分だった。",fx:{fol:8,cog:1,xp:7,dist:0,flm:0}},
+  {t:"みくに電話して、昨日のことを話す",who:["みく"],r:"みくは最後まで聞いて、言った。「あんたは昔から、歌うと全部なんとかなるタイプ」――根拠はない。でも、効いた。",fx:{fol:5,cog:0,xp:6,dist:0,flm:0}}];
+ const dm={who:"miku",msgs:["おはよー！ 昨日は大変だったね","あんたの歌、今日も聴いたよ。……何回聴いてもいい"],
+  choices:[{t:"「ありがとう。……私、まだ歌えるかな」",r:"みく「何言ってんの。あんたの歌は、あんたのものだよ。誰にも触れない」",fx:{fol:5,xp:6,dist:0,flm:0,cog:1}},
+  {t:"「1号の言葉、いちばん効く」",r:"みく「でしょ。……これからも特等席、予約しといて」",fx:{fol:8,xp:5,dist:0,flm:0,cog:1}}]};
+ return {day:"Day 7 ― その後の朝",banner:day7Banner(kind),seed:seed,posts:posts,event:event,activity:activity,dm:dm};}
+function day7Dm4(){return tgtKey()==="sakuya"?{
+ msgs:["おはようございます、ヌナ","昨日は、おつかれさまでした","……今日も、いい日になります"],
+ choices:[
+ {t:"「サクヤくんも、おつかれさま」",r:"返信は少し間を置いて。「はい。……ヌナの声、今日も聴きたいです」素直な一文が、朝の光みたいだった。",fx:{fol:0,xp:6,dist:6,flm:0,cog:0}},
+ {t:"「メロンパン、楽しみにしてる」",r:"「買っとくね。……二人分」約束は、もう約束の顔をしていなかった。日常の顔をしていた。",fx:{fol:0,xp:6,dist:8,flm:0,cog:0}},
+ {t:"「今日もよろしくね」",r:"「はい。……よろしく、です」彼の丁寧さが、今日は少しだけ近かった。",fx:{fol:0,xp:5,dist:5,flm:0,cog:0}}]}:{
+ msgs:["……おはようございます","大丈夫ですか。……こっちは、大丈夫です"],
+ choices:[
+ {t:"「私も大丈夫。……ありがとう」",r:"彼の返信は「よかった」だけ。それでも、しばらく既読のまま、画面が開いていた気がした。",fx:{fol:0,xp:5,dist:5,flm:0,cog:0}},
+ {t:"「地元に帰ったら、また」",r:"「……はい。たい焼き屋、まだあるらしいです」故郷の店の名前が、画面の中に残った。",fx:{fol:0,xp:6,dist:7,flm:0,cog:0}},
+ {t:"「配信、観たよ」",r:"「……ありがとうございます。次も、よかったら」短い。でも、昨日の今日で「次」と言えたことが、全部だった。",fx:{fol:0,xp:5,dist:6,flm:0,cog:0}}]};}
+function startDay7(){const D=window.__D7;if(!D||D.active||D.done)return;D.ch7=buildDay7Chapter(D.kind);D.active=true;
+ show("v-x");startChapter(7);showPane("tl");
+ const T=day7Dm4();const th=(S.threads||[]).find(x=>x.id===tgtKey()&&x.special);
+ if(T&&th&&th.done&&!th.round4){th.round4=true;th.msgs=th.msgs.concat(T.msgs);th.choices=T.choices;th.done=false;th.unread=true;
+  S.notifs.unshift({a:tgtKey(),tx:"さんからDMが届きました",sub:"Day 7 ― その後の朝に"});renderDmList();renderNotifs();updateBdg();save();}}
+function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return;sec.classList.add("fin");
+ const tag=sec.querySelector(".end-tag");if(tag)tag.textContent="FIN";
+ $("#end-fol").textContent=fmt(S.fol);$("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
+ $("#end-lv").textContent="Lv "+lvNum()+"・"+lvTitle();
+ $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
+ const ejt=sec.querySelector(".ej-t");if(ejt)ejt.textContent="7 DAYS JOURNEY";const ejs=$("#ej-small");if(ejs)ejs.textContent="7日間の軌跡";
+ const ps=$("#end-panel-sub");if(ps)ps.textContent="7日間の成績";const rl=$("#ec-record-lab");if(rl)rl.textContent="7日間の記録";
+ const es=sec.querySelector(".ec-sub");if(es)es.textContent="STATUS × X ― A SEVEN-DAY STORY";
+ renderEndJourney();renderCredits(D?D.kind:"start");show("scr-ending");save();}
+$("#btn-day7").addEventListener("click",startDay7);
 renderTrends();
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
@@ -6205,6 +6304,9 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
  if(S.folScale!==2){S.fol=(S.fol||0)*FOL_MULT;(S.folHist||[]).forEach(e=>{e.fol*=FOL_MULT;});(S.chgLog||[]).forEach(e=>{if(e.name==="フォロワー")e.v*=FOL_MULT;});S.folScale=2;save();}
  /* v341: her handle is unified to @nao_h2h; old saves are normalized on load (save format unchanged) */
  if(S.handle!=="@nao_h2h"){S.handle="@nao_h2h";(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&(p.mine||p.a==="nao"))p.h="@nao_h2h";});save();}
+ /* Day 7: the epilogue chapter is built per session and never
+    persisted; a save left mid-Day-7 returns to the Day 6 verdict */
+ if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
  $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+TOTAL_DAYS+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};
