@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v329</p>
+  <p class="ver">v330</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v329</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v330</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v329</p>
+    <p class="ver">v330</p>
   </div>
 </section>
 </div>
@@ -3969,8 +3969,8 @@ function svImg(k){if(k==="nao")return naoStory().img;if(k===tgtKey())return tgt(
    backstage selfie (recording day). Resolved from the current chapter at
    render time, so in-progress saves get the day's story with no migration
    and the save format is untouched. */
-const NAO_STORY={1:{img:"assets/nao-story-heart.jpg",cap:"デビュー初日、いってきます"},2:{img:"assets/nao-story-cafe.jpg",cap:"オフのいちごミルク"},3:{img:"assets/nao-backstage-selfie.jpg",cap:"収録の日、楽屋から"},4:{img:"assets/nao-story-towel.jpg",cap:"レッスン終わり、汗だく"},5:{img:"assets/nao-story-night.jpg",cap:"静かな、帰り道"},6:{img:"assets/nao-stage-confetti.jpg",cap:"最終日、帰り道"}};
-function naoStory(){const d=(typeof S!=="undefined"&&S&&S.ch)||1;return NAO_STORY[d]||NAO_STORY[1];}
+const NAO_STORY={1:{img:"assets/nao-story-heart.jpg",cap:"デビュー初日、いってきます"},2:{img:"assets/nao-story-cafe.jpg",cap:"オフのいちごミルク"},3:{img:"assets/nao-backstage-selfie.jpg",cap:"収録の日、楽屋から"},4:{img:"assets/nao-story-towel.jpg",cap:"レッスン終わり、汗だく"},5:{img:"assets/nao-story-night.jpg",cap:"静かな、帰り道"},6:{img:"assets/nao-stage-confetti.jpg",cap:"最終日、帰り道",imgH:"assets/nao-story-night.jpg",capH:"最終日、静かな帰り道"}};
+function naoStory(){const d=(typeof S!=="undefined"&&S&&S.ch)||1;const e=NAO_STORY[d]||NAO_STORY[1];if(e.imgH&&typeof tgtKey==="function"&&tgtKey()==="hiroto")return{img:e.imgH,cap:e.capH};return e;}
 </script>
 <script>
 "use strict";
@@ -4444,10 +4444,10 @@ const STORY_BASE={
  carmen:{img:"assets/pin-makeup.jpg",imgs:["assets/pin-makeup.jpg","assets/pin-studio-console.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-dance.jpg","assets/pin-group.jpg"],caps:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","配信の噂、ドキドキする","ラスト、いくよ！","発表の日！ 朝からそわそわ"],capsH:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","噂のやつ、ドキドキする","ラスト、いくよ！","報道の日！ オンニの味方だよ、ずっと"]},
  yeon:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-studio-booth.jpg","assets/pin-studio.jpg","assets/pin-night.jpg","assets/pin-makeup.jpg"],caps:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","明日が山場、見ててね","発表、ドキドキする"],capsH:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","噂のやつ、ドキドキだなあ","明日が山場、見ててね","報道の日。オンニ、大丈夫だよ"]},
  fan1:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg","assets/pin-cafe-cake.jpg"],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","コラボの噂…！？ 震えてる","運命の日、見届けます","発表の日。画面の前で待機"],capsH:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","ざわつきの噂…！？ 震えてる","運命の日、見届けます","報道の日。最後まで、見届けます"]},
- miku:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-studio-console.jpg","assets/pin-cafe-coffee.jpg","assets/pin-night.jpg","assets/pin-cafe-cake.jpg"],caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂の配信、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"],capsH:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂のやつ、ほんとだったらどうしよ","今日が山場。応援してる","報道見たよ。……あんたは大丈夫。地元から応援してる"]},
+ miku:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/gen-story-watch.jpg","assets/pin-cafe-coffee.jpg","assets/pin-night.jpg","assets/pin-cafe-cake.jpg"],caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂の配信、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"],capsH:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂のやつ、ほんとだったらどうしよ","今日が山場。応援してる","報道見たよ。……あんたは大丈夫。地元から応援してる"]},
  sea:{img:"assets/pin-karina.jpg",caps:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","発表の日。おめでとうございます"],capsH:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","今日は、大事な日ですね。……長く見てきた分、信じています"]},
  mina:{img:"assets/pin-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","発表、見届けます"],capsH:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","今日も、見届けます"]},
- tgt:{imgH:["assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg","assets/ig-gen-studio.jpg","assets/ig-gen-stage.jpg"],
+ tgt:{imgH:["assets/gen-story-stream.jpg","assets/gen-story-stream.jpg","assets/gen-story-stream.jpg","assets/gen-story-stream.jpg","assets/gen-story-stream.jpg"],
   capH:["おはようございます","配信の合間に","今日は配信です","ファンミ、決まりました","ありがとうございました","20時から、配信します"],
   imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-selca.jpg","assets/sakuya-cover.jpg","assets/pin-sakuya-bouquet.jpg"],
   capS:["いい朝になりました","リハの空","今日のステージ","配信、決まりました","ありがとうございました","今日、発表です"]}};
@@ -4476,7 +4476,7 @@ function storyList(){
     here at display time, keyed by the chain uid so only those two
     entries are ever rewritten. */
  const STORY_FIX={"d-post-4-b":"assets/pin-studio.jpg","d-act-3-b":"assets/nao-stage-dance.jpg"};
- const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).filter(d=>STORY_ALLOW.has(d.k)).map(d=>({k:d.k,lab:d.lab,img:STORY_FIX[d.uid]||(d.img==="assets/ig-avatar.jpg"?"assets/ig-gen-studio.jpg":d.img),cap:d.cap||"",uid:d.uid}));
+ const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).filter(d=>STORY_ALLOW.has(d.k)).map(d=>({k:d.k,lab:d.lab,img:STORY_FIX[d.uid]||(d.img==="assets/ig-avatar.jpg"?"assets/gen-story-stream.jpg":d.img),cap:d.cap||"",uid:d.uid}));
  /* v55 (supersedes the v43 order): newest first. Own story stays pinned to
     the left edge; everyone else sorts by when their story began to be
     displayed, newest closest to your own. Chain stories (storyDyn, kept in
@@ -4493,17 +4493,17 @@ function storyList(){
    selected target (hiroto / sakuya) with per-route image and caption. */
 const STORY_CHAIN={
  post:{1:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"デビュー初日、スタート！"},
-  2:{tgt:true,imgH:"assets/pin-studio-console.jpg",capH:"配信の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
+  2:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"配信の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
   3:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日は音楽番組！ 楽屋から"},
   4:{k:"fan1",lab:"ゆな",img:"assets/pin-cafe-cake.jpg",cap:"なおちゃん応援中！"},
   5:{tgt:true,imgH:"assets/pin-cafe-coffee.jpg",capH:"朝のコーヒー",imgS:"assets/pin-cafe-onion.jpg",capS:"メロンパン、買えました"},
   6:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"大事な日、みんなで迎えたよ"}},
  event:{1:{k:"stella",lab:"ステラ",img:"assets/gen-story-news.jpg",cap:"記事みたよ、すごい！"},
-  2:{tgt:true,imgH:"assets/pin-studio-booth.jpg",capH:"今日は配信",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
+  2:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"今日は配信",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
   3:{k:"juun",lab:"ジュウン",img:"assets/pin-rack.jpg",cap:"楽屋、にぎやかでした"},
   4:{k:"akari",lab:"ジウ",img:"assets/pin-studio.jpg",cap:"噂のやつ…！ みんなで見守ってるよ"},
   5:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"明日が山場、みんなで見守り中"},
-  6:{tgt:true,imgH:"assets/pin-studio-booth.jpg",capH:"20時から、配信します",imgS:"assets/sakuya-bmg.jpg",capS:"よろしくお願いします"}},
+  6:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"20時から、配信します",imgS:"assets/sakuya-bmg.jpg",capS:"よろしくお願いします"}},
  act:{1:{k:"yuha",lab:"ユハ",img:"assets/pin-dance.jpg",cap:"アカペラ聴いた、鳥肌…！"},
   2:{k:"ian",lab:"イアン",img:"assets/pin-dance.jpg",cap:"先輩たちのステージ、勉強中"},
   3:{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},
