@@ -129,7 +129,7 @@ input,textarea{font-size:16px}
 #x-pane-search .xtabs button{flex:none;padding-left:14px;padding-right:14px;white-space:nowrap}
 
 /* compose (transplanted shell: #x-compose-btn / #x-compose) */
-#x-compose-btn{position:absolute;right:16px;bottom:calc(138px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease}
+#x-compose-btn{position:absolute;right:16px;bottom:calc(138px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:50%;background:#1d9bf0;color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(29,155,240,.45);z-index:66;transition:transform .18s ease,opacity .22s ease;display:flex;align-items:center;justify-content:center;padding:0}
 #x-compose-btn:active{transform:scale(.9)}
 #x-compose-btn.fab-hide{opacity:0;pointer-events:none;transform:translateY(12px)}
 #x-compose{position:absolute;inset:0;background:#fff;z-index:80;display:none;flex-direction:column}
@@ -2827,7 +2827,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v347</p>
+  <p class="ver">v348</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3001,7 +3001,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v347</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v348</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3105,7 +3105,7 @@ input,textarea{font-size:16px}
     </div>
   </div>
   <div id="threadbar"><div class="thread-composer" id="tc-pill" role="button" aria-label="返信を書く"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><span class="tc-ph">返信をポスト</span><span class="tc-btn">返信</span></div><div class="tc-form hidden" id="tc-form"><img class="avatar" src="assets/nao-avatar4.jpg" width="34" height="34" alt=""><div class="tc-fmain"><div class="tc-to" id="tc-to"></div><textarea id="tc-input" rows="2" maxlength="140" placeholder="返信をポスト"></textarea><div class="tc-frow"><span class="tc-count" id="tc-count"></span><button class="tc-cancel" id="tc-cancel" type="button">キャンセル</button><button class="tc-send" id="tc-send" type="button" disabled>返信</button></div></div></div></div>
-  <button id="x-compose-btn" aria-label="投稿">＋</button>
+  <button id="x-compose-btn" aria-label="投稿"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8L2 22"/><path d="M17.5 15H9"/><path d="M4.2 1.6v3.6M2.4 3.4h3.6"/></svg></button>
   <div id="x-compose">
     <div class="xc-head">
       <button id="xc-cancel">キャンセル</button>
@@ -3270,7 +3270,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v347</p>
+    <p class="ver">v348</p>
   </div>
 </section>
 </div>
@@ -4976,7 +4976,7 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
      also stays in the list below, as on real X. */
   const minePosts=S.posts.filter(p=>p.mine&&!p.isReply),debut=minePosts[minePosts.length-1];
   if(debut){const w=document.createElement("div");w.className="rpwrap";w.appendChild(pinHeadEl());w.appendChild(postEl(debut,false));box.appendChild(w);}
-  if(!list.length)box.appendChild(mkEmpty("まだポストがない","＋ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
+  if(!list.length)box.appendChild(mkEmpty("まだポストがない","投稿ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
  else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length){box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));box.appendChild(tabDoor());}else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
  else if(meTab==="like"){const seen=new Set(),liked=[];(S.posts||[]).concat(S.men||[]).forEach(p=>{if(p&&!p.sys&&p.liked&&!seen.has(p.id)){seen.add(p.id);liked.push(p);}});box.appendChild(tabHead("いいね",liked.length+" 件"));if(!liked.length){box.appendChild(mkEmpty("いいねしたポストはまだない","ポストのハートを押すと、ここに集まるよ。","like"));box.appendChild(tabDoor());}else liked.forEach(p=>box.appendChild(postEl(p,false)));}
