@@ -1584,9 +1584,9 @@ input,textarea{font-size:16px}
 .folrow .fr-name{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .folrow .fr-handle{font-size:13.5px;color:#536471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .folrow .fr-bio{font-size:13.5px;line-height:1.55;color:#0f1419;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.folbtn{flex:none;border-radius:999px;font-family:inherit;font-size:13px;font-weight:800;padding:7px 15px;cursor:pointer;border:1px solid #cfd9de;background:#fff;color:#0f1419;transition:background .15s ease,color .15s ease,transform .1s ease}
+.folbtn{flex:none;border-radius:999px;font-family:inherit;font-size:13px;font-weight:800;padding:7px 15px;cursor:pointer;border:1px solid #0f1419;background:#0f1419;color:#fff;transition:background .15s ease,color .15s ease,transform .1s ease}
 .folbtn:active{transform:scale(.96)}
-.folbtn.on{background:#0f1419;color:#fff;border-color:#0f1419}
+.folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de}
 .counts span{cursor:pointer}
 .counts span:active{opacity:.6}
 /* ===== v135: follow list, second raise - the pane gains a network band
@@ -1626,8 +1626,7 @@ input,textarea{font-size:16px}
 .folrow .fr-handle{display:flex;align-items:center;gap:6px}
 .folrow .fr-handle .fr-h{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .fr-mutual{flex:none;font-size:10.5px;font-weight:700;color:#536471;background:#eff3f4;border-radius:5px;padding:1.5px 6px;white-space:nowrap}
-#x-pane-follow .folbtn{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25);padding:8px 16px}
-#x-pane-follow .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
+#x-pane-follow .folbtn{padding:8px 16px}
 /* ===== v158: explore pane gains a WHO TO FOLLOW rail - a horizontal
    strip of account cards (real ACC accounts, FOL_BIO lines, verified
    badges from the same VERIFIED set, follow buttons sharing the
@@ -1645,8 +1644,7 @@ input,textarea{font-size:16px}
 .sa-namerow .p-ver{width:14px;height:14px;flex:none}
 .sa-handle{font-size:11.5px;color:#536471;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sa-bio{margin-top:5px;font-size:11px;line-height:1.45;color:#536471;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:32px}
-.sa-card .folbtn{margin-top:9px;width:100%;padding:6px 0;font-size:12.5px;background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25)}
-.sa-card .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
+.sa-card .folbtn{margin-top:9px;width:100%;padding:6px 0;font-size:12.5px}
 #thread-main .dtstats{display:flex;gap:15px;flex-wrap:wrap;margin-top:8px;font-size:13.5px;color:#536471}
 #thread-main .dtstats b{color:#0f1419;font-weight:800;margin-right:3px;font-variant-numeric:tabular-nums}
 #thread-main .post.detail .mt{padding-right:2px}
@@ -1924,8 +1922,7 @@ input,textarea{font-size:16px}
 #x-search-results .srch-res-h span{display:block;margin:5px 0 0;font-size:12px;font-weight:700;color:#b9a8e8}
 #x-search-results .srch-res-h span b{display:inline;font-size:12px;color:#fff}
 .srch-hl{background:linear-gradient(180deg,transparent 55%,rgba(247,201,72,.55) 55%);color:inherit;border-radius:2px;padding:0 1px}
-#x-search-results .folbtn{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(190,40,130,.25);padding:8px 16px}
-#x-search-results .folbtn.on{background:#fff;color:#0f1419;border-color:#cfd9de;box-shadow:none}
+#x-search-results .folbtn{padding:8px 16px}
 #x-search-results .folrow .avatar,#x-search-results .folrow .ava-txt{width:48px;height:48px;font-size:18px}
 .srise{animation:folrise .3s ease both}
 .srch-more{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;background:#fff;border:none;border-bottom:1px solid #f4f6f7;font-family:inherit;font-size:13.5px;font-weight:800;color:#7856ff;cursor:pointer}
@@ -2842,7 +2839,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v361</p>
+  <p class="ver">v362</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -2987,7 +2984,7 @@ input,textarea{font-size:16px}
         <div class="pf-name">なお<span class="pf-badge-off">公式</span><span class="pf-rank" id="me-rank">新人</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_h2h</div>
         <div style="font-size:14px;line-height:1.65;margin-top:6px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
-        <div class="counts" style="display:flex;gap:22px"><span><b id="x-fol-n">1</b> フォロワー</span><span><b id="x-folwing-n">42</b> フォロー中</span></div>
+        <div class="counts" style="display:flex;gap:22px"><span><b id="x-folwing-n">42</b> フォロー中</span><span><b id="x-fol-n">1</b> フォロワー</span></div>
       </div>
       <div class="me-now">
         <div class="me-now-cell"><small>レベル</small><b id="me-now-lv">Lv 1</b></div>
@@ -3016,7 +3013,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v361</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v362</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3055,7 +3052,7 @@ input,textarea{font-size:16px}
         <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。ステージがすべて。</div>
         <div class="his-tags" id="his-tags"></div>
-        <div class="counts" style="display:flex;gap:22px"><span><b id="his-fol-n">4,379</b> フォロワー</span><span><b>12</b> フォロー中</span></div>
+        <div class="counts" style="display:flex;gap:22px"><span><b>12</b> フォロー中</span><span><b id="his-fol-n">4,379</b> フォロワー</span></div>
         <div id="his-dist">
           <div class="hd-top"><span class="hd-lab">二人の距離</span><span class="hd-stage" id="hd-stage">STAGE 1 ― まだ、遠い存在</span><b class="hd-num" id="hd-num">0</b></div>
           <div class="hd-meter"><i id="hd-fill"></i><span class="hd-tick" style="left:5%"></span><span class="hd-tick" style="left:15%"></span><span class="hd-tick" style="left:30%"></span><span class="hd-tick" style="left:45%"></span></div>
@@ -3285,7 +3282,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v361</p>
+    <p class="ver">v362</p>
   </div>
 </section>
 </div>
