@@ -2232,6 +2232,15 @@ input,textarea{font-size:16px}
 .qt-h .p-ver{width:14px;height:14px}
 .post .hd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}
 .post .tm{font-size:15px;color:#536471;flex:none;white-space:nowrap}
+.post .p-more{margin-left:auto;flex:none;width:30px;height:30px;margin-right:-8px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#536471;cursor:pointer}
+.post .p-more:hover{background:rgba(29,155,240,.1);color:#1d9bf0}
+#thread-main .post.detail .p-more{float:right;margin:0 -6px 0 8px}
+#scrim-pmenu{z-index:135}
+#scrim-pmenu .sheet{position:relative;padding:14px 18px 30px}
+#scrim-pmenu .sheet::before{content:"";display:block;width:42px;height:4.5px;border-radius:3px;background:#d8dee3;margin:0 auto 8px}
+.pm-item{display:flex;align-items:center;gap:14px;width:100%;padding:13px 2px;background:none;border:none;font-family:inherit;font-size:15px;font-weight:700;color:#0f1419;text-align:left;cursor:pointer}
+.pm-item svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pm-cancel{display:block;width:100%;margin-top:10px;padding:13px;border:1px solid #cfd9de;border-radius:999px;background:#fff;font-family:inherit;font-size:15px;font-weight:700;color:#0f1419;cursor:pointer}
 .post .tx{line-height:1.45;margin-top:1px}
 .post .pimg{width:100%;display:block;border-radius:16px;border:1px solid #e6ebed;background:#eff3f4;object-fit:cover;object-position:center 16%;max-height:400px;margin-top:10px}
 .post.detail .pimg{max-height:600px}
@@ -2827,7 +2836,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v350</p>
+  <p class="ver">v351</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3001,7 +3010,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v350</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v351</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3270,7 +3279,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v350</p>
+    <p class="ver">v351</p>
   </div>
 </section>
 </div>
@@ -3289,6 +3298,10 @@ input,textarea{font-size:16px}
   <h3>6日間のあゆみ</h3><p class="desc">1日ごとの記録。フォロワーの動きと、その日の変化をまとめているよ。</p>
   <div class="jtotal" id="jtotal"></div>
   <div id="jlist"></div>
+</div></div>
+<div class="scrim" id="scrim-pmenu"><div class="sheet">
+  <div id="pm-items"></div>
+  <button class="pm-cancel" data-close="scrim-pmenu">キャンセル</button>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
   <button class="close" data-close="scrim-act" aria-label="閉じる">✕</button>
@@ -4045,7 +4058,7 @@ function qtDerive(p){try{
 }catch(_){return null;}}
 function rpHeadEl(name){const d=document.createElement("div");d.className="rp-head";d.innerHTML='<span class="rp-ic">'+XIC9.rp+'</span><span></span>';d.querySelector("span:last-child").textContent=name+"さんがリポスト";return d;}
 const PIN_SVG='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>';
-function pinHeadEl(){const d=document.createElement("div");d.className="rp-head pin-head";d.innerHTML='<span class="rp-ic">'+PIN_SVG+'</span><span>ピン留めポスト ― デビューの投稿</span>';return d;}
+function pinHeadEl(lab){const d=document.createElement("div");d.className="rp-head pin-head";d.innerHTML='<span class="rp-ic">'+PIN_SVG+'</span><span></span>';d.querySelector("span:last-child").textContent=lab||"ピン留めポスト ― デビューの投稿";return d;}
 /* v95: verified accounts in-fiction (idols, the target, the show's
    official account, and her own official account) carry the real-X
    badge in the author row. Derived from the account key at render
@@ -4053,13 +4066,40 @@ function pinHeadEl(){const d=document.createElement("div");d.className="rp-head 
    so the hierarchy reads at a glance. */
 const VERIFIED=new Set(["nao","hiroto","sakuya","media","sea","akari","mina","carmen","yuha","stella","juun","ana","ian","yeon"]);
 const VER_BADGE='<svg class="p-ver" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
+/* v351 (X realism pass 2): every post row carries the real-X "…"
+   menu at the right edge of its head - the one affordance the feed,
+   detail and profile lists were all missing. The menu is functional,
+   not a prop: not-interested hides the post, mute hides the account
+   in the timeline and mentions, and her own posts can be pinned to
+   her profile. All of it is session-only state (the DM unread
+   filter precedent), so the save format is untouched. */
+const PM_HIDE=new Set(),PM_MUTE=new Set();let PM_PIN=null;
+const PM_MORE='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>';
+const PM_IC={eyeoff:'<svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.8 9.8 0 0 1 12 5c7 0 9.5 7 9.5 7a17.6 17.6 0 0 1-3.2 3.9M6.6 6.9A16.9 16.9 0 0 0 2.5 12S5 19 12 19c1.5 0 2.8-.3 4-.8"/><path d="M9.9 9.9a3.2 3.2 0 0 0 4.2 4.2"/></svg>',
+ mute:'<svg viewBox="0 0 24 24"><path d="M15 9.5a4 4 0 0 1 0 5"/><path d="M18.5 6.5a8.5 8.5 0 0 1 0 11"/><path d="M4 9v6h4l5 4V5L8 9H4z"/></svg>',
+ pin:'<svg viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>'};
+function pmFiltered(p){return PM_HIDE.has(p.id)||PM_MUTE.has(p.a);}
+function openPostMenu(p,el){
+ const box=$("#pm-items");if(!box)return;box.innerHTML="";
+ const close=()=>$("#scrim-pmenu").classList.remove("on");
+ const add=(ic,label,fn)=>{const b=document.createElement("button");b.className="pm-item";b.innerHTML=ic+"<span></span>";b.querySelector("span").textContent=label;b.addEventListener("click",()=>{close();fn();});box.appendChild(b);};
+ const vanish=()=>{if(el&&el.classList&&el.classList.contains("detail")){const tb=$("#thread-back");if(tb)tb.click();}else if(el&&el.remove)el.remove();};
+ if(p.mine){
+  if(PM_PIN===p.id)add(PM_IC.pin,"固定を外す",()=>{PM_PIN=null;try{renderMeTab();}catch(_){} try{toastChg("固定を外したよ");}catch(_){}});
+  else add(PM_IC.pin,"プロフィールに固定する",()=>{PM_PIN=p.id;try{renderMeTab();}catch(_){} try{toastChg("プロフィールに固定したよ");}catch(_){}});
+ }else{
+  add(PM_IC.eyeoff,"このポストに興味がない",()=>{PM_HIDE.add(p.id);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg("このポストを非表示にしたよ");}catch(_){}});
+  add(PM_IC.mute,(p.h||"")+" さんをミュート",()=>{PM_MUTE.add(p.a);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg((p.h||"")+" さんをミュートしたよ");}catch(_){}});
+ }
+ $("#scrim-pmenu").classList.add("on");
+}
 function postEl(p,hot){
   const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" loading="lazy" decoding="async" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
-  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(p.tm||"\u4eca")+'</span></div><div class="tx"></div>'
+  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(p.tm||"\u4eca")+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
     +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'" alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
@@ -4095,6 +4135,7 @@ function postEl(p,hot){
       rto.addEventListener("click",e=>{e.stopPropagation();openPostThread(par);});
       txEl.parentNode.insertBefore(rto,txEl);}}}catch(_){}}
   if(avEl&&avEl.addEventListener&&(p.a===tgtKey()||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}});}
+  const pmEl=d.querySelector(".p-more");if(pmEl)pmEl.addEventListener("click",e=>{e.stopPropagation();try{openPostMenu(p,d);}catch(_){}});
   const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>{e.stopPropagation();
    /* v190: the share button actually shares - the system share
       sheet where available, the clipboard as fallback */
@@ -4422,10 +4463,10 @@ function renderNotifs(){
  const bn=$("#x-bell-n");bn.style.display=unseen?"block":"none";bn.textContent=unseen||"";
  const men=$("#x-men-list");const emp=$("#x-men-empty");
  const nmen=$("#x-notif-men");const nn=$("#nmen-n");if(nn)nn.textContent=S.men.length?("("+S.men.length+")"):"";
- if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>men.appendChild(postEl(p,false)));}
+ if(S.men.length){if(emp)emp.remove();men.innerHTML="";S.men.forEach(p=>{if(!pmFiltered(p))men.appendChild(postEl(p,false));});}
  /* v64: the mention sub-tab opens with its own section head, same language as the panel */
  if(nmen){nmen.innerHTML="";const mh=document.createElement("div");mh.className="nmen-head";mh.textContent="あなたへのメンション";nmen.appendChild(mh);
-  if(S.men.length)S.men.forEach(p=>nmen.appendChild(postEl(p,false)));
+  if(S.men.length)S.men.forEach(p=>{if(!pmFiltered(p))nmen.appendChild(postEl(p,false));});
   else{const e=document.createElement("div");e.className="nempty";e.innerHTML='<span class="ne-ic">'+NTYPE.dm+'</span><b>まだメンションはないよ</b>';nmen.appendChild(e);}}
 }
 /* stories (Status addition): tap a ring -> fullscreen viewer.
@@ -4751,7 +4792,7 @@ function renderFeed(){
    if(!S.followHiroto){const b2=document.createElement("button");b2.type="button";b2.className="folfeed-door main";b2.textContent=tgt().short+"のプロフィールを見る";
     b2.addEventListener("click",()=>showPane("hisprof"));dw.appendChild(b2);}
    tl.appendChild(dw);}}
- posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else tl.appendChild(postEl(p,false));});
+ posts.forEach(p=>{if(p.sys){const d=document.createElement("div");d.className="sysnote";d.textContent=p.tx;tl.appendChild(d);}else if(!pmFiltered(p))tl.appendChild(postEl(p,false));});
  if(tab==="rec")tl.appendChild(feedEndCard());
  renderMePosts();renderHisPosts();
 }
@@ -4991,8 +5032,8 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
      profile - the earliest post she made, derived from the post
      order (newest first, so it is the last of her own posts). It
      also stays in the list below, as on real X. */
-  const minePosts=S.posts.filter(p=>p.mine&&!p.isReply),debut=minePosts[minePosts.length-1];
-  if(debut){const w=document.createElement("div");w.className="rpwrap";w.appendChild(pinHeadEl());w.appendChild(postEl(debut,false));box.appendChild(w);}
+  const minePosts=S.posts.filter(p=>p.mine&&!p.isReply),natDebut=minePosts[minePosts.length-1],debut=(PM_PIN&&minePosts.find(p=>p.id===PM_PIN))||natDebut;
+  if(debut){const w=document.createElement("div");w.className="rpwrap";w.appendChild(pinHeadEl(debut!==natDebut?"ピン留めポスト":undefined));w.appendChild(postEl(debut,false));box.appendChild(w);}
   if(!list.length)box.appendChild(mkEmpty("まだポストがない","投稿ボタンから投稿すると、ここに並ぶよ。","post"));else list.forEach(p=>{if(!p.mine&&p.rped){const w=document.createElement("div");w.className="rpwrap";w.appendChild(rpHeadEl("なお"));w.appendChild(postEl(p,false));box.appendChild(w);}else box.appendChild(postEl(p,false));});}
  else if(meTab==="reply"){const reps=S.posts.filter(p=>p.mine&&p.isReply);box.appendChild(tabHead("返信",reps.length+" 件"));if(!reps.length){box.appendChild(mkEmpty("返信ポストはまだない","誰かのポストに返信すると、ここに表示されるよ。","reply"));box.appendChild(tabDoor());}else reps.forEach(p=>box.appendChild(postEl(p,false)));}
  else if(meTab==="media"){const imgs=[];S.posts.filter(p=>p.mine&&p.img).forEach(p=>{if(!imgs.includes(p.img))imgs.push(p.img);});ME_MEDIA.forEach(u=>{if(!imgs.includes(u))imgs.push(u);});box.appendChild(tabHead("メディア",imgs.length+" 枚"));box.appendChild(mediaGrid(imgs,"nao"));}
