@@ -2830,7 +2830,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v333</p>
+  <p class="ver">v334</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +3004,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v333</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v334</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3276,7 +3276,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v333</p>
+    <p class="ver">v334</p>
   </div>
 </section>
 </div>
@@ -3834,15 +3834,15 @@ const BUZZ=[
 {k:"h-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。あの子、隠しごとが下手なだけだと思う",lk:520,rp:54,rc:41},
 {k:"h-f13",a:"fan2",cond:s=>s.ch>=6&&s.dist>=25,tx:"報道から少し経った。彼のコメント欄、荒れるかと思ったけど、古参が先に『ここは歌を聴く場所』って言い始めて、思ったより静かだ。……この界隈、こういうところがある",lk:720,rp:96,rc:84},
  {k:"h-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、サビで一気に駆け出す感じが癖になる。最年長メンバーの声、安定感が違う",lk:210,rp:18,rc:9},
- {k:"h-s2",a:"fan2",cond:s=>s.flm>=12,img:"assets/nao-hiroto-conveni2.jpg",tx:"なおの投稿、ひろとの動きとタイミング被りすぎ問題。偶然にしては多くない？",lk:388,rp:66,rc:92},
+ {k:"h-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、ひろとの動きとタイミング被りすぎ問題。偶然にしては多くない？",lk:388,rp:66,rc:92},
  {k:"h-s1",a:"matome",cond:s=>s.dist>=15,img:"assets/nao-hiroto-station2.jpg",tx:"新人・なおの投稿に、井汲大翔ファン界隈がざわつき始めた。『距離、近くない？』の声",lk:1120,rp:240,rc:188},
  {k:"h-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワー、また増えてる…！ デビュー初日から見てるけど、見つかっていく過程に立ち会えるの嬉しい",lk:96,rp:8,rc:14},
- {k:"h-s3",a:"sora",cond:s=>s.flm>=20,img:"assets/nao-hiroto-back.jpg",tx:"音楽の話がしたいのに、界隈は匂わせ探しで大盛り上がり。……いやまず歌を聴こうよ",lk:264,rp:31,rc:18},
+ {k:"h-s3",a:"sora",cond:s=>s.flm>=20,tx:"音楽の話がしたいのに、界隈は匂わせ探しで大盛り上がり。……いやまず歌を聴こうよ",lk:264,rp:31,rc:18},
  {k:"h-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「カバー切り抜き」が連日じわ伸び。歌いながら隣を助ける余裕に、注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"h-a1",a:"matome",cond:s=>s.flm>=30,img:"assets/nao-hiroto-train.jpg",tx:"【ざわつき】新人・なお、またも“偶然”が重なる。匂わせか天然か、界隈で論争に発展",lk:1980,rp:430,rc:355},
  {k:"h-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"正直、最初は様子見だった。でも歌番組の生歌で完全に落ちた。なお、推せる",lk:154,rp:12,rc:21},
  {k:"h-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は全然違うからな。なおはどっち側で残るか見もの",lk:512,rp:88,rc:140},
- {k:"h-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-hiroto-car.jpg",tx:"新人・なお、騒ぎの大きさが実力の評価に追いつき始めた。事務所の対応に注目が集まる",lk:2760,rp:590,rc:470},
+ {k:"h-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-hiroto-conveni2.jpg",tx:"新人・なお、騒ぎの大きさが実力の評価に追いつき始めた。事務所の対応に注目が集まる",lk:2760,rp:590,rc:470},
  {k:"h-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-hiroto-hug.jpg",tx:"【決定的】新人・なおと井汲大翔、深夜の住宅街で抱擁する姿が撮られたと報じられる。拡散が止まらない",lk:3400,rp:760,rc:590},
  {k:"h-a5",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-hotel.jpg",tx:"【特大報】井汲大翔と新人・なお、都内ホテルから出てくる姿が報じられる。事務所の正式コメントに注目が集まる",lk:4300,rp:1020,rc:810},
  {k:"h-a6",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-doorway.jpg",tx:"【続報】井汲大翔と新人・なお、深夜の玄関先で彼女が彼のジャケットを掴んで離さない姿が撮られたと報じられる。帰り際の数秒が、界隈を眠らせない",lk:4900,rp:1180,rc:940},
@@ -3882,15 +3882,15 @@ const BUZZ_S=[
 {k:"s-r1",a:"fan2",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"発表で盛り上がってるけど、例の誤投稿のスクショ、まだ持ってる人いるよね。サクヤさんとの距離、あれは近すぎた",lk:480,rp:66,rc:52},
 {k:"s-r2",a:"fan1",cond:s=>s.ch>=6&&(s.posts||[]).some(p=>p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),tx:"例の誤爆、今見返すと人間らしくて好きだったな。いいねしたサクヤさんも含めて",lk:520,rp:54,rc:41},
  {k:"s-w1",a:"sora",cond:s=>s.cog>=15,tx:"なおの『The Chase』、夢みたいなイントロから駆け出す感じが最高。最年長メンバーの声、芯がある",lk:210,rp:18,rc:9},
- {k:"s-s2",a:"fan2",cond:s=>s.flm>=12,img:"assets/nao-sakuya-mansion.jpg",tx:"なおの投稿、サクヤの動きとタイミング被りすぎ問題。同じ事務所でも、これは多くない？",lk:388,rp:66,rc:92},
+ {k:"s-s2",a:"fan2",cond:s=>s.flm>=12,tx:"なおの投稿、サクヤの動きとタイミング被りすぎ問題。同じ事務所でも、これは多くない？",lk:388,rp:66,rc:92},
  {k:"s-s1",a:"matome",cond:s=>s.dist>=15,tx:"新人・なおとNCT WISH サクヤ、同じ事務所の先輩後輩の距離感に界隈がざわつき始めた",lk:1120,rp:240,rc:188,img:"assets/nao-sakuya-sighting.jpg"},
  {k:"s-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
- {k:"s-s3",a:"sora",cond:s=>s.flm>=20,img:"assets/nao-sakuya-back.jpg",tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
+ {k:"s-s3",a:"sora",cond:s=>s.flm>=20,tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
  {k:"s-s4",a:"fan2",cond:s=>s.dist>=25,img:"assets/nao-sakuya-van.jpg",tx:"深夜、SMの社屋前でサクヤとなおが同じバンに乗り込むとこ見たって写真、回ってきた…。二人ともフード被ってたけど、笑い合ってた。仕事だよね、仕事…？",lk:860,rp:150,rc:230},
  {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「カバー切り抜き」が連日じわ伸び。先輩・サクヤの「☁️」リプにも注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"s-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。事務所の後輩という立場も相まって、論争に発展",lk:1980,rp:430,rc:355,img:"assets/nao-sakuya-conveni.jpg"},
  {k:"s-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"様子見してたけど、歌番組の生歌で落ちた。なおの声、現場だとさらに化ける",lk:154,rp:12,rc:21},
- {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,img:"assets/nao-sakuya-train.jpg",tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
+ {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
  {k:"s-a3",a:"matome",cond:s=>s.flm>=45,img:"assets/nao-sakuya-car.jpg",tx:"新人・なお、騒ぎの大きさが実力に追いつき始めた。同じ事務所の先輩との距離も含め、対応に注目集まる",lk:2760,rp:590,rc:470},
  {k:"s-a4",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-hug.jpg",tx:"【決定的】NCT WISH サクヤと新人・なお、深夜の宿舎前で抱擁する姿が撮られたと報じられる。同じ事務所の先輩後輩という説明では収まらない距離感に、韓国でも拡散が始まった",lk:3400,rp:760,rc:590},
  {k:"s-a5",a:"matome",cond:s=>s.flm>=50,img:"assets/nao-sakuya-elevator.jpg",tx:"【続報】NCT WISH サクヤと新人・なお、深夜のエレベーターホールで彼の腕の中に収まる姿が撮られたと報じられる。同じ事務所の先輩後輩、という言葉の賞味期限が切れた",lk:3900,rp:920,rc:730},
