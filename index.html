@@ -569,7 +569,6 @@ input,textarea{font-size:16px}
 #scr-ending .end-panel .erow.fol{animation-delay:.44s}
 #scr-ending .end-panel .erow.fire{animation-delay:.64s}
 #scr-ending .end-panel .erow.dist{animation-delay:.74s}
-#scr-ending .end-chg{animation:fadeup .45s ease .84s both}
 .end-card{width:100%;background:rgba(8,8,16,.55);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:16px 17px;margin:16px 0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-align:left;animation:fadeup .5s ease .12s both}
 #end-body{color:#e8ebee;font-size:14.5px;line-height:1.9;white-space:pre-wrap;margin:0}
 .end-panel{width:100%;background:linear-gradient(180deg,rgba(23,23,36,.92),rgba(12,12,20,.95));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:15px 16px 12px;box-shadow:0 18px 40px rgba(0,0,0,.45);text-align:left;animation:fadeup .5s ease .22s both}
@@ -588,7 +587,6 @@ input,textarea{font-size:16px}
 .erow.fire b{color:#ff9d94}
 .erow.dist .egauge i{background:linear-gradient(90deg,#7856ff,#f91880)}
 .erow.dist b{color:#ff8ac2}
-.end-chg{display:block;width:100%;margin-top:9px;background:none;border:none;border-top:1px solid rgba(255,255,255,.09);padding:12px 0 3px;color:#4cc3ff;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;text-align:left}
 #scr-ending .btn{margin-top:18px;flex:none}
 #scr-ending .ver{color:rgba(255,255,255,.35)}
 /* ===== v25: notifications panel + explore/trends overhaul ===== */
@@ -947,7 +945,6 @@ input,textarea{font-size:16px}
 .erow b{font-size:20px;letter-spacing:.01em}
 .erow.fol b{font-size:26px}
 .erow .egauge{height:7px}
-.end-chg{margin-top:10px;padding:13px 0 4px}
 #scr-ending .btn{margin-top:20px}
 /* ===== v50: type scale unification (same role = same size / leading) ===== */
 /* screen & panel titles: appbar/notif titles already sit at 16.5px */
@@ -2210,9 +2207,6 @@ input,textarea{font-size:16px}
 .ec-title{font-size:21px;font-weight:900;line-height:1.55;letter-spacing:.06em;color:#fff;margin-top:11px;text-shadow:0 3px 18px rgba(0,0,0,.6)}
 .ec-sub{font-size:9.5px;font-weight:800;letter-spacing:.3em;text-indent:.3em;color:#9aa0a6;margin-top:9px}
 .ec-rows{margin:20px auto 0;max-width:302px;text-align:left}
-#btn-end-journey{margin-bottom:10px}
-#btn-end-log{margin-bottom:10px}
-#btn-end-copy{margin-bottom:10px}
 .ec-row{display:flex;align-items:baseline;gap:12px;padding:7.5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .ec-row span{font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#8a94a6;flex:none;width:97px;white-space:nowrap}
 .ec-row b{font-size:13px;font-weight:800;color:#e7e9ea;margin-left:auto;text-align:right}
@@ -2830,7 +2824,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v337</p>
+  <p class="ver">v338</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3004,7 +2998,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v337</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v338</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3254,7 +3248,6 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
       <div class="ej-strip-wrap" id="ej-strip-wrap" style="display:none"><div class="ej-strip-h"><span>HIGHLIGHTS</span><small>6日間の写真</small></div><div class="ej-strip" id="ej-strip"></div></div>
     </div>
-      <button type="button" class="end-chg" id="btn-end-chg">これまでの Changes を見る ▸</button>
     </div>
     <div class="end-credits" id="end-credits">
       <div class="ec-rule" aria-hidden="true"></div>
@@ -3270,13 +3263,10 @@ input,textarea{font-size:16px}
         <div class="ec-row"><span>変化の総数</span><b id="ec-changes"></b></div>
       </div>
       <p class="ec-fin">― FIN ―</p>
-      <button class="btn ghost" id="btn-end-journey" type="button">6日間のあゆみを見る</button>
-      <button class="btn ghost" id="btn-end-log" type="button">変化の記録を STATUS LOG で見る</button>
-      <button class="btn ghost" id="btn-end-copy" type="button">最終結果をテキストでコピー</button>
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v337</p>
+    <p class="ver">v338</p>
   </div>
 </section>
 </div>
@@ -6075,7 +6065,6 @@ const askReset=()=>{const s=$("#scrim-reset");if(s){s.classList.remove("closing"
 $("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-restart").onclick=askReset;
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
-$("#btn-end-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 (function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});})();
 /* v175: save portability - export downloads the stored save as a
    JSON file; import validates the shape minimally (the same fields
@@ -6128,16 +6117,6 @@ function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML=
   box.appendChild(row);}}
 (function(){const jb=$("#set-journey");if(jb)jb.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});})();
 $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
-/* v192: the ending screen opens the JOURNEY sheet too - the
-   scrims live outside the screens, so it layers over the ending */
-$("#btn-end-journey").addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});
-/* v227: the ending also links straight to the STATUS LOG,
-   completing the triangle with the RESULT (v226) and the
-   journey sheet's per-day links (v208) */
-$("#btn-end-log").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
-/* v196: the ending's final result as copyable text (title read
-   back from the screen itself, stats from the state) */
-$("#btn-end-copy").addEventListener("click",()=>{const b=$("#btn-end-copy");if(!navigator.clipboard||!navigator.clipboard.writeText)return;const si=distStageIdx();const txt="『デビューしたら、彼と同じステージの件』ENDING ― "+(($("#end-title")||{}).textContent||"")+"\nフォロワー "+fmt(S.fol)+" ／ Lv "+lvNum()+"・"+lvTitle()+"\n認知度 "+S.cog+" ／ 炎上度 "+S.flm+" ／ "+distLab()+" "+S.dist+"（STAGE "+(si+1)+"「"+DIST_STAGES[si].lab+"」）"+"\nhttps://v5m44g26fb-sudo.github.io/hiroto-status/";navigator.clipboard.writeText(txt).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";setTimeout(()=>{b.textContent=old;},1600);}).catch(()=>{});});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
    pointer-events:none in CSS, so nothing here can block the title. */
