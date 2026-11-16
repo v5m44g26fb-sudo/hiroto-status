@@ -2698,3 +2698,10 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - 実装メモ：STORY_BASE の新規4エントリは fxcheck の img 列を不変に保つため img: リテラルを持たず imgs のみで構成（storyBaseForBase は imgs[day-1] を優先し day は6以下にクランプされるため img フォールバックは未使用）
 - IMG_DIMS に新規24点の実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v437 統一
 - 検証：Playwright実駆動（/tmp/verify437.py）。両ルートで新4人の写真6日分・字幕（caps／capsH 切替）・Day7字幕を照合、ビューア実表示でジュウンDay1・イアンDay7を確認、両ルート通し→FIN到達、エラー0。なお Day7 のチェーン側イアン（STORY_CHAIN2 post Day4「今日のレッスン、オンニと一緒だった」）は従来から存在する別エントリで、ベース側とは独立
+
+## v438（2026-11-17）是正：みく Day1 がゆな Day1 と同一写真だった問題
+本人の実機指摘（みく Day1 と ゆな Day1 が両方とも pin-cafe-coffee で、別人が同じ日に同じ写真を上げている状態）への対応。
+- 退避済みアセットと未使用プールを確認したが、字幕（サクヤ編「デビュー、おめでとう…！」／ひろと編「ついにデビューの日」）に合う物はなかった（退避分は井汲のデスク・配信系とツーショ系、プール残は gen-hiroto-after-selfie のみ）。本人の補足指示により Pinterest 調達に切替え
+- みくは架空の幼なじみのため人物写真は使わず、物撮りから選定：pin-miku-d1.jpg（手に持ったパステルカラーのお祝いブーケ、白壁背景、人物なし。i.pinimg.com の 736×1104）を STORY_BASE.miku.imgs[0] に配分。ゆな Day1 は pin-cafe-coffee のまま不変で、重複を解消
+- IMG_DIMS に実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v438 統一
+- 検証：Playwright実駆動（/tmp/verify438.py）。storyBaseFor で miku Day1=pin-miku-d1・fan1 Day1 と相違を確認、ビューア実表示で背景差し替えを確認、ひろと編通し→FIN到達、エラー0
