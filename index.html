@@ -2924,7 +2924,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v413</p>
+  <p class="ver">v414</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3104,7 +3104,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v413</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v414</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3374,7 +3374,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v413</p>
+    <p class="ver">v414</p>
   </div>
 </section>
 </div>
@@ -6652,7 +6652,19 @@ function bgmStop(){
 function titleOn(){var t=document.getElementById("scr-title");return !!(t&&t.classList.contains("on"));}
 function bgmSync(){if(on&&titleOn()&&!document.hidden)bgmStart();else bgmStop();}
 /* --- wiring: gestures unlock audio; delegation plays the SE set --- */
-document.addEventListener("pointerdown",function(){if(on){ac();bgmSync();}},{passive:true});
+var gestured=false;
+document.addEventListener("pointerdown",function(){gestured=true;if(on){ac();bgmSync();}},{passive:true});
+/* v414: the story page sound belongs to the page turn only - a hold
+   (pause) or a drag (dismiss / snap-back) ends in a click event too,
+   but nothing turned, so it must stay silent. Track the zone press
+   here in the sound module; the viewer's own handlers are untouched. */
+var svDownT=0,svDownX=0,svDownY=0,svMoved=false;
+document.addEventListener("pointerdown",function(e){
+  if(e.target&&e.target.closest&&e.target.closest("#sv-next,#sv-prev")){svDownT=Date.now();svDownX=e.clientX;svDownY=e.clientY;svMoved=false;}
+},true);
+document.addEventListener("pointermove",function(e){
+  if(svDownT&&Math.hypot(e.clientX-svDownX,e.clientY-svDownY)>24)svMoved=true;
+},{passive:true});
 document.addEventListener("click",function(e){
   if(!on)return;ac();
   var t=e.target;if(!t||!t.closest)return;
@@ -6662,8 +6674,13 @@ document.addEventListener("click",function(e){
   var xp=t.closest("#xc-post");
   if(xp){if(!xp.disabled)Snd.send();return;}
   if(t.closest(".dm-send")||t.closest("#sv-send")){Snd.send();return;}
-  if(t.closest("#sv-next")||t.closest("#sv-prev")||t.closest("#sv-segs")){Snd.story();return;}
+  if(t.closest("#sv-next")||t.closest("#sv-prev")){var held=svDownT?(Date.now()-svDownT):0;var dragged=svMoved;svDownT=0;svMoved=false;if(held<300&&!dragged)Snd.story();return;}
+  if(t.closest("#sv-segs")){Snd.story();return;}
   if(t.closest(".opt")){Snd.sel();return;}
+  /* v414: the game's choice cards (compose options, event / activity
+     choices, DM replies) are selections, not plain taps - give them
+     the same two-note select sound the setup cards already had */
+  if(t.closest(".xcopt")||t.closest(".choice")||t.closest(".dmchoice")){Snd.sel();return;}
   if(t.closest("button")){Snd.tap();return;}
 },true);
 document.addEventListener("visibilitychange",function(){if(document.hidden)bgmStop();else bgmSync();});
@@ -6675,11 +6692,13 @@ var du=document.getElementById("dmunlock");
 if(du&&window.MutationObserver)new MutationObserver(function(){
   if(du.classList.contains("on"))Snd.dm();
 }).observe(du,{attributes:true,attributeFilter:["class"]});
-/* notification badge increments -> notify sound */
+/* notification badge increments -> notify sound (v414: only after
+   the first real gesture - a badge restored from a save on reload
+   must not chime back at the first tap) */
 var bn=document.getElementById("x-bell-n"),lastN=0;
 if(bn&&window.MutationObserver)new MutationObserver(function(){
   var n=parseInt(bn.textContent||"0",10)||0;
-  if(n>lastN&&(bn.style.display!=="none"))Snd.ntf();
+  if(n>lastN&&gestured&&(bn.style.display!=="none"))Snd.ntf();
   lastN=n;
 }).observe(bn,{childList:true,characterData:true,attributes:true,attributeFilter:["style"],subtree:true});
 /* settings switch */
