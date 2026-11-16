@@ -300,7 +300,7 @@ input,textarea{font-size:16px}
 .statbox small{color:#536471;display:block;font-size:12px}.statbox b{font-size:19px}
 .statbox.distbox{border-color:#f91880;background:rgba(249,24,128,.05);grid-column:1/-1}
 .gauge{height:8px;border-radius:4px;background:#eff3f4;margin-top:8px;overflow:hidden}
-.gauge i{display:block;height:100%;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:4px}
+.gauge i{display:block;height:100%;background:linear-gradient(90deg,#7856ff,#f91880);border-radius:4px;transition:width .5s ease}
 .dmrow{display:flex;gap:11px;padding:13px 15px;border-bottom:1px solid #eff3f4;width:100%;text-align:left;align-items:center;background:#fff;border:none;cursor:pointer;font-family:inherit;transition:background .15s ease}
 .dmrow:active{background:#f7f9f9}
 .dmrow .pv{color:#536471;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2934,7 +2934,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v415</p>
+  <p class="ver">v416</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3114,7 +3114,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v415</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v416</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3384,7 +3384,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v415</p>
+    <p class="ver">v416</p>
   </div>
 </section>
 </div>
@@ -4429,7 +4429,7 @@ function showPane(k){
  $("#threadbar").style.display=k==="thread"?"block":"none";
  if(k!=="thread")$$("#x-nav button").forEach(b=>b.classList.toggle("sel",b.dataset.pane===k||(k==="tl"&&b.dataset.pane==="home")));
  $("#x-scroll").scrollTop=0;
- if(k==="me"){renderProfile();renderMeTab();}
+ if(k==="me"){profFolArm=true;renderProfile();renderMeTab();}
  if(k==="trend"||k==="search")renderTrends();
  if(k==="hisprof")renderHisTab();
  if(k==="msg"){renderDmList();setTimeout(maybeShowDmUnlock,80);}
@@ -5932,11 +5932,21 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
    setTimeout(()=>{t.msgs.push(c.r);applyFx(c.fx);if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},780);};cb.appendChild(b);});}}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
 /* profile */
+let profFolSeen=null,profFolTok=0,profFolArm=false;
 function renderProfile(){if(!S||!S.started)return;
  renderTargetProfile();
  $("#prof-handle").textContent=S.handle;
  $("#prof-bio").textContent="「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。コンセプト："+stanceObj().t+"。";
- $("#x-fol-n").textContent=fmt(S.fol);$("#st-fol").textContent=fmt(S.fol);
+ /* v416: the profile's follower figures count up like the HUD's -
+    but only on the pane-open render (armed by showPane) and only
+    when the number moved since the profile was last shown; every
+    other render sets them instantly, exactly like the real client */
+ {const fv=S.fol,tg=[$("#x-fol-n"),$("#st-fol")];
+  if(profFolArm){profFolArm=false;
+   if(profFolSeen!==null&&profFolSeen!==fv){const from=profFolSeen,tok=++profFolTok,t0=performance.now();const step=t=>{if(tok!==profFolTok)return;const k=Math.max(0,Math.min(1,(t-t0)/650));const v=Math.round(from+(fv-from)*(1-Math.pow(1-k,3)));tg.forEach(e=>{if(e)e.textContent=fmt(v);});if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}
+   else tg.forEach(e=>{if(e)e.textContent=fmt(fv);});
+   profFolSeen=fv;}
+  else tg.forEach(e=>{if(e)e.textContent=fmt(fv);});}
  const svD=$("#set-sv-day");if(svD){const rkEl=$("#set-ranks");if(rkEl&&!rkEl.childElementCount){for(let i=0;i<5;i++){const s=document.createElement("span");s.className="how-rank";s.innerHTML="<small>Lv "+(i+1)+(i===4?"+":"")+"</small>";const b=document.createElement("b");b.textContent=lvTitle(i+1);s.appendChild(b);rkEl.appendChild(s);}}
  /* v178: the distance stages join the how-to panel, rendered from
     DIST_STAGES itself so the help can never drift from the game */
@@ -5993,7 +6003,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-xptext"))el("#hud-xptext").textContent=lv>=5?("累計 "+S.xp+" XP"):("あと "+(50-inLv)+" XP（累計 "+S.xp+" XP）");
  if(el("#hud-xpfill"))el("#hud-xpfill").style.width=(inLv/50*100)+"%";
  /* v117: followers count between values (same final figure) */
- {const fe=el("#hud-fol");if(fe){if(hudFolShown===null||hudFolShown===S.fol){fe.textContent=fmt(S.fol);hudFolShown=S.fol;}else{const from=hudFolShown,to=S.fol,tok=++hudFolTok,t0=performance.now();hudFolShown=S.fol;const step=t=>{if(tok!==hudFolTok)return;const k=Math.min(1,(t-t0)/650);fe.textContent=fmt(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}}}
+ {const fe=el("#hud-fol");if(fe){if(hudFolShown===null||hudFolShown===S.fol){fe.textContent=fmt(S.fol);hudFolShown=S.fol;}else{const from=hudFolShown,to=S.fol,tok=++hudFolTok,t0=performance.now();hudFolShown=S.fol;const step=t=>{if(tok!==hudFolTok)return;const k=Math.max(0,Math.min(1,(t-t0)/650));fe.textContent=fmt(Math.round(from+(to-from)*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(step);};requestAnimationFrame(step);}}}
  const used=[S.posted,S.evDone,S.actDone].filter(Boolean).length,remain=3-used;
  /* v205: the standing tutorial line leaves the card (the how-to
     lives in Settings); the note only appears in the one state it
@@ -6074,7 +6084,7 @@ function dayDeltas(){const agg={fol:0,xp:0,cog:0,flm:0,dist:0};let lvup=0;const 
   if(e.name===dl)agg.dist+=e.v;else if(e.name==="フォロワー")agg.fol+=e.v;else if(e.name==="XP")agg.xp+=e.v;else if(e.name==="世間の認知度")agg.cog+=e.v;else if(e.name==="炎上度")agg.flm+=e.v;});
  return{agg,lvup};}
 function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
- function step(t){const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3),v=Math.round(from+(to-from)*e);el.textContent=useFmt?fmt(v):String(v);if(p<1)requestAnimationFrame(step);}
+ function step(t){const p=Math.max(0,Math.min(1,(t-t0)/dur)),e=1-Math.pow(1-p,3),v=Math.round(from+(to-from)*e);el.textContent=useFmt?fmt(v):String(v);if(p<1)requestAnimationFrame(step);}
  requestAnimationFrame(step);}
 let drsText="";
 function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
@@ -6231,7 +6241,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  if(tp[1]){const ts=document.createElement("span");ts.className="et-sub";ts.textContent=tp[1];th.appendChild(ts);}
  $("#end-body").textContent=body;
  /* v114: the follower count counts up to the same final figure */
- {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.min(1,(t-t0)/850);folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
+ {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.max(0,Math.min(1,(t-t0)/850));folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
  $("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
  $("#end-lv").textContent="Lv "+lvNum()+"・"+lvTitle();
  $("#end-cog-g").style.width=S.cog+"%";$("#end-flm-g").style.width=S.flm+"%";$("#end-dist-g").style.width=S.dist+"%";
