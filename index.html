@@ -2883,7 +2883,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v406</p>
+  <p class="ver">v407</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3063,7 +3063,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v406</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v407</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3333,7 +3333,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v406</p>
+    <p class="ver">v407</p>
   </div>
 </section>
 </div>
@@ -4071,6 +4071,19 @@ function linkifyTx(el,text,passive){
  plain(text.slice(last));
 }
 function fmtCnt(n){n=+n||0;if(n>=10000){const v=n/10000;return (v>=100?String(Math.round(v)):v.toFixed(1).replace(/\.0$/,""))+"\u4e07";}return n.toLocaleString("ja-JP");}
+/* v407 (X realism - post times): every post id minted by mkPost carries
+   its real creation time (Date.now in base36), so the feed can show the
+   real-X relative clock instead of a blanket "now": under a minute is
+   "now", then minutes, then hours, and past a day the calendar date -
+   exactly the JP client's ladder. Other people's posts are nudged back
+   by a stable per-id offset (0-179 min) so a chapter's seeds, minted in
+   the same instant, still read as a lived-in timeline; her own posts
+   keep the true elapsed time so a fresh post really does say "now".
+   Display-time derivation only - p.tm and the save are untouched. */
+function postBorn(p){const m=/-([0-9a-z]+)$/.exec(String(p&&p.id||""));if(!m)return 0;const t=parseInt(m[1],36);return(t>1e12&&t<Date.now()+6e4)?t:0;}
+function postOff(p){let h=0;const s=String(p&&p.id||"");for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return(h%180)*60000;}
+function postEff(p){const b=postBorn(p);return b?b-(p.mine?0:postOff(p)):0;}
+function postTime(p){const e=postEff(p);if(!e)return p.tm||"今";let ms=Date.now()-e;if(ms<0)ms=0;const min=Math.floor(ms/60000);if(min<1)return "今";if(min<60)return min+"分";const hr=Math.floor(min/60);if(hr<24)return hr+"時間";const d=new Date(e),nw=new Date(),md=(d.getMonth()+1)+"月"+d.getDate()+"日";return d.getFullYear()===nw.getFullYear()?md:d.getFullYear()+"年"+md;}
 /* v89: find the quoted original for a post, if one unambiguously exists:
    a bracketed fragment of 5+ chars that appears verbatim in one of her
    own posts. Returns a display snapshot or null. */
@@ -4124,7 +4137,7 @@ function postEl(p,hot){
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
-  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(p.tm||"\u4eca")+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
+  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(postTime(p))+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
     +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'" alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
@@ -4766,7 +4779,7 @@ document.addEventListener("keydown",e=>{if(!$("#storyviewer").classList.contains
    the info block reuses the post's own author / text / counts. ===== */
 let pvSet=[],pvIdx=0;
 function pvItemFromPost(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
- return{src:p.img,name:p.n,handle:p.h,av:p.av||null,pid:p.id||null,cap:dispTx(p.t||""),date:p.tm||"",meta:"返信 "+fmtCnt(num(0))+" ・ リポスト "+fmtCnt(num(1))+" ・ いいね "+fmtCnt(num(2))};}
+ return{src:p.img,name:p.n,handle:p.h,av:p.av||null,pid:p.id||null,cap:dispTx(p.t||""),date:postTime(p),meta:"返信 "+fmtCnt(num(0))+" ・ リポスト "+fmtCnt(num(1))+" ・ いいね "+fmtCnt(num(2))};}
 function openPostPhoto(p){
  const list=(S?S.posts:[]).filter(x=>x&&x.img&&!x.isReply);
  let idx=list.findIndex(x=>x.id===p.id);
