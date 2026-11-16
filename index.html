@@ -2934,7 +2934,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v429</p>
+  <p class="ver">v430</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3114,7 +3114,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v429</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v430</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3384,7 +3384,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v429</p>
+    <p class="ver">v430</p>
   </div>
 </section>
 </div>
@@ -3790,6 +3790,17 @@ function openPostMenu(p,el){
  }
  $("#scrim-pmenu").classList.add("on");
 }
+/* v430: intrinsic size of every bundled photo. Post images carry an
+   inline aspect-ratio so the browser reserves the exact box (width
+   100% x ratio, capped by the existing max-height) before the file
+   arrives - a photo finishing mid-scroll no longer shoves the posts
+   below it down (measured +218px on a 5s-delayed load). NOTE: width/
+   height attributes are NOT used - in Chromium they act as definite
+   dimensions (height 804px -> clamped to the 400px max-height) and
+   change the final box; inline aspect-ratio leaves it identical. */
+const IMG_DIMS={"av-akari.jpg":[512,512],"av-ana.jpg":[512,512],"av-carmen.jpg":[512,512],"av-fan1.jpg":[512,512],"av-fan2.jpg":[512,512],"av-ian.jpg":[512,512],"av-juun.jpg":[512,512],"av-matome.jpg":[512,512],"av-media.jpg":[512,512],"av-miku.jpg":[512,512],"av-mina.jpg":[512,512],"av-sea.jpg":[512,512],"av-sora.jpg":[512,512],"av-staff.jpg":[512,512],"av-stella.jpg":[512,512],"av-yeon.jpg":[512,512],"av-yuha.jpg":[512,512],"gen-hiroto-after-desk.jpg":[1152,2048],"gen-hiroto-after-selfie.jpg":[1152,2048],"gen-hiroto-collage.jpg":[1206,804],"gen-hiroto-desk.jpg":[1206,804],"gen-hiroto-live.jpg":[1206,804],"gen-hiroto-stream-selfie.jpg":[1206,804],"gen-miku-station.jpg":[1152,2048],"gen-nao-day6-rain.jpg":[1152,2048],"gen-nikuman.jpg":[1206,804],"gen-sakuya-collage.jpg":[1206,603],"gen-story-news.jpg":[1280,1920],"gen-story-stream.jpg":[1344,1792],"gen-story-watch.jpg":[1280,1920],"gen-tv-capture.jpg":[1206,804],"ig-avatar.jpg":[150,150],"ig-gen-stage.jpg":[1280,1722],"nao-avatar4.jpg":[800,800],"nao-backstage-selfie.jpg":[1184,2096],"nao-cafe2.jpg":[1080,1911],"nao-concept.jpg":[1206,1809],"nao-hiroto-conveni2.jpg":[1206,804],"nao-hiroto-doorway.jpg":[1206,1622],"nao-hiroto-hotel.jpg":[1206,804],"nao-hiroto-hug.jpg":[1206,804],"nao-hiroto-mirror.jpg":[1206,1599],"nao-hiroto-mispost.jpg":[1206,1622],"nao-hiroto-station2.jpg":[1206,1622],"nao-hiroto-taiyaki.jpg":[1206,804],"nao-lesson.jpg":[1184,2096],"nao-makeup.jpg":[1184,2096],"nao-promo.jpg":[1184,2096],"nao-rec.jpg":[1184,2096],"nao-sakuya-backstage.jpg":[1206,1599],"nao-sakuya-elevator.jpg":[1206,804],"nao-sakuya-hug.jpg":[1206,1633],"nao-sakuya-lobby.jpg":[1206,804],"nao-sakuya-mispost.jpg":[1206,1599],"nao-sakuya-sighting.jpg":[1206,910],"nao-sakuya-sofa.jpg":[1206,1599],"nao-sakuya-studio.jpg":[1206,804],"nao-sakuya-van.jpg":[1206,804],"nao-stage-ballad.jpg":[1184,2096],"nao-stage-confetti.jpg":[1184,2096],"nao-stage-dance.jpg":[1184,2096],"nao-stage-sailor.jpg":[1184,2096],"nao-stage.jpg":[1184,2096],"nao-story-cafe.jpg":[1184,2096],"nao-story-heart.jpg":[1184,2096],"nao-story-night.jpg":[1184,2096],"nao-story-towel.jpg":[1184,2096],"nao-stream-selfie.jpg":[1184,2096],"night.jpg":[750,1000],"pin-cafe-cake.jpg":[736,981],"pin-cafe-coffee.jpg":[735,918],"pin-cafe-onion.jpg":[735,981],"pin-dance.jpg":[736,1275],"pin-group.jpg":[736,920],"pin-karina.jpg":[736,981],"pin-makeup.jpg":[736,1169],"pin-mina.jpg":[736,862],"pin-night.jpg":[736,1308],"pin-rack.jpg":[736,981],"pin-sakuya-bouquet.jpg":[736,981],"pin-studio-booth.jpg":[735,1031],"pin-studio-console.jpg":[736,981],"pin-studio.jpg":[736,981],"sakuya-av.jpg":[480,480],"sakuya-bmg.jpg":[900,675],"sakuya-cover.jpg":[1200,900],"sakuya-selca.jpg":[640,800],"sakuya-stage.jpg":[800,800]};
+function imgDimAttrs(src){const d=src&&IMG_DIMS[String(src).split("/").pop()];return d?' style="aspect-ratio:'+d[0]+' / '+d[1]+'"':"";}
+function imgAR(src){const d=src&&IMG_DIMS[String(src).split("/").pop()];return d?d[0]+" / "+d[1]:"";}
 function postEl(p,hot){
   const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" loading="lazy" decoding="async" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
@@ -3797,7 +3808,7 @@ function postEl(p,hot){
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
   d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(postTime(p))+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
-    +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'" alt="">':"")
+    +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'"'+imgDimAttrs(p.img)+' alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
     +cnt("rp-btn",XIC9.rp,rp+(p.rped?1:0))
@@ -4204,7 +4215,11 @@ let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0,svDrag
 function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":" unseen")+(e.k==="nao"?" mine":"");b.setAttribute("aria-label",e.lab+"のストーリー");/* v278 (photo realism): like the real thing, every ring -
    hers included - shows the account's avatar, not a story
    photo thumbnail */
- const ringImg=a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});}
+ const ringImg=a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});
+ /* v430: warm the first stories' photos while she is still reading
+    the feed - a ~600KB story photo on a slow link otherwise lands
+    after its 5s segment has already moved on */
+ try{const pre=new Set();storyList().forEach(e=>{if(e.img)pre.add(e.img);});[...pre].slice(0,3).forEach(svPreload);}catch(_){}}
 /* v107: stories belong to the people at the centre of the story only -
    her, the Hearts2Hearts members, the target, the first follower, Miku
    and Yuna. Wire, programme, staff and stranger accounts never post
@@ -4327,9 +4342,14 @@ function addStory(kind){
  if(changed){renderStories();save();}
 }
 function svHue(name){let h=0;for(const c of name)h=(h*31+c.charCodeAt(0))%360;return h;}
+/* v430: story photo preloader (cache warm only; no behaviour change) */
+const SV_PRE=new Set();
+function svPreload(src){if(!src||SV_PRE.has(src))return;SV_PRE.add(src);const i=new Image();i.src=src;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
 function renderStorySeg(){
  const e=storyList()[svIdx];if(!e)return;const a=ACC[e.k];if(!a)return;
+ /* v430: keep one segment ahead of the viewer */
+ try{const nx=storyList()[svIdx+1];if(nx)svPreload(nx.img);}catch(_){}
  const bg=$("#sv-bg"),img=e.img;
  /* v290 (user's device report): EVERY story photo is full-bleed
     cover, edge to edge, exactly like the real Stories viewer -
@@ -5327,9 +5347,9 @@ const XC_MAX=140,XC_CIRC=56.5,XC_PLACEHOLDER="data:image/gif;base64,R0lGODlhAQAB
 $("#xc-pimg").addEventListener("click",()=>{if(!xcSel||!xcSel.img)return;try{openPhoto([{src:xcSel.img,name:"なお",handle:S?S.handle:"",av:(ACC.nao&&ACC.nao.av)||null,cap:xcSel.tx||"",date:"下書き",meta:""}],0);}catch(_){}});
 function xcRenderDraft(){
  const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg"),pw=$("#xc-pwrap"),cd=$(".xc-card");
- if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pw)pw.classList.add("hidden");if(pi)pi.src=XC_PLACEHOLDER;if(cd)cd.classList.remove("loaded");return;}
+ if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pw)pw.classList.add("hidden");if(pi){pi.style.aspectRatio="";pi.src=XC_PLACEHOLDER;}if(cd)cd.classList.remove("loaded");return;}
  linkifyTx(pv,xcSel.tx,true);pv.classList.remove("empty");pv.classList.remove("swap");void pv.offsetWidth;pv.classList.add("swap");btn.disabled=xcBusy;btn.classList.remove("ready");void btn.offsetWidth;btn.classList.add("ready");
- if(pi&&pw){if(xcSel.img){pi.src=xcSel.img;pw.classList.remove("hidden");}else{pw.classList.add("hidden");pi.src=XC_PLACEHOLDER;}}
+ if(pi&&pw){if(xcSel.img){pi.style.aspectRatio=imgAR(xcSel.img);pi.src=xcSel.img;pw.classList.remove("hidden");}else{pw.classList.add("hidden");pi.style.aspectRatio="";pi.src=XC_PLACEHOLDER;}}
  if(cd)cd.classList.add("loaded");
  const len=[...xcSel.tx.replace(/\n/g,"")].length;
  cnt.textContent=String(len);cnt.className="xc-count"+(len>XC_MAX?" over":(len>XC_MAX-20?" warn":""));
