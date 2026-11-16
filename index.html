@@ -1071,6 +1071,8 @@ input,textarea{font-size:16px}
 #dayintro.on,#dayresult.on{display:flex}
 #dayintro{background:radial-gradient(120% 90% at 50% -10%,#31125e 0%,#141b42 52%,#070818 100%);align-items:center;justify-content:center;text-align:center;cursor:pointer;overflow:hidden;animation:difade .3s ease}
 @keyframes difade{from{opacity:0}to{opacity:1}}
+@keyframes difadeout{from{opacity:1}to{opacity:0}}
+#dayintro.closing,#dayresult.closing{animation:difadeout .18s ease forwards}
 #dayintro .di-big{position:absolute;right:-14px;bottom:-64px;font-size:300px;font-weight:900;font-style:italic;line-height:1;color:rgba(255,255,255,.05);pointer-events:none}
 #dayintro .di-inner{position:relative;padding:0 34px;display:flex;flex-direction:column;align-items:center}
 #dayintro .di-lab{font-size:11px;font-weight:900;letter-spacing:.42em;color:#ffb3d1;animation:diup .6s cubic-bezier(.2,.8,.25,1) both}
@@ -2922,7 +2924,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v412</p>
+  <p class="ver">v413</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3102,7 +3104,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v412</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v413</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3372,7 +3374,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v412</p>
+    <p class="ver">v413</p>
   </div>
 </section>
 </div>
@@ -6029,7 +6031,7 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
    ending a Day first lands on a Status-style RESULT screen. The result is
    summed from the day's own chgLog entries (already recorded per action),
    so numbers and the save format are untouched - presentation only. */
-let diTimer=null;
+let diTimer=null,diHideTimer=null;
 const DI_BG={1:"assets/nao-concept.jpg",2:"assets/nao-stage-ballad.jpg",3:"assets/nao-stage-sailor.jpg",4:"assets/nao-rec.jpg",5:"assets/nao-stage-confetti.jpg",6:"assets/nao-stage-dance.jpg",7:"assets/nao-story-cafe.jpg"};
 function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#di-day","DAY "+S.ch);set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
@@ -6047,9 +6049,9 @@ function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.d
  const dbg=$("#di-bg");if(dbg)dbg.src=DI_BG[S.ch]||DI_BG[1];
  const dd=$("#di-dots");if(dd){if(dd.children.length!==totalDays()){dd.innerHTML="";for(let i=0;i<totalDays();i++)dd.appendChild(document.createElement("i"));}[...dd.children].forEach((el,i)=>el.classList.toggle("on",i<S.ch));}
  const diEl=$("#dayintro");if(diEl)diEl.classList.toggle("final",S.ch>=TOTAL_DAYS);
- const ov=$("#dayintro");ov.classList.remove("on");void ov.offsetWidth;ov.classList.add("on");
+ const ov=$("#dayintro");clearTimeout(diHideTimer);ov.classList.remove("on","closing");void ov.offsetWidth;ov.classList.add("on");
  clearTimeout(diTimer);diTimer=setTimeout(hideDayIntro,2800);}
-function hideDayIntro(){clearTimeout(diTimer);const ov=$("#dayintro");if(ov)ov.classList.remove("on");}
+function hideDayIntro(){clearTimeout(diTimer);const ov=$("#dayintro");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");clearTimeout(diHideTimer);diHideTimer=setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");},185);}
 $("#dayintro").addEventListener("click",hideDayIntro);
 function dayDeltas(){const agg={fol:0,xp:0,cog:0,flm:0,dist:0};let lvup=0;const dl=distLab();
  (S.chgLog||[]).filter(e=>e.day===S.ch).forEach(e=>{
@@ -6124,8 +6126,8 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  if(window.__D7&&__D7.active&&S.ch===7){goM.textContent="FINへ";goS.textContent="その後の1日を終えて";}
  else if(S.ch>=TOTAL_DAYS){goM.textContent="エンディングへ";goS.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
  else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
- $("#dayresult").classList.add("on");}
-$("#dr-go").addEventListener("click",()=>{$("#dayresult").classList.remove("on");if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}});
+ $("#dayresult").classList.remove("closing");$("#dayresult").classList.add("on");}
+$("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
 /* v226: the RESULT screen links onward to the full record too -
    the scrims layer over it, like they do over the ending (v192) */

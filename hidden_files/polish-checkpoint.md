@@ -2494,3 +2494,11 @@ DMスレッドのヘッダー名とイントロカードの名前に認証バッ
 - 照合：fx194・img79・cond81・BUZZキー111 完全一致（テキストと表示数字のみの是正、写真割り当て・条件は不変）。版数表示3箇所を v412 に更新
 - 検証：Playwright実駆動で両ルート通し（ひろと編＝乗り越えたEND／サクヤ編＝コラボEND）→Day7→FIN到達、是正4件をデータ断言で確認、ワールド選択は1枚、エラー0。駆動 /tmp/drive_v412.py
 - 据え置き（観察のみ・本ラウンドでは触れていない）：サクヤ編Day4シード写真（nao-sakuya-studio.jpg）と「内緒です」の組み合わせ、Day7サクヤ編collabバナーの「同じステージに立った余韻」等の言及は、いずれも書き換え前からの表現で過去の写真監査・Day7監査を通過済み
+
+## v413（2026-11-17未明）体感・演出の仕上げラウンド・パス1：全画面オーバーレイの閉じフェード
+実駆動の事前監査で、Dayイントロ（#dayintro）とDayリザルト（#dayresult）だけが「開く時はフェードイン（difade .3s）なのに、閉じる時は .on を外した瞬間に display:none で忽然と消える」非対称を確認（シート類・コンポーズ・通知は v46 系で .closing の閉じアニメ済み）。両オーバーレイにスクリムと同じ流儀の閉じフェードを追加：
+- CSS：@keyframes difadeout ＋ #dayintro.closing／#dayresult.closing（.18s ease forwards）。ID+クラスで基底の difade より優先
+- hideDayIntro()：即非表示をやめ、.closing を付けて185ms後に .on/.closing を外す（多重呼び出し・閉じ中の再クリックはガード）。showDayIntro() 側は再表示時に diHideTimer を破棄し .closing も外してから開き直す（値比較ではなくクラス状態で制御、残留なし）
+- #dr-go：クリックで .closing を付けて180ms後に従来の分岐（Day7 FIN／エンディング／次日 startChapter）をそのまま実行。フェードが次画面の上に薄く重なって消えるクロスフェードになる（#dayresult は DOM 後方で #dayintro より上に描画される）
+- 照合：fx194・img79・cond81・BUZZキー111 完全一致。版数表示3箇所を v413 に更新
+- 検証：Playwright実駆動でフェードを実測（イントロ：クリック70ms後に opacity 0.53・display flex のまま→330msで display none。リザルト：70ms後に .closing＋opacity 低下中→次日 Day3 へ進行し次日イントロが表示）。サクヤ編通しでエンディング到達、エラー0。駆動 /tmp/verify413.py・/tmp/verify413b.py
