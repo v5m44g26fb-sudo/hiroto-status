@@ -2552,3 +2552,46 @@ v398のサウンドを実駆動で全数計測（__snd.played）して仕上げ�
 - v424 ブロック6：Day7 全8通り（banner/seeds/FF/Event/posts/章DM＝ポスターがまだ貼ってある話/DM4）。ひろと collab は BGM ではなく「観たいステージがある」の漏れに統一、サクヤ collab Event は食堂の約束がレッスン室で果たされる形に。SAKUYA_SEED も新背骨へ整合
 - v425：サクヤのストーリー字幕 capS を新背骨に整合（v424 のコミットに混ぜ損ねた分の回収）
 - 全パスで fx194・img79・cond81・BUZZキー111 完全一致。旧背骨マーカー（10年の軌跡／駄菓子屋／検証スレ／その話は、ここではしません／ずっと前から／配信の一言／上のフロア／昨日の歌／帰り道の空／雲ひとつない／内緒です／メロンパン／肉まん被り／ハモリ／夕方の光／リハの空／内緒の準備中）はファイル全域で 0 件
+- v426 専用返信パス（本人の明確化「各投稿に合わせた返信だよ？」への対応）：返信の付け方を「投稿ごとに専用の返信（reps）を持つ」形へ全面移行。attachReps ヘルパーを新設し、種ポスト全49件（CH 25＋CH_S 24）／EV_GLOW 全12件／BUZZ 全81件（BUZZ 44＋BUZZ_S 37）／FF 18件（FF・FF2・FF3・FF5・FF6S・FF6H × first 3名）／Day7種ポスト 18件＋Day7 FF 15通り（first×kind のルックアップ表）に、親ポストの具体を受ける手書き返信を付与。汎用プールのシード（seedTopReplies）は冒頭 return で引退させ、TOP_REPLIES は死にデータとして残置（プレイヤー返信への反応 REPLY_REACT／tcScheduleReaction はゲーム内メカニックとして維持）。あわせて FF2 の旧背骨文言3件（sea「ダイジェストの1年目の子」／mina「挨拶の一節」／akari「挨拶の言葉」）を新背骨へ是正。fx194・img79・cond81・BUZZキー111 完全一致。両ルート全6日のスレッド監査（audit2.py）を実駆動で実施し、親ポスト→返信者→返信内容の整合と汎用プール文の残存0件を確認
+- v427 呼称ルールの是正：v426 の監査で見つかった「サクヤさん」2件（ジウの返信、CH_S Day4 種ポスト返信と Day6 発表ポスト返信）を「サクヤ先輩」へ是正し、全域0件の維持条件（サクヤさん／大翔さん／井汲さん／ひろとさん）を回復。あわせて禁止形・旧背骨マーカーの全域走査を実施し、該当0件を確認（「軌跡」はエンディングの JOURNEY パネル見出し「6日間の軌跡」の UI ラベルのみ）
+
+## ストーリー写真の棚卸し（2026-11-17未明、本人の指示「いくみの写真もう少し欲しい？ストーリー用。あと、他の子も毎日写真替えて」）
+枠数は増やさない前提で、ベースストーリー（毎日表示される本人の枠、STORY_BASE／NAO_STORY）とチェーンストーリー（STORY_CHAIN／CHAIN2）を全量棚卸しした。Day7 のベースストーリーは v371 の設計で Day6 と同写真・字幕のみ差分（storyBaseFor の表 T も新背骨に整合済みで旧背骨の残存なし）。
+
+### ベースストーリー Day1〜6 の写真（使い回しのある枠）
+- なお本人：Day1〜6 すべて別写真（問題なし）
+- 井汲大翔（ひろと編 tgt）：D1 gen-hiroto-stream-selfie／D2 gen-hiroto-after-desk／D3 gen-story-stream／**D4 gen-story-stream（D3と同一）**／D5 gen-hiroto-after-selfie／**D6 未設定（配列が5件しかなく、D1の写真にフォールバック表示）**
+- サクヤ（サクヤ編 tgt）：D1 sakuya-stage／D2 sakuya-bmg／D3 sakuya-cover／D4 sakuya-selca／D5 pin-sakuya-bouquet／**D6 未設定（D1の写真にフォールバック表示）**
+- カリナ（sea）：imgs 配列がなく **全6日 pin-karina.jpg の同一写真**
+- ミナ（mina）：imgs 配列がなく **全6日 pin-mina.jpg の同一写真**
+- ゆな（fan1）：D1 pin-cafe-coffee／**D2 pin-cafe-coffee**／D3 pin-cafe-cake／**D4 pin-cafe-cake**／**D5 pin-cafe-cake**／D6 pin-night（コーヒー×2・ケーキ×3）
+- みく（miku）：D1 pin-cafe-coffee／D2 pin-cafe-cake／D3 gen-miku-station／**D4 pin-cafe-coffee（D1と同一）**／**D5 pin-cafe-cake（D2と同一）**／D6 pin-night
+- ジウ（akari）：D1 pin-group／D2 pin-studio-console／D3 pin-makeup／D4 pin-rack／D5 pin-studio／**D6 pin-makeup（D3と同一）**
+- カルメン・イェオン：本人内では全日別写真（問題なし。ただし pin-* の風景写真はメンバー間で共有されている）
+
+### チェーンストーリーの使い回し（参考）
+- ひろと：gen-story-stream が彼の枠で計5回（ベースD3・D4＋チェーン post D2・event D2・event D6）。event D6 の字幕は「20時から、配信します」
+- サクヤ：event D2 と event D6 が同じ sakuya-bmg（ベースD2とも同一）
+
+## 本人への依頼リスト（ストーリー写真、2026-11-17追加）
+生成はいつもの方式（別チャットで生成→このチャットに貼付）でお願いします。枠数は増やさず、既存枠の差し替え用です。
+1. 【優先】井汲大翔・Day4ベースストーリー用：配信まわりの新しいカット 1枚（例：配信デスクの別アングル、マイクとモニターの灯り。現状は Day3 と同じ gen-story-stream の使い回し）
+2. 【優先】井汲大翔・Day6ベースストーリー用：最終日の1枚 1枚（例：配信前の静かな自撮り、窓辺の夜景バック等。現状は写真が未設定で Day1 の写真が表示されている）
+3. サクヤ・Day6ベースストーリー用：1枚（現状は未設定で Day1 の写真が表示されている）
+4. ゆな・Day2／Day4／Day5用：カフェ系の別カット 3枚（現状コーヒー×2日・ケーキ×3日）
+5. みく・Day4／Day5用：2枚（現状 Day1／Day2 と同じカフェ写真）
+6. ジウ・Day6用：1枚（現状 Day3 と同じ pin-makeup）
+7. カリナ・Day2〜6用：5枚（現状は全日同一写真。最初のフォロワーにカリナを選んだ場合のみ表示される枠）
+8. ミナ・Day2〜6用：5枚（同上、ミナを選んだ場合のみ）
+9. 【任意】井汲大翔・チェーン event Day6「20時から、配信します」用：配信カット 1枚（gen-story-stream の登場回数を減らすため）
+10. 【任意】なお・Day7用：1枚（現状は設計上 Day6 と同じ写真。Day7 も新しい絵にしたい場合のみ）
+
+## 最終回帰（v427、2026-11-17未明）＋第3回完了
+最終回帰（/tmp/rw3/final.py を再構築して実施。全5ラン＋セーブ復帰チェック）：
+- hiroto-best：Day6後 fol 709,201／cog 100／flm 5／dist 88 → 乗り越えたEND「消えなかった件」→ Day7 → FIN 表示。セーブ復帰チェック：Day2終了後にリロード→「つづきから」表示あり、復帰後も S.ch=3 を維持
+- sakuya-best：Day6後 fol 709,201／cog 100／flm 5／dist 88 → コラボEND「同じステージの件」→ Day7 → FIN 表示
+- hiroto-flame（Day5誤爆＋flm steer）：Day6後 flm 67／dist 93 → 炎上END「燃えてしまった件」→ Day7 → FIN 表示
+- sakuya-quiet（fol/dist/cog steer）：静かなEND「いちばん近くの件」→ Day7 → FIN 表示
+- hiroto-start（同上）：これからEND「まだ始まったばかりの件」→ Day7 → FIN 表示
+- 全ラン ERRORS: []。fx194・img79・cond81・BUZZキー111 は v426／v427 とも完全一致
+- 以上で全文書き換え第3回（v417〜v427）は完了。現行 v427
