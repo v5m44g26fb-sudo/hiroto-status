@@ -2512,3 +2512,11 @@ v398のサウンドを実駆動で全数計測（__snd.played）して仕上げ�
 - 照合：fx194・img79・cond81・BUZZキー111 完全一致。版数表示3箇所を v414 に更新
 - 検証：Playwright実駆動で上記すべてを計測確認、エラー0。駆動 /tmp/verify414.py
 - ※push は GitHub 側の接続リセット（Recv failure）が継続中のため v413・v414 ともローカルコミット止まり。復旧次第まとめて push する
+
+## v415（2026-11-17未明）体感・演出の仕上げラウンド・パス3：ストーリービューアの体感
+実駆動の事前監査で見つけた3件を是正：
+- **写真のズームがセグメントより長い**：Ken Burns（.sv-bg.kb）とカード写真（.sv-photo）のアニメーションが 5.8s で、セグメント尺 SV_DUR=5000ms より長く、送られる瞬間にズームが必ず未完だった。両方を 5s に揃え、ズームの完了と送りが一致するようにした（実測：animationDuration=5s）
+- **返信入力中はプログレスだけ止まって写真が進む**：入力フォーカスで svPaused=true になりバーは凍るのに、.typing には animation-play-state の指定がなく背景ズームが進み続けていた（実測で currentTime が増え続けるのを確認）。#storyviewer.typing の .sv-bg／.sv-photo にも paused と同じ play-state を付与（クロームを消す .paused と違い、返信バーは残す v268 の分離は維持）。実測：入力中は currentTime が 133→133 で凍結
+- **ビューアの閉じが即消え**：✕／自動送りの最後／Esc の closeStory が .on を外して即 display:none だった。v413 と同じ流儀で .closing フェード（svout .17s）を追加し、175ms後に隠す。ドラッグ閉じは既にインラインスタイルでフェード済みのため、opacity が "0" の時は即時完了する分岐にして二重フェード（透明→1に戻る閃き）を回避。開き直し時は svHideTimer 破棄＋.closing 除去
+- 照合：fx194・img79・cond81・BUZZキー111 完全一致。版数表示3箇所を v415 に更新
+- 検証：Playwright実駆動で上記実測＋自動送り（5.4sで次へ）＋play_day 回帰、エラー0。駆動 /tmp/verify415.py

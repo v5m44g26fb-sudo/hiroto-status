@@ -1797,12 +1797,12 @@ input,textarea{font-size:16px}
 .sv-ring .ava-txt{font-size:12.5px}
 .sv-close{background:rgba(10,12,16,.42);border:1px solid rgba(255,255,255,.28);width:35px;height:35px;padding:0;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .sv-close svg{width:18px;height:18px}
-.sv-bg.kb{animation:svkb 5.8s ease-out both}
+.sv-bg.kb{animation:svkb 5s ease-out both}
 @keyframes svkb{from{transform:scale(1.03)}to{transform:scale(1.10)}}
 .sv-bg.blur{filter:blur(26px) brightness(.70) saturate(1.2);transform:scale(1.28)}
 #storyviewer.paused .sv-bg{animation-play-state:paused}
 .sv-center .ava-txt{box-shadow:0 0 0 3px rgba(255,255,255,.85),0 18px 44px rgba(0,0,0,.45)}
-.sv-photo{width:min(80vw,320px);animation:svcard 5.8s ease-out both}
+.sv-photo{width:min(80vw,320px);animation:svcard 5s ease-out both}
 @keyframes svcard{0%{opacity:0;transform:scale(.94) translateY(10px)}12%{opacity:1;transform:scale(1) translateY(0)}100%{transform:scale(1.045) translateY(0)}}
 #storyviewer.paused .sv-photo{animation-play-state:paused}
 /* v267: captions clear the whole bottom layer (reactions row +
@@ -1818,6 +1818,16 @@ input,textarea{font-size:16px}
    the reply bar itself stays visible while she writes. */
 .sv-top,.sv-actions,.sv-replybar,.sv-cap{transition:opacity .18s ease}
 #storyviewer.paused .sv-pause{opacity:0}
+/* v415: typing a reply freezes the progress bar (svPaused) - the
+   photo's own motion must freeze with it, or the zoom runs ahead
+   of the bar. Same play-state treatment as .paused, without the
+   chrome fade (the reply bar stays up while she writes). */
+#storyviewer.typing .sv-bg,#storyviewer.typing .sv-photo{animation-play-state:paused}
+/* v415: closing fades out like the other overlays instead of
+   vanishing; the drag-dismiss path already faded via inline
+   styles and skips this (see closeStory) */
+@keyframes svout{to{opacity:0}}
+#storyviewer.closing{animation:svout .17s ease forwards}
 #storyviewer.paused .sv-top,#storyviewer.paused .sv-actions,#storyviewer.paused .sv-replybar,#storyviewer.paused .sv-cap{opacity:0}
 #storyviewer.paused .sv-bg{opacity:1}
 .sv-actions{position:absolute;right:14px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:6;display:flex;align-items:center;gap:10px}
@@ -2924,7 +2934,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v414</p>
+  <p class="ver">v415</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3104,7 +3114,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v414</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v415</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3374,7 +3384,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v414</p>
+    <p class="ver">v415</p>
   </div>
 </section>
 </div>
@@ -4788,8 +4798,13 @@ function svStep(d){
  else{if(svIdx<=0){svElapsed=0;svStartTimer();return;}svIdx--;}
  renderStorySeg();svStartTimer();
 }
-function openStory(i){closeNotif();svIdx=Math.max(0,Math.min(storyList().length-1,i||0));$("#storyviewer").classList.add("on");renderStorySeg();svStartTimer();}
-function closeStory(){svStopTimer();svPaused=false;const v=$("#storyviewer");v.classList.remove("on");v.classList.remove("paused");v.style.transform="";v.style.opacity="";v.style.transition="";renderStories();}
+function openStory(i){closeNotif();clearTimeout(svHideTimer);const vw=$("#storyviewer");vw.classList.remove("closing");svIdx=Math.max(0,Math.min(storyList().length-1,i||0));vw.classList.add("on");renderStorySeg();svStartTimer();}
+let svHideTimer=null;
+function closeStory(){svStopTimer();svPaused=false;const v=$("#storyviewer");if(!v.classList.contains("on")||v.classList.contains("closing"))return;
+ /* the drag-dismiss path already faded the viewer out with inline
+    styles - finish at once there instead of re-fading from 1 */
+ if(v.style.opacity==="0"){v.classList.remove("on");v.classList.remove("paused");v.style.transform="";v.style.opacity="";v.style.transition="";renderStories();return;}
+ v.classList.add("closing");clearTimeout(svHideTimer);svHideTimer=setTimeout(()=>{v.classList.remove("on");v.classList.remove("paused");v.classList.remove("closing");v.style.transform="";v.style.opacity="";v.style.transition="";renderStories();},175);}
 $("#sv-close").addEventListener("click",closeStory);
 $("#sv-id").addEventListener("click",()=>{const _e=storyList()[svIdx];const a=_e&&_e.k;if(a!==tgtKey()&&a!=="nao")return;closeStory();showPane(a==="nao"?"me":"hisprof");});
 function svZone(el,dir){if(!el)return;
