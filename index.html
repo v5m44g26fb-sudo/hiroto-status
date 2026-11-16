@@ -1443,7 +1443,7 @@ input,textarea{font-size:16px}
 .msg.me.grp{border-top-right-radius:5px}
 .msgmeta{display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .msgmeta::before{content:"";width:11px;height:11px;background:#1d9bf0;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%)}
-/* v372: like real X, the partner's avatar sits at the foot of the
+/* v373: like real X, the partner's avatar sits at the foot of the
    last bubble of each of their groups; their column shifts right
    to make room for it */
 #th-msgs .msg.them{position:relative;margin-left:48px}
@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v372</p>
+  <p class="ver">v373</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v372</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v373</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v372</p>
+    <p class="ver">v373</p>
   </div>
 </section>
 </div>
@@ -4211,6 +4211,7 @@ const FOL_MULT=400;
    constant. Saves written by the five-day version keep working: a
    save parked at the old final day simply gains its Day 6. */
 const TOTAL_DAYS=6;
+function totalDays(){return (window.__D7&&(__D7.active||__D7.done))?7:TOTAL_DAYS;}
 /* v145: level carries a rank title and a small engagement bonus.
    Bands are calibrated on measured XP (both routes share the same XP
    skeleton: standard play totals ~192 XP, best ~227, worst ~158):
@@ -4499,7 +4500,7 @@ function storyBaseForBase(k,day){day=Math.min(day,6);
  const b=STORY_BASE[k];if(!b)return{img:svImg(k),cap:""};
  const caps=(tgtKey()==="hiroto"&&b.capsH)?b.capsH:b.caps;
  return{img:(b.imgs&&b.imgs[day-1])||b.img,cap:caps[day-1]||caps[0]||""};}
-/* v372: on Day 7 the base stories keep their Day 6 photos (same
+/* v373: on Day 7 the base stories keep their Day 6 photos (same
    people, same scenes) but the captions must belong to the morning
    after - "発表の日" / "報道の日" / "今日、発表です" cannot stand
    on the day after. Captions only; the frame count is unchanged. */
@@ -5473,7 +5474,7 @@ function startChapter(n){
   sea:{tx:"なおちゃん、ステージおつかれさま。練習生の頃から見てきた人が、大きなステージで堂々と歌ってるの、感慨深かったよ。……やっとだね。ごはんちゃんと食べて、体調管理もしっかりね。",lk:3908,rp:640,rc:88},
   akari:{tx:"なおオンニ、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
  }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
- /* v372 (episode): the first follower also checks in on the
+ /* v373 (episode): the first follower also checks in on the
     mornings of Day 2 and Day 5, filling the silent stretch
     between Day 1 and Day 4 / Day 6 - same slot, same display-only
     numbers, each in their own voice. No fx, no branching. */
@@ -5504,7 +5505,7 @@ function startChapter(n){
  const FF6=(tgtKey()==="hiroto"?FF6H:FF6S)[S.first];if(FF6)sd.unshift(mkPost(S.first,FF6.tx,FF6.lk,FF6.rp,FF6.rc,false,null));}
  S.posts=sd.concat(S.posts.filter(p=>p.mine));
  renderDayBanner();
- $("#x-head-note").textContent="Day "+n+" / "+TOTAL_DAYS+"";
+ $("#x-head-note").textContent="Day "+n+" / "+totalDays()+"";
  if(ch.dm)S.threads.unshift({id:"fan"+n,who:ch.dm.who,msgs:ch.dm.msgs.slice(),choices:ch.dm.choices,done:false,unread:true,replyIdx:-1});
  const TDM=TARGET_DMS[tgtKey()];
  if(n>=4&&TDM&&S.hirotoDm==="locked"&&S.dist>=10){
@@ -5555,7 +5556,7 @@ function checkNext(){try{renderHud();}catch(_){}$("#btn-nextday").style.display=
  /* v140: the dock button names its destination (same words as the
     RESULT screen's destination bar) instead of a bare label */
  const nm=$("#next-main"),ns=$("#next-sub");
- if(S.ch>=TOTAL_DAYS){if(nm)nm.textContent="エンディングへ";if(ns)ns.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
+ if(S.ch>=TOTAL_DAYS){if(nm)nm.textContent="エンディングへ";if(ns)ns.textContent=totalDays()+"日間の物語の結末へ";}
  else{if(nm)nm.textContent="次の日へ";if(ns){const nx=curCH()[S.ch];ns.textContent=nx?("Day "+(S.ch+1)+" ― "+(nx.day||"").split(" ― ").slice(1).join(" ― ")):"";}}}
 $("#btn-nextday").onclick=()=>{showDayResult();};
 /* compose (real-X flow): tap a draft choice to load it into the composer like
@@ -5587,7 +5588,7 @@ function xcCloseSheet(done){
 $("#x-compose-btn").addEventListener("click",()=>{
  if(S.posted){toastChg("今日の投稿は完了してるよ");return;}
  xcSel=null;xcBusy=false;xcRenderDraft();
- $("#xc-day").textContent="Day "+S.ch+" / "+TOTAL_DAYS+"";
+ $("#xc-day").textContent="Day "+S.ch+" / "+totalDays()+"";
  $("#xc-handle").textContent=S.handle||"";
  const box=$("#postopts");box.innerHTML="";
  curCH()[S.ch-1].posts.forEach((o,oi)=>{const b=document.createElement("button");b.className="choice xcopt";
@@ -5641,7 +5642,7 @@ $("#btn-activity").onclick=()=>{
  go.classList.add("hidden");go.disabled=true;go.classList.remove("running");go.textContent="この内容で実行する";
  $("#actsec-title").classList.remove("hidden");
  actStage(S.actDone?2:1);
- $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+TOTAL_DAYS+" ・ "+(S.actDone?"今日の分は完了":"あと1回だけ実行できる");
+ $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+totalDays()+" ・ "+(S.actDone?"今日の分は完了":"あと1回だけ実行できる");
  if(S.actDone){$("#actsec-title").classList.add("hidden");res.textContent="今日のActivityはもう済んでるよ。";res.classList.add("done");}
  else curCH()[S.ch-1].activity.forEach((o,oi)=>{
   const b=document.createElement("button");b.className="choice actopt";const chips=fxChips(o.fx);b.innerHTML='<span class="actopt-no">'+(oi+1)+'</span><span class="actopt-main"><span class="actopt-tx"></span>'+(chips?'<span class="actopt-chips">'+chips+"</span>":"")+'</span><span class="actopt-check">✓</span>';b.querySelector(".actopt-tx").textContent=o.t;
@@ -5683,7 +5684,7 @@ $("#btn-activity").onclick=()=>{
     cw.appendChild(c);});
    if(mp.every(m=>m[1])){const al=document.createElement("span");al.className="ap-all";al.textContent="全部完了 ― おつかれさま";prog.appendChild(al);}}
    res.classList.add("show","done");
-   $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+TOTAL_DAYS+" ・ 今日の分は完了";
+   $("#act-today").textContent="TODAY ― Day "+S.ch+" / "+totalDays()+" ・ 今日の分は完了";
    applyFx(o.fx);addStory("act");save();
   },580);
  };
@@ -5792,12 +5793,12 @@ function renderProfile(){if(!S||!S.started)return;
  /* v225: the how-to tables mark where she currently stands -
     the chips are built once, the marker re-syncs every render */
  if(rkEl)$$("#set-ranks .how-rank").forEach((el,i)=>el.classList.toggle("now",i===lvNum()-1));
- if(stgEl)$$("#set-stages .how-rank").forEach((el,i)=>el.classList.toggle("now",i===distStageIdx()));svD.textContent="Day "+S.ch+" / "+TOTAL_DAYS;$("#set-sv-lv").textContent="Lv "+lvNum()+"・"+lvTitle();$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
+ if(stgEl)$$("#set-stages .how-rank").forEach((el,i)=>el.classList.toggle("now",i===distStageIdx()));svD.textContent="Day "+S.ch+" / "+totalDays();$("#set-sv-lv").textContent="Lv "+lvNum()+"・"+lvTitle();$("#set-sv-fol").textContent=fmt(S.fol);$("#set-sv-distlab").textContent=tgt().short+"との距離";$("#set-sv-dist").textContent=S.dist;const sg=$("#set-sv-segs");sg.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";sg.appendChild(i);}}
  const fw=$("#x-folwing-n");if(fw)fw.textContent=42+(S.followHiroto?1:0);
  $("#st-cog").textContent=S.cog;$("#st-flm").textContent=S.flm;$("#st-dist").textContent=S.dist;$("#dist-gauge").style.width=S.dist+"%";
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=lvNum()+"・"+lvTitle();
  const lvN=1+Math.floor(S.xp/50),usedN=[S.posted,S.evDone,S.actDone].filter(Boolean).length,setT=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- setT("#me-cov-day","DAY "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+TOTAL_DAYS+"");setT("#me-now-act","残り "+(3-usedN));setT("#me-rank",lvTitle(lvN));
+ setT("#me-cov-day","DAY "+S.ch+" / "+totalDays()+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+totalDays()+"");setT("#me-now-act","残り "+(3-usedN));setT("#me-rank",lvTitle(lvN));
  renderRep();renderHud();}
 /* v44: reputation - how the world currently sees her, derived from the axes */
 function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
@@ -5852,7 +5853,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#btn-activity"))el("#btn-activity").classList.toggle("done",!!S.actDone);
  /* v140: day-dock strip + activity sub-label (display only, read from
     the same state as the HUD) */
- if(el("#dock-day"))el("#dock-day").textContent="DAY "+S.ch+" / "+TOTAL_DAYS;
+ if(el("#dock-day"))el("#dock-day").textContent="DAY "+S.ch+" / "+totalDays();
  if(el("#dock-ch")){const chp=curCH()[S.ch-1];el("#dock-ch").textContent=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";}
  if(el("#dock-mission"))el("#dock-mission").textContent="MISSION "+used+" / 3";
  if(el("#act-sub"))el("#act-sub").textContent=S.actDone?"今日は完了":"あと1回";
@@ -5883,7 +5884,7 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  const bn=$("#daybanner");if(bn)bn.classList.toggle("final",S.ch>=TOTAL_DAYS);
- set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+TOTAL_DAYS+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
+ set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+totalDays()+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
  /* v91: the CHAPTER banner carries the same per-chapter photo as the
     v88 day card, dimmed under its gradient (presentation only) */
  const bgEl=$("#db-bg");if(bgEl){const src=DI_BG[S.ch]||"";if(src&&bgEl.getAttribute("src")!==src)bgEl.src=src;}
@@ -5970,14 +5971,14 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
     delta, three sub-stats and the day's best gain. Derived only. */
  const shAv=$("#drs-av");if(shAv){const src=(ACC.nao&&ACC.nao.av)||"assets/nao-avatar4.jpg";if(shAv.getAttribute("src")!==src)shAv.src=src;}
  const shSet=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- shSet("#drs-day","DAY "+S.ch+" / "+TOTAL_DAYS);
+ shSet("#drs-day","DAY "+S.ch+" / "+totalDays());
  shSet("#drs-handle",S.handle||"");
  shSet("#drs-rank","Lv "+lvNum()+"・"+lvTitle());
  shSet("#drs-fol",fmt(S.fol));
  shSet("#drs-fd","今日 "+(agg.fol>=0?"+":"−")+fmt(Math.abs(agg.fol)));
  shSet("#drs-cog",String(S.cog));shSet("#drs-dist",String(S.dist));shSet("#drs-xp",String(S.xp));
  shSet("#drs-distlab",distLab());
- const shDots=$("#drs-dots");if(shDots){shDots.innerHTML="";for(let d=1;d<=TOTAL_DAYS;d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";shDots.appendChild(i);}}
+ const shDots=$("#drs-dots");if(shDots){shDots.innerHTML="";for(let d=1;d<=totalDays();d++){const i=document.createElement("i");if(d<S.ch)i.className="done";else if(d===S.ch)i.className="now";shDots.appendChild(i);}}
  shSet("#drs-best",bestI>=0?("今日のベスト ― "+rows[bestI].lab+" +"+(rows[bestI].useFmt?fmt(bestV):bestV)):"今日のベスト ― 静かに、確かに前へ");
  /* v195: the same summary as copyable text for the button under
     the card (built from the very values the card just showed) */
@@ -6116,7 +6117,7 @@ function renderCredits(kind){
  set("#ec-changes",(S.chgLog||[]).length+" 件の Changes");
  const bc=$("#btn-continue"),br=$("#btn-reset0");
  if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
-  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+TOTAL_DAYS+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
+  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
  renderTitleSave();}
 /* v100: title save card - reads only state that already exists (day /
    chapter title / target / handle / followers / level) and promotes
@@ -6128,7 +6129,7 @@ function renderTitleSave(){
  const card=$("#tsave");if(!card||typeof S==="undefined"||!S||!S.started)return;
  const T=tgt(),ch=curCH()[S.ch-1],parts=ch?(ch.day||"").split(" ― "):[];
  const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- set("#ts-day","Day "+S.ch+" / "+TOTAL_DAYS+"");
+ set("#ts-day","Day "+S.ch+" / "+totalDays()+"");
  set("#ts-chap",parts.length>1?parts.slice(1).join(" ― "):(ch?(ch.day||""):""));
  set("#ts-target",T.short);set("#ts-handle",S.handle||"");
  set("#ts-fol",fmt(S.fol));set("#ts-lv","Lv "+lvNum()+"・"+lvTitle());
@@ -6172,14 +6173,14 @@ $("#btn-reset-yes").onclick=resetAll;
    each day's follower movement, and the day's gains are aggregated
    from the change log under dayDeltas' rules. Future days stay
    locked silhouettes - title only, no invented numbers. */
-function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML="";
+function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML="";const jh=document.querySelector("#scrim-journey h3");if(jh)jh.textContent=totalDays()+"日間のあゆみ";
  /* v228: a totals strip heads the sheet - where the run started,
     where it stands, and the distance stage it reached */
  {const jt=$("#jtotal");if(jt){const h0=(S.folHist||[])[0];const start=h0?h0.fol:1;const si=distStageIdx();
   jt.innerHTML="フォロワー <b>"+fmt(start)+" → "+fmt(S.fol)+"</b> ／ XP 累計 <b>"+S.xp+"</b> ／ "+distLab()+" <b>STAGE "+(si+1)+"「"+DIST_STAGES[si].lab+"」</b>";}}
  const CHS=curCH(),hist=S.folHist||[],dl=distLab();
  const snap=d=>{const e=hist.find(x=>x.day===d);return e?e.fol:null;};
- for(let d=1;d<=TOTAL_DAYS;d++){
+ for(let d=1;d<=totalDays();d++){
   const chp=CHS[d-1];if(!chp)continue;const parts=(chp.day||"").split(" ― ");
   const row=document.createElement("div");const st=d<S.ch?"done":d===S.ch?"now":"lock";
   row.className="jrow "+st;
@@ -6332,7 +6333,7 @@ function buildDay7Chapter(kind){
   {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
    {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
    {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
- /* v372: her Day 7 post choices must match the ending she reached.
+ /* v373: her Day 7 post choices must match the ending she reached.
     In the flame endings her public activities are suspended, so the
     forward-looking default set ("次の準備が始まっています") cannot
     stand; the sakuya quiet ending never promised a shared stage
@@ -6404,7 +6405,7 @@ function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return
  const ejt=sec.querySelector(".ej-t");if(ejt)ejt.textContent="7 DAYS JOURNEY";const ejs=$("#ej-small");if(ejs)ejs.textContent="7日間の軌跡";
  const ps=$("#end-panel-sub");if(ps)ps.textContent="7日間の成績";const rl=$("#ec-record-lab");if(rl)rl.textContent="7日間の記録";
  const es=sec.querySelector(".ec-sub");if(es)es.textContent="STATUS × X ― A SEVEN-DAY STORY";
- renderEndJourney();renderCredits(D?D.kind:"start");show("scr-ending");save();}
+ renderEndJourney();renderCredits(D?D.kind:"start");const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";show("scr-ending");save();}
 $("#btn-day7").addEventListener("click",startDay7);
 renderTrends();
 const saved=load();
@@ -6418,7 +6419,7 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
  if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
- $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+TOTAL_DAYS+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};
+ $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};
  /* v188: the title save card itself opens the JOURNEY sheet */
  const tsv=$("#tsave");if(tsv){tsv.style.cursor="pointer";tsv.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});}
  renderTitleSave();}
