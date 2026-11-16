@@ -2934,7 +2934,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v422</p>
+  <p class="ver">v423</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3114,7 +3114,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v422</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v423</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3384,7 +3384,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v422</p>
+    <p class="ver">v423</p>
   </div>
 </section>
 </div>
@@ -3471,10 +3471,7 @@ const FIRSTS=[
  {id:"akari",t:"ジウ｜Hearts2Heartsのリーダー",d:"同じグループのリーダーとして一緒にデビューした、年下の戦友。"},
  {id:"mina",t:"ミナ｜TWICEのメンバー、先輩アイドル",d:"大先輩からの、フォロー第1号。"}];
 /* welcome post each idol first-follower drops at the top of the Day 1 feed */
-const FIRST_WELCOME={
- sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。今朝の『10年の軌跡』、観ました。レッスン室の前を通るたびに聴いていた声が、やっとみんなに届きますね。無理せず、自分のペースで。また同じステージで会いましょう。",lk:3900,rp:560,rc:140},
- akari:{tx:"なお、デビューおめでとう！！ 同じHearts2Heartsのメンバーとして、ここから一緒に駆け抜けようね。最年長、頼りにしてるよ。……でも、負けないからね。",lk:1180,rp:175,rc:85},
- mina:{tx:"デビュー、おめでとうございます。歌、聴きました。……静かに、応援しています。",lk:4200,rp:610,rc:130}};
+const FIRST_WELCOME={sea:{tx:"데뷔 축하해요！ なおさん、デビューおめでとうございます。レッスン室の前を通るたびに聴いていた声が、やっとみんなに届きますね。無理せず、自分のペースで。また同じステージで会いましょう。",lk:3900,rp:560,rc:140},akari:{tx:"なお、デビューおめでとう！！ 同じHearts2Heartsのメンバーとして、ここから一緒に駆け抜けようね。最年長、頼りにしてるよ。……でも、負けないからね。",lk:1180,rp:175,rc:85},mina:{tx:"デビュー、おめでとうございます。歌、聴きました。……静かに、応援しています。",lk:4200,rp:610,rc:130}};
 </script>
 <script>
 /* chapters: seed feed, post options, event, activity, fan DM */
@@ -3499,13 +3496,13 @@ const HIROTO_DM={msgs:["井汲や。……久しぶり、やんな","デビュ�
 const SAKUYA_DM={msgs:["はじめまして、サクヤです","いきなりで、すみません。出す前に、なおさんに確認したくて","明日のポストの下書きです。「僕のほうが、後輩です。デビューは先でも、練習生の年数は変えられません」","なおさんの10年のことを、僕の言葉で言ってしまいます","……出していいか、なおさんに聞きたくて"],choices:[{t:"「そのままで、十分伝わります」と返す",r:"既読のまま、少し止まって――「……よかったです。ありがとうございます」「なおさんの10年、ちゃんと伝わるように書きます」。丁寧で、短い。でも、自分の言葉で返ってきた。",fx:{dist:10,xp:8,fol:0,cog:0,flm:0}},{t:"「……私の10年のこと、そんなふうに思ってくれてたの？」と聞く",r:"「ずっと、知っていました」。間があって、それから――「練習生の頃から、声で分かりました」「……出すのは、明日です」。――それで終わり。なのに、一日中そわそわした。",fx:{dist:12,xp:8,fol:0,cog:0,flm:0}},{t:"緊張して、丁寧すぎる長文を送ってしまう",r:"しまった、と思った直後。「大丈夫ですよ。言葉は、多いほうが伝わります」「無理せず、ゆっくりでいいですよ」。やわらかい言葉。距離が、少しだけ縮んだ音がした。",fx:{dist:9,xp:6,fol:0,cog:0,flm:1}}]};
 /* Sakuya-route ending bodies (v33); kinds/thresholds shared with the hiroto route */
 const END_S_BODY={
-collab:()=>"年末の音楽特番で、NCT WISH × Hearts2Hearts なお のスペシャルコラボステージが正式発表された。\n練習生の頃、上のフロアの人だった。デビューでは先輩になった、その人と並んで立つ。あの「内緒です」から始まった距離が、公の場で「共演」になった。10年以上越しの景色だった。\n発表ポストへのサクヤのリプは、丁寧で、少しだけ独特だった。「同じ空の下で歌う日、楽しみにしています」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「明日の朝、空の写真を送ります。……ヌナにだけ」\n憧れは、少しずつ、秘密の約束に変わっていく。",
-flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「内緒です」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。10年以上かけて、やっと立った場所だった。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。",
-quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、最終日の夜。会社の食堂で、彼が向かいの席に座って、丁寧に言った。「……今日の空みたいに、ヌナの声が好きです」\n公の場では絶対に言わない呼び方が、誰もいない食堂で、ふたりの間だけに出た。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
-start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでも、10年以上待った人間に、焦りはない。ステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n「内緒です」の相手は、まだ秘密の中。サクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
+collab:()=>"年末の音楽特番で、NCT WISH × Hearts2Hearts なお のスペシャルコラボステージが正式発表された。\n練習生の頃、遠くから見ていた人だった。デビューでは先輩になった、その人と並んで立つ。あの「僕のほうが、後輩です」から始まった距離が、公の場で「共演」になった。10年以上越しの景色だった。\n発表ポストへのサクヤのリプは、丁寧で、少しだけ独特だった。「後輩ですが、隣に立たせてください」\n――でも、その夜。DMに、公には出ない一言が届いた。\n「明日、食堂の窓側で。カフェオレ、温かいうちに。……ヌナ」\n憧れは、少しずつ、秘密の約束に変わっていく。",
+flame:hot=>"匂わせ疑惑は止まらなかった。まとめ垢の切り抜きが拡散され、謝罪ポストを出すことに。\n"+(hot?"距離が近いほど、噂は本物っぽく燃えた。「後輩です」から始まった火は、熱愛疑惑としてトレンド入りした。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n歌に戻るには、少し時間がかかりそうだ。10年以上かけて、やっと立った場所だった。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。",
+quiet:()=>"大きくはバズらなかった。フォロワーも、世間の認知も、まだ小さい。\nでも、最終日の夜。会社の食堂で、彼が向かいの席に座って、静かに言った。「後輩の僕が言うのも変ですけど。……ヌナの歌が、いちばん好きです」\n公の場では絶対に言わない呼び方が、誰もいない食堂で、ふたりの間だけに出た。\n数字にはならない距離が、ここにある。それで、今は十分だった。",
+start:()=>"バズりもしなければ、炎上もしなかった、静かなデビュー期間だった。\nでも、10年以上待った人間に、焦りはない。ステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。\n「後輩です」の真意は、まだ秘密の中。サクヤとの距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。"};
 
 
-const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 大阪","96 ポスト"],["エンタメ","井汲大翔 配信切り抜き","428 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#配信の一言","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["トレンド","井汲大翔 雑談配信","268 ポスト"],["スポーツ","プロ野球 日本シリーズ","45,210 ポスト"],["スポーツ","サッカー日本代表 親善試合","38,540 ポスト"]];
+const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","井汲大翔 大阪","96 ポスト"],["エンタメ","井汲大翔 配信切り抜き","428 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#配信の沈黙","7,540 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["トレンド","井汲大翔 雑談配信","268 ポスト"],["スポーツ","プロ野球 日本シリーズ","45,210 ポスト"],["スポーツ","サッカー日本代表 親善試合","38,540 ポスト"]];
 const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["carmen","カルメン"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
 const TARGETS={
@@ -3538,7 +3535,7 @@ const SAKUYA_SEED=[
  {tx:"今日は収録です。よろしくお願いします。楽屋のお菓子が豊作でした。……袖のモニターの前、特等席でした",lk:9870,rp:1502,rc:233},
  {tx:"スタジオで、声を重ねる練習をしました。……相手は、内緒です",lk:14230,rp:2590,rc:411},
  {tx:"朝、駅前のパン屋さん。今日は、焼きたての時間に間に合いました",lk:16780,rp:2904,rc:601}];
-const TRENDS_S=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","NCT WISH カムバ","61,204 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#上のフロア","8,120 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["スポーツ","プロ野球 日本シリーズ","45,210 ポスト"],["スポーツ","サッカー日本代表 親善試合","38,540 ポスト"]];
+const TRENDS_S=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレンド","NCT WISH カムバ","61,204 ポスト"],["エンタメ","歌うまコラボSP 噂","9,877 ポスト"],["ニュース","音楽番組 出演者発表","23,104 ポスト"],["トレンド","#何年も前の写真","8,120 ポスト"],["エンタメ","新人アイドル 歌唱力","15,209 ポスト"],["スポーツ","プロ野球 日本シリーズ","45,210 ポスト"],["スポーツ","サッカー日本代表 親善試合","38,540 ポスト"]];
 const STORY_S=[["sakuya","サクヤ"],["akari","ジウ"],["carmen","カルメン"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["nao","あなた"]];
 function tgtKey(){return (typeof S!=="undefined"&&S&&S.target)||"hiroto";}
 function tgt(){return TARGETS[tgtKey()]||TARGETS.hiroto;}
@@ -3552,7 +3549,7 @@ function curTrends(){const base=(tgtKey()==="sakuya"?TRENDS_S:TRENDS).slice();
  if(S.dist>=38&&S.ch>=4)dyn.push(sk?["エンタメ","歌うまコラボSP コラボ予告",fp(15000+S.dist*180)]:["トレンド","井汲大翔 秒速いいね",fp(15000+S.dist*180)]);
  else if(S.cog>=45)dyn.push(["エンタメ","#なお 歌唱力",fp(6000+S.cog*150)]);
  if(S.flm>=20&&S.dist>=25)dyn.push(["エンタメ",sk?"サクヤ なお 匂わせ":"井汲大翔 なお 匂わせ",fp(5000+S.flm*120+S.dist*60)]);
- const baseF=base.filter(t=>!((t[1]==="#配信の一言"||t[1]==="#上のフロア")&&S.ch<5)&&!(t[1]==="歌うまコラボSP 噂"&&S.ch<4));
+ const baseF=base.filter(t=>!((t[1]==="#配信の沈黙"||t[1]==="#何年も前の写真")&&S.ch<5)&&!(t[1]==="歌うまコラボSP 噂"&&S.ch<4));
  if(!dyn.length)return baseF;
  const used=new Set(dyn.map(t=>t[1]));
  return dyn.concat(baseF.filter(t=>!used.has(t[1]))).slice(0,9);}
@@ -3569,7 +3566,7 @@ const BUZZ=[
  {k:"h-s1",a:"matome",cond:s=>s.dist>=15,img:"assets/gen-hiroto-collage.jpg",tx:"新人・なおの投稿に、井汲大翔ファン界隈がざわつき始めた。『距離、近くない？』の声",lk:1120,rp:240,rc:188},
  {k:"h-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワー、また増えてる…！ デビュー初日から見てるけど、見つかっていく過程に立ち会えるの嬉しい",lk:96,rp:8,rc:14},
  {k:"h-s3",a:"sora",cond:s=>s.flm>=20,tx:"音楽の話がしたいのに、界隈は匂わせ探しで大盛り上がり。……いやまず歌を聴こうよ",lk:264,rp:31,rc:18},
- {k:"h-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「挨拶切り抜き」が連日じわ伸び。『誰にも聴かれずに歌っていた』の一節に、注目が集まり始めた",lk:840,rp:130,rc:64},
+ {k:"h-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「ブレス切り抜き」が連日じわ伸び。『サビ前の息づかいまで聞こえる』の一節に、注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"h-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。匂わせか天然か、界隈で論争に発展",lk:1980,rp:430,rc:355},
  {k:"h-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"正直、最初は様子見だった。でも歌番組の生歌で完全に落ちた。なお、推せる",lk:154,rp:12,rc:21},
  {k:"h-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は全然違うからな。なおはどっち側で残るか見もの",lk:512,rp:88,rc:140},
@@ -3579,7 +3576,7 @@ const BUZZ=[
  {k:"h-a6",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-doorway.jpg",tx:"【続報】井汲大翔と新人・なお、深夜の玄関先で彼女が彼のジャケットを掴んで離さない姿が撮られたと報じられる。帰り際の数秒が、界隈を眠らせない",lk:4900,rp:1180,rc:940},
  {k:"h-a7",a:"matome",cond:s=>s.flm>=60,img:"assets/nao-hiroto-mirror.jpg",tx:"【流出か】井汲大翔と新人・なおのものとされる、鏡越しのツーショット写真が拡散中。本人たちしか持ち得ないはずの一枚に、事務所は沈黙を貫く",lk:5700,rp:1420,rc:1180},
  {k:"h-f1",a:"fan2",cond:s=>s.dist>=10,tx:"ひろとのファンの反応、穏やかなのは古参が多いからだと思う。日プの頃からずっと見てる人たちだから、なおさんのことも静かに見守ってる",lk:186,rp:22,rc:31},
- {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんは歌番組、ひろとは配信。いる場所は違うのに、最近この二人の名前、並んで見ることが増えた気がする。ボイプラで落ちた日、泣いたの私だけじゃないはず。あの人の7年は、無駄じゃなかったんだな",lk:243,rp:29,rc:44},
+ {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんは歌番組、ひろとは配信。いる場所は違うのに、最近この二人の名前、並んで見ることが増えた気がする。ボイプラで落ちた日、泣いたのは俺だけじゃないはず。あの人の7年は、無駄じゃなかったんだな",lk:243,rp:29,rc:44},
  {k:"h-f10",a:"fan2",cond:s=>s.ch>=3&&s.cog>=20,tx:"正直、最初は警戒してた。ひろとの名前で伸びてる子かと思って、歌番組を確かめに行った。……10年以上、練習生をやってきた人だった。あの落ち着きは、本物だと思う",lk:268,rp:31,rc:47},
  {k:"h-f3",a:"sora",cond:s=>s.dist>=25,tx:"ひろとの現場、規模は大きくないけど熱量が別格だと思う。何度落ちても挑戦し続ける人を、何年も見てるファンがいる強さ",lk:328,rp:41,rc:26},
  /* v249 (episode): more of the world's voice, on the same ladder -
@@ -3590,7 +3587,7 @@ const BUZZ=[
  {k:"h-w6",a:"matome",cond:s=>s.fol>=120000,tx:"新人・なお、フォロワーの伸び率が歴代級と話題。歌唱動画の再生数が跳ね、海外ファンの翻訳ポストも増え始めた",lk:1530,rp:310,rc:120},
  {k:"h-j1",a:"matome",cond:s=>s.cog>=20,tx:"ハツハ唯一の日本人・なお、日本のファンも急増中。「言葉の壁を越えて歌う姿に泣いた」という現地ファンの声が、日本のまとめにも届き始めた",lk:1180,rp:260,rc:64},
  {k:"h-j2",a:"media",cond:s=>s.ch>=3&&s.cog>=25,tx:"日本の音楽メディアも注目。ハツハ唯一の日本人・なおと、大阪出身の井汲大翔。……ただ井汲の名は、彼女のファンが掘り始めたばかりで、世間にはまだ届いていない",lk:1420,rp:290,rc:88},
- {k:"h-e2",a:"fan2",cond:s=>s.ch>=4&&s.dist>=20,tx:"待って、ひろとの昔の配信で『すごい声の子がいる』って言ってたやつ、あれって、なおさんのことだったりする…？ 『ずっと前から』って、そういうこと…？",lk:480,rp:66,rc:58},
+ {k:"h-e2",a:"fan2",cond:s=>s.ch>=4&&s.dist>=20,tx:"待って、ひろとの昔の配信で『すごい声の子がいる』って言ってたやつ、あれって、なおさんのことだったりする…？ 終わる時間の件といい、昔から観てたってこと…？",lk:480,rp:66,rc:58},
  {k:"h-n1",a:"fan2",cond:s=>s.ch>=2&&s.cog>=15,tx:"ハツハの日本人枠って、話題作りには便利だよね。実力の証明はこれからでしょ",lk:96,rp:14,rc:38},
  {k:"h-n2",a:"fan2",cond:s=>s.dist>=15,tx:"ひろとの名前、最近は新人さんの話題でばっかり出る。正直、古参としてはちょっと複雑",lk:210,rp:22,rc:41},
  {k:"h-n3",a:"matome",cond:s=>s.flm>=18,tx:"新人の「匂わせ」を巡り賛否が続く。「偶然でしょ」「狙ってるようにも見える」両論を併記したまとめが静かに伸びている",lk:720,rp:120,rc:96},
@@ -3618,7 +3615,7 @@ const BUZZ_S=[
  {k:"s-w2",a:"fan1",cond:s=>s.fol>=60000,tx:"なおのフォロワーまた増えてる！ デビュー日から見届けてる身としては、もう親戚の気分",lk:96,rp:8,rc:14},
  {k:"s-s3",a:"sora",cond:s=>s.flm>=20,tx:"曲の話より匂わせ探しが盛り上がる界隈、ちょっと複雑。なおの歌、ちゃんと良いのに",lk:264,rp:31,rc:18},
  {k:"s-s4",a:"fan2",cond:s=>s.dist>=25,img:"assets/nao-sakuya-van.jpg",tx:"深夜、SMの社屋前でサクヤとなおが同じバンに乗り込むとこ見たって写真、回ってきた…。二人ともフード被ってたけど、笑い合ってた。仕事だよね、仕事…？",lk:860,rp:150,rc:230},
- {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「挨拶切り抜き」が連日じわ伸び。先輩・サクヤの「昨日の歌」ポストにも注目が集まり始めた",lk:840,rp:130,rc:64},
+ {k:"s-w3",a:"matome",cond:s=>s.cog>=25,tx:"新人・なお、「ブレス切り抜き」が連日じわ伸び。先輩・サクヤの「挨拶の練習」ポストにも注目が集まり始めた",lk:840,rp:130,rc:64},
  {k:"s-a1",a:"matome",cond:s=>s.flm>=30,tx:"【ざわつき】新人・なお、またも“偶然”が重なる。事務所の後輩という立場も相まって、論争に発展",lk:1980,rp:430,rc:355},
  {k:"s-w4",a:"fan2",cond:s=>s.ch>=3&&s.flm<25,tx:"様子見してたけど、歌番組の生歌で落ちた。なおの声、現場だとさらに化ける",lk:154,rp:12,rc:21},
  {k:"s-a2",a:"fan2",cond:s=>s.flm>=35&&s.cog>=20,tx:"匂わせで伸びる新人と、歌で伸びる新人は違う。なおはどっちで残るか、ここからが正念場",lk:512,rp:88,rc:140},
@@ -3634,7 +3631,7 @@ const BUZZ_S=[
  {k:"s-j2",a:"fan2",cond:s=>s.ch>=3&&s.dist>=20,tx:"楽屋の近くで、サクヤがなおさんに日本語で話しかけてたって。韓国で活動する日本人同士、ふっと母国語に戻る距離感、近い",lk:520,rp:64,rc:47},
  {k:"s-a1",a:"fan2",cond:s=>s.ch>=2&&s.dist>=10,tx:"同じ事務所って、社屋で普通に会うんだね。サクヤが食堂で、新人さんの隣の席を空けて待ってたって目撃談、出てる",lk:310,rp:38,rc:26},
  {k:"s-a2",a:"sora",cond:s=>s.ch>=4&&s.dist>=25,tx:"会社の前で、レッスン帰りの後輩の子にサクヤが傘を差し出してたって。同じ日本人の後輩、放っておけないんだろうな",lk:560,rp:70,rc:52},
- {k:"s-e2",a:"fan2",cond:s=>s.ch>=4&&s.dist>=20,tx:"サクヤ、練習生の頃の映像を前からよく観てたって話あるよね。『10年の軌跡』に出てた子がデビューした時、自分のことみたいに喜んでたって",lk:450,rp:58,rc:49},
+ {k:"s-e2",a:"fan2",cond:s=>s.ch>=4&&s.dist>=20,tx:"サクヤ、練習生の頃の映像を前からよく観てたって話あるよね。名前札の写真の子がデビューした時、自分のことみたいに喜んでたって",lk:450,rp:58,rc:49},
  {k:"s-n1",a:"fan2",cond:s=>s.ch>=2&&s.cog>=15,tx:"日本人メンバーってだけで日本のメディアが騒ぐの、少しずるくない？ 実力の証明はこれからでしょ",lk:96,rp:14,rc:38},
  {k:"s-n2",a:"fan2",cond:s=>s.ch>=3&&s.dist>=15,tx:"後輩って言っても、サクヤとの距離が近くない…？ 日本人同士って、そういう近さなの…",lk:230,rp:26,rc:44},
  {k:"s-n3",a:"matome",cond:s=>s.flm>=18,tx:"新人の「匂わせ」を巡り賛否が続く。「偶然でしょ」「狙ってるようにも見える」両論を併記したまとめが静かに伸びている",lk:720,rp:120,rc:96},
@@ -3673,19 +3670,7 @@ function injectBuzz(maxN,pos){
    v252 (episode - his affection was there from the start): the
    Day 2 entry is the earliest leak - a fan clips the moment he
    lets slip that he knew her voice from before the debut. */
-const EV_GLOW={
- 1:{hiroto:{a:"matome",tx:"新人・なお、デビュー初日から『10年の軌跡』が回り始める。井汲大翔の「いいね」の速さも、静かに話題に",lk:420,rp:70,rc:52,nsub:"Day 1 ― デビューの夜"},
-    sakuya:{a:"matome",tx:"新人・なお、デビュー初日から『10年の軌跡』が回り始める。サクヤの「いいね」の速さも、静かに話題に",lk:420,rp:70,rc:52,nsub:"Day 1 ― デビューの夜"}},
- 2:{hiroto:{a:"fan1",tx:"ひろとの配信切り抜き見た？ 『あの声、ずっと前から知ってた』って言ってた…！ 練習生の頃の映像で、だって。前から知ってた、ってこと…？",lk:640,rp:88,rc:120,nsub:"Day 2 ― 『ずっと前から』の夜"},
-    sakuya:{a:"fan1",tx:"サクヤのポスト見た？ 『帰り道の空が、昨日の歌みたいでした』って。……昨日の歌って、なおさんの歌だよね…？",lk:890,rp:120,rc:164,nsub:"Day 2 ― 昨日の歌の夜"}},
- 3:{hiroto:{a:"fan2",tx:"なおさんの初歌番組、堂々としてた…！ それに、ひろとが配信休んでテレビ観てたの、気づいた人いる？ あの人、自分の配信より優先したの、初めて見た",lk:296,rp:24,rc:31,nsub:"Day 3 ― 初めての歌番組の日"},
-    sakuya:{a:"sora",tx:"今日の収録、エンディングのカメラに映ったやつ見た？ 袖のモニターをじっと見るサクヤ。誰の本番でもない時間に、あの人の集中、珍しいらしい",lk:318,rp:27,rc:35,nsub:"Day 3 ― 同じ番組の日"}},
- 4:{hiroto:{a:"sora",tx:"ひろとの配信、地元の話の回だった。『商店街の駄菓子屋、閉まってた』って。……なおさんも大阪の人だよね。この二人、地元が同じってだけで、なんかある",lk:480,rp:52,rc:74,nsub:"Day 4 ― ざわつきの夜"},
-    sakuya:{a:"sora",tx:"サクヤの『内緒です』、相手探しが始まってる。……なおさんの『上のフロア』のポスト、掘り返されてるの見た？",lk:520,rp:58,rc:81,nsub:"Day 4 ― 内緒の波紋の夜"}},
- 6:{hiroto:{a:"fan2",tx:"7年、この人を見てる。報道の夜も『今日も、話します』だった。何も言わないのが、この人の答えだと思う。騒ぎたい人は騒げばいい。私は、見続ける",lk:980,rp:210,rc:140,nsub:"Day 6 ― 熱愛報道の日"},
-    sakuya:{a:"matome",tx:"サクヤの発表ポスト、公式文の最後に一行だけ、私信みたいな一文があったと話題に。……あの丁寧な人が、公の場であの言葉を使うとは",lk:3400,rp:720,rc:430,nsub:"Day 6 ― 発表の日"}},
- 5:{hiroto:{tx:"……俺の配信に来る人は、俺の話を聴きに来てくれたら、それでいいです",lk:540,rp:68,rc:96,nsub:"Day 5 ― 配信の一言の夜"},
-    sakuya:{tx:"……明日の空も、晴れますように",lk:18600,rp:2100,rc:890,nsub:"Day 5 ― 匂わせ疑惑の夜"}}};
+const EV_GLOW={"1":{hiroto:{a:"matome",tx:"新人・なお、デビュー初日から話題独占。井汲大翔の「いいね」の速さも、静かに話題に",lk:420,rp:70,rc:52,nsub:"Day 1 ― デビューの夜"},sakuya:{a:"matome",tx:"新人・なお、デビュー初日から話題独占。サクヤの「いいね」の速さも、静かに話題に",lk:420,rp:70,rc:52,nsub:"Day 1 ― デビューの夜"}},"2":{hiroto:{a:"fan1",tx:"ひろとの配信切り抜き見た？ 『デビューの日くらい、最初から観たかった』って言ってた…！ 配信の開始時間、わざわざずらしてたんだって…！",lk:640,rp:88,rc:120,nsub:"Day 2 ― 『最初から観たかった』の夜"},sakuya:{a:"fan1",tx:"サクヤのポスト見た？ 『挨拶の練習もしました』って。……あの深い挨拶、なおさんへのやつだよね…？",lk:890,rp:120,rc:164,nsub:"Day 2 ― 挨拶の練習の夜"}},"3":{hiroto:{a:"fan2",tx:"なおさんの初歌番組、堂々としてた…！ それに、ひろとの配信が18時58分に終わってたの、気づいた人いる？ あの人、番組のために配信を切るの、初めて見た",lk:296,rp:24,rc:31,nsub:"Day 3 ― 初めての歌番組の日"},sakuya:{a:"sora",tx:"今日の収録、楽屋の紹介の話もう回ってる？ 『僕のほうが、後輩です』って訂正したサクヤ。あの場にいた人、静まり返ったらしい",lk:318,rp:27,rc:35,nsub:"Day 3 ― 同じ番組の日"}},"4":{hiroto:{a:"sora",tx:"ひろとの配信『終わる時間』の表、出回ってる。なおさんの出演日だけ、きれいに早い。……この二人、ただの偶然で片付く材料じゃなくなってきた",lk:480,rp:52,rc:74,nsub:"Day 4 ― ざわつきの夜"},sakuya:{a:"sora",tx:"サクヤの『僕のほうが、後輩です』、波紋が広がってる。……なおさんの10年を、あの人が言葉にしたの、重くない？",lk:520,rp:58,rc:81,nsub:"Day 4 ― 『後輩です』の波紋の夜"}},"5":{hiroto:{tx:"……俺の話をしに来た人とだけ、話します",lk:540,rp:68,rc:96,nsub:"Day 5 ― 配信の沈黙の夜"},sakuya:{tx:"……明日は、発表の日です。楽しみにしていてください",lk:18600,rp:2100,rc:890,nsub:"Day 5 ― 匂わせ疑惑の夜"}},"6":{hiroto:{a:"fan2",tx:"7年、この人を見てる。報道の夜も、いつも通りに配信してた。何も言わないのが、この人の答えだと思う。騒ぎたい人は騒げばいい。俺は、見続ける",lk:980,rp:210,rc:140,nsub:"Day 6 ― 熱愛報道の日"},sakuya:{a:"matome",tx:"サクヤの発表への返信ポストが話題に。『僕のほうが後輩ですが、ステージでは隣に立たせてください』……あの丁寧な人が、公の場であの言い方をするとは",lk:3400,rp:720,rc:430,nsub:"Day 6 ― 発表の日"}}};
 function evAfterglow(){
  if(!S)return;const per=EV_GLOW[S.ch];if(!per)return;const g=per[tgtKey()];if(!g)return;
  const a=g.a||tgtKey();
@@ -4241,18 +4226,7 @@ const STORY_CARD=new Set(["assets/pin-group.jpg"]);
    selfie, studio console/booth, makeup desk, costume rack, the
    pudding in hand, the cafe tray, dance practice, the night street).
    Post photo assignments and the common media grid are untouched. */
-const STORY_BASE={
- akari:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-makeup.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-makeup.jpg"],caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","『内緒です』の噂、ほんと？","明日が山場。ここまで来たね","発表の日。なおオンニ、行ってらっしゃい"],capsH:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","検証の噂、ほんと…？","明日が山場。ここまで来たね","報道の日。オンニ、私たちがついてるよ"]},
- carmen:{img:"assets/pin-makeup.jpg",imgs:["assets/pin-makeup.jpg","assets/pin-studio-console.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-dance.jpg","assets/pin-group.jpg"],caps:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","『内緒です』、ドキドキする","ラスト、いくよ！","発表の日！ 朝からそわそわ"],capsH:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","噂のやつ、ドキドキする","ラスト、いくよ！","報道の日！ オンニの味方だよ、ずっと"]},
- yeon:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-studio-booth.jpg","assets/pin-studio.jpg","assets/pin-night.jpg","assets/pin-makeup.jpg"],caps:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","明日が山場、見ててね","発表、ドキドキする"],capsH:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","噂のやつ、ドキドキだなあ","明日が山場、見ててね","報道の日。オンニ、大丈夫だよ"]},
- fan1:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg"],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","『内緒です』の相手…！？ 震えてる","運命の日、見届けます","発表の日。画面の前で待機"],capsH:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","ざわつきの噂…！？ 震えてる","運命の日、見届けます","報道の日。最後まで、見届けます"]},
- miku:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/gen-miku-station.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg"],caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","『内緒です』の相手、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"],capsH:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂のやつ、ほんとだったらどうしよ","今日が山場。応援してる","報道見たよ。……あんたは大丈夫。地元から応援してる"]},
- sea:{img:"assets/pin-karina.jpg",caps:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","発表の日。おめでとうございます"],capsH:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","今日は、大事な日ですね。……長く見てきた分、信じています"]},
- mina:{img:"assets/pin-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","発表、見届けます"],capsH:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","今日も、見届けます"]},
- tgt:{imgH:["assets/gen-hiroto-stream-selfie.jpg","assets/gen-hiroto-after-desk.jpg","assets/gen-story-stream.jpg","assets/gen-story-stream.jpg","assets/gen-hiroto-after-selfie.jpg"],
-  capH:["おはようございます","配信の合間に","今日は、テレビを観ます","21時から、話します","ありがとうございました","20時から、配信します"],
-  imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-cover.jpg","assets/sakuya-selca.jpg","assets/pin-sakuya-bouquet.jpg"],
-  capS:["雲ひとつない朝","リハの空","今日のステージ","内緒の準備中","ありがとうございました","今日、発表です"]}};
+const STORY_BASE={akari:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-makeup.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-makeup.jpg"],caps:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","『後輩です』のポスト、ほんと？","明日が山場。ここまで来たね","発表の日。なおオンニ、行ってらっしゃい"],capsH:["デビューの日。Hearts2Hearts、始まります","切り抜き、伸びてる…！ 私も負けない","今日は音楽番組。いってきます","終わる時間の表、ほんと…？","明日が山場。ここまで来たね","報道の日。オンニ、私たちがついてるよ"]},carmen:{img:"assets/pin-makeup.jpg",imgs:["assets/pin-makeup.jpg","assets/pin-studio-console.jpg","assets/pin-rack.jpg","assets/pin-studio.jpg","assets/pin-dance.jpg","assets/pin-group.jpg"],caps:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","『後輩です』、ドキドキする","ラスト、いくよ！","発表の日！ 朝からそわそわ"],capsH:["楽屋、わくわくが止まらない〜！","オンニの切り抜き、バズってる！","収録の日の楽屋から","噂のやつ、ドキドキする","ラスト、いくよ！","報道の日！ オンニの味方だよ、ずっと"]},yeon:{img:"assets/pin-group.jpg",imgs:["assets/pin-group.jpg","assets/pin-studio-console.jpg","assets/pin-studio-booth.jpg","assets/pin-studio.jpg","assets/pin-night.jpg","assets/pin-makeup.jpg"],caps:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","コラボ、楽しみだなあ","明日が山場、見ててね","発表、ドキドキする"],capsH:["デビュー…！ どきどき","オンニの歌、すごいの","番組の収録、がんばります","噂のやつ、ドキドキだなあ","明日が山場、見ててね","報道の日。オンニ、大丈夫だよ"]},fan1:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg"],caps:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","『後輩です』ポスト…！？ 震えてる","運命の日、見届けます","発表の日。画面の前で待機"],capsH:["なおちゃんデビュー日！ 朝から待機","切り抜き伸びてる、布教成功","今日の番組、リアタイ待機","ざわつきの噂…！？ 震えてる","運命の日、見届けます","報道の日。最後まで、見届けます"]},miku:{img:"assets/pin-cafe-coffee.jpg",imgs:["assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/gen-miku-station.jpg","assets/pin-cafe-coffee.jpg","assets/pin-cafe-cake.jpg","assets/pin-night.jpg"],caps:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","『後輩です』、ほんとだといいな","今日が山場。応援してる","発表の日だね。私まで緊張する"],capsH:["ついにデビューの日","切り抜き見た、鳥肌たった","今日テレビ出る日だよね","噂のやつ、ほんとだったらどうしよ","今日が山場。応援してる","報道見たよ。……あんたは大丈夫。地元から応援してる"]},sea:{img:"assets/pin-karina.jpg",caps:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","発表の日。おめでとうございます"],capsH:["やっと、この日が来ましたね。おめでとうございます","今日もいい日になりますように","音楽番組の日。楽しみにしています","配信、楽しみにしています","最後まで、自分のペースで","今日は、大事な日ですね。……長く見てきた分、信じています"]},mina:{img:"assets/pin-mina.jpg",caps:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","発表、見届けます"],capsH:["デビュー、おめでとうございます","歌、聴きました","静かに、応援しています","配信、観ますね","今日も、応援しています","今日も、見届けます"]},tgt:{imgH:["assets/gen-hiroto-stream-selfie.jpg","assets/gen-hiroto-after-desk.jpg","assets/gen-story-stream.jpg","assets/gen-story-stream.jpg","assets/gen-hiroto-after-selfie.jpg"],capH:["おはようございます","配信の合間に","今日は、テレビを観ます","21時から、話します","ありがとうございました","20時から、配信します"],imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-cover.jpg","assets/sakuya-selca.jpg","assets/pin-sakuya-bouquet.jpg"],capS:["雲ひとつない朝","リハの空","今日のステージ","内緒の準備中","ありがとうございました","今日、発表です"]}};
 function storyBaseForBase(k,day){day=Math.min(day,6);
  if(k===tgtKey()){const t=STORY_BASE.tgt,sk=k==="sakuya";return{img:(sk?t.imgS:t.imgH)[day-1]||(sk?t.imgS:t.imgH)[0],cap:(sk?t.capS:t.capH)[day-1]||""};}
  const b=STORY_BASE[k];if(!b)return{img:svImg(k),cap:""};
@@ -4311,25 +4285,7 @@ function storyList(){
 /* story action chain (Status-style): after each Action, someone adds a story.
    Entries are keyed by action kind and day; tgt entries resolve to the
    selected target (hiroto / sakuya) with per-route image and caption. */
-const STORY_CHAIN={
- post:{1:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"デビュー初日、スタート！"},
-  2:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"配信の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハの空"},
-  3:{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日は音楽番組！ 楽屋から"},
-  4:{k:"fan1",lab:"ゆな",img:"assets/pin-cafe-cake.jpg",cap:"なおちゃん応援中！"},
-  5:{tgt:true,imgH:"assets/gen-hiroto-desk.jpg",capH:"朝のコーヒー",imgS:"assets/pin-cafe-onion.jpg",capS:"朝のパン、買えました"},
-  6:{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"大事な日、みんなで迎えたよ"}},
- event:{1:{k:"stella",lab:"ステラ",img:"assets/gen-story-news.jpg",cap:"記事みたよ、すごい！"},
-  2:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"今日は配信",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},
-  3:{k:"juun",lab:"ジュウン",img:"assets/pin-rack.jpg",cap:"楽屋、にぎやかでした"},
-  4:{k:"akari",lab:"ジウ",img:"assets/pin-studio.jpg",cap:"噂のやつ…！ みんなで見守ってるよ"},
-  5:{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"明日が山場、みんなで見守り中"},
-  6:{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"20時から、配信します",imgS:"assets/sakuya-bmg.jpg",capS:"よろしくお願いします"}},
- act:{1:{k:"yuha",lab:"ユハ",img:"assets/pin-studio-booth.jpg",cap:"アカペラ聴いた、鳥肌…！"},
-  2:{k:"ian",lab:"イアン",img:"assets/pin-dance.jpg",cap:"先輩たちのステージ、勉強中"},
-  3:{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},
-  4:{k:"ana",lab:"エイナ",img:"assets/pin-studio.jpg",cap:"配信、楽しみにしてます"},
-  5:{k:"miku",lab:"みく",img:"assets/pin-night.jpg",cap:"明日が山場、応援してるよ"},
-  6:{k:"fan1",lab:"ゆな",img:"assets/nao-stage-confetti.jpg",cap:"今日のこと、見届けたよ…！"}}};
+const STORY_CHAIN={post:{"1":{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"デビュー初日、スタート！"},"2":{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"配信の合間に",imgS:"assets/sakuya-cover.jpg",capS:"リハーサル、終わりました"},"3":{k:"carmen",lab:"カルメン",img:"assets/pin-makeup.jpg",cap:"今日は音楽番組！ 楽屋から"},"4":{k:"fan1",lab:"ゆな",img:"assets/pin-cafe-cake.jpg",cap:"なおちゃん応援中！"},"5":{tgt:true,imgH:"assets/gen-hiroto-desk.jpg",capH:"朝のコーヒー",imgS:"assets/pin-cafe-onion.jpg",capS:"朝のパン、買えました"},"6":{k:"akari",lab:"ジウ",img:"assets/pin-group.jpg",cap:"大事な日、みんなで迎えたよ"}},event:{"1":{k:"stella",lab:"ステラ",img:"assets/gen-story-news.jpg",cap:"記事みたよ、すごい！"},"2":{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"今日は配信",imgS:"assets/sakuya-bmg.jpg",capS:"今日のステージ"},"3":{k:"juun",lab:"ジュウン",img:"assets/pin-rack.jpg",cap:"楽屋、にぎやかでした"},"4":{k:"akari",lab:"ジウ",img:"assets/pin-studio.jpg",cap:"噂のやつ…！ みんなで見守ってるよ"},"5":{k:"yeon",lab:"イェオン",img:"assets/gen-story-watch.jpg",cap:"明日が山場、みんなで見守り中"},"6":{tgt:true,imgH:"assets/gen-story-stream.jpg",capH:"20時から、配信します",imgS:"assets/sakuya-bmg.jpg",capS:"よろしくお願いします"}},act:{"1":{k:"yuha",lab:"ユハ",img:"assets/pin-studio-booth.jpg",cap:"アカペラ聴いた、鳥肌…！"},"2":{k:"ian",lab:"イアン",img:"assets/pin-dance.jpg",cap:"先輩たちのステージ、勉強中"},"3":{k:"yuha",lab:"ユハ",img:"assets/pin-night.jpg",cap:"収録終わり、帰り道"},"4":{k:"ana",lab:"エイナ",img:"assets/pin-studio.jpg",cap:"配信、楽しみにしてます"},"5":{k:"miku",lab:"みく",img:"assets/pin-night.jpg",cap:"明日が山場、応援してるよ"},"6":{k:"fan1",lab:"ゆな",img:"assets/nao-stage-confetti.jpg",cap:"今日のこと、見届けたよ…！"}}};
 /* v128: second-wave chain stories - the same action draws one more
    reaction from the central circle, with a scene photo that fits
    the moment. Same storyDyn frame, same allow-list, no new save
@@ -4607,12 +4563,12 @@ function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[
    - never stitched or concatenated. "No replies yet" now only appears on
    posts whose counter is genuinely near zero. */
 const TOP_REPLIES={
- nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なおオンニ、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなおオンニ、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"],["fan2","歌は好き。……でも、無理だけはしないでほしい"],["ian","オンニのポスト、メンバーみんなで見てるよ"],["fan2","10年以上、練習生だった人の歌だと思うと、ひとつひとつの音が重い"],["fan1","ふとした時に出る関西の言葉、すごく好きです"],["fan2","あの人のファンだったけど、この人の歌も好きになってきた。両方応援していいよね"]],
- tgtH:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人の配信、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって観ちゃった"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも静かで温かい。数字じゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","古参の皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"]],
- tgtS:[["fan2","待ってました…！ ずっと観てます"],["sora","この人のステージ、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも温かい。数字だけじゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","ファンの皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"]],
- member:[["fan1","なおちゃん推しだけど、この投稿は保存しました"],["sora","メンバーのこういう一言、ぐっときます"],["fan2","Hearts2Hearts、みんな仲が良いの伝わってくる"],["fan1","オンニ呼びの距離感、見てる側もほっこりする"]],
- news:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"],["fan2","続報待ちだな"],["sora","これは見守りたいやつ"],["fan1","通知で来て、思わず開いちゃった"]],
- other:[["sora","これは残しておきたい投稿"],["fan1","ほんとにそれです…！"],["fan2","同意しかないな"],["fan1","見てて、ほっとしました"]]};
+ nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なおオンニ、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなおオンニ、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"],["fan2","歌は好き。……でも、無理だけはしないでほしい"],["ian","オンニのポスト、メンバーみんなで見てるよ"],["fan2","10年以上、練習生だった人の歌だと思うと、ひとつひとつの音が重い"],["fan1","ふとした時に出る関西の言葉、すごく好きです"],["fan2","あの人のファンだったけど、この人の歌も好きになってきた。両方応援していいよね"],["fan1","サビ前のブレスで毎回泣く…。練習生の頃から、ずっとこうやって歌ってきたんだよね"],["fan2","コメント欄、平和で好き。歌の話しかしてないの、珍しいよな"],["akari","オンニの歌、レッスン室で聴いてた頃からずっと好き。……世界に見つかれ〜！"],["sora","上の人たちも言ってるけど、この人の生歌は本物。切り抜きだけでも伝わる"],["fan2","10年以上って、想像つかない長さだよな。歌の説得力、そこから来てるんだと思う"],["carmen","なおオンニの声、今日も世界に届いてます！ メンバーとして誇らしい！"]],
+ tgtH:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人の配信、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって観ちゃった"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも静かで温かい。数字じゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","古参の皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"],["fan2","配信時間の件、古参はみんな気づいてたよ。……言わないだけ"],["fan1","ここのコメント欄、荒らされてもすぐ静かになるの好き"],["fan2","7年見てるけど、この人の『ありがとう』はいつも本気なんだよな"],["sora","雑談だけの配信なのに、ずっと聴いていられるの不思議"],["fan2","上の人と同じで、俺もあの頃から。静かに見守るのが古参の流儀"]],
+ tgtS:[["fan2","待ってました…！ ずっと観てます"],["sora","この人のステージ、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも温かい。数字だけじゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","ファンの皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"],["fan1","挨拶の丁寧さ、画面越しでも伝わる…。人柄が出てる"],["fan2","『後輩です』の言い方、あの人らしいよな。静かに見守りたい"],["sora","この人の言葉選び、いつも少し不思議で、そこが好き"],["fan1","コメント欄が温かいの、この人の人柄だと思う"],["fan2","上の人たちも言ってるけど、歌は本当に別格。一度は生で聴きたい"]],
+ member:[["fan1","なおちゃん推しだけど、この投稿は保存しました"],["sora","メンバーのこういう一言、ぐっときます"],["fan2","Hearts2Hearts、みんな仲が良いの伝わってくる"],["fan1","オンニ呼びの距離感、見てる側もほっこりする"],["fan1","メンバーのこういう素の感じ、グループの空気が良い証拠だよね"],["fan2","オンニへの信頼が伝わってくる。いいグループだな"]],
+ news:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"],["fan2","続報待ちだな"],["sora","これは見守りたいやつ"],["fan1","通知で来て、思わず開いちゃった"],["fan2","まとめの書き方、煽りすぎじゃない？ 本人たちの言葉だけ見たい"],["fan1","こういう記事が出るたび、歌のほうも聴きに行ってる"]],
+ other:[["sora","これは残しておきたい投稿"],["fan1","ほんとにそれです…！"],["fan2","同意しかないな"],["fan1","見てて、ほっとしました"],["fan2","この人の言葉、いつも短いけど重いんだよな"],["sora","同意。静かに見守りたいタイプの話"]]};
 function replyCountOf(p){const v=parseInt(String(p.m&&p.m[0]!=null?p.m[0]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;}
 function seedTopReplies(p,have){
  if(typeof S==="undefined"||!S||!S.posts)return have;
@@ -4729,14 +4685,14 @@ function tcSendReply(){
  tcScheduleReaction(parent,rp);
 }
 const REPLY_REACT={
- hiroto:{tx:["ありがとう。……読んだよ","うん、ありがとう","……なんか、うれしいな","おつかれさま。無理せんとってな"],like:.45},
- sakuya:{tx:["わあ、ありがとうございます","その言葉、静かにうれしいです","覚えていてくれて、ありがとうございます","その言葉、ずっと覚えておきます"],like:.4},
- member:{tx:["なおー！ 見たよ見たよ","わかる、それ言いたかったやつ","最年長、さすがの言葉選び","ねえねえ、あとで楽屋でも話そ"],like:.3},
- fan:{tx:["ほんとそれです…！","なおちゃん、言葉がまっすぐで好き","引用したいくらい、良い返信","わたしも同じ気持ちでした"],like:.3},
- official:{tx:["ありがとうございます。引き続き、よろしくお願いいたします","ご注目、ありがとうございます","今後の続報にも、ご期待ください"],like:.35},
- matome:{tx:["新人・なお、ファンへの返信もまめな模様","【観測】なお、界隈への返信が丁寧と話題に"],like:.3},
- generic:{tx:["ありがとうございます！","見てくれて、うれしいです","その一言、励みになります"],like:.35},
- ownpost:{tx:["ほんとそれです…！","なおちゃんの言葉、刺さります","わかる、わかりすぎる"],who:["fan1","fan1","akari"],like:.3}};
+ hiroto:{tx:["ありがとう。……読んだよ","うん、ありがとう","……なんか、うれしいな","おつかれさま。無理せんとってな","……その言葉、配信の前に読めてよかった","読んだ。……ありがとうな"],like:.45},
+ sakuya:{tx:["わあ、ありがとうございます","その言葉、静かにうれしいです","覚えていてくれて、ありがとうございます","その言葉、ずっと覚えておきます","その言葉、静かに受け取りました","……読めて、よかったです"],like:.4},
+ member:{tx:["なおー！ 見たよ見たよ","わかる、それ言いたかったやつ","最年長、さすがの言葉選び","ねえねえ、あとで楽屋でも話そ","オンニ、見てるよ〜！","楽屋でも話題になってたやつ"],like:.3},
+ fan:{tx:["ほんとそれです…！","なおちゃん、言葉がまっすぐで好き","引用したいくらい、良い返信","わたしも同じ気持ちでした","分かりすぎて、頷きながら読んだ","なおちゃんのファンでよかったって思う瞬間"],like:.3},
+ official:{tx:["ありがとうございます。引き続き、よろしくお願いいたします","ご注目、ありがとうございます","今後の続報にも、ご期待ください","ご声援、ありがとうございます"],like:.35},
+ matome:{tx:["新人・なお、ファンへの返信もまめな模様","【観測】なお、界隈への返信が丁寧と話題に","なおの返信、古参ファンほど丁寧と話題に"],like:.3},
+ generic:{tx:["ありがとうございます！","見てくれて、うれしいです","その一言、励みになります","その一言で、今日が良い日になりました"],like:.35},
+ ownpost:{tx:["ほんとそれです…！","なおちゃんの言葉、刺さります","わかる、わかりすぎる","なおちゃん、こういうところだよね…好き","言葉の温度がちょうどいい"],who:["fan1","fan1","akari"],like:.3}};
 function tcReactCtx(parent){
  const a=parent.a;
  if(a==="hiroto"||a==="sakuya")return{pool:REPLY_REACT[a],who:a};
@@ -4832,7 +4788,7 @@ function renderFollowBtn(){const b=$("#btn-follow-hiroto");if(!b||!S)return;cons
    accounts; follow-state buttons on rows are session-local feedback only,
    except the target's row, which reflects and jumps to the real follow
    toggle on his profile. Nothing here writes to the save. */
-const FOL_BIO={hiroto:"日プシーズン1出身、中国・創造営、韓国・BOYS PLANETと国を跨いで挑戦を続けてきた人。練習生時代に、共通の練習生の友達に紹介されて知り合った。地元では帰省のたびに顔を合わせていた昔なじみ。",sakuya:"NCT WISH。同じSM所属。デビューの順番と、練習生の順番が違う人。不思議な感性と、丁寧な言葉選び。",nao:"Hearts2Hearts 最年長・唯一の日本人。2014年から10年以上の練習生を経てデビュー。デビュー曲は『The Chase』。",akari:"同期のリーダー。一緒にデビューした仲間。",carmen:"同期。ムードメーカー。",yuha:"同期。",stella:"同期。",juun:"同期。頼れる存在。",ana:"同期。",ian:"同期。",yeon:"同期。最年少。",sea:"aespaのリーダー。入所はなおより後で、デビューは先。練習生時代の彼女を知っている。",mina:"TWICE。静かで上品な先輩。",miku:"幼なじみ。フォロワー1号を自称している。",sora:"音楽好き。歌の話になると熱い。",fan1:"なお推し1号ファン。デビュー初日から見ている。",fan2:"音楽ファン。界隈の動きに早い。",staff:"事務所スタッフ。現場の橋渡し役。",media:"音楽番組『MUSIC STAGE』の公式アカウント。",matome:"エンタメ速報のまとめアカウント。"};
+const FOL_BIO={hiroto:"日プシーズン1出身、中国・創造営、韓国・BOYS PLANETと国を跨いで挑戦を続けてきた人。練習生時代に、共通の練習生の友達に紹介されて知り合った。地元では帰省のたびに顔を合わせていた昔なじみ。",sakuya:"NCT WISH。同じSM所属。デビューの順番と、練習生の順番が違う人。不思議な感性と、丁寧な言葉選び。",nao:"Hearts2Hearts 最年長・唯一の日本人。2014年から10年以上の練習生を経てデビュー。デビュー曲は『The Chase』。",akari:"同期のリーダー。一緒にデビューした仲間。",carmen:"同期。ムードメーカー。",yuha:"同期。",stella:"同期。",juun:"同期。頼れる存在。",ana:"同期。",ian:"同期。",yeon:"同期。最年少。",sea:"aespaのリーダー。入所はなおより後で、デビューは先。練習生時代の彼女を知っている。",mina:"TWICE。静かで上品な先輩。",miku:"幼なじみ。フォロワー1号を自称している。",sora:"音楽好き。歌の話になると熱い。",fan1:"なお推し1号ファン。デビュー初日から見ている。",fan2:"井汲大翔を日プ時代から追う古参ファン。音楽番組の切り抜きを見るのが趣味。最近は、なおの歌にも静かにハマっている。",staff:"事務所スタッフ。現場の橋渡し役。",media:"音楽番組『MUSIC STAGE』の公式アカウント。",matome:"エンタメ速報のまとめアカウント。"};
 let folOwner="nao",folTab="folwing",folBackTo="me",folQ="";const folOverride={};
 function folSets(owner){
  const T=tgtKey(),members=["akari","carmen","yuha","stella","juun","ana","ian","yeon"];
@@ -4958,7 +4914,7 @@ $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
 function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){$("#x-pane-trend").innerHTML="";const list=curTrends(),maxV=Math.max(1,...list.map(trendNum));const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-live'></span><span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);list.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i,maxV)));
- const sug=$("#x-sug");sug.innerHTML="";const chN=(typeof S!=="undefined"&&S&&S.ch)||1;(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#上のフロア","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の一言","MUSIC STAGE"]).filter(w=>!((w==="#配信の一言"||w==="#上のフロア")&&chN<5)&&!(w==="熱愛報道"&&chN<6)&&!(w==="歌うまコラボSP"&&chN<4)).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
+ const sug=$("#x-sug");sug.innerHTML="";const chN=(typeof S!=="undefined"&&S&&S.ch)||1;(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#何年も前の写真","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の沈黙","MUSIC STAGE"]).filter(w=>!((w==="#配信の沈黙"||w==="#何年も前の写真")&&chN<5)&&!(w==="熱愛報道"&&chN<6)&&!(w==="歌うまコラボSP"&&chN<4)).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
 /* v167: recent-search chips - session-local only (module state,
@@ -5065,11 +5021,11 @@ const TREND_KEYS={
  "井汲大翔 大阪":["大阪","井汲大翔"],
  "歌うまコラボSP 噂":["コラボ","噂","歌うま"],
  "音楽番組 出演者発表":["MUSIC STAGE","音楽番組","出演","収録"],
- "配信の一言":["配信","一言","切り抜き"],
+ "配信の沈黙":["配信","沈黙","切り抜き"],
  "新人アイドル 歌唱力":["歌唱力","歌声","歌"],
  "井汲大翔 雑談配信":["井汲大翔","配信","雑談"],
  "NCT WISH カムバ":["サクヤ","NCT WISH","新曲"],
- "上のフロア":["フロア","練習生","上の"],
+ "何年も前の写真":["写真","名前札","練習生"],
  "井汲大翔 熱愛疑惑":["井汲大翔","匂わせ","疑惑"],
  "サクヤ 熱愛疑惑":["サクヤ","匂わせ","疑惑"],
  "匂わせ疑惑":["匂わせ","疑惑"],
@@ -5860,16 +5816,16 @@ function renderEndJourney(){
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
- if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="熱愛報道は、本物の炎上になった。後追い記事が次々と出て、盾のない彼の個人アカウントには、毎分、言葉が投げつけられた。\n"+(hot?"距離が近いほど、記事の『証拠』は本物らしく並んだ。デビュー日のダイジェストも、配信での「昔から」も、検証スレの線も、全部が後付けで意味を持った。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n出演予定だった番組は『当面見合わせ』に。10年以上かけて、やっと立った場所だった。歌に戻るには、長い時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
- else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title=(tgtKey()==="sakuya"?"コラボEND ― 同じステージの件":"乗り越えたEND ― 消えなかった件");body="公式には、何も認められなかった。並んで立つステージも、発表も、約束された未来もない。事務所のコメントは定型文のまま、彼は最後まで何も言わなかった。\nそれでも、騒ぎが少しずつ引いていった頃。彼の配信のBGMに、彼女のデビュー曲が、さりげなく流れていた。紹介でも、告知でもなく。――二人だけが分かる形で。\n関係は、消えなかった。公の場ではなく、静かな場所で、続いている。";}
- else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="報道は出た。でも、燃え広がる前に、界隈の熱は冷めていった。フォロワーも、世間の認知も、まだ小さい。\nでも、最終日の夜。彼の配信が終わった後、DMに短い一通が届いた。「地元、帰ったら連絡する。……駄菓子屋の跡地、見に行こ」\n数字にも、記事にもならない距離が、ここにある。それで、今は十分だった。";}
+ if(S.flm>=55){kind="flame";title="炎上END ― 燃えてしまった件";body="熱愛報道は、本物の炎上になった。後追い記事が次々と出て、盾のない彼の個人アカウントには、毎分、言葉が投げつけられた。\n"+(hot?"距離が近いほど、記事の『証拠』は本物らしく並んだ。終わる時間の表も、配信での長い沈黙も、誤爆の一枚も、全部が後付けで意味を持った。\n":"実力より先に、騒ぎの方が有名になってしまった。")+"\n出演予定だった番組は『当面見合わせ』に。10年以上かけて、やっと立った場所だった。歌に戻るには、長い時間がかかりそうだ。――でも、全部が嘘だったわけじゃない。あの距離だけは、本物だった。";}
+ else if(S.fol>=180000&&S.cog>=40&&S.dist>=38){kind="collab";title=(tgtKey()==="sakuya"?"コラボEND ― 同じステージの件":"乗り越えたEND ― 消えなかった件");body="公式には、何も認められなかった。並んで立つステージも、発表も、約束された未来もない。事務所のコメントは定型文のまま、彼は最後まで何も言わなかった。\nそれでも、騒ぎが少しずつ引いていった頃。また彼の配信が、早く終わった日があった。理由を聞かれて、彼は少し黙ってから言った。『……このあと、観たいステージがある』。――デビューの日と、同じ漏れ方で。\n関係は、消えなかった。公の場ではなく、静かな場所で、続いている。";}
+ else if(S.dist>=30){kind="quiet";title="静かなEND ― いちばん近くの件";body="報道は出た。でも、燃え広がる前に、界隈の熱は冷めていった。フォロワーも、世間の認知も、まだ小さい。\nでも、最終日の夜。彼の配信が終わった後、DMに短い一通が届いた。「次の帰省、同じ日にした。……祭りの日や」\n数字にも、記事にもならない距離が、ここにある。それで、今は十分だった。";}
  else{kind="start";title="これからEND ― まだ始まったばかりの件";body="記事の見出しは大きかったけれど、決め手の一枚は、最後まで出なかった。熱愛報道のわりには、静かな6日間だった。\nでもステージは続いていく。フォロワーは少しずつ増え、歌は少しずつ届いている。10年以上待った人間に、焦りはない。\n彼との距離は、まだ遠い。――始まったばかり、というのは、そういうことだ。";}
  if(tgtKey()==="sakuya")body=END_S_BODY[kind](hot);
  /* v299 (episode - mispost aftermath, endings): if she actually made
     the Day 5 mispost, the ending text remembers it. Kinds, thresholds
     and order are untouched - only the prose branches. The gate reads
     her own posts, same as v295; no new save fields. */
- if((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))){const sk=tgtKey()==="sakuya";body+="\n"+({flame:"とどめは、あの誤投稿だった。鍵垢に上げるはずだった私的な一枚のスクショが、『匂わせの証拠』として並べられた。消したはずのものは、消えていなかった。",collab:sk?"発表の日、例のスクショの話題は、コラボの歓声にかき消えた。今ではファンの間で『伝説の誤爆』と笑って振り返られている。本人は、まだ少しだけ耳が赤い。":"例のスクショは、今もたまに蒸し返される。それでも、消えなかったものもある。騒ぎの向こう側で、二人だけが知っている。",quiet:sk?"あの誤投稿の写真も、もう騒がれていない。彼だけが『ぼくの前でしか見せない笑い方でした』と言った。その一言だけが、静かに残っている。":"あの誤投稿のスクショも、もう騒がれていない。彼だけが『消えてよかったとは、思ってない』と言った。その一言だけが、静かに残っている。",start:"あの誤投稿のスクショだけが、少し先に有名になった。それも含めて、まだ始まったばかり。"})[kind];}
+ if((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))){const sk=tgtKey()==="sakuya";body+="\n"+({flame:"とどめは、あの誤投稿だった。鍵垢に上げるはずだった私的な一枚のスクショが、『匂わせの証拠』として並べられた。消したはずのものは、消えていなかった。",collab:sk?"発表の日、例のスクショの話題は、コラボの歓声にかき消えた。今ではファンの間で『伝説の誤爆』と笑って振り返られている。本人は、まだ少しだけ耳が赤い。":"例のスクショは、今もたまに蒸し返される。それでも、消えなかったものもある。騒ぎの向こう側で、二人だけが知っている。",quiet:sk?"あの誤投稿の写真も、もう騒がれていない。彼だけが『見られてよかったです』と言った。その一言だけが、静かに残っている。":"あの誤投稿のスクショも、もう騒がれていない。彼だけが『俺は見れてよかった』と言った。その一言だけが、静かに残っている。",start:"あの誤投稿のスクショだけが、少し先に有名になった。それも含めて、まだ始まったばかり。"})[kind];}
  window.__D7={kind:kind,active:false,done:false,ch7:null};
  renderTargetProfile();
  const sec=$("#scr-ending");sec.classList.remove("fin");const etag=sec.querySelector(".end-tag");if(etag)etag.textContent="ENDING";sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
