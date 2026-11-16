@@ -2839,7 +2839,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v367</p>
+  <p class="ver">v368</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3013,7 +3013,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v367</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v368</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3282,7 +3282,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v367</p>
+    <p class="ver">v368</p>
   </div>
 </section>
 </div>
@@ -6293,6 +6293,37 @@ function buildDay7Chapter(kind){
   {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
    {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
    {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
+ /* v368: her Day 7 post choices must match the ending she reached.
+    In the flame endings her public activities are suspended, so the
+    forward-looking default set ("次の準備が始まっています") cannot
+    stand; the sakuya quiet ending never promised a shared stage
+    either. Text-only override: fx order and values are untouched. */
+ if(kind==="flame"){
+  const FT=sk?[
+   {tx:"この度は、ご心配とご迷惑をおかけして、申し訳ありませんでした。……しばらく、表の活動はお休みすることになりました。",react:[
+    {a:"matome",tx:"新人・なお、騒ぎを受けて謝罪のポスト。事務所も『今後の活動は協議中』としている",lk:2400,rp:520,rc:410},
+    {a:"fan1",tx:"なおちゃん、謝らなくていいのに……",lk:350,rp:28,rc:15}]},
+   {tx:"二人のステージは、本物でした。……それだけは、どうしても伝えたくて。",react:[
+    {a:"fan1",tx:"私も、そう思う。あのステージは本物だった",lk:520,rp:44,rc:12},
+    {a:"fan2",tx:"言ってくれて、よかった",lk:210,rp:16,rc:6}]},
+   {tx:"歌うことは、止めません。……また立つ日まで、静かに準備を続けます。",react:[
+    {a:"matome",tx:"新人・なお、『歌うことは止めません』とポスト。界隈に静かな反響",lk:1500,rp:260,rc:120},
+    {a:"fan1",tx:"待ってます。何年でも待てます",lk:280,rp:20,rc:7}]}]:[
+   {tx:"この度は、ご心配とご迷惑をおかけして、申し訳ありませんでした。……少しの間、表の活動をお休みします。",react:[
+    {a:"matome",tx:"新人・なお、報道を受けて謝罪のポスト。『少しの間、表の活動をお休み』と自ら綴った",lk:2100,rp:480,rc:390},
+    {a:"fan1",tx:"なおちゃん……。待ってるから。ずっと待ってるから",lk:320,rp:26,rc:14}]},
+   {tx:"歌うことは、止めません。場所が小さくなっても、届け続けます。……それだけは、約束します。",react:[
+    {a:"fan1",tx:"その言葉、信じるよ。歌を止めないで",lk:410,rp:34,rc:9},
+    {a:"fan2",tx:"小さな場所から、また始まるんだね",lk:150,rp:11,rc:4}]},
+   {tx:"おはようございます。今日も、静かに練習だけは続けます。……朝の光が、少しだけ優しいです。",react:[
+    {a:"fan2",tx:"練習を続ける人、強い",lk:120,rp:9,rc:3},
+    {a:"fan1",tx:"おはよう、なおちゃん。無理しないでね",lk:200,rp:15,rc:5}]}];
+  posts.forEach((p,i)=>{if(FT[i]){p.tx=FT[i].tx;p.react=FT[i].react;}});}
+ else if(sk&&kind==="quiet"){
+  posts[2].tx="次のステージの準備が、もう始まっています。……静かに、確かに、進んでいきます。";
+  posts[2].react=[
+   {a:"fan2",tx:"静かに進んでいく感じ、なおさんらしい",lk:88,rp:9,rc:14},
+   {a:"fan1",tx:"次のステージ、楽しみにしてます！",lk:150,rp:14,rc:5}];}
  const activity=sk?[
   {t:"メンバーと朝ごはんを食べながら、昨日の話をする",who:["メンバー"],r:"笑いながら昨日の映像を見返した。『オンニ、幸せそうだった』と言われて、耳が赤くなった。",fx:{fol:10,cog:1,xp:7,dist:0,flm:0}},
   {t:"一人でレッスン室に残って、次の曲を聴き込む",who:["ひとりで"],r:"次の曲のデモを、何度も聴いた。10年以上待った人間に、焦りはない。でも、楽しみはある。",fx:{fol:0,cog:1,xp:10,dist:0,flm:0}},
