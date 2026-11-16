@@ -1327,6 +1327,7 @@ input,textarea{font-size:16px}
 .qt-av{width:20px;height:20px;border-radius:50%;object-fit:cover;flex:none}
 .qt-n{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qt-hd{color:#536471;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qt-tm{color:#536471;white-space:nowrap;flex:none}
 .qt-flex{display:flex;gap:10px;margin-top:3px}
 .qt-tx{flex:1;min-width:0;font-size:14px;line-height:1.55;color:#0f1419;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .qt-thumb{width:64px;height:64px;border-radius:10px;object-fit:cover;object-position:center 20%;flex:none;border:1px solid #eff3f4}
@@ -2883,7 +2884,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v407</p>
+  <p class="ver">v408</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3063,7 +3064,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v407</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v408</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3333,7 +3334,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v407</p>
+    <p class="ver">v408</p>
   </div>
 </section>
 </div>
@@ -4084,6 +4085,9 @@ function postBorn(p){const m=/-([0-9a-z]+)$/.exec(String(p&&p.id||""));if(!m)ret
 function postOff(p){let h=0;const s=String(p&&p.id||"");for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return(h%180)*60000;}
 function postEff(p){const b=postBorn(p);return b?b-(p.mine?0:postOff(p)):0;}
 function postTime(p){const e=postEff(p);if(!e)return p.tm||"今";let ms=Date.now()-e;if(ms<0)ms=0;const min=Math.floor(ms/60000);if(min<1)return "今";if(min<60)return min+"分";const hr=Math.floor(min/60);if(hr<24)return hr+"時間";const d=new Date(e),nw=new Date(),md=(d.getMonth()+1)+"月"+d.getDate()+"日";return d.getFullYear()===nw.getFullYear()?md:d.getFullYear()+"年"+md;}
+/* v408: the detail view's absolute clock, same derivation - the JP
+   client prints "午後9:14 · 2026年11月16日" over the view count */
+function postAbsTime(p){const e=postEff(p);if(!e)return p.tm||"今";const d=new Date(e),h=d.getHours(),hh=h%12===0?12:h%12;return (h<12?"午前":"午後")+hh+":"+String(d.getMinutes()).padStart(2,"0")+" · "+d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日";}
 /* v89: find the quoted original for a post, if one unambiguously exists:
    a bracketed fragment of 5+ chars that appears verbatim in one of her
    own posts. Returns a display snapshot or null. */
@@ -4157,8 +4161,8 @@ function postEl(p,hot){
      as a real-X quote card. Nothing is written back to the save. */
   const qtSnap=p.qt||qtDerive(p);
   if(qtSnap){const qc=document.createElement("div");qc.className="qtcard";
-   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" loading="lazy" decoding="async" src="'+qtSnap.img+'" alt="">':"")+'</div>';
-   qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;linkifyTx(qc.querySelector(".qt-tx"),dispTx(qtSnap.tx));
+   qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span><span class="qt-tm"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" loading="lazy" decoding="async" src="'+qtSnap.img+'" alt="">':"")+'</div>';
+   qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;qc.querySelector(".qt-tm").textContent="· "+postTime({id:qtSnap.id,mine:true,tm:"今"});linkifyTx(qc.querySelector(".qt-tx"),dispTx(qtSnap.tx));
    qc.addEventListener("click",e=>{e.stopPropagation();try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o.id===qtSnap.id);if(orig)openPostThread(orig);}catch(_){}});
    d.querySelector(".tx").after(qc);}
   const avEl=d.firstChild;
@@ -4939,7 +4943,7 @@ function renderThread(p){
  const hdEl=main.querySelector(".hd");if(hdEl)hdEl.textContent=p.h;
  const mt=main.querySelector(".mt");
  if(mt&&mt.parentNode){
-  const meta=document.createElement("div");meta.className="dtmeta";meta.textContent=(p.tm||"今")+" ・ "+fmtCnt(viewsOf(p))+" 回表示";mt.parentNode.insertBefore(meta,mt);
+  const meta=document.createElement("div");meta.className="dtmeta";meta.textContent=postAbsTime(p)+" · "+fmtCnt(viewsOf(p))+" 回表示";mt.parentNode.insertBefore(meta,mt);
   /* v63: worded engagement summary, like real X (12 件のリポスト / 34 件のいいね) */
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const stats=[[num(0),"件の返信"],[num(1)+(p.rped?1:0),"件のリポスト"],[num(2)+(p.liked?1:0),"件のいいね"]].filter(x=>x[0]>0);
