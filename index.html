@@ -1443,7 +1443,7 @@ input,textarea{font-size:16px}
 .msg.me.grp{border-top-right-radius:5px}
 .msgmeta{display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .msgmeta::before{content:"";width:11px;height:11px;background:#1d9bf0;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%)}
-/* v370: like real X, the partner's avatar sits at the foot of the
+/* v371: like real X, the partner's avatar sits at the foot of the
    last bubble of each of their groups; their column shifts right
    to make room for it */
 #th-msgs .msg.them{position:relative;margin-left:48px}
@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v370</p>
+  <p class="ver">v371</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v370</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v371</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v370</p>
+    <p class="ver">v371</p>
   </div>
 </section>
 </div>
@@ -3983,6 +3983,7 @@ function svImg(k){if(k==="nao")return naoStory().img;if(k===tgtKey())return tgt(
    render time, so in-progress saves get the day's story with no migration
    and the save format is untouched. */
 const NAO_STORY={1:{img:"assets/nao-story-heart.jpg",cap:"デビュー初日、いってきます"},2:{img:"assets/nao-story-cafe.jpg",cap:"オフのいちごミルク"},3:{img:"assets/nao-backstage-selfie.jpg",cap:"収録の日、楽屋から"},4:{img:"assets/nao-story-towel.jpg",cap:"レッスン終わり、汗だく"},5:{img:"assets/nao-story-night.jpg",cap:"静かな、帰り道"},6:{img:"assets/nao-stage-confetti.jpg",cap:"最終日、帰り道",imgH:"assets/gen-nao-day6-rain.jpg",capH:"最終日、雨の窓辺"}};
+NAO_STORY[7]={img:NAO_STORY[6].img,cap:"一夜明けて、朝の光",imgH:NAO_STORY[6].imgH,capH:"一夜明けて、雨上がり"};
 function naoStory(){const d=(typeof S!=="undefined"&&S&&S.ch)||1;const e=NAO_STORY[d]||NAO_STORY[6]||NAO_STORY[1];if(e.imgH&&typeof tgtKey==="function"&&tgtKey()==="hiroto")return{img:e.imgH,cap:e.capH};return e;}
 </script>
 <script>
@@ -4492,11 +4493,29 @@ const STORY_BASE={
   capH:["おはようございます","配信の合間に","今日は配信です","ファンミ、決まりました","ありがとうございました","20時から、配信します"],
   imgS:["assets/sakuya-stage.jpg","assets/sakuya-bmg.jpg","assets/sakuya-cover.jpg","assets/sakuya-selca.jpg","assets/pin-sakuya-bouquet.jpg"],
   capS:["いい朝になりました","リハの空","今日のステージ","配信、決まりました","ありがとうございました","今日、発表です"]}};
-function storyBaseFor(k,day){day=Math.min(day,6);
+function storyBaseForBase(k,day){day=Math.min(day,6);
  if(k===tgtKey()){const t=STORY_BASE.tgt,sk=k==="sakuya";return{img:(sk?t.imgS:t.imgH)[day-1]||(sk?t.imgS:t.imgH)[0],cap:(sk?t.capS:t.capH)[day-1]||""};}
  const b=STORY_BASE[k];if(!b)return{img:svImg(k),cap:""};
  const caps=(tgtKey()==="hiroto"&&b.capsH)?b.capsH:b.caps;
  return{img:(b.imgs&&b.imgs[day-1])||b.img,cap:caps[day-1]||caps[0]||""};}
+/* v371: on Day 7 the base stories keep their Day 6 photos (same
+   people, same scenes) but the captions must belong to the morning
+   after - "発表の日" / "報道の日" / "今日、発表です" cannot stand
+   on the day after. Captions only; the frame count is unchanged. */
+function storyBaseFor(k,day){const r=storyBaseForBase(k,day);if(day>6){
+ const h=tgtKey()==="hiroto";
+ const kind=(typeof window!=="undefined"&&window.__D7&&window.__D7.kind)||"start";
+ const T={
+  akari:h?"報道から一夜。オンニ、私たちがついてるよ":"発表から一夜。なおオンニ、今日も隣にいるよ",
+  carmen:h?"一夜明けた。オンニの味方だよ、ずっと":"発表の余韻！ 今日もそわそわしてる",
+  yeon:h?"一夜明けたね。オンニ、大丈夫だよ":"発表、終わったね。……すごかった",
+  fan1:h?"報道から一夜。最後まで、見届けます":"発表から一夜。画面の前で、まだ余韻の中",
+  miku:h?"報道から一夜。……あんたは大丈夫。地元から応援してる":"発表から一夜明けたね。私までまだ緊張してる",
+  sea:h?"一夜明けたね。……信じてるよ":"発表から一夜。……いい朝になりますように",
+  mina:h?"一夜明けて。今日も、見届けます":"一夜明けて。静かに、見届けます"};
+ if(k===tgtKey()){r.cap=h?(kind==="flame"?"……今日は、静かにしてます":"20時から、配信します"):(kind==="flame"?"……今日は、静かに過ごします":"発表から一夜。今日も、よろしくお願いします");}
+ else if(T[k])r.cap=T[k];}
+ return r;}
 function storyList(){
  const day=(typeof S!=="undefined"&&S&&S.ch)||1;
  const base=curStory().filter(x=>STORY_ALLOW.has(x[0])).map(x=>{
@@ -5453,7 +5472,7 @@ function startChapter(n){
   sea:{tx:"なおちゃん、ステージおつかれさま。練習生の頃から見てきた人が、大きなステージで堂々と歌ってるの、感慨深かったよ。……やっとだね。ごはんちゃんと食べて、体調管理もしっかりね。",lk:3908,rp:640,rc:88},
   akari:{tx:"なおオンニ、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
  }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
- /* v370 (episode): the first follower also checks in on the
+ /* v371 (episode): the first follower also checks in on the
     mornings of Day 2 and Day 5, filling the silent stretch
     between Day 1 and Day 4 / Day 6 - same slot, same display-only
     numbers, each in their own voice. No fx, no branching. */
@@ -6312,7 +6331,7 @@ function buildDay7Chapter(kind){
   {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
    {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
    {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
- /* v370: her Day 7 post choices must match the ending she reached.
+ /* v371: her Day 7 post choices must match the ending she reached.
     In the flame endings her public activities are suspended, so the
     forward-looking default set ("次の準備が始まっています") cannot
     stand; the sakuya quiet ending never promised a shared stage
