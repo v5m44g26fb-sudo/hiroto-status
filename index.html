@@ -2882,6 +2882,10 @@ input,textarea{font-size:16px}
 #x-notif .nstack{display:flex;gap:4px;margin:1px 0 3px}
 #x-notif .nstack .avatar{width:30px;height:30px}
 #x-notif .nstack .ava-txt{width:30px;height:30px;font-size:13px}
+
+/* ===== v411: verified badge sits with the name in the DM header and
+   the thread intro card, as in the real client ===== */
+#th-name .dm-verified,.ti-name .dm-verified{width:15px;height:15px;fill:#1d9bf0;margin-left:4px;vertical-align:-2px}
 </style>
 </head>
 <body>
@@ -2918,7 +2922,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v410</p>
+  <p class="ver">v411</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3098,7 +3102,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v410</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v411</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3185,7 +3189,7 @@ input,textarea{font-size:16px}
         <div id="th-msgs"></div>
         <div class="dm-dock">
         <div id="th-choices" style="padding:2px 14px 2px"></div>
-        <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
+        <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><text x="12" y="15.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="inherit">GIF</text></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M9 10.2h.01M15 10.2h.01" stroke-width="2.6"/><path d="M8.6 14.3c.9 1.2 2.1 1.8 3.4 1.8s2.5-.6 3.4-1.8"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
         </div>
       </div>
     </div>
@@ -3368,7 +3372,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v410</p>
+    <p class="ver">v411</p>
   </div>
 </section>
 </div>
@@ -5883,9 +5887,9 @@ function renderDmList(){
  updateBdg();
 }
 function scrollDmBottom(smooth){const sc=$("#x-scroll");requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.scrollTo({top:sc.scrollHeight,behavior:smooth?"smooth":"auto"});}));}
-function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),260);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
+function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),260);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;if(VERIFIED.has(t.who))$("#th-name").insertAdjacentHTML("beforeend",DM_VERIFIED);$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
  const ti=$("#th-intro");ti.innerHTML='<span class="ti-avw">'+(a.av?'<img class="avatar" src="'+a.av+'" width="64" height="64" alt="">':avaTxt(a.n))+'</span><div class="ti-name"></div><div class="ti-handle">'+a.h+'</div><div class="ti-bio"></div>'+(t.special?'<div class="ti-pill">初めての、本人からの連絡</div>':"");
- ti.querySelector(".ti-name").textContent=a.n;
+ ti.querySelector(".ti-name").textContent=a.n;if(VERIFIED.has(t.who))ti.querySelector(".ti-name").insertAdjacentHTML("beforeend",DM_VERIFIED);
  ti.querySelector(".ti-bio").textContent=t.special?tgt().bio:(FOL_BIO[t.who]||"");
  /* v180: his thread's header and intro card lead to his profile,
     like the follow-list and search rows; other accounts have no
