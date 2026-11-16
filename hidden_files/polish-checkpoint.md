@@ -2575,7 +2575,7 @@ v398のサウンドを実駆動で全数計測（__snd.played）して仕上げ�
 
 ## 本人への依頼リスト（ストーリー写真、2026-11-17追加）
 生成はいつもの方式（別チャットで生成→このチャットに貼付）でお願いします。枠数は増やさず、既存枠の差し替え用です。
-1. 【優先】井汲大翔・Day4ベースストーリー用：配信まわりの新しいカット 1枚（例：配信デスクの別アングル、マイクとモニターの灯り。現状は Day3 と同じ gen-story-stream の使い回し）
+1. ~~【優先】井汲大翔・Day4ベースストーリー用：配信まわりの新しいカット 1枚~~ → **消化済み（v434）**：前提がスマホ配信に変わったため、スマホ三脚の準備カット gen-hiroto-hoodie.jpg（配信前に三脚のスマホを調整）に置換
 2. ~~【優先】井汲大翔・Day6ベースストーリー用：最終日の1枚~~ → **消化済み（v432）**：gen-hiroto-day6-night.jpg（夜景の窓辺・黒シャツの自撮り）を imgH の6件目に追加し、Day1フォールバックを解消
 3. ~~サクヤ・Day6ベースストーリー用：1枚~~ → **消化済み（v432）**：gen-sakuya-day6-studio.jpg（練習室で水を持つグレー服）を imgS の6件目に追加し、Day1フォールバックを解消
 4. ゆな・Day2／Day4／Day5用：カフェ系の別カット 3枚（現状コーヒー×2日・ケーキ×3日）→ **Day2・Day5は消化済み（v433）**：Day2=gen-yuna-day2-desk.jpg（モニターに切り抜き動画が映る机）、Day5=gen-yuna-day5-living.jpg（リビングのテーブル、飲み物と伏せたスマホ、奥にテレビ）。Day4は未着（保留）
@@ -2583,18 +2583,18 @@ v398のサウンドを実駆動で全数計測（__snd.played）して仕上げ�
 6. ~~ジウ・Day6用：1枚（現状 Day3 と同じ pin-makeup）~~ → **消化済み（v431、Pinterest調達）**：pin-jiwoo-d6.jpg
 7. ~~カリナ・Day2〜6用：5枚（現状は全日同一写真。最初のフォロワーにカリナを選んだ場合のみ表示される枠）~~ → **消化済み（v431、Pinterest調達）**：pin-karina-d2〜d6.jpg
 8. ~~ミナ・Day2〜6用：5枚（同上、ミナを選んだ場合のみ）~~ → **消化済み（v431、Pinterest調達）**：pin-mina-d2〜d6.jpg
-9. 【任意】井汲大翔・チェーン event Day6「20時から、配信します」用：配信カット 1枚（gen-story-stream の登場回数を減らすため）
+9. ~~【任意】井汲大翔・チェーン event Day6「20時から、配信します」用：配信カット 1枚~~ → **消化済み（v434）**：gen-hiroto-chain-tripod-setup.jpg（顔なし：三脚のスマホ背面＋コーラ缶＋アイスコーヒー）の告知カットに置換
 10. ~~【任意】なお・Day7用：1枚~~ → **消化済み（v432）**：gen-nao-day7-cafe.jpg（カフェ窓際でラテ、雨上がりの街路）を NAO_STORY[7] に充当（両ルート共通）
 
 ### スマホ配信版への差し替えリスト（2026-11-17追加、本人の新前提「彼の配信はスマホ配信」）
 文章側にマイク・モニター等の言及はゼロ（確認済み）のため、対象は写真のみ。
-- 配信シーンのメイン写真 gen-story-stream（リングライト＋カメラ＋OBSの本格デスク。彼のストーリーDay3・Day4＋チェーン post Day2・event Day2・event Day6 の5枠＋旧セーブ救済リマップで使用）→ スマホ三脚＋部屋の灯りのスマホ配信カット。できれば2〜3枚（使い回し解消も兼ねる）
-- 彼のDay5ポスト写真 gen-hiroto-desk（キーボードとモニター際のドリンク。チェーン post Day5）→ コーラとアイスコーヒーはそのまま、スマホを伏せた机／サイドテーブル版
-- 彼のストーリーDay2写真 gen-hiroto-after-desk（モニターとヘッドホンのデスク）→ スマホと飲みかけコーラとイヤホンのベッド／机版
-- 【軽め】配信キャプチャ gen-hiroto-live はUIがスマホライブ風だが正面マイクが大きい。マイクなし版があれば差し替え
-- 井汲Day4用（マイク横顔の作り直し）：スマホ配信中の横顔／手元版
-- チェーンDay6「20時から、配信します」用（顔なしデスクの作り直し）：スマホ三脚の告知カット版
-- 彼の日常カット（配信以外の生活感のある絵）2〜3枚：大阪の地元・帰省の風景、コンビニ帰り、電車の窓など。届いたら配信カットの一部と差し替えて、彼のストーリー写真が配信に寄りすぎない配分にする
+- ~~配信シーンのメイン写真 gen-story-stream → スマホ配信カット~~ → **消化済み（v434）**：5枠すべてを別々のスマホ三脚カットに配分（Day3は後述のTVカット、Day4=hoodie、post Day2=tripod-profile、event Day2=tripod-front、event Day6=chain-tripod-setup）。旧ファイルは archived-assets へ退避し、旧セーブの dyn エントリは表示時リマップで新カットへ誘導
+- ~~彼のDay5ポスト写真 gen-hiroto-desk → サイドテーブル版~~ → **消化済み（v434）**：gen-hiroto-day5-table.jpg（コーラ缶＋アイスコーヒー＋伏せたスマホ）。旧ファイルは退避
+- ~~彼のストーリーDay2写真 gen-hiroto-after-desk → ベッド／机版~~ → **消化済み（v434）**：gen-hiroto-story-day2-bed.jpg（ベッドにコーラのペットボトル・スマホ・イヤホンケース）。旧ファイルは退避
+- ~~【軽め】配信キャプチャ gen-hiroto-live のマイクなし版~~ → **消化済み（v434）**：本人の v2（スマホライブUI・視聴者328・マイクなし）でファイルの中身を差し替え（パスは不変、IMG_DIMS は 1206×1622 に更新）。旧版は archived-assets/gen-hiroto-live_v1-mic.jpg に保全
+- ~~井汲Day4用（マイク横顔の作り直し）~~ → **消化済み（v434）**：gen-hiroto-hoodie.jpg（配信前に三脚のスマホを調整する手元と横顔、夜景）を Day4 ベースに配分
+- ~~チェーンDay6用（顔なしデスクの作り直し）~~ → **消化済み（v434）**：gen-hiroto-chain-tripod-setup.jpg を event Day6 に配分
+- ~~彼の日常カット 2〜3枚~~ → **消化済み（v434）**：4点が届き、Day3=gen-hiroto-day3-tv.jpg（ソファでテレビを観る横顔、字幕そのまま合致）、Day1=gen-hiroto-daily-arcade.jpg（大阪の商店街アーケード、後ろ姿）、Day5=gen-hiroto-daily-conveni.jpg（夜の住宅街、コンビニ袋）を配分。gen-hiroto-daily-train.jpg（夕方の電車の窓、横顔）は合う枠がなく保留素材（incoming に残置）
 
 ## 最終回帰（v427、2026-11-17未明）＋第3回完了
 最終回帰（/tmp/rw3/final.py を再構築して実施。全5ラン＋セーブ復帰チェック）：
@@ -2664,3 +2664,15 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - X：フォロワー4,379人、ポストのいいね最大560目安（従来どおり）
 - TikTok：フォロワーは **4.3万人**、ダンス動画のいいねは **1万超級（12.4K級が実在のレベル）**
 - Xの小規模アンカーを TikTok の数字に適用しないこと。作中に TikTok の数字が出る場合は上記基準で統一する
+
+## v434（2026-11-17）バッチA：井汲のスマホ配信版への全面差し替え
+本人の新前提「彼の配信はスマホ配信」に沿い、デスク・マイク型の旧カットを全てスマホ三脚・日常カットに置換。配分は本人の調整指示（配信カットは字幕が配信そのものの枠へ寄せ、Day3はテレビ視聴カット、配信に寄せすぎない）に従った。
+- ベース（imgH）：Day1=gen-hiroto-daily-arcade.jpg（大阪の商店街、後ろ姿）／Day2=gen-hiroto-story-day2-bed.jpg（ベッド＋コーラ＋スマホ＋イヤホンケース）／Day3=gen-hiroto-day3-tv.jpg（ソファでテレビを観る横顔、コーラ）／Day4=gen-hiroto-hoodie.jpg（配信前に三脚を調整、夜景）／Day5=gen-hiroto-daily-conveni.jpg（夜の住宅街、コンビニ袋）／Day6=gen-hiroto-day6-night.jpg（不変）
+- チェーン：post Day2=gen-hiroto-tripod-profile.jpg（笑う横顔）／post Day5=gen-hiroto-day5-table.jpg（サイドテーブル）／event Day2=gen-hiroto-tripod-front.jpg（正面、コーラ缶）／event Day6=gen-hiroto-chain-tripod-setup.jpg（顔なし告知カット）
+- gen-hiroto-live は本人の v2（視聴者328・マイクなし）で中身を差し替え（パス不変、実寸 1206×1622 に IMG_DIMS 更新、旧版は退避先に保全）
+- 旧セーブ救済：storyList の表示時リマップを拡張（ig-avatar→tripod-front、gen-hiroto-desk→day5-table、gen-story-stream は uid 別に post2/event2/event6 の新カットへ）
+- 旧アセット gen-story-stream／gen-hiroto-desk／gen-hiroto-after-desk は使用箇所ゼロを確認し archived-assets/hiroto-status/ へ退避（削除せず）。IMG_DIMS からも除去
+- 未使用の届け素材：gen-hiroto-after-selfie（旧 Day5）は assets に残置。hiroto-stream-profile-serious.jpg と hiroto-daily-train.jpg は合う枠がなく incoming に保留
+- TikTok素材 hiroto-tiktok-dance.jpg は、作中に TikTok／ダンス動画へ触れるポスト枠が存在しない（全文検索で TikTok 言及ゼロ）ため無理に入れず保留
+- fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v434 統一
+- 検証：Playwright実駆動（/tmp/verify434.py）。データ照合（ベース6枠・チェーン4枠・IMG_DIMS・live実寸）、ビューア実表示で Day3（TV）・Day4（hoodie）・event Day6（告知カット）を確認、ひろと編通し→エンディング→Day7→FIN到達、エラー0
