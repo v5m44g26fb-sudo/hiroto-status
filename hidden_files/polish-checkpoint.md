@@ -2705,3 +2705,14 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - みくは架空の幼なじみのため人物写真は使わず、物撮りから選定：pin-miku-d1.jpg（手に持ったパステルカラーのお祝いブーケ、白壁背景、人物なし。i.pinimg.com の 736×1104）を STORY_BASE.miku.imgs[0] に配分。ゆな Day1 は pin-cafe-coffee のまま不変で、重複を解消
 - IMG_DIMS に実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v438 統一
 - 検証：Playwright実駆動（/tmp/verify438.py）。storyBaseFor で miku Day1=pin-miku-d1・fan1 Day1 と相違を確認、ビューア実表示で背景差し替えを確認、ひろと編通し→FIN到達、エラー0
+
+## v439（2026-11-17）サクヤのストーリー写真もPinterest調達に（sakuya-bmg の使い回し解消）
+本人の追加指示に基づき、sakuya-bmg の使用3枠を Pinterest 調達の本人写真に差し替え。字幕（capS）は既存のまま、Day6 は本人の生成カット（gen-sakuya-day6-studio）を維持。
+- ベース Day2（字幕「リハーサル、終わりました」）：pin-sakuya-d2.jpg（マシュマロ串を持った遊び心のあるセルカ、544×680）
+- チェーン event Day2（字幕「今日のステージ」）：pin-sakuya-ev2.jpg（ピンク髪のプレスフォト、ほっぺハート、720×933）
+- チェーン event Day6（字幕「よろしくお願いします」）：pin-sakuya-ev6.jpg（ピンク髪のセルカ、960×1200）
+- 全て既存のサクヤ写真（sakuya-selca／sakuya-stage／アバター）と顔照合。候補に混入したリク（ピンクのパーカー）・シオン系・ジェヒ系、2人写り、フォトカードの撮影物は除外
+- sakuya-bmg.jpg はコード内参照が IMG_DIMS のみになったが、旧セーブの dyn エントリ対策としてファイルは残置
+- IMG_DIMS に新規3点の実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v439 統一
+- 検証：Playwright実駆動（/tmp/verify439.py）。データ照合（ベースDay2・チェーンevent2/6・Day6生成カットの維持）、ビューア実表示で Day2 を確認しスクショ目視、サクヤ編通し→エンディング→Day7→FIN到達、エラー0
+- これで今回の生成写真組み込み＋バッチA〜C＋みくDay1是正＋サクヤ調達の全パスが着地（v432〜v439）。保留素材は従来どおり：hiroto-day4-stream／hiroto-chain-day6-desk（スマホ配信の前提に合わない2点）、hiroto-stream-profile-serious、hiroto-daily-train、hiroto-tiktok-dance（組み込み先なし）、unassigned-rural-station
