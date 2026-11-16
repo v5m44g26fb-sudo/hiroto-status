@@ -2682,3 +2682,11 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - IMG_DIMS に実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v435 統一
 - 検証：Playwright実駆動（/tmp/verify435.py）。データ照合（fan1 全6日）、ビューア実表示で Day4 を確認しスクショ目視、サクヤ編通し→エンディング→Day7→FIN到達、エラー0
 - 依頼リスト：4（ゆな）を全て消化済みに更新。残る生成待ちは ゆな・みく分が解消し、残件はなし（保留素材：hiroto-daily-train／hiroto-stream-profile-serious／hiroto-tiktok-dance）
+
+## v436（2026-11-17）バッチC1：カルメン・イェオンのストーリー写真を本人写真に全面差し替え
+本人の承認（バッチC）に基づき、共有プール写真（pin-makeup／pin-studio-console／pin-rack／pin-studio／pin-dance／pin-group／pin-studio-booth／pin-night の使い回し）を、両名とも Day1〜6 全て別の本人写真に置換。字幕は既存のまま。
+- カルメン：pin-carmen-d1〜d6.jpg を新設し STORY_BASE.carmen.imgs を差し替え（img: 本体は fxcheck の列不変のため従来値のまま、v431方式）。D1=ほっぺハンドのクローズアップ／D2=サイドポニーテールのウインク／D3=石壁の白T／D4=白シャツのセルカ／D5=ハートハンド／D6=コーンドッグを持ってウインク。全てアバター（av-carmen）と顔照合し、別メンバー（ユハ系）の混入候補は目視で除外
+- イェオン：pin-yeon-d1〜d6.jpg を新設し STORY_BASE.yeon.imgs を差し替え。D1=ぬいぐるみと一緒のセルカ／D2=車内ウインク／D3=ステージ（字幕「番組の収録、がんばります」に合致）／D4=ニット帽のセルカ／D5=ピースのセルカ／D6=名札（하츠투하츠 예온）付きで本人確定のカット。全て av-yeon と顔照合済み
+- 調達経路の注記：Pinterest 本体はこの環境から 403 で直接取得できないため、画像インデックス経由で公開写真（Weverse／X／韓国メディアのアーカイブ等、Pinterest 上にも流通している同一写真群）を取得し、v431と同じ顔照合基準で選定した
+- IMG_DIMS に新規12点の実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v436 統一
+- 検証：Playwright実駆動（/tmp/verify436.py）。データ照合（両名とも6日すべて別写真）、ビューア実表示でカルメンDay1・イェオンDay3を確認しスクショ目視、ひろと編通し→エンディング→Day7→FIN到達、エラー0
