@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v376</p>
+  <p class="ver">v377</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v376</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v377</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v376</p>
+    <p class="ver">v377</p>
   </div>
 </section>
 </div>
@@ -3835,7 +3835,7 @@ function curTrends(){const base=(tgtKey()==="sakuya"?TRENDS_S:TRENDS).slice();
  if(S.dist>=38&&S.ch>=4)dyn.push(sk?["エンタメ","歌うまコラボSP コラボ予告",fp(15000+S.dist*180)]:["トレンド","井汲大翔 秒速いいね",fp(15000+S.dist*180)]);
  else if(S.cog>=45)dyn.push(["エンタメ","#なお 歌唱力",fp(6000+S.cog*150)]);
  if(S.flm>=20&&S.dist>=25)dyn.push(["エンタメ",sk?"サクヤ なお 匂わせ":"井汲大翔 なお 匂わせ",fp(5000+S.flm*120+S.dist*60)]);
- const baseF=base.filter(t=>!((t[1]==="#肉まん被り"||t[1]==="#メロンパン被り")&&S.ch<5));
+ const baseF=base.filter(t=>!((t[1]==="#肉まん被り"||t[1]==="#メロンパン被り")&&S.ch<5)&&!(t[1]==="歌うまコラボSP 噂"&&S.ch<4));
  if(!dyn.length)return baseF;
  const used=new Set(dyn.map(t=>t[1]));
  return dyn.concat(baseF.filter(t=>!used.has(t[1]))).slice(0,7);}
@@ -5185,7 +5185,7 @@ $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
 function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
 function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){$("#x-pane-trend").innerHTML="";const list=curTrends(),maxV=Math.max(1,...list.map(trendNum));const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-live'></span><span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);list.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i,maxV)));
- const sug=$("#x-sug");sug.innerHTML="";(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#メロンパン被り","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#肉まん被り","MUSIC STAGE"]).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
+ const sug=$("#x-sug");sug.innerHTML="";const chN=(typeof S!=="undefined"&&S&&S.ch)||1;(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#メロンパン被り","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#肉まん被り","MUSIC STAGE"]).filter(w=>!((w==="#肉まん被り"||w==="#メロンパン被り")&&chN<5)&&!(w==="熱愛報道"&&chN<6)).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
 let searchTab="topic";
 /* v167: recent-search chips - session-local only (module state,
