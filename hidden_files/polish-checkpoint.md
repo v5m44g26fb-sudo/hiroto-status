@@ -2578,7 +2578,7 @@ v398のサウンドを実駆動で全数計測（__snd.played）して仕上げ�
 1. ~~【優先】井汲大翔・Day4ベースストーリー用：配信まわりの新しいカット 1枚~~ → **消化済み（v434）**：前提がスマホ配信に変わったため、スマホ三脚の準備カット gen-hiroto-hoodie.jpg（配信前に三脚のスマホを調整）に置換
 2. ~~【優先】井汲大翔・Day6ベースストーリー用：最終日の1枚~~ → **消化済み（v432）**：gen-hiroto-day6-night.jpg（夜景の窓辺・黒シャツの自撮り）を imgH の6件目に追加し、Day1フォールバックを解消
 3. ~~サクヤ・Day6ベースストーリー用：1枚~~ → **消化済み（v432）**：gen-sakuya-day6-studio.jpg（練習室で水を持つグレー服）を imgS の6件目に追加し、Day1フォールバックを解消
-4. ゆな・Day2／Day4／Day5用：カフェ系の別カット 3枚（現状コーヒー×2日・ケーキ×3日）→ **Day2・Day5は消化済み（v433）**：Day2=gen-yuna-day2-desk.jpg（モニターに切り抜き動画が映る机）、Day5=gen-yuna-day5-living.jpg（リビングのテーブル、飲み物と伏せたスマホ、奥にテレビ）。Day4は未着（保留）
+4. ~~ゆな・Day2／Day4／Day5用：カフェ系の別カット 3枚~~ → **全て消化済み（v433・v435）**：Day2=gen-yuna-day2-desk.jpg（モニターに切り抜き動画が映る机）、Day5=gen-yuna-day5-living.jpg（リビングのテーブル、飲み物と伏せたスマホ、奥にテレビ）、Day4=gen-yuna-day4-screenshot.jpg（Xの画面スクショ風、ぼかしポスト＋ステージ光の写真。字幕「『後輩です』ポスト…！？ 震えてる」に合致）
 5. ~~みく・Day4／Day5用：2枚~~ → **消化済み（v433）**：Day4=gen-miku-day4-station.jpg（夕方の都市部の駅ホーム）、Day5=gen-miku-day5-river.jpg（橋から見た川と夕焼けの空）
 6. ~~ジウ・Day6用：1枚（現状 Day3 と同じ pin-makeup）~~ → **消化済み（v431、Pinterest調達）**：pin-jiwoo-d6.jpg
 7. ~~カリナ・Day2〜6用：5枚（現状は全日同一写真。最初のフォロワーにカリナを選んだ場合のみ表示される枠）~~ → **消化済み（v431、Pinterest調達）**：pin-karina-d2〜d6.jpg
@@ -2676,3 +2676,9 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - TikTok素材 hiroto-tiktok-dance.jpg は、作中に TikTok／ダンス動画へ触れるポスト枠が存在しない（全文検索で TikTok 言及ゼロ）ため無理に入れず保留
 - fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v434 統一
 - 検証：Playwright実駆動（/tmp/verify434.py）。データ照合（ベース6枠・チェーン4枠・IMG_DIMS・live実寸）、ビューア実表示で Day3（TV）・Day4（hoodie）・event Day6（告知カット）を確認、ひろと編通し→エンディング→Day7→FIN到達、エラー0
+
+## v435（2026-11-17）バッチB：ゆな Day4 ストーリー写真
+- ゆな Day4：gen-yuna-day4-screenshot.jpg（Xの画面スクショ風、ぼかしポスト＋ステージ光、1008×2128）を fan1 の imgs[3] に配分。字幕「『後輩です』ポスト…！？ 震えてる」（ひろと編は「ざわつきの噂…！？ 震えてる」）に合致し、pin-cafe-cake の使い回しを解消。これでゆなの6日は全て別写真になった
+- IMG_DIMS に実寸を追加。fxcheck: fx194・img79・cond81・BUZZキー111 完全一致。版数3箇所 v435 統一
+- 検証：Playwright実駆動（/tmp/verify435.py）。データ照合（fan1 全6日）、ビューア実表示で Day4 を確認しスクショ目視、サクヤ編通し→エンディング→Day7→FIN到達、エラー0
+- 依頼リスト：4（ゆな）を全て消化済みに更新。残る生成待ちは ゆな・みく分が解消し、残件はなし（保留素材：hiroto-daily-train／hiroto-stream-profile-serious／hiroto-tiktok-dance）
