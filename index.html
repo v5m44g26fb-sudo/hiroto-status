@@ -2934,7 +2934,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v419</p>
+  <p class="ver">v420</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3114,7 +3114,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v419</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v420</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3384,7 +3384,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v419</p>
+    <p class="ver">v420</p>
   </div>
 </section>
 </div>
@@ -3936,6 +3936,8 @@ $("#btn-target").onclick=()=>{if(!selT)return;S.target=selT.key;updSetupNotes();
 $("#btn-first").onclick=()=>{S.first=selF.id;S.started=true;if(!S.world)S.world="idol";S.notifs.push({a:selF.id,tx:"さんがあなたをフォローしました",sub:"最初のフォロワー ― 物語の起点"});startChapter(1);
  const w=FIRST_WELCOME[S.first];
  if(w){const wp=mkPost(S.first,w.tx,w.lk,w.rp,w.rc,false);S.posts.unshift(wp);
+  const wreps=S.first==="akari"?[["fan1","なおちゃん、デビューおめでとう…！"],["fan2","デビューおめでとうございます。歌、聴きました"]]:[["fan1","なおちゃん、デビューおめでとう…！"],["akari","なおオンニ、デビューおめでとうございます！"]];
+  wp.replyIds=wreps.map(e=>{const rp=mkPost(e[0],e[1],18,2,1,false,null);rp.isReply=true;rp.replyTo=wp.id;S.posts.push(rp);return rp.id;});
   if(S.first==="mina")S.notifs.unshift({a:"matome",tx:"が「TWICE・ミナが新人なおを初フォロー」と報じました",sub:"最初のフォロワー ― メディアがざわついた"});
   renderFeed();renderNotifs();save();}
  show("v-x");showPane("tl");save();setTimeout(()=>toastChg("ワールド「芸能界」に入ったよ"),350);setTimeout(()=>toastChg("最初のフォロワーが、物語の起点になるよ"),1100);};
@@ -4613,20 +4615,26 @@ function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[
    - never stitched or concatenated. "No replies yet" now only appears on
    posts whose counter is genuinely near zero. */
 const TOP_REPLIES={
- nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なおオンニ、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなおオンニ、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"],["fan2","歌は好き。でも最近、噂のほうで名前を見ることが増えたのは、少しだけ心配"],["ian","オンニのポスト、メンバーみんなで見てるよ"],["fan2","10年以上、練習生だった人の歌だと思うと、ひとつひとつの音が重い"],["fan1","ふとした時に出る関西の言葉、すごく好きです"],["fan2","あの人のファンだったけど、この人の歌も好きになってきた。両方応援していいよね"]],
- tgt:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人のステージ、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"],["fan2","7年経っても、聴くたびに初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも静かで温かい。数字じゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","古参の皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"]],
+ nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なおオンニ、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなおオンニ、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"],["fan2","歌は好き。……でも、無理だけはしないでほしい"],["ian","オンニのポスト、メンバーみんなで見てるよ"],["fan2","10年以上、練習生だった人の歌だと思うと、ひとつひとつの音が重い"],["fan1","ふとした時に出る関西の言葉、すごく好きです"],["fan2","あの人のファンだったけど、この人の歌も好きになってきた。両方応援していいよね"]],
+ tgtH:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人の配信、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって観ちゃった"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも静かで温かい。数字じゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","古参の皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"]],
+ tgtS:[["fan2","待ってました…！ ずっと観てます"],["sora","この人のステージ、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも温かい。数字だけじゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","ファンの皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"]],
  member:[["fan1","なおちゃん推しだけど、この投稿は保存しました"],["sora","メンバーのこういう一言、ぐっときます"],["fan2","Hearts2Hearts、みんな仲が良いの伝わってくる"],["fan1","オンニ呼びの距離感、見てる側もほっこりする"]],
- other:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"]]};
+ news:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"],["fan2","続報待ちだな"],["sora","これは見守りたいやつ"],["fan1","通知で来て、思わず開いちゃった"]],
+ other:[["sora","これは残しておきたい投稿"],["fan1","ほんとにそれです…！"],["fan2","同意しかないな"],["fan1","見てて、ほっとしました"]]};
 function replyCountOf(p){const v=parseInt(String(p.m&&p.m[0]!=null?p.m[0]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;}
 function seedTopReplies(p,have){
  if(typeof S==="undefined"||!S||!S.posts)return have;
  const rc=replyCountOf(p);if(rc<10)return have;
  const want=rc>=250?4:rc>=60?3:2;
  if(have.length>=want)return have;
- const pool=p.a==="nao"?TOP_REPLIES.nao:(p.a===tgtKey()?TOP_REPLIES.tgt:(["akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)?TOP_REPLIES.member:TOP_REPLIES.other));
+ /* v420: a post that already carries 2+ authored replies is a complete
+    thread - never top it up with pool lines (a cheerful pooled reply
+    under an apology post was the visible failure). */
+ if(have.length>=2)return have;
+ const pool=p.a==="nao"?TOP_REPLIES.nao:(p.a===tgtKey()?(tgtKey()==="hiroto"?TOP_REPLIES.tgtH:TOP_REPLIES.tgtS):(["akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)?TOP_REPLIES.member:((p.a==="media"||p.a==="matome")?TOP_REPLIES.news:TOP_REPLIES.other)));
  let h=0;for(const c of String(p.id))h=(h*31+c.charCodeAt(0))>>>0;
  const used=new Set(have.map(r=>r.a));const picks=[];
- for(let i=0;i<pool.length&&picks.length<want-have.length;i++){const e=pool[(h+i)%pool.length];if(used.has(e[0]))continue;used.add(e[0]);picks.push(e);}
+ for(let i=0;i<pool.length&&picks.length<want-have.length;i++){const e=pool[(h+i)%pool.length];if(e[0]===p.a||used.has(e[0]))continue;used.add(e[0]);picks.push(e);}
  if(!picks.length)return have;
  const seeds=picks.map((e,i)=>{const rp=mkPost(e[0],e[1],24+((h>>(i*3))%160),3+((h>>(i*2))%14),1+((h>>i)%6),false,null);rp.isReply=true;rp.replyTo=p.id;return rp;});
  seeds.forEach(r=>S.posts.push(r));
@@ -4636,8 +4644,12 @@ function seedTopReplies(p,have){
 }
 function threadReplies(p){
  let base=[];
- if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[]);const seen=new Set();p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);base.push(o);}});}
- if(!base.length){const idx=(S.posts||[]).indexOf(p);if(idx>=0)base=S.posts.slice(idx+1).filter(q=>q&&!q.sys&&!q.isReply&&q.a!==p.a).slice(0,3);}
+ if(p.replyIds&&p.replyIds.length){const all=(S.posts||[]).concat(S.men||[],S.rkeep||[]);const seen=new Set();p.replyIds.forEach(id=>{const o=all.find(x=>x&&x.id===id&&!seen.has(x.id));if(o){seen.add(o.id);base.push(o);}});}
+ /* v420: replies come only from replyIds (authored reactions, the
+    player's own replies, seeded top replies). The old position-based
+    fallback showed whichever posts happened to sit next to a post in
+    the feed array as its "replies" (e.g. the target's stream notice
+    rendered as a reply to Karina's congrats post) - removed. */
  return seedTopReplies(p,base);
 }
 function renderThread(p){
@@ -4726,7 +4738,7 @@ function tcSendReply(){
 }
 const REPLY_REACT={
  hiroto:{tx:["ありがとう。……読んだよ","うん、ありがとう","……なんか、うれしいな","おつかれさま。無理せんとってな"],like:.45},
- sakuya:{tx:["わあ、ありがとうございます","その言葉、静かにうれしいです","覚えていてくれて、ありがとうございます","……空が晴れたみたいな気持ちになりました"],like:.4},
+ sakuya:{tx:["わあ、ありがとうございます","その言葉、静かにうれしいです","覚えていてくれて、ありがとうございます","その言葉、ずっと覚えておきます"],like:.4},
  member:{tx:["なおー！ 見たよ見たよ","わかる、それ言いたかったやつ","最年長、さすがの言葉選び","ねえねえ、あとで楽屋でも話そ"],like:.3},
  fan:{tx:["ほんとそれです…！","なおちゃん、言葉がまっすぐで好き","引用したいくらい、良い返信","わたしも同じ気持ちでした"],like:.3},
  official:{tx:["ありがとうございます。引き続き、よろしくお願いいたします","ご注目、ありがとうございます","今後の続報にも、ご期待ください"],like:.35},
@@ -4747,7 +4759,7 @@ function tcScheduleReaction(parent,myReply){
  const pid=parent.id,rid=myReply.id;
  setTimeout(()=>{
   if(!S||!S.started)return;
-  const all=(S.posts||[]).concat(S.men||[]);
+  const all=(S.posts||[]).concat(S.men||[],S.rkeep||[]);
   const par=all.find(x=>x&&x.id===pid);if(!par)return;
   const ctx=tcReactCtx(par);
   if(Math.random()<ctx.pool.like){
@@ -5281,6 +5293,13 @@ function startChapter(n){
   akari:{tx:"なおオンニ、今日の報道見た。10年以上の努力は、誰にも消せないよ。リーダーとして、メンバーとして、隣にいるからね。",lk:1600,rp:260,rc:180}
  };
  const FF6=(tgtKey()==="hiroto"?FF6H:FF6S)[S.first];if(FF6)sd.unshift(mkPost(S.first,FF6.tx,FF6.lk,FF6.rp,FF6.rc,false,null));}
+ /* v420: posts referenced by your own posts' replyIds (authored reactions,
+    your replies, seeded top replies) move to S.rkeep at the day change
+    instead of vanishing, so a thread keeps the replies it was written
+    with on later days too. */
+ if(!S.rkeep)S.rkeep=[];
+ const keepIds=new Set();S.posts.filter(p=>p.mine).forEach(p=>(p.replyIds||[]).forEach(id=>keepIds.add(id)));
+ S.posts.forEach(p=>{if(!p.mine&&keepIds.has(p.id)&&!S.rkeep.some(q=>q.id===p.id))S.rkeep.push(p);});
  S.posts=sd.concat(S.posts.filter(p=>p.mine));
  renderDayBanner();
  $("#x-head-note").textContent="Day "+n+" / "+totalDays()+"";
