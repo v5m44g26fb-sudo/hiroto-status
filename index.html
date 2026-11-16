@@ -2489,6 +2489,29 @@ input,textarea{font-size:16px}
 #scr-title::before{animation:titledrift 18s ease-in-out infinite alternate}
 @keyframes titledrift{from{transform:scale(1.02)}to{transform:scale(1.1) translateY(-6px)}}
 @media (prefers-reduced-motion:reduce){#scr-title::before{animation:none}}
+/* ===== v396: title, third raise - make it read like a real game's
+   title screen. The key visual goes sharp (the promo visual is the
+   poster now, not a blur behind glass) under a designed scrim that
+   stays light over the photo and anchors the lower UI in near-black;
+   the logo lockup gains the EN sub-caption real title logos carry;
+   the start CTA takes the brand gradient with a slow breathing glow
+   (its label also drops the hand-written arrow - the intro CTA rule
+   already draws one, so it rendered twice); the footer gains the
+   small print a real title screen carries. Structure, buttons,
+   destinations and the no-real-names rule are unchanged. ===== */
+#scr-title::before{filter:blur(1px) brightness(.8) saturate(1.25);background-position:center 15%}
+#scr-title::after{background:linear-gradient(180deg,rgba(6,5,16,.30) 0%,rgba(6,5,16,.08) 30%,rgba(6,5,16,.40) 58%,rgba(3,3,9,.90) 85%,rgba(2,2,7,.97) 100%)}
+#scr-title h1{font-size:31px;letter-spacing:.04em}
+.t-en{margin-top:11px;font-size:10.5px;font-weight:900;letter-spacing:.42em;text-indent:.42em;color:#c9b8ff}
+#scr-title .t-rule{margin-top:14px}
+#scr-title .flowsteps span{text-shadow:0 1px 9px rgba(0,0,0,.5)}
+#scr-title #btn-start{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;animation:titlein .6s cubic-bezier(.2,.8,.25,1) 1.12s both,startglow 2.8s ease-in-out 2.1s infinite}
+@keyframes startglow{0%,100%{box-shadow:0 16px 38px rgba(249,24,128,.42),inset 0 1px 0 rgba(255,255,255,.35)}50%{box-shadow:0 16px 48px rgba(249,24,128,.68),inset 0 1px 0 rgba(255,255,255,.35)}}
+.t-copy{margin-top:9px;font-size:9.5px;line-height:1.75;letter-spacing:.05em;color:rgba(255,255,255,.4)}
+#scr-title.booted .t-en,#scr-title.booted .t-copy{animation:titlein .6s cubic-bezier(.2,.8,.25,1) both}
+#scr-title.booted .t-en{animation-delay:.85s}
+#scr-title.booted .t-copy{animation-delay:1.37s}
+@media (prefers-reduced-motion:reduce){#scr-title #btn-start{animation:none}#scr-title.booted .t-en,#scr-title.booted .t-copy{animation:none}}
 .ts-dist{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14)}
 .ts-jhint{margin-top:10px;text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:rgba(255,255,255,.55)}
 .ts-dist-lab{font-size:11px;font-weight:800;letter-spacing:.1em;color:#cdbcf5;white-space:nowrap}
@@ -2818,12 +2841,13 @@ input,textarea{font-size:16px}
   <p class="sp-eyebrow">NAO ― OFFICIAL X OPENING</p>
   <p class="sp-title">デビューしたら、<br>彼と同じステージの件</p>
   <div class="sp-bar"><i></i></div>
-  <p class="sp-cap">STATUS ― 6 DAYS STORY</p>
+  <p class="sp-cap">STATUS ― 7 DAYS STORY</p>
 </div></div>
 <section class="screen intro on" id="scr-title" style="--bgimg:url(assets/nao-promo.jpg)">
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
   <p class="t-eyebrow">NAO ― OFFICIAL X OPENING</p>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
+  <p class="t-en" aria-hidden="true">― ON THE SAME STAGE ―</p>
   <div class="t-rule"></div>
   <p class="sub">10年以上の練習生期間を経て、デビュー。<br>「なお」の公式X、開設。<br>バズるか、炎上するか。あの人に、少しずつ近づけるか。</p>
   <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>相手選択</span><span>最初のフォロワー</span></div>
@@ -2840,11 +2864,12 @@ input,textarea{font-size:16px}
     <div class="ts-dist"><span class="ts-dist-lab" id="ts-dist-lab">二人の距離</span><span class="ts-pips" id="ts-pips"><i></i><i></i><i></i><i></i><i></i></span><b class="ts-dist-stage" id="ts-dist-stage"></b></div>
     <div class="ts-jhint">タップで「あゆみ」を開く</div>
   </div>
-  <button class="btn" id="btn-start">はじめる →</button>
+  <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v395</p>
+  <p class="ver">v396</p>
+  <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3043,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v395</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v396</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3312,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v395</p>
+    <p class="ver">v396</p>
   </div>
 </section>
 </div>
