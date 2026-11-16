@@ -2848,6 +2848,32 @@ input,textarea{font-size:16px}
 .dmchoice .xchip.dist{background:rgba(249,24,128,.12);color:#d60f74}
 .dmchoice .xchip.bad{background:rgba(244,33,46,.1);color:#d11a27}
 .dmchoice .xchip.xp{background:rgba(120,86,255,.13);color:#6643d8}
+
+/* ===== v409 (X realism - profile header): on the two profile panes the
+   header bar starts as the real client's does - transparent over the
+   cover, only the back / share buttons floating in dark glass circles,
+   name and post count hidden. Once the cover has scrolled up under the
+   bar, .bar-solid fades in the blurred white bar with the name. The bar
+   keeps its sticky slot via a negative bottom margin, so the cover now
+   starts flush at the pane top exactly like the real profile. ===== */
+#x-pane-me .profbar,#x-pane-hisprof .profbar{height:52px;box-sizing:border-box;margin-bottom:-52px;z-index:9;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;transition:background .25s ease}
+#x-pane-me .profbar::after,#x-pane-hisprof .profbar::after{opacity:0;transition:opacity .25s ease}
+#x-pane-me .profbar .pt,#x-pane-hisprof .profbar .pt{opacity:0;transform:translateY(3px);transition:opacity .22s ease,transform .22s ease}
+#x-pane-me .profbar .pback,#x-pane-hisprof .profbar .pback,
+#x-pane-me .profbar .pshare,#x-pane-hisprof .profbar .pshare{background:rgba(15,20,25,.55);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:50%;flex:none;transition:background .25s ease,color .25s ease}
+#x-pane-me.bar-solid .profbar,#x-pane-hisprof.bar-solid .profbar{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#x-pane-me.bar-solid .profbar::after,#x-pane-hisprof.bar-solid .profbar::after{opacity:1}
+#x-pane-me.bar-solid .profbar .pt,#x-pane-hisprof.bar-solid .profbar .pt{opacity:1;transform:none}
+#x-pane-me.bar-solid .profbar .pback,#x-pane-hisprof.bar-solid .profbar .pback,
+#x-pane-me.bar-solid .profbar .pshare,#x-pane-hisprof.bar-solid .profbar .pshare{background:none;color:#0f1419;backdrop-filter:none;-webkit-backdrop-filter:none}
+#x-pane-me .x-ptabs,#x-pane-hisprof .x-ptabs{top:52px}
+@media (prefers-reduced-motion:reduce){#x-pane-me .profbar,#x-pane-hisprof .profbar,#x-pane-me .profbar .pt,#x-pane-hisprof .profbar .pt{transition:none}}
+
+/* v409 follow-up: the covers' stat chips lived in the top corners the
+   floating buttons now own - drop both rows below the bar zone */
+#x-pane-me .pf-covstat{top:60px}
+#x-pane-me .pf-cover-chip{top:60px}
+#x-pane-hisprof .his-covstat{top:60px}
 </style>
 </head>
 <body>
@@ -2884,7 +2910,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v408</p>
+  <p class="ver">v409</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3064,7 +3090,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v408</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v409</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3334,7 +3360,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v408</p>
+    <p class="ver">v409</p>
   </div>
 </section>
 </div>
@@ -4384,6 +4410,7 @@ function showPane(k){
  if(k==="hisprof")renderHisTab();
  if(k==="msg"){renderDmList();setTimeout(maybeShowDmUnlock,80);}
  if(k==="follow")renderFollowList();
+ if(window.__syncProfBar)window.__syncProfBar();
 }
 /* one-shot "settle from the left" animation for back navigation */
 function panePop(el){if(!el)return;el.classList.remove("pane-pop");void el.offsetWidth;el.classList.add("pane-pop");setTimeout(()=>el.classList.remove("pane-pop"),240);}
@@ -4412,7 +4439,10 @@ $("#x-myava").addEventListener("click",()=>showPane("me"));
  const bd=document.createElement("span");bd.className="bdg";bd.id="dm-bdg";bd.textContent="!";dmBtn.appendChild(bd);
 })();
 /* FAB: hide while scrolling down, return on scroll up (real-X feel) */
-(function(){const sc=$("#x-scroll"),fab=$("#x-compose-btn");if(!sc||!fab)return;let ly=0;sc.addEventListener("scroll",()=>{const y=sc.scrollTop;if(y>ly+8&&y>120)fab.classList.add("fab-hide");else if(y<ly-4||y<60)fab.classList.remove("fab-hide");ly=y;},{passive:true});})();
+(function(){const sc=$("#x-scroll"),fab=$("#x-compose-btn");if(!sc||!fab)return;let ly=0;sc.addEventListener("scroll",()=>{const y=sc.scrollTop;
+ /* v409: profile header state - solid once the cover passes under the bar */
+ const syncPB=()=>{["me","hisprof"].forEach(k=>{const pane=$("#x-pane-"+k);if(!pane||pane.style.display==="none")return;const cov=pane.querySelector(".pf-cover");const th=cov?cov.offsetHeight-56:120;pane.classList.toggle("bar-solid",sc.scrollTop>th);});};
+ sc.addEventListener("scroll",syncPB,{passive:true});window.__syncProfBar=syncPB;if(y>ly+8&&y>120)fab.classList.add("fab-hide");else if(y<ly-4||y<60)fab.classList.remove("fab-hide");ly=y;},{passive:true});})();
 /* pull-to-refresh: only on the home timeline at scroll top. Finger-follow (damped,
    max 80px), threshold 64px. Refresh re-renders the same feed in the same order -
    no new posts, no reorder. A pull drag suppresses the click it would otherwise fire. */
