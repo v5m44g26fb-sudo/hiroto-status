@@ -2512,6 +2512,21 @@ input,textarea{font-size:16px}
 #scr-title.booted .t-en{animation-delay:.85s}
 #scr-title.booted .t-copy{animation-delay:1.37s}
 @media (prefers-reduced-motion:reduce){#scr-title #btn-start{animation:none}#scr-title.booted .t-en,#scr-title.booted .t-copy{animation:none}}
+/* ===== v397: setup flow, third raise - the four setup steps take the
+   title screen's language (v396): their key visuals sharpen from a
+   blurred backdrop into dimmed posters under the same designed scrim
+   family, the step CTAs take the brand gradient once armed (the
+   disabled face stays the dim white pill), the back link becomes a
+   glass chip, each step heading gains the EN caption the title logo
+   lockup carries, and the final step closes with the title's small
+   print. Options, counts, destinations and initial values are
+   unchanged. ===== */
+.screen.intro:not(#scr-title)::before{filter:blur(4px) brightness(.68) saturate(1.22)}
+.screen.intro:not(#scr-title)::after{background:linear-gradient(180deg,rgba(6,5,16,.44) 0%,rgba(5,5,12,.66) 42%,rgba(3,3,8,.93) 88%)}
+.setup-back{display:inline-flex;align-items:center;padding:7px 14px 7px 11px;margin-bottom:14px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(10,8,24,.34);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font-size:12.5px}
+.setup .btn:not(:disabled){background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;box-shadow:0 14px 32px rgba(249,24,128,.38),inset 0 1px 0 rgba(255,255,255,.35)}
+.s-en{margin:1px 0 3px;font-size:10px;font-weight:900;letter-spacing:.34em;color:#c9b8ff}
+#scr-first .t-copy{text-align:left;margin-top:16px}
 .ts-dist{display:flex;align-items:center;gap:8px;margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14)}
 .ts-jhint{margin-top:10px;text-align:center;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:rgba(255,255,255,.55)}
 .ts-dist-lab{font-size:11px;font-weight:800;letter-spacing:.1em;color:#cdbcf5;white-space:nowrap}
@@ -2868,7 +2883,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v396</p>
+  <p class="ver">v397</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -2879,6 +2894,7 @@ input,textarea{font-size:16px}
     <div class="step">STEP 1 / 4 ― WORLD SELECT</div>
     <div class="prog"><div class="track"><i style="width:25%"></i></div><span class="pnum"><b>1</b> / 4</span></div>
     <h2>どの世界で生きる？</h2>
+    <p class="s-en" aria-hidden="true">― THE STAGE IS SET ―</p>
     <p class="desc">この物語の舞台は、芸能界。フォロワーと評判と炎上で、毎日が動き出す。</p>
     <div id="worlds"></div>
     <button class="btn" id="btn-world" disabled>この世界に入る</button>
@@ -2893,6 +2909,7 @@ input,textarea{font-size:16px}
     <div class="prog"><div class="track"><i style="width:50%"></i></div><span class="pnum"><b>2</b> / 4</span></div>
     <div class="worldnote" id="persona-world-note"><span class="wn-lab">WORLD</span><b>芸能界 ― アイドルワールド</b></div>
     <h2>公式アカウント開設</h2>
+    <p class="s-en" aria-hidden="true">― OPENING DAY ―</p>
     <p class="desc">ガールズグループ「Hearts2Hearts」の最年長・唯一の日本人メンバーとして、10年以上の練習生期間を経てデビューした「なお」。今日、公式Xを開設する。</p>
     <p class="secttl">公式ハンドル</p>
     <div id="handles"></div>
@@ -2910,6 +2927,7 @@ input,textarea{font-size:16px}
     <div class="prog"><div class="track"><i style="width:75%"></i></div><span class="pnum"><b>3</b> / 4</span></div>
     <div class="worldnote hidden" id="target-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
     <h2>誰に近づく？</h2>
+    <p class="s-en" aria-hidden="true">― THE ONE YOU ADMIRE ―</p>
     <p class="desc">憧れの人は、選べる。どちらの背中を追うかで、物語が変わる。</p>
     <div id="targets"></div>
     <button class="btn" id="btn-target" disabled>この人で始める</button>
@@ -2924,6 +2942,7 @@ input,textarea{font-size:16px}
     <div class="prog"><div class="track"><i style="width:100%"></i></div><span class="pnum"><b>4</b> / 4</span></div>
     <div class="worldnote hidden" id="first-recap"><span class="wn-lab">SETUP SO FAR ― ここまでの選択</span><b></b></div>
     <h2>最初のフォロワー</h2>
+    <p class="s-en" aria-hidden="true">― THE VERY FIRST ―</p>
     <p class="desc">開設から数時間。最初のフォロワーが、物語の起点になる。</p>
     <div id="firsts"></div>
     <div class="setup-sum" id="setup-sum">
@@ -2935,6 +2954,7 @@ input,textarea{font-size:16px}
       <div class="ss-row"><span>最初のフォロワー</span><b id="ss-first" class="unset">未選択</b></div>
     </div>
     <button class="btn" id="btn-first" disabled>この人で始める</button>
+    <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
   </div>
 </section>
 
@@ -3043,7 +3063,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v396</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v397</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3312,7 +3332,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v396</p>
+    <p class="ver">v397</p>
   </div>
 </section>
 </div>
