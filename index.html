@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v379</p>
+  <p class="ver">v380</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v379</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v380</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v379</p>
+    <p class="ver">v380</p>
   </div>
 </section>
 </div>
@@ -3862,7 +3862,7 @@ const BUZZ=[
  {k:"h-a6",a:"matome",cond:s=>s.flm>=55,img:"assets/nao-hiroto-doorway.jpg",tx:"【続報】井汲大翔と新人・なお、深夜の玄関先で彼女が彼のジャケットを掴んで離さない姿が撮られたと報じられる。帰り際の数秒が、界隈を眠らせない",lk:4900,rp:1180,rc:940},
  {k:"h-a7",a:"matome",cond:s=>s.flm>=60,img:"assets/nao-hiroto-mirror.jpg",tx:"【流出か】井汲大翔と新人・なおのものとされる、鏡越しのツーショット写真が拡散中。本人たちしか持ち得ないはずの一枚に、事務所は沈黙を貫く",lk:5700,rp:1420,rc:1180},
  {k:"h-f1",a:"fan2",cond:s=>s.dist>=10,tx:"大翔くんのファンの反応、穏やかなのは古参が多いからだと思う。日プの頃からずっと見てる人たちだから、なおさんのことも静かに見守ってる",lk:186,rp:22,rc:31},
- {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんと大翔くんが同じ歌番組だったの、感慨深い。ボイプラで落ちた日、泣いたの私だけじゃないはず。あの人が今「先輩」って呼ばれる側なんだな",lk:243,rp:29,rc:44},
+ {k:"h-f2",a:"fan2",cond:s=>s.cog>=20,tx:"なおちゃんは歌番組、大翔くんは配信。いる場所は違うのに、最近この二人の名前、並んで見ることが増えた気がする。ボイプラで落ちた日、泣いたの私だけじゃないはず。あの人が今「先輩」って呼ばれる側なんだな",lk:243,rp:29,rc:44},
  {k:"h-f10",a:"fan2",cond:s=>s.ch>=3&&s.cog>=20,tx:"正直、最初は警戒してた。大翔くんの名前で伸びてる子かと思って、歌番組を確かめに行った。……10年以上、練習生をやってきた人だった。あの落ち着きは、本物だと思う",lk:268,rp:31,rc:47},
  {k:"h-f3",a:"sora",cond:s=>s.dist>=25,tx:"ひろとの現場、規模は大きくないけど熱量が別格だと思う。何度落ちても挑戦し続ける人を、何年も見てるファンがいる強さ",lk:328,rp:41,rc:26},
  /* v249 (episode): more of the world's voice, on the same ladder -
@@ -4118,7 +4118,7 @@ function postEl(p,hot){
   const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>{e.stopPropagation();
    /* v190: the share button actually shares - the system share
       sheet where available, the clipboard as fallback */
-   const data={title:"デビューしたら、彼と同じステージの件",text:(p.n||"")+"さんのポスト ― "+(p.t||""),url:location.href};
+   const data={title:"デビューしたら、彼と同じステージの件",text:(p.n||"")+"のポスト ― "+(p.t||""),url:location.href};
    try{if(navigator.share){navigator.share(data).catch(()=>{});}
    else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(data.text+" "+data.url).then(()=>{try{toastChg("リンクをコピーしたよ");}catch(_){}}).catch(()=>{});}
    else{try{toastChg("この環境では共有できないよ");}catch(_){}}}catch(_){}});
@@ -6010,7 +6010,7 @@ $("#dr-loglink").addEventListener("click",()=>{chgFilter="all";renderChgLog();$(
    DM gets a one-shot celebration the first time the message pane is opened
    while the thread is still unanswered. Display only: conversation text,
    unlock conditions and numbers are unchanged. */
-const DIST_STAGES=[{min:0,lab:"まだ、遠い存在",note:"まだ、画面の向こうの人。"},{min:5,lab:"認知され始めた",note:"いいねが届いた。向こうの世界に、名前が届き始めた。"},{min:15,lab:"同じ現場の人",note:"同じ番組、同じステージ。言葉を交わす距離になった。"},{min:30,lab:"二人だけの秘密",note:"DMでつながっている。ここからは、二人だけの話。"},{min:45,lab:"特別な距離",note:"公にはできない近さ。それでも、確かに特別。"}];
+const DIST_STAGES=[{min:0,lab:"まだ、遠い存在",note:"まだ、画面の向こうの人。"},{min:5,lab:"認知され始めた",note:"いいねが届いた。向こうの世界に、名前が届き始めた。"},{min:15,lab:"言葉が届く距離",note:"姿は見えなくても、言葉が届く距離になった。"},{min:30,lab:"二人だけの秘密",note:"DMでつながっている。ここからは、二人だけの話。"},{min:45,lab:"特別な距離",note:"公にはできない近さ。それでも、確かに特別。"}];
 function distStageIdx(){const d=(typeof S!=="undefined"&&S&&S.dist)||0;let s=0;DIST_STAGES.forEach((x,i)=>{if(d>=x.min)s=i;});return s;}
 function renderDistProfile(){if(typeof S==="undefined"||!S)return;const si=distStageIdx(),st=DIST_STAGES[si];
  const pane=$("#x-pane-hisprof");if(pane){for(let i=0;i<5;i++)pane.classList.remove("dstage-"+i);pane.classList.add("dstage-"+si);}
