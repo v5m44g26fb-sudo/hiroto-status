@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v377</p>
+  <p class="ver">v378</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v377</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v378</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v377</p>
+    <p class="ver">v378</p>
   </div>
 </section>
 </div>
@@ -5483,6 +5483,15 @@ function startChapter(n){
   sea:{tx:"なおちゃん、デビューおつかれさま。昨日のステージ、画面越しでも声がまっすぐ届いたよ。……10年以上、待った甲斐があったね。",lk:3600,rp:590,rc:80},
   akari:{tx:"なおオンニ、デビュー2日目！ 昨日のステージ、メンバーみんなで観たよ。……レッスン室で聴いてた歌が、テレビの中にいた。",lk:1100,rp:180,rc:130}
  }[S.first];if(FF2)sd.unshift(mkPost(S.first,FF2.tx,FF2.lk,FF2.rp,FF2.rc,false,null));}
+ /* v378 (episode): the first follower's morning post for Day 3,
+    the one morning the set still skipped - the first music-show
+    recording day. Same slot, same display-only numbers, each in
+    their own voice. No fx, no branching. */
+ if(n===3){const FF3={
+  mina:{tx:"今日は初めての音楽番組ですね。緊張する朝だと思います。……なおさんの歌は、きっと届きます。",lk:5400,rp:830,rc:94},
+  sea:{tx:"なおちゃん、今日は初めての歌番組だね。練習生の頃のあんたを知ってるから、余計に楽しみ。……画面の前で、見届けるね。",lk:3900,rp:640,rc:90},
+  akari:{tx:"なおオンニ、おはようございます！ 今日は初めての音楽番組。リーダーとして、隣で精一杯支えます。……オンニの歌、テレビでも響かせようね。",lk:1250,rp:170,rc:38}
+ }[S.first];if(FF3)sd.unshift(mkPost(S.first,FF3.tx,FF3.lk,FF3.rp,FF3.rc,false,null));}
  if(n===5){const FF5={
   mina:{tx:"なおさんの歌を聴きながら、朝の支度をしました。……今日も、いい日になりますように。",lk:5600,rp:840,rc:102},
   sea:{tx:"なおちゃん、おはよう。今日も収録だね。……無理だけはしないで。あんたのペースで大丈夫だから。",lk:4100,rp:660,rc:92},
