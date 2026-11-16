@@ -2874,6 +2874,14 @@ input,textarea{font-size:16px}
 #x-pane-me .pf-covstat{top:60px}
 #x-pane-me .pf-cover-chip{top:60px}
 #x-pane-hisprof .his-covstat{top:60px}
+
+/* ===== v410: notification rows carry the actor's verified badge, and
+   aggregated like rows show the real client's avatar strip ===== */
+#x-notif .nrow .nmain b{display:inline-flex;align-items:center;gap:4px}
+#x-notif .nrow .p-ver{width:14px;height:14px}
+#x-notif .nstack{display:flex;gap:4px;margin:1px 0 3px}
+#x-notif .nstack .avatar{width:30px;height:30px}
+#x-notif .nstack .ava-txt{width:30px;height:30px;font-size:13px}
 </style>
 </head>
 <body>
@@ -2910,7 +2918,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v409</p>
+  <p class="ver">v410</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3090,7 +3098,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v409</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v410</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3360,7 +3368,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v409</p>
+    <p class="ver">v410</p>
   </div>
 </section>
 </div>
@@ -4521,15 +4529,34 @@ function renderNotifs(){
   if(notifFilter!=="all"){const rb=document.createElement("button");rb.type="button";rb.className="nempty-back";rb.textContent="すべての通知を見る";
    rb.addEventListener("click",()=>{const c=$('#nfilter [data-nf="all"]');if(c)c.click();});list.appendChild(rb);}}
  const headAt={};{let last=null,runStart=-1;visN.forEach((e,vi)=>{const g=e.n.sub&&e.n.sub.indexOf("Day")===0?e.n.sub:null;if(g!==last){if(last&&runStart>=0)headAt[runStart]=vi-runStart;last=g;runStart=g?vi:-1;}});if(last&&runStart>=0)headAt[runStart]=visN.length-runStart;}
+ /* v410 (X realism - notification aggregation): like the real client,
+    a run of like notifications for the same text on the same Day from
+    different people collapses into one row - "Aさんと他N名が…" with a
+    strip of the actors' avatars. Pure display grouping: the day-head
+    counts, unseen marking and order all stay per-item underneath. */
+ const grpOf={},grpMem=new Set();
+ {let run=[];const likeKey=e=>(notifType(e.n)==="heart"&&(e.n.tx||"").includes("いいね"))?((e.n.tx||"")+"|"+(e.n.sub||"")):null;
+  const flush=()=>{if(run.length>=2){grpOf[run[0]]=run.slice();run.slice(1).forEach(x=>grpMem.add(x));}run=[];};
+  visN.forEach((e,vi)=>{const k=likeKey(e);
+   if(k&&run.length&&likeKey(visN[run[run.length-1]])===k&&!run.some(x=>visN[x].n.a===e.n.a))run.push(vi);
+   else{flush();if(k)run=[vi];}});
+  flush();}
  visN.forEach((e,vi)=>{const n=e.n,i=e.i;const a=ACC[n.a]||{n:"不明なアカウント",h:""};const t=notifType(n);
   if(headAt[vi]){const hd=document.createElement("div");hd.className="nday-head";hd.innerHTML='<span class="ndh-t"></span><span class="ndh-n">'+headAt[vi]+' 件</span>';
    /* v213: the day head names the chapter too, like the log and
       journey sheets (the sub still leads; rows keep their own) */
    {let t=n.sub;const m=/^Day (\d+)/.exec(n.sub||"");if(m){const chp=curCH()[Number(m[1])-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl)t=n.sub+" ― "+ttl;}hd.querySelector(".ndh-t").textContent=t;}
    list.appendChild(hd);}
+  if(grpMem.has(vi))return;
+  if(grpOf[vi]){const mems=grpOf[vi].map(x=>visN[x]);const fn=mems[0].n,fa=ACC[fn.a]||{n:"不明なアカウント",h:""};const anyU=mems.some(x=>x.i<unseen),anyS=mems.some(x=>x.n.a===tgtKey());
+   const grow=document.createElement("div");grow.className="nrow nt-heart grpn"+(anyU?" unseen":"")+(anyS?" special":"");grow.style.animationDelay=Math.min(i*0.045,0.3)+"s";
+   const stack=mems.slice(0,4).map(x=>{const ma=ACC[x.n.a]||{n:"?",av:null};return ma.av?'<img class="avatar" loading="lazy" decoding="async" src="'+ma.av+'" alt="">':avaTxt(ma.n);}).join("");
+   grow.innerHTML='<span class="ntypecol t-heart">'+NTYPE.heart+'</span>'+"<div class='nmain'><div class='nlab t-heart'>"+NLAB.heart+"</div><div class='nstack'>"+stack+"</div><b></b><span class='tx2'></span><small></small></div>"+(anyU?'<i class="ndot"></i>':"");
+   const gb=grow.querySelector("b");gb.textContent=fa.n+"さんと他"+(mems.length-1)+"名";if(VERIFIED.has(fn.a))gb.insertAdjacentHTML("beforeend",VER_BADGE);
+   grow.querySelector(".tx2").textContent=(fn.tx||"").replace(/^さん/,"");grow.querySelector("small").textContent=fn.sub||"";list.appendChild(grow);return;}
   const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");row.style.animationDelay=Math.min(i*0.045,0.3)+"s";
   row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
-  row.querySelector("b").textContent=a.n;row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
+  row.querySelector("b").textContent=a.n;if(VERIFIED.has(n.a))row.querySelector("b").insertAdjacentHTML("beforeend",VER_BADGE);row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  /* v242: a visible end to the list, so the bottom reads as the
     bottom (skipped when a filter already shows its empty state) */
  if(visN.length){const en=document.createElement("div");en.className="nend";en.textContent="―― ここまで ――";list.appendChild(en);}
