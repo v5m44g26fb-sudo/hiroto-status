@@ -1443,7 +1443,7 @@ input,textarea{font-size:16px}
 .msg.me.grp{border-top-right-radius:5px}
 .msgmeta{display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .msgmeta::before{content:"";width:11px;height:11px;background:#1d9bf0;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%)}
-/* v373: like real X, the partner's avatar sits at the foot of the
+/* v374: like real X, the partner's avatar sits at the foot of the
    last bubble of each of their groups; their column shifts right
    to make room for it */
 #th-msgs .msg.them{position:relative;margin-left:48px}
@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v373</p>
+  <p class="ver">v374</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v373</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v374</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v373</p>
+    <p class="ver">v374</p>
   </div>
 </section>
 </div>
@@ -3762,7 +3762,7 @@ choices:[
 const SAKUYA_DM={msgs:["はじめまして、サクヤです","いきなりで、すみません。ポストする前に、なおさんにだけ見せたい文があって","デビューの日の歌のことです。「雲ひとつない歌でした」って、書きました","……緊張すると、言葉が増えます。普段は、もう少し静かです","……出しすぎですか。なおさんの歌のことを、こんなに書いてしまって、よかったのか分からなくて"],
 choices:[
 {t:"「大丈夫です、そのまま出してください」と返す",r:"少し間があって――「……よかったです。出します」「ぼくも、なおさんの歌、好きです。また同じ番組で会えたら」。丁寧で、短い。でも、自分の言葉で返ってきた。",fx:{dist:10,xp:8,fol:0,cog:0,flm:0}},
-{t:"「……私の歌のこと、そんなふうに思ってくれてたんですか」と聞く",r:"「伝わっていたなら、よかったです」。少し間があって――「デビュー前から、知っていました。……声で、分かりました」「次は直接、言えるようにします」。――それで終わり。なのに、一日中そわそわした。",fx:{dist:12,xp:8,fol:0,cog:0,flm:0}},
+{t:"「……私の歌のこと、そんなふうに思ってくれてたの？」と聞く",r:"「伝わっていたなら、よかったです」。少し間があって――「デビュー前から、知っていました。……声で、分かりました」「次は直接、言えるようにします」。――それで終わり。なのに、一日中そわそわした。",fx:{dist:12,xp:8,fol:0,cog:0,flm:0}},
 {t:"緊張して、丁寧すぎる長文を送ってしまう",r:"しまった、と思った直後。「大丈夫ですよ。言葉は、多いほうが伝わります」「無理せず、ゆっくりで」。やわらかい一言。距離が、少しだけ縮んだ音がした。",fx:{dist:9,xp:6,fol:0,cog:0,flm:1}}]};
 /* Sakuya-route ending bodies (v33); kinds/thresholds shared with the hiroto route */
 const END_S_BODY={
@@ -3789,9 +3789,9 @@ choices:[
 {t:"「今度は私が、何か置いとくね」と返す",r:"「……楽しみにしてる」。即レスだった。らしくない速さに、こっちが動揺した。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
 const SAKUYA_DM2={msgs:["昨日の番組、帰ってからも思い出していました","なおさんの声、夕方の光みたいでした","メロンパン、明日のレッスン室の前に置いとくね。駅前の、あそこの","駅前のパン屋さん、朝だけ並ぶんです。……並びました","……ぼくが練習生だった頃、上のフロアに長くいる方がいると、聞いていました。今は、同じフロアですね","……日本語で話していると、少しだけ、素に戻れます。ヌナも、そうだと嬉しいです"],
 choices:[
-{t:"「ありがとうございます！ 楽しみにしています」と返す",r:"「約束です」「パンの約束は、破ったことがないんです」丁寧で、少し不思議で、でも確かに嬉しそうだった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
+{t:"「ありがとう！ 楽しみにしてる」と返す",r:"「約束です」「パンの約束は、破ったことがないんです」丁寧で、少し不思議で、でも確かに嬉しそうだった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
 {t:"「……いま、ヌナって言いました？」と聞く",r:"少し間があって――「……言いました」「公の場では、言いません。ここだけです」丁寧な声で、でも少しだけ素だった。",fx:{dist:8,xp:5,fol:0,cog:0,flm:0}},
-{t:"「今度は私が、何か置いとくね」と返す",r:"「交換ですね」「ぼくは、プリンにします。なおさんの好きなものを、置いておきたいので」――サラッと、こちらの好みを覚えていた。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
+{t:"「今度は私が、何か置いとくね」と返す",r:"「交換ですね」「ぼくは、カフェオレにします。なおさんの好きなものを、置いておきたいので」――サラッと、こちらの好みを覚えていた。",fx:{dist:9,xp:5,fol:0,cog:0,flm:1}}]};
 const TARGET_DM2={hiroto:HIROTO_DM2,sakuya:SAKUYA_DM2};
 /* v254 (episode - heat, the far end of the leak): a third exchange
    on the morning of Day 6, only if the second was answered. He
@@ -3804,9 +3804,9 @@ choices:[
 {t:"「関西弁で言って」と冗談めかして返す",r:"「……あかん、それは反則や」。笑い混じりの文字。最後に――「ほんまに、楽しみにしてる」。関西弁が、漏れた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
 const SAKUYA_DM3={msgs:["発表、出ましたね","コラボ曲のことです。……ひとつ、入れていいですか","ヌナにだけ分かる合図を、曲の中に。……ステージの上で、言います。それで"],
 choices:[
-{t:"「楽しみにしてます」と返す",r:"「はい」「待っていてください。……約束です」丁寧なまま。でも、今度は逃げなかった。――「パンの約束も、忘れてません」最後に、彼らしい一言が添えられていた。",fx:{dist:6,xp:5,fol:0,cog:0,flm:0}},
+{t:"「楽しみにしてる」と返す",r:"「はい」「待っていてください。……約束です」丁寧なまま。でも、今度は逃げなかった。――「パンの約束も、忘れてません」最後に、彼らしい一言が添えられていた。",fx:{dist:6,xp:5,fol:0,cog:0,flm:0}},
 {t:"「私も、言いたいことあります」と返す",r:"少し長い沈黙。――「お互い様、ですね」「じゃあ、答え合わせはステージで」言葉選びに、少しだけ熱があった。",fx:{dist:7,xp:5,fol:0,cog:0,flm:0}},
-{t:"「ヌナにだけ分かるって、どういうことですか」と聞く",r:"「内緒です」「……ヒントは、メロンパンです」それ以上は教えてくれなかった。でも、十分すぎた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
+{t:"「ヌナにだけ分かるって、どういうこと？」と聞く",r:"「内緒です」「……ヒントは、メロンパンです」それ以上は教えてくれなかった。でも、十分すぎた。",fx:{dist:8,xp:5,fol:0,cog:0,flm:1}}]};
 const TARGET_DM3={hiroto:HIROTO_DM3,sakuya:SAKUYA_DM3};
 /* v295: if she actually made the Day 5 mispost, his Day 6 morning DM
    opens on it before the origin reveal - same choices, same fx. The
@@ -4500,7 +4500,7 @@ function storyBaseForBase(k,day){day=Math.min(day,6);
  const b=STORY_BASE[k];if(!b)return{img:svImg(k),cap:""};
  const caps=(tgtKey()==="hiroto"&&b.capsH)?b.capsH:b.caps;
  return{img:(b.imgs&&b.imgs[day-1])||b.img,cap:caps[day-1]||caps[0]||""};}
-/* v373: on Day 7 the base stories keep their Day 6 photos (same
+/* v374: on Day 7 the base stories keep their Day 6 photos (same
    people, same scenes) but the captions must belong to the morning
    after - "発表の日" / "報道の日" / "今日、発表です" cannot stand
    on the day after. Captions only; the frame count is unchanged. */
@@ -5474,7 +5474,7 @@ function startChapter(n){
   sea:{tx:"なおちゃん、ステージおつかれさま。練習生の頃から見てきた人が、大きなステージで堂々と歌ってるの、感慨深かったよ。……やっとだね。ごはんちゃんと食べて、体調管理もしっかりね。",lk:3908,rp:640,rc:88},
   akari:{tx:"なおオンニ、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
  }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
- /* v373 (episode): the first follower also checks in on the
+ /* v374 (episode): the first follower also checks in on the
     mornings of Day 2 and Day 5, filling the silent stretch
     between Day 1 and Day 4 / Day 6 - same slot, same display-only
     numbers, each in their own voice. No fx, no branching. */
@@ -6333,7 +6333,7 @@ function buildDay7Chapter(kind){
   {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
    {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
    {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
- /* v373: her Day 7 post choices must match the ending she reached.
+ /* v374: her Day 7 post choices must match the ending she reached.
     In the flame endings her public activities are suspended, so the
     forward-looking default set ("次の準備が始まっています") cannot
     stand; the sakuya quiet ending never promised a shared stage
