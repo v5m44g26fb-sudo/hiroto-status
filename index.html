@@ -1443,7 +1443,7 @@ input,textarea{font-size:16px}
 .msg.me.grp{border-top-right-radius:5px}
 .msgmeta{display:flex;align-items:center;justify-content:flex-end;gap:4px}
 .msgmeta::before{content:"";width:11px;height:11px;background:#1d9bf0;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%)}
-/* v369: like real X, the partner's avatar sits at the foot of the
+/* v370: like real X, the partner's avatar sits at the foot of the
    last bubble of each of their groups; their column shifts right
    to make room for it */
 #th-msgs .msg.them{position:relative;margin-left:48px}
@@ -2844,7 +2844,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>6日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v369</p>
+  <p class="ver">v370</p>
 </section>
 
 <section class="screen intro" id="scr-world" style="--bgimg:url(assets/ig-gen-stage.jpg)">
@@ -3018,7 +3018,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v369</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 6日間の物語</small></div><span class="set-ver">v370</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3287,7 +3287,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v369</p>
+    <p class="ver">v370</p>
   </div>
 </section>
 </div>
@@ -5453,6 +5453,20 @@ function startChapter(n){
   sea:{tx:"なおちゃん、ステージおつかれさま。練習生の頃から見てきた人が、大きなステージで堂々と歌ってるの、感慨深かったよ。……やっとだね。ごはんちゃんと食べて、体調管理もしっかりね。",lk:3908,rp:640,rc:88},
   akari:{tx:"なおオンニ、デビュー4日目。レッスン室で何度も聴いた『The Chase』が、大きなステージに響いてる。リーダーとして、メンバーとして、ずっと隣で応援してます。",lk:1240,rp:203,rc:154}
  }[S.first];if(FF)sd.unshift(mkPost(S.first,FF.tx,FF.lk,FF.rp,FF.rc,false,null));}
+ /* v370 (episode): the first follower also checks in on the
+    mornings of Day 2 and Day 5, filling the silent stretch
+    between Day 1 and Day 4 / Day 6 - same slot, same display-only
+    numbers, each in their own voice. No fx, no branching. */
+ if(n===2){const FF2={
+  mina:{tx:"デビューステージ、拝見しました。静かな強さのある歌でした。……これからも、楽しみにしています。",lk:4800,rp:760,rc:88},
+  sea:{tx:"なおちゃん、デビューおつかれさま。昨日のステージ、画面越しでも声がまっすぐ届いたよ。……10年以上、待った甲斐があったね。",lk:3600,rp:590,rc:80},
+  akari:{tx:"なおオンニ、デビュー2日目！ 昨日のステージ、メンバーみんなで観たよ。……レッスン室で聴いてた歌が、テレビの中にいた。",lk:1100,rp:180,rc:130}
+ }[S.first];if(FF2)sd.unshift(mkPost(S.first,FF2.tx,FF2.lk,FF2.rp,FF2.rc,false,null));}
+ if(n===5){const FF5={
+  mina:{tx:"なおさんの歌を聴きながら、朝の支度をしました。……今日も、いい日になりますように。",lk:5600,rp:840,rc:102},
+  sea:{tx:"なおちゃん、おはよう。今日も収録だね。……無理だけはしないで。あんたのペースで大丈夫だから。",lk:4100,rp:660,rc:92},
+  akari:{tx:"なおオンニ、おはようございます！ 今日の収録も、隣で応援してます。……オンニの歌、今日もたくさんの人に届きますように。",lk:1350,rp:220,rc:160}
+ }[S.first];if(FF5)sd.unshift(mkPost(S.first,FF5.tx,FF5.lk,FF5.rp,FF5.rc,false,null));}
  /* v275 (episode): the first follower returns once more on the
     morning of the announcement - the bookend to Day 4, in the
     same slot with display-only numbers. Who it is changes the
@@ -6298,7 +6312,7 @@ function buildDay7Chapter(kind){
   {tx:"次の準備が、もう始まっています。待っててくれる人がいる限り、私は歌い続けます。",fx:{fol:44,cog:5,xp:10,dist:1,flm:1},react:[
    {a:"fan2",tx:"歌い続けてくれるなら、聴き続けます。",lk:76,rp:6,rc:9},
    {a:"fan1",tx:"次のステージ、絶対行きます。",lk:140,rp:12,rc:5}]}];
- /* v369: her Day 7 post choices must match the ending she reached.
+ /* v370: her Day 7 post choices must match the ending she reached.
     In the flame endings her public activities are suspended, so the
     forward-looking default set ("次の準備が始まっています") cannot
     stand; the sakuya quiet ending never promised a shared stage
