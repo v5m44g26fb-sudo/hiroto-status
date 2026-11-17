@@ -290,6 +290,21 @@ input,textarea{font-size:16px}
 .sheet{background:#fff;width:100%;border-radius:22px 22px 0 0;padding:20px 18px 34px;max-height:82dvh;overflow-y:auto}
 .sheet h3{font-size:17px;margin-bottom:6px}.sheet p.desc{color:#536471;font-size:13px;line-height:1.6}
 .sheet .close{float:right;color:#536471;font-size:20px;background:none;border:none}
+/* ===== v479: debut song card (Day 1) + Apple Music player sheet ===== */
+#chasecard{display:none;align-items:center;gap:12px;margin:11px 12px 0;padding:13px 14px;background:#fff;border:1px solid #f6d3de;border-radius:18px;box-shadow:0 10px 24px rgba(250,36,60,.10);cursor:pointer}
+#chasecard:active{transform:scale(.995)}
+#chasecard .cc-ic{width:42px;height:42px;flex:none;border-radius:12px;background:linear-gradient(145deg,#fc5c7d,#fa243c);display:flex;align-items:center;justify-content:center}
+#chasecard .cc-ic svg{width:24px;height:24px;fill:#fff}
+#chasecard .cc-main{flex:1;min-width:0}
+#chasecard .cc-main b{display:block;font-size:15px;color:#0f1419}
+#chasecard .cc-main small{display:block;font-size:12px;color:#536471;margin-top:1px}
+#chasecard .cc-play{width:40px;height:40px;flex:none;border:none;border-radius:50%;background:#fa243c;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(250,36,60,.35);pointer-events:none}
+#chasecard .cc-play svg{width:19px;height:19px;fill:#fff;margin-left:2px}
+#chase-frame{margin-top:12px;min-height:150px;border-radius:12px;background:#f7f9f9}
+.chase-iframe{width:100%;height:150px;border:0;border-radius:12px;background:transparent;display:block}
+#chase-open{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;padding:12px;border-radius:999px;background:#fa243c;color:#fff;font-size:14.5px;font-weight:800;text-decoration:none}
+#chase-open svg{width:17px;height:17px;fill:#fff}
+.chase-note{margin-top:10px;font-size:12px;line-height:1.6;color:#536471}
 #changes{position:fixed;top:calc(56px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:120;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none;width:max-content;max-width:94vw}
 .chg{background:rgba(15,20,25,.95);border:1px solid #1d9bf0;color:#fff;padding:9px 16px;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.35);animation:pop .25s ease both;text-align:center;transition:opacity .4s ease,transform .4s ease}
 .chg.out{opacity:0;transform:translateY(-6px)}
@@ -3499,7 +3514,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v478</p>
+  <p class="ver">v479</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3598,6 +3613,11 @@ input,textarea{font-size:16px}
         <span class="db-sub" id="db-sub"></span>
         <span class="ev-zoom db-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.8-4.8M11 8v6M8 11h6"/></svg>写真を見る</span>
       </div>
+      <div id="chasecard" role="button" aria-label="デビュー曲『The Chase』を聴く">
+        <span class="cc-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></span>
+        <div class="cc-main"><b>デビュー曲『The Chase』</b><small>Hearts2Hearts ― デビューシングルを聴く</small></div>
+        <span class="cc-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
       <div id="status-hud">
         <div class="hud-eyebrow"><span class="hud-etick" aria-hidden="true"></span><span>PLAYER STATUS</span><span class="hud-mcount" id="hud-mcount"></span></div>
         <div class="hud-top">
@@ -3677,7 +3697,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v478</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v479</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3689,6 +3709,7 @@ input,textarea{font-size:16px}
             <div class="ssv-segs" id="set-sv-segs"></div>
           </div>
           <button class="setrow set-link" id="set-snd" type="button"><span class="set-ic" style="--c:#f91880"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.4L12 18.6V5.4L7.4 9.5H4zM15.5 8.7a4.4 4.4 0 0 1 0 6.6l-1.1-1.1a2.9 2.9 0 0 0 0-4.4l1.1-1.1zM18 6a8.3 8.3 0 0 1 0 12l-1.1-1.1a6.8 6.8 0 0 0 0-9.8L18 6z"/></svg></span><div class="set-main"><b>サウンド</b><small>効果音とタイトルのBGM</small></div><span class="set-sw on" id="set-snd-sw"><i></i></span></button>
+          <button class="setrow set-link" id="set-chase" type="button"><span class="set-ic" style="--c:#fa243c"><svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></span><div class="set-main"><b>デビュー曲『The Chase』</b><small>Hearts2Hearts ― Apple Musicで聴く</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-journey"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M6.5 3a2 2 0 0 1 2 2v14.3a1.7 1.7 0 0 1-2.8 1.3L4 19V5a2 2 0 0 1 2.5-2zM17.5 3A2 2 0 0 0 15.5 5v14.3a1.7 1.7 0 0 0 2.8 1.3L20 19V5a2 2 0 0 0-2.5-2zM10 7h3v1.8h-3zm0 4h3v1.8h-3zm0 4h3v1.8h-3z" transform="translate(-1.5,0)"/></svg></span><div class="set-main"><b id="set-journey-lab">6日間のあゆみ</b><small>JOURNEY ― 日ごとの記録を振り返る</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-export"><span class="set-ic" style="--c:#17bf63"><svg viewBox="0 0 24 24"><path d="M11 2.5h2v8.7l2.6-2.6 1.4 1.4-5 5-5-5 1.4-1.4 2.6 2.6zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを書き出す</b><small>JSONファイルで保存 ― 機種変更・引き継ぎ用</small></div><span class="set-chev">›</span></button>
@@ -3990,7 +4011,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v478</p>
+    <p class="ver">v479</p>
   </div>
 </section>
 </div>
@@ -4034,6 +4055,15 @@ input,textarea{font-size:16px}
   <p class="desc">セーブを消すと、7日間の記録はすべて最初からになるよ。</p>
   <button class="rs-danger" id="btn-reset-yes">消して最初から</button>
   <button class="rs-cancel" data-close="scrim-reset">やめておく</button>
+</div></div>
+<div class="scrim" id="scrim-chase"><div class="sheet chase-sheet">
+  <button class="close" data-close="scrim-chase">✕</button>
+  <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>MUSIC ― デビュー曲</span>
+  <h3>『The Chase』</h3>
+  <p class="desc">Hearts2Heartsのデビューシングル。10年以上待った日の歌を、Apple Musicの公式プレイヤーで聴けるよ。</p>
+  <div id="chase-frame"></div>
+  <a id="chase-open" href="https://music.apple.com/jp/album/the-chase/1796402197?i=1796402200" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>Apple Musicで開く</a>
+  <p class="chase-note">プレイヤーが表示されないときは、上のボタンからApple Musicで開いてね。フルバージョンの再生にはApple Musicの登録が必要です。</p>
 </div></div>
 <script>
 "use strict";
@@ -6576,6 +6606,8 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
 /* v56: chapter header - splits ch.day ("Day n ― title") into DAY n / title / banner */
 function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  const bn=$("#daybanner");if(bn)bn.classList.toggle("final",S.ch>=TOTAL_DAYS);
+ /* v479: the debut song card sits under the banner on Day 1 only */
+ const cc=$("#chasecard");if(cc)cc.style.display=(S.ch===1)?"flex":"none";
  set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+totalDays()+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
  /* v91: the CHAPTER banner carries the same per-chapter photo as the
     v88 day card, dimmed under its gradient (presentation only) */
@@ -7329,6 +7361,20 @@ $("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-resta
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 (function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});})();
+/* v479: debut song - the Apple Music embed player lives in its own
+   sheet (scrim-chase), independent of the game's sound setting. The
+   iframe is built lazily on first open (nothing loads or plays until
+   the player is tapped) and unloaded when the sheet closes, so the
+   music stops with the sheet. Entry points: the Day 1 song card
+   under the chapter banner and a settings row. */
+const CHASE_EMBED="https://embed.music.apple.com/jp/album/the-chase/1796402197?i=1796402200";
+function openChase(){const box=$("#chase-frame");if(box&&!box.querySelector("iframe")){const f=document.createElement("iframe");f.className="chase-iframe";f.title="The Chase ― Hearts2Hearts（Apple Music）";f.setAttribute("allow","autoplay *; encrypted-media *; fullscreen *");f.setAttribute("sandbox","allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation");f.src=CHASE_EMBED;box.appendChild(f);}const s=$("#scrim-chase");if(s)s.classList.add("on");}
+function unloadChase(){const box=$("#chase-frame");if(box)box.innerHTML="";}
+(function(){const card=$("#chasecard");if(card)card.addEventListener("click",openChase);
+ const row=$("#set-chase");if(row)row.addEventListener("click",openChase);
+ const scrim=$("#scrim-chase");if(!scrim)return;
+ const cb=scrim.querySelector("[data-close]");if(cb)cb.addEventListener("click",unloadChase);
+ scrim.addEventListener("click",e=>{if(e.target===scrim&&!scrim.classList.contains("closing")){scrim.classList.add("closing");setTimeout(()=>{scrim.classList.remove("on");scrim.classList.remove("closing");},175);unloadChase();}});})();
 /* v175: save portability - export downloads the stored save as a
    JSON file; import validates the shape minimally (the same fields
    the boot path relies on), asks once, writes the very same key and
