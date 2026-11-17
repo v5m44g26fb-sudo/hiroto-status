@@ -2794,3 +2794,14 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
   - BUZZ h-tk1（ゆなの布教ポスト）：「井汲大翔さんのTikTokダンス」→「井汲大翔のTikTokダンス」（公への紹介文としてフルネーム・さん付けなし）
   - ミニイベント hiroto:2 本文（ブレス集を作ったファンの子の報告の引用）：「井汲大翔さんがいいねしてくれた」→「あの井汲大翔がいいねしてくれた」（興奮気味のファンの口調に合わせ、さん付けなし）
 - 検証：fxcheck＝fx200・img79・cond82・BUZZ112 完全一致。Playwright実駆動で両箇所の表示を確認（ミニイベント本文はDay2描画で、BUZZ h-tk1は注入→フィード描画で目視相当のテキスト確認）、エラー0。版数3箇所 v447 統一
+
+## v448（2026-11-17）演出・見た目の豪華化パス
+本人の指示「もっと豪華なあぷりにして」に基づく演出専用パス。方針どおり豪華化はゲーム側の演出レイヤーのみに絞り、実Xの画面（TL・ポスト・DM等）の実物準拠は一切崩していない。文章・fx・条件・セーブ形式は不変（fxcheck：fx200・img79・cond82・BUZZ112 完全一致）。新規写真の消費・使い回しもなし。全て transform／opacity／background-position のみの軽量アニメーションで、prefers-reduced-motion では無効化（粒子は endConfetti と同じ JS 側ガード）。
+- **タイトル**：h1 のグラデーションを 300% サイズにして光がゆっくり流れる titleshine を入場アニメ（titlein）と複合で付与。.t-rule は金を含む3色グラデ＋220% サイズで rulesheen が往復。開いた瞬間に「格が上がった」と分かる到達を優先（スクショ /tmp/v448-title.png で目視）
+- **エンディング**：結末ごとの環境粒子レイヤー #end-ambient＋endAmbient(kind) を新設。炎上＝上昇する火の粉11（グロー付き）／静か＝漂うティールの光玉6／これから＝夜明けの塵10（上昇・淡青）／コラボ＝金の瞬き14（その場で明滅）。サクヤ編コラボの紙吹雪（v159）は従来どおり併存し、紙吹雪自体はサクヤ編コラボのみのまま。タイトル文字（et-main）にも結末色の titleshine。粒子は ending() のたび生成し直し、FIN 画面でもそのまま残る
+- **日の切り替え**：#dayintro の大日数（.di-day）をタイトルと同じグラデーション文字＋drop-shadow に格上げ
+- **幕間（彼の画面）**：#sideview にビネット（紫の中心光＋下辺のピンク光）を敷き、.sv2-rule は左から描き出される svrule、本文行はブラーが晴れながら出る svline2 に変更（animation-name の差し替えのみで JS の遅延指定はそのまま）
+- **ストーリービューア**：プログレスバー（.sv-seg i）に gloss の svsheen（控えめな透明度・4.6s周期）
+- **日のリザルト**：LEVEL UP バンド（.dr-lvup）にシャインの lvshine と右上のダイヤ型きらめき lvspark（回転する正方形＋グロー、絵文字不使用）
+- **ライブシーン**：フレームに開幕時1回だけ光が横切る lvsheen（::after、pointer-events なし）、LIVE バッジは opacity の鼓動 lvpulse
+- 検証：Playwright実駆動（/tmp/verify448.py・verify448b.py）。両ルート通しでエンディング到達（両ルートともコラボ系、周回数値は従来と同一列）、タイトル（実名・グループ名なし／v448表示／sheen の computed 確認）、ストーリービューア（svsheen）、ライブシーン（lvpulse）、幕間（svline2）、エンディング環境粒子は実到達＋状態強制で4種全て個数・クラス照合（spark14／ember11／orb6／mote10）、サクヤ編コラボで紙吹雪46片の発火も維持確認、LVUP バンドは実画面上で表示＋スクショ目視。エラー0・HTTP≥400なし・scrollW=390。スクショ /tmp/v448-title.png・v448-end-hiroto-collab.png・v448-end-forced-flame.png・v448-end-forced-quiet.png・v448-side.png・v448-live.png・v448-lvup2.png・v448-end-flame2.png
