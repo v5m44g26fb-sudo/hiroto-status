@@ -2898,6 +2898,22 @@ input,textarea{font-size:16px}
 /* ===== v411: verified badge sits with the name in the DM header and
    the thread intro card, as in the real client ===== */
 #th-name .dm-verified,.ti-name .dm-verified{width:15px;height:15px;fill:#1d9bf0;margin-left:4px;vertical-align:-2px}
+
+/* ===== v442: SIDE VIEW - the interlude from his side, shown as each
+   day closes. A quiet novel screen over the app: label, an optional
+   photo, lines that settle in one by one, tap to go on. ===== */
+#sideview{position:absolute;inset:0;z-index:124;display:none;color:#eef;background:linear-gradient(168deg,#0b0e1f 0%,#10142e 55%,#1c1030 100%)}
+#sideview.on{display:flex;align-items:center;justify-content:center;animation:difade .3s ease}
+#sideview.closing{animation:difadeout .18s ease forwards}
+#sideview .sv2-inner{width:100%;max-width:340px;margin:0 24px;text-align:left;max-height:calc(var(--app-h,100dvh)*.94);overflow-y:auto;scrollbar-width:none}
+#sideview .sv2-inner::-webkit-scrollbar{display:none}
+#sideview .sv2-lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:.26em;color:#8fd0ff}
+#sideview .sv2-day{display:block;margin-top:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:rgba(235,238,255,.55)}
+#sideview .sv2-rule{width:44px;height:2px;background:linear-gradient(90deg,#7856ff,#f91880);margin:16px 0 18px;border-radius:2px}
+#sideview .sv2-ph{display:block;width:100%;border-radius:16px;margin:0 0 18px;box-shadow:0 18px 40px rgba(0,0,0,.5);animation:svline .7s .1s ease both}
+#sideview .sv2-line{font-size:15px;line-height:1.95;color:rgba(240,242,255,.94);margin:0 0 14px;animation:svline .7s ease both}
+@keyframes svline{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#sideview .sv2-tap{display:block;margin-top:22px;text-align:center;font-size:10.5px;font-weight:900;letter-spacing:.3em;color:rgba(235,238,255,.5);animation:svline .7s ease both}
 </style>
 </head>
 <body>
@@ -2934,7 +2950,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v441</p>
+  <p class="ver">v442</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3114,7 +3130,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v441</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v442</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3329,6 +3345,16 @@ input,textarea{font-size:16px}
       <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
   </div>
+  <div id="sideview" role="dialog" aria-label="彼の画面">
+    <div class="sv2-inner">
+      <span class="sv2-lab">SIDE ― 彼の画面</span>
+      <span class="sv2-day" id="sv2-day">DAY 1</span>
+      <div class="sv2-rule"></div>
+      <img class="sv2-ph" id="sv2-ph" alt="" style="display:none">
+      <div id="sv2-lines"></div>
+      <span class="sv2-tap">TAP</span>
+    </div>
+  </div>
   <div id="dmunlock" role="dialog" aria-label="DMが届いた">
     <div class="du-inner">
       <span class="du-avw" id="du-av"></span>
@@ -3384,7 +3410,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v441</p>
+    <p class="ver">v442</p>
   </div>
 </section>
 </div>
@@ -3806,7 +3832,7 @@ function openPostMenu(p,el){
    height attributes are NOT used - in Chromium they act as definite
    dimensions (height 804px -> clamped to the 400px max-height) and
    change the final box; inline aspect-ratio leaves it identical. */
-const IMG_DIMS={"av-akari.jpg":[512,512],"av-ana.jpg":[512,512],"av-carmen.jpg":[512,512],"av-fan1.jpg":[512,512],"av-fan2.jpg":[512,512],"av-ian.jpg":[512,512],"av-juun.jpg":[512,512],"av-matome.jpg":[512,512],"av-media.jpg":[512,512],"av-miku.jpg":[512,512],"av-mina.jpg":[512,512],"av-sea.jpg":[512,512],"av-sora.jpg":[512,512],"av-staff.jpg":[512,512],"av-stella.jpg":[512,512],"av-yeon.jpg":[512,512],"av-yuha.jpg":[512,512],"gen-hiroto-after-selfie.jpg":[1152,2048],"gen-hiroto-chain-tripod-setup.jpg":[1206,804],"gen-hiroto-collage.jpg":[1206,804],"gen-hiroto-daily-arcade.jpg":[1206,811],"gen-hiroto-daily-conveni.jpg":[1206,804],"gen-hiroto-day3-tv.jpg":[1206,804],"gen-hiroto-day5-table.jpg":[1206,804],"gen-hiroto-day6-night.jpg":[1206,1622],"gen-hiroto-hoodie.jpg":[1152,2048],"gen-hiroto-live.jpg":[1206,1622],"gen-hiroto-story-day2-bed.jpg":[1152,2048],"gen-hiroto-stream-selfie.jpg":[1206,804],"gen-hiroto-tiktok.jpg":[1104,1968],"gen-hiroto-d7.jpg":[1206,804],"pin-ana-c1.jpg":[736,736],"pin-ana-d7.jpg":[800,1066],"pin-carmen-c1.jpg":[1200,720],"pin-carmen-c2.jpg":[800,1066],"pin-carmen-c3.jpg":[800,1066],"pin-carmen-d7.jpg":[800,1066],"pin-ian-c1.jpg":[800,1422],"pin-ian-c2.jpg":[736,981],"pin-ian-d7.jpg":[856,1141],"pin-jiwoo-c1.jpg":[1024,683],"pin-jiwoo-c2.jpg":[960,1280],"pin-jiwoo-c3.jpg":[670,893],"pin-jiwoo-c4.jpg":[500,667],"pin-jiwoo-d1.jpg":[900,1125],"pin-jiwoo-d2.jpg":[800,1066],"pin-jiwoo-d3.jpg":[420,630],"pin-jiwoo-d4.jpg":[1366,2048],"pin-jiwoo-d5.jpg":[800,1193],"pin-jiwoo-d7.jpg":[500,500],"pin-juun-c1.jpg":[670,503],"pin-juun-d7.jpg":[670,503],"pin-karina-d7.jpg":[1080,1440],"pin-miku-c1.jpg":[910,607],"pin-miku-c2.jpg":[1200,900],"pin-miku-d7.jpg":[454,340],"pin-mina-d7.jpg":[736,981],"pin-sakuya-c1.jpg":[1224,1632],"pin-sakuya-d7.jpg":[960,1200],"pin-stella-c1.jpg":[768,1024],"pin-stella-c2.jpg":[1707,2560],"pin-stella-d7.jpg":[800,1071],"pin-yeon-c1.jpg":[900,1200],"pin-yeon-c2.jpg":[1284,855],"pin-yeon-d7.jpg":[800,1066],"pin-yuha-c1.jpg":[500,709],"pin-yuha-c2.jpg":[800,967],"pin-yuha-c3.jpg":[1500,2250],"pin-yuna-c1.jpg":[900,1200],"pin-yuna-c2.jpg":[2816,1536],"pin-yuna-d3.jpg":[1000,653],"pin-yuna-d6.jpg":[1200,675],"pin-yuna-d7.jpg":[492,340],"gen-hiroto-tripod-front.jpg":[1152,2048],"gen-hiroto-tripod-profile.jpg":[1104,1968],"gen-miku-day4-station.jpg":[1206,804],"gen-miku-day5-river.jpg":[1206,804],"gen-miku-station.jpg":[1152,2048],"gen-nao-day6-rain.jpg":[1152,2048],"gen-nao-day7-cafe.jpg":[1206,804],"gen-nikuman.jpg":[1206,804],"gen-sakuya-collage.jpg":[1206,603],"gen-sakuya-day6-studio.jpg":[1206,804],"gen-story-news.jpg":[1280,1920],"gen-story-watch.jpg":[1280,1920],"gen-tv-capture.jpg":[1206,804],"gen-yuna-day2-desk.jpg":[1206,804],"gen-yuna-day4-screenshot.jpg":[1008,2128],"gen-yuna-day5-living.jpg":[1206,804],"ig-avatar.jpg":[150,150],"ig-gen-stage.jpg":[1280,1722],"nao-avatar4.jpg":[800,800],"nao-backstage-selfie.jpg":[1184,2096],"nao-cafe2.jpg":[1080,1911],"nao-concept.jpg":[1206,1809],"nao-hiroto-conveni2.jpg":[1206,804],"nao-hiroto-doorway.jpg":[1206,1622],"nao-hiroto-hotel.jpg":[1206,804],"nao-hiroto-hug.jpg":[1206,804],"nao-hiroto-mirror.jpg":[1206,1599],"nao-hiroto-mispost.jpg":[1206,1622],"nao-hiroto-station2.jpg":[1206,1622],"nao-hiroto-taiyaki.jpg":[1206,804],"nao-lesson.jpg":[1184,2096],"nao-makeup.jpg":[1184,2096],"nao-promo.jpg":[1184,2096],"nao-rec.jpg":[1184,2096],"nao-sakuya-backstage.jpg":[1206,1599],"nao-sakuya-elevator.jpg":[1206,804],"nao-sakuya-hug.jpg":[1206,1633],"nao-sakuya-lobby.jpg":[1206,804],"nao-sakuya-mispost.jpg":[1206,1599],"nao-sakuya-sighting.jpg":[1206,910],"nao-sakuya-sofa.jpg":[1206,1599],"nao-sakuya-studio.jpg":[1206,804],"nao-sakuya-van.jpg":[1206,804],"nao-stage-ballad.jpg":[1184,2096],"nao-stage-confetti.jpg":[1184,2096],"nao-stage-dance.jpg":[1184,2096],"nao-stage-sailor.jpg":[1184,2096],"nao-stage.jpg":[1184,2096],"nao-story-cafe.jpg":[1184,2096],"nao-story-heart.jpg":[1184,2096],"nao-story-night.jpg":[1184,2096],"nao-story-towel.jpg":[1184,2096],"nao-stream-selfie.jpg":[1184,2096],"night.jpg":[750,1000],"pin-cafe-cake.jpg":[736,981],"pin-cafe-coffee.jpg":[735,918],"pin-cafe-onion.jpg":[735,981],"pin-carmen-d1.jpg":[701,700],"pin-carmen-d2.jpg":[500,600],"pin-carmen-d3.jpg":[800,1066],"pin-carmen-d4.jpg":[800,1066],"pin-carmen-d5.jpg":[800,1066],"pin-carmen-d6.jpg":[800,1070],"pin-dance.jpg":[736,1275],"pin-group.jpg":[736,920],"pin-jiwoo-d6.jpg":[736,1005],"pin-karina.jpg":[736,981],"pin-karina-d2.jpg":[474,632],"pin-karina-d3.jpg":[474,1015],"pin-karina-d4.jpg":[736,981],"pin-karina-d5.jpg":[736,981],"pin-karina-d6.jpg":[736,981],"pin-makeup.jpg":[736,1169],"pin-miku-d1.jpg":[736,1104],"pin-mina.jpg":[736,862],"pin-mina-d2.jpg":[736,981],"pin-mina-d3.jpg":[736,736],"pin-mina-d4.jpg":[720,720],"pin-mina-d5.jpg":[1108,1477],"pin-mina-d6.jpg":[1080,1350],"pin-night.jpg":[736,1308],"pin-yeon-d1.jpg":[800,1066],"pin-yeon-d2.jpg":[800,1066],"pin-yeon-d3.jpg":[900,1200],"pin-yeon-d4.jpg":[670,893],"pin-yeon-d5.jpg":[800,1064],"pin-yeon-d6.jpg":[1080,1440],"pin-stella-d1.jpg":[1500,2250],"pin-stella-d2.jpg":[1200,1800],"pin-stella-d3.jpg":[800,1066],"pin-stella-d4.jpg":[800,1125],"pin-stella-d5.jpg":[512,512],"pin-stella-d6.jpg":[800,1067],"pin-juun-d1.jpg":[1080,1346],"pin-juun-d2.jpg":[800,1066],"pin-juun-d3.jpg":[1080,1346],"pin-juun-d4.jpg":[800,1200],"pin-juun-d5.jpg":[1080,1346],"pin-juun-d6.jpg":[785,1200],"pin-ana-d1.jpg":[1000,1500],"pin-ana-d2.jpg":[670,476],"pin-ana-d3.jpg":[1536,2048],"pin-ana-d4.jpg":[856,1141],"pin-ana-d5.jpg":[800,1066],"pin-ana-d6.jpg":[900,1200],"pin-ian-d1.jpg":[400,600],"pin-ian-d2.jpg":[736,981],"pin-ian-d3.jpg":[1366,1366],"pin-ian-d4.jpg":[800,1199],"pin-ian-d5.jpg":[800,1200],"pin-ian-d6.jpg":[1500,2250],"pin-rack.jpg":[736,981],"pin-sakuya-bouquet.jpg":[736,981],"pin-sakuya-d2.jpg":[544,680],"pin-sakuya-ev2.jpg":[720,933],"pin-sakuya-ev6.jpg":[960,1200],"pin-studio-booth.jpg":[735,1031],"pin-studio-console.jpg":[736,981],"pin-studio.jpg":[736,981],"sakuya-av.jpg":[480,480],"sakuya-bmg.jpg":[900,675],"sakuya-cover.jpg":[1200,900],"sakuya-selca.jpg":[640,800],"sakuya-stage.jpg":[800,800]};
+const IMG_DIMS={"av-akari.jpg":[512,512],"av-ana.jpg":[512,512],"av-carmen.jpg":[512,512],"av-fan1.jpg":[512,512],"av-fan2.jpg":[512,512],"av-ian.jpg":[512,512],"av-juun.jpg":[512,512],"av-matome.jpg":[512,512],"av-media.jpg":[512,512],"av-miku.jpg":[512,512],"av-mina.jpg":[512,512],"av-sea.jpg":[512,512],"av-sora.jpg":[512,512],"av-staff.jpg":[512,512],"av-stella.jpg":[512,512],"av-yeon.jpg":[512,512],"av-yuha.jpg":[512,512],"gen-hiroto-after-selfie.jpg":[1152,2048],"gen-hiroto-chain-tripod-setup.jpg":[1206,804],"gen-hiroto-collage.jpg":[1206,804],"gen-hiroto-daily-arcade.jpg":[1206,811],"gen-hiroto-daily-conveni.jpg":[1206,804],"gen-hiroto-day3-tv.jpg":[1206,804],"gen-hiroto-day5-table.jpg":[1206,804],"gen-hiroto-day6-night.jpg":[1206,1622],"gen-hiroto-hoodie.jpg":[1152,2048],"gen-hiroto-live.jpg":[1206,1622],"gen-hiroto-story-day2-bed.jpg":[1152,2048],"gen-hiroto-stream-selfie.jpg":[1206,804],"gen-hiroto-tiktok.jpg":[1104,1968],"gen-hiroto-d7.jpg":[1206,804],"gen-hiroto-side-train.jpg":[1206,804],"pin-ana-c1.jpg":[736,736],"pin-ana-d7.jpg":[800,1066],"pin-carmen-c1.jpg":[1200,720],"pin-carmen-c2.jpg":[800,1066],"pin-carmen-c3.jpg":[800,1066],"pin-carmen-d7.jpg":[800,1066],"pin-ian-c1.jpg":[800,1422],"pin-ian-c2.jpg":[736,981],"pin-ian-d7.jpg":[856,1141],"pin-jiwoo-c1.jpg":[1024,683],"pin-jiwoo-c2.jpg":[960,1280],"pin-jiwoo-c3.jpg":[670,893],"pin-jiwoo-c4.jpg":[500,667],"pin-jiwoo-d1.jpg":[900,1125],"pin-jiwoo-d2.jpg":[800,1066],"pin-jiwoo-d3.jpg":[420,630],"pin-jiwoo-d4.jpg":[1366,2048],"pin-jiwoo-d5.jpg":[800,1193],"pin-jiwoo-d7.jpg":[500,500],"pin-juun-c1.jpg":[670,503],"pin-juun-d7.jpg":[670,503],"pin-karina-d7.jpg":[1080,1440],"pin-miku-c1.jpg":[910,607],"pin-miku-c2.jpg":[1200,900],"pin-miku-d7.jpg":[454,340],"pin-mina-d7.jpg":[736,981],"pin-sakuya-c1.jpg":[1224,1632],"pin-sakuya-d7.jpg":[960,1200],"pin-stella-c1.jpg":[768,1024],"pin-stella-c2.jpg":[1707,2560],"pin-stella-d7.jpg":[800,1071],"pin-yeon-c1.jpg":[900,1200],"pin-yeon-c2.jpg":[1284,855],"pin-yeon-d7.jpg":[800,1066],"pin-yuha-c1.jpg":[500,709],"pin-yuha-c2.jpg":[800,967],"pin-yuha-c3.jpg":[1500,2250],"pin-yuna-c1.jpg":[900,1200],"pin-yuna-c2.jpg":[2816,1536],"pin-yuna-d3.jpg":[1000,653],"pin-yuna-d6.jpg":[1200,675],"pin-yuna-d7.jpg":[492,340],"gen-hiroto-tripod-front.jpg":[1152,2048],"gen-hiroto-tripod-profile.jpg":[1104,1968],"gen-miku-day4-station.jpg":[1206,804],"gen-miku-day5-river.jpg":[1206,804],"gen-miku-station.jpg":[1152,2048],"gen-nao-day6-rain.jpg":[1152,2048],"gen-nao-day7-cafe.jpg":[1206,804],"gen-nikuman.jpg":[1206,804],"gen-sakuya-collage.jpg":[1206,603],"gen-sakuya-day6-studio.jpg":[1206,804],"gen-story-news.jpg":[1280,1920],"gen-story-watch.jpg":[1280,1920],"gen-tv-capture.jpg":[1206,804],"gen-yuna-day2-desk.jpg":[1206,804],"gen-yuna-day4-screenshot.jpg":[1008,2128],"gen-yuna-day5-living.jpg":[1206,804],"ig-avatar.jpg":[150,150],"ig-gen-stage.jpg":[1280,1722],"nao-avatar4.jpg":[800,800],"nao-backstage-selfie.jpg":[1184,2096],"nao-cafe2.jpg":[1080,1911],"nao-concept.jpg":[1206,1809],"nao-hiroto-conveni2.jpg":[1206,804],"nao-hiroto-doorway.jpg":[1206,1622],"nao-hiroto-hotel.jpg":[1206,804],"nao-hiroto-hug.jpg":[1206,804],"nao-hiroto-mirror.jpg":[1206,1599],"nao-hiroto-mispost.jpg":[1206,1622],"nao-hiroto-station2.jpg":[1206,1622],"nao-hiroto-taiyaki.jpg":[1206,804],"nao-lesson.jpg":[1184,2096],"nao-makeup.jpg":[1184,2096],"nao-promo.jpg":[1184,2096],"nao-rec.jpg":[1184,2096],"nao-sakuya-backstage.jpg":[1206,1599],"nao-sakuya-elevator.jpg":[1206,804],"nao-sakuya-hug.jpg":[1206,1633],"nao-sakuya-lobby.jpg":[1206,804],"nao-sakuya-mispost.jpg":[1206,1599],"nao-sakuya-sighting.jpg":[1206,910],"nao-sakuya-sofa.jpg":[1206,1599],"nao-sakuya-studio.jpg":[1206,804],"nao-sakuya-van.jpg":[1206,804],"nao-stage-ballad.jpg":[1184,2096],"nao-stage-confetti.jpg":[1184,2096],"nao-stage-dance.jpg":[1184,2096],"nao-stage-sailor.jpg":[1184,2096],"nao-stage.jpg":[1184,2096],"nao-story-cafe.jpg":[1184,2096],"nao-story-heart.jpg":[1184,2096],"nao-story-night.jpg":[1184,2096],"nao-story-towel.jpg":[1184,2096],"nao-stream-selfie.jpg":[1184,2096],"night.jpg":[750,1000],"pin-cafe-cake.jpg":[736,981],"pin-cafe-coffee.jpg":[735,918],"pin-cafe-onion.jpg":[735,981],"pin-carmen-d1.jpg":[701,700],"pin-carmen-d2.jpg":[500,600],"pin-carmen-d3.jpg":[800,1066],"pin-carmen-d4.jpg":[800,1066],"pin-carmen-d5.jpg":[800,1066],"pin-carmen-d6.jpg":[800,1070],"pin-dance.jpg":[736,1275],"pin-group.jpg":[736,920],"pin-jiwoo-d6.jpg":[736,1005],"pin-karina.jpg":[736,981],"pin-karina-d2.jpg":[474,632],"pin-karina-d3.jpg":[474,1015],"pin-karina-d4.jpg":[736,981],"pin-karina-d5.jpg":[736,981],"pin-karina-d6.jpg":[736,981],"pin-makeup.jpg":[736,1169],"pin-miku-d1.jpg":[736,1104],"pin-mina.jpg":[736,862],"pin-mina-d2.jpg":[736,981],"pin-mina-d3.jpg":[736,736],"pin-mina-d4.jpg":[720,720],"pin-mina-d5.jpg":[1108,1477],"pin-mina-d6.jpg":[1080,1350],"pin-night.jpg":[736,1308],"pin-yeon-d1.jpg":[800,1066],"pin-yeon-d2.jpg":[800,1066],"pin-yeon-d3.jpg":[900,1200],"pin-yeon-d4.jpg":[670,893],"pin-yeon-d5.jpg":[800,1064],"pin-yeon-d6.jpg":[1080,1440],"pin-stella-d1.jpg":[1500,2250],"pin-stella-d2.jpg":[1200,1800],"pin-stella-d3.jpg":[800,1066],"pin-stella-d4.jpg":[800,1125],"pin-stella-d5.jpg":[512,512],"pin-stella-d6.jpg":[800,1067],"pin-juun-d1.jpg":[1080,1346],"pin-juun-d2.jpg":[800,1066],"pin-juun-d3.jpg":[1080,1346],"pin-juun-d4.jpg":[800,1200],"pin-juun-d5.jpg":[1080,1346],"pin-juun-d6.jpg":[785,1200],"pin-ana-d1.jpg":[1000,1500],"pin-ana-d2.jpg":[670,476],"pin-ana-d3.jpg":[1536,2048],"pin-ana-d4.jpg":[856,1141],"pin-ana-d5.jpg":[800,1066],"pin-ana-d6.jpg":[900,1200],"pin-ian-d1.jpg":[400,600],"pin-ian-d2.jpg":[736,981],"pin-ian-d3.jpg":[1366,1366],"pin-ian-d4.jpg":[800,1199],"pin-ian-d5.jpg":[800,1200],"pin-ian-d6.jpg":[1500,2250],"pin-rack.jpg":[736,981],"pin-sakuya-bouquet.jpg":[736,981],"pin-sakuya-d2.jpg":[544,680],"pin-sakuya-ev2.jpg":[720,933],"pin-sakuya-ev6.jpg":[960,1200],"pin-studio-booth.jpg":[735,1031],"pin-studio-console.jpg":[736,981],"pin-studio.jpg":[736,981],"sakuya-av.jpg":[480,480],"sakuya-bmg.jpg":[900,675],"sakuya-cover.jpg":[1200,900],"sakuya-selca.jpg":[640,800],"sakuya-stage.jpg":[800,800]};
 function imgDimAttrs(src){const d=src&&IMG_DIMS[String(src).split("/").pop()];return d?' style="aspect-ratio:'+d[0]+' / '+d[1]+'"':"";}
 function imgAR(src){const d=src&&IMG_DIMS[String(src).split("/").pop()];return d?d[0]+" / "+d[1]:"";}
 function postEl(p,hot){
@@ -5795,7 +5821,39 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  else if(S.ch>=TOTAL_DAYS){goM.textContent="エンディングへ";goS.textContent=TOTAL_DAYS+"日間の物語の結末へ";}
  else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
  $("#dayresult").classList.remove("closing");$("#dayresult").classList.add("on");}
-$("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}},180);});
+/* v442: SIDE VIEW - when a day closes, the curtain lifts on his side
+   of it. Display only: no fx, no save fields, and she exists here
+   only across a screen (her posts, her stage, his stream) - no new
+   words or actions are written for her. Lines are hand-written per
+   day and route, kept short so the curtain never stops the flow. */
+const SIDE_SCENES={
+hiroto:{
+1:{lines:["17時40分。彼の部屋。","今日の配信は、19時開始の予定だった。画面の向こうでは、18時から、彼女のショーケースが始まる。","彼は少しだけ考えて、開始時刻を21時に書き換えた。理由の欄には、短く置いた。――所用です。","18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"]},
+2:{ph:"assets/gen-hiroto-side-train.jpg",lines:["帰りの電車。窓の外は、もう暗い。","昨夜の配信で、自分が言った言葉を思い出していた。『デビューの日くらい、最初から観たかった』。","言い過ぎた、と思う。でも、取り消したいとは思わなかった。","スマホの中では、彼女の切り抜きが、今日も静かに伸び続けていた。"]},
+3:{lines:["18時58分。彼は配信を閉じた。","いつもなら、もう少しだけ話す時間。でも今日は、観たいものがあった。","テレビの前。コーラを置いて、19時を待つ。","彼女の出番が始まってから、彼は一度も、スマホに触らなかった。"]},
+4:{lines:["夜。『終わる時間』の表が、彼の画面にも届いていた。","出演日だけ、きれいに早い配信終了時刻。並べたのは他人でも、決めていたのは、自分だ。","彼は表を閉じて、21時きっかりに配信を始めた。いつも通り、雑談だけ。","終わる時間は、明日も自分で決める。それだけは、変わらなかった。"]},
+5:{lines:["配信の夜。荒らしのコメントが、画面を埋めていった。","彼は、長いこと何も言わなかった。彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。","選んだのは、どちらの名前も出さないことだった。置いた一言は、それだけ。","『……俺の話をしに来た人とだけ、話します』","配信が終わっても、コーラには手が付いていなかった。"]},
+6:{lines:["報道の日。20時の配信は、いつも通りに終わった。","画面を閉じたあと、彼は彼女の今日のポストを開いた。コンビニで、知らない人が彼女の曲を口ずさんでいた、という小さな話。","いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。","彼は押さなかった。代わりに、明日の配信の開始時刻を、いつも通りに設定した。"]}},
+sakuya:{
+1:{lines:["ショーケースのあとの夜。会社の廊下で、彼は挨拶を思い返していた。","『デビュー、おめでとうございます』。練習生として10年以上を過ごした人への言葉として、あれで足りていただろうか。","彼はイヤホンを付けて、彼女のデビュー曲を、もう一度最初から聴いた。","まっすぐな歌だった。……次に会えたら、今度はもう少しだけ、自分の言葉で話したい。"]},
+2:{lines:["『挨拶の練習もしました』。その一文を置くまでに、彼は下書きを何度も書き直していた。","廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。","残ったのは、一文だけだった。残りは、胸の中にしまっておく。","レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"]},
+3:{lines:["『……僕のほうが、後輩です』。言った直後の廊下は、静かだった。","言わなければ、彼女は「後輩」のまま紹介され続ける。それだけは、違うと思った。","移動の車の中で、彼は今日の彼女のステージを思い返していた。10年以上待った人の歌は、やっぱり重かった。","訂正したことに、後悔はなかった。少しだけ、手が震えていたけれど。"]},
+4:{lines:["朝。あのポストが、公開された。下書きで彼女に見せた、あの文面のまま。","彼はすぐには反応を見なかった。レッスン室で振りを確認して、通知は伏せて置いた。","夕方、彼女の今日の動きを知って、彼は小さく息を吐いた。","言ってよかったのだと思う。あとは、ステージで並ぶ日を待つだけだ。"]},
+5:{lines:["何年も前の写真が、掘り返された日。","彼のスマホにも、同じ頃の写真が残っている。練習生フロアの、何気ない一枚。","彼はそれを開いて、閉じた。出すことは、守ることにはならない。","明日の発表の前に、できることは少ない。でも、隣に立つ覚悟だけは、もう決まっていた。"]},
+6:{lines:["発表の直後。公式ポストへの返信を、彼は何度も書き直していた。","丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。","『ステージでは隣に立たせてください』。その一行だけは、最初から決まっていた。","送信の前に、一度だけ深く息を吸う。……あとは、彼女の返事を待つだけだった。"]}}};
+let sideCb=null;
+function sideScene(d){const t=SIDE_SCENES[tgtKey()];return t?t[d]:null;}
+function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
+ sideCb=cb||null;
+ $("#sv2-day").textContent="DAY "+d+" ― "+(tgtKey()==="sakuya"?"サクヤ":"井汲大翔")+"の側";
+ const ph=$("#sv2-ph");if(sc.ph){ph.src=sc.ph;ph.style.display="";}else{ph.removeAttribute("src");ph.style.display="none";}
+ const box=$("#sv2-lines");box.innerHTML="";sc.lines.forEach((ln,i)=>{const p=document.createElement("p");p.className="sv2-line";p.style.animationDelay=(0.25+i*0.35)+"s";p.textContent=ln;box.appendChild(p);});
+ const tap=$("#sideview .sv2-tap");if(tap)tap.style.animationDelay=(0.4+sc.lines.length*0.35)+"s";
+ const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
+function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
+$("#sideview").addEventListener("click",closeSide);
+function proceedFromResult(){if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}}
+$("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else proceedFromResult();},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
 /* v226: the RESULT screen links onward to the full record too -
    the scrims layer over it, like they do over the ending (v192) */
