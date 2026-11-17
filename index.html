@@ -2921,6 +2921,144 @@ input,textarea{font-size:16px}
 @keyframes svline{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #sideview .sv2-tap{display:block;margin-top:22px;text-align:center;font-size:10.5px;font-weight:900;letter-spacing:.3em;color:rgba(235,238,255,.5);animation:svline .7s ease both}
 
+/* ===== v460: SIDE VIEW becomes the phone in his hand - the prose
+   curtain is replaced by a device mock (bezel, status bar, app bar)
+   and each scene is told through the app he is actually looking at:
+   stream studio, X, drafts, messages, a photo viewer, a music
+   player. The scenes' own hand-written words live inside the
+   screens (posts, drafts, fields, notifications); a short caption
+   under the phone carries only what no screen can show. ===== */
+#sideview .sv2-ph{height:118px;object-fit:cover;object-position:center 30%;margin:0 0 14px}
+#sideview .sv2-phone{position:relative;width:min(302px,100%);margin:0 auto;background:#05050a;border-radius:34px;padding:9px;box-shadow:0 26px 60px rgba(0,0,0,.6),0 0 0 1.5px rgba(255,255,255,.16);animation:svphone .55s cubic-bezier(.2,.8,.25,1) .08s both}
+@keyframes svphone{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+#sideview .sv2-scrwrap{border-radius:26px;overflow:hidden;background:#fff;color:#0f1419;display:flex;flex-direction:column}
+#sideview .sv2-phone.th-dark .sv2-scrwrap{background:#101014;color:#f4f4f6}
+#sideview .sv2-status{display:flex;align-items:center;justify-content:space-between;padding:9px 16px 3px;font-size:12px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+#sideview .sv2-sig svg{display:block;width:44px;height:12px;fill:currentColor;stroke:currentColor}
+#sideview .sv2-appbar{display:flex;align-items:center;gap:7px;padding:7px 14px 8px;font-size:13.5px;font-weight:800;border-bottom:1px solid rgba(130,140,160,.18)}
+#sideview .sv2-chev{font-size:19px;line-height:1;font-weight:400;opacity:.65;margin-top:-2px}
+#sideview .sv2-scr{padding:12px 13px 14px;display:flex;flex-direction:column;gap:10px;min-height:296px}
+#sideview .sv2-homebar{width:110px;height:4px;border-radius:3px;background:currentColor;opacity:.28;margin:2px auto 7px}
+#sideview .sv2-blk{animation:svline2 .6s ease both}
+#sideview .sv2-stack{display:flex;flex-direction:column;gap:8px}
+#sideview .sv2-cap{font-size:13px;line-height:1.9;color:rgba(238,240,255,.88);margin:16px 2px 0;animation:svline2 .7s ease both}
+#sideview .sv2-sh{font-size:10.5px;font-weight:900;letter-spacing:.18em;color:#8a94a6;margin:2px 0 -2px}
+#sideview .sv2-head b{display:block;font-size:16.5px;font-weight:900;letter-spacing:.02em}
+#sideview .sv2-head span{display:block;margin-top:2px;font-size:11.5px;color:#7a8494}
+#sideview .th-dark .sv2-head span{color:#9a9aa5}
+#sideview .sv2-row{display:flex;align-items:center;gap:8px;padding:9px 11px;border:1px solid rgba(130,140,160,.22);border-radius:12px;font-size:13px}
+#sideview .sv2-row .lab{color:#7a8494;font-weight:700;flex:none}
+#sideview .th-dark .sv2-row .lab{color:#9a9aa5}
+#sideview .sv2-row .rwrap{margin-left:auto;text-align:right}
+#sideview .sv2-row .val{font-weight:800}
+#sideview .sv2-row .val.strike{color:#a7b0bf;text-decoration:line-through;font-weight:600}
+#sideview .sv2-row .val.hot{color:#f91880}
+#sideview .sv2-row .sub{display:block;font-size:10.5px;color:#98a2b3;font-weight:600;margin-top:1px}
+#sideview .sv2-chip{flex:none;font-size:9.5px;font-weight:900;letter-spacing:.06em;color:#fff;background:linear-gradient(92deg,#7856ff,#f91880);border-radius:999px;padding:3px 8px}
+#sideview .sv2-field{border:1.5px solid rgba(120,86,255,.55);border-radius:12px;padding:8px 11px 9px}
+#sideview .sv2-field .lab{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;color:#7856ff}
+#sideview .sv2-field .tx{font-size:14.5px;font-weight:700;margin-top:2px}
+#sideview .sv2-field .tx::after{content:"";display:inline-block;width:1.5px;height:14px;background:#7856ff;margin-left:2px;vertical-align:-2px;animation:svblink 1.1s steps(1) infinite}
+@keyframes svblink{0%,55%{opacity:1}56%,100%{opacity:0}}
+#sideview .sv2-btn{display:block;text-align:center;background:linear-gradient(92deg,#7856ff,#f91880);color:#fff;font-size:13.5px;font-weight:900;border-radius:999px;padding:11px 0;box-shadow:0 8px 20px rgba(160,60,180,.35)}
+#sideview .th-light .sv2-btn{background:#0f1419;box-shadow:0 8px 20px rgba(15,20,25,.25)}
+#sideview .sv2-cal{display:flex;gap:11px;align-items:center;border:1px solid rgba(130,140,160,.22);border-radius:12px;padding:9px 11px}
+#sideview .sv2-cal .tm{font-size:13px;font-weight:900;color:#f91880;font-variant-numeric:tabular-nums;flex:none}
+#sideview .sv2-cal .tx{font-size:13px;font-weight:800}
+#sideview .sv2-cal .sub{display:block;font-size:10.5px;color:#98a2b3;font-weight:600;margin-top:1px}
+#sideview .sv2-stats{display:flex;gap:8px}
+#sideview .sv2-stat{flex:1;border:1px solid rgba(130,140,160,.22);border-radius:12px;padding:9px 4px 8px;text-align:center}
+#sideview .sv2-stat b{display:block;font-size:15.5px;font-weight:900;font-variant-numeric:tabular-nums}
+#sideview .sv2-stat span{display:block;margin-top:2px;font-size:10px;font-weight:700;color:#8a94a6;letter-spacing:.08em}
+#sideview .sv2-note{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:#8a94a6}
+#sideview .sv2-note svg{width:15px;height:15px;flex:none;fill:currentColor}
+#sideview .sv2-post{display:flex;gap:9px}
+#sideview .sv2-post .av{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none}
+#sideview .sv2-post .main{flex:1;min-width:0}
+#sideview .sv2-post .nh{display:flex;align-items:baseline;gap:5px;font-size:12.5px}
+#sideview .sv2-post .nh b{font-weight:800;white-space:nowrap}
+#sideview .sv2-post .nh span{color:#7a8494;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sideview .sv2-post .tx{font-size:13.5px;line-height:1.55;margin-top:1px;white-space:pre-wrap;word-break:break-word}
+#sideview .sv2-acts{display:flex;justify-content:space-between;max-width:232px;margin-top:7px;color:#7a8494}
+#sideview .sv2-act{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600}
+#sideview .sv2-act svg{width:15px;height:15px;fill:currentColor}
+#sideview .sv2-act.like{position:relative}
+#sideview .sv2-act.like.hov{color:#f91880}
+#sideview .sv2-act.like.hov::after{content:"";position:absolute;left:7.5px;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border:1.5px solid rgba(249,24,128,.55);border-radius:50%;animation:svring 1.8s ease-in-out infinite;pointer-events:none}
+@keyframes svring{0%,100%{transform:scale(.92);opacity:.75}50%{transform:scale(1.06);opacity:.35}}
+#sideview .sv2-tbl{border:1px solid rgba(130,140,160,.25);border-radius:12px;overflow:hidden;font-size:11.5px}
+#sideview .sv2-tbl table{width:100%;border-collapse:collapse}
+#sideview .sv2-tbl th{background:rgba(120,86,255,.12);font-weight:900;text-align:left;padding:6px 8px}
+#sideview .sv2-tbl td{padding:6px 8px;border-top:1px solid rgba(130,140,160,.16);font-weight:600}
+#sideview .sv2-tbl td.hot{color:#f91880;font-weight:900}
+#sideview .sv2-notif{display:flex;gap:9px;align-items:flex-start}
+#sideview .sv2-notif .ic{width:26px;height:26px;border-radius:50%;background:rgba(249,24,128,.13);color:#f91880;display:flex;align-items:center;justify-content:center;flex:none}
+#sideview .sv2-notif .ic svg{width:14px;height:14px;fill:currentColor}
+#sideview .sv2-notif .tx{font-size:12.5px;line-height:1.5}
+#sideview .sv2-notif .tx b{font-weight:800}
+#sideview .sv2-notif .tm{margin-left:auto;font-size:10.5px;color:#98a2b3;flex:none;padding-top:2px}
+#sideview .sv2-sent{display:flex;gap:9px;background:rgba(120,86,255,.1);border:1px solid rgba(120,86,255,.3);border-radius:13px;padding:9px 11px}
+#sideview .sv2-sent .av{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none}
+#sideview .sv2-sent .who{display:block;font-size:10.5px;font-weight:900;color:#7856ff;letter-spacing:.08em}
+#sideview .sv2-sent .tx{font-size:13px;line-height:1.55;font-weight:700}
+#sideview .sv2-draft{border:1.5px dashed rgba(190,90,80,.55);border-radius:12px;padding:8px 11px 9px;background:rgba(200,60,60,.05)}
+#sideview .sv2-draft .lab{display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#c0564f}
+#sideview .sv2-draft .tx{font-size:14px;font-weight:700;margin-top:2px;color:#a8a29e;text-decoration:line-through;text-decoration-thickness:1.5px}
+#sideview .sv2-draft .sub{display:block;font-size:10.5px;color:#98a2b3;margin-top:2px;font-weight:600}
+#sideview .sv2-ditem{display:flex;gap:8px;align-items:flex-start;border:1px solid rgba(130,140,160,.2);border-radius:12px;padding:9px 11px;font-size:13px;line-height:1.55}
+#sideview .sv2-ditem.off{opacity:.48}
+#sideview .sv2-ditem.off .tx{text-decoration:line-through;text-decoration-thickness:1px}
+#sideview .sv2-ditem.keep{border-color:rgba(29,155,240,.6);background:rgba(29,155,240,.07)}
+#sideview .sv2-ditem .mk{flex:none;font-size:12px;font-weight:900;margin-top:1px;color:#b0b7c3}
+#sideview .sv2-ditem.keep .mk{color:#1d9bf0}
+#sideview .sv2-chatname{text-align:center;font-size:11px;font-weight:800;color:#8a94a6}
+#sideview .sv2-bub{max-width:82%;font-size:13px;line-height:1.55;padding:8px 12px;border-radius:17px}
+#sideview .sv2-bub.l{align-self:flex-start;background:#eef1f4;border-bottom-left-radius:5px}
+#sideview .sv2-bub.r{align-self:flex-end;background:#1d9bf0;color:#fff;border-bottom-right-radius:5px}
+#sideview .sv2-vid{border-radius:14px;overflow:hidden;background:#000;color:#fff}
+#sideview .sv2-vstage{position:relative;height:148px;background:linear-gradient(150deg,#2a1440 0%,#571d56 48%,#b3236b 100%)}
+#sideview .sv2-vstage::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 108%,rgba(255,190,220,.35),rgba(255,190,220,0) 60%)}
+#sideview .sv2-vbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:rgba(10,8,18,.55);display:flex;align-items:center;justify-content:center;z-index:2}
+#sideview .sv2-vbtn svg{width:20px;height:20px;fill:#fff}
+#sideview .sv2-vdur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.72);font-size:10.5px;font-weight:700;border-radius:5px;padding:2px 6px;z-index:2;font-variant-numeric:tabular-nums}
+#sideview .sv2-vbar{height:3.5px;background:rgba(255,255,255,.28)}
+#sideview .sv2-vbar i{display:block;height:100%;background:#f91880}
+#sideview .sv2-vmeta{padding:9px 11px 10px;background:#16161c}
+#sideview .sv2-vmeta b{display:block;font-size:12.5px;line-height:1.5;font-weight:800}
+#sideview .sv2-vmeta span{display:block;margin-top:2px;font-size:11px;color:#a7adba;font-weight:600}
+#sideview .sv2-album{height:150px;border-radius:14px;background:linear-gradient(150deg,#3b2a6e 0%,#7856ff 55%,#f91880 130%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#fff}
+#sideview .sv2-album svg{width:34px;height:34px;fill:rgba(255,255,255,.92)}
+#sideview .sv2-album b{font-size:13px;letter-spacing:.34em;font-weight:900;padding-left:.34em}
+#sideview .sv2-album span{font-size:10px;letter-spacing:.22em;font-weight:700;color:rgba(255,255,255,.75);padding-left:.22em}
+#sideview .sv2-ptitle b{display:block;font-size:15.5px;font-weight:900}
+#sideview .sv2-ptitle span{display:block;font-size:12px;color:#9a9aa5;font-weight:600;margin-top:1px}
+#sideview .sv2-pbar{height:4px;border-radius:3px;background:rgba(140,140,160,.3)}
+#sideview .sv2-pbar i{display:block;height:100%;border-radius:3px;background:#fff}
+#sideview .sv2-pctl{display:flex;align-items:center;justify-content:center;gap:30px}
+#sideview .sv2-pctl svg{width:22px;height:22px;fill:currentColor}
+#sideview .sv2-pctl .big{width:52px;height:52px;border-radius:50%;background:#fff;color:#101014;display:flex;align-items:center;justify-content:center;flex:none}
+#sideview .sv2-pctl .big svg{width:24px;height:24px}
+#sideview .sv2-photo{border-radius:14px;overflow:hidden;background:#000;color:#fff}
+#sideview .sv2-pview{position:relative;height:212px;background:linear-gradient(168deg,#4a3a30 0%,#2c2320 55%,#17120f 100%)}
+#sideview .sv2-pview::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 46% at 50% 30%,rgba(255,214,150,.28),rgba(255,214,150,0) 65%)}
+#sideview .sv2-pview svg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:150px;fill:rgba(12,8,6,.85)}
+#sideview .sv2-pmeta{display:flex;align-items:center;gap:8px;padding:9px 11px;background:#101013;font-size:11.5px}
+#sideview .sv2-pmeta b{font-weight:800}
+#sideview .sv2-pmeta span{color:#9a9aa5;font-weight:600}
+#sideview .sv2-pmeta .lk{margin-left:auto;display:flex}
+#sideview .sv2-pmeta .lk svg{width:14px;height:14px;fill:#9a9aa5}
+#sideview .sv2-comp{border:1.5px solid rgba(29,155,240,.55);border-radius:14px;padding:10px 12px}
+#sideview .sv2-comp .to{font-size:11px;font-weight:800;color:#7a8494}
+#sideview .sv2-comp .to b{color:#1d9bf0}
+#sideview .sv2-comp .tx{font-size:14.5px;line-height:1.6;margin-top:5px;font-weight:600}
+#sideview .sv2-comp .tx::after{content:"";display:inline-block;width:1.5px;height:14px;background:#1d9bf0;margin-left:2px;vertical-align:-2px;animation:svblink 1.1s steps(1) infinite}
+#sideview .sv2-comp .bar{display:flex;align-items:center;margin-top:10px}
+#sideview .sv2-comp .iic{display:flex}
+#sideview .sv2-comp .iic svg{width:18px;height:18px;fill:#1d9bf0;opacity:.75}
+#sideview .sv2-send{margin-left:auto;background:#1d9bf0;color:#fff;font-size:12px;font-weight:900;border-radius:999px;padding:6px 14px}
+#sideview .sv2-old .lab2{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;color:#98a2b3;margin-bottom:2px}
+#sideview .sv2-old .orow{font-size:11.5px;color:#98a2b3;padding:5px 2px;border-top:1px dashed rgba(130,140,160,.3);text-decoration:line-through;line-height:1.5}
+
 /* ===== v443: LIVE SCENE - the Day 5 stream of silence, replayed as a
    phone live-viewer: his frame, a comment river that stops, a real
    silence, then his one line. ===== */
@@ -3042,7 +3180,7 @@ input,textarea{font-size:16px}
 #livescene .lv-frame::after{content:"";position:absolute;inset:0;z-index:5;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.13) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);pointer-events:none}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
-@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule{animation:none}}
+@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv2-phone,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after{animation:none}}
 /* ===== v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, the
    counterpart to Hiroto's live scene (v443): not a stream imitation
    but the announcement minute itself, replayed on a light real-X
@@ -3165,7 +3303,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v459</p>
+  <p class="ver">v460</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3345,7 +3483,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v459</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v460</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3566,7 +3704,15 @@ input,textarea{font-size:16px}
       <span class="sv2-day" id="sv2-day">DAY 1</span>
       <div class="sv2-rule"></div>
       <img class="sv2-ph" id="sv2-ph" alt="" style="display:none">
-      <div id="sv2-lines"></div>
+      <div class="sv2-phone" id="sv2-phone">
+        <div class="sv2-scrwrap">
+          <div class="sv2-status"><span id="sv2-clock">17:40</span><span class="sv2-sig"><svg viewBox="0 0 44 12" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="8" rx="1"/><rect x="15" y="1" width="3" height="10" rx="1"/><path d="M24.5 8.6a4.6 4.6 0 0 1 6 0M22.8 6.2a7.4 7.4 0 0 1 9.4 0" fill="none" stroke-width="1.6" stroke-linecap="round"/><circle cx="27.5" cy="10.4" r="1.3"/><rect x="35" y="1.5" width="8" height="9" rx="2.4" fill="none" stroke-width="1.1"/><rect x="36.6" y="3.1" width="3.4" height="5.8" rx="1"/></svg></span></div>
+          <div class="sv2-appbar"><span class="sv2-chev">‹</span><span id="sv2-app">X</span></div>
+          <div class="sv2-scr" id="sv2-scr"></div>
+          <div class="sv2-homebar"></div>
+        </div>
+      </div>
+      <p class="sv2-cap" id="sv2-cap"></p>
       <span class="sv2-tap">TAP</span>
     </div>
   </div>
@@ -3647,7 +3793,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v459</p>
+    <p class="ver">v460</p>
   </div>
 </section>
 </div>
@@ -6202,34 +6348,136 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  else{goM.textContent="次の日へ";const nx=curCH()[S.ch];goS.textContent=nx?(nx.day||""):"";}
  $("#dayresult").classList.remove("closing");$("#dayresult").classList.add("on");}
 /* v442: SIDE VIEW - when a day closes, the curtain lifts on his side
-   of it. Display only: no fx, no save fields, and she exists here
-   only across a screen (her posts, her stage, his stream) - no new
-   words or actions are written for her. Lines are hand-written per
-   day and route, kept short so the curtain never stops the flow. */
+of it. Display only: no fx, no save fields, and she exists here
+only across a screen (her posts, her stage, his stream) - no new
+words or actions are written for her.
+v460: the curtain is no longer prose. Each scene is the phone in
+his hand - the app he is actually looking at (his stream studio,
+X, his drafts, a chat with the PR desk, a photo he opens and
+closes, the song on repeat). The hand-written words of the scene
+live inside those screens as posts, drafts, fields and
+notifications; one short caption under the phone carries what no
+screen can show. Same insertion point, same tap-to-go-on flow. */
+const SVI={
+heart:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 16.9 3.2 13.7 3.2 10.3c0-2.6 2-4.6 4.5-4.6 1.7 0 3.4.9 4.3 2.4.9-1.5 2.6-2.4 4.3-2.4 2.5 0 4.5 2 4.5 4.6 0 3.4-3.2 6.6-8.8 10.4z" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>',
+heartF:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 16.9 3.2 13.7 3.2 10.3c0-2.6 2-4.6 4.5-4.6 1.7 0 3.4.9 4.3 2.4.9-1.5 2.6-2.4 4.3-2.4 2.5 0 4.5 2 4.5 4.6 0 3.4-3.2 6.6-8.8 10.4z"/></svg>',
+reply:'<svg viewBox="0 0 24 24"><path d="M4.5 5.5h15v9.5H10l-4.5 4v-4H4.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+repost:'<svg viewBox="0 0 24 24"><path d="M7.5 6.5h9.8V4L21 7.7l-3.7 3.7V8.9H9.5v4.6H7.5zm9 11H6.7V20L3 16.3l3.7-3.7v2.5h7.8v-4.6h2z"/></svg>',
+views:'<svg viewBox="0 0 24 24"><path d="M4 20V10h3v10zm6.5 0V4h3v16zM17 20v-7h3v7z"/></svg>',
+play:'<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>',
+pause:'<svg viewBox="0 0 24 24"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.6z"/></svg>',
+prev:'<svg viewBox="0 0 24 24"><path d="M6 5h2.2v14H6zM19 5.5v13L9.5 12z"/></svg>',
+next:'<svg viewBox="0 0 24 24"><path d="M15.8 5H18v14h-2.2zM5 5.5v13L14.5 12z"/></svg>',
+note:'<svg viewBox="0 0 24 24"><path d="M9 18.2V6l10-2v11.7a3.8 3.8 0 1 1-2-3.4V6.4L11 8.3v9.9a3.8 3.8 0 1 1-2-3.4z"/></svg>',
+hp:'<svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0v1.5a3 3 0 0 1-3 3h-1v-7h1.2A9.9 9.9 0 0 0 12 5a9.9 9.9 0 0 0-5.2 5.5H8v7H7a3 3 0 0 1-3-3z"/></svg>',
+belloff:'<svg viewBox="0 0 24 24"><path d="M12 4a6 6 0 0 1 6 6c0 3.8 4.4 1.6 5.4.3.4 0 1.1-.6 1.1H6.6l3.5-3.2A6.5 6.5 0 0 1 12 4zm-1.2 14h2.4a2.3 2.3 0 0 1-2.4 0zM4.5 3.8l15 15-1.4 1.4-15-15z"/></svg>',
+cal:'<svg viewBox="0 0 24 24"><path d="M6 3v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3h-2v2H8V3zm13 8H5V8h14z"/></svg>',
+lock:'<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 1 5 5v3h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h1V8a5 5 0 0 1 5-5zm-3 8h6V8a3 3 0 1 0-6 0z"/></svg>',
+img:'<svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm3.5 4A1.8 1.8 0 1 0 9.3 7.2 1.8 1.8 0 0 0 7.5 9zM5 17.5l4.7-4.7 3 3L16 12.5l3 3v1.2a.8.8 0 0 1-.8.8z"/></svg>'};
+function svEl(tag,cls,tx){const e=document.createElement(tag);if(cls)e.className=cls;if(tx!=null)e.textContent=tx;return e;}
+function svBlock(b){
+const w=svEl("div","sv2-blk");
+if(b.t==="head"){const d=svEl("div","sv2-head");d.appendChild(svEl("b",null,b.tx));if(b.sub)d.appendChild(svEl("span",null,b.sub));w.appendChild(d);}
+else if(b.t==="shead"){w.appendChild(svEl("div","sv2-sh",b.tx));}
+else if(b.t==="row"){const d=svEl("div","sv2-row");d.appendChild(svEl("span","lab",b.lab));const r=svEl("span","rwrap");r.appendChild(svEl("span","val"+(b.strike?" strike":"")+(b.hot?" hot":""),b.val));if(b.sub)r.appendChild(svEl("span","sub",b.sub));d.appendChild(r);if(b.chip)d.appendChild(svEl("span","sv2-chip",b.chip));w.appendChild(d);}
+else if(b.t==="field"){const d=svEl("div","sv2-field");d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));w.appendChild(d);}
+else if(b.t==="btn"){w.appendChild(svEl("div","sv2-btn",b.tx));}
+else if(b.t==="cal"){const d=svEl("div","sv2-cal");d.appendChild(svEl("span","tm",b.time));const m=svEl("div");m.appendChild(svEl("span","tx",b.tx));if(b.sub)m.appendChild(svEl("span","sub",b.sub));d.appendChild(m);w.appendChild(d);}
+else if(b.t==="stats"){const d=svEl("div","sv2-stats");b.items.forEach(it=>{const s=svEl("div","sv2-stat");s.appendChild(svEl("b",null,it[1]));s.appendChild(svEl("span",null,it[0]));d.appendChild(s);});w.appendChild(d);}
+else if(b.t==="note"){const d=svEl("div","sv2-note");const i=svEl("span");i.innerHTML=SVI[b.icon]||"";d.appendChild(i);d.appendChild(svEl("span",null,b.tx));w.appendChild(d);}
+else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h+(b.time?" ・ "+b.time:"")));m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));ac.appendChild(mk(SVI.repost,b.rp));ac.appendChild(mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":"")));ac.appendChild(mk(SVI.views,b.vw||""));m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
+else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
+else if(b.t==="notif"){const d=svEl("div","sv2-notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));w.appendChild(d);}
+else if(b.t==="sent"){const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",b.tx));d.appendChild(m);w.appendChild(d);}
+else if(b.t==="draft"){const d=svEl("div","sv2-draft");d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));if(b.sub)d.appendChild(svEl("span","sub",b.sub));w.appendChild(d);}
+else if(b.t==="drafts"){w.classList.add("sv2-stack");b.items.forEach(it=>{const d=svEl("div","sv2-ditem"+(it.keep?" keep":" off"));d.appendChild(svEl("span","mk",it.keep?"✓":"✕"));d.appendChild(svEl("span","tx",it.tx));w.appendChild(d);});}
+else if(b.t==="chat"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.msgs.forEach(m=>{w.appendChild(svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]));});}
+else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vstage");const vb=svEl("span","sv2-vbtn");vb.innerHTML=b.icon==="play"?SVI.play:SVI.pause;st.appendChild(vb);st.appendChild(svEl("span","sv2-vdur",b.dur));d.appendChild(st);const bar=svEl("div","sv2-vbar");const bi=svEl("i");bi.style.width=(b.prog||0)+"%";bar.appendChild(bi);d.appendChild(bar);const md=svEl("div","sv2-vmeta");md.appendChild(svEl("b",null,b.title));md.appendChild(svEl("span",null,b.by+" ・ "+b.views));d.appendChild(md);w.appendChild(d);}
+else if(b.t==="player"){w.classList.add("sv2-stack");const al=svEl("div","sv2-album");al.innerHTML=SVI.note;al.appendChild(svEl("b",null,"Hearts2Hearts"));al.appendChild(svEl("span",null,"THE CHASE"));w.appendChild(al);const pt=svEl("div","sv2-ptitle");pt.appendChild(svEl("b",null,b.title));pt.appendChild(svEl("span",null,b.artist));w.appendChild(pt);const pb=svEl("div","sv2-pbar");const pi=svEl("i");pi.style.width=(b.prog||0)+"%";pb.appendChild(pi);w.appendChild(pb);const pc=svEl("div","sv2-pctl");const pv=svEl("span");pv.innerHTML=SVI.prev;pc.appendChild(pv);const big=svEl("span","big");big.innerHTML=SVI.play;pc.appendChild(big);const nx=svEl("span");nx.innerHTML=SVI.next;pc.appendChild(nx);w.appendChild(pc);}
+else if(b.t==="photo"){const d=svEl("div","sv2-photo");const pv=svEl("div","sv2-pview");pv.innerHTML='<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="72" cy="58" r="17"/><path d="M38 150c2-30 16-44 34-44s32 14 34 44z"/><circle cx="128" cy="52" r="20"/><path d="M92 150c2-34 17-50 36-50s34 16 36 50z"/></svg>';d.appendChild(pv);const pm=svEl("div","sv2-pmeta");pm.appendChild(svEl("b",null,b.date));pm.appendChild(svEl("span",null,b.place));const lk=svEl("span","lk");lk.innerHTML=SVI.lock;pm.appendChild(lk);d.appendChild(pm);w.appendChild(d);}
+else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-comp");const to=svEl("div","to");to.appendChild(document.createTextNode("返信先："));to.appendChild(svEl("b",null,b.to));c.appendChild(to);c.appendChild(svEl("div","tx",b.tx));const bar=svEl("div","bar");const ii=svEl("span","iic");ii.innerHTML=SVI.img;bar.appendChild(ii);bar.appendChild(svEl("span","sv2-send","返信する"));c.appendChild(bar);w.appendChild(c);if(b.old&&b.old.length){const o=svEl("div","sv2-old");o.appendChild(svEl("span","lab2","書き直した下書き"));b.old.forEach(x=>o.appendChild(svEl("div","orow",x)));w.appendChild(o);}}
+return w;}
 const SIDE_SCENES={
 hiroto:{
-1:{lines:["17時40分。彼の部屋。","今日の配信は、19時開始の予定だった。画面の向こうでは、18時から、彼女のショーケースが始まる。","彼は少しだけ考えて、開始時刻を21時に書き換えた。理由の欄には、短く置いた。――所用です。","18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"]},
-2:{ph:"assets/gen-hiroto-side-train.jpg",lines:["帰りの電車。窓の外は、もう暗い。","昨夜の配信で、自分が言った言葉を思い出していた。『デビューの日くらい、最初から観たかった』。","言い過ぎた、と思う。でも、取り消したいとは思わなかった。","スマホの中では、彼女の切り抜きが、今日も静かに伸び続けていた。"]},
-3:{lines:["18時58分。彼は配信を閉じた。","いつもなら、もう少しだけ話す時間。でも今日は、観たいものがあった。","テレビの前。コーラを置いて、19時を待つ。","彼女の出番が始まってから、彼は一度も、スマホに触らなかった。"]},
-4:{lines:["夜。『終わる時間』の表が、彼の画面にも届いていた。","出演日だけ、きれいに早い配信終了時刻。並べたのは他人でも、決めていたのは、自分だ。","彼は表を閉じて、21時きっかりに配信を始めた。いつも通り、雑談だけ。","終わる時間は、明日も自分で決める。それだけは、変わらなかった。"]},
-5:{lines:["配信の夜。荒らしのコメントが、画面を埋めていった。","彼は、長いこと何も言わなかった。彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。","選んだのは、どちらの名前も出さないことだった。置いた一言は、それだけ。","『……俺の話をしに来た人とだけ、話します』","打ちかけたコメントを、彼は一文字ずつ消した。『まって』――誰に向けた言葉かは、自分が一番分かっていた。","配信が終わっても、コーラには手が付いていなかった。通知欄には、知らない名前からの言葉が、まだ増え続けていた。"]},
-6:{lines:["報道の日。20時の配信は、いつも通りに終わった。","画面を閉じたあと、彼は彼女の今日のポストを開いた。コンビニで、知らない人が彼女の曲を口ずさんでいた、という小さな話。小さな話だった。なのに、二回読んだ。","いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。","彼は押さなかった。代わりに、明日の配信の開始時刻を、いつも通りに設定した。"]}},
+1:{clock:"17:40",app:"配信スタジオ",theme:"dark",blocks:[
+{t:"head",tx:"配信の予約",sub:"今日の配信"},
+{t:"row",lab:"タイトル",val:"雑談"},
+{t:"row",lab:"開始時刻",val:"19:00",strike:1,sub:"当初の予定"},
+{t:"row",lab:"開始時刻",val:"21:00",hot:1,chip:"変更済み"},
+{t:"field",lab:"理由",tx:"所用です"},
+{t:"cal",time:"18:00",tx:"デビューショーケース",sub:"Hearts2Hearts ― カレンダー登録済み"},
+{t:"btn",tx:"保存する"}],
+cap:"18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"},
+2:{ph:"assets/gen-hiroto-side-train.jpg",clock:"20:12",app:"X",blocks:[
+{t:"video",title:"デビューショーケース ― なお『The Chase』歌唱",by:"ゆな @yuna_nao",views:"再生 214,308回",dur:"0:47",prog:62,icon:"pause"},
+{t:"note",icon:"views",tx:"彼女の切り抜きは、今日も静かに伸び続けていた"}],
+cap:"昨夜の配信で、自分が言った言葉を思い出していた。『デビューの日くらい、最初から観たかった』――言い過ぎた、と思う。でも、取り消したいとは思わなかった。"},
+3:{clock:"18:59",app:"配信スタジオ",theme:"dark",blocks:[
+{t:"head",tx:"配信が終了しました",sub:"今日のレポート"},
+{t:"stats",items:[["終了時刻","18:58"],["視聴者数","328"],["配信時間","1時間12分"]]},
+{t:"field",lab:"終了メッセージ",tx:"ありがとうございました"},
+{t:"note",icon:"cal",tx:"いつもより、少し早い終了"}],
+cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"},
+4:{clock:"23:18",app:"X",blocks:[
+{t:"post",a:"sora",time:"3時間",tx:"ひろとの配信『終わる時間』の表、出回ってる。なおさんの出演日だけ、きれいに早い。……この二人、ただの偶然で片付く材料じゃなくなってきた",rc:"74",rp:"52",lk:"480",vw:"8,412"},
+{t:"shead",tx:"回っている表"},
+{t:"table",head:["日付","彼女の予定","彼の配信"],hl:[0,1],rows:[["デビューの日","ショーケース 18:00","開始 21:00"],["歌番組の日","放送 19:00","終了 18:58"],["ふだんの日","―","終了 23:30ごろ"]]},
+{t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定"}],
+cap:"並べたのは他人でも、決めていたのは、自分だった。終わる時間は、明日も自分で決める。それだけは、変わらなかった。"},
+5:{clock:"21:06",app:"X",blocks:[
+{t:"shead",tx:"配信のコメント"},
+{t:"sent",tx:"……俺の話をしに来た人とだけ、話します"},
+{t:"draft",lab:"入力しかけたコメント",tx:"まって",sub:"送信されなかった"},
+{t:"shead",tx:"通知 ― まだ増えている"},
+{t:"notif",n:"通りすがり",tx:"ねえ、新人アイドルのこと、どう思う？",time:"12分"},
+{t:"notif",n:"名無し",tx:"18時58分の人だよね？ 答えてよ",time:"9分"},
+{t:"notif",n:"通りすがり",tx:"匂わせの件、本人に聞けないからここで聞くわ",time:"4分"}],
+cap:"彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。選んだのは、どちらの名前も出さないことだった。配信が終わっても、コーラには手が付いていなかった。"},
+6:{clock:"20:24",app:"X",blocks:[
+{t:"post",a:"nao",time:"20:04",tx:"今日、コンビニで、知らない人が私の曲を口ずさんでいました。\n……それだけで、十分です。ありがとうございます。",rc:"96",rp:"412",lk:"3,208",vw:"21万",hov:1},
+{t:"row",lab:"明日の配信",val:"20:00 開始",chip:"いつも通り"}],
+cap:"小さな話だった。なのに、二回読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"}},
 sakuya:{
-1:{lines:["ショーケースのあとの夜。会社の廊下で、彼は挨拶を思い返していた。","『デビュー、おめでとうございます』。練習生として10年以上を過ごした人への言葉として、あれで足りていただろうか。","彼はイヤホンを付けて、彼女のデビュー曲を、もう一度最初から聴いた。","まっすぐな歌だった。……次に会えたら、今度はもう少しだけ、自分の言葉で話したい。"]},
-2:{lines:["『挨拶の練習もしました』。その一文を置くまでに、彼は下書きを何度も書き直していた。","廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。","残ったのは、一文だけだった。残りは、胸の中にしまっておく。","レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"]},
-3:{lines:["『……僕のほうが、後輩です』。言った直後の廊下は、静かだった。","言わなければ、彼女は「後輩」のまま紹介され続ける。それだけは、違うと思った。","移動の車の中で、彼は今日の彼女のステージを思い返していた。10年以上待った人の歌は、やっぱり重かった。","訂正したことに、後悔はなかった。少しだけ、手が震えていたけれど。"]},
-4:{lines:["朝。あのポストが、公開された。下書きで彼女に見せた、あの文面のまま。","広報からは、文面を柔らかくする案も来ていた。彼は朝いちばんに、『この文面でお願いします』と返していた。","彼はすぐには反応を見なかった。レッスン室で振りを確認して、通知は伏せて置いた。","夕方、彼女の今日の動きを知って、彼は小さく息を吐いた。","言ってよかったのだと思う。あとは、ステージで並ぶ日を待つだけだ。"]},
-5:{lines:["何年も前の写真が、掘り返された日。","彼のスマホにも、同じ頃の写真が残っている。練習生フロアの、何気ない一枚。","彼はそれを開いて、閉じた。出すことは、守ることにはならない。","下書きには、送らなかった一文が残っていた。『無理をしないでください』――送れば、彼女の負担になる。彼は、それも分かっていた。","明日の発表の前に、できることは少ない。でも、隣に立つ覚悟だけは、もう決まっていた。"]},
-6:{lines:["発表の直後。公式ポストへの返信を、彼は何度も書き直していた。","丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。","『ステージでは隣に立たせてください』。その一行だけは、最初から決まっていた。","送信の前に、一度だけ深く息を吸う。……あとは、彼女の返事を待つだけだった。","返事が来るまでの時間を、彼はレッスン室で過ごした。振りを確認するふりをして、何度もスマホを見た。"]}}};
+1:{clock:"22:41",app:"ミュージック",theme:"dark",blocks:[
+{t:"player",title:"The Chase",artist:"Hearts2Hearts",prog:4},
+{t:"note",icon:"hp",tx:"イヤホンで再生中 ― 1曲リピート"}],
+cap:"『デビュー、おめでとうございます』。あれで、足りていただろうか。まっすぐな歌だった。次に会えたら、もう少しだけ、自分の言葉で話したい。"},
+2:{clock:"23:09",app:"X ― 下書き",blocks:[
+{t:"head",tx:"下書き",sub:"ポストの下書き"},
+{t:"drafts",items:[
+{tx:"デビュー、おめでとうございます。今日のステージ、素晴らしかったです"},
+{tx:"廊下で挨拶した者です。覚えているでしょうか"},
+{tx:"……練習生の頃から、ずっと聴いていました"},
+{tx:"挨拶の練習もしました",keep:1}]}],
+cap:"廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。残ったのは、一文だけだった。残りは、胸の中にしまっておく。レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"},
+3:{clock:"19:52",app:"X",blocks:[
+{t:"video",title:"MUSIC STAGE ― Hearts2Hearts『The Chase』",by:"番組公式 @livestage_tv",views:"再生 892,415回",dur:"3:12",prog:38,icon:"play"}],
+cap:"言わなければ、彼女は「後輩」のまま紹介され続ける。それだけは、違うと思った。10年以上待った人の歌は、やっぱり重かった。訂正したことに、後悔はなかった。少しだけ、手が震えていたけれど。"},
+4:{clock:"8:02",app:"メッセージ",blocks:[
+{t:"chat",who:"広報",msgs:[[0,"おはようございます。例のポストですが、文面を柔らかくした案も用意しています"],[1,"この文面でお願いします"],[0,"……分かりました。本人の文面で、進めます"]]},
+{t:"post",a:"sakuya",time:"8:14",tx:"僕のほうが、後輩です。デビューは先でも、練習生の年数は変えられません。……歌は、ずっと先輩でした",rc:"411",rp:"2,590",lk:"14,230",vw:"98万"},
+{t:"note",icon:"belloff",tx:"このポストの通知はオフ"}],
+cap:"彼はすぐには反応を見なかった。レッスン室で振りを確認して、夕方、彼女の今日の動きを知って、彼は小さく息を吐いた。言ってよかったのだと思う。"},
+5:{clock:"21:37",app:"写真",theme:"dark",blocks:[
+{t:"photo",date:"2022年4月",place:"練習生フロア"},
+{t:"draft",lab:"下書き ― 未送信",tx:"無理をしないでください",sub:"送れば、彼女の負担になる"}],
+cap:"何年も前の写真が、掘り返された日。彼はそれを開いて、閉じた。出すことは、守ることにはならない。明日の発表の前に、隣に立つ覚悟だけは、もう決まっていた。"},
+6:{clock:"12:04",app:"X ― 返信",blocks:[
+{t:"compose",to:"メディアの発表ポスト",tx:"ステージでは隣に立たせてください",old:["この度は、ありがとうございます。精一杯、務めさせていただきます","……隣に立たせてください、なんて。言い過ぎでしょうか"]}],
+cap:"丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。その一行だけは、最初から決まっていた。送信の前に、一度だけ深く息を吸う。あとは、彼女の返事を待つだけだった。返事が来るまでの時間、彼はレッスン室で、何度もスマホを見た。"}}};
 let sideCb=null;
 function sideScene(d){const t=SIDE_SCENES[tgtKey()];return t?t[d]:null;}
 function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
- sideCb=cb||null;
- $("#sv2-day").textContent="DAY "+d+" ― "+(tgtKey()==="sakuya"?"サクヤ":"井汲大翔")+"の側";
- const ph=$("#sv2-ph");if(sc.ph){ph.src=sc.ph;ph.style.display="";}else{ph.removeAttribute("src");ph.style.display="none";}
- const box=$("#sv2-lines");box.innerHTML="";sc.lines.forEach((ln,i)=>{const p=document.createElement("p");p.className="sv2-line";p.style.animationDelay=(0.25+i*0.35)+"s";p.textContent=ln;box.appendChild(p);});
- const tap=$("#sideview .sv2-tap");if(tap)tap.style.animationDelay=(0.4+sc.lines.length*0.35)+"s";
- const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
+sideCb=cb||null;
+$("#sv2-day").textContent="DAY "+d+" ― "+(tgtKey()==="sakuya"?"サクヤ":"井汲大翔")+"の側";
+const ph=$("#sv2-ph");if(sc.ph){ph.src=sc.ph;ph.style.display="";}else{ph.removeAttribute("src");ph.style.display="none";}
+$("#sv2-clock").textContent=sc.clock||"";
+$("#sv2-app").textContent=sc.app||"";
+const phone=$("#sv2-phone");phone.classList.toggle("th-dark",sc.theme==="dark");phone.classList.toggle("th-light",sc.theme!=="dark");
+const scr=$("#sv2-scr");scr.innerHTML="";(sc.blocks||[]).forEach((b,i)=>{const el=svBlock(b);el.style.animationDelay=(0.22+i*0.13)+"s";scr.appendChild(el);});
+const cap=$("#sv2-cap");cap.textContent=sc.cap||"";cap.style.display=sc.cap?"":"none";cap.style.animationDelay=(0.3+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
+const tap=$("#sideview.sv2-tap");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
+const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
 function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
 $("#sideview").addEventListener("click",closeSide);
 /* v443: LIVE SCENE - the Day 5 core, his stream of silence, replayed
