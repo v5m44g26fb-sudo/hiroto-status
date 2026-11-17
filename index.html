@@ -2948,6 +2948,16 @@ input,textarea{font-size:16px}
 #livescene .lv-hint{color:rgba(255,255,255,.65);font-size:10.5px;font-weight:800;letter-spacing:.24em}
 #livescene .lv-close{border:none;cursor:pointer;background:#fff;color:#111;font-size:14px;font-weight:900;border-radius:999px;padding:11px 22px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
 #livescene .lv-close:active{transform:scale(.97)}
+
+/* ===== v444: SIDE QUEST - one small extra incident per route in the
+   Day 2-3 stretch, told in the main quest's grammar but optional:
+   it never gates the next day, and its completion rides on a marker
+   notification, so the save format does not change. ===== */
+.evcard.mini{border-color:#c4b5fd;background:linear-gradient(180deg,#f8f5ff,#efe9ff);box-shadow:0 12px 32px rgba(120,86,255,.16)}
+.evcard.mini .tag{background:#7856ff;color:#fff;box-shadow:0 2px 8px rgba(120,86,255,.35)}
+.evcard.mini .tag svg{fill:#fff}
+.evcard.mini .mini-eyebrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;font-weight:900;letter-spacing:.22em;color:#7856ff}
+.evcard.mini .mini-eyebrow .ev-eyebrow-jp{letter-spacing:.06em;color:rgba(120,86,255,.6)}
 </style>
 </head>
 <body>
@@ -2984,7 +2994,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v443</p>
+  <p class="ver">v444</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3164,7 +3174,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v443</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v444</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3457,7 +3467,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v443</p>
+    <p class="ver">v444</p>
   </div>
 </section>
 </div>
@@ -5290,7 +5300,7 @@ function renderEvent(){
     S.evDone only, so it survives re-renders and reloads alike) */
  if(S.evDone){const done=document.createElement("div");done.className="evcleared"+(S.ch>=TOTAL_DAYS?" final":"");
   done.innerHTML='<span class="evc-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6.5 9.5 17 4 11.5l1.8-1.8 3.7 3.7L18.2 4.7z"/></svg></span><span class="evc-main"><span class="evc-eyebrow">QUEST CLEAR ― </span><b class="evc-title"></b><span class="evc-sub">今日のEventは完了。続きは明日の章で。</span></span>';
-  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 昨夜の配信の切り抜きを、もう一度観る";lb.onclick=()=>openLive();done.appendChild(lb);}slot.appendChild(done);return;}
+  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 昨夜の配信の切り抜きを、もう一度観る";lb.onclick=()=>openLive();done.appendChild(lb);}slot.appendChild(done);renderMini(slot);return;}
  const card=document.createElement("div");card.className="evcard"+(S.ch>=TOTAL_DAYS?" final":"");
  card.innerHTML='<div class="ev-hero'+(ev.img?" hasimg":"")+'">'+(ev.img?'<img class="ev-hero-img" alt="">':"")+'<div class="ev-hero-shade"></div><div class="ev-ghost">'+S.ch+'</div><span class="ev-clear">QUEST CLEAR</span><div class="ev-hero-in"><div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div></div>'+(ev.img?'<span class="ev-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.8-4.8M11 8v6M8 11h6"/></svg>写真を見る</span>':"")+'</div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  if(ev.img){card.querySelector(".ev-hero-img").src=ev.img;
@@ -5304,6 +5314,49 @@ function renderEvent(){
  if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn";lb.innerHTML="<span>▶</span> 昨夜の配信を観る ― 切り抜き";lb.onclick=e=>{e.stopPropagation();openLive();};card.insertBefore(lb,card.querySelector(".evc"));}
  const box=card.querySelector(".evc");
  ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();save();};box.appendChild(b);});
+ slot.appendChild(card);renderMini(slot);
+}
+/* v444: SIDE QUEST mini-events - one small incident per route in the
+   Day 2-3 stretch, fattening each route's spine without touching it:
+   Hiroto Day 2 (his TikTok liked her breath-clip edit - the fan who
+   cut it reports it; his TikTok scale is the established 43k) and
+   Sakuya Day 3 (the rehearsal running sheet still prints her as
+   "Sakuya's junior" - a paper error by floor staff, apart from the
+   spoken introduction the main event corrects). Optional by design:
+   checkNext() never learns about them. Completion is kept as a
+   marker notification (mk) inside S.notifs, the v261/v313 way, so
+   the save format is unchanged; the picked choice rides along as
+   pick, and the result text is re-read from the definition. */
+const MINI_EVENTS={
+ "hiroto:2":{mk:"mini-h2",tag:"SIDE EVENT ― 小さな事件",title:"彼のTikTokにも、いいねがあった",
+  body:"ブレス集の切り抜きを作ったファンの子から、興奮気味の報告が届いた。「私の動画に、井汲大翔さんがいいねしてくれた…！」。スクショ付きだった。フォロワー4.3万、ダンス動画の人。彼女の息づかいだけを集めた動画の、いいねの中に――彼の名前があった。どうする？",
+  na:"fan1",ntx:"さんの切り抜き動画が伸びています",nsub:"小さな事件 ― 彼のTikTokのいいね",
+  choices:[
+   {t:"見なかったことにする",r:"なかったことには、できなかった。でも、表向きは静かにしておく。それが今の距離の、ちょうどいい守り方だと思った。",fx:{dist:4,xp:5}},
+   {t:"彼のダンス動画に、いいねだけ返しておく",r:"彼の最新のダンス動画に、いいねをひとつ。向こうの通知の中に、自分の名前が残る。……それだけ。それだけで、今日は十分だった。",fx:{dist:6,xp:5,flm:1}},
+   {t:"「見つけてくれて、ありがとう」とだけポストする",r:"誰のことかは、書いていない。なのに、ブレス集を作った子が真っ先に気づいて、静かに震えていた。ざわつきは小さく、熱だけが濃い。",fx:{fol:40,cog:3,xp:5,dist:5,flm:5}}]},
+ "sakuya:3":{mk:"mini-s3",tag:"SIDE EVENT ― 小さな事件",title:"進行表の名前",
+  body:"リハーサルの進行表が、楽屋に届いた。出演順と、名前の一覧。自分の名前の横に、小さく――「（サクヤ後輩）」。印刷物は、もう刷り直しが間に合わない。デビューが先か、練習生歴か。紙の上では、まだ逆のままだった。どうする？",
+  na:"staff",ntx:"さんが進行表を届けました",nsub:"小さな事件 ― 進行表の名前",
+  choices:[
+   {t:"そのままにしておく",r:"進行表は、今日限りの紙。誰も悪くない。でも、その四文字が、ステージに立つ直前まで目に残った。",fx:{dist:3,xp:5}},
+   {t:"スタッフに、名前だけでいいと伝える",r:"自分の欄だけ、ペンで「なお」と書き直してもらった。小さな訂正。小さくない気持ち。スタッフは「すみません」と何度も言った。",fx:{dist:4,cog:2,xp:5}},
+   {t:"笑って、「後輩じゃないんです」と自分で言いに行く",r:"言えた。笑って、軽く。声は少しだけ震えたけど、最後まで笑顔でいられた。進行表は、その場で新しいものに差し替わった。",fx:{dist:5,cog:3,xp:6,flm:1}}]}};
+function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
+function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
+function renderMini(slot){
+ const def=miniDef();if(!def||!slot)return;
+ const rec=miniRecord(def);
+ const card=document.createElement("div");card.className="evcard mini"+(rec?" cleared":"");
+ card.innerHTML='<div class="mini-eyebrow"><span>SIDE QUEST</span><span class="ev-eyebrow-jp">小さな事件 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
+ card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';
+ card.querySelector(".tag span").textContent=def.tag;card.querySelector("h3").textContent=def.title;card.querySelector("p").textContent=def.body;
+ const box=card.querySelector(".evc");
+ def.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;
+  if(rec){b.disabled=true;if(rec.pick===ci)b.classList.add("picked");}
+  else b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);applyFx(c.fx);S.notifs.unshift({a:def.na,tx:def.ntx,sub:def.nsub,mk:def.mk,pick:ci});renderNotifs();updateBdg();save();};
+  box.appendChild(b);});
+ if(rec){const r=document.createElement("div");r.className="result";r.textContent=def.choices[rec.pick].r;card.querySelector(".evr").appendChild(r);}
  slot.appendChild(card);
 }
 /* chapter flow */
