@@ -2914,6 +2914,40 @@ input,textarea{font-size:16px}
 #sideview .sv2-line{font-size:15px;line-height:1.95;color:rgba(240,242,255,.94);margin:0 0 14px;animation:svline .7s ease both}
 @keyframes svline{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 #sideview .sv2-tap{display:block;margin-top:22px;text-align:center;font-size:10.5px;font-weight:900;letter-spacing:.3em;color:rgba(235,238,255,.5);animation:svline .7s ease both}
+
+/* ===== v443: LIVE SCENE - the Day 5 stream of silence, replayed as a
+   phone live-viewer: his frame, a comment river that stops, a real
+   silence, then his one line. ===== */
+.ev-live-btn{display:flex;align-items:center;gap:8px;margin:12px 0 2px;padding:11px 14px;width:100%;border-radius:13px;border:1px solid rgba(249,24,128,.45);background:linear-gradient(92deg,rgba(249,24,128,.16),rgba(120,86,255,.14));color:#ffd7e8;font-size:13.5px;font-weight:800;cursor:pointer;text-align:left}
+.ev-live-btn span{color:#ff5c8a;font-size:12px}
+.ev-live-btn:active{transform:scale(.985)}
+.ev-live-btn.slim{margin:10px 0 0}
+#livescene{position:absolute;inset:0;z-index:126;display:none;background:rgba(4,5,12,.88);align-items:center;justify-content:center}
+#livescene.on{display:flex;animation:difade .25s ease}
+#livescene.closing{animation:difadeout .18s ease forwards}
+#livescene .lv-frame{position:relative;width:min(360px,calc(100vw - 28px));height:min(640px,calc(var(--app-h,100dvh)*.86));border-radius:22px;overflow:hidden;background:#000;box-shadow:0 30px 70px rgba(0,0,0,.65)}
+#livescene .lv-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+#livescene .lv-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 26%,rgba(0,0,0,0) 46%,rgba(0,0,0,.55) 78%,rgba(0,0,0,.78) 100%)}
+#livescene .lv-top{position:absolute;top:12px;left:12px;right:12px;display:flex;align-items:center;gap:8px}
+#livescene .lv-live{background:#f91880;color:#fff;font-size:11px;font-weight:900;letter-spacing:.08em;border-radius:7px;padding:4px 8px}
+#livescene .lv-view{background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;font-weight:700;border-radius:7px;padding:4px 8px}
+#livescene .lv-x{margin-left:auto;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:14px;cursor:pointer}
+#livescene .lv-cap{position:absolute;top:54px;left:12px;color:rgba(255,255,255,.85);font-size:11px;font-weight:700;letter-spacing:.06em;text-shadow:0 1px 6px rgba(0,0,0,.7)}
+#livescene .lv-cmts{position:absolute;left:12px;right:64px;bottom:86px;display:flex;flex-direction:column;gap:6px;justify-content:flex-end}
+#livescene .lv-cmt{background:rgba(10,10,18,.62);border-radius:12px;padding:6px 10px;color:#fff;font-size:12.5px;line-height:1.5;animation:lvin .3s ease both;max-width:100%}
+#livescene .lv-cmt b{color:#9fd8ff;font-weight:800;margin-right:6px}
+#livescene .lv-cmt.troll{background:rgba(80,14,22,.72)}
+#livescene .lv-cmt.troll b{color:#ff9d9d}
+@keyframes lvin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#livescene .lv-silence{position:absolute;left:0;right:0;top:44%;text-align:center;color:#fff}
+#livescene .lv-sil-lab{display:block;font-size:11px;font-weight:900;letter-spacing:.34em;color:rgba(255,255,255,.75)}
+#livescene .lv-sil-t{display:block;margin-top:6px;font-size:34px;font-weight:200;letter-spacing:.12em;font-variant-numeric:tabular-nums}
+#livescene .lv-line{position:absolute;left:18px;right:18px;bottom:150px;text-align:center;color:#fff;font-size:17px;font-weight:800;line-height:1.7;background:rgba(5,5,12,.66);border-radius:14px;padding:14px 16px;animation:lvin .45s ease both}
+#livescene .lv-end{position:absolute;left:18px;right:18px;bottom:150px;text-align:center;color:rgba(255,255,255,.92);font-size:13.5px;line-height:1.8;background:rgba(5,5,12,.6);border-radius:14px;padding:12px 16px;animation:lvin .45s ease both}
+#livescene .lv-foot{position:absolute;left:0;right:0;bottom:16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#livescene .lv-hint{color:rgba(255,255,255,.65);font-size:10.5px;font-weight:800;letter-spacing:.24em}
+#livescene .lv-close{border:none;cursor:pointer;background:#fff;color:#111;font-size:14px;font-weight:900;border-radius:999px;padding:11px 22px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
+#livescene .lv-close:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -2950,7 +2984,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v442</p>
+  <p class="ver">v443</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3130,7 +3164,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v442</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v443</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3355,6 +3389,19 @@ input,textarea{font-size:16px}
       <span class="sv2-tap">TAP</span>
     </div>
   </div>
+  <div id="livescene" role="dialog" aria-label="配信の切り抜き">
+    <div class="lv-frame" id="lv-frame">
+      <img class="lv-bg" src="assets/gen-hiroto-live.jpg" alt="">
+      <div class="lv-shade"></div>
+      <div class="lv-top"><span class="lv-live">● LIVE</span><span class="lv-view" id="lv-view">視聴者 328</span><button class="lv-x" id="lv-x" aria-label="閉じる">✕</button></div>
+      <div class="lv-cap">Day 4 ― 21時　彼の配信（切り抜き）</div>
+      <div class="lv-cmts" id="lv-cmts"></div>
+      <div class="lv-silence" id="lv-silence" style="display:none"><span class="lv-sil-lab">沈黙</span><span class="lv-sil-t" id="lv-sil-t">0:00</span></div>
+      <div class="lv-line" id="lv-line" style="display:none"></div>
+      <div class="lv-end" id="lv-end" style="display:none"></div>
+      <div class="lv-foot"><span class="lv-hint" id="lv-hint">タップで進む</span><button class="lv-close" id="lv-close" style="display:none">切り抜きを閉じる</button></div>
+    </div>
+  </div>
   <div id="dmunlock" role="dialog" aria-label="DMが届いた">
     <div class="du-inner">
       <span class="du-avw" id="du-av"></span>
@@ -3410,7 +3457,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v442</p>
+    <p class="ver">v443</p>
   </div>
 </section>
 </div>
@@ -5243,7 +5290,7 @@ function renderEvent(){
     S.evDone only, so it survives re-renders and reloads alike) */
  if(S.evDone){const done=document.createElement("div");done.className="evcleared"+(S.ch>=TOTAL_DAYS?" final":"");
   done.innerHTML='<span class="evc-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6.5 9.5 17 4 11.5l1.8-1.8 3.7 3.7L18.2 4.7z"/></svg></span><span class="evc-main"><span class="evc-eyebrow">QUEST CLEAR ― </span><b class="evc-title"></b><span class="evc-sub">今日のEventは完了。続きは明日の章で。</span></span>';
-  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;slot.appendChild(done);return;}
+  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 昨夜の配信の切り抜きを、もう一度観る";lb.onclick=()=>openLive();done.appendChild(lb);}slot.appendChild(done);return;}
  const card=document.createElement("div");card.className="evcard"+(S.ch>=TOTAL_DAYS?" final":"");
  card.innerHTML='<div class="ev-hero'+(ev.img?" hasimg":"")+'">'+(ev.img?'<img class="ev-hero-img" alt="">':"")+'<div class="ev-hero-shade"></div><div class="ev-ghost">'+S.ch+'</div><span class="ev-clear">QUEST CLEAR</span><div class="ev-hero-in"><div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div></div>'+(ev.img?'<span class="ev-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.8-4.8M11 8v6M8 11h6"/></svg>写真を見る</span>':"")+'</div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  if(ev.img){card.querySelector(".ev-hero-img").src=ev.img;
@@ -5252,6 +5299,9 @@ function renderEvent(){
   const hero=card.querySelector(".ev-hero");hero.style.cursor="pointer";
   hero.addEventListener("click",()=>{try{openPhoto([{src:ev.img,name:"なお",handle:S.handle||"",av:(ACC.nao&&ACC.nao.av)||null,cap:ev.title||"",date:"Day "+S.ch,meta:"MAIN QUEST ― CHAPTER "+S.ch}],0);}catch(_){}});}
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';card.querySelector(".tag span").textContent=ev.tag;card.querySelector("h3").textContent=ev.title;card.querySelector("p").textContent=ev.body;
+ /* v443: on Hiroto's Day 5, the event opens with the clip itself -
+    the stream of silence, replayed in a live viewer (openLive) */
+ if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn";lb.innerHTML="<span>▶</span> 昨夜の配信を観る ― 切り抜き";lb.onclick=e=>{e.stopPropagation();openLive();};card.insertBefore(lb,card.querySelector(".evc"));}
  const box=card.querySelector(".evc");
  ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();save();};box.appendChild(b);});
  slot.appendChild(card);
@@ -5852,6 +5902,49 @@ function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
  const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
 function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
 $("#sideview").addEventListener("click",closeSide);
+/* v443: LIVE SCENE - the Day 5 core, his stream of silence, replayed
+   as a fan's clip inside a phone live-viewer. The comment river runs,
+   the trolls arrive, the river stops, a real silence is held on a
+   counter, and his one existing line lands as a subtitle. Pure
+   viewing: no state, no fx; closing returns to the event card as it
+   was. Comments are hand-written; the viewer count stays inside his
+   phone-stream scale (a few hundred). */
+const LIVE_STEPS=[
+ {c:["古参のひとり","こんばんは。今日も雑談、楽しみにしてました"]},
+ {c:["常連さん","昨日の切り抜き、もう10回は観たよ"]},
+ {c:["古参のひとり","声、聴いてると落ち着くんだよな"]},
+ {c:["夜更かし組","今日はゆっくりでいいよ"]},
+ {v:356},
+ {c:["通りすがり","ねえ、新人アイドルのこと、どう思う？"],t:1},
+ {c:["名無し","18時58分の人だよね？ 答えてよ"],t:1},
+ {c:["通りすがり","匂わせの件、本人に聞けないからここで聞くわ"],t:1},
+ {c:["名無し","無視？ ｗ"],t:1},
+ {v:431},
+ {silence:1},
+ {line:"……俺の話をしに来た人とだけ、話します"},
+ {c:["古参のひとり","……うん"]},
+ {c:["常連さん","いつも通り、話そう"]},
+ {c:["夜更かし組","ここは、そういう場所だもんね"]},
+ {end:"このあと、彼は何事もなかったように、雑談に戻った。"}];
+let lvIdx=0,lvTimer=null,lvSilInt=null,lvSilSec=0,lvView=328,lvDone=false;
+function lvSetView(n){lvView=n;const e=$("#lv-view");if(e)e.textContent="視聴者 "+n;}
+function lvClearTimers(){if(lvTimer){clearTimeout(lvTimer);lvTimer=null;}if(lvSilInt){clearInterval(lvSilInt);lvSilInt=null;}}
+function lvSchedule(ms){lvClearTimers();lvTimer=setTimeout(lvNext,ms);}
+function lvAddCmt(n,tx,troll){const box=$("#lv-cmts");if(!box)return;const d=document.createElement("div");d.className="lv-cmt"+(troll?" troll":"");const b=document.createElement("b");b.textContent=n;d.appendChild(b);d.appendChild(document.createTextNode(tx));box.appendChild(d);while(box.children.length>6)box.removeChild(box.firstChild);}
+function lvNext(){lvClearTimers();if(lvIdx>=LIVE_STEPS.length)return;const st=LIVE_STEPS[lvIdx++];
+ if(st.c){lvAddCmt(st.c[0],st.c[1],st.t);lvSchedule(1500);}
+ else if(st.v){lvSetView(st.v);lvNext();}
+ else if(st.silence){const sil=$("#lv-silence");sil.style.display="";lvSilSec=0;$("#lv-sil-t").textContent="0:00";
+  lvSilInt=setInterval(()=>{lvSilSec++;$("#lv-sil-t").textContent="0:"+String(lvSilSec).padStart(2,"0");if(lvSilSec===9)lvSetView(468);if(lvSilSec===17)lvSetView(512);if(lvSilSec>=23){clearInterval(lvSilInt);lvSilInt=null;sil.style.display="none";lvNext();}},115);}
+ else if(st.line){const l=$("#lv-line");l.textContent=st.line;l.style.display="";lvSchedule(2800);}
+ else if(st.end){const e=$("#lv-end");e.textContent=st.end;e.style.display="";$("#lv-line").style.display="none";$("#lv-hint").style.display="none";const cb=$("#lv-close");cb.style.display="";lvDone=true;}}
+function openLive(){lvClearTimers();lvIdx=0;lvDone=false;lvSetView(328);
+ $("#lv-cmts").innerHTML="";$("#lv-silence").style.display="none";$("#lv-line").style.display="none";$("#lv-end").style.display="none";$("#lv-close").style.display="none";$("#lv-hint").style.display="";
+ const ov=$("#livescene");ov.classList.remove("closing");ov.classList.add("on");lvSchedule(700);}
+function closeLive(){lvClearTimers();const ov=$("#livescene");if(!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");},185);}
+$("#lv-frame").addEventListener("click",e=>{if(e.target.closest("#lv-x")||e.target.closest("#lv-close"))return;if(lvDone)return;if(lvSilInt){lvSilSec=22;return;}lvNext();});
+$("#lv-x").addEventListener("click",e=>{e.stopPropagation();closeLive();});
+$("#lv-close").addEventListener("click",e=>{e.stopPropagation();closeLive();});
 function proceedFromResult(){if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}}
 $("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else proceedFromResult();},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
