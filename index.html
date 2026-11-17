@@ -1445,6 +1445,9 @@ input,textarea{font-size:16px}
 .msg.them.grp{border-top-left-radius:5px}
 .msg.me.grp{border-top-right-radius:5px}
 .msgmeta{display:flex;align-items:center;justify-content:flex-end;gap:4px}
+/* v452: on the render right after she sends, the read mark fades in
+   a beat later - he has to open the thread before it can say 既読 */
+@keyframes readmark{from{opacity:0}to{opacity:1}}
 .msgmeta::before{content:"";width:11px;height:11px;background:#1d9bf0;clip-path:polygon(14% 44%,0 65%,50% 100%,100% 16%,80% 0%,43% 62%)}
 /* v369: like real X, the partner's avatar sits at the foot of the
    last bubble of each of their groups; their column shifts right
@@ -3092,7 +3095,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v451</p>
+  <p class="ver">v452</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3272,7 +3275,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v451</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v452</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3574,7 +3577,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v451</p>
+    <p class="ver">v452</p>
   </div>
 </section>
 </div>
@@ -5679,7 +5682,18 @@ function doPost(o){
     already made keep the numbers they were seeded with. */
  const lm=lvMult();
  mine.m=[String(Math.max(1,Math.round(S.fol*0.002*lm))),String(Math.round(S.fol*0.006*lm)),String(Math.round(S.fol*0.05*lm))];
- injectBuzz(1,1);renderFeed();renderNotifs();checkNext();addStory("post");save();
+ injectBuzz(1,1);renderFeed();
+ /* v452: her post lands first and the reactions trickle in after
+    it, seconds apart, like a real timeline catching on - the posts,
+    their order and the save are untouched; only the entrance of
+    the just-landed reaction elements is staggered, and any later
+    re-render shows them all, as before */
+ if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+  const kids=Array.from($("#tl-posts").children);
+  const fi=kids.findIndex(e=>e.classList&&e.classList.contains("fresh"));
+  if(fi>=0){let n=0;for(let j=fi+1;j<kids.length&&n<reacts.length;j++){const el=kids[j];if(el.classList&&(el.classList.contains("post")||el.classList.contains("sysnote"))){el.style.animation="fadeup .45s cubic-bezier(.2,.8,.3,1) "+(500+n*600)+"ms both";n++;}}}
+ }
+ renderNotifs();checkNext();addStory("post");save();
 }
 /* activity (Status-style: pick a title, then run. v142: the partner and
    time-slot steps are gone by user decision - neither ever fed fx, the
@@ -5746,7 +5760,7 @@ $("#btn-activity").onclick=()=>{
 };
 $$("[data-close]").forEach(b=>b.onclick=()=>{const s=$("#"+b.dataset.close);if(!s||!s.classList.contains("on")||s.classList.contains("closing"))return;s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);});
 /* DM (pane pattern from Tinder #x-pane-msg) */
-let curThread=null,thEnter=false;
+let curThread=null,thEnter=false,dmReadFresh=false;
 function updateBdg(){const n=S?S.threads.filter(t=>t.unread).length:0;const bd=$("#dm-bdg");if(bd){bd.textContent=n>9?"9+":n;bd.style.display=n?"block":"none";}}
 function dmEmptyState(){const d=document.createElement("div");d.className="dm-empty";d.innerHTML='<span class="dm-empty-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg></span><b>メッセージはまだないよ</b><span>物語が進むと、ファンや関係者からの<br>メッセージがここに届く。</span>';return d;}
 const DM_VERIFIED='<svg class="dm-verified" viewBox="0 0 24 24" aria-label="認証済みアカウント"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91C2.88 9.33 2 10.57 2 12s.88 2.67 2.19 3.34c-.46 1.39-.2 2.9.81 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>';
@@ -5826,13 +5840,16 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
     under the latest of her replies */
  const isMe=j=>j===t.replyIdx||(t.replyIdx2!=null&&j===t.replyIdx2)||(t.replyIdx3!=null&&j===t.replyIdx3);
  const lastMe=Math.max((t.replyIdx==null?-1:t.replyIdx),(t.replyIdx2==null?-1:t.replyIdx2),(t.replyIdx3==null?-1:t.replyIdx3));
- t.msgs.forEach((m,i)=>{const side=isMe(i)?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(isMe(i-1)?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}if(t.done&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";box.appendChild(mm);}});
+ t.msgs.forEach((m,i)=>{const side=isMe(i)?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&(isMe(i-1)?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}if(t.done&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";if(dmReadFresh){mm.style.animation="readmark .35s ease .55s both";dmReadFresh=false;}box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
- if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;if(t.special&&t.replyIdx2!=null&&t.replyIdx2>=0)t.replyIdx3=t.msgs.length;else if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";renderThreadMsgs();scrollDmBottom(true);
+ if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{t.done=true;if(t.special&&t.replyIdx2!=null&&t.replyIdx2>=0)t.replyIdx3=t.msgs.length;else if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;t.msgs.push(c.t);if(t.special)S.hirotoDm="done";dmReadFresh=true;renderThreadMsgs();scrollDmBottom(true);
    /* v118: his reply types for a beat before it lands (the save
       waits for the pair, so a closed app never keeps half a talk) */
    const ty=document.createElement("div");ty.className="msg them typing";ty.innerHTML="<i></i><i></i><i></i>";$("#th-msgs").appendChild(ty);scrollDmBottom(true);
-   setTimeout(()=>{t.msgs.push(c.r);applyFx(c.fx);if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},780);};cb.appendChild(b);});}}
+   /* v452: the typing beat scales with the reply's length, like a
+      real correspondent - a one-liner lands fast, a long answer
+      keeps the dots up longer (was a flat 780ms for every reply) */
+   setTimeout(()=>{t.msgs.push(c.r);applyFx(c.fx);if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},Math.max(700,Math.min(1900,560+(c.r||"").length*14)));};cb.appendChild(b);});}}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
 /* profile */
 let profFolSeen=null,profFolTok=0,profFolArm=false;
