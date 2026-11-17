@@ -3014,6 +3014,48 @@ input,textarea{font-size:16px}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
 @media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule{animation:none}}
+/* ===== v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, the
+   counterpart to Hiroto's live scene (v443): not a stream imitation
+   but the announcement minute itself, replayed on a light real-X
+   phone sheet at 12:00. The official word lands, its counters
+   climb, warm notifications pour in, and at 12:01 - one minute
+   after the announcement - his reply lands, carrying the line he
+   had been redrafting since morning. The public side of the moment
+   only; view-only like the live scene (no state, no fx). ===== */
+#annscene{position:absolute;inset:0;z-index:126;display:none;background:rgba(4,5,12,.88);align-items:center;justify-content:center}
+#annscene.on{display:flex;animation:difade .25s ease}
+#annscene.closing{animation:difadeout .18s ease forwards}
+#annscene .an-frame{position:relative;width:min(360px,calc(100vw - 28px));height:min(660px,calc(var(--app-h,100dvh)*.88));border-radius:22px;overflow:hidden;background:#fff;color:#0f1419;box-shadow:0 30px 70px rgba(0,0,0,.65);display:flex;flex-direction:column}
+#annscene .an-head{display:flex;align-items:center;gap:8px;padding:14px 16px 0}
+#annscene .an-eyebrow{font-size:10px;font-weight:900;letter-spacing:.22em;color:#7856ff}
+#annscene .an-x{margin-left:auto;width:30px;height:30px;border-radius:50%;border:none;background:#eff3f4;color:#0f1419;font-size:13px;cursor:pointer;flex:none}
+#annscene .an-clock{text-align:center;padding:0 16px}
+#annscene .an-time{display:block;font-size:40px;font-weight:200;letter-spacing:.1em;font-variant-numeric:tabular-nums;line-height:1.15}
+#annscene .an-note{display:block;font-size:11.5px;font-weight:700;color:#536471;min-height:16px}
+#annscene .an-feed{flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:9px;padding:10px 14px 12px}
+#annscene .an-feed::-webkit-scrollbar{display:none}
+#annscene .an-post{border:1px solid #e6ebee;border-radius:16px;padding:11px 12px;animation:lvin .35s ease both;background:#fff;flex:none}
+#annscene .an-post.his{border-color:#f6c6dd;box-shadow:0 0 0 1px #f6c6dd,0 10px 26px rgba(249,24,128,.13)}
+#annscene .an-ph{display:flex;align-items:center;gap:8px}
+#annscene .an-av{width:34px;height:34px;border-radius:50%;object-fit:cover;flex:none}
+#annscene .an-avtx{width:34px;height:34px;border-radius:50%;background:#cfd9de;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex:none;font-size:13px}
+#annscene .an-nm{font-size:13.5px;font-weight:800}
+#annscene .an-hd{font-size:12px;color:#536471}
+#annscene .an-badge{margin-left:auto;font-size:10px;font-weight:900;color:#f91880;background:#fdeef6;border-radius:999px;padding:3px 8px;flex:none}
+#annscene .an-tx{margin-top:6px;font-size:13.5px;line-height:1.6}
+#annscene .an-mt{display:flex;gap:20px;margin-top:9px;font-size:12px;color:#536471;font-variant-numeric:tabular-nums}
+#annscene .an-mt b{font-weight:700;color:#0f1419}
+#annscene .an-notif{display:flex;align-items:center;gap:9px;background:#f7f9fa;border-radius:12px;padding:8px 10px;font-size:12.5px;line-height:1.5;animation:lvin .3s ease both;flex:none}
+#annscene .an-notif .an-av{width:24px;height:24px}
+#annscene .an-notif .an-avtx{width:24px;height:24px;font-size:11px}
+#annscene .an-notif b{font-weight:800}
+#annscene .an-trend{align-self:flex-start;background:#0f1419;color:#fff;font-size:12px;font-weight:800;border-radius:999px;padding:7px 13px;animation:lvin .35s ease both;flex:none}
+#annscene .an-trend span{color:#ffd400}
+#annscene .an-foot{padding:4px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#annscene .an-end{font-size:13px;line-height:1.8;text-align:center;color:#0f1419;background:#fdf3f8;border-radius:14px;padding:12px 14px;animation:lvin .45s ease both}
+#annscene .an-hint{color:#8b98a5;font-size:10.5px;font-weight:800;letter-spacing:.24em}
+#annscene .an-close{border:none;cursor:pointer;background:#0f1419;color:#fff;font-size:14px;font-weight:900;border-radius:999px;padding:11px 22px}
+#annscene .an-close:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -3050,7 +3092,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v448</p>
+  <p class="ver">v449</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3230,7 +3272,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v448</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v449</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3468,6 +3510,14 @@ input,textarea{font-size:16px}
       <div class="lv-foot"><span class="lv-hint" id="lv-hint">タップで進む</span><button class="lv-close" id="lv-close" style="display:none">切り抜きを閉じる</button></div>
     </div>
   </div>
+  <div id="annscene" role="dialog" aria-label="発表の瞬間">
+    <div class="an-frame" id="an-frame">
+      <div class="an-head"><span class="an-eyebrow">DAY 6 ― 発表の瞬間</span><button class="an-x" id="an-x" aria-label="閉じる">✕</button></div>
+      <div class="an-clock"><span class="an-time" id="an-time">11:59</span><span class="an-note" id="an-note"></span></div>
+      <div class="an-feed" id="an-feed"></div>
+      <div class="an-foot"><div class="an-end" id="an-end" style="display:none"></div><span class="an-hint" id="an-hint">タップで進む</span><button class="an-close" id="an-close" style="display:none">閉じる</button></div>
+    </div>
+  </div>
   <div id="dmunlock" role="dialog" aria-label="DMが届いた">
     <div class="du-inner">
       <span class="du-avw" id="du-av"></span>
@@ -3524,7 +3574,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v448</p>
+    <p class="ver">v449</p>
   </div>
 </section>
 </div>
@@ -5357,7 +5407,7 @@ function renderEvent(){
     S.evDone only, so it survives re-renders and reloads alike) */
  if(S.evDone){const done=document.createElement("div");done.className="evcleared"+(S.ch>=TOTAL_DAYS?" final":"");
   done.innerHTML='<span class="evc-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6.5 9.5 17 4 11.5l1.8-1.8 3.7 3.7L18.2 4.7z"/></svg></span><span class="evc-main"><span class="evc-eyebrow">QUEST CLEAR ― </span><b class="evc-title"></b><span class="evc-sub">今日のEventは完了。続きは明日の章で。</span></span>';
-  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 昨夜の配信の切り抜きを、もう一度観る";lb.onclick=()=>openLive();done.appendChild(lb);}slot.appendChild(done);renderMini(slot);return;}
+  done.querySelector(".evc-eyebrow").textContent="QUEST CLEAR ― "+String(ev.tag||"").replace(/^EVENT\s*―\s*/,"");done.querySelector(".evc-title").textContent=ev.title;if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 昨夜の配信の切り抜きを、もう一度観る";lb.onclick=()=>openLive();done.appendChild(lb);}if(tgtKey()==="sakuya"&&S.ch===6){const lb=document.createElement("button");lb.className="ev-live-btn slim";lb.innerHTML="<span>▶</span> 発表の瞬間を、もう一度観る";lb.onclick=()=>openAnn();done.appendChild(lb);}slot.appendChild(done);renderMini(slot);return;}
  const card=document.createElement("div");card.className="evcard"+(S.ch>=TOTAL_DAYS?" final":"");
  card.innerHTML='<div class="ev-hero'+(ev.img?" hasimg":"")+'">'+(ev.img?'<img class="ev-hero-img" alt="">':"")+'<div class="ev-hero-shade"></div><div class="ev-ghost">'+S.ch+'</div><span class="ev-clear">QUEST CLEAR</span><div class="ev-hero-in"><div class="ev-eyebrow"><span>MAIN QUEST</span><span class="ev-eyebrow-jp">メイン任務 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div></div>'+(ev.img?'<span class="ev-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.8-4.8M11 8v6M8 11h6"/></svg>写真を見る</span>':"")+'</div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  if(ev.img){card.querySelector(".ev-hero-img").src=ev.img;
@@ -5369,6 +5419,9 @@ function renderEvent(){
  /* v443: on Hiroto's Day 5, the event opens with the clip itself -
     the stream of silence, replayed in a live viewer (openLive) */
  if(tgtKey()==="hiroto"&&S.ch===5){const lb=document.createElement("button");lb.className="ev-live-btn";lb.innerHTML="<span>▶</span> 昨夜の配信を観る ― 切り抜き";lb.onclick=e=>{e.stopPropagation();openLive();};card.insertBefore(lb,card.querySelector(".evc"));}
+ /* v449: on Sakuya's Day 6, the event opens with the announcement
+    minute itself - the 12:00 replay in the announce scene (openAnn) */
+ if(tgtKey()==="sakuya"&&S.ch===6){const lb=document.createElement("button");lb.className="ev-live-btn";lb.innerHTML="<span>▶</span> 発表の瞬間を観る ― 12:00";lb.onclick=e=>{e.stopPropagation();openAnn();};card.insertBefore(lb,card.querySelector(".evc"));}
  const box=card.querySelector(".evc");
  ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();save();};box.appendChild(b);});
  slot.appendChild(card);renderMini(slot);
@@ -6055,6 +6108,57 @@ function closeLive(){lvClearTimers();const ov=$("#livescene");if(!ov.classList.c
 $("#lv-frame").addEventListener("click",e=>{if(e.target.closest("#lv-x")||e.target.closest("#lv-close"))return;if(lvDone)return;if(lvSilInt){lvSilSec=22;return;}lvNext();});
 $("#lv-x").addEventListener("click",e=>{e.stopPropagation();closeLive();});
 $("#lv-close").addEventListener("click",e=>{e.stopPropagation();closeLive();});
+/* v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, counterpart
+   to the live scene above: the announcement minute replayed on a
+   light real-X phone sheet. The media word lands at 12:00 and its
+   counters climb to their seeded figures, warm notifications pour
+   in, and at 12:01 his reply lands - the post he had been
+   redrafting since morning, one minute after the announcement.
+   Hand-written steps; the figures stay on his star scale (his post
+   really does carry 19,800 likes in the Day 6 seed). Pure viewing:
+   no state, no fx; closing discards every timer. */
+const ANN_STEPS=[
+ {clock:"11:59",note:"発表のポストが出るまで、あと1分",wait:1600},
+ {clock:"12:00",note:"12:00 ― 発表",wait:950},
+ {post:"media",tx:"本日、NCT WISH サクヤ×なお コラボ配信の正式発表がありました。発表文には、当初用意されていた無難な文面ではなく、サクヤ本人の言葉がそのまま使われています。コラボ曲の初披露も、予定されています。"},
+ {count:{rc:402,rp:1640,lk:8900}},
+ {notif:{a:"fan1",tx:"正式決定、きた…！ 初披露、絶対観ます"}},
+ {notif:{a:"fan2",tx:"デビュー6日目の到達、すごいとしか言えない"}},
+ {notif:{a:"akari",tx:"なおオンニ…！ メンバー全員で、見守ってるよ"}},
+ {clock:"12:01",note:"発表から、1分",wait:1400},
+ {post:"sakuya",his:1,badge:"発表から1分",tx:"今日、発表です。……僕のほうが後輩ですが、ステージでは隣に立たせてください。よろしくお願いします"},
+ {count:{rc:890,rp:3400,lk:19800}},
+ {trend:"サクヤ×なお コラボ発表"},
+ {end:"彼は、その『1分』のために、朝から何度も下書きを直していた。広報の用意した文面は、使われなかった。"}];
+let anIdx=0,anTimer=null,anCountInt=null,anDone=false,anLastCard=null,anPendingCount=null;
+function anClearTimers(){if(anTimer){clearTimeout(anTimer);anTimer=null;}}
+function anSchedule(ms){anClearTimers();anTimer=setTimeout(anNext,ms);}
+function anAvatar(a){const A=ACC[a];if(A&&A.av)return '<img class="an-av" src="'+A.av+'" alt="">';return '<span class="an-avtx">'+((A&&A.n)||"").slice(0,1)+"</span>";}
+function anFeedBottom(){const f=$("#an-feed");if(f)f.scrollTop=f.scrollHeight;}
+function anCard(st){const A=ACC[st.post]||{};const d=document.createElement("div");d.className="an-post"+(st.his?" his":"");
+ d.innerHTML='<div class="an-ph">'+anAvatar(st.post)+'<span><span class="an-nm"></span><br><span class="an-hd"></span></span>'+(st.badge?'<span class="an-badge"></span>':"")+'</div><div class="an-tx"></div><div class="an-mt"><span>返信 <b data-c="rc">0</b></span><span>リポスト <b data-c="rp">0</b></span><span>いいね <b data-c="lk">0</b></span></div>';
+ d.querySelector(".an-nm").textContent=A.n||"";d.querySelector(".an-hd").textContent=A.h||"";if(st.badge)d.querySelector(".an-badge").textContent=st.badge;d.querySelector(".an-tx").textContent=st.tx;
+ $("#an-feed").appendChild(d);anLastCard=d;anFeedBottom();}
+function anSetCounts(tg){if(!anLastCard||!tg)return;["rc","rp","lk"].forEach(k2=>{const el=anLastCard.querySelector('[data-c="'+k2+'"]');if(el)el.textContent=fmtCnt(tg[k2]);});}
+function anFinishCount(){if(!anCountInt)return false;clearInterval(anCountInt);anCountInt=null;anSetCounts(anPendingCount);anPendingCount=null;return true;}
+function anCountTo(tg){anPendingCount=tg;if(!anLastCard){anPendingCount=null;anNext();return;}
+ const els={},from={};["rc","rp","lk"].forEach(k2=>{els[k2]=anLastCard.querySelector('[data-c="'+k2+'"]');from[k2]=parseInt(String(els[k2]?els[k2].textContent:"0").replace(/[^0-9]/g,""),10)||0;});
+ const t0=performance.now(),dur=950;
+ anCountInt=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/dur);const e=1-Math.pow(1-k,3);["rc","rp","lk"].forEach(k2=>{if(els[k2])els[k2].textContent=fmtCnt(Math.round(from[k2]+(tg[k2]-from[k2])*e));});if(k>=1){clearInterval(anCountInt);anCountInt=null;anPendingCount=null;anSchedule(550);}},40);}
+function anNext(){anClearTimers();if(anFinishCount()){anSchedule(350);return;}if(anIdx>=ANN_STEPS.length)return;const st=ANN_STEPS[anIdx++];
+ if(st.clock){$("#an-time").textContent=st.clock;if(st.note)$("#an-note").textContent=st.note;anSchedule(st.wait||1200);}
+ else if(st.post){anCard(st);anSchedule(1050);}
+ else if(st.count){anCountTo(st.count);}
+ else if(st.notif){const A=ACC[st.notif.a]||{};const d=document.createElement("div");d.className="an-notif";d.innerHTML=anAvatar(st.notif.a);const sp=document.createElement("span");const b=document.createElement("b");b.textContent=A.n||"";sp.appendChild(b);sp.appendChild(document.createTextNode("　"+st.notif.tx));d.appendChild(sp);$("#an-feed").appendChild(d);anFeedBottom();anSchedule(1150);}
+ else if(st.trend){const d=document.createElement("div");d.className="an-trend";d.innerHTML="トレンド入り ― <span></span>";d.querySelector("span").textContent=st.trend;$("#an-feed").appendChild(d);anFeedBottom();anSchedule(1350);}
+ else if(st.end){const e=$("#an-end");e.textContent=st.end;e.style.display="";$("#an-hint").style.display="none";$("#an-close").style.display="";anDone=true;}}
+function openAnn(){anClearTimers();if(anCountInt){clearInterval(anCountInt);anCountInt=null;}anIdx=0;anDone=false;anLastCard=null;anPendingCount=null;
+ $("#an-feed").innerHTML="";$("#an-time").textContent="11:59";$("#an-note").textContent="";$("#an-end").style.display="none";$("#an-close").style.display="none";$("#an-hint").style.display="";
+ const ov=$("#annscene");ov.classList.remove("closing");ov.classList.add("on");anSchedule(650);}
+function closeAnn(){anClearTimers();if(anCountInt){clearInterval(anCountInt);anCountInt=null;}const ov=$("#annscene");if(!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");},185);}
+$("#an-frame").addEventListener("click",e=>{if(e.target.closest("#an-x")||e.target.closest("#an-close"))return;if(anDone)return;anNext();});
+$("#an-x").addEventListener("click",e=>{e.stopPropagation();closeAnn();});
+$("#an-close").addEventListener("click",e=>{e.stopPropagation();closeAnn();});
 function proceedFromResult(){if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}}
 $("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else proceedFromResult();},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
