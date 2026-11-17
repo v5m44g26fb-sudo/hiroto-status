@@ -3075,6 +3075,27 @@ input,textarea{font-size:16px}
 #sideview .sv2-ditem.keep{border-color:rgba(29,155,240,.6);background:rgba(29,155,240,.07)}
 #sideview .sv2-ditem .mk{flex:none;font-size:12px;font-weight:900;margin-top:1px;color:#b0b7c3}
 #sideview .sv2-ditem.keep .mk{color:#1d9bf0}
+/* v486: live replies arriving under a post on his screen, his
+   follower count ticking in-scene, operable drafts, mail threads */
+#sideview .sv2-lf{border:1px solid rgba(130,140,160,.18);border-radius:14px;padding:10px 13px 4px}
+#sideview .sv2-lf-hd{font-size:12.5px;font-weight:800;color:#8b93a3;letter-spacing:.04em}
+#sideview .sv2-lf-row{display:flex;gap:10px;padding:9px 0;border-top:1px solid rgba(130,140,160,.12)}
+#sideview .sv2-lf-row.pend{display:none}
+#sideview .sv2-lf-row .av{width:32px;height:32px;border-radius:50%;flex:none}
+#sideview .sv2-lf-row .main{flex:1;min-width:0}
+#sideview .sv2-lf-row .nh{display:flex;gap:6px;align-items:baseline;font-size:13.5px}
+#sideview .sv2-lf-row .nh span{color:#8b93a3;font-size:12.5px}
+#sideview .sv2-lf-row .tx{font-size:14.5px;line-height:1.5}
+#sideview .sv2-lf-lk{display:flex;gap:5px;align-items:center;color:#8b93a3;font-size:12.5px;margin-top:3px}
+#sideview .sv2-lf-lk svg{width:14px;height:14px}
+#sideview .sv2-folnum{font-variant-numeric:tabular-nums;transition:color .3s}
+#sideview .sv2-folnum.tick{color:#ff5c7a}
+#sideview .sv2-ditem.dropped{opacity:.45}
+#sideview .sv2-ditem.dropped .tx{text-decoration:line-through;text-decoration-thickness:1px}
+#sideview .sv2-ditem.kept2{border-color:rgba(29,155,240,.75);background:rgba(29,155,240,.1)}
+#sideview .sv2-shbtn{display:block;margin:12px 0 4px;width:100%;padding:11px;border:none;border-radius:999px;background:#1d9bf0;color:#fff;font-size:14.5px;font-weight:800;cursor:pointer}
+#sideview .sv2-mthread{display:flex;flex-direction:column;gap:8px;padding:8px 2px}
+@media (prefers-reduced-motion:reduce){#sideview .sv2-lf-row{animation:none}}
 #sideview .sv2-chatname{text-align:center;font-size:12.5px;font-weight:800;color:#8a94a6}
 #sideview .sv2-bub{max-width:85%;font-size:15px;line-height:1.5;padding:10px 14px;border-radius:17px}
 #sideview .sv2-bub.l{align-self:flex-start;background:#eef1f4;border-bottom-left-radius:5px}
@@ -3583,7 +3604,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v485</p>
+  <p class="ver">v486</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3766,7 +3787,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v485</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v486</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4081,7 +4102,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v485</p>
+    <p class="ver">v486</p>
   </div>
 </section>
 </div>
@@ -4388,7 +4409,11 @@ const EV_GLOW={"1":{hiroto:{a:"matome",tx:"新人・なお、デビュー初日�
 function evAfterglow(){
  if(!S)return;const per=EV_GLOW[S.ch];if(!per)return;const g=per[tgtKey()];if(!g)return;
  const a=g.a||tgtKey();
- const gp=mkPost(a,g.tx,g.lk,g.rp,g.rc,false,null);if(g.reps)attachReps(gp,g.reps,null);S.posts.unshift(gp);
+ /* v486: on the news day, the fan who watched his last stream
+    quotes the promise he actually made on his own screen */
+ let tx=g.tx;
+ if(S.ch===6&&tgtKey()==="hiroto"&&typeof svGet==="function"){const c5g=svGet(5);if(c5g===0)tx+="\n昨日の配信、古参への礼の言い方が、いつも通り静かだった。";else if(c5g===1)tx+="\n昨日の配信で『大事な夜』って言葉が、漏れてた。……何が大事なのかは、聞かないでおく。";else if(c5g===2)tx+="\n昨日の配信、『最後まで聴いて』って古参に頼んでた。……俺たちは、最後までいたよ。";}
+ const gp=mkPost(a,tx,g.lk,g.rp,g.rc,false,null);if(g.reps)attachReps(gp,g.reps,null);S.posts.unshift(gp);
  S.notifs.unshift({a:a,tx:"さんがポストしました",sub:g.nsub});
  renderFeed();renderNotifs();updateBdg();
 }
@@ -6178,6 +6203,18 @@ function startChapter(n){
  /* v478: what he chose on his own screen on Day 1 reaches her
     morning feed - his Day 2 post is worded by that choice */
  if(n===2&&tgtKey()==="hiroto"){const hp=sd.find(p=>p.a==="hiroto");const c1=svGet(1);if(hp&&c1===1)hp.t="配信、ありがとうございました。……言葉にするのは、まだ早い気がして。……昨日のステージ、最初から最後まで観ました";else if(hp&&c1===2)hp.t="配信、ありがとうございました。……昨日のステージ、最初から最後まで観ました。名前の行を、何度も見返した夜でした";}
+ /* v486: his screen choices reach further into her morning feed -
+    his post on Days 3, 5 and 6 (both routes) is worded by what he
+    did the night before; display numbers stay exactly as seeded */
+ if(tgtKey()==="hiroto"){
+  if(n===3){const hp=sd.find(p=>p.a==="hiroto");const c2=svGet(2);if(hp&&c2===0)hp.t="今日の配信は、18時台で終わります。……観たいものが、あるので。昨日の切り抜き、もう一周しました";else if(hp&&c2===1)hp.t="今日の配信は、18時台で終わります。……観たいものが、あるので。……歌い出しだけ、巻き戻してから行きます";}
+  if(n===5){const hp=sd.find(p=>p.a==="hiroto");const c4=svGet(4);if(hp&&c4===1)hp.t="肉まん、買いました。……今日は、静かな日にします。明日の予定は、もう入れてあります";else if(hp&&c4===2)hp.t="肉まん、買いました。……今日は、静かな日にします。コメント欄は、開きません";}
+  if(n===6){const hp=sd.find(p=>p.a==="hiroto");const c5=svGet(5);if(hp&&c5===0)hp.t="今日も、20時から配信します。……いつも通りです。来てくれる人と、話します";else if(hp&&c5===1)hp.t="今日も、20時から配信します。……大事な日でも、いつも通りです";else if(hp&&c5===2)hp.t="今日も、20時から配信します。……いつも通り、最後まで話します";}
+ }
+ if(tgtKey()==="sakuya"){
+  if(n===3){const sp=sd.find(p=>p.a==="sakuya");const c2=svGet(2);if(sp&&c2===0)sp.t="今日は収録です。よろしくお願いします。……挨拶の練習の成果、出せますように";else if(sp&&c2===1)sp.t="今日は収録です。よろしくお願いします。……残した一文は、今日、言うかもしれません";else if(sp&&c2===2)sp.t="今日は収録です。よろしくお願いします。……歌い出しを聴いてから、来ました";}
+  if(n===6){const sp=sd.find(p=>p.a==="sakuya");const c5=svGet(5);if(sp&&c5===1)sp.t="今日、発表です。……送らなかった文の分まで、今日は言います。ステージでは隣に立たせてください。よろしくお願いします";else if(sp&&c5===2)sp.t="今日、発表です。……守るために、出さないものもあります。それでも、隣に立たせてください。よろしくお願いします";}
+ }
  /* v248 (episode): the first follower checks in once more, on the
     morning of Day 4 - the same slot, the same display numbers for
     every run; only the person and their words differ, in their own
@@ -6864,6 +6901,8 @@ else if(b.t==="cal"){const d=svEl("div","sv2-cal");d.appendChild(svEl("span","tm
 else if(b.t==="stats"){const d=svEl("div","sv2-stats");b.items.forEach(it=>{const s=svEl("div","sv2-stat");s.appendChild(svEl("b",null,it[1]));s.appendChild(svEl("span",null,it[0]));d.appendChild(s);});w.appendChild(d);}
 else if(b.t==="note"){const d=svEl("div","sv2-note");const i=svEl("span");i.innerHTML=SVI[b.icon]||"";d.appendChild(i);d.appendChild(svEl("span",null,b.tx));w.appendChild(d);}
 else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");d._pb=b;const im=svEl("img","av");im.src=A.av;im.alt="";im.setAttribute("data-svx","prof");im.dataset.a=b.a;im.style.cursor="pointer";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.setAttribute("data-svx","prof");nb.dataset.a=b.a;nb.style.cursor="pointer";nh.appendChild(nb);const hs=svEl("span",null,A.h+(b.time?" ・ "+b.time:""));hs.setAttribute("data-svx","prof");hs.dataset.a=b.a;hs.style.cursor="pointer";nh.appendChild(hs);const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.setAttribute("data-svx","more");nh.appendChild(mo);m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));const rpEl=mk(SVI.repost,b.rp,"repost");ac.appendChild(rpEl);const lkEl=mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":""));ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,b.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");bkEl.setAttribute("data-svx","bmk");d._bmkEl=bkEl;ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.setAttribute("data-svx","share");ac.appendChild(shEl);if(b.hov){lkEl.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);}else{lkEl.setAttribute("data-svx","like2");rpEl.setAttribute("data-svx","repost");}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
+else if(b.t==="livefeed"){const d=svEl("div","sv2-lf");d.appendChild(svEl("div","sv2-lf-hd",b.head||"返信"));(b.items||[]).forEach(it=>{const A=ACC[it.a];const r=svEl("div","sv2-lf-row pend");const im=svEl("img","av");im.src=A.av;im.alt="";r.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h));m.appendChild(nh);m.appendChild(svEl("div","tx",it.tx));if(it.lk){const lk2=svEl("div","sv2-lf-lk");lk2.innerHTML=SVI.heart;lk2.appendChild(svEl("span",null,String(it.lk)));m.appendChild(lk2);}r.appendChild(m);d.appendChild(r);});w.appendChild(d);}
+else if(b.t==="foltick"){const d=svEl("div","sv2-row");d.appendChild(svEl("span","lab",b.lab));const r=svEl("span","rwrap");const v=svEl("span","val sv2-folnum",Number(b.from).toLocaleString("en-US"));v.setAttribute("data-svx","foltick");v.dataset.from=b.from;v.dataset.to=b.to;r.appendChild(v);if(b.sub)r.appendChild(svEl("span","sub",b.sub));d.appendChild(r);w.appendChild(d);}
 else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr","taprow");t2.setAttribute("data-svx","trow");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
 else if(b.t==="notif"){const d=svEl("div","sv2-notif");d.setAttribute("data-svx","notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));if(b.det)d.appendChild(svEl("div","sv2-notif-det",b.det));w.appendChild(d);}
 else if(b.t==="sent"){const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");const im=svEl("img","av");im.src=A.av;im.alt="";im.setAttribute("data-svx","prof");im.dataset.a=tgtKey();im.style.cursor="pointer";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",b.tx));d.appendChild(m);w.appendChild(d);}
@@ -6926,6 +6965,10 @@ cap:"昨夜の配信で、自分が言った言葉を思い出していた。『
 cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番が始まってから、彼は一度もスマホに触らなかった。",capAlt:[{f:2,c:0,cap:"テレビの前。コーラを置いて、19時を待つ。電車の中で、もう一周した歌が、今日は生で聴ける。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"},{f:2,c:1,cap:"テレビの前。コーラを置いて、19時を待つ。何度も巻き戻した歌い出しが、今日は目の前で始まる。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"},{f:2,c:2,cap:"テレビの前。コーラを置いて、19時を待つ。目を閉じても残っていた歌声が、今日は生で届く。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"}]},
 4:{clock:"23:18",app:"X",blocks:[
 {t:"post",a:"sora",time:"3時間",tx:"ひろとの配信『終わる時間』の表、出回ってる。なおさんの出演日だけ、きれいに早い。……この二人、ただの偶然で片付く材料じゃなくなってきた",rc:"74",rp:"52",lk:"480",vw:"8,412"},
+{t:"livefeed",head:"返信 ― 届き始めている",items:[
+{a:"fan2",tx:"表、作った人すごいな。出演日だけ、ほんとにきれいに早い",lk:34},
+{a:"fan1",tx:"偶然で片付けるには、材料が揃いすぎてる……",lk:58},
+{a:"sora",tx:"拡散、ありがとうございます。……数字は、嘘つかないんです",lk:112}]},
 {t:"shead",tx:"回っている表"},
 {t:"table",head:["日付","彼女の予定","彼の配信"],hl:[0,1],rows:[["デビューの日","ショーケース 18:00","開始 21:00"],["歌番組の日","放送 19:00","終了 18:58"],["ふだんの日","―","終了 23:30ごろ"]]},
 {t:"cal",time:"19:00",tx:"歌番組 ― なおの出番",sub:"次の出番も、カレンダーに入れてある"},
@@ -6944,9 +6987,9 @@ cap:"並べたのは他人でも、決めていたのは、自分だった。終
 {t:"sent",tx:"……俺の話をしに来た人とだけ、話します"},
 {t:"draft",lab:"入力しかけたコメント",tx:"まって",sub:"送信されなかった",replay:1},
 {t:"shead",tx:"通知 ― まだ増えている"},
-{t:"notif",n:"通りすがり",tx:"ねえ、新人アイドルのこと、どう思う？",time:"12分"},
-{t:"notif",n:"名無し",tx:"18時58分の人だよね？ 答えてよ",time:"9分"},
-{t:"notif",n:"通りすがり",tx:"匂わせの件、本人に聞けないからここで聞くわ",time:"4分"},
+{t:"notif",n:"通りすがり",tx:"ねえ、新人アイドルのこと、どう思う？",time:"12分",det:"答えなかった。答えれば、彼女の名前がここに出てしまう"},
+{t:"notif",n:"名無し",tx:"18時58分の人だよね？ 答えてよ",time:"9分",det:"時刻まで、合っていた。それでも、頷かなかった"},
+{t:"notif",n:"通りすがり",tx:"匂わせの件、本人に聞けないからここで聞くわ",time:"4分",det:"聞く場所を、間違えている。……そう思っても、指は動かなかった"},
 {t:"notif",n:"カレンダー",tx:"明日 ― なおの収録日",time:"今",det:"収録の時間は、もう覚えている。カレンダーを開くのは、確認のためだった"},
 {t:"replyq",mode:"send",lab:"彼の返事 ― 古参のひとりへ",fromN:"古参のひとり",from:"7年観てます。今日も、あなたの話を聴きに来ました",choices:[
 {send:"ありがとうございます。7年も、ここにいてくれて",followN:"古参のひとり",follow:"うん。今日も、ここにいる"},
@@ -6959,6 +7002,7 @@ cap:"並べたのは他人でも、決めていたのは、自分だった。終
 cap:"彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。選んだのは、どちらの名前も出さないことだった。配信が終わっても、コーラには手が付いていなかった。"},
 6:{clock:"20:24",app:"X",blocks:[
 {t:"post",a:"nao",time:"20:04",tx:"今日、コンビニで、知らない人が私たちの曲を口ずさんでいました。\n……それだけで、十分です。ありがとうございます。",rc:"96",rp:"412",lk:"3,208",vw:"21万",hov:1},
+{t:"foltick",lab:"フォロワー",from:4379,to:4371,sub:"報道の日。少しずつ、減っている"},
 {t:"row",lab:"3月24日",val:"なおの誕生日",sub:"2021年から、毎年カレンダーに入れてある"},
 {t:"row",lab:"明日の配信",val:"20:00 開始",chip:"いつも通り"},
 {t:"pick",lab:"押せなかった代わりに",choices:[
@@ -7074,7 +7118,12 @@ scr.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("cli
 scr.querySelectorAll('[data-svx="trow"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.parentNode.querySelectorAll("tr").forEach(r=>r.classList.remove("on"));el.classList.add("on");});});
 scr.querySelectorAll('[data-svx="draft"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
 scr.querySelectorAll('[data-svx="replay"]').forEach(el=>{const tx=el.querySelector(".tx");el.addEventListener("click",e=>{e.stopPropagation();if(el.dataset.busy||!tx)return;el.dataset.busy="1";const full=el.dataset.full||"";svErase(tx,()=>{svLater(()=>{svType(tx,full,()=>{svLater(()=>{svErase(tx,()=>{el.dataset.busy="";});},620);});},260);});});});
-scr.querySelectorAll('[data-svx="ditem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const sheet=$("#sv3-sheet");sheet.innerHTML="";const top=svEl("div","sh-top");top.appendChild(svEl("span",null,"下書き"));const x=svEl("span","sh-x","✕");top.appendChild(x);sheet.appendChild(top);sheet.appendChild(svEl("div","sh-tx",el.dataset.tx||""));sheet.appendChild(svEl("div","sh-note",el.dataset.keep?"残した下書き":"破棄した下書き"));sheet.style.display="";sheet.onclick=ev=>{ev.stopPropagation();};x.addEventListener("click",ev=>{ev.stopPropagation();sheet.style.display="none";});});});
+scr.querySelectorAll('[data-svx="ditem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const sheet=$("#sv3-sheet");sheet.innerHTML="";const top=svEl("div","sh-top");top.appendChild(svEl("span",null,"下書き"));const x=svEl("span","sh-x","✕");top.appendChild(x);sheet.appendChild(top);sheet.appendChild(svEl("div","sh-tx",el.dataset.tx||""));const keep=!!el.dataset.keep;const acted=el.dataset.act==="1";const note=svEl("div","sh-note",acted?(keep?"残した下書き":"消した下書き"):(keep?"残した下書き":"破棄した下書き"));sheet.appendChild(note);if(!acted){const btn=svEl("button","sv2-shbtn",keep?"この一文を、残す":"この下書きを、消す");btn.type="button";btn.addEventListener("click",ev=>{ev.stopPropagation();el.dataset.act="1";if(keep){el.classList.add("kept2");note.textContent="残した下書き";svToast("一文を、残した");}else{el.classList.add("dropped");note.textContent="消した下書き";svToast("下書きを、消した");}btn.remove();});sheet.appendChild(btn);}sheet.style.display="";sheet.onclick=ev=>{ev.stopPropagation();};x.addEventListener("click",ev=>{ev.stopPropagation();sheet.style.display="none";});});});
+/* v486: replies keep landing under the post he is reading, and
+   his follower count quietly ticks down on the news day. Both
+   live only inside the scene; the timers die with it. */
+scr.querySelectorAll(".sv2-lf-row.pend").forEach((r,i)=>{svLater(()=>{r.classList.remove("pend");r.style.animation="svline2 .5s ease both";},1100+i*1500);});
+scr.querySelectorAll('[data-svx="foltick"]').forEach(el=>{let cur=parseInt(el.dataset.from,10);const to=parseInt(el.dataset.to,10);const step=()=>{if(cur<=to)return;cur--;el.textContent=cur.toLocaleString("en-US");el.classList.add("tick");svLater(()=>el.classList.remove("tick"),320);if(cur>to)svLater(step,2300);};svLater(step,2100);});
 scr.querySelectorAll('[data-svx="bub"]').forEach(el=>{const meta=el.querySelector(".bmeta");if(meta)meta.textContent=(sc.clock||"")+(el.dataset.side==="r"?" 既読":"");el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("showmeta");});});
 scr.querySelectorAll('[data-svx="photo"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
 scr.querySelectorAll('[data-svx="vid"]').forEach(st=>{const blk=st.closest(".sv2-blk");const btn=blk.querySelector(".sv2-vbtn");const bar=blk.querySelector(".sv2-vbar i");let prog=parseFloat(st.dataset.prog)||0;let timer=null;const setIcon=()=>{btn.innerHTML=st.dataset.playing?SVI.pause:SVI.play;};const tick=()=>{prog+=1.6;if(prog>=100){prog=100;st.dataset.playing="";setIcon();if(timer)clearInterval(timer);timer=null;}bar.style.width=prog+"%";st.dataset.prog=prog;};const start=()=>{if(!timer)timer=svEvery(tick,130);};if(st.dataset.playing)start();st.addEventListener("click",e=>{e.stopPropagation();if(st.dataset.playing){st.dataset.playing="";if(timer)clearInterval(timer);timer=null;setIcon();}else{if(prog>=100){prog=0;bar.style.width="0%";}st.dataset.playing="1";setIcon();start();}});});
@@ -7148,7 +7197,11 @@ function svOpenProfile(key){const A=ACC[key];if(!A)return;const isTgt=key===tgtK
 function svTrendsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("トレンド"));(curTrends()||[]).forEach(t=>{const r=svEl("div","sv2-trend");r.appendChild(svEl("span","cat",t[0]+"のトレンド"));r.appendChild(svEl("b",null,t[1]));r.appendChild(svEl("span","cnt",t[2]));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});sub.appendChild(wrap);svShowSub("search");}
 function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw="";all.push(o);};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys)push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"");});const scs=SIDE_SCENES[tgtKey()]||{};Object.keys(scs).forEach(dk=>{(scs[dk].blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));if(all.length)all.forEach(p=>wrap.appendChild(svPostEl(p)));else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
 function svNotifsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("通知"));let n=0;const scs=SIDE_SCENES[tgtKey()]||{};Object.keys(scs).forEach(dk=>{(scs[dk].blocks||[]).forEach(b=>{if(b.t==="notif"){wrap.appendChild(svBlock(b));n++;}});});const mine=svProfPosts(tgtKey());if(mine.length){const row=svEl("div","sv2-notif");row.setAttribute("data-svx","notif");const ic=svEl("span","ic");ic.innerHTML=SVI.heartF;row.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,ACC.fan1?ACC.fan1.n:"ゆな"));tx.appendChild(document.createTextNode(" さんがあなたのポストをいいねしました"));row.appendChild(tx);row.appendChild(svEl("div","sv2-notif-det",mine[0].tx));wrap.appendChild(row);n++;}if(!n)wrap.appendChild(svEl("div","sv2-empty","新しい通知はありません"));sub.appendChild(wrap);svWireSub(sub);svShowSub("bell");}
-function svMailView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("メッセージ"));let n=0;const scs=SIDE_SCENES[tgtKey()]||{};Object.keys(scs).forEach(dk=>{(scs[dk].blocks||[]).forEach(b=>{if(b.t==="chat"||b.t==="chatq"){const msgs=b.msgs||b.pre||[];const last=msgs.length?msgs[msgs.length-1][1]:"";const row=svEl("div","sv2-msgrow");row.appendChild(svEl("span","mav",(b.who||"").slice(0,1)));const mm=svEl("div","mmain");mm.appendChild(svEl("b",null,b.who||""));mm.appendChild(svEl("span","pv",last));row.appendChild(mm);row.addEventListener("click",e=>{e.stopPropagation();svGo("home");});wrap.appendChild(row);n++;}});});if(!n)wrap.appendChild(svEl("div","sv2-empty","新しいメッセージはありません"));sub.appendChild(wrap);svShowSub("mail");}
+function svMailView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("メッセージ"));let n=0;const scs=SIDE_SCENES[tgtKey()]||{};Object.keys(scs).forEach(dk=>{(scs[dk].blocks||[]).forEach(b=>{if(b.t==="chat"||b.t==="chatq"){const msgs=b.msgs||b.pre||[];const last=msgs.length?msgs[msgs.length-1][1]:"";const row=svEl("div","sv2-msgrow");row.appendChild(svEl("span","mav",(b.who||"").slice(0,1)));const mm=svEl("div","mmain");mm.appendChild(svEl("b",null,b.who||""));mm.appendChild(svEl("span","pv",last));row.appendChild(mm);row.addEventListener("click",e=>{e.stopPropagation();svMailThread(b.who||"",parseInt(dk,10),b);});wrap.appendChild(row);n++;}});});if(!n)wrap.appendChild(svEl("div","sv2-empty","新しいメッセージはありません"));sub.appendChild(wrap);svShowSub("mail");}
+/* v486: his message list opens the thread itself - her-related
+   exchanges can be read back on his screen, including the reply
+   he chose (kept in S.sv) or the fact he has not answered yet. */
+function svMailThread(who,day,b){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(who,()=>svMailView()));const th=svEl("div","sv2-mthread");(b.pre||b.msgs||[]).forEach(m=>{th.appendChild(svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]));});if(b.t==="chatq"){const ans=svGet(day);if(ans!=null&&b.choices&&b.choices[ans]){const c=b.choices[ans];th.appendChild(svEl("div","sv2-bub r",c.send));(c.react||[]).forEach(m=>{th.appendChild(svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]));});}else{th.appendChild(svEl("div","sv2-empty","まだ返事をしていない ― 場面に戻ると、返事を選べる"));}}wrap.appendChild(th);sub.appendChild(wrap);svShowSub("mail");}
 /* ===== v478: his choices on his screen now leave marks on the
    story. Every answer he gives in an interlude is kept in S.sv
    (an additive save field; older saves simply have none and read
@@ -7161,7 +7214,7 @@ function svRec(idx){if(typeof S==="undefined"||!S)return;if(!S.sv)S.sv={};const 
 function svRecK(key,val){if(typeof S==="undefined"||!S)return;if(!S.sv)S.sv={};const r=tgtKey();if(!S.sv[r])S.sv[r]={};S.sv[r][key]=val;save();}
 function svResolve(sc){if(!sc||typeof S==="undefined"||!S||!S.sv)return sc;const c=JSON.parse(JSON.stringify(sc));const apply=o=>{if(!o||!o.alt)return;for(const a of o.alt){if(svGet(a.f)===a.c){Object.keys(a).forEach(k2=>{if(k2!=="f"&&k2!=="c")o[k2]=a[k2];});break;}}};(c.blocks||[]).forEach(b=>{apply(b);if(b&&b.items)b.items.forEach(apply);});if(c.capAlt)for(const a of c.capAlt){if(svGet(a.f)===a.c){c.cap=a.cap;break;}}return c;}
 function svDm2Msgs(base){const m=base.slice();const c4=svGet(4);if(tgtKey()==="hiroto"){if(c4===1)m[2]="……次の出番の日、カレンダーに入れた。終わる時間は先に決めとく。なおの歌、最初から観る";else if(c4===2)m[2]="……次の出番の日も、終わる時間は先に決めとく。コメント欄は、もう開かへん。……なおの歌、最初から観る";}else{if(c4===1)m[0]="『後輩です』のポスト、出しました。……広報の柔らかい案は、なしにしてもらいました";else if(c4===2)m[0]="『後輩です』のポスト、出しました。……僕の言葉で、言わせてもらいました";}return m;}
-function svDm3Msgs(base){const m=base.slice();if(tgtKey()!=="hiroto")return m;const c5=svGet(5);const line=c5===0?"昨日の夜、古参の人に、ちゃんと礼を言えた。……今日の話は、その続きや":c5===1?"昨日の古参の人にも、言い過ぎたかもしれん。……でも、大事な夜やったから":c5===2?"昨日、古参の人に『最後まで聴いて』って頼んだ。……今日の話も、最後まで聴いてほしいねん":null;if(!line)return m;const i=m.indexOf("……今日は、ちゃんと話したいことがある");m.splice(i>=0?i+1:1,0,line);return m;}
+function svDm3Msgs(base){const m=base.slice();if(tgtKey()!=="hiroto"){const c5s=svGet(5);const lineS=c5s===0?"……発表文、昨日の夜も読み返してました。『隣に立つ』って書いたの、ぼくです。……何度読んでも、手が震えました":c5s===1?"……送らないままの文が、二つあります。……今日の話は、その続きです":c5s===2?"……古い写真、フォルダの奥に戻しました。……出すことは、守ることにはならないので":null;if(lineS){const ia=m.indexOf("……本当は、振り付けの話だけじゃありません");m.splice(ia>=0?ia+1:5,0,lineS);}return m;}const c5=svGet(5);const line=c5===0?"昨日の夜、古参の人に、ちゃんと礼を言えた。……今日の話は、その続きや":c5===1?"昨日の古参の人にも、言い過ぎたかもしれん。……でも、大事な夜やったから":c5===2?"昨日、古参の人に『最後まで聴いて』って頼んだ。……今日の話も、最後まで聴いてほしいねん":null;if(!line)return m;const i=m.indexOf("……今日は、ちゃんと話したいことがある");m.splice(i>=0?i+1:1,0,line);return m;}
 function svDm4Msgs(T){if(!T||!T.msgs)return;const c6=svGet(6);if(tgtKey()==="hiroto"){const line=c6===0?"……昨日のポスト、また読み返してた。『それだけで、十分です』……十分じゃ、なかった":c6===1?"……24日の予定、また開いてた。……今年は、直接言いたいねん":c6===2?"……今夜の配信で話すこと、考えてた。……昨日の話、少しだけ":null;if(line)T.msgs.splice(1,0,line);}else{const kept=svGet("6k");if(kept===1)T.msgs.splice(1,0,"……昨日の下書き、まだ残してます。……送れる日が来るまで、ぼくが持ってます");else if(kept===0)T.msgs.splice(1,0,"……昨日、消した一文があります。……言える日が来たら、今度は声で言います");}}
 function showSide(d,cb){const sc=svResolve(sideScene(d));if(!sc){if(cb)cb();return;}
 sideCb=cb||null;svClearTmrs();
