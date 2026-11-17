@@ -1428,6 +1428,8 @@ input,textarea{font-size:16px}
 .his-covstat span{font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#fff;background:rgba(15,20,25,.55);border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:4px 10px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .his-covstat span:empty{display:none}
 #x-pane-hisprof #his-bio{font-size:14px!important;line-height:1.65}
+.prof-joined{display:flex;align-items:center;gap:5px;color:#536471;font-size:13px;margin-top:8px}
+.prof-joined svg{width:15px;height:15px;flex:none;fill:#536471}
 .his-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
 .his-tags span{font-size:11.5px;font-weight:800;color:#8a6d1f;background:#faf3da;border:1px solid #e8ddba;border-radius:999px;padding:4px 11px;transition:color .4s ease,background .4s ease,border-color .4s ease}
 #x-pane-hisprof.dstage-3 .his-tags span,#x-pane-hisprof.dstage-4 .his-tags span{color:#c2185b;background:#fdeef6;border-color:#f8c8dd}
@@ -3604,7 +3606,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v486</p>
+  <p class="ver">v487</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3758,6 +3760,7 @@ input,textarea{font-size:16px}
         <div class="pf-name">なお<span class="pf-badge-off">公式</span><span class="pf-rank" id="me-rank">新人</span></div>
         <div style="color:#536471;font-size:13px" id="prof-handle">@nao_h2h</div>
         <div style="font-size:14px;line-height:1.65;margin-top:6px" id="prof-bio">「Hearts2Hearts」の最年長メンバー「なお」公式。デビュー曲『The Chase』配信中。</div>
+        <div class="prof-joined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 15H5V10h14v9zM5 8V6h14v2H5z"/></svg><span id="me-joined-t"></span></div>
         <div class="counts" style="display:flex;gap:22px"><span><b id="x-folwing-n">42</b> フォロー中</span><span><b id="x-fol-n">1</b> フォロワー</span></div>
       </div>
       <div class="me-now">
@@ -3787,7 +3790,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v486</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v487</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3828,6 +3831,7 @@ input,textarea{font-size:16px}
         <div style="color:#536471;font-size:13px" id="his-handle">@193hiroto</div>
         <div style="font-size:13px;margin-top:5px" id="his-bio">歌手。ステージがすべて。</div>
         <div class="his-tags" id="his-tags"></div>
+        <div class="prof-joined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 15H5V10h14v9zM5 8V6h14v2H5z"/></svg><span id="his-joined-t"></span></div>
         <div class="counts" style="display:flex;gap:22px"><span><b>12</b> フォロー中</span><span><b id="his-fol-n">4,379</b> フォロワー</span></div>
         <div id="his-dist">
           <div class="hd-top"><span class="hd-lab">二人の距離</span><span class="hd-stage" id="hd-stage">STAGE 1 ― まだ、遠い存在</span><b class="hd-num" id="hd-num">0</b></div>
@@ -4102,7 +4106,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v486</p>
+    <p class="ver">v487</p>
   </div>
 </section>
 </div>
@@ -4233,8 +4237,8 @@ const TRENDS=[["エンタメ","#なおデビュー","12,402 ポスト"],["トレ
 const STORY=[["hiroto","井汲大翔"],["akari","ジウ"],["carmen","カルメン"],["fan1","ゆな"],["miku","みく"],["yeon","イェオン"],["stella","ステラ"],["juun","ジュウン"],["ana","エイナ"],["ian","イアン"],["nao","あなた"]];
 /* ===== target select (Status-style): who nao gets closer to ===== */
 const TARGETS={
- hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/gen-hiroto-stream-selfie.jpg",typo:"HIROTO IKUMI",bio:"日プ（PRODUCE 101 JAPAN）シーズン1出身。中国・創造営、韓国・BOYS PLANETと、国を跨いで挑戦を続けてきた歌手。現在は個人で活動中。ステージがすべて。お仕事のご連絡はDMへ。",fol:"4,379",cardT:"井汲大翔｜日プ出身",cardD:"2021年、ソウルで知り合った。共通の振付師を通じて出会った、別事務所の同い年の練習生同士。近づいては離れてきた、4年越しの距離がある。フォロワーは4,379人。それでも、7年ついてきたファンがいる。言葉少なめ、でも目が離せない。",tags:["ソロ","鯖番出身","個人活動"]},
- sakuya:{key:"sakuya",name:"サクヤ",short:"サクヤ",handle:"@sakuya_nctwish",av:"assets/sakuya-av.jpg",cover:"assets/sakuya-cover.jpg",typo:"SAKUYA ― NCT WISH",bio:"NCT WISHのメンバー。パンと、静かな時間が好き。",fol:"312万",cardT:"サクヤ｜NCT WISH",cardD:"同じ事務所の相手。デビューの順番と、練習生の順番が違う人。不思議な感性と、丁寧な言葉選び。",tags:["NCT WISH","同じSM"]}};
+ hiroto:{key:"hiroto",name:"井汲大翔",short:"ひろと",handle:"@193hiroto",av:"assets/ig-avatar.jpg",cover:"assets/gen-hiroto-stream-selfie.jpg",typo:"HIROTO IKUMI",bio:"日プ（PRODUCE 101 JAPAN）シーズン1出身。中国・創造営、韓国・BOYS PLANETと、国を跨いで挑戦を続けてきた歌手。現在は個人で活動中。ステージがすべて。お仕事のご連絡はDMへ。",fol:"4,379",cardT:"井汲大翔｜日プ出身",cardD:"2021年、ソウルで知り合った。共通の振付師を通じて出会った、別事務所の同い年の練習生同士。近づいては離れてきた、4年越しの距離がある。フォロワーは4,379人。それでも、7年ついてきたファンがいる。言葉少なめ、でも目が離せない。",tags:["ソロ","鯖番出身","個人活動"],jn:"2019年9月"},
+ sakuya:{key:"sakuya",name:"サクヤ",short:"サクヤ",handle:"@sakuya_nctwish",av:"assets/sakuya-av.jpg",cover:"assets/sakuya-cover.jpg",typo:"SAKUYA ― NCT WISH",bio:"NCT WISHのメンバー。パンと、静かな時間が好き。",fol:"312万",cardT:"サクヤ｜NCT WISH",cardD:"同じ事務所の相手。デビューの順番と、練習生の順番が違う人。不思議な感性と、丁寧な言葉選び。",tags:["NCT WISH","同じSM"],jn:"2024年2月"}};
 const TARGET_DMS={hiroto:HIROTO_DM,sakuya:SAKUYA_DM};
 /* v250 (episode): a second, shorter exchange that reaches the same
    thread on Day 5 - only if the first one was answered. His warmth
@@ -4924,7 +4928,7 @@ function renderNotifs(){
   if(headAt[vi]){const hd=document.createElement("div");hd.className="nday-head";hd.innerHTML='<span class="ndh-t"></span><span class="ndh-n">'+headAt[vi]+' 件</span>';
    /* v213: the day head names the chapter too, like the log and
       journey sheets (the sub still leads; rows keep their own) */
-   {let t=n.sub;const m=/^Day (\d+)/.exec(n.sub||"");if(m){const chp=curCH()[Number(m[1])-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl)t=n.sub+" ― "+ttl;}hd.querySelector(".ndh-t").textContent=t;}
+   {let t=n.sub;const m=/^Day (\d+)/.exec(n.sub||"");if(m){const chp=curCH()[Number(m[1])-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl&&n.sub.indexOf(ttl)<0)t=n.sub+" ― "+ttl;}hd.querySelector(".ndh-t").textContent=t;}/* v487: some subs already carry the chapter's day title - appending it again printed it twice in the head ("…切り抜きが伸びた日 ― 切り抜きが伸びた日") */
    list.appendChild(hd);}
   if(grpMem.has(vi))return;
   if(grpOf[vi]){const mems=grpOf[vi].map(x=>visN[x]);const fn=mems[0].n,fa=ACC[fn.a]||{n:"不明なアカウント",h:""};const anyU=mems.some(x=>x.i<unseen),anyS=mems.some(x=>x.n.a===tgtKey());
@@ -5588,7 +5592,7 @@ function renderMeTab(){const box=$("#x-me-tabbody");if(!box||!S||!S.started)retu
  if(box.querySelector(".post,.mediagrid")){const en=document.createElement("div");en.className="nend";en.textContent="―― ここまで ――";box.appendChild(en);}
 }
 function renderTargetProfile(){const T=tgt();const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);
+ set("#his-name-bar",T.name);set("#his-name",T.name);set("#his-handle",T.handle);set("#his-bio",T.bio);set("#his-typo",T.typo);set("#his-fol-n",T.fol);set("#his-joined-t",T.jn?T.jn+"からXを利用しています":"");
  set("#his-cov-fol","フォロワー "+T.fol);set("#his-cov-tag",(T.tags&&T.tags[0])||"");
  const tg=$("#his-tags");if(tg){tg.innerHTML="";(T.tags||[]).forEach(t=>{const s=document.createElement("span");s.textContent=t;tg.appendChild(s);});}
  const av=$("#his-ava");if(av)av.src=T.av;
@@ -6650,6 +6654,11 @@ function renderProfile(){if(!S||!S.started)return;
  $("#st-xp").textContent=S.xp;$("#st-lv").textContent=lvNum()+"・"+lvTitle();
  const lvN=1+Math.floor(S.xp/50),usedN=[S.posted,S.evDone,S.actDone].filter(Boolean).length,setT=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  setT("#me-cov-day","DAY "+S.ch+" / "+totalDays()+"");setT("#me-cov-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-lv","Lv "+lvN+"・"+lvTitle(lvN));setT("#me-now-day","Day "+S.ch+" / "+totalDays()+"");setT("#me-now-act","残り "+(3-usedN));setT("#me-rank",lvTitle(lvN));
+ /* v487: the real client's joined line - her account opened the month
+    the story began, read off her earliest own post (its id carries the
+    timestamp, the same source postTime uses); before her first post it
+    is simply this month. Display only */
+ {const mj=$("#me-joined-t");if(mj){let bt=0;(S.posts||[]).forEach(p=>{if(!p.mine)return;const tp=String(p.id||"").split("-")[1];const v=tp?parseInt(tp,36):0;if(v&&(!bt||v<bt))bt=v;});const jd=new Date(bt||Date.now());mj.textContent=jd.getFullYear()+"年"+(jd.getMonth()+1)+"月からXを利用しています";}}
  renderRep();renderHud();}
 /* v44: reputation - how the world currently sees her, derived from the axes */
 function repTitle(){const c=S.cog,f=S.flm,d=S.dist,fo=S.fol;
@@ -6668,9 +6677,9 @@ function renderRep(){if(!S||!S.started)return;const tt=$("#rep-title");if(!tt)re
  $("#rep-quote").textContent=T.q;
  $("#rep-cog-g").style.width=S.cog+"%";$("#rep-cog-t").textContent=cogWord(S.cog);
  $("#rep-flm-g").style.width=S.flm+"%";$("#rep-flm-t").textContent=flmWord(S.flm);
- const pts=((S.folHist)||[]).slice();
+ const pts=((S.folHist)||[]).map(e=>({day:e.day,fol:e.fol}));
  if(!pts.length||pts[pts.length-1].fol!==S.fol)pts.push({day:S.ch,fol:S.fol,now:true});
- if(pts.length)pts[pts.length-1].now=true;/* v476: the last point is always the current one - when the day-start snapshot already equals the live value, no point was marked "now" and the chart read as an unstyled slab */
+ if(pts.length)pts[pts.length-1].now=true;/* v476: the last point is always the current one - when the day-start snapshot already equals the live value, no point was marked "now" and the chart read as an unstyled slab. v487: the points are fresh copies - slice() shared the folHist entries, so the now flag written here persisted into the save and every past day ended up marked current (the FIN chart labelled all bars 最終) */
  const max=Math.max(1,...pts.map(e=>e.fol));
  const box=$("#rep-bars");box.innerHTML="";
  pts.forEach(e=>{const w=document.createElement("div");w.className="rep-bar"+(e.now?" now":"");
@@ -6722,9 +6731,9 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#hud-dist-g"))el("#hud-dist-g").style.width=Math.min(100,S.dist)+"%";
  if(el("#hud-dist-lab"))el("#hud-dist-lab").textContent=distLab();
  /* v161: follower-trend sparkline (folHist snapshots + live value) */
- {const sp=el("#hud-spark");if(sp){const pts=((S.folHist)||[]).slice();
+ {const sp=el("#hud-spark");if(sp){const pts=((S.folHist)||[]).map(e=>({day:e.day,fol:e.fol}));
   if(!pts.length||pts[pts.length-1].fol!==S.fol)pts.push({day:S.ch,fol:S.fol,now:true});
-  if(pts.length)pts[pts.length-1].now=true;/* v476: same "now" marking as the profile chart - the day-start snapshot equals the live value, so without this the single Day 1 bar rendered as a plain grey slab */
+  if(pts.length)pts[pts.length-1].now=true;/* v476: same "now" marking as the profile chart - the day-start snapshot equals the live value, so without this the single Day 1 bar rendered as a plain grey slab. v487: fresh copies, as in renderRep - never write the flag into S.folHist itself */
   const sig=pts.map(e=>e.day+":"+e.fol).join("|");
   if(sp.dataset.sig!==sig){sp.dataset.sig=sig;sp.innerHTML="";
    const max=Math.max(1,...pts.map(e=>e.fol));
@@ -7380,9 +7389,9 @@ const END_EMBLEM={
  start:'<svg viewBox="0 0 24 24"><path d="M12 21v-7.5"/><path d="M12 13.5c0-3.1 2.3-5.2 6.2-5.2 0 3.6-2.3 5.2-6.2 5.2z"/><path d="M12 11.4C12 8.8 9.9 7 6.3 7c0 3.1 1.9 4.4 5.7 4.4z"/></svg>'};
 function renderEndJourney(){
  const bars=$("#ej-bars");if(!bars)return;
- const pts=((S.folHist)||[]).slice();
+ const pts=((S.folHist)||[]).map(e=>({day:e.day,fol:e.fol}));
  if(!pts.length||pts[pts.length-1].fol!==S.fol)pts.push({day:S.ch,fol:S.fol,now:true});
- if(pts.length)pts[pts.length-1].now=true;/* v476: same "now" marking - the final point always carries the 最終 label and highlight */
+ if(pts.length)pts[pts.length-1].now=true;/* v476: same "now" marking - the final point always carries the 最終 label and highlight. v487: fresh copies, as in renderRep - with slice() the flag leaked into every saved snapshot and all bars read 最終 */
  const max=Math.max(1,...pts.map(e=>e.fol));
  bars.innerHTML="";
  pts.forEach(e=>{const w=document.createElement("div");w.className="ej-bar"+(e.now?" now":"");
