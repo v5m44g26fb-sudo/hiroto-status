@@ -3092,7 +3092,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v450</p>
+  <p class="ver">v451</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3272,7 +3272,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v450</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v451</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3574,7 +3574,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v450</p>
+    <p class="ver">v451</p>
   </div>
 </section>
 </div>
@@ -6647,7 +6647,7 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
 var PKEY="debut-status-snd",on=true;
 try{on=localStorage.getItem(PKEY)!=="0";}catch(e){}
 var ctx=null,master=null,bgmBus=null,noiseBuf=null;
-var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0};
+var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0};
 function ac(){
   if(!ctx){
     var AC=window.AudioContext||window.webkitAudioContext;
@@ -6686,7 +6686,19 @@ var Snd={
   ntf:function(){played.ntf++;tone({f0:1318,dur:.32,vol:.07,a:.01});tone({f0:1760,dur:.42,vol:.05,at:.09,a:.01});},
   dm:function(){played.dm++;tone({type:"triangle",f0:880,dur:.08,vol:.11});tone({type:"triangle",f0:1174,dur:.15,vol:.09,at:.07});},
   send:function(){played.send++;noise({f0:500,f1:2600,dur:.16,vol:.06});tone({type:"triangle",f0:420,f1:840,dur:.14,vol:.045});},
-  story:function(){played.story++;noise({f0:1600,f1:700,dur:.11,vol:.085});}
+  story:function(){played.story++;noise({f0:1600,f1:700,dur:.11,vol:.085});},
+  /* v451: scene sounds - kept short and quiet, in the same synth
+     voice as the set above. end: a soft three-note resolve (the
+     flame ending gets a lower two-note fall instead). live: the
+     little two-tone blip of a stream starting. side: a slow, low
+     swell under the SIDE VIEW curtain. ann: a bright three-note
+     cascade for the announcement minute. */
+  end:function(flame){played.end++;
+    if(flame){tone({f0:392,dur:1.15,vol:.05,a:.02});tone({f0:329.63,dur:1.35,vol:.042,at:.14,a:.02});}
+    else{tone({type:"triangle",f0:523.25,dur:.9,vol:.055,a:.015});tone({type:"triangle",f0:659.25,dur:.95,vol:.048,at:.12,a:.015});tone({type:"triangle",f0:783.99,dur:1.2,vol:.048,at:.24,a:.015});}},
+  live:function(){played.live++;tone({type:"triangle",f0:880,dur:.09,vol:.08});tone({type:"triangle",f0:1318,dur:.16,vol:.06,at:.08});noise({f0:900,f1:2400,dur:.2,vol:.018});},
+  side:function(){played.side++;tone({f0:329.63,dur:.85,vol:.042,a:.22});tone({f0:493.88,dur:.9,vol:.026,at:.1,a:.26});},
+  ann:function(){played.ann++;tone({f0:1318,dur:.3,vol:.05,a:.01});tone({f0:1567,dur:.36,vol:.042,at:.08,a:.01});tone({f0:2093,dur:.5,vol:.038,at:.16,a:.01});}
 };
 /* --- title BGM: a slow four-chord pad (Cmaj7 - Am7 - Fmaj7 - G6) --- */
 var CHORDS=[[261.63,329.63,392.00,493.88],[220.00,261.63,329.63,392.00],[174.61,220.00,261.63,329.63],[196.00,246.94,293.66,329.63]];
@@ -6759,6 +6771,16 @@ var du=document.getElementById("dmunlock");
 if(du&&window.MutationObserver)new MutationObserver(function(){
   if(du.classList.contains("on"))Snd.dm();
 }).observe(du,{attributes:true,attributeFilter:["class"]});
+/* v451: scene layers -> their sounds. Fires only on the rising
+   edge of .on (the ending also gains .fin and theme classes while
+   shown; those must not replay the arrival). The ending reads its
+   own theme class so the flame ending sounds lower. */
+function watchOn(el,fn){if(!el||!window.MutationObserver)return;var was=el.classList.contains("on");
+ new MutationObserver(function(){var now=el.classList.contains("on");if(now&&!was)fn();was=now;}).observe(el,{attributes:true,attributeFilter:["class"]});}
+watchOn(document.getElementById("scr-ending"),function(){var se=document.getElementById("scr-ending");Snd.end(!!(se&&se.classList.contains("end-flame")));});
+watchOn(document.getElementById("livescene"),function(){Snd.live();});
+watchOn(document.getElementById("sideview"),function(){Snd.side();});
+watchOn(document.getElementById("annscene"),function(){Snd.ann();});
 /* notification badge increments -> notify sound (v414: only after
    the first real gesture - a badge restored from a save on reload
    must not chime back at the first tap) */
