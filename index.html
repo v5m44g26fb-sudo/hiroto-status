@@ -3303,7 +3303,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v460</p>
+  <p class="ver">v461</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3483,7 +3483,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v460</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v461</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3793,7 +3793,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v460</p>
+    <p class="ver">v461</p>
   </div>
 </section>
 </div>
@@ -4626,17 +4626,20 @@ function renderNotifs(){
    One segment per story entry, auto-advance, tap right = next / left = back,
    press-and-hold pauses (a quick tap still navigates on release).
    Backdrops reuse photos already in the game; accounts without one get a
-   gradient + initial, so no new photos or story text are introduced. */
+   gradient + initial, so no new photos or story text are introduced.
+   v461: the bar follows the real client - one ring per person (the
+   day's segments play inside it, in the order they were posted) and
+   only the current day's stories are on the bar at all. */
 const SV_DUR=5000;
-let svIdx=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0,svDragX=0,svDragY=0,svDragMode=false,svDragDy=0;
-function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(seen.includes(e.uid)?" seen":" unseen")+(e.k==="nao"?" mine":"");b.setAttribute("aria-label",e.lab+"のストーリー");/* v278 (photo realism): like the real thing, every ring -
+let svIdx=0,svSeg=0,svElapsed=0,svLastTs=0,svTimer=null,svPaused=false,svDownAt=0,svDragX=0,svDragY=0,svDragMode=false,svDragDy=0;
+function renderStories(){$("#stories").innerHTML="";const seen=(S&&S.storySeen)||[];storyList().forEach((e,i)=>{const a=ACC[e.k];if(!a)return;const b=document.createElement("button");b.className="story"+(e.segs.every(s=>seen.includes(s.uid))?" seen":" unseen")+(e.k==="nao"?" mine":"");b.setAttribute("aria-label",e.lab+"のストーリー");/* v278 (photo realism): like the real thing, every ring -
    hers included - shows the account's avatar, not a story
    photo thumbnail */
  const ringImg=a.av;b.innerHTML='<div class="ring">'+(ringImg?'<img class="avatar" src="'+ringImg+'" alt="">':avaTxt(a.n))+(e.k==="nao"?'<i class="splus">+</i>':"")+'</div><span>'+e.lab+"</span>";b.onclick=()=>openStory(i);$("#stories").appendChild(b);});
  /* v430: warm the first stories' photos while she is still reading
     the feed - a ~600KB story photo on a slow link otherwise lands
     after its 5s segment has already moved on */
- try{const pre=new Set();storyList().forEach(e=>{if(e.img)pre.add(e.img);});[...pre].slice(0,3).forEach(svPreload);}catch(_){}}
+ try{const pre=new Set();storyList().forEach(e=>e.segs.forEach(s=>{if(s.img)pre.add(s.img);}));[...pre].slice(0,3).forEach(svPreload);}catch(_){}}
 /* v107: stories belong to the people at the centre of the story only -
    her, the Hearts2Hearts members, the target, the first follower, Miku
    and Yuna. Wire, programme, staff and stranger accounts never post
@@ -4697,13 +4700,13 @@ function storyBaseFor(k,day){const r=storyBaseForBase(k,day);if(day>6){if(STORY_
 function storyList(){
  const day=(typeof S!=="undefined"&&S&&S.ch)||1;
  const base=curStory().filter(x=>STORY_ALLOW.has(x[0])).map(x=>{
-  if(x[0]==="nao")return{k:x[0],lab:x[1],img:naoStory().img,cap:naoStory().cap,uid:x[0]};
-  const b=storyBaseFor(x[0],day);return{k:x[0],lab:x[1],img:b.img,cap:b.cap,uid:x[0]};});
+  if(x[0]==="nao")return{k:x[0],lab:x[1],img:naoStory().img,cap:naoStory().cap,uid:"b-nao-"+day};
+  const b=storyBaseFor(x[0],day);return{k:x[0],lab:x[1],img:b.img,cap:b.cap,uid:"b-"+x[0]+"-"+day};});
  /* v107: the first follower joins the ring when she is not already in
     it (Jiwoo is a member and already there). Render-time only. */
  if(typeof S!=="undefined"&&S&&S.first&&STORY_ALLOW.has(S.first)&&!base.some(e=>e.k===S.first)){
   const fb=storyBaseFor(S.first,day);
-  base.push({k:S.first,lab:S.first==="sea"?"カリナ":"ミナ",img:fb.img,cap:fb.cap,uid:S.first});}
+  base.push({k:S.first,lab:S.first==="sea"?"カリナ":"ミナ",img:fb.img,cap:fb.cap,uid:"b-"+S.first+"-"+day});}
  /* v66: legacy saves may still carry the 150px avatar file as a story
     backdrop (the old Day-2 event chain entry) - remap it at display time
     to the studio photo. Save format untouched. */
@@ -4715,16 +4718,33 @@ function storyList(){
     entries are ever rewritten. */
  const STORY_FIX={"d-post-1":"assets/pin-jiwoo-c1.jpg","d-post-3":"assets/pin-carmen-c1.jpg","d-post-4":"assets/pin-yuna-c1.jpg","d-post-6":"assets/pin-jiwoo-c2.jpg","d-event-1":"assets/pin-stella-c1.jpg","d-event-3":"assets/pin-juun-c1.jpg","d-event-4":"assets/pin-jiwoo-c3.jpg","d-event-5":"assets/pin-yeon-c1.jpg","d-act-1":"assets/pin-yuha-c1.jpg","d-act-2":"assets/pin-ian-c1.jpg","d-act-3":"assets/pin-yuha-c2.jpg","d-act-4":"assets/pin-ana-c1.jpg","d-act-5":"assets/pin-miku-c2.jpg","d-act-6":"assets/pin-yuna-c2.jpg","d-post-2-b":"assets/pin-miku-c1.jpg","d-post-4-b":"assets/pin-ian-c2.jpg","d-event-2-b":"assets/pin-carmen-c2.jpg","d-event-4-b":"assets/pin-yuha-c3.jpg","d-event-6-b":"assets/pin-carmen-c3.jpg","d-act-3-b":"assets/pin-stella-c2.jpg","d-act-5-b":"assets/pin-jiwoo-c4.jpg","d-act-6-b":"assets/pin-yeon-c2.jpg"};
  const dyn=((typeof S!=="undefined"&&S&&S.storyDyn)||[]).filter(d=>STORY_ALLOW.has(d.k)).map(d=>({k:d.k,lab:d.lab,img:STORY_FIX[d.uid]||(d.img==="assets/sakuya-cover.jpg"?"assets/sakuya-bmg.jpg":d.img==="assets/pin-cafe-onion.jpg"?"assets/pin-sakuya-c1.jpg":d.img==="assets/ig-avatar.jpg"?"assets/gen-hiroto-tripod-front.jpg":d.img==="assets/gen-hiroto-desk.jpg"?"assets/gen-hiroto-day5-table.jpg":d.img==="assets/gen-story-stream.jpg"?({"d-post-2":"assets/gen-hiroto-tripod-profile.jpg","d-event-2":"assets/gen-hiroto-tripod-front.jpg","d-event-6":"assets/gen-hiroto-chain-tripod-setup.jpg"}[d.uid]||"assets/gen-hiroto-tripod-front.jpg"):d.img),cap:d.cap||"",uid:d.uid}));
- /* v55 (supersedes the v43 order): newest first. Own story stays pinned to
-    the left edge; everyone else sorts by when their story began to be
-    displayed, newest closest to your own. Chain stories (storyDyn, kept in
-    added order) all began after the base set, and base stories began in
-    array order - so both groups display reversed. Display order only:
-    contents / seen-tracking / chain triggers are unchanged, and old saves
-    need no migration (the reversal happens here, not in stored data). */
- const mine=base.filter(e=>e.k==="nao");
- const others=base.filter(e=>e.k!=="nao");
- return mine.concat(dyn.slice().reverse(),others.slice().reverse());
+ /* v461: stories live for a day, like the real thing - a chain story
+    added on an earlier day leaves the bar when the day turns (the
+    chain uid carries its day: d-<kind>-<day>[-b]). Display-time
+    filter only; the stored storyDyn array is never touched, so an
+    in-progress save shows exactly today's set. Base stories already
+    resolve to the current day's photo and caption above, and their
+    seen-tracking uid is day-scoped (b-<k>-<day>) so a ring read
+    yesterday is fresh again today. */
+ const dynToday=dyn.filter(e=>{const m=/^d-(?:post|event|act)-(\d+)(?:-b)?$/.exec(e.uid);return m&&+m[1]===day;});
+ /* v461: one ring per person, like the real thing. Each person entry
+    carries segs[] - the day's base story first, then today's chain
+    stories in the order they were added - and the viewer walks the
+    segments inside the person before moving on to the next ring.
+    Bar order keeps the v55 spirit (which superseded v43): own ring
+    pinned to the left edge, everyone else by their newest segment,
+    newest closest to your own. Display order only: contents / chain
+    triggers are unchanged, and old saves need no migration. */
+ const people=new Map();
+ const put=(e,rec)=>{let p=people.get(e.k);if(!p){p={k:e.k,lab:e.lab,uid:e.k,segs:[],rec:-1};people.set(e.k,p);}
+  p.segs.push({img:e.img,cap:e.cap,uid:e.uid});if(rec>p.rec)p.rec=rec;};
+ base.forEach((e,i)=>put(e,i));
+ dynToday.forEach((e,j)=>put(e,base.length+j));
+ const grouped=[...people.values()];
+ grouped.forEach(p=>{p.img=p.segs[0].img;p.cap=p.segs[0].cap;});
+ const mine=grouped.filter(p=>p.k==="nao");
+ const rest=grouped.filter(p=>p.k!=="nao").sort((a,b)=>b.rec-a.rec);
+ return mine.concat(rest);
 }
 /* story action chain (Status-style): after each Action, someone adds a story.
    Entries are keyed by action kind and day; tgt entries resolve to the
@@ -4774,9 +4794,10 @@ const SV_PRE=new Set();
 function svPreload(src){if(!src||SV_PRE.has(src))return;SV_PRE.add(src);const i=new Image();i.src=src;}
 function svSegFill(i,v){const seg=$("#sv-segs").children[i];if(seg)seg.firstChild.style.width=v+"%";}
 function renderStorySeg(){
- const e=storyList()[svIdx];if(!e)return;const a=ACC[e.k];if(!a)return;
- /* v430: keep one segment ahead of the viewer */
- try{const nx=storyList()[svIdx+1];if(nx)svPreload(nx.img);}catch(_){}
+ const _p=storyList()[svIdx];if(!_p||!_p.segs[svSeg])return;const e=Object.assign({},_p.segs[svSeg],{k:_p.k,lab:_p.lab});const a=ACC[e.k];if(!a)return;
+ /* v430: keep one segment ahead of the viewer (v461: the next
+    segment of this person, else the next person's first) */
+ try{const _L=storyList();const nx=_p.segs[svSeg+1]||(_L[svIdx+1]&&_L[svIdx+1].segs[0]);if(nx)svPreload(nx.img);}catch(_){}
  const bg=$("#sv-bg"),img=e.img;
  /* v290 (user's device report): EVERY story photo is full-bleed
     cover, edge to edge, exactly like the real Stories viewer -
@@ -4794,12 +4815,14 @@ function renderStorySeg(){
  id.innerHTML='<span class="sv-ring">'+(a.av?'<img class="avatar" src="'+a.av+'" alt="">':avaTxt(a.n))+"</span><span><b></b><small></small></span>";
  id.querySelector("b").textContent=a.n;id.querySelector("small").textContent=a.h;
  const segs=$("#sv-segs");segs.innerHTML="";
- storyList().forEach((_,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";
+ _p.segs.forEach((sg,i)=>{const d=document.createElement("div");d.className="sv-seg";d.innerHTML="<i></i>";
   /* v200: a segment tap jumps straight to that story (the tap
-     zones live on their own elements, so this never fights them) */
+     zones live on their own elements, so this never fights them).
+     v461: the bars are the current person's segments only, like
+     the real viewer - one bar per segment inside the ring. */
   d.style.cursor="pointer";d.setAttribute("role","button");d.setAttribute("aria-label","ストーリー "+(i+1)+" へ移動");
-  d.addEventListener("click",ev=>{ev.stopPropagation();if(i===svIdx)return;svIdx=i;renderStorySeg();svStartTimer();});
-  segs.appendChild(d);svSegFill(i,i<svIdx?100:0);});
+  d.addEventListener("click",ev=>{ev.stopPropagation();if(i===svSeg)return;svSeg=i;renderStorySeg();svStartTimer();});
+  segs.appendChild(d);svSegFill(i,i<svSeg?100:0);});
  const capEl=$("#sv-cap");if(capEl){capEl.textContent=e.cap||"";capEl.classList.remove("on");if(e.cap){void capEl.offsetWidth;capEl.classList.add("on");}}
  const lk=$("#sv-like");if(lk)lk.classList.remove("liked");$$("#storyviewer .sv-burst").forEach(x=>x.remove());$$("#sv-reacts button").forEach(x=>x.classList.remove("picked"));
  /* v267: the bottom layer follows the owner - her own story
@@ -4814,18 +4837,29 @@ function svTick(ts){
  if(svPaused){svLastTs=ts;svTimer=requestAnimationFrame(svTick);return;}
  if(svLastTs)svElapsed+=ts-svLastTs;
  svLastTs=ts;
- svSegFill(svIdx,Math.min(100,svElapsed/SV_DUR*100));
+ svSegFill(svSeg,Math.min(100,svElapsed/SV_DUR*100));
  if(svElapsed>=SV_DUR){svStep(1);return;}
  svTimer=requestAnimationFrame(svTick);
 }
 function svStartTimer(){svStopTimer();svElapsed=0;svLastTs=0;svPaused=false;$("#storyviewer").classList.remove("paused");svTimer=requestAnimationFrame(svTick);}
 function svStopTimer(){if(svTimer!==null)cancelAnimationFrame(svTimer);svTimer=null;}
 function svStep(d){
- if(d>0){if(svIdx>=storyList().length-1){closeStory();return;}svIdx++;}
- else{if(svIdx<=0){svElapsed=0;svStartTimer();return;}svIdx--;}
+ const L=storyList();const p=L[svIdx];if(!p)return;
+ /* v461: step through this person's segments first, then cross to
+    the neighbouring ring (back-step lands on its last segment) */
+ if(d>0){if(svSeg<p.segs.length-1)svSeg++;
+  else if(svIdx>=L.length-1){closeStory();return;}
+  else{svIdx++;svSeg=0;}}
+ else{if(svSeg>0)svSeg--;
+  else if(svIdx<=0){svElapsed=0;svStartTimer();return;}
+  else{svIdx--;svSeg=L[svIdx].segs.length-1;}}
  renderStorySeg();svStartTimer();
 }
-function openStory(i){closeNotif();clearTimeout(svHideTimer);const vw=$("#storyviewer");vw.classList.remove("closing");svIdx=Math.max(0,Math.min(storyList().length-1,i||0));vw.classList.add("on");renderStorySeg();svStartTimer();}
+function openStory(i){closeNotif();clearTimeout(svHideTimer);const vw=$("#storyviewer");vw.classList.remove("closing");const L=storyList();svIdx=Math.max(0,Math.min(L.length-1,i||0));
+ /* v461: like the real viewer, a ring opens at its first unseen
+    segment of the day (from the top when everything was read) */
+ svSeg=0;const p=L[svIdx];if(p){const seen=(S&&S.storySeen)||[];const u=p.segs.findIndex(s=>!seen.includes(s.uid));if(u>0)svSeg=u;}
+ vw.classList.add("on");renderStorySeg();svStartTimer();}
 let svHideTimer=null;
 function closeStory(){svStopTimer();svPaused=false;const v=$("#storyviewer");if(!v.classList.contains("on")||v.classList.contains("closing"))return;
  /* the drag-dismiss path already faded the viewer out with inline
@@ -6370,7 +6404,7 @@ prev:'<svg viewBox="0 0 24 24"><path d="M6 5h2.2v14H6zM19 5.5v13L9.5 12z"/></svg
 next:'<svg viewBox="0 0 24 24"><path d="M15.8 5H18v14h-2.2zM5 5.5v13L14.5 12z"/></svg>',
 note:'<svg viewBox="0 0 24 24"><path d="M9 18.2V6l10-2v11.7a3.8 3.8 0 1 1-2-3.4V6.4L11 8.3v9.9a3.8 3.8 0 1 1-2-3.4z"/></svg>',
 hp:'<svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0v1.5a3 3 0 0 1-3 3h-1v-7h1.2A9.9 9.9 0 0 0 12 5a9.9 9.9 0 0 0-5.2 5.5H8v7H7a3 3 0 0 1-3-3z"/></svg>',
-belloff:'<svg viewBox="0 0 24 24"><path d="M12 4a6 6 0 0 1 6 6c0 3.8 4.4 1.6 5.4.3.4 0 1.1-.6 1.1H6.6l3.5-3.2A6.5 6.5 0 0 1 12 4zm-1.2 14h2.4a2.3 2.3 0 0 1-2.4 0zM4.5 3.8l15 15-1.4 1.4-15-15z"/></svg>',
+belloff:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16zM10 21a2.2 2.2 0 0 0 4 0M4.5 3.8l15 15-1.4 1.4-15-15z"/></svg>',
 cal:'<svg viewBox="0 0 24 24"><path d="M6 3v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3h-2v2H8V3zm13 8H5V8h14z"/></svg>',
 lock:'<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 1 5 5v3h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h1V8a5 5 0 0 1 5-5zm-3 8h6V8a3 3 0 1 0-6 0z"/></svg>',
 img:'<svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm3.5 4A1.8 1.8 0 1 0 9.3 7.2 1.8 1.8 0 0 0 7.5 9zM5 17.5l4.7-4.7 3 3L16 12.5l3 3v1.2a.8.8 0 0 1-.8.8z"/></svg>'};
