@@ -3181,6 +3181,29 @@ input,textarea{font-size:16px}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
 @media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv2-phone,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after{animation:none}}
+/* ===== v464: presentation round 3 - the same discipline as v448
+   (game-side stage dressing only; the real-X surfaces keep their
+   fidelity). The day curtain's big number now breathes the slow
+   sheen the title type already had; his phone screen wakes with one
+   pass of light when a SIDE scene opens; the announce frame catches
+   the same single sweep the live frame got in v448; and the ending
+   gains a slow accent glow breathing behind its emblem, inside the
+   ambient layer. Transform / opacity / background-position only. == */
+/* -- day curtain: the big day number breathes -- */
+#dayintro .di-day{background-size:100% 280%;animation:diup .6s .08s cubic-bezier(.2,.8,.25,1) both,titleshine 7s ease-in-out 1.4s infinite alternate}
+/* -- SIDE VIEW: the screen wakes as the scene opens -- */
+#sideview .sv2-scrwrap{position:relative}
+#sideview .sv2-scrwrap::after{content:"";position:absolute;inset:0;z-index:8;background:linear-gradient(112deg,rgba(255,255,255,0) 32%,rgba(255,255,255,.20) 50%,rgba(255,255,255,0) 68%);transform:translateX(-130%);pointer-events:none}
+#sideview.on .sv2-scrwrap::after{animation:svwake 1.15s ease .45s both}
+@keyframes svwake{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
+/* -- announce scene: one sweep of light, like the live frame -- */
+#annscene .an-frame::after{content:"";position:absolute;inset:0;z-index:5;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(120,86,255,.10) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);pointer-events:none}
+#annscene.on .an-frame::after{animation:ansheen 1.2s ease .35s both}
+@keyframes ansheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
+/* -- ending: an accent glow breathing behind the emblem -- */
+#end-ambient::before{content:"";position:absolute;left:-18%;right:-18%;top:-6%;height:58%;background:radial-gradient(52% 62% at 50% 38%,color-mix(in srgb,var(--acc,#ffd400) 30%,transparent),transparent 70%);opacity:.55;animation:endglow 5.2s ease-in-out infinite alternate;pointer-events:none}
+@keyframes endglow{from{opacity:.5;transform:scale(1) translateY(0)}to{opacity:.95;transform:scale(1.07) translateY(6px)}}
+@media (prefers-reduced-motion:reduce){#dayintro .di-day,#sideview.on .sv2-scrwrap::after,#annscene.on .an-frame::after,#end-ambient::before{animation:none}}
 /* ===== v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, the
    counterpart to Hiroto's live scene (v443): not a stream imitation
    but the announcement minute itself, replayed on a light real-X
@@ -3303,7 +3326,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v463</p>
+  <p class="ver">v464</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3483,7 +3506,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v463</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v464</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3793,7 +3816,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v463</p>
+    <p class="ver">v464</p>
   </div>
 </section>
 </div>
@@ -5402,7 +5425,13 @@ $$("[data-back]").forEach(b=>b.addEventListener("click",()=>showPane("tl")));
    (it rose because of cog/flm/dist) - it gets the "dyn" glow + surge chip.
    The volume bar is presentation only, scaled to the list's max count. */
 function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
-function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=t[2];const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+/* v464 (X realism): trend counts render in the same abbreviated
+   grammar as every other count in the app (fmtCnt - 1.2万, not
+   12,402), like the real client. Display only: the stored strings
+   and trendNum (which parses them back for the volume bars) are
+   untouched. */
+function trendCntTx(t){return fmtCnt(trendNum(t))+" ポスト";}
+function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){$("#x-pane-trend").innerHTML="";const list=curTrends(),maxV=Math.max(1,...list.map(trendNum));const h=document.createElement("div");h.className="trend-head";h.innerHTML="<span class='th-live'></span><span class='th-t'>トレンド</span><span class='th-s'>いま、世間で起きていること</span>";$("#x-pane-trend").appendChild(h);list.forEach((t,i)=>$("#x-pane-trend").appendChild(trendEl(t,i,maxV)));
  const sug=$("#x-sug");sug.innerHTML="";const chN=(typeof S!=="undefined"&&S&&S.ch)||1;(tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#何年も前の写真","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の沈黙","MUSIC STAGE"]).filter(w=>!((w==="#配信の沈黙"||w==="#何年も前の写真")&&chN<5)&&!(w==="熱愛報道"&&chN<6)&&!(w==="歌うまコラボSP"&&chN<4)).forEach(w=>{const s=document.createElement("span");s.textContent=w;s.addEventListener("click",()=>{$("#x-q").value=w.replace(/^#/,"");runSearch();});sug.appendChild(s);});
  renderSearchTab("topic");}
@@ -5447,7 +5476,7 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
    (same data, same tap-to-search as the row it replaces) */
 function trendHero(t,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend-hero"+(dyn?" dyn":"");
  d.innerHTML='<span class="th-eyebrow"><i></i>TOP TREND ― いま最も熱い話題</span><b class="th-title"></b><div class="th-meta"><span class="th-cat"></span><span class="th-count"></span>'+(dyn?'<span class="tdyn"><i></i>急上昇</span>':"")+'</div><span class="th-vol"><i></i></span>';
- d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]+" ― トレンド";d.querySelector(".th-count").textContent=t[2];
+ d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]+" ― トレンド";d.querySelector(".th-count").textContent=trendCntTx(t);
  d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";
  d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
@@ -5638,7 +5667,7 @@ function renderSugLive(){
  curTrends().filter(t=>t[1].toLowerCase().includes(ql)).slice(0,4).forEach(t=>{
   const r=document.createElement("button");r.className="suglive-row";
   r.innerHTML='<span class="suglive-ic hash">#</span><span class="suglive-main"><b></b><small></small></span>';
-  r.querySelector("b").textContent=t[1];r.querySelector("small").textContent=t[0]+" ― "+t[2];
+  r.querySelector("b").textContent=t[1];r.querySelector("small").textContent=t[0]+" ― "+trendCntTx(t);
   r.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});
   box.appendChild(r);});
 }
@@ -7108,7 +7137,7 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
 var PKEY="debut-status-snd",on=true;
 try{on=localStorage.getItem(PKEY)!=="0";}catch(e){}
 var ctx=null,master=null,bgmBus=null,noiseBuf=null;
-var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0};
+var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0,result:0,lvup:0};
 function ac(){
   if(!ctx){
     var AC=window.AudioContext||window.webkitAudioContext;
@@ -7159,7 +7188,12 @@ var Snd={
     else{tone({type:"triangle",f0:523.25,dur:.9,vol:.055,a:.015});tone({type:"triangle",f0:659.25,dur:.95,vol:.048,at:.12,a:.015});tone({type:"triangle",f0:783.99,dur:1.2,vol:.048,at:.24,a:.015});}},
   live:function(){played.live++;tone({type:"triangle",f0:880,dur:.09,vol:.08});tone({type:"triangle",f0:1318,dur:.16,vol:.06,at:.08});noise({f0:900,f1:2400,dur:.2,vol:.018});},
   side:function(){played.side++;tone({f0:329.63,dur:.85,vol:.042,a:.22});tone({f0:493.88,dur:.9,vol:.026,at:.1,a:.26});},
-  ann:function(){played.ann++;tone({f0:1318,dur:.3,vol:.05,a:.01});tone({f0:1567,dur:.36,vol:.042,at:.08,a:.01});tone({f0:2093,dur:.5,vol:.038,at:.16,a:.01});}
+  ann:function(){played.ann++;tone({f0:1318,dur:.3,vol:.05,a:.01});tone({f0:1567,dur:.36,vol:.042,at:.08,a:.01});tone({f0:2093,dur:.5,vol:.038,at:.16,a:.01});},
+  /* v464: the day result settles with a soft two-note close, and a
+     LEVEL UP day answers with a short bright arpeggio - same synth
+     voice, same modest volumes as the rest of the set. */
+  result:function(){played.result++;tone({type:"triangle",f0:587.33,dur:.5,vol:.05,a:.015});tone({type:"triangle",f0:880,dur:.7,vol:.042,at:.1,a:.015});},
+  lvup:function(){played.lvup++;tone({f0:659.25,dur:.22,vol:.06,a:.008});tone({f0:987.77,dur:.26,vol:.055,at:.07,a:.008});tone({f0:1318.5,dur:.42,vol:.05,at:.14,a:.008});}
 };
 /* --- title BGM: a slow four-chord pad (Cmaj7 - Am7 - Fmaj7 - G6) --- */
 var CHORDS=[[261.63,329.63,392.00,493.88],[220.00,261.63,329.63,392.00],[174.61,220.00,261.63,329.63],[196.00,246.94,293.66,329.63]];
@@ -7242,6 +7276,9 @@ watchOn(document.getElementById("scr-ending"),function(){var se=document.getElem
 watchOn(document.getElementById("livescene"),function(){Snd.live();});
 watchOn(document.getElementById("sideview"),function(){Snd.side();});
 watchOn(document.getElementById("annscene"),function(){Snd.ann();});
+/* v464: day result arrival -> the settle sound; if the day carried
+   a LEVEL UP band, the arpeggio follows once the band has landed */
+watchOn(document.getElementById("dayresult"),function(){Snd.result();setTimeout(function(){if(document.querySelector("#dayresult.on .dr-lvup"))Snd.lvup();},700);});
 /* notification badge increments -> notify sound (v414: only after
    the first real gesture - a badge restored from a save on reload
    must not chime back at the first tap) */
