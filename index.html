@@ -3153,6 +3153,11 @@ input,textarea{font-size:16px}
 #sideview .sv2-minibtn.solid{background:#1d9bf0;color:#fff;border-color:#1d9bf0}
 #sideview .sv2-minibtn:active{transform:scale(.97)}
 #sideview .sv2-rq-note{margin-top:9px;font-size:11.5px;font-weight:700;color:#7a8494;animation:svline2 .4s ease both}
+/* ===== v473: SIDE VIEW - every scene gains one small choice of his
+   own: a moment he turns over, three ways, all landing in the same
+   place. In-scene text only, never fx, tap-through untouched. ===== */
+#sideview .sv2-pick-r{margin-top:10px;font-size:13px;line-height:1.75;font-weight:600;color:#33404f;background:rgba(29,155,240,.07);border:1px solid rgba(29,155,240,.28);border-radius:12px;padding:9px 12px;animation:svline2 .45s ease both}
+#sideview .th-dark .sv2-pick-r{color:#dfe6f2;background:rgba(120,86,255,.13);border-color:rgba(120,86,255,.4)}
 #sideview .sv2-act.like.on{color:#f91880}
 #sideview .sv2-act.repost.on{color:#00ba7c}
 #sideview .sv2-notif{flex-wrap:wrap}
@@ -3280,7 +3285,7 @@ input,textarea{font-size:16px}
 #livescene .lv-frame::after{content:"";position:absolute;inset:0;z-index:5;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.13) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);pointer-events:none}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
-@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv3-app,#sideview .sv3-sheet,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after,#sideview .sv2-td-item.open .sv2-td-det,#sideview .sv2-qafter .sv2-bub,#sideview .sv2-rq-fol,#sideview .sv2-rq-comp,#sideview .sv2-minibtns,#sideview .sv2-rq-note{animation:none}}
+@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv3-app,#sideview .sv3-sheet,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after,#sideview .sv2-td-item.open .sv2-td-det,#sideview .sv2-qafter .sv2-bub,#sideview .sv2-rq-fol,#sideview .sv2-rq-comp,#sideview .sv2-minibtns,#sideview .sv2-rq-note,#sideview .sv2-pick-r{animation:none}}
 /* ===== v464: presentation round 3 - the same discipline as v448
    (game-side stage dressing only; the real-X surfaces keep their
    fidelity). The day curtain's big number now breathes the slow
@@ -3426,7 +3431,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v472</p>
+  <p class="ver">v473</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3606,7 +3611,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v472</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v473</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3919,7 +3924,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v472</p>
+    <p class="ver">v473</p>
   </div>
 </section>
 </div>
@@ -6668,6 +6673,7 @@ else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-co
 else if(b.t==="acts"){const d=svEl("div","sv2-today");const hd=svEl("div","sv2-today-hd");hd.appendChild(svEl("span","sv2-today-lab","彼の今日の動き"));hd.appendChild(svEl("span","sv2-today-sub","タップで詳細"));d.appendChild(hd);b.items.forEach((it,i)=>{const r=svEl("div","sv2-td-item");r.setAttribute("data-svx","aitem");r.appendChild(svEl("span","sv2-td-no",String(i+1)));const m=svEl("div","sv2-td-main");m.appendChild(svEl("span","sv2-td-tx",it.t));m.appendChild(svEl("span","sv2-td-det",it.d));r.appendChild(m);r.appendChild(svEl("span","sv2-td-chev","›"));d.appendChild(r);});w.appendChild(d);}
 else if(b.t==="chatq"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.pre.forEach(m=>{const bb=svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]);bb.setAttribute("data-svx","bub");bb.dataset.side=m[0]?"r":"l";bb.appendChild(svEl("span","bmeta",""));w.appendChild(bb);});const qb=svEl("div","sv2-qbox");qb.setAttribute("data-svx","qbox");qb._b=b;qb.appendChild(svEl("span","sv2-qlab","彼の返事"));b.choices.forEach((c,ci)=>{const btn=svEl("button","sv2-qbtn",c.send);btn.type="button";btn.setAttribute("data-svx","qchoice");btn.dataset.idx=ci;qb.appendChild(btn);});w.appendChild(qb);w.appendChild(svEl("div","sv2-qafter"));}
 else if(b.t==="replyq"){const d=svEl("div","sv2-rq");d._b=b;d.appendChild(svEl("span","sv2-qlab",b.lab));if(b.from){const f=svEl("div","sv2-rq-from");f.appendChild(svEl("b",null,b.fromN));f.appendChild(document.createTextNode(" 「"+b.from+"」"));d.appendChild(f);}const qb=svEl("div","sv2-qbox");qb.setAttribute("data-svx","qbox");b.choices.forEach((c,ci)=>{const btn=svEl("button","sv2-qbtn",b.mode==="draft"?c.tx:c.send);btn.type="button";btn.setAttribute("data-svx","rqchoice");btn.dataset.idx=ci;qb.appendChild(btn);});d.appendChild(qb);d.appendChild(svEl("div","sv2-qafter"));w.appendChild(d);}
+else if(b.t==="pick"){const d=svEl("div","sv2-rq");d._b=b;d.appendChild(svEl("span","sv2-qlab",b.lab));const qb=svEl("div","sv2-qbox");qb.setAttribute("data-svx","qbox");b.choices.forEach((c,ci)=>{const btn=svEl("button","sv2-qbtn",c.tx);btn.type="button";btn.setAttribute("data-svx","pchoice");btn.dataset.idx=ci;qb.appendChild(btn);});d.appendChild(qb);d.appendChild(svEl("div","sv2-qafter"));w.appendChild(d);}
 return w;}
 const SIDE_SCENES={
 hiroto:{
@@ -6679,26 +6685,38 @@ hiroto:{
 {t:"field",lab:"理由",tx:"所用です"},
 {t:"cal",time:"18:00",tx:"デビューショーケース",sub:"Hearts2Hearts ― カレンダー登録済み"},
 {t:"btn",tx:"保存する",save:1},
+{t:"pick",lab:"18時まで、あと少し ― スマホを開いて",choices:[
+{tx:"『今日、観てます』とだけ打つ",r:"打って、消した。デビューの日に、余計な一言はいらなかった"},
+{tx:"何も打たずに、画面を閉じる",r:"言葉は、歌のあとでいい。今日は、聴く側でいる"},
+{tx:"ショーケースのページを開き直す",r:"彼女の名前の行を、もう一度だけ見た。開始まで、あと少し"}]},
 {t:"acts",items:[
-{t:"開始時刻を、19:00から21:00に動かした",d:"理由の欄には「所用です」とだけ書いた。本当の理由は、書けない"},
-{t:"デビューショーケースを、カレンダーで開いた",d:"18時から。Hearts2Heartsの名前の横に、彼女の名前もあった"},
+{t:"開始時刻を、19:00から21:00に動かした",d:"理由の欄には「所用です」とだけ。本当は、彼女のデビューの日。最初から聴いていたかった"},
+{t:"デビューショーケースを、カレンダーで開いた",d:"18時から。グループの名前の横に、彼女の名前があった。見るのは、その行だけだった"},
 {t:"コメント欄は、開かなかった",d:"今日は、聴く日と決めていた。打つ言葉は、ひとつもなかった"}]}],
 cap:"18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"},
 2:{ph:"assets/gen-hiroto-side-train.jpg",clock:"20:12",app:"X",blocks:[
 {t:"video",title:"デビューショーケース ― なお『The Chase』歌唱",by:"ゆな @yuna_nao",views:"再生 214,308回",dur:"0:47",prog:62,icon:"pause"},
 {t:"note",icon:"views",tx:"彼女の切り抜きは、今日も静かに伸び続けていた"},
+{t:"pick",lab:"動画が終わって ― 指が、止まった",choices:[
+{tx:"もう一度、最初から観る",r:"0:47を、もう一周した。降りる駅まで、あと少しだけ"},
+{tx:"彼女の歌い出しだけ、巻き戻す",r:"何度目かは、数えなかった。イヤホンの中で、彼女の声だけが残った"},
+{tx:"画面を閉じて、目を閉じる",r:"耳に残った歌声だけで、残りの道のりを過ごした"}]},
 {t:"acts",items:[
 {t:"彼女の切り抜き動画を、最後まで観た",d:"0:47。止めたのは、歌が終わってからだった"},
 {t:"昨夜の配信の、自分の発言を思い出していた",d:"「デビューの日くらい、最初から観たかった」。言い過ぎた、と思う。でも、取り消したいとは思わなかった"},
-{t:"ポストは、しなかった",d:"今日の気持ちは、画面の外に置いておく"}]}],
+{t:"ポストは、しなかった",d:"言葉にしたら、軽くなる気がした。今日は、観るだけにする"}]}],
 cap:"昨夜の配信で、自分が言った言葉を思い出していた。『デビューの日くらい、最初から観たかった』――言い過ぎた、と思う。でも、取り消したいとは思わなかった。"},
 3:{clock:"18:59",app:"配信スタジオ",theme:"dark",blocks:[
 {t:"head",tx:"配信が終了しました",sub:"今日のレポート"},
 {t:"stats",items:[["終了時刻","18:58"],["視聴者数","328"],["配信時間","1時間12分"]]},
 {t:"field",lab:"終了メッセージ",tx:"ありがとうございました"},
 {t:"note",icon:"cal",tx:"いつもより、少し早い終了"},
+{t:"pick",lab:"19時 ― テレビの前で",choices:[
+{tx:"コーラを開ける",r:"音を立てないように開けた。出番は、もうすぐだった"},
+{tx:"スマホを裏返しに置く",r:"通知は、あとでいい。今は、画面の彼女だけを見る"},
+{tx:"音量を、少し上げる",r:"歌が始まったら、ちゃんと聴こえるように"}]},
 {t:"acts",items:[
-{t:"配信を、18:58に終えた",d:"いつもより少し早い終了。理由は、レポートに書かれていない"},
+{t:"配信を、18:58に終えた",d:"いつもより少し早い終了。19時から、彼女の出番だった。理由は、レポートには書かれていない"},
 {t:"19時からは、テレビの前にいた",d:"コーラを置いて、彼女の出番が始まるのを待った"},
 {t:"スマホには、一度も触らなかった",d:"出番のあいだは、それで十分だった"}]}],
 cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"},
@@ -6708,6 +6726,10 @@ cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番�
 {t:"table",head:["日付","彼女の予定","彼の配信"],hl:[0,1],rows:[["デビューの日","ショーケース 18:00","開始 21:00"],["歌番組の日","放送 19:00","終了 18:58"],["ふだんの日","―","終了 23:30ごろ"]]},
 {t:"cal",time:"19:00",tx:"歌番組 ― なおの出番",sub:"次の出番も、カレンダーに入れてある"},
 {t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定",pick:1},
+{t:"pick",lab:"表を閉じる前に",choices:[
+{tx:"明日の配信時間を、確認する",r:"21:00開始。……変える理由は、なかった"},
+{tx:"彼女の次の出番を、カレンダーで開く",r:"歌番組、19:00。終わる時間は、その前に決まる"},
+{tx:"コメント欄は、開かない",r:"確かめる言葉は、そこにはなかった。並んだ時間だけが、本当だった"}]},
 {t:"acts",items:[
 {t:"「終わる時間」の表を、最後まで読んだ",d:"出回っている表は、自分の決めた時間と、一分も違わなかった"},
 {t:"明日の配信も、21:00開始に設定した",d:"終わる時間は、明日も自分で決める"},
@@ -6723,11 +6745,11 @@ cap:"並べたのは他人でも、決めていたのは、自分だった。終
 {t:"notif",n:"通りすがり",tx:"匂わせの件、本人に聞けないからここで聞くわ",time:"4分"},
 {t:"notif",n:"カレンダー",tx:"明日 ― なおの収録日",time:"今",det:"収録の時間は、もう覚えている。カレンダーを開くのは、確認のためだった"},
 {t:"replyq",mode:"send",lab:"彼の返事 ― 古参のひとりへ",fromN:"古参のひとり",from:"7年観てます。今日も、あなたの話を聴きに来ました",choices:[
-{send:"ありがとうございます。……今日も、話します",followN:"古参のひとり",follow:"うん。待ってます"},
-{send:"7年。……長いですね。ありがとうございます",followN:"古参のひとり",follow:"長く観てきた分、今日の配信も楽しみにしてます"},
-{send:"……来てくれて、ありがとうございます",followN:"古参のひとり",follow:"こちらこそ。いつもありがとう"}]},
+{send:"ありがとうございます。7年も、ここにいてくれて",followN:"古参のひとり",follow:"うん。今日も、ここにいる"},
+{send:"……来てくれて、ありがとうございます。今日は、いつもより大事な夜で",followN:"古参のひとり",follow:"大事な夜、か。……聴いてるよ"},
+{send:"いつもありがとうございます。……今日の話、最後まで聴いてもらえたら嬉しいです",followN:"古参のひとり",follow:"もちろん。最後までいるよ"}]},
 {t:"acts",items:[
-{t:"コメント欄を、7年で初めて閉じた",d:"荒らしへの対策、と表向きは言える。でも、本当の理由は別だった"},
+{t:"コメント欄を、7年で初めて閉じた",d:"表向きは、荒らし対策。本当は、彼女の名前が出る場所を、閉じたかった"},
 {t:"未送信の「まって」が、入力欄に残った",d:"打って、消した。彼女の名前は、出さなかった"},
 {t:"通知は、まだ増え続けている",d:"答えれば彼女が燃える。答えなければ、言い逃れに見える"}]}],
 cap:"彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。選んだのは、どちらの名前も出さないことだった。配信が終わっても、コーラには手が付いていなかった。"},
@@ -6735,6 +6757,10 @@ cap:"彼女の名前を出せば、彼女のほうが燃える。出さなけれ
 {t:"post",a:"nao",time:"20:04",tx:"今日、コンビニで、知らない人が私の曲を口ずさんでいました。\n……それだけで、十分です。ありがとうございます。",rc:"96",rp:"412",lk:"3,208",vw:"21万",hov:1},
 {t:"row",lab:"3月24日",val:"なおの誕生日",sub:"2021年から、毎年カレンダーに入れてある"},
 {t:"row",lab:"明日の配信",val:"20:00 開始",chip:"いつも通り"},
+{t:"pick",lab:"押せなかった代わりに",choices:[
+{tx:"ポストを、もう一度読み返す",r:"『それだけで、十分です』。……十分じゃ、なかった"},
+{tx:"3月24日の予定を、開く",r:"なおの誕生日。今年は、直接言えるだろうか"},
+{tx:"明日の配信で話すことを、考える",r:"彼女の話は、できない。でも、今日みたいな日の話なら、少しだけ"}]},
 {t:"acts",items:[
 {t:"彼女のポストを、二回読んだ",d:"小さな話だった。なのに、目が離れなかった"},
 {t:"いいねは、押さなかった",d:"押せば、また「証拠」が増える。指は、ボタンの上で止まった"},
@@ -6744,6 +6770,10 @@ sakuya:{
 1:{clock:"22:41",app:"ミュージック",theme:"dark",blocks:[
 {t:"player",title:"The Chase",artist:"Hearts2Hearts",prog:4},
 {t:"note",icon:"hp",tx:"イヤホンで再生中 ― 1曲リピート"},
+{t:"pick",lab:"1曲リピートのまま",choices:[
+{tx:"彼女のパートを、小さく口ずさむ",r:"イヤホンの外には、漏れなかった。最初から、最後まで"},
+{tx:"デビューの挨拶を、もう一度開く",r:"『おめでとうございます』。あれで足りていたか、やっぱり考えた"},
+{tx:"次の曲には、進まない",r:"もう一周だけ。……それを、三回繰り返した"}]},
 {t:"acts",items:[
 {t:"「The Chase」を、1曲リピートで聴いた",d:"イヤホンを外すまで、他の曲は挟まなかった"},
 {t:"デビューの挨拶を、もう一度読み返した",d:"「おめでとうございます」。あれで足りていたか、まだ考えている"},
@@ -6752,17 +6782,25 @@ cap:"『デビュー、おめでとうございます』。あれで、足りて
 2:{clock:"23:09",app:"X ― 下書き",blocks:[
 {t:"head",tx:"下書き",sub:"ポストの下書き"},
 {t:"drafts",items:[
-{tx:"デビュー、おめでとうございます。今日のステージ、素晴らしかったです"},
-{tx:"廊下で挨拶した者です。覚えているでしょうか"},
-{tx:"……練習生の頃から、ずっと聴いていました"},
+{tx:"デビュー、おめでとうございます。今日のステージ、目が離せませんでした"},
+{tx:"廊下で挨拶した者です。覚えていてくれたら、嬉しいです"},
+{tx:"練習生の頃、レッスン室の前で聴いた歌を、今も覚えています"},
 {tx:"挨拶の練習もしました",keep:1}]},
+{t:"pick",lab:"下書きを閉じる前に",choices:[
+{tx:"鏡の前で、もう一度頭を下げる",r:"角度は、昨日より少しだけ自然だった"},
+{tx:"残した一文を、読み返す",r:"『挨拶の練習もしました』。……これだけは、本当のことだった"},
+{tx:"彼女のデビュー曲を、小さく流す",r:"練習の前に、もう一度だけ。歌い出しで、手が止まった"}]},
 {t:"acts",items:[
 {t:"下書きを、4件書いた",d:"デビューの挨拶、廊下の挨拶、練習生の頃のこと。どれも、長かった"},
 {t:"3件を、消した",d:"言い過ぎれば、彼女の負担になる。残すのは、一文だけ"},
 {t:"「挨拶の練習もしました」だけ、残した",d:"レッスン室の鏡の前で、もう一度だけ頭を下げた"}]}],
-cap:"廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。残ったのは、一文だけだった。残りは、胸の中にしまっておく。レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"},
+cap:"廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。残ったのは、一文だけだった。残りの言葉は、会えたときに言うつもりだった。レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"},
 3:{clock:"19:52",app:"X",blocks:[
 {t:"video",title:"MUSIC STAGE ― Hearts2Hearts『The Chase』",by:"番組公式 @livestage_tv",views:"再生 892,415回",dur:"3:12",prog:38,icon:"play"},
+{t:"pick",lab:"映像を閉じてから",choices:[
+{tx:"言うべき言葉を、メモに書く",r:"『僕のほうが、後輩です』。最初の一文だけ、決まった"},
+{tx:"彼女の歌のところを、もう一度観る",r:"訂正の前に、もう一度だけ。10年以上待った人の歌は、やっぱり重かった"},
+{tx:"何も書かずに、今日は眠る",r:"言葉は、明日でいい。気持ちだけは、今日のうちに決まっていた"}]},
 {t:"acts",items:[
 {t:"番組の映像を、最初から観た",d:"彼女の歌のところで、手が止まった"},
 {t:"「後輩」の紹介のされ方に、引っかかった",d:"10年以上待った人の歌は、やっぱり重かった"},
@@ -6770,21 +6808,25 @@ cap:"廊下の挨拶のことを、言葉にしていいのか。言い過ぎれ
 cap:"言わなければ、彼女は「後輩」のまま紹介され続ける。それだけは、違うと思った。10年以上待った人の歌は、やっぱり重かった。訂正したことに、後悔はなかった。少しだけ、手が震えていたけれど。"},
 4:{clock:"8:02",app:"メッセージ",blocks:[
 {t:"chatq",who:"広報",pre:[[0,"おはようございます。例のポストですが、文面を柔らかくした案も用意しています"]],choices:[
-{send:"この文面でお願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]},
-{send:"柔らかい案は、なしでお願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]},
-{send:"そのまま出します。お願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]}]},
+{send:"この文面でお願いします。彼女は、10年以上待った人です",react:[[0,"……分かりました。本人の文面で、進めます"]]},
+{send:"柔らかくすると、彼女が『後輩』のままになります。なしでお願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]},
+{send:"そのまま出します。……彼女の10年を、僕の言葉で言わせてください",react:[[0,"……分かりました。本人の文面で、進めます"]]}]},
 {t:"post",a:"sakuya",time:"8:14",tx:"僕のほうが、後輩です。デビューは先でも、練習生の年数は変えられません。……歌は、ずっと先輩でした",rc:"411",rp:"2,590",lk:"14,230",vw:"98万"},
 {t:"cal",time:"明日 昼",tx:"食堂 ― 窓側の席",sub:"なおさんとの約束"},
 {t:"note",icon:"belloff",tx:"このポストの通知はオフ"},
 {t:"acts",items:[
-{t:"広報の差し替え案を、読んだ",d:"柔らかくした文面は、彼の言いたいことから、一番遠かった"},
-{t:"自分の文面で出すことに、決めた",d:"言い回しではなく、中身の問題だった"},
+{t:"広報の差し替え案を、読んだ",d:"柔らかくした文面では、彼女の10年が消えてしまう。読んで、すぐに分かった"},
+{t:"自分の文面で出すことに、決めた",d:"直したかったのは文面じゃない。彼女が『後輩』と紹介されることだった"},
 {t:"ポストの通知は、オフにした",d:"反応は、すぐには見ない。夕方、彼女の動きを知ってからでいい"}]}],
 cap:"彼はすぐには反応を見なかった。レッスン室で振りを確認して、夕方、彼女の今日の動きを知って、彼は小さく息を吐いた。言ってよかったのだと思う。"},
 5:{clock:"21:37",app:"写真",theme:"dark",blocks:[
 {t:"photo",date:"2022年4月",place:"練習生フロア"},
 {t:"draft",lab:"下書き ― 未送信",tx:"無理をしないでください",sub:"送れば、彼女の負担になる"},
-{t:"draft",lab:"下書き ― 未送信",tx:"今日のヌナも、きれいでした",sub:"……これは、送らない"},
+{t:"draft",lab:"下書き ― 未送信",tx:"今日のヌナも、きれいでした",sub:"言いたいのは、こっちだった"},
+{t:"pick",lab:"写真を閉じて",choices:[
+{tx:"明日の発表ポストを、読み返す",r:"『隣に立つ』という一文。何度読んでも、少し震えた"},
+{tx:"下書きの二文を、もう一度開く",r:"送らない、と決めた文。消すことも、しなかった"},
+{tx:"2022年4月の写真を、フォルダに戻す",r:"フォルダの奥に戻した。出すことは、守ることにはならない"}]},
 {t:"acts",items:[
 {t:"2022年4月の写真を、開いて、閉じた",d:"何年も前の写真が、掘り返された日。出すことは、守ることにはならない"},
 {t:"下書きを、2件書いて残した",d:"「無理をしないでください」と、もう一文。どちらも、送らない"},
@@ -6794,9 +6836,9 @@ cap:"何年も前の写真が、掘り返された日。彼はそれを開いて
 {t:"compose",to:"メディアの発表ポスト",tx:"ステージでは隣に立たせてください",old:["この度は、ありがとうございます。精一杯、務めさせていただきます","……隣に立たせてください、なんて。言い過ぎでしょうか"]},
 {t:"note",icon:"cal",tx:"カレンダー ― 3月24日：ヌナの誕生日"},
 {t:"replyq",mode:"draft",lab:"もう一文、打とうとして",choices:[
-{tx:"ヌナ、明日は隣で、よろしくお願いします"},
-{tx:"緊張したら、ヌナのほうを見ます"},
-{tx:"……あした、楽しみにしています"}]},
+{tx:"……ヌナの隣に立てる日が来るなんて、練習生の頃は思ってませんでした"},
+{tx:"緊張したら、ヌナのほうを見ます。……いつも、そうしてます"},
+{tx:"明日が終わっても、また隣に立たせてください"}]},
 {t:"acts",items:[
 {t:"返信の文面を、2回書き直した",d:"丁寧なだけの言葉にはしたくなかった"},
 {t:"「ステージでは隣に立たせてください」だけは、最初から決まっていた",d:"その一行は、書き直しのたびに残った"},
@@ -6854,6 +6896,7 @@ qb.querySelectorAll('[data-svx="rqchoice"]').forEach(btn=>{btn.addEventListener(
 if(b.mode==="draft"){const comp=svEl("div","sv2-rq-comp");const tx=svEl("div","tx","");comp.appendChild(tx);qa.appendChild(comp);svLater(()=>{svType(tx,c.tx,()=>{const row=svEl("div","sv2-minibtns");const keep=svEl("button","sv2-minibtn solid","下書きに残す");keep.type="button";const drop=svEl("button","sv2-minibtn","消す");drop.type="button";row.appendChild(keep);row.appendChild(drop);qa.appendChild(row);const finish=(kept)=>{row.remove();qa.appendChild(svEl("div","sv2-rq-note",kept?"下書きに残した。送信は、一行だけにした":"消した。送信は、一行だけ"));};keep.addEventListener("click",ev=>{ev.stopPropagation();comp.classList.add("kept");finish(true);});drop.addEventListener("click",ev=>{ev.stopPropagation();comp.classList.add("struck");svErase(tx,()=>{finish(false);});});});},300);}
 else{svLater(()=>{const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");d.style.animation="svline2 .45s ease both";const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",c.send));d.appendChild(m);qa.appendChild(d);if(c.follow)svLater(()=>{const f=svEl("div","sv2-rq-fol");f.appendChild(svEl("b",null,c.followN));f.appendChild(document.createTextNode(" 「"+c.follow+"」"));qa.appendChild(f);},560);},330);}
 });});
+qb.querySelectorAll('[data-svx="pchoice"]').forEach(btn=>{btn.addEventListener("click",e=>{e.stopPropagation();if(qb.classList.contains("done"))return;qb.classList.add("done");qb.querySelectorAll(".sv2-qbtn").forEach(x=>{x.classList.toggle("sel",x===btn);if(x!==btn)x.classList.add("off");});const c=b.choices[parseInt(btn.dataset.idx,10)];if(!c)return;svLater(()=>{qa.appendChild(svEl("div","sv2-pick-r",c.r));},300);});});
 });
 }
 function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
