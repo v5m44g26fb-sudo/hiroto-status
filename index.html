@@ -3109,6 +3109,55 @@ input,textarea{font-size:16px}
 #sideview .sv2-send{margin-left:auto;background:#1d9bf0;color:#fff;font-size:12px;font-weight:900;border-radius:999px;padding:6px 14px}
 #sideview .sv2-old .lab2{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;color:#98a2b3;margin-bottom:2px}
 #sideview .sv2-old .orow{font-size:11.5px;color:#98a2b3;padding:5px 2px;border-top:1px dashed rgba(130,140,160,.3);text-decoration:line-through;line-height:1.5}
+/* ===== v471: SIDE VIEW parity - his screen gains the weight of her
+   UI: reply choices in his message scenes (convergent, in-scene text
+   only, never fx), a "his today" panel dressed like her Activity
+   sheet, and timeline buttons that answer inside the scene. ===== */
+#sideview .sv2-today{border:1px solid rgba(130,140,160,.25);border-radius:16px;padding:11px 11px 5px;background:rgba(130,140,160,.05)}
+#sideview .sv2-today-hd{display:flex;align-items:baseline;gap:8px;margin:0 2px 4px}
+#sideview .sv2-today-lab{font-size:11px;font-weight:900;letter-spacing:.16em;color:#7856ff}
+#sideview .th-dark .sv2-today-lab{color:#b79dff}
+#sideview .sv2-today-sub{margin-left:auto;font-size:10px;font-weight:700;color:#98a2b3}
+#sideview .sv2-td-item{display:flex;gap:10px;align-items:flex-start;padding:9px 8px;border-top:1px solid rgba(130,140,160,.16);cursor:pointer;-webkit-tap-highlight-color:transparent}
+#sideview .sv2-td-no{width:24px;height:24px;flex:none;border-radius:50%;background:rgba(130,140,160,.16);color:#7a8494;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:background .2s ease,color .2s ease}
+#sideview .sv2-td-item.open .sv2-td-no{background:linear-gradient(135deg,#f91880,#7856ff);color:#fff}
+#sideview .sv2-td-main{flex:1;min-width:0}
+#sideview .sv2-td-tx{display:block;font-size:13.5px;line-height:1.55;font-weight:700}
+#sideview .sv2-td-det{display:none;margin-top:4px;font-size:12px;line-height:1.65;color:#7a8494;font-weight:600}
+#sideview .th-dark .sv2-td-det{color:#a5a5b0}
+#sideview .sv2-td-item.open .sv2-td-det{display:block;animation:svline2 .35s ease both}
+#sideview .sv2-td-chev{flex:none;font-size:17px;line-height:1;color:#b0b7c3;transition:transform .25s ease;margin-top:3px}
+#sideview .sv2-td-item.open .sv2-td-chev{transform:rotate(90deg)}
+#sideview .sv2-qlab{display:block;font-size:10px;font-weight:900;letter-spacing:.14em;color:#7856ff;margin:2px 0 0}
+#sideview .sv2-qbtn{display:block;width:100%;text-align:left;margin-top:8px;padding:12px 32px 12px 14px;border:1.5px solid #cfd9de;border-radius:16px;background:#fff;font-size:14px;line-height:1.55;font-weight:600;color:#0f1419;cursor:pointer;box-shadow:0 1px 3px rgba(15,20,25,.05);position:relative;font-family:inherit;transition:background .15s ease,border-color .15s ease,opacity .25s ease,transform .1s ease;-webkit-tap-highlight-color:transparent}
+#sideview .sv2-qbtn::after{content:"›";position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:19px;color:#c3ced4;font-weight:400}
+#sideview .sv2-qbtn:active{border-color:#1d9bf0;background:rgba(29,155,240,.07);transform:scale(.99)}
+#sideview .sv2-qbox.done .sv2-qbtn{pointer-events:none}
+#sideview .sv2-qbox.done .sv2-qbtn.off{opacity:.38}
+#sideview .sv2-qbox.done .sv2-qbtn.sel{border-color:#1d9bf0;background:rgba(29,155,240,.09)}
+#sideview .sv2-qbox.done .sv2-qbtn.sel::after{content:"✓";font-size:14px;color:#1d9bf0;font-weight:900}
+#sideview .sv2-qafter{display:flex;flex-direction:column;gap:10px}
+#sideview .sv2-qafter:empty{display:none}
+#sideview .sv2-qafter .sv2-bub{animation:svline2 .45s ease both}
+#sideview .sv2-rq{border:1px solid rgba(130,140,160,.25);border-radius:16px;padding:11px 12px 12px;background:rgba(130,140,160,.05)}
+#sideview .sv2-rq-from{font-size:12.5px;line-height:1.55;margin-top:4px}
+#sideview .sv2-rq-from b{font-weight:800}
+#sideview .sv2-rq-fol{font-size:12.5px;line-height:1.55;animation:svline2 .45s ease both}
+#sideview .sv2-rq-fol b{font-weight:800}
+#sideview .sv2-rq-comp{border:1.5px solid rgba(29,155,240,.55);border-radius:14px;padding:10px 12px;background:#fff;color:#0f1419;margin-top:10px;animation:svline2 .4s ease both}
+#sideview .sv2-rq-comp .tx{font-size:14.5px;line-height:1.6;font-weight:600;min-height:1.6em;white-space:pre-wrap;word-break:break-word}
+#sideview .sv2-rq-comp.struck .tx{text-decoration:line-through;color:#98a2b3}
+#sideview .sv2-rq-comp.kept{opacity:.72}
+#sideview .sv2-minibtns{display:flex;gap:8px;margin-top:10px;animation:svline2 .4s ease both}
+#sideview .sv2-minibtn{flex:1;text-align:center;font-size:12.5px;font-weight:900;border-radius:999px;padding:8px 0;border:1.5px solid rgba(29,155,240,.6);color:#1d9bf0;background:#fff;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent}
+#sideview .sv2-minibtn.solid{background:#1d9bf0;color:#fff;border-color:#1d9bf0}
+#sideview .sv2-minibtn:active{transform:scale(.97)}
+#sideview .sv2-rq-note{margin-top:9px;font-size:11.5px;font-weight:700;color:#7a8494;animation:svline2 .4s ease both}
+#sideview .sv2-act.like.on{color:#f91880}
+#sideview .sv2-act.repost.on{color:#00ba7c}
+#sideview .sv2-notif{flex-wrap:wrap}
+#sideview .sv2-notif-det{display:none;flex-basis:100%;font-size:11.5px;line-height:1.6;color:#7a8494;font-weight:600}
+#sideview .sv2-notif.open .sv2-notif-det{display:block}
 
 /* ===== v443: LIVE SCENE - the Day 5 stream of silence, replayed as a
    phone live-viewer: his frame, a comment river that stops, a real
@@ -3231,7 +3280,7 @@ input,textarea{font-size:16px}
 #livescene .lv-frame::after{content:"";position:absolute;inset:0;z-index:5;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.13) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);pointer-events:none}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
-@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv3-app,#sideview .sv3-sheet,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after{animation:none}}
+@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv3-app,#sideview .sv3-sheet,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after,#sideview .sv2-td-item.open .sv2-td-det,#sideview .sv2-qafter .sv2-bub,#sideview .sv2-rq-fol,#sideview .sv2-rq-comp,#sideview .sv2-minibtns,#sideview .sv2-rq-note{animation:none}}
 /* ===== v464: presentation round 3 - the same discipline as v448
    (game-side stage dressing only; the real-X surfaces keep their
    fidelity). The day curtain's big number now breathes the slow
@@ -3377,7 +3426,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v470</p>
+  <p class="ver">v471</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3557,7 +3606,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v470</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v471</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3870,7 +3919,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v470</p>
+    <p class="ver">v471</p>
   </div>
 </section>
 </div>
@@ -6605,9 +6654,9 @@ else if(b.t==="btn"){const bd=svEl("div","sv2-btn",b.tx);if(b.save)bd.setAttribu
 else if(b.t==="cal"){const d=svEl("div","sv2-cal");d.appendChild(svEl("span","tm",b.time));const m=svEl("div");m.appendChild(svEl("span","tx",b.tx));if(b.sub)m.appendChild(svEl("span","sub",b.sub));d.appendChild(m);w.appendChild(d);}
 else if(b.t==="stats"){const d=svEl("div","sv2-stats");b.items.forEach(it=>{const s=svEl("div","sv2-stat");s.appendChild(svEl("b",null,it[1]));s.appendChild(svEl("span",null,it[0]));d.appendChild(s);});w.appendChild(d);}
 else if(b.t==="note"){const d=svEl("div","sv2-note");const i=svEl("span");i.innerHTML=SVI[b.icon]||"";d.appendChild(i);d.appendChild(svEl("span",null,b.tx));w.appendChild(d);}
-else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h+(b.time?" ・ "+b.time:"")));m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));ac.appendChild(mk(SVI.repost,b.rp));ac.appendChild(mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":"")));ac.appendChild(mk(SVI.views,b.vw||""));if(b.hov){const la=ac.querySelector(".sv2-act.like");if(la){la.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;la.appendChild(hf);}}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
+else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h+(b.time?" ・ "+b.time:"")));m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));const rpEl=mk(SVI.repost,b.rp,"repost");ac.appendChild(rpEl);const lkEl=mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":""));ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,b.vw||""));if(b.hov){lkEl.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);}else{lkEl.setAttribute("data-svx","like2");rpEl.setAttribute("data-svx","repost");}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
 else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr","taprow");t2.setAttribute("data-svx","trow");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
-else if(b.t==="notif"){const d=svEl("div","sv2-notif");d.setAttribute("data-svx","notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));w.appendChild(d);}
+else if(b.t==="notif"){const d=svEl("div","sv2-notif");d.setAttribute("data-svx","notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));if(b.det)d.appendChild(svEl("div","sv2-notif-det",b.det));w.appendChild(d);}
 else if(b.t==="sent"){const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",b.tx));d.appendChild(m);w.appendChild(d);}
 else if(b.t==="draft"){const d=svEl("div","sv2-draft");d.setAttribute("data-svx",b.replay?"replay":"draft");d.dataset.full=b.tx||"";d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));if(b.sub)d.appendChild(svEl("span","sub",b.sub));w.appendChild(d);}
 else if(b.t==="drafts"){w.classList.add("sv2-stack");b.items.forEach(it=>{const d=svEl("div","sv2-ditem"+(it.keep?" keep":" off"));d.setAttribute("data-svx","ditem");d.dataset.tx=it.tx;d.dataset.keep=it.keep?"1":"";d.appendChild(svEl("span","mk",it.keep?"✓":"✕"));d.appendChild(svEl("span","tx",it.tx));w.appendChild(d);});}
@@ -6616,6 +6665,9 @@ else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vs
 else if(b.t==="player"){w.classList.add("sv2-stack");const al=svEl("div","sv2-album");al.innerHTML=SVI.note;al.appendChild(svEl("b",null,"Hearts2Hearts"));al.appendChild(svEl("span",null,"THE CHASE"));w.appendChild(al);const pt=svEl("div","sv2-ptitle");pt.appendChild(svEl("b",null,b.title));pt.appendChild(svEl("span",null,b.artist));w.appendChild(pt);const pb=svEl("div","sv2-pbar");const pi=svEl("i");pi.style.width=(b.prog||0)+"%";pb.appendChild(pi);w.appendChild(pb);const pc=svEl("div","sv2-pctl");const pv=svEl("span");pv.innerHTML=SVI.prev;pc.appendChild(pv);const big=svEl("span","big");big.setAttribute("data-svx","play");big.innerHTML=SVI.play;pc.appendChild(big);const nx=svEl("span");nx.innerHTML=SVI.next;pc.appendChild(nx);w.appendChild(pc);}
 else if(b.t==="photo"){const d=svEl("div","sv2-photo");d.setAttribute("data-svx","photo");const pv=svEl("div","sv2-pview");pv.innerHTML='<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="72" cy="58" r="17"/><path d="M38 150c2-30 16-44 34-44s32 14 34 44z"/><circle cx="128" cy="52" r="20"/><path d="M92 150c2-34 17-50 36-50s34 16 36 50z"/></svg>';d.appendChild(pv);const pm=svEl("div","sv2-pmeta");pm.appendChild(svEl("b",null,b.date));pm.appendChild(svEl("span",null,b.place));const lk=svEl("span","lk");lk.innerHTML=SVI.lock;pm.appendChild(lk);d.appendChild(pm);w.appendChild(d);}
 else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-comp");c.setAttribute("data-svx","comp");c.dataset.final=b.tx;const to=svEl("div","to");to.appendChild(document.createTextNode("返信先："));to.appendChild(svEl("b",null,b.to));c.appendChild(to);c.appendChild(svEl("div","tx",b.tx));const bar=svEl("div","bar");const ii=svEl("span","iic");ii.innerHTML=SVI.img;bar.appendChild(ii);const sd=svEl("span","sv2-send","返信する");sd.setAttribute("data-svx","send");bar.appendChild(sd);c.appendChild(bar);w.appendChild(c);if(b.old&&b.old.length){const o=svEl("div","sv2-old");o.appendChild(svEl("span","lab2","書き直した下書き"));b.old.forEach(x=>{const or2=svEl("div","orow",x);or2.setAttribute("data-svx","old");or2.dataset.tx=x;o.appendChild(or2);});w.appendChild(o);}}
+else if(b.t==="acts"){const d=svEl("div","sv2-today");const hd=svEl("div","sv2-today-hd");hd.appendChild(svEl("span","sv2-today-lab","彼の今日の動き"));hd.appendChild(svEl("span","sv2-today-sub","タップで詳細"));d.appendChild(hd);b.items.forEach((it,i)=>{const r=svEl("div","sv2-td-item");r.setAttribute("data-svx","aitem");r.appendChild(svEl("span","sv2-td-no",String(i+1)));const m=svEl("div","sv2-td-main");m.appendChild(svEl("span","sv2-td-tx",it.t));m.appendChild(svEl("span","sv2-td-det",it.d));r.appendChild(m);r.appendChild(svEl("span","sv2-td-chev","›"));d.appendChild(r);});w.appendChild(d);}
+else if(b.t==="chatq"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.pre.forEach(m=>{const bb=svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]);bb.setAttribute("data-svx","bub");bb.dataset.side=m[0]?"r":"l";bb.appendChild(svEl("span","bmeta",""));w.appendChild(bb);});const qb=svEl("div","sv2-qbox");qb.setAttribute("data-svx","qbox");qb._b=b;qb.appendChild(svEl("span","sv2-qlab","彼の返事"));b.choices.forEach((c,ci)=>{const btn=svEl("button","sv2-qbtn",c.send);btn.type="button";btn.setAttribute("data-svx","qchoice");btn.dataset.idx=ci;qb.appendChild(btn);});w.appendChild(qb);w.appendChild(svEl("div","sv2-qafter"));}
+else if(b.t==="replyq"){const d=svEl("div","sv2-rq");d._b=b;d.appendChild(svEl("span","sv2-qlab",b.lab));if(b.from){const f=svEl("div","sv2-rq-from");f.appendChild(svEl("b",null,b.fromN));f.appendChild(document.createTextNode(" 「"+b.from+"」"));d.appendChild(f);}const qb=svEl("div","sv2-qbox");qb.setAttribute("data-svx","qbox");b.choices.forEach((c,ci)=>{const btn=svEl("button","sv2-qbtn",b.mode==="draft"?c.tx:c.send);btn.type="button";btn.setAttribute("data-svx","rqchoice");btn.dataset.idx=ci;qb.appendChild(btn);});d.appendChild(qb);d.appendChild(svEl("div","sv2-qafter"));w.appendChild(d);}
 return w;}
 const SIDE_SCENES={
 hiroto:{
@@ -6626,24 +6678,40 @@ hiroto:{
 {t:"row",lab:"開始時刻",val:"21:00",hot:1,chip:"変更済み",pick:1},
 {t:"field",lab:"理由",tx:"所用です"},
 {t:"cal",time:"18:00",tx:"デビューショーケース",sub:"Hearts2Hearts ― カレンダー登録済み"},
-{t:"btn",tx:"保存する",save:1}],
+{t:"btn",tx:"保存する",save:1},
+{t:"acts",items:[
+{t:"開始時刻を、19:00から21:00に動かした",d:"理由の欄には「所用です」とだけ書いた。本当の理由は、書けない"},
+{t:"デビューショーケースを、カレンダーで開いた",d:"18時から。Hearts2Heartsの名前の横に、彼女の名前もあった"},
+{t:"コメント欄は、開かなかった",d:"今日は、聴く日と決めていた。打つ言葉は、ひとつもなかった"}]}],
 cap:"18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"},
 2:{ph:"assets/gen-hiroto-side-train.jpg",clock:"20:12",app:"X",blocks:[
 {t:"video",title:"デビューショーケース ― なお『The Chase』歌唱",by:"ゆな @yuna_nao",views:"再生 214,308回",dur:"0:47",prog:62,icon:"pause"},
-{t:"note",icon:"views",tx:"彼女の切り抜きは、今日も静かに伸び続けていた"}],
+{t:"note",icon:"views",tx:"彼女の切り抜きは、今日も静かに伸び続けていた"},
+{t:"acts",items:[
+{t:"彼女の切り抜き動画を、最後まで観た",d:"0:47。止めたのは、歌が終わってからだった"},
+{t:"昨夜の配信の、自分の発言を思い出していた",d:"「デビューの日くらい、最初から観たかった」。言い過ぎた、と思う。でも、取り消したいとは思わなかった"},
+{t:"ポストは、しなかった",d:"今日の気持ちは、画面の外に置いておく"}]}],
 cap:"昨夜の配信で、自分が言った言葉を思い出していた。『デビューの日くらい、最初から観たかった』――言い過ぎた、と思う。でも、取り消したいとは思わなかった。"},
 3:{clock:"18:59",app:"配信スタジオ",theme:"dark",blocks:[
 {t:"head",tx:"配信が終了しました",sub:"今日のレポート"},
 {t:"stats",items:[["終了時刻","18:58"],["視聴者数","328"],["配信時間","1時間12分"]]},
 {t:"field",lab:"終了メッセージ",tx:"ありがとうございました"},
-{t:"note",icon:"cal",tx:"いつもより、少し早い終了"}],
+{t:"note",icon:"cal",tx:"いつもより、少し早い終了"},
+{t:"acts",items:[
+{t:"配信を、18:58に終えた",d:"いつもより少し早い終了。理由は、レポートに書かれていない"},
+{t:"19時からは、テレビの前にいた",d:"コーラを置いて、彼女の出番が始まるのを待った"},
+{t:"スマホには、一度も触らなかった",d:"出番のあいだは、それで十分だった"}]}],
 cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番が始まってから、彼は一度もスマホに触らなかった。"},
 4:{clock:"23:18",app:"X",blocks:[
 {t:"post",a:"sora",time:"3時間",tx:"ひろとの配信『終わる時間』の表、出回ってる。なおさんの出演日だけ、きれいに早い。……この二人、ただの偶然で片付く材料じゃなくなってきた",rc:"74",rp:"52",lk:"480",vw:"8,412"},
 {t:"shead",tx:"回っている表"},
 {t:"table",head:["日付","彼女の予定","彼の配信"],hl:[0,1],rows:[["デビューの日","ショーケース 18:00","開始 21:00"],["歌番組の日","放送 19:00","終了 18:58"],["ふだんの日","―","終了 23:30ごろ"]]},
 {t:"cal",time:"19:00",tx:"歌番組 ― なおの出番",sub:"次の出番も、カレンダーに入れてある"},
-{t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定",pick:1}],
+{t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定",pick:1},
+{t:"acts",items:[
+{t:"「終わる時間」の表を、最後まで読んだ",d:"出回っている表は、自分の決めた時間と、一分も違わなかった"},
+{t:"明日の配信も、21:00開始に設定した",d:"終わる時間は、明日も自分で決める"},
+{t:"彼女の次の出番を、カレンダーに入れた",d:"歌番組、19:00。入れる理由は、もう考えない"}]}],
 cap:"並べたのは他人でも、決めていたのは、自分だった。終わる時間は、明日も自分で決める。それだけは、変わらなかった。"},
 5:{clock:"21:06",app:"X",blocks:[
 {t:"shead",tx:"配信のコメント"},
@@ -6653,17 +6721,33 @@ cap:"並べたのは他人でも、決めていたのは、自分だった。終
 {t:"notif",n:"通りすがり",tx:"ねえ、新人アイドルのこと、どう思う？",time:"12分"},
 {t:"notif",n:"名無し",tx:"18時58分の人だよね？ 答えてよ",time:"9分"},
 {t:"notif",n:"通りすがり",tx:"匂わせの件、本人に聞けないからここで聞くわ",time:"4分"},
-{t:"notif",n:"カレンダー",tx:"明日 ― なおの収録日",time:"今"}],
+{t:"notif",n:"カレンダー",tx:"明日 ― なおの収録日",time:"今",det:"収録の時間は、もう覚えている。カレンダーを開くのは、確認のためだった"},
+{t:"replyq",mode:"send",lab:"彼の返事 ― 古参のひとりへ",fromN:"古参のひとり",from:"7年観てます。今日も、あなたの話を聴きに来ました",choices:[
+{send:"ありがとうございます。……今日も、話します",followN:"古参のひとり",follow:"うん。待ってます"},
+{send:"7年。……長いですね。ありがとうございます",followN:"古参のひとり",follow:"長く観てきた分、今日の配信も楽しみにしてます"},
+{send:"……来てくれて、ありがとうございます",followN:"古参のひとり",follow:"こちらこそ。いつもありがとう"}]},
+{t:"acts",items:[
+{t:"コメント欄を、7年で初めて閉じた",d:"荒らしへの対策、と表向きは言える。でも、本当の理由は別だった"},
+{t:"未送信の「まって」が、入力欄に残った",d:"打って、消した。彼女の名前は、出さなかった"},
+{t:"通知は、まだ増え続けている",d:"答えれば彼女が燃える。答えなければ、言い逃れに見える"}]}],
 cap:"彼女の名前を出せば、彼女のほうが燃える。出さなければ、言い逃れに見える。選んだのは、どちらの名前も出さないことだった。配信が終わっても、コーラには手が付いていなかった。"},
 6:{clock:"20:24",app:"X",blocks:[
 {t:"post",a:"nao",time:"20:04",tx:"今日、コンビニで、知らない人が私の曲を口ずさんでいました。\n……それだけで、十分です。ありがとうございます。",rc:"96",rp:"412",lk:"3,208",vw:"21万",hov:1},
 {t:"row",lab:"3月24日",val:"なおの誕生日",sub:"2021年から、毎年カレンダーに入れてある"},
-{t:"row",lab:"明日の配信",val:"20:00 開始",chip:"いつも通り"}],
+{t:"row",lab:"明日の配信",val:"20:00 開始",chip:"いつも通り"},
+{t:"acts",items:[
+{t:"彼女のポストを、二回読んだ",d:"小さな話だった。なのに、目が離れなかった"},
+{t:"いいねは、押さなかった",d:"押せば、また「証拠」が増える。指は、ボタンの上で止まった"},
+{t:"3月24日を、カレンダーで開いた",d:"なおの誕生日。2021年から、毎年入れてある"}]}],
 cap:"小さな話だった。なのに、二回読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"}},
 sakuya:{
 1:{clock:"22:41",app:"ミュージック",theme:"dark",blocks:[
 {t:"player",title:"The Chase",artist:"Hearts2Hearts",prog:4},
-{t:"note",icon:"hp",tx:"イヤホンで再生中 ― 1曲リピート"}],
+{t:"note",icon:"hp",tx:"イヤホンで再生中 ― 1曲リピート"},
+{t:"acts",items:[
+{t:"「The Chase」を、1曲リピートで聴いた",d:"イヤホンを外すまで、他の曲は挟まなかった"},
+{t:"デビューの挨拶を、もう一度読み返した",d:"「おめでとうございます」。あれで足りていたか、まだ考えている"},
+{t:"次に会えたときの言葉を、考えていた",d:"もう少しだけ、自分の言葉で話したい"}]}],
 cap:"『デビュー、おめでとうございます』。あれで、足りていただろうか。まっすぐな歌だった。次に会えたら、もう少しだけ、自分の言葉で話したい。"},
 2:{clock:"23:09",app:"X ― 下書き",blocks:[
 {t:"head",tx:"下書き",sub:"ポストの下書き"},
@@ -6671,25 +6755,52 @@ cap:"『デビュー、おめでとうございます』。あれで、足りて
 {tx:"デビュー、おめでとうございます。今日のステージ、素晴らしかったです"},
 {tx:"廊下で挨拶した者です。覚えているでしょうか"},
 {tx:"……練習生の頃から、ずっと聴いていました"},
-{tx:"挨拶の練習もしました",keep:1}]}],
+{tx:"挨拶の練習もしました",keep:1}]},
+{t:"acts",items:[
+{t:"下書きを、4件書いた",d:"デビューの挨拶、廊下の挨拶、練習生の頃のこと。どれも、長かった"},
+{t:"3件を、消した",d:"言い過ぎれば、彼女の負担になる。残すのは、一文だけ"},
+{t:"「挨拶の練習もしました」だけ、残した",d:"レッスン室の鏡の前で、もう一度だけ頭を下げた"}]}],
 cap:"廊下の挨拶のことを、言葉にしていいのか。言い過ぎれば、彼女の負担になる。残ったのは、一文だけだった。残りは、胸の中にしまっておく。レッスン室の鏡の前で、彼は小さく、もう一度だけ頭を下げた。練習は、まだ続いている。"},
 3:{clock:"19:52",app:"X",blocks:[
-{t:"video",title:"MUSIC STAGE ― Hearts2Hearts『The Chase』",by:"番組公式 @livestage_tv",views:"再生 892,415回",dur:"3:12",prog:38,icon:"play"}],
+{t:"video",title:"MUSIC STAGE ― Hearts2Hearts『The Chase』",by:"番組公式 @livestage_tv",views:"再生 892,415回",dur:"3:12",prog:38,icon:"play"},
+{t:"acts",items:[
+{t:"番組の映像を、最初から観た",d:"彼女の歌のところで、手が止まった"},
+{t:"「後輩」の紹介のされ方に、引っかかった",d:"10年以上待った人の歌は、やっぱり重かった"},
+{t:"訂正することに、決めた",d:"言わなければ、彼女は「後輩」のまま紹介され続ける"}]}],
 cap:"言わなければ、彼女は「後輩」のまま紹介され続ける。それだけは、違うと思った。10年以上待った人の歌は、やっぱり重かった。訂正したことに、後悔はなかった。少しだけ、手が震えていたけれど。"},
 4:{clock:"8:02",app:"メッセージ",blocks:[
-{t:"chat",who:"広報",msgs:[[0,"おはようございます。例のポストですが、文面を柔らかくした案も用意しています"],[1,"この文面でお願いします"],[0,"……分かりました。本人の文面で、進めます"]]},
+{t:"chatq",who:"広報",pre:[[0,"おはようございます。例のポストですが、文面を柔らかくした案も用意しています"]],choices:[
+{send:"この文面でお願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]},
+{send:"柔らかい案は、なしでお願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]},
+{send:"そのまま出します。お願いします",react:[[0,"……分かりました。本人の文面で、進めます"]]}]},
 {t:"post",a:"sakuya",time:"8:14",tx:"僕のほうが、後輩です。デビューは先でも、練習生の年数は変えられません。……歌は、ずっと先輩でした",rc:"411",rp:"2,590",lk:"14,230",vw:"98万"},
 {t:"cal",time:"明日 昼",tx:"食堂 ― 窓側の席",sub:"なおさんとの約束"},
-{t:"note",icon:"belloff",tx:"このポストの通知はオフ"}],
+{t:"note",icon:"belloff",tx:"このポストの通知はオフ"},
+{t:"acts",items:[
+{t:"広報の差し替え案を、読んだ",d:"柔らかくした文面は、彼の言いたいことから、一番遠かった"},
+{t:"自分の文面で出すことに、決めた",d:"言い回しではなく、中身の問題だった"},
+{t:"ポストの通知は、オフにした",d:"反応は、すぐには見ない。夕方、彼女の動きを知ってからでいい"}]}],
 cap:"彼はすぐには反応を見なかった。レッスン室で振りを確認して、夕方、彼女の今日の動きを知って、彼は小さく息を吐いた。言ってよかったのだと思う。"},
 5:{clock:"21:37",app:"写真",theme:"dark",blocks:[
 {t:"photo",date:"2022年4月",place:"練習生フロア"},
 {t:"draft",lab:"下書き ― 未送信",tx:"無理をしないでください",sub:"送れば、彼女の負担になる"},
-{t:"draft",lab:"下書き ― 未送信",tx:"今日のヌナも、きれいでした",sub:"……これは、送らない"}],
+{t:"draft",lab:"下書き ― 未送信",tx:"今日のヌナも、きれいでした",sub:"……これは、送らない"},
+{t:"acts",items:[
+{t:"2022年4月の写真を、開いて、閉じた",d:"何年も前の写真が、掘り返された日。出すことは、守ることにはならない"},
+{t:"下書きを、2件書いて残した",d:"「無理をしないでください」と、もう一文。どちらも、送らない"},
+{t:"明日の発表の前に、覚悟を決めた",d:"隣に立つ覚悟だけは、もう決まっていた"}]}],
 cap:"何年も前の写真が、掘り返された日。彼はそれを開いて、閉じた。出すことは、守ることにはならない。明日の発表の前に、隣に立つ覚悟だけは、もう決まっていた。"},
 6:{clock:"12:04",app:"X ― 返信",blocks:[
 {t:"compose",to:"メディアの発表ポスト",tx:"ステージでは隣に立たせてください",old:["この度は、ありがとうございます。精一杯、務めさせていただきます","……隣に立たせてください、なんて。言い過ぎでしょうか"]},
-{t:"note",icon:"cal",tx:"カレンダー ― 3月24日：ヌナの誕生日"}],
+{t:"note",icon:"cal",tx:"カレンダー ― 3月24日：ヌナの誕生日"},
+{t:"replyq",mode:"draft",lab:"もう一文、打とうとして",choices:[
+{tx:"ヌナ、明日は隣で、よろしくお願いします"},
+{tx:"緊張したら、ヌナのほうを見ます"},
+{tx:"……あした、楽しみにしています"}]},
+{t:"acts",items:[
+{t:"返信の文面を、2回書き直した",d:"丁寧なだけの言葉にはしたくなかった"},
+{t:"「ステージでは隣に立たせてください」だけは、最初から決まっていた",d:"その一行は、書き直しのたびに残った"},
+{t:"送信の前に、深く息を吸った",d:"あとは、彼女の返事を待つだけだった"}]}],
 cap:"丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。その一行だけは、最初から決まっていた。送信の前に、一度だけ深く息を吸う。あとは、彼女の返事を待つだけだった。返事が来るまでの時間、彼はレッスン室で、何度もスマホを見た。"}}};
 let sideCb=null;
 function sideScene(d){const t=SIDE_SCENES[tgtKey()];return t?t[d]:null;}
@@ -6713,7 +6824,7 @@ function svWire(scr,sc){
 scr.querySelectorAll('[data-svx="row"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("picked");});});
 scr.querySelectorAll('[data-svx="save"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();if(el.classList.contains("done"))return;el.classList.add("done");el.textContent="保存済み";});});
 scr.querySelectorAll('[data-svx="field"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("focus");});});
-scr.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.add("read");});});
+scr.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.add("read");if(el.querySelector(".sv2-notif-det"))el.classList.toggle("open");});});
 scr.querySelectorAll('[data-svx="trow"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.parentNode.querySelectorAll("tr").forEach(r=>r.classList.remove("on"));el.classList.add("on");});});
 scr.querySelectorAll('[data-svx="draft"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
 scr.querySelectorAll('[data-svx="replay"]').forEach(el=>{const tx=el.querySelector(".tx");el.addEventListener("click",e=>{e.stopPropagation();if(el.dataset.busy||!tx)return;el.dataset.busy="1";const full=el.dataset.full||"";svErase(tx,()=>{svLater(()=>{svType(tx,full,()=>{svLater(()=>{svErase(tx,()=>{el.dataset.busy="";});},620);});},260);});});});
@@ -6726,6 +6837,24 @@ scr.querySelectorAll('[data-svx="like"]').forEach(la=>{const off=()=>la.classLis
 scr.querySelectorAll('[data-svx="comp"]').forEach(c=>{const tx=c.querySelector(".tx");const fin=c.dataset.final||"";let busy=false;const retype=()=>{if(busy||!tx)return;busy=true;c.classList.remove("struck");svErase(tx,()=>{svType(tx,fin,()=>{busy=false;});});};c.addEventListener("click",e=>{e.stopPropagation();retype();});c._svRetype=retype;});
 scr.querySelectorAll('[data-svx="old"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const blk=el.closest(".sv2-blk");const c=blk?blk.querySelector('[data-svx="comp"]'):null;if(!c)return;const tx=c.querySelector(".tx");if(!tx||c._svBusy)return;c.classList.add("struck");tx.textContent=el.dataset.tx||"";svLater(()=>{if(c._svRetype)c._svRetype();},1150);});});
 scr.querySelectorAll('[data-svx="send"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();});});
+/* v471: the parity wiring. Every handler below stays inside the
+   scene: choices change only which in-scene lines are shown, the
+   today panel only opens its own detail, and timeline buttons only
+   move their own counts. Nothing writes state, nothing carries fx,
+   and the tap-to-go-on fallback is untouched. */
+const svNum=el=>{const n=parseInt((el.textContent||"").replace(/[^0-9]/g,""),10);return isNaN(n)?0:n;};
+const svFmtN=n=>n.toLocaleString("en-US");
+scr.querySelectorAll('[data-svx="like2"]').forEach(la=>{const num=la.querySelector("span");la.addEventListener("click",e=>{e.stopPropagation();const on=la.classList.toggle("on");const cnt=num?svNum(num):0;la.innerHTML=on?SVI.heartF:SVI.heart;if(num){num.textContent=svFmtN(cnt+(on?1:-1));la.appendChild(num);}});});
+scr.querySelectorAll('[data-svx="repost"]').forEach(rp=>{const num=rp.querySelector("span");rp.addEventListener("click",e=>{e.stopPropagation();const on=rp.classList.toggle("on");if(num)num.textContent=svFmtN(svNum(num)+(on?1:-1));});});
+scr.querySelectorAll('[data-svx="aitem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
+const svBub2=(qa,m,clock)=>{const bb=svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]);const meta=svEl("span","bmeta",(clock||"")+(m[0]?" 既読":""));bb.appendChild(meta);bb.addEventListener("click",e=>{e.stopPropagation();bb.classList.toggle("showmeta");});qa.appendChild(bb);return bb;};
+scr.querySelectorAll('[data-svx="qbox"]').forEach(qb=>{const blk=qb.parentNode;const qa=blk.querySelector(".sv2-qafter");const b=qb._b||(blk._b);if(!qa)return;
+qb.querySelectorAll('[data-svx="qchoice"]').forEach(btn=>{btn.addEventListener("click",e=>{e.stopPropagation();if(qb.classList.contains("done"))return;qb.classList.add("done");qb.querySelectorAll(".sv2-qbtn").forEach(x=>x.classList.toggle("sel",x===btn));qb.querySelectorAll(".sv2-qbtn").forEach(x=>{if(x!==btn)x.classList.add("off");});const c=b.choices[parseInt(btn.dataset.idx,10)];if(!c)return;svLater(()=>{svBub2(qa,[1,c.send],sc.clock);(c.react||[]).forEach((m,i)=>{svLater(()=>{svBub2(qa,m,sc.clock);},520*(i+1));});},330);});});
+qb.querySelectorAll('[data-svx="rqchoice"]').forEach(btn=>{btn.addEventListener("click",e=>{e.stopPropagation();if(qb.classList.contains("done"))return;qb.classList.add("done");qb.querySelectorAll(".sv2-qbtn").forEach(x=>{x.classList.toggle("sel",x===btn);if(x!==btn)x.classList.add("off");});const c=b.choices[parseInt(btn.dataset.idx,10)];if(!c)return;
+if(b.mode==="draft"){const comp=svEl("div","sv2-rq-comp");const tx=svEl("div","tx","");comp.appendChild(tx);qa.appendChild(comp);svLater(()=>{svType(tx,c.tx,()=>{const row=svEl("div","sv2-minibtns");const keep=svEl("button","sv2-minibtn solid","下書きに残す");keep.type="button";const drop=svEl("button","sv2-minibtn","消す");drop.type="button";row.appendChild(keep);row.appendChild(drop);qa.appendChild(row);const finish=(kept)=>{row.remove();qa.appendChild(svEl("div","sv2-rq-note",kept?"下書きに残した。送信は、一行だけにした":"消した。送信は、一行だけ"));};keep.addEventListener("click",ev=>{ev.stopPropagation();comp.classList.add("kept");finish(true);});drop.addEventListener("click",ev=>{ev.stopPropagation();comp.classList.add("struck");svErase(tx,()=>{finish(false);});});});},300);}
+else{svLater(()=>{const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");d.style.animation="svline2 .45s ease both";const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",c.send));d.appendChild(m);qa.appendChild(d);if(c.follow)svLater(()=>{const f=svEl("div","sv2-rq-fol");f.appendChild(svEl("b",null,c.followN));f.appendChild(document.createTextNode(" 「"+c.follow+"」"));qa.appendChild(f);},560);},330);}
+});});
+});
 }
 function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
 sideCb=cb||null;svClearTmrs();
