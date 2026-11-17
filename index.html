@@ -3377,7 +3377,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v467</p>
+  <p class="ver">v468</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3557,7 +3557,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v467</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v468</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3870,7 +3870,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v467</p>
+    <p class="ver">v468</p>
   </div>
 </section>
 </div>
@@ -5830,22 +5830,90 @@ const MINI_EVENTS={
   choices:[
    {t:"ありがたく飲んで、何も言わない",r:"温かいうちに飲んだ。言わないことが、今の二人のちょうどいい距離だと思った。……缶は洗って、捨てられなかった。",fx:{dist:5,xp:5}},
    {t:"ジウに「これ、誰のか知ってる？」と聞く",r:"ジウは少し考えて、「さっき、サクヤ先輩が自販機の前に立ってたよ」。それ以上は聞かなかった。ジウも、それ以上は言わなかった。",fx:{dist:4,cog:1,xp:5}},
-   {t:"同じ場所に、お礼のメモだけ置いておく",r:"「ありがとうございました」とだけ書いて、ベンチに置いた。翌日、メモはなくなっていた。誰が持っていったのかは、分からない。分からないままで、よかった。",fx:{dist:6,xp:5,flm:1}}]}};
+   {t:"同じ場所に、お礼のメモだけ置いておく",r:"「ありがとうございました」とだけ書いて、ベンチに置いた。翌日、メモはなくなっていた。誰が持っていったのかは、分からない。分からないままで、よかった。",fx:{dist:6,xp:5,flm:1}}]},
+ /* v468: SIDE QUEST round 4 - the late days join in, one small
+    incident per route on Days 5, 6 and 7. Days 5-6 stay quiet
+    beats beside the main peaks (the stream of silence / the
+    scandal scoop for Hiroto, the mispost and the name-tag photo /
+    the announcement for Sakuya) and never touch them. Day 7 is
+    the epilogue: its two minis carry per-ending flavor (bodyK /
+    rK, keyed by the locked verdict) on top of one shared incident.
+    Same grammar as rounds 1-3: optional, never gates the next
+    day, marker-held. */
+ "hiroto:5":{mk:"mini-h5",tag:"SIDE EVENT ― 小さな事件",title:"送らなかった下書き",
+  body:"今夜から、公式の投稿はスタッフの確認を通すことになった。端末を預ける前に下書きフォルダを開いたら、一番下に古い下書きが残っていた。2021年、ソウル。『今日のレッスン、声がきれいでした』――送らなかった一文が、4年越しに画面の中にいた。どうする？",
+  na:"staff",ntx:"さんが、公式端末を預かりました",nsub:"小さな事件 ― 送らなかった下書き",
+  choices:[
+   {t:"消さずに、そのまま預ける",r:"消せなかった。佐藤さんに端末を渡す手が、少しだけ遅くなった。……4年前の自分の言葉が、今日の自分を守っている気がした。",fx:{dist:5,xp:5}},
+   {t:"下書きを消してから預ける",r:"指先で、4年分を消した。すっきりしたはずなのに、帰り道の画面が少しだけ軽くて、少しだけ寂しかった。",fx:{dist:3,cog:1,xp:5}},
+   {t:"今の言葉で書き直して、自分だけのメモに移す",r:"『今日も、ありがとう』。送らない言葉は増えていく。でも、その分だけ、二人の間には言葉の貯金が増えていく気がした。",fx:{dist:6,xp:5,flm:1}}]},
+ "sakuya:5":{mk:"mini-s5",tag:"SIDE EVENT ― 小さな事件",title:"出席簿の、二人の名前",
+  body:"夕方、資料の確認で開いた古いバインダー。練習生時代の出席簿だった。何年も前のページに、二人の名前が同じ曜日の欄に並んでいた。『名前札の写真』よりずっと地味で、ずっと本当の記録だった。どうする？",
+  na:"staff",ntx:"さんが、資料室の鍵を返しました",nsub:"小さな事件 ― 出席簿の名前",
+  choices:[
+   {t:"ページを写真に撮って、自分だけのフォルダにしまう",r:"誰にも送らなかった。送る必要もなかった。……本当の記録は、騒ぎの外側で静かに眠っているほうがいい。",fx:{dist:5,xp:5}},
+   {t:"何もせず、バインダーを閉じる",r:"閉じた。記録は、記録の場所で眠るのが正しいと思った。……でも、並んだ二つの名前だけは、目に焼き付いて離れなかった。",fx:{dist:4,xp:5}},
+   {t:"広報に「古い資料は、表に出さないでください」と頼む",r:"広報は頷いた。「分かってます。……守るべきものは、こちらでも守ります」。守る側の輪が、一つ広がった気がした。",fx:{dist:6,cog:1,xp:5,flm:1}}]},
+ "hiroto:6":{mk:"mini-h6",tag:"SIDE EVENT ― 小さな事件",title:"コンビニで、曲が流れていた",
+  body:"報道の日の、帰り道。帽子を深くかぶって入ったコンビニで、店内放送が彼女の曲を流していた。レジの店員さんが、小さく口ずさんでいる。騒ぎの外側で、歌だけがいつも通りに流れていた。どうする？",
+  na:"fan2",ntx:"さんのポストが、静かに広がっています",nsub:"小さな事件 ― コンビニの店内放送",
+  choices:[
+   {t:"何も言わず、会計をして出る",r:"店員さんの鼻歌が、ドアの向こうまで追いかけてきた。……騒ぎは数字の世界の話で、歌は、こういう場所に届いていた。",fx:{cog:2,xp:5}},
+   {t:"「……いい曲ですね」と、小さく声をかける",r:"店員さんは「でしょう？ 最近よく流れるんです」と笑った。本人だとは、最後まで気づかれなかった。それが少しだけ嬉しくて、少しだけ誇らしかった。",fx:{cog:3,xp:5}},
+   {t:"彼の好きなコーラを、1本だけ買って帰る",r:"誰に渡せるわけでもない。でも、冷蔵庫のドアポケットに、彼の好きなコーラが1本増えた。……それだけで、今夜の配信を観る理由が一つ増えた気がした。",fx:{dist:6,xp:5}}]},
+ "sakuya:6":{mk:"mini-s6",tag:"SIDE EVENT ― 小さな事件",title:"発表の日のカフェオレ",
+  body:"発表の1時間前。レッスン室の前のベンチに、温かいカフェオレが置いてあった。今度は付箋に、短く一言。『よろしく、お願いします』――彼の字だった。発表の文面を用意して待っていた人の、最後の置き土産だった。どうする？",
+  na:"akari",ntx:"さんが、レッスン室の前の話をしています",nsub:"小さな事件 ― 発表の日のカフェオレ",
+  choices:[
+   {t:"温かいうちに飲んで、発表に臨む",r:"甘さが、緊張の奥まで届いた。……12時。彼女の声は、震えなかった。",fx:{dist:6,xp:5}},
+   {t:"付箋だけ、ポケットにしまう",r:"缶はベンチに残した。付箋は、ポケットの中で小さく温かかった。発表の瞬間、その温かさが背中を押した。",fx:{dist:5,cog:1,xp:5}},
+   {t:"DMで「ありがとう。……隣で、よろしくね」とだけ送る",r:"既読は、すぐ付いた。返信はなかった。……なかったことが、いちばん彼らしい返事だった。発表まで、あと少し。",fx:{dist:7,xp:5,flm:1}}]},
+ "hiroto:7":{mk:"mini-h7",tag:"SIDE EVENT ― 小さな事件",title:"1週間前の私から",
+  body:"朝、レッスン室のロッカー。奥に、小さく折った紙が挟まっていた。デビューの前夜、緊張で眠れなくて書いた『1週間後の私へ』の手紙だった。中身は一行だけ。『歌えてますか』――",
+  bodyK:{flame:"騒ぎの真っただ中で、その一行がまっすぐに立っていた。どうする？",
+   collab:"騒ぎを越えた朝に読むその一行は、前夜の震える字のままだった。どうする？",
+   quiet:"静かな朝の光の中で、その一行が少しだけ笑って見えた。どうする？",
+   start:"まだ始まったばかりの朝に、その一行が背中を押した。どうする？"},
+  na:"akari",ntx:"さんが、レッスン室で見かけた話をしています",nsub:"小さな事件 ― 1週間前の手紙",
+  choices:[
+   {t:"その場で、最後まで読む",r:"読み終わって、紙を丁寧に折り直した。答えは、まだ言葉にならない。でも、歌う理由なら、もう十分すぎるほどあった。",
+    rK:{flame:"騒ぎの音は遠くで、紙の音だけが近く聞こえた。",collab:"昨日の配信の、最後の一言が耳の奥で重なった。",quiet:"祭りの日の予定が、頭の片隅で小さく光った。",start:"次の一週間が、もう始まっていた。"},fx:{dist:3,xp:6}},
+   {t:"夜まで、ポケットに取っておく",r:"今は、朝のレッスンが先だった。手紙はポケットの中。……夜、一人になってから開ける。それが、この1週間の締め方にちょうどいい気がした。",fx:{dist:2,cog:1,xp:5}},
+   {t:"読んで、その場で返事を書く",r:"裏に、ペンを走らせた。『歌えてます。……観てくれている人が、います』。誰にも見せない返事が、1週間の全部を抱えていた。",fx:{dist:5,xp:6,flm:1}}]},
+ "sakuya:7":{mk:"mini-s7",tag:"SIDE EVENT ― 小さな事件",title:"『1年前の今日』に、彼がいた",
+  body:"朝、写真アプリの通知。『1年前の今日』――会社の廊下で撮った、彼女の何気ない一枚。その端に、小さく彼が写り込んでいた。何気ない顔で、通り過ぎる途中だった。",
+  bodyK:{flame:"騒ぎの朝に見る1年前は、遠い国の話みたいだった。どうする？",
+   collab:"発表から一夜明けた朝に見る1年前は、昨日の伏線みたいだった。どうする？",
+   quiet:"静かな朝に見る1年前は、今日の約束の出発点みたいだった。どうする？",
+   start:"始まりの朝に見る1年前は、まだ何も知らない二人の顔をしていた。どうする？"},
+  na:"miku",ntx:"さんから、朝の連絡が届きました",nsub:"小さな事件 ― 1年前の今日",
+  choices:[
+   {t:"スクショを撮って、彼に送る",r:"送信ボタンを押す指が、少しだけ迷った。……でも、送った。返信は短かった。『……覚えてます』。",
+    rK:{flame:"騒ぎの外側で、1年前の二人が静かに笑っていた。",collab:"『隣に立たせてください』の人の、1年前の通りすがりの顔だった。",quiet:"窓側の約束の、ずっと前の話だった。",start:"始まりは、とっくに始まっていたのかもしれない。"},fx:{dist:6,xp:6,flm:1}},
+   {t:"自分だけのフォルダに移して、しまう",r:"誰にも送らなかった。1年前の端っこの彼と、今日の彼が、フォルダの中で静かに並んだ。",fx:{dist:4,xp:5}},
+   {t:"そのまま閉じて、朝の支度に戻る",r:"閉じた。写真は逃げない。……今日の二人は、今日の顔で会えばいいと思った。",fx:{dist:3,cog:1,xp:5}}]}};
 function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
 function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
+/* v468: on Day 7 a mini may carry per-ending flavor - bodyK appends
+   one kind-keyed sentence to the body, and a choice's rK appends one
+   kind-keyed sentence to its result. The picked flavor is stored on
+   the marker record (rk) so a re-rendered card shows the same text;
+   older records simply have no rk and read as the base text. */
+function miniKind(){return (S.ch===7&&typeof window!=="undefined"&&window.__D7&&window.__D7.kind)||null;}
 function renderMini(slot){
  const def=miniDef();if(!def||!slot)return;
  const rec=miniRecord(def);
+ const kd=miniKind();
  const card=document.createElement("div");card.className="evcard mini"+(rec?" cleared":"");
  card.innerHTML='<div class="mini-eyebrow"><span>SIDE QUEST</span><span class="ev-eyebrow-jp">小さな事件 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';
- card.querySelector(".tag span").textContent=def.tag;card.querySelector("h3").textContent=def.title;card.querySelector("p").textContent=def.body;
+ card.querySelector(".tag span").textContent=def.tag;card.querySelector("h3").textContent=def.title;card.querySelector("p").textContent=def.body+((kd&&def.bodyK&&def.bodyK[kd])||"");
  const box=card.querySelector(".evc");
  def.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;
   if(rec){b.disabled=true;if(rec.pick===ci)b.classList.add("picked");}
-  else b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);applyFx(c.fx);S.notifs.unshift({a:def.na,tx:def.ntx,sub:def.nsub,mk:def.mk,pick:ci});renderNotifs();updateBdg();save();};
+  else b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const rk=(kd&&c.rK&&c.rK[kd])||"";const r=document.createElement("div");r.className="result";r.textContent=c.r+rk;card.querySelector(".evr").appendChild(r);applyFx(c.fx);S.notifs.unshift({a:def.na,tx:def.ntx,sub:def.nsub,mk:def.mk,pick:ci,rk:rk});renderNotifs();updateBdg();save();};
   box.appendChild(b);});
- if(rec){const r=document.createElement("div");r.className="result";r.textContent=def.choices[rec.pick].r;card.querySelector(".evr").appendChild(r);}
+ if(rec){const r=document.createElement("div");r.className="result";r.textContent=def.choices[rec.pick].r+(rec.rk||"");card.querySelector(".evr").appendChild(r);}
  slot.appendChild(card);
 }
 /* chapter flow */
