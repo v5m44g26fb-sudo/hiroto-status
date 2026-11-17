@@ -3514,7 +3514,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v479</p>
+  <p class="ver">v480</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3697,7 +3697,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v479</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v480</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4011,7 +4011,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v479</p>
+    <p class="ver">v480</p>
   </div>
 </section>
 </div>
@@ -6045,7 +6045,31 @@ const MINI_EVENTS={
    {t:"スクショを撮って、彼に送る",r:"送信ボタンを押す指が、少しだけ迷った。……でも、送った。返信は短かった。『……覚えてます』。",
     rK:{flame:"騒ぎの外側で、1年前の二人が静かに笑っていた。",collab:"『隣に立たせてください』の人の、1年前の通りすがりの顔だった。",quiet:"窓側の約束の、ずっと前の話だった。",start:"始まりは、とっくに始まっていたのかもしれない。"},fx:{dist:6,xp:6,flm:1}},
    {t:"自分だけのフォルダに移して、しまう",r:"誰にも送らなかった。1年前の端っこの彼と、今日の彼が、フォルダの中で静かに並んだ。",fx:{dist:4,xp:5}},
-   {t:"そのまま閉じて、朝の支度に戻る",r:"閉じた。写真は逃げない。……今日の二人は、今日の顔で会えばいいと思った。",fx:{dist:3,cog:1,xp:5}}]}};
+   {t:"そのまま閉じて、朝の支度に戻る",r:"閉じた。写真は逃げない。……今日の二人は、今日の顔で会えばいいと思った。",fx:{dist:3,cog:1,xp:5}}]},
+ /* v480: SIDE QUEST round 5 - the last two open slots in the grid:
+    Hiroto Day 3 (a fan clip of his stream's final three seconds -
+    one quiet word added after his usual sign-off, on the day her
+    first music show aired; the chart does not exist yet and
+    nothing has happened in public) and Sakuya Day 1 (the company
+    elevator on debut morning, where he introduces her to a
+    trainee as this company's great senior - the seniority frame
+    of his route, in seed form). With these, every day on both
+    routes carries a mini. Same grammar as rounds 1-4: optional,
+    never gates the next day, marker-held. */
+ "hiroto:3":{mk:"mini-h3",tag:"SIDE EVENT ― 小さな事件",title:"最後の3秒",
+  body:"帰宅して、眠る前。今日の彼の配信の切り抜きが、もう回っていた。タイトルは『最後の3秒』。いつもの締めの言葉のあと、配信が切れる直前に、彼が小さく一言だけ足していた。『……がんばれ』――誰に言ったのか、コメント欄でも意見が割れている。どうする？",
+  na:"fan2",ntx:"さんの切り抜きが、静かに回っています",nsub:"小さな事件 ― 最後の3秒",
+  choices:[
+   {t:"何も言わず、切り抜きを保存だけする",r:"誰にも言わなかった。でも、眠る前の暗い部屋で、その3秒だけを何度も再生した。『がんばれ』の声が、今日のステージの緊張と重なって、静かにほどけていった。",fx:{dist:6,xp:5}},
+   {t:"ゆなに「その切り抜き、私にも送って」と頼む",r:"ゆなは即座に送ってくれた。『なおちゃんも観たんだ！ あの「がんばれ」、誰にだと思う？』――答えられなかった。答えられないことが、少しだけ嬉しかった。",fx:{dist:5,cog:1,xp:5}},
+   {t:"「『がんばれ』って、言ってもらえた気がしました」とポストする",r:"誰のことかは、書いていない。なのに、切り抜きのコメント欄に『これ、届いた側の答えじゃない？』と書かれて、小さくざわついた。熱は小さい。でも、その一言は確かに、届くべき場所に届いていた。",fx:{fol:40,cog:3,xp:5,dist:5,flm:5}}]},
+ "sakuya:1":{mk:"mini-s1",tag:"SIDE EVENT ― 小さな事件",title:"エレベーターの、大先輩",
+  body:"デビュー当日の朝、会社のエレベーター。乗り合わせた練習生の子が、緊張した顔で彼女に頭を下げた。途中の階で彼が乗り込んできて、その子に言った。『その人、よく見ておいて。……この会社の、大先輩だから』――デビューは、彼のほうが先。練習生歴は、彼女のほうがずっと長い。その言い方が、静かに胸に残った。どうする？",
+  na:"akari",ntx:"さんが、朝のエレベーターの話をしています",nsub:"小さな事件 ― エレベーターの大先輩",
+  choices:[
+   {t:"何も言わず、小さく頭を下げて過ごす",r:"模範的な朝だった。でも、扉が開くまでの数秒が、いつもより長く感じた。『大先輩』――彼の口から聞く自分の11年は、少しだけくすぐったくて、少しだけ誇らしかった。",fx:{dist:5,xp:5}},
+   {t:"練習生の子に「私も、昨日までそっち側でした」と声をかける",r:"子は目を丸くして、それから深く頭を下げた。彼が隣で、小さく笑っていた。……11年前の自分に言ってほしかった言葉を、今朝の自分は、言える側になっていた。",fx:{dist:4,cog:2,xp:5}},
+   {t:"降り際に、彼へ「ありがとうございます」とだけ言う",r:"彼は少し驚いて、『……当然のことです』と返した。その当然、という言い方が、その日のステージまで背中を押し続けた。",fx:{dist:6,xp:5,flm:1}}]}};
 function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
 function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
 /* v468: on Day 7 a mini may carry per-ending flavor - bodyK appends
