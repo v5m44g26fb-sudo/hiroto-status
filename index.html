@@ -2961,6 +2961,29 @@ input,textarea{font-size:16px}
 .evcard.mini .tag svg{fill:#fff}
 .evcard.mini .mini-eyebrow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;font-size:10px;font-weight:900;letter-spacing:.22em;color:#7856ff}
 .evcard.mini .mini-eyebrow .ev-eyebrow-jp{letter-spacing:.06em;color:rgba(120,86,255,.6)}
+/* ===== v454: SIDE QUEST readability fix - the mini card swapped the
+   main card's dark stage for a light lavender one but inherited its
+   dark-stage text (white h3, pale-lavender body, glass-white choices,
+   pastel chips, pale-gold result), so on the light ground almost
+   nothing could be read (owner's screenshot, Hiroto Day 2). The mini
+   card now speaks in its own light-theme voice: deep violet text,
+   white choice cards, saturated chips, a violet result panel. The
+   main card's dark grammar is untouched. ===== */
+.evcard.mini{color:#2e2160}
+.evcard.mini h3{color:#2b1a5e}
+.evcard.mini p{color:#4a3d78}
+.evcard.mini .choice.evchoice{background:rgba(255,255,255,.78);border-color:rgba(120,86,255,.42);color:#2e2160;box-shadow:0 4px 14px rgba(120,86,255,.10)}
+.evcard.mini .choice.evchoice:active{background:#fff}
+.evcard.mini .choice.evchoice:disabled{opacity:.6}
+.evcard.mini .choice.evchoice.picked{opacity:1;border-color:#7856ff;background:rgba(120,86,255,.13);box-shadow:0 0 0 1px #7856ff,0 8px 22px rgba(120,86,255,.22);color:#2b1a5e}
+.evcard.mini .evc-no{border-color:rgba(120,86,255,.55);color:#5b3df0}
+.evcard.mini .choice.evchoice.picked .evc-no{background:#7856ff;color:#fff}
+.evcard.mini .xchip{background:rgba(29,155,240,.13);color:#0a6cc4}
+.evcard.mini .xchip.dist{background:rgba(249,24,128,.12);color:#c20e63}
+.evcard.mini .xchip.bad{background:rgba(244,33,46,.11);color:#c0111c}
+.evcard.mini .xchip.xp{background:rgba(120,86,255,.15);color:#5135d6}
+.evcard.mini .result{color:#372a6b;background:linear-gradient(180deg,rgba(120,86,255,.14),rgba(120,86,255,.07));border-color:rgba(120,86,255,.45)}
+.evcard.mini .result::before{color:#6a48d7}
 /* ===== v448: luxury presentation pass - the game's own stage dressing
    only (the real-X surfaces stay faithful, untouched): a slow light
    lives in the title type and its rule and in the ending's title, every
@@ -3139,7 +3162,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v453</p>
+  <p class="ver">v454</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3319,7 +3342,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v453</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v454</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3621,7 +3644,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v453</p>
+    <p class="ver">v454</p>
   </div>
 </section>
 </div>
