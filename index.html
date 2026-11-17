@@ -3092,7 +3092,7 @@ input,textarea{font-size:16px}
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
   <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v449</p>
+  <p class="ver">v450</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3272,7 +3272,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v449</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v450</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3574,7 +3574,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v449</p>
+    <p class="ver">v450</p>
   </div>
 </section>
 </div>
@@ -5451,7 +5451,28 @@ const MINI_EVENTS={
   choices:[
    {t:"そのままにしておく",r:"進行表は、今日限りの紙。誰も悪くない。でも、その四文字が、ステージに立つ直前まで目に残った。",fx:{dist:3,xp:5}},
    {t:"スタッフに、名前だけでいいと伝える",r:"自分の欄だけ、ペンで「なお」と書き直してもらった。小さな訂正。小さくない気持ち。スタッフは「すみません」と何度も言った。",fx:{dist:4,cog:2,xp:5}},
-   {t:"笑って、「後輩じゃないんです」と自分で言いに行く",r:"言えた。笑って、軽く。声は少しだけ震えたけど、最後まで笑顔でいられた。進行表は、その場で新しいものに差し替わった。",fx:{dist:5,cog:3,xp:6,flm:1}}]}};
+   {t:"笑って、「後輩じゃないんです」と自分で言いに行く",r:"言えた。笑って、軽く。声は少しだけ震えたけど、最後まで笑顔でいられた。進行表は、その場で新しいものに差し替わった。",fx:{dist:5,cog:3,xp:6,flm:1}}]},
+ /* v450: SIDE QUEST round 2 - one more small incident per route,
+    deeper into each spine: Hiroto Day 4 (under the circulating
+    chart, one of his oldest fans quietly guards his side of the
+    story) and Sakuya Day 4 (the cafeteria window seat, on the day
+    his post went public - the promise the Day 5 event and the
+    quiet ending both remember is made here). Same grammar as
+    round 1: optional, never gates the next day, marker-held. */
+ "hiroto:4":{mk:"mini-h4",tag:"SIDE EVENT ― 小さな事件",title:"表の下に、古参がいた",
+  body:"『終わる時間』の表が回る中で、彼女はひとつだけ、静かなリプを見つけた。彼の古参ファンのものだった。『この人の配信、7年観てる。終わる時間が早い日は、だいたい、この人にとって大事な日だよ』――騒ぎの中で、その一行だけが、彼の側の景色を守っていた。どうする？",
+  na:"fan2",ntx:"さんのポストが、静かに伸びています",nsub:"小さな事件 ― 古参の一行",
+  choices:[
+   {t:"何もしない。その一行を、そっと胸にしまう",r:"何もしなかった。でも、古参の言葉が、表の数字よりずっと長く残った。彼の7年と、自分の10年が、どこかで重なって見えた。",fx:{dist:3,xp:5}},
+   {t:"古参のポストに、いいねだけ置く",r:"いいね欄に、自分の名前が残った。古参は気づいただろうか。……気づいた上で、何も言わないでいてくれたら、それがいちばんありがたいと思った。",fx:{dist:5,xp:5,flm:1}},
+   {t:"「歌だけ、聴いてください」と、自分の言葉でポストする",r:"表の話には、触れなかった。なのに、古参のポストの下に『歌は本物だよ』の声が、静かに増えていった。ざわつきの温度が、少しだけ下がった気がした。",fx:{fol:40,cog:3,xp:5,dist:4,flm:4}}]},
+ "sakuya:4":{mk:"mini-s4",tag:"SIDE EVENT ― 小さな事件",title:"食堂の窓側",
+  body:"昼、会社の食堂。資料を広げていた窓側の席の向かいに、トレーを持った彼が立った。『……ここ、座ってもいいですか』。彼のポストが公開された日の、昼。騒ぎの外側の、静かな食堂だった。どうする？",
+  na:"akari",ntx:"さんが、食堂で見かけた話をしています",nsub:"小さな事件 ― 食堂の窓側",
+  choices:[
+   {t:"「どうぞ」と、向かいの席を勧める",r:"彼は小さく会釈して、向かいに座った。発表の話は、しなかった。代わりに『……ここの窓、夕方は光がきれいなんです』。帰り際、彼が言った。『発表が終わったら、またここで。……ゆっくり、ごはんを食べましょう』",fx:{dist:6,xp:5}},
+   {t:"小さく頷いて、資料を寄せる",r:"言葉は交わさなかった。でも、同じ窓の光の中で、同じ時間だけ静かに座っていた。それだけで、午後のざわつきが少し遠くなった。",fx:{dist:4,xp:5,cog:1}},
+   {t:"「先に失礼します」と席を立つ",r:"立ち上がる拍子に、目が合った。彼は何も言わず、小さく頭を下げた。……逃げたのは、自分のほうだった気がした。",fx:{dist:2,xp:5}}]}};
 function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
 function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
 function renderMini(slot){
