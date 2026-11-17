@@ -3398,6 +3398,69 @@ input,textarea{font-size:16px}
 #end-ambient::before{content:"";position:absolute;left:-18%;right:-18%;top:-6%;height:58%;background:radial-gradient(52% 62% at 50% 38%,color-mix(in srgb,var(--acc,#ffd400) 30%,transparent),transparent 70%);opacity:.55;animation:endglow 5.2s ease-in-out infinite alternate;pointer-events:none}
 @keyframes endglow{from{opacity:.5;transform:scale(1) translateY(0)}to{opacity:.95;transform:scale(1.07) translateY(6px)}}
 @media (prefers-reduced-motion:reduce){#dayintro .di-day,#sideview.on .sv2-scrwrap::after,#annscene.on .an-frame::after,#end-ambient::before{animation:none}}
+/* ===== v485: SIDE VIEW luxury round 4 - his screen gets the full
+   stage dressing. The curtain rises with depth and settles as it
+   closes; the whole interlude is colour-graded in his route's two
+   colours and the grade deepens day by day; a few quiet motes of
+   light drift behind the scene (the ending ambient layer's family,
+   JS: svAmb); his screen wakes with a wider, route-tinted pass of
+   light; the chapter type takes the moving sheen the title type
+   has, in his colours; his choices answer with a spring under the
+   finger and a sheen of light on the chosen one; and his typing
+   and the landing of a notification catch small lights of their
+   own. Presentation layer only: no size, text, choice, state or
+   number changes. Transform / opacity / background-position
+   throughout, and everything sleeps under prefers-reduced-motion. */
+/* -- route and day grading -- */
+#sideview{--svA:#7856ff;--svB:#f91880;--svDeep:15%}
+#sideview.svr-sakuya{--svA:#1d9bf0;--svB:#5eead4}
+#sideview.svd-1{--svDeep:10%}
+#sideview.svd-2{--svDeep:12%}
+#sideview.svd-3{--svDeep:15%}
+#sideview.svd-4{--svDeep:18%}
+#sideview.svd-5{--svDeep:21%}
+#sideview.svd-6{--svDeep:25%}
+#sideview::before{background:radial-gradient(92% 58% at 50% 36%,color-mix(in srgb,var(--svA) var(--svDeep),transparent),transparent 62%),radial-gradient(125% 90% at 50% 112%,color-mix(in srgb,var(--svB) calc(var(--svDeep)*.8),transparent),transparent 55%)}
+#sideview::after{content:"";position:absolute;inset:0;background:radial-gradient(64% 42% at 50% -4%,color-mix(in srgb,var(--svA) 13%,transparent),transparent 70%);opacity:.45;animation:svbreathe 6.5s ease-in-out infinite alternate;pointer-events:none}
+@keyframes svbreathe{from{opacity:.3;transform:scale(1)}to{opacity:.65;transform:scale(1.05)}}
+#sideview .sv2-inner{z-index:1}
+#sideview .sv-amb{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+/* -- curtain: rise in, settle out -- */
+#sideview.on .sv2-inner{animation:svrise .55s cubic-bezier(.2,.8,.25,1) both}
+@keyframes svrise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+#sideview.closing .sv2-inner{animation:svsettle .18s ease forwards}
+@keyframes svsettle{from{opacity:1;transform:none}to{opacity:0;transform:translateY(10px)}}
+/* -- chapter type: the sheen, in his route's colours -- */
+#sideview .sv2-lab{background-image:linear-gradient(92deg,var(--svA) 5%,#cfe9ff 42%,#fff 50%,var(--svB) 95%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:svlabshine 6s ease-in-out infinite alternate}
+@keyframes svlabshine{from{background-position:0% 0}to{background-position:100% 0}}
+#sideview .sv2-day{text-shadow:0 0 16px color-mix(in srgb,var(--svA) 50%,transparent)}
+#sideview .sv2-rule{background:linear-gradient(90deg,var(--svA),var(--svB));box-shadow:0 0 12px color-mix(in srgb,var(--svA) 55%,transparent)}
+#sideview .sv2-cap{text-shadow:0 2px 16px rgba(0,0,0,.5)}
+/* -- the screen wakes: a wider, tinted pass of light -- */
+#sideview .sv2-scrwrap::after{background:linear-gradient(112deg,rgba(255,255,255,0) 26%,color-mix(in srgb,var(--svA) 13%,transparent) 42%,rgba(255,255,255,.24) 50%,color-mix(in srgb,var(--svB) 11%,transparent) 58%,rgba(255,255,255,0) 74%)}
+#sideview.on .sv2-scrwrap::after{animation-duration:1.4s;animation-delay:.4s}
+/* -- choices: a spring under the finger, light on the chosen one -- */
+#sideview .sv2-qbtn{transition:background .15s ease,border-color .15s ease,opacity .25s ease,transform .18s cubic-bezier(.34,1.35,.4,1),box-shadow .25s ease}
+#sideview .sv2-qbtn:active{transform:scale(.972);box-shadow:0 1px 2px rgba(15,20,25,.07),0 0 0 5px rgba(29,155,240,.09)}
+#sideview .sv2-qbox.done .sv2-qbtn.sel{box-shadow:0 8px 20px rgba(29,155,240,.20);background-image:linear-gradient(100deg,rgba(255,255,255,0) 25%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 75%);background-size:220% 100%;animation:svselshine 1.15s ease .05s both}
+@keyframes svselshine{from{background-position:115% 0}to{background-position:-35% 0}}
+#sideview .sv2-minibtn{transition:transform .16s cubic-bezier(.34,1.35,.4,1),box-shadow .25s ease}
+#sideview .sv2-minibtn:active{transform:scale(.96)}
+#sideview .sv2-minibtn.solid{box-shadow:0 6px 16px rgba(29,155,240,.28)}
+/* -- the way on: a slow sheen crosses the next-day button -- */
+#sideview .sv2-next{position:relative;overflow:hidden}
+#sideview .sv2-next:not(.dis)::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 70%);transform:translateX(-130%);animation:svnextshine 3.8s ease-in-out 1.4s infinite;pointer-events:none}
+@keyframes svnextshine{0%{transform:translateX(-130%)}38%,100%{transform:translateX(130%)}}
+/* -- small lights: his typing glows, a notification lands with a ring -- */
+#sideview .sv2-typing{animation:svline2 .35s ease both,svtpglow 1.6s ease-in-out .35s infinite}
+@keyframes svtpglow{0%,100%{box-shadow:0 3px 10px rgba(15,20,25,.07)}50%{box-shadow:0 3px 16px color-mix(in srgb,var(--svA) 28%,transparent)}}
+#sideview .sv2-notif .ic{animation:svicpulse 1.5s ease .3s both}
+@keyframes svicpulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--svB) 38%,transparent)}100%{box-shadow:0 0 0 10px rgba(249,24,128,0)}}
+#sideview .sv2-act.like.pressing{filter:drop-shadow(0 0 7px rgba(249,24,128,.5))}
+/* -- his sheets rise a touch softer -- */
+#sideview .sv3-sheet{animation-name:svsheet2}
+@keyframes svsheet2{from{opacity:0;transform:translateY(12px) scale(.992)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#sideview::after,#sideview.on .sv2-inner,#sideview.closing .sv2-inner,#sideview .sv2-lab,#sideview .sv2-qbox.done .sv2-qbtn.sel,#sideview .sv2-next:not(.dis)::before,#sideview .sv2-typing,#sideview .sv2-notif .ic{animation:none}#sideview .sv-amb{display:none}}
 /* ===== v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, the
    counterpart to Hiroto's live scene (v443): not a stream imitation
    but the announcement minute itself, replayed on a light real-X
@@ -3520,7 +3583,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v484</p>
+  <p class="ver">v485</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3703,7 +3766,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v484</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v485</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3920,6 +3983,7 @@ input,textarea{font-size:16px}
     </div>
   </div>
   <div id="sideview" role="dialog" aria-label="彼の画面">
+    <div class="sv-amb" id="sv-amb" aria-hidden="true"></div>
     <div class="sv2-inner">
       <div class="sv3-top">
         <span class="sv2-lab">SIDE ― 彼の画面</span>
@@ -4017,7 +4081,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v484</p>
+    <p class="ver">v485</p>
   </div>
 </section>
 </div>
@@ -7065,6 +7129,11 @@ function svSharePost(a,tx){const A=ACC[a];const url="https://x.com/"+(A?A.h.repl
 function svToggleBmk(el){const on=el.classList.toggle("on");const num=el.querySelector("span");el.innerHTML=on?SVI.bmkF:SVI.bmk;if(num)el.appendChild(num);}
 function svHidePosts(hosts,label){if(!hosts.length)return;const first=hosts[0];const note=svEl("div","sv2-hidden");note.appendChild(svEl("span",null,label));const un=svEl("button","sv2-undo","元に戻す");un.type="button";un.addEventListener("click",e=>{e.stopPropagation();hosts.forEach(h=>{h.style.display="";});note.remove();});note.appendChild(un);first.parentNode.insertBefore(note,first);hosts.forEach(h=>{h.style.display="none";});}
 function svPostMenu(postEl){if(!postEl||!postEl._pb)return;const b=postEl._pb;const A=ACC[b.a];const own=b.a===tgtKey();const box=svEl("div");box.appendChild(svSheetTop(own?"自分のポスト":"ポスト"));const item=(label,fn,danger)=>{const it=svEl("div","sv2-mi"+(danger?" danger":""),label);it.addEventListener("click",e=>{e.stopPropagation();svSheetClose();fn();});box.appendChild(it);};const bmkEl=postEl.querySelector('[data-svx="bmk"]')||postEl._bmkEl;item(bmkEl&&bmkEl.classList.contains("on")?"ブックマークを取り消す":"ブックマークする",()=>{if(bmkEl)svToggleBmk(bmkEl);});item("共有する",()=>svSharePost(b.a,b.tx));if(!own){item("このポストに興味がない",()=>{svHidePosts([postEl.closest(".sv2-blk")||postEl],"このポストは表示されません");});item(A.n+" さんをミュート",()=>{const hosts=[];document.querySelectorAll("#sv2-scr .sv2-post").forEach(p=>{if(p._pb&&p._pb.a===b.a)hosts.push(p.closest(".sv2-blk")||p);});svHidePosts(hosts,A.n+" さんをミュートしました");svToast(A.n+" さんをミュートしました");},1);}svSheet(box);}
+/* v485: a few quiet motes of light drift behind his screen - the
+   ending ambient layer's family (motes, sparks, embers), tinted by
+   route in the CSS grading. Pure dressing: rebuilt on every open,
+   never read back, and hidden under prefers-reduced-motion. */
+function svAmb(route){const box=$("#sv-amb");if(!box)return;box.innerHTML="";const kinds=route==="sakuya"?["mote","mote","spark"]:["spark","ember","mote"];for(let i=0;i<9;i++){const s=document.createElement("span");const k=kinds[i%kinds.length];s.className="amb "+k;const sz=(k==="spark"?4:3)+Math.random()*4;s.style.left=(4+Math.random()*92)+"%";if(k==="spark")s.style.top=(8+Math.random()*68)+"%";s.style.width=sz+"px";s.style.height=sz+"px";s.style.setProperty("--dx",((Math.random()*56)-28)+"px");s.style.animationDuration=(8+Math.random()*7)+"s";s.style.animationDelay=(-Math.random()*13)+"s";box.appendChild(s);}}
 function svTyping(){if(svCur.typed)return;const qb=document.querySelector("#sv2-home .sv2-qbox");if(!qb)return;svCur.typed=1;const host=qb.closest(".sv2-blk")||qb.parentNode;const tb=svEl("div","sv2-bub l sv2-typing");tb.innerHTML="<i></i><i></i><i></i>";host.insertBefore(tb,qb);svLater(()=>{tb.remove();},1600);}
 function svNavSync(){const bot=$("#sv3-bot");if(!bot)return;bot.querySelectorAll("[data-nav]").forEach(s=>s.classList.toggle("on",s.getAttribute("data-nav")===svCur.view));}
 function svShowSub(view){const home=$("#sv2-home"),sub=$("#sv2-sub");if(!home||!sub)return;home.style.display="none";sub.style.display="";svCur.view=view;$("#sv2-scr").scrollTop=0;svNavSync();}
@@ -7112,7 +7181,7 @@ const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";
 svWire(scr,sc);svSyncNext();
 const cap=$("#sv2-cap");cap.textContent=sc.cap||"";cap.style.display=sc.cap?"":"none";cap.style.animationDelay=(0.3+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
 const tap=$("#sv2-next");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
-const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
+const ov=$("#sideview");ov.classList.remove("svr-hiroto","svr-sakuya","svd-1","svd-2","svd-3","svd-4","svd-5","svd-6");ov.classList.add("svr-"+tgtKey(),"svd-"+d);svAmb(tgtKey());ov.classList.remove("closing");ov.classList.add("on");}
 function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;svClearTmrs();ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
 /* v475: tap-to-go-on is gone. The interlude closes only from its
    own next-day button; taps inside the scene do their own work or

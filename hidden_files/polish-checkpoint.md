@@ -3280,3 +3280,14 @@ Playwright実駆動（390×844）で両ルートを通し、全ペイン・全�
 - 修正：Day1（chasecard 表示時）だけ HUD の tuck を解除。CSS に `#status-hud.no-tuck{margin-top:12px}` を追加し、renderDayBanner で chasecard の表示切替と並べて `#status-hud` に .no-tuck を付け外し（S.ch===1 のときだけ付与）。Day2以降はクラスが外れ、従来の -20px tuck がそのまま効く
 - 絶対条件の維持：fxcheck で fx254・cond82・BUZZキー112・img79 が HEAD（v483）と完全一致（順序列まで同一）。エンディング条件・セーブ形式は不変。版数3箇所 v484 統一
 - 検証：Playwright実駆動（/tmp/verify484.py、390×844）計20チェック全PASS・エラー0。Day1＝chasecard 全高70pxが完全表示、HUD margin-top 12px、カード間ギャップ正確に12px、サブテキストと再生ボタンの下端が HUD 上端より上にあることを実測し、スクショ /tmp/v484-after-day1.png で重なり解消を目視確認。カードタップでプレイヤーシートが開き公式 embed の iframe が生成され、閉じると破棄されることも確認。Day2＝chasecard 非表示・.no-tuck 除去・margin-top -20px 復帰・バナー/HUD の重なり20pxが従来どおりであることを実測。両ルート通し→エンディング→Day7→FIN 到達
+
+## v485（2026-11-18）彼の画面の豪華化 第4弾 ― ルート×日別の色調グレーディングと幕間の格上げ
+- 本人指示（2026-11-18）：「彼の画面をもっと豪華に」。先行する v483・v484 の両コミット着地とツリークリーンを確認してから着手。線引きは v448／v464 と同じく**演出レイヤーのみ**：彼の画面の中身（手書きテキスト・選択肢と結果・acts・ポスト内容・実X準拠の体裁と本編同寸の寸法）・数字・セーブ形式・S.sv の結果保持は全て不変。冒頭フローは無変更
+- 色調グレーディング：showSide が #sideview に `svr-<route>` と `svd-<day>` を付け、CSS変数 --svA／--svB／--svDeep で幕全体の色調を制御。ひろと編＝紫#7856ff→ピンク#f91880（従来のアイデンティティ）、サクヤ編＝青#1d9bf0→ティール#5eead4。--svDeep は Day1の10%→Day6の25%へ日ごとに深まる。幕のビネット（::before）はこの変数で再構成し、上部には呼吸する薄い光（::after、svbreathe 6.5s）を追加
+- 環境粒子：幕の背後に #sv-amb レイヤーを新設し、showSide のたびに JS（svAmb）が9粒を生成。エンディング環境粒子（v448）の同族（mote／spark／ember）を再利用し、ルートで配合を変えた（ひろと＝spark・ember・mote／サクヤ＝mote・mote・spark）。transform／opacity のみ、prefers-reduced-motion ではレイヤーごと非表示
+- 開幕・閉幕の格上げ：.sv2-inner に svrise（18pxの浮き上がり＋フェード、.55s）を追加し、閉幕は svsettle（10px沈んで消える）。svwake（v464）は帯を広げ、両端にルート色の薄いティントを混ぜて 1.4s に質上げ
+- 章タイポグラフィ：.sv2-lab にタイトルと同じ「光が流れるグラデーション文字」をルート色で適用（background-clip:text＋svlabshine 6s）。 .sv2-day にルート色の淡いグロー、.sv2-rule はルート色グラデ＋発光シャドウ、.sv2-cap に奥行きの text-shadow
+- 選択肢の押し心地：.sv2-qbtn の transition にバネ曲線（cubic-bezier(.34,1.35,.4,1)）と box-shadow を追加し、:active は scale(.972)＋リング。選ばれたボタン（.sel）は浮くシャドウ＋光の帯が1回流れる（svselshine）。下書きのミニボタン（.sv2-minibtn）にも同じバネと solid のグロー。「次の日へ」ボタンには LEVEL UP バンドと同じ流れる光（svnextshine、.dis 時は無効）
+- 小さな光：彼の入力中バブル（.sv2-typing）にルート色のグローが脈打つ svtpglow を追加。通知アイコン（.sv2-notif .ic）は着地時にリングが1回広がる svicpulse。Day6の押せないいいねは pressing 中だけピンクの drop-shadow（押せない仕様自体は不変）。彼のシート（.sv3-sheet）の出現は svsheet2（scale .992 併用）に微格上げ
+- 絶対条件の維持：fxcheck で fx254・cond82・BUZZキー112・img79 が HEAD（v484）と完全一致。彼の画面の本編同寸・タップ送りなし（不活性タップで閉じないことを実測）・S.sv 記録は不変。版数3箇所 v485 統一
+- 検証：Playwright実駆動（/tmp/verify485.py、390×844）両ルート＋reduced-motion の計100超チェック全PASS・エラー0。全12場面でグレーディングクラス（svr-/svd-）・粒子9粒・lab の clip:text・ルート色変数（ひろと#7856ff／サクヤ#1d9bf0）を実測し、選択→done／sel／S.sv記録／次へボタンの有効化まで各場面で確認。メッセージ場面では入力中バブルの animation-name に svtpglow が入ることも確認。両ルート通し→エンディング→Day7→FIN 到達。reduced-motion では粒子レイヤー非表示・シーン無効化のうえ操作系が生きていることを確認。スクショ /tmp/v485-hiroto-day1.png・day5.png・day6.png、/tmp/v485-sakuya-day1.png・day4.png・day6.png で目視確認（Dayが進むほど幕下部の色が深まること、サクヤ編のルールが青→ティールになることを確認）
