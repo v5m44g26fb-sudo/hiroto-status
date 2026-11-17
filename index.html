@@ -3059,6 +3059,52 @@ input,textarea{font-size:16px}
 #annscene .an-hint{color:#8b98a5;font-size:10.5px;font-weight:800;letter-spacing:.24em}
 #annscene .an-close{border:none;cursor:pointer;background:#0f1419;color:#fff;font-size:14px;font-weight:900;border-radius:999px;padding:11px 22px}
 #annscene .an-close:active{transform:scale(.97)}
+/* ===== v453: intro flow declutter (title -> last setup screen only;
+   the game proper is untouched). The opening had grown loud in
+   layers: the title alone ran six ambient motions at once (poster
+   drift, type sheen, rule sheen, breathing CTA glow, a scrolling
+   ticker, a pulsing save pip) under two English caps ornaments and
+   a pink-glowing logo medallion, and every setup screen announced
+   its progress four ways (giant ghost numeral, STEP line, glowing
+   progress bar, n / 4 count), stacked a gradient bar and an English
+   caption under each heading, cascaded up to eleven blocks in on
+   entry, and shouted the selected card in a three-colour gradient
+   frame. Now: one ambient motion per screen (the title keeps the
+   slow sheen in its type, v448), progress speaks once (STEP line +
+   a quiet white hairline bar), entrances are a single rise of the
+   whole screen, the selected card is a white frame on dark glass,
+   and the first-follower screen lets the blueprint panel alone
+   carry the summary (its recap note duplicated it). No text,
+   option, fx or destination changes. ===== */
+/* -- title: still the poster, one moving light -- */
+#scr-title::before{animation:none}
+#scr-title .xlogo{box-shadow:none;border-color:rgba(255,255,255,.26)}
+#scr-title.booted .t-rule{animation:titlein .6s cubic-bezier(.2,.8,.25,1) .88s both}
+#scr-title .t-rule{background-image:linear-gradient(90deg,#7856ff,#f91880);background-size:100% 100%}
+#scr-title #btn-start{animation:titlein .6s cubic-bezier(.2,.8,.25,1) 1.12s both;box-shadow:0 14px 32px rgba(249,24,128,.35),inset 0 1px 0 rgba(255,255,255,.35)}
+#scr-title .flowsteps span::before{display:none}
+#scr-title .flowsteps span{color:rgba(255,255,255,.62);padding:0 11px}
+.ts-prog i.now{animation:none}
+/* -- setup: progress in one voice, no ghost numeral -- */
+.setup-ghost{display:none}
+.prog .pnum{display:none}
+.prog .track{height:2px}
+.prog .track i{background:#fff;box-shadow:none}
+.setup .step::before{background:rgba(255,255,255,.55)}
+.setup h2::after{display:none}
+.s-en{color:rgba(201,184,255,.72)}
+/* -- setup: one entrance for the whole screen, not a cascade -- */
+.screen.intro.on .setup>*:not(.setup-ghost){animation:none}
+.screen.intro.on .setup{animation:setupin .55s cubic-bezier(.2,.8,.25,1) both}
+@keyframes setupin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* -- setup: the selected card in a quiet white frame -- */
+.setup .opt.sel{border:1.5px solid rgba(255,255,255,.85);background:linear-gradient(165deg,rgba(255,255,255,.10),rgba(255,255,255,.04));box-shadow:0 14px 30px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.16)}
+.setup .opt.sel::after{background:#fff;color:#0f1419;box-shadow:none}
+.setup .opt.sel .cimg{border-color:rgba(255,255,255,.85)}
+/* -- first follower: the blueprint panel alone summarises -- */
+#first-recap{display:none}
+.setup-sum::before{background:linear-gradient(90deg,#7856ff,#f91880)}
+@media (prefers-reduced-motion:reduce){.screen.intro.on .setup{animation:none}}
 </style>
 </head>
 <body>
@@ -3074,7 +3120,6 @@ input,textarea{font-size:16px}
   <svg class="xlogo" viewBox="0 0 24 24" fill="#fff"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.2l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18h1.7L7.1 3.9H5.3L17.8 20z"/></svg>
   <p class="t-eyebrow">NAO ― OFFICIAL X OPENING</p>
   <h1>デビューしたら、<br>彼と同じステージの件</h1>
-  <p class="t-en" aria-hidden="true">― ON THE SAME STAGE ―</p>
   <div class="t-rule"></div>
   <p class="sub">10年以上の練習生期間を経て、デビュー。<br>「なお」の公式X、開設。<br>バズるか、炎上するか。あの人に、少しずつ近づけるか。</p>
   <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>相手選択</span><span>最初のフォロワー</span></div>
@@ -3094,8 +3139,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <div class="t-ticker" aria-hidden="true"><div class="t-ticker-in"><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span><span>10年越しのデビュー。<i>◆</i>バズるか、炎上するか。<i>◆</i>あの人と、同じステージへ。<i>◆</i>二人だけの秘密。<i>◆</i>7日間の物語。<i>◆</i></span></div></div>
-  <p class="ver">v452</p>
+  <p class="ver">v453</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3275,7 +3319,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v452</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v453</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3577,7 +3621,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v452</p>
+    <p class="ver">v453</p>
   </div>
 </section>
 </div>
