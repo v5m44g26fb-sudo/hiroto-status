@@ -2911,7 +2911,7 @@ input,textarea{font-size:16px}
 #sideview{position:absolute;inset:0;z-index:124;display:none;color:#eef;background:linear-gradient(168deg,#0b0e1f 0%,#10142e 55%,#1c1030 100%)}
 #sideview.on{display:flex;align-items:center;justify-content:center;animation:difade .3s ease}
 #sideview.closing{animation:difadeout .18s ease forwards}
-#sideview .sv2-inner{width:100%;max-width:340px;margin:0 24px;text-align:left;max-height:calc(var(--app-h,100dvh)*.94);overflow-y:auto;scrollbar-width:none}
+#sideview .sv2-inner{width:100%;height:100%;text-align:left;display:flex;flex-direction:column;padding:14px 14px 12px;box-sizing:border-box}
 #sideview .sv2-inner::-webkit-scrollbar{display:none}
 #sideview .sv2-lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:.26em;color:#8fd0ff}
 #sideview .sv2-day{display:block;margin-top:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:rgba(235,238,255,.55)}
@@ -2927,18 +2927,69 @@ input,textarea{font-size:16px}
    stream studio, X, drafts, messages, a photo viewer, a music
    player. The scenes' own hand-written words live inside the
    screens (posts, drafts, fields, notifications); a short caption
-   under the phone carries only what no screen can show. ===== */
-#sideview .sv2-ph{height:118px;object-fit:cover;object-position:center 30%;margin:0 0 14px}
-#sideview .sv2-phone{position:relative;width:min(302px,100%);margin:0 auto;background:#05050a;border-radius:34px;padding:9px;box-shadow:0 26px 60px rgba(0,0,0,.6),0 0 0 1.5px rgba(255,255,255,.16);animation:svphone .55s cubic-bezier(.2,.8,.25,1) .08s both}
-@keyframes svphone{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
-#sideview .sv2-scrwrap{border-radius:26px;overflow:hidden;background:#fff;color:#0f1419;display:flex;flex-direction:column}
-#sideview .sv2-phone.th-dark .sv2-scrwrap{background:#101014;color:#f4f4f6}
-#sideview .sv2-status{display:flex;align-items:center;justify-content:space-between;padding:9px 16px 3px;font-size:12px;font-weight:700;letter-spacing:.04em;font-variant-numeric:tabular-nums}
-#sideview .sv2-sig svg{display:block;width:44px;height:12px;fill:currentColor;stroke:currentColor}
-#sideview .sv2-appbar{display:flex;align-items:center;gap:7px;padding:7px 14px 8px;font-size:13.5px;font-weight:800;border-bottom:1px solid rgba(130,140,160,.18)}
+   under the phone carries only what no screen can show. =====
+   ===== v466: the device mock is gone (the user's correction: not
+   an iPhone frame - HIS side of the app). The scene IS his app
+   screen, full-bleed: the app he is in fills the view, on his
+   account, and the small operations on it trace what he did -
+   scrolling his timeline, opening a draft, typing and erasing,
+   a thumb that rests on the like button and lifts without
+   pressing. Operations never branch the story; a plain tap
+   anywhere else still walks on, as before. ===== */
+#sideview .sv2-ph{height:104px;object-fit:cover;object-position:center 30%;margin:0 0 10px;border-radius:14px}
+#sideview .sv3-top{display:flex;align-items:baseline;gap:10px}
+#sideview .sv3-top .sv2-day{margin-top:0}
+#sideview .sv3-back{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.18em;color:rgba(235,238,255,.42)}
+#sideview .sv2-rule{margin:10px 0 12px}
+#sideview .sv3-app{flex:1;min-height:0;display:flex;animation:svappin .45s cubic-bezier(.2,.8,.25,1) .05s both}
+@keyframes svappin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#sideview .sv2-scrwrap{flex:1;min-height:0;border-radius:18px;overflow:hidden;background:#fff;color:#0f1419;display:flex;flex-direction:column;box-shadow:0 18px 44px rgba(0,0,0,.5)}
+#sideview .sv3-app.th-dark .sv2-scrwrap{background:#101014;color:#f4f4f6}
+#sideview .sv2-appbar{display:flex;align-items:center;gap:7px;padding:10px 14px 9px;font-size:13.5px;font-weight:800;border-bottom:1px solid rgba(130,140,160,.18);flex:none}
 #sideview .sv2-chev{font-size:19px;line-height:1;font-weight:400;opacity:.65;margin-top:-2px}
-#sideview .sv2-scr{padding:12px 13px 14px;display:flex;flex-direction:column;gap:10px;min-height:296px}
-#sideview .sv2-homebar{width:110px;height:4px;border-radius:3px;background:currentColor;opacity:.28;margin:2px auto 7px}
+#sideview .sv3-acct{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#7a8494}
+#sideview .sv3-acct img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+#sideview .sv2-scr{padding:12px 13px 14px;display:flex;flex-direction:column;gap:10px;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior:contain}
+#sideview .sv2-scr::-webkit-scrollbar{display:none}
+#sideview .sv3-bot{flex:none}
+#sideview .sv3-bot:empty{display:none}
+#sideview .sv3-xnav{display:flex;align-items:center;justify-content:space-around;padding:8px 6px 9px;border-top:1px solid rgba(130,140,160,.18)}
+#sideview .sv3-xnav svg{width:21px;height:21px;fill:currentColor;opacity:.85}
+#sideview .sv3-xnav img{width:24px;height:24px;border-radius:50%;object-fit:cover}
+#sideview .sv3-msgbar{display:flex;align-items:center;gap:8px;padding:8px 12px 10px;border-top:1px solid rgba(130,140,160,.18)}
+#sideview .sv3-msgbar .in{flex:1;border:1px solid rgba(130,140,160,.35);border-radius:999px;padding:7px 13px;font-size:12.5px;color:#98a2b3}
+#sideview .sv3-msgbar svg{width:19px;height:19px;fill:#1d9bf0;flex:none}
+#sideview .sv3-sheet{position:absolute;inset:0;z-index:6;background:inherit;display:flex;flex-direction:column;padding:14px 14px 16px;animation:svsheet .28s cubic-bezier(.2,.8,.25,1) both}
+@keyframes svsheet{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+#sideview .sv3-sheet .sh-top{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:900;letter-spacing:.1em;color:#7a8494;margin-bottom:12px}
+#sideview .sv3-sheet .sh-x{margin-left:auto;font-size:17px;color:#98a2b3;padding:2px 6px}
+#sideview .sv3-sheet .sh-tx{font-size:16.5px;line-height:1.75;font-weight:600;white-space:pre-wrap;word-break:break-word}
+#sideview .sv3-sheet .sh-note{margin-top:12px;font-size:11.5px;font-weight:700;color:#1d9bf0}
+#sideview [data-svx]{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#sideview .sv2-row.picked{border-color:rgba(249,24,128,.65);background:rgba(249,24,128,.07)}
+#sideview .sv2-row.saved{opacity:.75}
+#sideview .sv2-btn.done{background:#3f4756;box-shadow:none}
+#sideview .th-light .sv2-btn.done{background:#3f4756}
+#sideview .sv2-field.focus{border-color:#7856ff;box-shadow:0 0 0 3px rgba(120,86,255,.18)}
+#sideview .sv2-tbl tr.taprow.on td{background:rgba(120,86,255,.13)}
+#sideview .sv2-notif.read{opacity:.5}
+#sideview .sv2-notif.read .ic{background:rgba(130,140,160,.16);color:#8a94a6}
+#sideview .sv2-ditem:active{transform:scale(.985)}
+#sideview .sv2-bub .bmeta{display:none;font-size:9.5px;font-weight:700;color:#98a2b3;margin-top:3px}
+#sideview .sv2-bub.showmeta .bmeta{display:block}
+#sideview .sv2-bub.r .bmeta{text-align:right;color:rgba(255,255,255,.75)}
+#sideview .sv2-photo.open .sv2-pview{height:308px}
+#sideview .sv2-pview{transition:height .45s cubic-bezier(.2,.8,.25,1)}
+#sideview .sv2-draft.open{border-style:solid;background:rgba(200,60,60,.1)}
+#sideview .sv2-act.like .hf{position:absolute;left:0;top:0;width:15px;height:15px;color:#f91880;opacity:0;transform:scale(.6);pointer-events:none}
+#sideview .sv2-act.like.pressing .hf{opacity:.55;transform:scale(1.3);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.25,1)}
+#sideview .sv2-act.like.pressing{color:#f91880}
+#sideview .sv2-act.like .hf svg{width:15px;height:15px;display:block}
+#sideview .sv2-act.like{touch-action:none;user-select:none;-webkit-user-select:none}
+#sideview .sv2-send{transition:transform .12s ease}
+#sideview .sv2-send:active{transform:scale(.93)}
+#sideview .sv2-comp.struck .tx{text-decoration:line-through;color:#98a2b3}
+#sideview .sv2-comp.struck .tx::after{display:none}
 #sideview .sv2-blk{animation:svline2 .6s ease both}
 #sideview .sv2-stack{display:flex;flex-direction:column;gap:8px}
 #sideview .sv2-cap{font-size:13px;line-height:1.9;color:rgba(238,240,255,.88);margin:16px 2px 0;animation:svline2 .7s ease both}
@@ -3180,7 +3231,7 @@ input,textarea{font-size:16px}
 #livescene .lv-frame::after{content:"";position:absolute;inset:0;z-index:5;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.13) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);pointer-events:none}
 #livescene.on .lv-frame::after{animation:lvsheen 1.15s ease .25s both}
 @keyframes lvsheen{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
-@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv2-phone,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after{animation:none}}
+@media (prefers-reduced-motion:reduce){#scr-title.booted h1,#scr-title.booted .t-rule,#scr-ending #end-title .et-main,.sv-seg i::after,#dayresult .dr-lvup::before,#dayresult .dr-lvup::after,#livescene .lv-live,#sideview .sv2-rule,#sideview .sv2-blk,#sideview .sv3-app,#sideview .sv3-sheet,#sideview .sv2-cap,#sideview .sv2-act.like.hov::after,#sideview .sv2-field .tx::after,#sideview .sv2-comp .tx::after{animation:none}}
 /* ===== v464: presentation round 3 - the same discipline as v448
    (game-side stage dressing only; the real-X surfaces keep their
    fidelity). The day curtain's big number now breathes the slow
@@ -3326,7 +3377,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v465</p>
+  <p class="ver">v466</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3506,7 +3557,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v465</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v466</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3723,16 +3774,19 @@ input,textarea{font-size:16px}
   </div>
   <div id="sideview" role="dialog" aria-label="彼の画面">
     <div class="sv2-inner">
-      <span class="sv2-lab">SIDE ― 彼の画面</span>
-      <span class="sv2-day" id="sv2-day">DAY 1</span>
+      <div class="sv3-top">
+        <span class="sv2-lab">SIDE ― 彼の画面</span>
+        <span class="sv2-day" id="sv2-day">DAY 1</span>
+        <span class="sv3-back">タップで戻る</span>
+      </div>
       <div class="sv2-rule"></div>
       <img class="sv2-ph" id="sv2-ph" alt="" style="display:none">
-      <div class="sv2-phone" id="sv2-phone">
+      <div class="sv3-app" id="sv3-app">
         <div class="sv2-scrwrap">
-          <div class="sv2-status"><span id="sv2-clock">17:40</span><span class="sv2-sig"><svg viewBox="0 0 44 12" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="6" rx="1"/><rect x="10" y="3" width="3" height="8" rx="1"/><rect x="15" y="1" width="3" height="10" rx="1"/><path d="M24.5 8.6a4.6 4.6 0 0 1 6 0M22.8 6.2a7.4 7.4 0 0 1 9.4 0" fill="none" stroke-width="1.6" stroke-linecap="round"/><circle cx="27.5" cy="10.4" r="1.3"/><rect x="35" y="1.5" width="8" height="9" rx="2.4" fill="none" stroke-width="1.1"/><rect x="36.6" y="3.1" width="3.4" height="5.8" rx="1"/></svg></span></div>
-          <div class="sv2-appbar"><span class="sv2-chev">‹</span><span id="sv2-app">X</span></div>
+          <div class="sv2-appbar"><span class="sv2-chev">‹</span><span id="sv2-app">X</span><span class="sv3-acct" id="sv3-acct"></span></div>
           <div class="sv2-scr" id="sv2-scr"></div>
-          <div class="sv2-homebar"></div>
+          <div class="sv3-bot" id="sv3-bot"></div>
+          <div class="sv3-sheet" id="sv3-sheet" style="display:none"></div>
         </div>
       </div>
       <p class="sv2-cap" id="sv2-cap"></p>
@@ -3816,7 +3870,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v465</p>
+    <p class="ver">v466</p>
   </div>
 </section>
 </div>
@@ -6442,7 +6496,15 @@ X, his drafts, a chat with the PR desk, a photo he opens and
 closes, the song on repeat). The hand-written words of the scene
 live inside those screens as posts, drafts, fields and
 notifications; one short caption under the phone carries what no
-screen can show. Same insertion point, same tap-to-go-on flow. */
+screen can show. Same insertion point, same tap-to-go-on flow.
+v466: not a phone at all (the user's correction) - the scene IS
+his side of the app, full-bleed, on his account: his X with his
+avatar in the bar, his stream studio, his drafts, his messages.
+And it can be touched: each screen carries the small operations
+that trace what he did there (a time he re-set, words typed and
+erased, a draft opened, a thumb resting on the like button and
+lifting away unpressed). Operations never write state and never
+branch; a plain tap elsewhere still walks on. */
 const SVI={
 heart:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 16.9 3.2 13.7 3.2 10.3c0-2.6 2-4.6 4.5-4.6 1.7 0 3.4.9 4.3 2.4.9-1.5 2.6-2.4 4.3-2.4 2.5 0 4.5 2 4.5 4.6 0 3.4-3.2 6.6-8.8 10.4z" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>',
 heartF:'<svg viewBox="0 0 24 24"><path d="M12 20.7C6.4 16.9 3.2 13.7 3.2 10.3c0-2.6 2-4.6 4.5-4.6 1.7 0 3.4.9 4.3 2.4.9-1.5 2.6-2.4 4.3-2.4 2.5 0 4.5 2 4.5 4.6 0 3.4-3.2 6.6-8.8 10.4z"/></svg>',
@@ -6458,29 +6520,34 @@ hp:'<svg viewBox="0 0 24 24"><path d="M4 13a8 8 0 0 1 16 0v1.5a3 3 0 0 1-3 3h-1v
 belloff:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16zM10 21a2.2 2.2 0 0 0 4 0M4.5 3.8l15 15-1.4 1.4-15-15z"/></svg>',
 cal:'<svg viewBox="0 0 24 24"><path d="M6 3v2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3h-2v2H8V3zm13 8H5V8h14z"/></svg>',
 lock:'<svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 1 5 5v3h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h1V8a5 5 0 0 1 5-5zm-3 8h6V8a3 3 0 1 0-6 0z"/></svg>',
-img:'<svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm3.5 4A1.8 1.8 0 1 0 9.3 7.2 1.8 1.8 0 0 0 7.5 9zM5 17.5l4.7-4.7 3 3L16 12.5l3 3v1.2a.8.8 0 0 1-.8.8z"/></svg>'};
+img:'<svg viewBox="0 0 24 24"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm3.5 4A1.8 1.8 0 1 0 9.3 7.2 1.8 1.8 0 0 0 7.5 9zM5 17.5l4.7-4.7 3 3L16 12.5l3 3v1.2a.8.8 0 0 1-.8.8z"/></svg>',
+home:'<svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-4.5v-6h-3v6H6v-9H3z"/></svg>',
+search:'<svg viewBox="0 0 24 24"><path d="M10.5 3a7.5 7.5 0 1 0 4.6 13.5l4.7 4.7 1.7-1.7-4.7-4.7A7.5 7.5 0 0 0 10.5 3zm0 2.5a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"/></svg>',
+bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16zM10 21a2.2 2.2 0 0 0 4 0z"/></svg>',
+mail:'<svg viewBox="0 0 24 24"><path d="M3.5 6h17v12h-17zM3.8 6.8l8.2 5.9 8.2-5.9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+send:'<svg viewBox="0 0 24 24"><path d="M3.4 20.4l17.8-7.5c.8-.35.8-1.45 0-1.8L3.4 3.6c-.66-.29-1.39.2-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .72.73 1.2 1.39.91z"/></svg>'};
 function svEl(tag,cls,tx){const e=document.createElement(tag);if(cls)e.className=cls;if(tx!=null)e.textContent=tx;return e;}
 function svBlock(b){
 const w=svEl("div","sv2-blk");
 if(b.t==="head"){const d=svEl("div","sv2-head");d.appendChild(svEl("b",null,b.tx));if(b.sub)d.appendChild(svEl("span",null,b.sub));w.appendChild(d);}
 else if(b.t==="shead"){w.appendChild(svEl("div","sv2-sh",b.tx));}
-else if(b.t==="row"){const d=svEl("div","sv2-row");d.appendChild(svEl("span","lab",b.lab));const r=svEl("span","rwrap");r.appendChild(svEl("span","val"+(b.strike?" strike":"")+(b.hot?" hot":""),b.val));if(b.sub)r.appendChild(svEl("span","sub",b.sub));d.appendChild(r);if(b.chip)d.appendChild(svEl("span","sv2-chip",b.chip));w.appendChild(d);}
-else if(b.t==="field"){const d=svEl("div","sv2-field");d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));w.appendChild(d);}
-else if(b.t==="btn"){w.appendChild(svEl("div","sv2-btn",b.tx));}
+else if(b.t==="row"){const d=svEl("div","sv2-row");if(b.pick)d.setAttribute("data-svx","row");d.appendChild(svEl("span","lab",b.lab));const r=svEl("span","rwrap");r.appendChild(svEl("span","val"+(b.strike?" strike":"")+(b.hot?" hot":""),b.val));if(b.sub)r.appendChild(svEl("span","sub",b.sub));d.appendChild(r);if(b.chip)d.appendChild(svEl("span","sv2-chip",b.chip));w.appendChild(d);}
+else if(b.t==="field"){const d=svEl("div","sv2-field");d.setAttribute("data-svx","field");d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));w.appendChild(d);}
+else if(b.t==="btn"){const bd=svEl("div","sv2-btn",b.tx);if(b.save)bd.setAttribute("data-svx","save");w.appendChild(bd);}
 else if(b.t==="cal"){const d=svEl("div","sv2-cal");d.appendChild(svEl("span","tm",b.time));const m=svEl("div");m.appendChild(svEl("span","tx",b.tx));if(b.sub)m.appendChild(svEl("span","sub",b.sub));d.appendChild(m);w.appendChild(d);}
 else if(b.t==="stats"){const d=svEl("div","sv2-stats");b.items.forEach(it=>{const s=svEl("div","sv2-stat");s.appendChild(svEl("b",null,it[1]));s.appendChild(svEl("span",null,it[0]));d.appendChild(s);});w.appendChild(d);}
 else if(b.t==="note"){const d=svEl("div","sv2-note");const i=svEl("span");i.innerHTML=SVI[b.icon]||"";d.appendChild(i);d.appendChild(svEl("span",null,b.tx));w.appendChild(d);}
-else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h+(b.time?" ・ "+b.time:"")));m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));ac.appendChild(mk(SVI.repost,b.rp));ac.appendChild(mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":"")));ac.appendChild(mk(SVI.views,b.vw||""));m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
-else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
-else if(b.t==="notif"){const d=svEl("div","sv2-notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));w.appendChild(d);}
+else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));nh.appendChild(svEl("span",null,A.h+(b.time?" ・ "+b.time:"")));m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));ac.appendChild(mk(SVI.repost,b.rp));ac.appendChild(mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":"")));ac.appendChild(mk(SVI.views,b.vw||""));if(b.hov){const la=ac.querySelector(".sv2-act.like");if(la){la.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;la.appendChild(hf);}}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
+else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr","taprow");t2.setAttribute("data-svx","trow");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
+else if(b.t==="notif"){const d=svEl("div","sv2-notif");d.setAttribute("data-svx","notif");const ic=svEl("span","ic");ic.innerHTML=SVI.reply;d.appendChild(ic);const tx=svEl("div","tx");tx.appendChild(svEl("b",null,b.n));tx.appendChild(document.createTextNode(" 「"+b.tx+"」"));d.appendChild(tx);d.appendChild(svEl("span","tm",b.time));w.appendChild(d);}
 else if(b.t==="sent"){const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");const im=svEl("img","av");im.src=A.av;im.alt="";d.appendChild(im);const m=svEl("div");m.appendChild(svEl("span","who",A.n));m.appendChild(svEl("div","tx",b.tx));d.appendChild(m);w.appendChild(d);}
-else if(b.t==="draft"){const d=svEl("div","sv2-draft");d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));if(b.sub)d.appendChild(svEl("span","sub",b.sub));w.appendChild(d);}
-else if(b.t==="drafts"){w.classList.add("sv2-stack");b.items.forEach(it=>{const d=svEl("div","sv2-ditem"+(it.keep?" keep":" off"));d.appendChild(svEl("span","mk",it.keep?"✓":"✕"));d.appendChild(svEl("span","tx",it.tx));w.appendChild(d);});}
-else if(b.t==="chat"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.msgs.forEach(m=>{w.appendChild(svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]));});}
-else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vstage");const vb=svEl("span","sv2-vbtn");vb.innerHTML=b.icon==="play"?SVI.play:SVI.pause;st.appendChild(vb);st.appendChild(svEl("span","sv2-vdur",b.dur));d.appendChild(st);const bar=svEl("div","sv2-vbar");const bi=svEl("i");bi.style.width=(b.prog||0)+"%";bar.appendChild(bi);d.appendChild(bar);const md=svEl("div","sv2-vmeta");md.appendChild(svEl("b",null,b.title));md.appendChild(svEl("span",null,b.by+" ・ "+b.views));d.appendChild(md);w.appendChild(d);}
-else if(b.t==="player"){w.classList.add("sv2-stack");const al=svEl("div","sv2-album");al.innerHTML=SVI.note;al.appendChild(svEl("b",null,"Hearts2Hearts"));al.appendChild(svEl("span",null,"THE CHASE"));w.appendChild(al);const pt=svEl("div","sv2-ptitle");pt.appendChild(svEl("b",null,b.title));pt.appendChild(svEl("span",null,b.artist));w.appendChild(pt);const pb=svEl("div","sv2-pbar");const pi=svEl("i");pi.style.width=(b.prog||0)+"%";pb.appendChild(pi);w.appendChild(pb);const pc=svEl("div","sv2-pctl");const pv=svEl("span");pv.innerHTML=SVI.prev;pc.appendChild(pv);const big=svEl("span","big");big.innerHTML=SVI.play;pc.appendChild(big);const nx=svEl("span");nx.innerHTML=SVI.next;pc.appendChild(nx);w.appendChild(pc);}
-else if(b.t==="photo"){const d=svEl("div","sv2-photo");const pv=svEl("div","sv2-pview");pv.innerHTML='<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="72" cy="58" r="17"/><path d="M38 150c2-30 16-44 34-44s32 14 34 44z"/><circle cx="128" cy="52" r="20"/><path d="M92 150c2-34 17-50 36-50s34 16 36 50z"/></svg>';d.appendChild(pv);const pm=svEl("div","sv2-pmeta");pm.appendChild(svEl("b",null,b.date));pm.appendChild(svEl("span",null,b.place));const lk=svEl("span","lk");lk.innerHTML=SVI.lock;pm.appendChild(lk);d.appendChild(pm);w.appendChild(d);}
-else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-comp");const to=svEl("div","to");to.appendChild(document.createTextNode("返信先："));to.appendChild(svEl("b",null,b.to));c.appendChild(to);c.appendChild(svEl("div","tx",b.tx));const bar=svEl("div","bar");const ii=svEl("span","iic");ii.innerHTML=SVI.img;bar.appendChild(ii);bar.appendChild(svEl("span","sv2-send","返信する"));c.appendChild(bar);w.appendChild(c);if(b.old&&b.old.length){const o=svEl("div","sv2-old");o.appendChild(svEl("span","lab2","書き直した下書き"));b.old.forEach(x=>o.appendChild(svEl("div","orow",x)));w.appendChild(o);}}
+else if(b.t==="draft"){const d=svEl("div","sv2-draft");d.setAttribute("data-svx",b.replay?"replay":"draft");d.dataset.full=b.tx||"";d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));if(b.sub)d.appendChild(svEl("span","sub",b.sub));w.appendChild(d);}
+else if(b.t==="drafts"){w.classList.add("sv2-stack");b.items.forEach(it=>{const d=svEl("div","sv2-ditem"+(it.keep?" keep":" off"));d.setAttribute("data-svx","ditem");d.dataset.tx=it.tx;d.dataset.keep=it.keep?"1":"";d.appendChild(svEl("span","mk",it.keep?"✓":"✕"));d.appendChild(svEl("span","tx",it.tx));w.appendChild(d);});}
+else if(b.t==="chat"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.msgs.forEach(m=>{const bb=svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]);bb.setAttribute("data-svx","bub");bb.dataset.side=m[0]?"r":"l";bb.appendChild(svEl("span","bmeta",""));w.appendChild(bb);});}
+else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vstage");st.setAttribute("data-svx","vid");st.dataset.prog=b.prog||0;st.dataset.playing=b.icon==="play"?"":"1";const vb=svEl("span","sv2-vbtn");vb.innerHTML=b.icon==="play"?SVI.play:SVI.pause;st.appendChild(vb);st.appendChild(svEl("span","sv2-vdur",b.dur));d.appendChild(st);const bar=svEl("div","sv2-vbar");const bi=svEl("i");bi.style.width=(b.prog||0)+"%";bar.appendChild(bi);d.appendChild(bar);const md=svEl("div","sv2-vmeta");md.appendChild(svEl("b",null,b.title));md.appendChild(svEl("span",null,b.by+" ・ "+b.views));d.appendChild(md);w.appendChild(d);}
+else if(b.t==="player"){w.classList.add("sv2-stack");const al=svEl("div","sv2-album");al.innerHTML=SVI.note;al.appendChild(svEl("b",null,"Hearts2Hearts"));al.appendChild(svEl("span",null,"THE CHASE"));w.appendChild(al);const pt=svEl("div","sv2-ptitle");pt.appendChild(svEl("b",null,b.title));pt.appendChild(svEl("span",null,b.artist));w.appendChild(pt);const pb=svEl("div","sv2-pbar");const pi=svEl("i");pi.style.width=(b.prog||0)+"%";pb.appendChild(pi);w.appendChild(pb);const pc=svEl("div","sv2-pctl");const pv=svEl("span");pv.innerHTML=SVI.prev;pc.appendChild(pv);const big=svEl("span","big");big.setAttribute("data-svx","play");big.innerHTML=SVI.play;pc.appendChild(big);const nx=svEl("span");nx.innerHTML=SVI.next;pc.appendChild(nx);w.appendChild(pc);}
+else if(b.t==="photo"){const d=svEl("div","sv2-photo");d.setAttribute("data-svx","photo");const pv=svEl("div","sv2-pview");pv.innerHTML='<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="72" cy="58" r="17"/><path d="M38 150c2-30 16-44 34-44s32 14 34 44z"/><circle cx="128" cy="52" r="20"/><path d="M92 150c2-34 17-50 36-50s34 16 36 50z"/></svg>';d.appendChild(pv);const pm=svEl("div","sv2-pmeta");pm.appendChild(svEl("b",null,b.date));pm.appendChild(svEl("span",null,b.place));const lk=svEl("span","lk");lk.innerHTML=SVI.lock;pm.appendChild(lk);d.appendChild(pm);w.appendChild(d);}
+else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-comp");c.setAttribute("data-svx","comp");c.dataset.final=b.tx;const to=svEl("div","to");to.appendChild(document.createTextNode("返信先："));to.appendChild(svEl("b",null,b.to));c.appendChild(to);c.appendChild(svEl("div","tx",b.tx));const bar=svEl("div","bar");const ii=svEl("span","iic");ii.innerHTML=SVI.img;bar.appendChild(ii);const sd=svEl("span","sv2-send","返信する");sd.setAttribute("data-svx","send");bar.appendChild(sd);c.appendChild(bar);w.appendChild(c);if(b.old&&b.old.length){const o=svEl("div","sv2-old");o.appendChild(svEl("span","lab2","書き直した下書き"));b.old.forEach(x=>{const or2=svEl("div","orow",x);or2.setAttribute("data-svx","old");or2.dataset.tx=x;o.appendChild(or2);});w.appendChild(o);}}
 return w;}
 const SIDE_SCENES={
 hiroto:{
@@ -6488,10 +6555,10 @@ hiroto:{
 {t:"head",tx:"配信の予約",sub:"今日の配信"},
 {t:"row",lab:"タイトル",val:"雑談"},
 {t:"row",lab:"開始時刻",val:"19:00",strike:1,sub:"当初の予定"},
-{t:"row",lab:"開始時刻",val:"21:00",hot:1,chip:"変更済み"},
+{t:"row",lab:"開始時刻",val:"21:00",hot:1,chip:"変更済み",pick:1},
 {t:"field",lab:"理由",tx:"所用です"},
 {t:"cal",time:"18:00",tx:"デビューショーケース",sub:"Hearts2Hearts ― カレンダー登録済み"},
-{t:"btn",tx:"保存する"}],
+{t:"btn",tx:"保存する",save:1}],
 cap:"18時。彼はコメントも打たずに、最初から最後まで、その歌を聴いた。"},
 2:{ph:"assets/gen-hiroto-side-train.jpg",clock:"20:12",app:"X",blocks:[
 {t:"video",title:"デビューショーケース ― なお『The Chase』歌唱",by:"ゆな @yuna_nao",views:"再生 214,308回",dur:"0:47",prog:62,icon:"pause"},
@@ -6508,12 +6575,12 @@ cap:"テレビの前。コーラを置いて、19時を待つ。彼女の出番�
 {t:"shead",tx:"回っている表"},
 {t:"table",head:["日付","彼女の予定","彼の配信"],hl:[0,1],rows:[["デビューの日","ショーケース 18:00","開始 21:00"],["歌番組の日","放送 19:00","終了 18:58"],["ふだんの日","―","終了 23:30ごろ"]]},
 {t:"cal",time:"19:00",tx:"歌番組 ― なおの出番",sub:"次の出番も、カレンダーに入れてある"},
-{t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定"}],
+{t:"row",lab:"明日の配信",val:"21:00 開始",chip:"自分で設定",pick:1}],
 cap:"並べたのは他人でも、決めていたのは、自分だった。終わる時間は、明日も自分で決める。それだけは、変わらなかった。"},
 5:{clock:"21:06",app:"X",blocks:[
 {t:"shead",tx:"配信のコメント"},
 {t:"sent",tx:"……俺の話をしに来た人とだけ、話します"},
-{t:"draft",lab:"入力しかけたコメント",tx:"まって",sub:"送信されなかった"},
+{t:"draft",lab:"入力しかけたコメント",tx:"まって",sub:"送信されなかった",replay:1},
 {t:"shead",tx:"通知 ― まだ増えている"},
 {t:"notif",n:"通りすがり",tx:"ねえ、新人アイドルのこと、どう思う？",time:"12分"},
 {t:"notif",n:"名無し",tx:"18時58分の人だよね？ 答えてよ",time:"9分"},
@@ -6558,18 +6625,59 @@ cap:"何年も前の写真が、掘り返された日。彼はそれを開いて
 cap:"丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。その一行だけは、最初から決まっていた。送信の前に、一度だけ深く息を吸う。あとは、彼女の返事を待つだけだった。返事が来るまでの時間、彼はレッスン室で、何度もスマホを見た。"}}};
 let sideCb=null;
 function sideScene(d){const t=SIDE_SCENES[tgtKey()];return t?t[d]:null;}
+/* v466: the operations on his screen. Every timer a scene starts is
+   registered here and cleared when the scene closes or reopens, so
+   nothing types, plays or pulses behind the next screen. */
+let svTmrs=[];
+function svLater(fn,ms){const id=setTimeout(fn,ms);svTmrs.push(id);return id;}
+function svEvery(fn,ms){const id=setInterval(fn,ms);svTmrs.push(id);return id;}
+function svClearTmrs(){svTmrs.forEach(id=>{clearTimeout(id);clearInterval(id);});svTmrs=[];}
+function svType(el,text,done){let i=0;el.textContent="";const step=()=>{if(i<=text.length){el.textContent=text.slice(0,i);i++;svLater(step,55);}else if(done)done();};step();}
+function svErase(el,done){const step=()=>{const t=el.textContent;if(t.length){el.textContent=t.slice(0,-1);svLater(step,34);}else if(done)done();};step();}
+function svXNav(){const A=ACC[tgtKey()];const d=svEl("div","sv3-xnav");[SVI.home,SVI.search,SVI.bell,SVI.mail].forEach(s=>{const sp=svEl("span");sp.innerHTML=s;d.appendChild(sp);});const im=document.createElement("img");im.src=A.av;im.alt="";d.appendChild(im);return d;}
+function svMsgBar(){const d=svEl("div","sv3-msgbar");d.appendChild(svEl("span","in","メッセージを入力"));const sp=svEl("span");sp.innerHTML=SVI.send;d.appendChild(sp);return d;}
+/* Wire the small operations of one scene. Each traces an action of
+   his that the scene already tells (he changed the time, he typed
+   and erased, his thumb stopped on the like button); none of them
+   writes state, and every one stops its click from reaching the
+   tap-to-go-on handler underneath. */
+function svWire(scr,sc){
+scr.querySelectorAll('[data-svx="row"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("picked");});});
+scr.querySelectorAll('[data-svx="save"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();if(el.classList.contains("done"))return;el.classList.add("done");el.textContent="保存済み";});});
+scr.querySelectorAll('[data-svx="field"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("focus");});});
+scr.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.add("read");});});
+scr.querySelectorAll('[data-svx="trow"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.parentNode.querySelectorAll("tr").forEach(r=>r.classList.remove("on"));el.classList.add("on");});});
+scr.querySelectorAll('[data-svx="draft"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
+scr.querySelectorAll('[data-svx="replay"]').forEach(el=>{const tx=el.querySelector(".tx");el.addEventListener("click",e=>{e.stopPropagation();if(el.dataset.busy||!tx)return;el.dataset.busy="1";const full=el.dataset.full||"";svErase(tx,()=>{svLater(()=>{svType(tx,full,()=>{svLater(()=>{svErase(tx,()=>{el.dataset.busy="";});},620);});},260);});});});
+scr.querySelectorAll('[data-svx="ditem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const sheet=$("#sv3-sheet");sheet.innerHTML="";const top=svEl("div","sh-top");top.appendChild(svEl("span",null,"下書き"));const x=svEl("span","sh-x","✕");top.appendChild(x);sheet.appendChild(top);sheet.appendChild(svEl("div","sh-tx",el.dataset.tx||""));sheet.appendChild(svEl("div","sh-note",el.dataset.keep?"残した下書き":"破棄した下書き"));sheet.style.display="";sheet.onclick=ev=>{ev.stopPropagation();sheet.style.display="none";};});});
+scr.querySelectorAll('[data-svx="bub"]').forEach(el=>{const meta=el.querySelector(".bmeta");if(meta)meta.textContent=(sc.clock||"")+(el.dataset.side==="r"?" 既読":"");el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("showmeta");});});
+scr.querySelectorAll('[data-svx="photo"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
+scr.querySelectorAll('[data-svx="vid"]').forEach(st=>{const blk=st.closest(".sv2-blk");const btn=blk.querySelector(".sv2-vbtn");const bar=blk.querySelector(".sv2-vbar i");let prog=parseFloat(st.dataset.prog)||0;let timer=null;const setIcon=()=>{btn.innerHTML=st.dataset.playing?SVI.pause:SVI.play;};const tick=()=>{prog+=1.6;if(prog>=100){prog=100;st.dataset.playing="";setIcon();if(timer)clearInterval(timer);timer=null;}bar.style.width=prog+"%";st.dataset.prog=prog;};const start=()=>{if(!timer)timer=svEvery(tick,130);};if(st.dataset.playing)start();st.addEventListener("click",e=>{e.stopPropagation();if(st.dataset.playing){st.dataset.playing="";if(timer)clearInterval(timer);timer=null;setIcon();}else{if(prog>=100){prog=0;bar.style.width="0%";}st.dataset.playing="1";setIcon();start();}});});
+scr.querySelectorAll('[data-svx="play"]').forEach(big=>{const blk=big.closest(".sv2-blk");const bar=blk.querySelector(".sv2-pbar i");let prog=parseFloat(bar&&bar.style.width)||0;let timer=null;big.addEventListener("click",e=>{e.stopPropagation();if(big.dataset.playing){big.dataset.playing="";big.innerHTML=SVI.play;if(timer)clearInterval(timer);timer=null;}else{big.dataset.playing="1";big.innerHTML=SVI.pause;timer=svEvery(()=>{prog+=1.1;if(prog>=100)prog=0;if(bar)bar.style.width=prog+"%";},150);}});});
+scr.querySelectorAll('[data-svx="like"]').forEach(la=>{const off=()=>la.classList.remove("pressing");la.addEventListener("pointerdown",e=>{e.stopPropagation();la.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>la.addEventListener(ev2,off));la.addEventListener("click",e=>{e.stopPropagation();});});
+scr.querySelectorAll('[data-svx="comp"]').forEach(c=>{const tx=c.querySelector(".tx");const fin=c.dataset.final||"";let busy=false;const retype=()=>{if(busy||!tx)return;busy=true;c.classList.remove("struck");svErase(tx,()=>{svType(tx,fin,()=>{busy=false;});});};c.addEventListener("click",e=>{e.stopPropagation();retype();});c._svRetype=retype;});
+scr.querySelectorAll('[data-svx="old"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const blk=el.closest(".sv2-blk");const c=blk?blk.querySelector('[data-svx="comp"]'):null;if(!c)return;const tx=c.querySelector(".tx");if(!tx||c._svBusy)return;c.classList.add("struck");tx.textContent=el.dataset.tx||"";svLater(()=>{if(c._svRetype)c._svRetype();},1150);});});
+scr.querySelectorAll('[data-svx="send"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();});});
+}
 function showSide(d,cb){const sc=sideScene(d);if(!sc){if(cb)cb();return;}
-sideCb=cb||null;
+sideCb=cb||null;svClearTmrs();
 $("#sv2-day").textContent="DAY "+d+" ― "+(tgtKey()==="sakuya"?"サクヤ":"井汲大翔")+"の側";
 const ph=$("#sv2-ph");if(sc.ph){ph.src=sc.ph;ph.style.display="";}else{ph.removeAttribute("src");ph.style.display="none";}
-$("#sv2-clock").textContent=sc.clock||"";
 $("#sv2-app").textContent=sc.app||"";
-const phone=$("#sv2-phone");phone.classList.toggle("th-dark",sc.theme==="dark");phone.classList.toggle("th-light",sc.theme!=="dark");
+const A=ACC[tgtKey()];const acct=$("#sv3-acct");acct.innerHTML="";
+if((sc.app||"").indexOf("X")===0){const im=document.createElement("img");im.src=A.av;im.alt="";acct.appendChild(im);acct.appendChild(document.createTextNode(A.h));}
+const app=$("#sv3-app");app.classList.toggle("th-dark",sc.theme==="dark");app.classList.toggle("th-light",sc.theme!=="dark");
 const scr=$("#sv2-scr");scr.innerHTML="";(sc.blocks||[]).forEach((b,i)=>{const el=svBlock(b);el.style.animationDelay=(0.22+i*0.13)+"s";scr.appendChild(el);});
+scr.scrollTop=0;
+const bot=$("#sv3-bot");bot.innerHTML="";
+if((sc.app||"")==="X"&&!(sc.blocks||[]).some(b=>b.t==="video"))bot.appendChild(svXNav());
+else if((sc.app||"")==="メッセージ")bot.appendChild(svMsgBar());
+const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";
+svWire(scr,sc);
 const cap=$("#sv2-cap");cap.textContent=sc.cap||"";cap.style.display=sc.cap?"":"none";cap.style.animationDelay=(0.3+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
-const tap=$("#sideview.sv2-tap");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
+const tap=$("#sideview .sv2-tap");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
 const ov=$("#sideview");ov.classList.remove("closing");ov.classList.add("on");}
-function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
+function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;svClearTmrs();ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
 $("#sideview").addEventListener("click",closeSide);
 /* v443: LIVE SCENE - the Day 5 core, his stream of silence, replayed
    as a fan's clip inside a phone live-viewer. The comment river runs,
