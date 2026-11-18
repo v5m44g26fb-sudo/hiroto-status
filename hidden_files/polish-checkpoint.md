@@ -3326,3 +3326,21 @@ v476 の全体総点検の続き。本編側（彼女側のXアプリ全体）�
 - グレーディング拡張：#sideview.svd-7{--svDeep:30%} を新設し、深さの階段は Day1=10%→Day6=25%→Day7=30%（一番深い）。粒子9個・開閉演出は既存機構にそのまま乗る。進行ボタンの文言は Day7 のときだけ「彼女の一日へ」（Day1〜6 は「次の日へ」のまま）。未回答の間はボタン無効化の既存型（svSyncNext）もそのまま効く
 - 絶対条件の維持：fxcheck で fx254・cond82・BUZZキー112・img79 が HEAD（v487）と完全一致（順序列まで同一）。新規 fx・BUZZ キー・画像ゼロ。エンディング条件・閾値・判定順・判定タイミング（Day6終了時）は不変で、Day7 の幕間は結果に影響しない。セーブ形式は S.sv への加算のみ。冒頭フロー無変更、FIN のボタンは2つのまま。版数3箇所 v488 統一
 - 検証：Playwright実駆動（390×844）両ルート×4結末＝8通り、各29チェック全PASS（Day1〜6幕間の存続／結末一致／Day7開始時点で S.sv にキー7なし・DM4未配達／Event後に幕間が開く／svr-<route>＋svd-7・--svDeep=30%／DAY 7表記／ボタン文言「彼女の一日へ」／選択前はボタン無効・選択で結果表示と S.sv[7] 記録・有効化／DM4配達と反映文の位置 offset≤2／FIN到達／ページエラー0）。加えて互換ラン（幕間をスキップした旧セーブ相当）14チェック全PASS＝安全網で DM4 が配達され、選択が無いので反映文は入らず、FIN 到達。合計246チェック・失敗0。スクショでひろと編 collab（紫→桃の最深グラデーション）とサクヤ編 flame（青系）の色調差と場面を目視確認
+
+## v489（2026-11-18）サクヤの Day6 ストーリー写真の人物取り違え是正 ― 全日監査つき
+- 本人指摘（実機）：Day6 のサクヤのストーリーが CRAVITY のソンミンになっている。v488（3dfb0a3）の着地とツリークリーンを確認してから着手
+- 監査方法：STORY_BASE.tgt.imgS（Day1〜6）＋ STORY_D7_IMG.sakuya（Day7）の全7枚を実物目視し、確定済みサクヤ写真（アバター sakuya-av.jpg／Day1 sakuya-stage.jpg／Day3 sakuya-cover.jpg／Day4 sakuya-selca.jpg＝いずれも本人が過去プロジェクトで渡した素材）と顔を照合。外部の公式参照（ちゃお公式の記者会見写真、CRAVITY 日本公式プロフィール等）でも裏取りした
+- 日別監査結果：
+  - Day1 sakuya-stage.jpg＝本人 ○（ファンサイトのステージ写真、本人提供素材）
+  - Day2 pin-sakuya-d2.jpg＝本人 ○（丸い頬と目の形が確定群と一致。STORY_CHAIN 用の pin-sakuya-c1.jpg と同一人物で、c1 は外部でも NCT WISH サクヤの写真として流通していることを確認）
+  - Day3 sakuya-cover.jpg＝本人 ○（本人提供の sakuya-ig1.jpg 由来）
+  - Day4 sakuya-selca.jpg＝本人 ○（本人提供素材）
+  - Day5 pin-sakuya-bouquet.jpg＝本人 ○（2026-11-14 のブラウザダウンロード「Sakuya.jpg」とバイト一致＝サクヤとして調達された記録あり。顔も確定群と一致）
+  - Day6 gen-sakuya-day6-studio.jpg＝**別人** ✗（CRAVITY のソンミン。本人の指摘どおり。輪郭が細長く、確定サクヤ群の丸い頬・目の形と一致しない。出所は incoming-20261117/sakuya-day6-studio.jpg と同一バイトで、生成画像バッチに実在の別人写真が混入していた）
+  - Day7 pin-sakuya-d7.jpg＝本人 ○（ラジオ番組ロゴ入りのセルカ。Day2・c1 と同一人物）
+- 是正：Day6 を新規調達のサクヤ本人写真へ差し替え。新ファイル assets/pin-sakuya-d6.jpg（1200×800）。出典＝ファンサイト bamboo cookie 撮影のステージ写真（kbizoom／netizenbuzz 掲載の NCT WISH サクヤ記事写真 CDN から取得。衣装の名札「サクヤ」とファンサイト表記で本人確定、確定サクヤ群と顔照合済み）。2026-11-17 解禁範囲（実在人物の本人写真の調達）に基づく調達
+- 旧ファイル gen-sakuya-day6-studio.jpg は index.html 内の参照0件を確認して公開ツリーから外し、~/workspace/archived-assets/hiroto-status/ へ退避（削除せず保全）。IMG_DIMS からも旧エントリを外し、新エントリ pin-sakuya-d6.jpg:[1200,800] を追加
+- 使い回しの確認：差し替え後のサクヤのストーリー Day1〜Day7 は全て相異なる画像（stage／d2／cover／selca／bouquet／d6／d7）。リポジトリ内の他のサクヤ写真（sakuya-bmg／pin-sakuya-c1／ev2／ev6）は STORY_CHAIN で使用中のため流用せず、新規調達で重複を避けた
+- 範囲外の注記：サクヤ以外の人物は今回の監査対象外。作業中に他の明白な取り違えには気づかなかった
+- 絶対条件の維持：fxcheck で fx254・cond82・BUZZキー112・img79 が HEAD（v488）と完全一致。差分は STORY_BASE の imgS 1枠・IMG_DIMS の入れ替え1件・版数表示3箇所のみ。エンディング条件・セーブ形式は不変。彼の画面・冒頭フロー・v488 の Day7 幕間には無変更
+- 検証：Playwright 実駆動（/tmp/verify489.py、390×844）両ルート通し→エンディング→Day7→FIN 到達、ページエラー0・HTTP≥400 ゼロ（旧ファイルへのリクエストなし）。サクヤ編 Day6 で storyList のサクヤ項目とストーリービューアの背景が pin-sakuya-d6.jpg であることを実測し、スクショ /tmp/v489-day6-story2.png でビューア表示（サクヤ本人＋字幕「今日、発表です」）を目視確認
