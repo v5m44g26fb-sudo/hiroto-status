@@ -3443,6 +3443,7 @@ input,textarea{font-size:16px}
 #sideview.svd-4{--svDeep:18%}
 #sideview.svd-5{--svDeep:21%}
 #sideview.svd-6{--svDeep:25%}
+#sideview.svd-7{--svDeep:30%}
 #sideview::before{background:radial-gradient(92% 58% at 50% 36%,color-mix(in srgb,var(--svA) var(--svDeep),transparent),transparent 62%),radial-gradient(125% 90% at 50% 112%,color-mix(in srgb,var(--svB) calc(var(--svDeep)*.8),transparent),transparent 55%)}
 #sideview::after{content:"";position:absolute;inset:0;background:radial-gradient(64% 42% at 50% -4%,color-mix(in srgb,var(--svA) 13%,transparent),transparent 70%);opacity:.45;animation:svbreathe 6.5s ease-in-out infinite alternate;pointer-events:none}
 @keyframes svbreathe{from{opacity:.3;transform:scale(1)}to{opacity:.65;transform:scale(1.05)}}
@@ -3606,7 +3607,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v487</p>
+  <p class="ver">v488</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3790,7 +3791,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v487</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v488</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4106,7 +4107,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v487</p>
+    <p class="ver">v488</p>
   </div>
 </section>
 </div>
@@ -6012,7 +6013,7 @@ function renderEvent(){
     minute itself - the 12:00 replay in the announce scene (openAnn) */
  if(tgtKey()==="sakuya"&&S.ch===6){const lb=document.createElement("button");lb.className="ev-live-btn";lb.innerHTML="<span>▶</span> 発表の瞬間を観る ― 12:00";lb.onclick=e=>{e.stopPropagation();openAnn();};card.insertBefore(lb,card.querySelector(".evc"));}
  const box=card.querySelector(".evc");
- ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();save();};box.appendChild(b);});
+ ev.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice evchoice";const chips=fxChips(c.fx);b.innerHTML='<span class="evc-no">'+(ci+1)+'</span><span class="evc-main"><span class="evc-tx"></span>'+(chips?'<span class="evc-chips">'+chips+"</span>":"")+"</span>";b.querySelector(".evc-tx").textContent=c.t;b.onclick=()=>{box.querySelectorAll(".choice").forEach(x=>x.disabled=true);b.classList.add("picked");card.classList.add("cleared");const r=document.createElement("div");r.className="result";r.textContent=c.r;card.querySelector(".evr").appendChild(r);S.evDone=true;applyFx(c.fx);checkNext();addStory("event");evAfterglow();if(window.__D7&&__D7.active&&S.ch===7&&!__D7.sv7){__D7.sv7=true;setTimeout(()=>{if(window.__D7&&__D7.active&&!__D7.done)showSide(7,deliverDm4);},700);}save();};box.appendChild(b);});
  slot.appendChild(card);renderMini(slot);
 }
 /* v444: SIDE QUEST mini-events - one small incident per route in the
@@ -7022,7 +7023,63 @@ cap:"彼女の名前を出せば、彼女のほうが燃える。出さなけれ
 {t:"彼女のポストを、二回読んだ",d:"小さな話だった。なのに、目が離れなかった"},
 {t:"いいねは、押さなかった",d:"押せば、また「証拠」が増える。指は、ボタンの上で止まった"},
 {t:"3月24日を、カレンダーで開いた",d:"なおの誕生日。2021年から、毎年入れてある"}]}],
-cap:"小さな話だった。なのに、二回読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。",capAlt:[{f:5,c:1,cap:"小さな話だった。なのに、二回読んだ。昨夜、古参に漏らした『大事な夜』が、まだ胸に残っていた。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"},{f:5,c:2,cap:"小さな話だった。なのに、二回読んだ。『最後まで聴いて』と頼んだ夜の続きみたいに、今日のポストも最後まで読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"}]}},
+cap:"小さな話だった。なのに、二回読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。",capAlt:[{f:5,c:1,cap:"小さな話だった。なのに、二回読んだ。昨夜、古参に漏らした『大事な夜』が、まだ胸に残っていた。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"},{f:5,c:2,cap:"小さな話だった。なのに、二回読んだ。『最後まで聴いて』と頼んだ夜の続きみたいに、今日のポストも最後まで読んだ。いいねのボタンの上で、指が止まる。押せば、また「証拠」が増える。彼は押さなかった。"}]},
+7:{
+flame:{clock:"8:12",app:"配信スタジオ",theme:"dark",blocks:[
+{t:"post",a:"matome",time:"1時間",tx:"新人・なおの熱愛報道、事務所は『当面の活動を見合わせる』と発表。相手とされる配信者は、沈黙を続けている",rc:"280",rp:"640",lk:"3,900",vw:"46万"},
+{t:"head",tx:"今夜の配信",sub:"予約の確認"},
+{t:"row",lab:"タイトル",val:"雑談"},
+{t:"row",lab:"開始時刻",val:"20:00",chip:"いつも通り",pick:1},
+{t:"row",lab:"コメント欄",val:"閉じたまま",sub:"Day 5 から"},
+{t:"pick",lab:"今夜の配信を前に",choices:[
+{tx:"タイトルは、「雑談」のままにする",r:"変えなかった。いつも通りが、今夜の答えだった"},
+{tx:"リクエスト受付を、開けておく",r:"『The Chase』のリクエストが来たら、かける。来なくても、かけるつもりだった"},
+{tx:"コーラを、冷蔵庫に入れる",r:"今夜は長くなる。終わったら、電話する約束がある"}]},
+{t:"acts",items:[
+{t:"報道の記事を、開いて、閉じた",d:"見出しだけ読んだ。中身は、もう知っていることばかりだった"},
+{t:"今夜の配信を、20:00に予約した",d:"いつも通り。変えないことが、今の自分にできることだった"},
+{t:"彼女のポストを、読んだ",d:"「歌うことは、止めません」。……その一行を、二回読んだ"}]}],
+cap:"彼は何も言わなかった。言う代わりに、今夜も20時に配信を開ける。いつも通り、という形で。"},
+collab:{clock:"9:03",app:"X",blocks:[
+{t:"post",a:"fan1",time:"2時間",tx:"昨日のひろとの配信の『観たいステージがある』、何回も聴き直してる。……誰のステージかは、聞かないでおく",rc:"9",rp:"28",lk:"230",vw:"3,102"},
+{t:"cal",time:"近日",tx:"歌番組 ― なおの出番",sub:"カレンダー登録済み"},
+{t:"row",lab:"今日の配信",val:"20:00 開始",chip:"いつも通り",pick:1},
+{t:"pick",lab:"騒ぎが引いた朝に",choices:[
+{tx:"「観たいステージがある」の切り抜きを、最後まで観る",r:"自分の声だった。……漏らした、というより、漏らしたかったのかもしれない"},
+{tx:"コメント欄は、開かない",r:"聞かれたら、まだ答えられない。今は、言わないでおく"},
+{tx:"コーヒーを淹れる",r:"騒ぎが引いた朝の、静かな一杯だった"}]},
+{t:"acts",items:[
+{t:"自分の切り抜きが、回っていた",d:"「観たいステージがある」。自分の言葉だった。消す気は、なかった"},
+{t:"彼女の次の出番を、カレンダーで確かめた",d:"終わる時間は、もう決まっている。聞かなくても、合わせられる"},
+{t:"今日の配信も、20:00に設定した",d:"いつも通り。それが、騒ぎのあとの朝の答えだった"}]}],
+cap:"公式には、何もなかったことになっている。それでも、彼の言葉は残った。消す気は、なかった。"},
+quiet:{clock:"7:48",app:"X",blocks:[
+{t:"cal",time:"祭りの日",tx:"大阪 ― 地元の祭り",sub:"彼女の地元の、祭りの日"},
+{t:"row",lab:"その日の配信",val:"未定",sub:"まだ、決めていない"},
+{t:"note",icon:"cal",tx:"祭りの日程は、もう調べた"},
+{t:"pick",lab:"祭りの日を前に",choices:[
+{tx:"その日の配信を、休みに設定する",r:"理由は書かなかった。……なんとなく、その日がいい"},
+{tx:"電車の時間を、調べる",r:"大阪まで。思ったより、近かった"},
+{tx:"まだ、何も決めない",r:"決めなくても、日にちだけは覚えた"}]},
+{t:"acts",items:[
+{t:"祭りの日程を、調べた",d:"彼女の地元の祭り。日にちを、覚えた"},
+{t:"昨夜のDMを、読み返した",d:"数字にも記事にもならない話が、あそこにある"},
+{t:"配信の切り抜きが、回っていた",d:"祭りの日の話。誰に向けた言葉かは、言わなかった"}]}],
+cap:"数字にも、記事にもならない朝。彼は、祭りの日にちを覚えた。それだけのことが、静かに重かった。"},
+start:{clock:"8:37",app:"配信スタジオ",theme:"dark",blocks:[
+{t:"head",tx:"次の出番の前に",sub:"今日の設定"},
+{t:"cal",time:"近日",tx:"歌番組 ― なおの出番",sub:"出演予定が、更新された"},
+{t:"row",lab:"終了時刻",val:"出演の前に設定",chip:"いつもの決まり",pick:1},
+{t:"row",lab:"タイトル",val:"雑談"},
+{t:"pick",lab:"始まりの朝に",choices:[
+{tx:"終わる時間を、出演の前に設定する",r:"いつもの決まり。言わなくても、続いていく"},
+{tx:"彼女の今朝のポストに、いいねを押す",r:"デビューから1週間。今朝のいいねは、速くなかった。……普通に、押した"},
+{tx:"コーラを開けて、予定表を見る",r:"次の1週間が、始まる。彼の側にも、始まりがあった"}]},
+{t:"acts",items:[
+{t:"彼女の出演予定が、更新されていた",d:"小さな更新。でも、続いていく証拠だった"},
+{t:"終わる時間を、先に決めた",d:"出演の前に終える。デビューの日から続く、彼の決まり"},
+{t:"今朝は、配信をしなかった",d:"今日は、彼女の歌を聴く側でいる"}]}],
+cap:"何も終わっていない。何も、まだ始まっていない。それでも彼の側でも、昨日より少しだけ、前に進んでいた。"}}},
 sakuya:{
 1:{clock:"22:41",app:"ミュージック",theme:"dark",blocks:[
 {t:"player",title:"The Chase",artist:"Hearts2Hearts",prog:4},
@@ -7100,9 +7157,61 @@ cap:"何年も前の写真が、掘り返された日。彼はそれを開いて
 {t:"返信の文面を、2回書き直した",d:"丁寧なだけの言葉にはしたくなかった",alt:[{f:5,c:0,d:"丁寧なだけの言葉にはしたくなかった。昨夜、発表ポストを何度も読み返した目で、今日の文面を見た"},{f:5,c:1,d:"丁寧なだけの言葉にはしたくなかった。送らなかった二文の分まで、今日の一文に込めた"},{f:5,c:2,d:"丁寧なだけの言葉にはしたくなかった。写真をフォルダの奥に戻した手で、今日の文面を打った"}]},
 {t:"「ステージでは隣に立たせてください」だけは、最初から決まっていた",d:"その一行は、書き直しのたびに残った"},
 {t:"送信の前に、深く息を吸った",d:"あとは、彼女の返事を待つだけだった"}]}],
-cap:"丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。その一行だけは、最初から決まっていた。送信の前に、一度だけ深く息を吸う。あとは、彼女の返事を待つだけだった。返事が来るまでの時間、彼はレッスン室で、何度もスマホを見た。"}}};
+cap:"丁寧な文面にしなければいけない。でも、丁寧なだけの言葉にはしたくなかった。その一行だけは、最初から決まっていた。送信の前に、一度だけ深く息を吸う。あとは、彼女の返事を待つだけだった。返事が来るまでの時間、彼はレッスン室で、何度もスマホを見た。"},
+7:{
+flame:{clock:"8:26",app:"メッセージ",blocks:[
+{t:"chat",who:"広報",msgs:[[0,"おはようございます。例の件、本日午後に協議の場を設けます"],[1,"分かりました。……ぼくも、出ます"],[0,"無理は、しないでくださいね"]]},
+{t:"draft",lab:"下書き ― 未送信",tx:"ぼくは、逃げません",sub:"送るかどうかは、まだ決めていない"},
+{t:"pick",lab:"午後の協議の前に",choices:[
+{tx:"彼女への文面を、考える",r:"『逃げません』。送るかどうかは、まだ決めていない。でも、言葉は決まった"},
+{tx:"発表ポストを、読み返す",r:"最後の一行は、自分の言葉だった。取り消す気は、なかった"},
+{tx:"深呼吸して、レッスン室へ向かう",r:"歌う場所は、まだある。足は、そちらへ向かった"}]},
+{t:"acts",items:[
+{t:"午後の協議に、出ると返した",d:"逃げる選択肢は、最初からなかった"},
+{t:"発表ポストを、消さなかった",d:"最後の一行は、自分の言葉。そのままにしておいた"},
+{t:"彼女の歌を、イヤホンで聴いた",d:"騒ぎの音の向こうで、歌だけは変わらなかった"}]}],
+cap:"彼は逃げなかった。午後の協議の前に、イヤホンを外して、レッスン室のドアを開けた。"},
+collab:{clock:"8:54",app:"X",blocks:[
+{t:"post",a:"fan1",time:"2時間",tx:"おはようございます。発表ポストの最後の一行、何回読んでも泣ける。……二人のステージ、絶対観ます",rc:"9",rp:"31",lk:"210",vw:"2,840"},
+{t:"cal",time:"近日",tx:"年末特番 ― リハーサル",sub:"進行表が、届いた"},
+{t:"row",lab:"進行表",val:"二人の名前が、並んでいた",hot:1},
+{t:"pick",lab:"レッスン室へ向かう前に",choices:[
+{tx:"進行表の、彼女の名前の行を見る",r:"自分の名前の、隣にあった。……しばらく、そこから目が離せなかった"},
+{tx:"カフェオレを、二つ買う",r:"一つは、彼女の分。温かいうちに届ける約束だった"},
+{tx:"今夜の電話の時間を、決める",r:"声を聴く約束を、先に決めておきたかった"}]},
+{t:"acts",items:[
+{t:"年末特番の進行表が、届いていた",d:"二人の名前が、並んでいた。夢じゃなかった"},
+{t:"発表ポストの反響を、少しだけ見た",d:"最後の一行が、語り継がれているらしい。……耳が、少し熱かった"},
+{t:"レッスン室に、先に着いた",d:"窓側の席に、温かいカフェオレを置いた。約束の形が、少し変わった朝"}]}],
+cap:"夢じゃなかった。進行表の中で、二人の名前が並んでいた。彼は窓側の席に、カフェオレを置いた。"},
+quiet:{clock:"7:58",app:"ミュージック",theme:"dark",blocks:[
+{t:"player",title:"The Chase",artist:"Hearts2Hearts",prog:68},
+{t:"note",icon:"hp",tx:"イヤホンで再生中 ― 朝のレッスンの前に"},
+{t:"cal",time:"12:00",tx:"食堂 ― 窓側の席",sub:"なおさんとの約束"},
+{t:"pick",lab:"昼の約束まで、あと少し",choices:[
+{tx:"窓側の席を、先に取る",r:"来なくても、取る。それが、最近の決まりだった"},
+{tx:"デザートを、彼女の好きなものにする",r:"メニューは、もう覚えている。選ぶ時間は、かからなかった"},
+{tx:"彼女の歌を、最後まで聴く",r:"昼の約束まで、あと少し。歌の終わりと、約束の始まりが重なった"}]},
+{t:"acts",items:[
+{t:"朝のレッスンの前に、彼女の歌を聴いた",d:"静かな朝に合う歌だった"},
+{t:"食堂の窓側の席を、取っておいた",d:"約束は、もう約束の顔をしていない。日常の顔をしていた"},
+{t:"デザートのメニューを、確かめた",d:"彼女の好きなものは、もう覚えている"}]}],
+cap:"静かな朝。彼は歌を聴いて、昼の席を取った。約束は、日常の顔をしていた。"},
+start:{clock:"9:41",app:"X",blocks:[
+{t:"cal",time:"来週",tx:"音楽番組 ― 出演者リスト",sub:"Hearts2Hearts と、同じ日"},
+{t:"row",lab:"挨拶の練習",val:"継続中",sub:"公の場の分だけ"},
+{t:"note",icon:"note",tx:"彼女のデビュー曲は、今日もリピートの中"},
+{t:"pick",lab:"始まりの朝に",choices:[
+{tx:"出演者リストの、彼女の名前を見る",r:"同じ日に、名前が並んでいた。始まりは、静かに近づいていた"},
+{tx:"挨拶の練習を、一度だけする",r:"公の場の分は、まだ練習が要る。二人きりの時は、要らないのに"},
+{tx:"彼女のデビュー曲を、流す",r:"始まりの朝に合う歌だった。……何度聴いても、そう思う"}]},
+{t:"acts",items:[
+{t:"出演者リストに、二人の名前があった",d:"同じ日、同じ番組。始まりは、もう来ていた"},
+{t:"公の場の挨拶を、練習した",d:"二人きりの時は、要らない。その差が、少しだけ嬉しかった"},
+{t:"朝の挨拶を、送った",d:"「おはようございます、ヌナ」。始まりの朝の、最初の一通"}]}],
+cap:"始まりの朝。彼は出演者リストの中で、彼女の名前を見た。公の場の挨拶は、まだ練習中だった。"}}}};
 let sideCb=null;
-function sideScene(d){const t=SIDE_SCENES[tgtKey()];return t?t[d]:null;}
+function sideScene(d){const t=SIDE_SCENES[tgtKey()];if(!t)return null;if(d===7){const s7=t[7];if(!s7)return null;const k=(window.__D7&&__D7.kind)||"start";return s7[k]||s7.start||null;}return t[d]||null;}
 /* v466: the operations on his screen. Every timer a scene starts is
    registered here and cleared when the scene closes or reopens, so
    nothing types, plays or pulses behind the next screen. */
@@ -7225,6 +7334,25 @@ function svResolve(sc){if(!sc||typeof S==="undefined"||!S||!S.sv)return sc;const
 function svDm2Msgs(base){const m=base.slice();const c4=svGet(4);if(tgtKey()==="hiroto"){if(c4===1)m[2]="……次の出番の日、カレンダーに入れた。終わる時間は先に決めとく。なおの歌、最初から観る";else if(c4===2)m[2]="……次の出番の日も、終わる時間は先に決めとく。コメント欄は、もう開かへん。……なおの歌、最初から観る";}else{if(c4===1)m[0]="『後輩です』のポスト、出しました。……広報の柔らかい案は、なしにしてもらいました";else if(c4===2)m[0]="『後輩です』のポスト、出しました。……僕の言葉で、言わせてもらいました";}return m;}
 function svDm3Msgs(base){const m=base.slice();if(tgtKey()!=="hiroto"){const c5s=svGet(5);const lineS=c5s===0?"……発表文、昨日の夜も読み返してました。『隣に立つ』って書いたの、ぼくです。……何度読んでも、手が震えました":c5s===1?"……送らないままの文が、二つあります。……今日の話は、その続きです":c5s===2?"……古い写真、フォルダの奥に戻しました。……出すことは、守ることにはならないので":null;if(lineS){const ia=m.indexOf("……本当は、振り付けの話だけじゃありません");m.splice(ia>=0?ia+1:5,0,lineS);}return m;}const c5=svGet(5);const line=c5===0?"昨日の夜、古参の人に、ちゃんと礼を言えた。……今日の話は、その続きや":c5===1?"昨日の古参の人にも、言い過ぎたかもしれん。……でも、大事な夜やったから":c5===2?"昨日、古参の人に『最後まで聴いて』って頼んだ。……今日の話も、最後まで聴いてほしいねん":null;if(!line)return m;const i=m.indexOf("……今日は、ちゃんと話したいことがある");m.splice(i>=0?i+1:1,0,line);return m;}
 function svDm4Msgs(T){if(!T||!T.msgs)return;const c6=svGet(6);if(tgtKey()==="hiroto"){const line=c6===0?"……昨日のポスト、また読み返してた。『それだけで、十分です』……十分じゃ、なかった":c6===1?"……24日の予定、また開いてた。……今年は、直接言いたいねん":c6===2?"……今夜の配信で話すこと、考えてた。……昨日の話、少しだけ":null;if(line)T.msgs.splice(1,0,line);}else{const kept=svGet("6k");if(kept===1)T.msgs.splice(1,0,"……昨日の下書き、まだ残してます。……送れる日が来るまで、ぼくが持ってます");else if(kept===0)T.msgs.splice(1,0,"……昨日、消した一文があります。……言える日が来たら、今度は声で言います");}}
+/* v488: Day 7 gains his screen too - one scene per route and ending,
+   opened after her Day 7 Event and before DM4 lands. What he chose
+   there that morning is read back here: one of his own lines, keyed
+   by route, ending and choice, slipped into DM4 just after his
+   greeting. Display text only; DM4's own lines, choices and fx are
+   untouched, and a run (or an old save) without a Day 7 choice
+   inserts nothing. */
+const SV_DM4_D7={
+hiroto:{
+flame:["……今夜の配信、タイトルは『雑談』のままや。……いつも通り、な","……今夜、リクエスト開けとく。……『The Chase』、誰か言うてくれるやろ","……コーラ、冷やしといた。今夜は、長うなるかもしれん"],
+collab:["……昨日の配信の切り抜き、朝から回ってた。……自分の声、変な感じや","……コメント欄、まだ開けてへん。……聞かれたら、困るからな","……コーヒー、飲んだか。……こっちは、今朝は静かやった"],
+quiet:["……祭りの日、配信は休みにした。……理由は、内緒や","……電車の時間、調べたわ。……大阪、思ったより近いで","……祭りの日、覚えた。……何も決めてへんけど、な"],
+start:["……次の出番、終わる時間はもう決めといた。……合わせるから、安心して","……今朝のポスト、いいね押したで。……今日は普通の速さやけどな","……予定表、見とった。……なおの次が、始まるんやな"]},
+sakuya:{
+flame:["……さっき、ヌナに送る言葉を考えてました。……『逃げません』、です","……発表ポスト、朝も読み返しました。……最後の一行、消しません","……レッスン室、行ってきます。……歌う場所は、まだあります"],
+collab:["……進行表、届きました。……ヌナの名前、ぼくの隣にありました","……レッスン室、先に着いてます。……窓側、温かくしておきます","……今夜の電話、楽しみにしてます。……先に、言っておきたくて"],
+quiet:["……窓側、もう取ってあります。……来なくても、取るのが決まりなので","……デザート、ヌナの好きなのにしておきました。……メニュー、覚えたんです","……今朝も、ヌナの歌を聴きました。……静かな朝に、合いますね"],
+start:["……出演者リスト、見ました。……同じ日に、ヌナの名前がありました","……挨拶の練習、今朝もしました。……公の場の分だけ、ですけど","……今朝も、『The Chase』を聴きました。……始まりの朝に、合います"]}};
+function svDm4D7(T){if(!T||!T.msgs)return;const D=window.__D7;if(!D||!D.kind)return;const c7=svGet(7);if(c7==null)return;const per=SV_DM4_D7[tgtKey()];if(!per)return;const line=(per[D.kind]||[])[c7];if(line)T.msgs.splice(1,0,line);}
 function showSide(d,cb){const sc=svResolve(sideScene(d));if(!sc){if(cb)cb();return;}
 sideCb=cb||null;svClearTmrs();
 $("#sv2-day").textContent="DAY "+d+" ― "+(tgtKey()==="sakuya"?"サクヤ":"井汲大翔")+"の側";
@@ -7243,7 +7371,8 @@ const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";
 svWire(scr,sc);svSyncNext();
 const cap=$("#sv2-cap");cap.textContent=sc.cap||"";cap.style.display=sc.cap?"":"none";cap.style.animationDelay=(0.3+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
 const tap=$("#sv2-next");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
-const ov=$("#sideview");ov.classList.remove("svr-hiroto","svr-sakuya","svd-1","svd-2","svd-3","svd-4","svd-5","svd-6");ov.classList.add("svr-"+tgtKey(),"svd-"+d);svAmb(tgtKey());ov.classList.remove("closing");ov.classList.add("on");}
+const nb=$("#sv2-next");if(nb&&nb.firstElementChild)nb.firstElementChild.textContent=(d===7?"彼女の一日へ":"次の日へ");
+const ov=$("#sideview");ov.classList.remove("svr-hiroto","svr-sakuya","svd-1","svd-2","svd-3","svd-4","svd-5","svd-6","svd-7");ov.classList.add("svr-"+tgtKey(),"svd-"+d);svAmb(tgtKey());ov.classList.remove("closing");ov.classList.add("on");}
 function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on")||ov.classList.contains("closing"))return;svClearTmrs();ov.classList.add("closing");setTimeout(()=>{ov.classList.remove("on");ov.classList.remove("closing");const cb=sideCb;sideCb=null;if(cb)cb();},185);}
 /* v475: tap-to-go-on is gone. The interlude closes only from its
    own next-day button; taps inside the scene do their own work or
@@ -7347,7 +7476,7 @@ $("#an-frame").addEventListener("click",e=>{if(e.target.closest("#an-x")||e.targ
 $("#an-x").addEventListener("click",e=>{e.stopPropagation();closeAnn();});
 $("#an-close").addEventListener("click",e=>{e.stopPropagation();closeAnn();});
 function proceedFromResult(){if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}}
-$("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else proceedFromResult();},180);});
+$("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else{if(window.__D7&&__D7.active)deliverDm4();proceedFromResult();}},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
 /* v226: the RESULT screen links onward to the full record too -
    the scrims layer over it, like they do over the ending (v192) */
@@ -7802,8 +7931,13 @@ function day7Dm4(kind){return tgtKey()==="sakuya"?{
  {t:"「今日の歌、最初から観ててね」",r:"「……当たり前やろ」少し間があって。「……最初から観るのは、ずっと前からの決まりや」2021年のソウルから続く、約束みたいなものだった。「……今日も、最初から、な」。言い切る前に、笑った気配がした。",fx:{fol:0,xp:6,dist:7,flm:0,cog:0}},
  {t:"「私も大丈夫。……ありがとう」",r:"「……うん」短い返事。でも、始まったばかりの朝に、彼の名前が画面にあることが、少しだけ心強かった。",fx:{fol:0,xp:5,dist:6,flm:0,cog:0}}]})[kind]};}
 function startDay7(){const D=window.__D7;if(!D||D.active||D.done)return;D.ch7=buildDay7Chapter(D.kind);D.active=true;
- show("v-x");startChapter(7);showPane("tl");
- const T=day7Dm4(D.kind);svDm4Msgs(T);const th=(S.threads||[]).find(x=>x.id===tgtKey()&&x.special);
+ /* v488: DM4 is held back until his Day 7 screen has played - the
+    interlude opens right after her Day 7 Event, and DM4 lands as it
+    closes, carrying his choice there in its second line */
+ D.dm4held=true;D.sv7=false;
+ show("v-x");startChapter(7);showPane("tl");}
+function deliverDm4(){const D=window.__D7;if(!D||!D.dm4held)return;D.dm4held=false;
+ const T=day7Dm4(D.kind);svDm4D7(T);svDm4Msgs(T);const th=(S.threads||[]).find(x=>x.id===tgtKey()&&x.special);
  if(T&&th&&th.done&&!th.round4){th.round4=true;th.msgs=th.msgs.concat(T.msgs);th.choices=T.choices;th.done=false;th.unread=true;
   S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:"Day 7 ― その後の朝に"});renderDmList();renderNotifs();updateBdg();save();}}
 function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return;sec.classList.add("fin");
