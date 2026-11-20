@@ -3607,7 +3607,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v494</p>
+  <p class="ver">v495</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3791,7 +3791,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v494</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v495</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4107,7 +4107,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v494</p>
+    <p class="ver">v495</p>
   </div>
 </section>
 </div>
@@ -6169,8 +6169,59 @@ const MINI_EVENTS={
   choices:[
    {t:"何も言わず、小さく頭を下げて過ごす",r:"模範的な朝だった。でも、扉が開くまでの数秒が、いつもより長く感じた。『大先輩』――彼の口から聞く自分の11年は、少しだけくすぐったくて、少しだけ誇らしかった。",fx:{dist:5,xp:5}},
    {t:"練習生の子に「私も、昨日までそっち側でした」と声をかける",r:"子は目を丸くして、それから深く頭を下げた。彼が隣で、小さく笑っていた。……11年前の自分に言ってほしかった言葉を、今朝の自分は、言える側になっていた。",fx:{dist:4,cog:2,xp:5}},
-   {t:"降り際に、彼へ「ありがとうございます」とだけ言う",r:"彼は少し驚いて、『……当然のことです』と返した。その当然、という言い方が、その日のステージまで背中を押し続けた。",fx:{dist:6,xp:5,flm:1}}]}};
+   {t:"降り際に、彼へ「ありがとうございます」とだけ言う",r:"彼は少し驚いて、『……当然のことです』と返した。その当然、という言い方が、その日のステージまで背中を押し続けた。",fx:{dist:6,xp:5,flm:1}}]},
+ /* v495: SIDE QUEST round 6 - a second small incident on Days 2
+    and 5 of both routes, so those days carry two minis each. The
+    second def is keyed route:day+"b" and renders as a third card
+    in #eventslot, right after the day's primary mini (see
+    miniDefs / renderMiniCard). Same grammar as rounds 1-5:
+    optional, never gates the next day, marker-held. The incidents
+    lean lightly on the v491-v494 rewritten chapters: Hiroto Day 2
+    (the live-or-sung argument's heat flows into his stream
+    archive's comments), Hiroto Day 5 (his throwaway nikuman post
+    reaches a convenience-store clerk who has never heard of him),
+    Sakuya Day 2 (she finds him still practising the deep bow from
+    his morning post, alone in a hallway), Sakuya Day 5 (a small
+    account refuses to post the screenshot of his deleted words,
+    and its reply thread argues about it). Mob voices are kept
+    apart per account - indifferent, off-target and unimpressed
+    reactions included, at small-account scale. */
+ "hiroto:2b":{mk:"mini-h2b",tag:"SIDE EVENT ― 小さな事件",title:"コメント欄の、新しい人",
+  body:"夜、彼の昨夜の配信のアーカイブを開いた。再生回数はいつもの倍近く、コメント欄には昨日までいなかった名前が並んでいた。『生歌の人って、この人の配信観てるの？』『ここ、歌うとこじゃないの？』――生歌論争の熱が、彼の静かな場所にまで流れ込んでいた。いつもの常連が、短く書いていた。『ここは7年、雑談の場所だよ』。どうする？",
+  na:"fan2",ntx:"さんが、彼の配信の話をしています",nsub:"小さな事件 ― コメント欄の新しい人",
+  choices:[
+   {t:"何も書かず、アーカイブを最後まで観る",r:"書かなかった。常連の短い一文が、新しい人たちの勢いを静かに受け止めていた。彼の場所は、彼と、彼の時間で守られていた。自分は観る側でいること。それが今の距離だと思った。",fx:{dist:5,xp:5}},
+   {t:"常連のコメントに、いいねだけ置く",r:"いいねの数が、ひとつ増えた。それだけのこと。……でも、7年という言葉の隣に、自分の小さな印が並んだことが少しだけ嬉しかった。",fx:{dist:6,xp:5,flm:1}},
+   {t:"「いつも楽しく観ています」と、普通の視聴者としてコメントする",r:"何百人もが書くような、無難な一文。なのに、送信ボタンを押す指が震えた。返信はなかった。当たり前だった。……それで、よかった。",fx:{dist:5,cog:1,xp:5,flm:2}}]},
+ "hiroto:5b":{mk:"mini-h5b",tag:"SIDE EVENT ― 小さな事件",title:"肉まんが、よく出る日",
+  body:"夜の帰り道、帽子を目深にかぶって、駅前のコンビニに寄った。何となく、肉まんのケースの前に立った。レジの店員さんが、補充しながら言った。『今日、肉まんよく出るんですよ。配信で誰か食べてたみたいで』――彼の朝の何気ない一言が、こんな場所にまで届いていた。どうする？",
+  na:"fan1",ntx:"さんが、肉まんの話をしています",nsub:"小さな事件 ― 肉まんがよく出る日",
+  choices:[
+   {t:"何も言わず、肉まんをひとつ買う",r:"湯気の向こうで、店員さんはもう次の客の会計を始めていた。……彼の『静かな日』と、自分の静かな夜が、同じ肉まんでつながっていた。",fx:{dist:5,xp:5}},
+   {t:"「……おいしいですよね」とだけ答える",r:"店員さんは『ですよねー』と笑って、肉まんを袋に入れてくれた。本人だとは、最後まで気づかれなかった。彼の何気ない朝の報告が、知らない人の口にまで届いている。それが、少しだけ誇らしかった。",fx:{dist:6,cog:1,xp:5}},
+   {t:"彼の分まで、二つ買って帰る",r:"今夜、渡せる相手はいない。それでも、二つ入った袋の重さが、帰り道を少しだけ温かくした。……明日の朝、冷蔵庫を開けたら、今日のことが少し笑える気がした。",fx:{dist:6,xp:5,flm:1}}]},
+ "sakuya:2b":{mk:"mini-s2b",tag:"SIDE EVENT ― 小さな事件",title:"廊下の、お辞儀",
+  body:"夕方、レッスン室へ向かう廊下の角。鏡のある踊り場で、彼が一人立っていた。誰もいない空間に向かって、ゆっくりと、深く頭を下げている。挨拶の練習だった。朝のポストの『深く、丁寧に』は、本当の話だった。通りかかった練習生の子が、小声で言った。『サクヤ先輩、さっきからずっとああしてる……』。どうする？",
+  na:"akari",ntx:"さんが、廊下で見かけた話をしています",nsub:"小さな事件 ― 廊下のお辞儀",
+  choices:[
+   {t:"声をかけず、そのまま通り過ぎる",r:"邪魔をしなかった。彼の練習は、誰にも見せない場所で続いていた。……見てしまったことだけが、胸の奥に残った。",fx:{dist:5,xp:5}},
+   {t:"「……深すぎますよ」と、小さく声をかける",r:"彼は弾かれたように顔を上げて、耳まで赤くなった。『……見て、ましたか』。慌てて向けられたお辞儀は、練習どおり深すぎた。言葉より先に、全部伝わってしまった。",fx:{dist:7,xp:5,flm:1}},
+   {t:"隣に立って、自分も鏡に向かって頭を下げてみる",r:"並んで、一度だけ。二人とも、笑ってしまった。彼が小さく言った。『……お互い、ですね』。廊下の笑い声は、二人だけのものだった。",fx:{dist:6,cog:1,xp:5}}]},
+ "sakuya:5b":{mk:"mini-s5b",tag:"SIDE EVENT ― 小さな事件",title:"スクショを、出さない人",
+  body:"夜、フィードを眺めていたら、小さなアカウントのポストが目に留まった。『今朝のサクヤの消えた文、スクショ持ってます。でも出しません。あの人の言葉は、あの人が出す時に出るものなので』――リプ欄は、小さく荒れていた。『持ってるなら見せてよ』『消えたってことは、そういうことだろ』『明日の発表のほうが大事じゃない？』。彼の朝の数分が、知らない人たちの間で静かに守られていた。どうする？",
+  na:"fan2",ntx:"さんが、消えた文の話をしています",nsub:"小さな事件 ― スクショを出さない人",
+  choices:[
+   {t:"何もせず、画面を閉じる",r:"閉じた。守ってくれているのは、彼のファン一人ひとりの、小さな判断の積み重ねだった。自分にできるのは、その判断を邪魔しないことだと思った。",fx:{dist:5,xp:5}},
+   {t:"そのポストに、いいねだけ置く",r:"いいね欄に、自分の名前が残った。……少しして、そのアカウントが書いた。『……ありがとうございます。出しませんから、安心してください』。誰のことか、分かってしまったらしい。熱は小さい。でも、確かに届いた。",fx:{dist:6,xp:5,flm:2}},
+   {t:"佐藤さんに「こういう声も、あります」とだけ伝える",r:"佐藤さんは少し驚いて、『……ありがたいですね。表には出せない味方ですけど』と笑った。明日の12時が、少しだけ楽しみになった。",fx:{dist:5,cog:1,xp:5}}]}};
 function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
+/* v495: a day may carry a second mini (round 6), keyed
+   route:day+"b". miniDefs returns the day's defs in display
+   order - the primary def keeps the plain key, so the grid's
+   first fourteen minis and their markers are untouched, and a
+   save without the new markers simply renders the new cards
+   unanswered. */
+function miniDefs(){const k=tgtKey()+":"+S.ch;const out=[];if(MINI_EVENTS[k])out.push(MINI_EVENTS[k]);if(MINI_EVENTS[k+"b"])out.push(MINI_EVENTS[k+"b"]);return out;}
 function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
 /* v468: on Day 7 a mini may carry per-ending flavor - bodyK appends
    one kind-keyed sentence to the body, and a choice's rK appends one
@@ -6179,11 +6230,14 @@ function miniRecord(def){return (S.notifs||[]).find(n=>n&&n.mk===def.mk)||null;}
    older records simply have no rk and read as the base text. */
 function miniKind(){return (S.ch===7&&typeof window!=="undefined"&&window.__D7&&window.__D7.kind)||null;}
 function renderMini(slot){
- const def=miniDef();if(!def||!slot)return;
+ if(!slot)return;
+ miniDefs().forEach((def,di)=>renderMiniCard(slot,def,di));
+}
+function renderMiniCard(slot,def,di){
  const rec=miniRecord(def);
  const kd=miniKind();
  const card=document.createElement("div");card.className="evcard mini"+(rec?" cleared":"");
- card.innerHTML='<div class="mini-eyebrow"><span>SIDE QUEST</span><span class="ev-eyebrow-jp">小さな事件 ― CHAPTER '+S.ch+'</span></div><div class="tag"></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
+ card.innerHTML='<div class="mini-eyebrow"><span>SIDE QUEST</span><span class="ev-eyebrow-jp">小さな事件 ― CHAPTER '+S.ch+(di>0?'（その2）':'')+'</span></div><div class="tag"></div><h3></h3><p></p><div class="evc"></div><div class="evr"></div>';
  card.querySelector(".tag").innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg><span></span>';
  card.querySelector(".tag span").textContent=def.tag;card.querySelector("h3").textContent=def.title;card.querySelector("p").textContent=def.body+((kd&&def.bodyK&&def.bodyK[kd])||"");
  const box=card.querySelector(".evc");
