@@ -1489,6 +1489,44 @@ input,textarea{font-size:16px}
 .msg.typing i:nth-child(2){animation-delay:.15s}
 .msg.typing i:nth-child(3){animation-delay:.3s}
 @keyframes typdot{0%,60%,100%{transform:none;opacity:.45}30%{transform:translateY(-3px);opacity:1}}
+/* ===== v496: the DM screens rebuilt against the real client - a run
+   of bubbles keeps its tail corner only on the last one, day breaks
+   become the client's centred pill, history no longer replays its
+   entrance on every render (only the opening tail and fresh landings
+   move), the compose bar sticks to the foot of the scrollport while
+   she reads back, and every bubble answers a long press / double tap
+   with reactions, kept additively on the thread (t.rct). Thread
+   data, rounds, the pend queue and DM delivery are untouched. ===== */
+#th-msgs .msg{animation:none;position:relative}
+#th-msgs .msg.new{animation:msgin .3s cubic-bezier(.2,.8,.3,1)}
+#th-msgs .msg.them{border-bottom-left-radius:18px}
+#th-msgs .msg.them.tail{border-bottom-left-radius:5px}
+#th-msgs .msg.me{border-bottom-right-radius:18px}
+#th-msgs .msg.me.tail{border-bottom-right-radius:5px}
+.th-sep{display:block;width:fit-content;margin:16px auto 6px;padding:4px 12px;background:#eff3f4;border-radius:999px;color:#536471;font-size:11.5px;font-weight:700;letter-spacing:.02em;text-align:center}
+.th-sep::before,.th-sep::after{content:none}
+#dmthread.dmin{animation:threadin .3s cubic-bezier(.16,.84,.3,1)}
+@keyframes threadin{from{opacity:0;transform:translateX(56px)}to{opacity:1;transform:none}}
+#dmthread .dm-inputbar{position:sticky;bottom:-14px;margin:8px 14px 14px;box-shadow:0 6px 20px rgba(15,20,25,.10)}/* bottom:-14px offsets #x-scroll's 24px bottom padding, so the stuck bar rests a visual 10px above the scrollport's foot */
+.dmrow:active{background:#edf2f4}
+.choice.dmchoice{transition:transform .12s ease,background .15s ease}
+.choice.dmchoice:active{transform:scale(.985)}
+.msg-rct{position:absolute;bottom:-9px;z-index:3;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;border-radius:999px;background:#fff;border:1px solid #e3e9ec;box-shadow:0 2px 6px rgba(15,20,25,.16);font-size:12.5px;line-height:1;cursor:pointer}
+.msg.them .msg-rct{left:8px}
+.msg.me .msg-rct{right:8px}
+.msg.has-rct{margin-bottom:15px}
+.msg-tray{position:absolute;bottom:calc(100% + 8px);z-index:40;display:flex;gap:2px;background:#fff;border:1px solid #e3e9ec;border-radius:999px;padding:5px 7px;box-shadow:0 10px 30px rgba(15,20,25,.22);animation:trayin .18s cubic-bezier(.2,.9,.3,1.15)}
+.msg.them .msg-tray{left:0}
+.msg.me .msg-tray{right:0}
+.msg-tray button{border:none;background:none;font-size:19px;line-height:1;padding:5px 6px;border-radius:50%;cursor:pointer;font-family:inherit}
+.msg-tray button:active{transform:scale(1.25)}
+.msg-tray button.on{background:#e8f5fe}
+@keyframes trayin{from{opacity:0;transform:translateY(5px) scale(.85)}to{opacity:1;transform:none}}
+.msg-burst{position:absolute;top:-8px;z-index:41;font-size:17px;pointer-events:none;animation:burst .65s ease-out forwards}
+.msg.them .msg-burst{left:10px}
+.msg.me .msg-burst{right:10px}
+@keyframes burst{0%{opacity:0;transform:translateY(6px) scale(.5)}25%{opacity:1;transform:translateY(0) scale(1.25)}100%{opacity:0;transform:translateY(-20px) scale(1)}}
+@media (prefers-reduced-motion:reduce){.msg-tray{animation:none}.msg-burst{display:none}#dmthread.dmin{animation:none}}
 /* ===== v82: settings & save management. There was no settings surface -
    just a bare button and a grey line at the foot of the profile. The same
    items (version, save reset with its existing single-action behaviour)
@@ -3607,7 +3645,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v495</p>
+  <p class="ver">v496</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3791,7 +3829,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v495</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v496</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -3880,8 +3918,8 @@ input,textarea{font-size:16px}
         <div id="th-msgs"></div>
         <div class="dm-dock">
         <div id="th-choices" style="padding:2px 14px 2px"></div>
-        <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><text x="12" y="15.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="inherit">GIF</text></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M9 10.2h.01M15 10.2h.01" stroke-width="2.6"/><path d="M8.6 14.3c.9 1.2 2.1 1.8 3.4 1.8s2.5-.6 3.4-1.8"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
         </div>
+        <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><text x="12" y="15.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="inherit">GIF</text></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M9 10.2h.01M15 10.2h.01" stroke-width="2.6"/><path d="M8.6 14.3c.9 1.2 2.1 1.8 3.4 1.8s2.5-.6 3.4-1.8"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
       </div>
     </div>
   </div>
@@ -4107,7 +4145,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v495</p>
+    <p class="ver">v496</p>
   </div>
 </section>
 </div>
@@ -6635,7 +6673,7 @@ function renderDmList(){
  updateBdg();
 }
 function scrollDmBottom(smooth){const sc=$("#x-scroll");requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.scrollTo({top:sc.scrollHeight,behavior:smooth?"smooth":"auto"});}));}
-function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),260);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;if(VERIFIED.has(t.who))$("#th-name").insertAdjacentHTML("beforeend",DM_VERIFIED);$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
+function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),330);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;if(VERIFIED.has(t.who))$("#th-name").insertAdjacentHTML("beforeend",DM_VERIFIED);$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
  const ti=$("#th-intro");ti.innerHTML='<span class="ti-avw">'+(a.av?'<img class="avatar" src="'+a.av+'" width="64" height="64" alt="">':avaTxt(a.n))+'</span><div class="ti-name"></div><div class="ti-handle">'+a.h+'</div><div class="ti-bio"></div>'+(t.special?'<div class="ti-pill">'+(t.who==="hiroto"?"何年も眠っていたスレッド":"久しぶりの、本人からの連絡")+'</div>':"");
  ti.querySelector(".ti-name").textContent=a.n;if(VERIFIED.has(t.who))ti.querySelector(".ti-name").insertAdjacentHTML("beforeend",DM_VERIFIED);
  ti.querySelector(".ti-bio").textContent=t.special?tgt().bio:(FOL_BIO[t.who]||"");
@@ -6645,7 +6683,7 @@ function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#d
  const goProf=(t.special&&t.who===tgtKey())?()=>showPane("hisprof"):null;
  $("#th-av").onclick=goProf;th.querySelector(".th-id").onclick=goProf;ti.onclick=goProf;
  thEnter=true;renderThreadMsgs();updateBdg();save();scrollDmBottom(false);}
-function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const box=$("#th-msgs");box.innerHTML="";
+function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const box=$("#th-msgs");box.innerHTML="";dmTray=null;dmTrayT=null;dmTrayI=-1;
  /* v144: the open cascade is consumed here - later renders (my reply
     landing, his answer arriving) keep their own single-beat motion */
  const entering=thEnter;thEnter=false;
@@ -6662,15 +6700,15 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
  const lastMeDone=t.rounds?(function(){const r=t.rounds.find(r=>r.me===lastMe);return r?r.done:false;})():t.done;
  const sepAt={};if(t.rounds&&t.rounds.length>1)t.rounds.forEach(r=>{sepAt[r.at]=r.d;});
  t.msgs.forEach((m,i)=>{if(sepAt[i]!=null){const sp=document.createElement("div");sp.className="th-sep";sp.textContent="Day "+sepAt[i];box.appendChild(sp);}
-  const side=isMe(i)?"me":"them";const d=document.createElement("div");d.className="msg "+side+((i>0&&sepAt[i]==null&&(isMe(i-1)?"me":"them")===side)?" grp":"");d.textContent=m;if(entering)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+Math.min(i*75,450)+"ms both";box.appendChild(d);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}if(lastMeDone&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";if(dmReadFresh){mm.style.animation="readmark .35s ease .55s both";dmReadFresh=false;}box.appendChild(mm);}});
+  const side=isMe(i)?"me":"them";const tail=(i===t.msgs.length-1||sepAt[i+1]!=null||isMe(i+1)!==isMe(i));const d=document.createElement("div");d.className="msg "+side+((i>0&&sepAt[i]==null&&(isMe(i-1)?"me":"them")===side)?" grp":"")+(tail?" tail":"");d.textContent=m;if(entering&&i>=t.msgs.length-6)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+((i-Math.max(0,t.msgs.length-6))*70)+"ms both";box.appendChild(d);dmRctBadge(d,t,i);dmRctAttach(d,t,i);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}if(lastMeDone&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";if(dmReadFresh){mm.style.animation="readmark .35s ease .55s both";dmReadFresh=false;}box.appendChild(mm);}});
  const cb=$("#th-choices");cb.innerHTML="";
  if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{
    if(t.rounds){const r=fanRoundOf(t);if(r){r.done=true;r.me=t.msgs.length;}const na=fanRoundOf(t);if(na)t.choices=na.choices;t.done=!na&&!(t.pend&&t.pend.length);}
    else{t.done=true;if(t.special&&t.replyIdx2!=null&&t.replyIdx2>=0)t.replyIdx3=t.msgs.length;else if(t.special&&t.replyIdx!=null&&t.replyIdx>=0)t.replyIdx2=t.msgs.length;else t.replyIdx=t.msgs.length;}
-   t.msgs.push(c.t);if(t.special)S.hirotoDm="done";dmReadFresh=true;renderThreadMsgs();scrollDmBottom(true);
+   t.msgs.push(c.t);if(t.special)S.hirotoDm="done";dmReadFresh=true;renderThreadMsgs();{const mb=$("#th-msgs").querySelectorAll(".msg.me");if(mb.length)mb[mb.length-1].classList.add("new");}scrollDmBottom(true);
    /* v118: his reply types for a beat before it lands (the save
       waits for the pair, so a closed app never keeps half a talk) */
-   const ty=document.createElement("div");ty.className="msg them typing";ty.innerHTML="<i></i><i></i><i></i>";$("#th-msgs").appendChild(ty);scrollDmBottom(true);
+   const ty=document.createElement("div");ty.className="msg them typing tail";ty.innerHTML="<i></i><i></i><i></i>";{const A2=ACC[t.who];if(A2&&A2.av){const im2=document.createElement("img");im2.className="th-av";im2.src=A2.av;im2.alt="";ty.appendChild(im2);}}$("#th-msgs").appendChild(ty);scrollDmBottom(true);
    /* v452: the typing beat scales with the reply's length, like a
       real correspondent - a one-liner lands fast, a long answer
       keeps the dots up longer (was a flat 780ms for every reply) */
@@ -6679,6 +6717,25 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
       the moment the answer lands */
    if(t.rounds&&t.pend&&t.pend.length){const nx=t.pend.shift();appendFanRound(t,nx.d,nx.msgs,nx.choices);if(curThread!==t)t.unread=true;}
    if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},Math.max(700,Math.min(1900,560+(c.r||"").length*14)));};cb.appendChild(b);});}}
+/* v496: bubble reactions, the real client's long-press tray and
+   double-tap heart. Display layer only: the pick is kept additively
+   on the thread (t.rct, keyed by message index - messages only ever
+   append, so indices are stable) and rides the normal save; older
+   saves simply have no rct field and read as no reactions. */
+const DM_RX=["❤️","😂","😮","😢","👍"];
+let dmTray=null,dmTrayT=null,dmTrayI=-1;
+function dmRctClose(){if(dmTray){dmTray.remove();dmTray=null;dmTrayT=null;dmTrayI=-1;}}
+function dmRctSet(t,i,e){if(!t.rct)t.rct={};if(e)t.rct[i]=e;else delete t.rct[i];if(!Object.keys(t.rct).length)delete t.rct;save();}
+function dmRctBadge(d,t,i){const old=d.querySelector(".msg-rct");if(old)old.remove();d.classList.remove("has-rct");const e=t.rct&&t.rct[i];if(!e)return;const s=document.createElement("span");s.className="msg-rct";s.textContent=e;s.addEventListener("pointerdown",ev2=>ev2.stopPropagation());s.addEventListener("click",ev2=>{ev2.stopPropagation();dmRctOpen(d,t,i);});d.appendChild(s);d.classList.add("has-rct");}
+function dmRctOpen(d,t,i){if(dmTray&&dmTrayT===t&&dmTrayI===i){dmRctClose();return;}dmRctClose();const tr=document.createElement("div");tr.className="msg-tray";DM_RX.forEach(e=>{const b=document.createElement("button");b.type="button";b.textContent=e;if(t.rct&&t.rct[i]===e)b.className="on";b.addEventListener("click",ev2=>{ev2.stopPropagation();const cur=t.rct&&t.rct[i];dmRctSet(t,i,cur===e?null:e);dmRctBadge(d,t,i);if(cur!==e)dmRctBurst(d,e);dmRctClose();});tr.appendChild(b);});d.appendChild(tr);dmTray=tr;dmTrayT=t;dmTrayI=i;}
+function dmRctBurst(d,e){const s=document.createElement("span");s.className="msg-burst";s.textContent=e;d.appendChild(s);setTimeout(()=>s.remove(),700);}
+function dmRctAttach(d,t,i){let timer=null,lastTap=0,moved=false,sx=0,sy=0,longed=false;
+ d.addEventListener("pointerdown",e=>{if(dmTrayT===t&&dmTrayI!==i)dmRctClose();sx=e.clientX;sy=e.clientY;moved=false;longed=false;clearTimeout(timer);timer=setTimeout(()=>{longed=true;dmRctOpen(d,t,i);},430);});
+ d.addEventListener("pointermove",e=>{if(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10){moved=true;clearTimeout(timer);}});
+ d.addEventListener("pointerup",()=>{clearTimeout(timer);if(longed||moved)return;const now=Date.now();if(now-lastTap<330){lastTap=0;const cur=t.rct&&t.rct[i];dmRctSet(t,i,cur==="❤️"?null:"❤️");dmRctBadge(d,t,i);if(cur!=="❤️")dmRctBurst(d,"❤️");}else lastTap=now;});
+ d.addEventListener("pointercancel",()=>{clearTimeout(timer);});}
+document.addEventListener("pointerdown",e=>{if(dmTray&&e.target&&e.target.closest&&!e.target.closest(".msg-tray")&&!e.target.closest(".msg"))dmRctClose();});
+{const dmSc=$("#x-scroll");if(dmSc)dmSc.addEventListener("scroll",()=>dmRctClose(),{passive:true});}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
 /* profile */
 let profFolSeen=null,profFolTok=0,profFolArm=false;
