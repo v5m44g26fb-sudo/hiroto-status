@@ -814,6 +814,22 @@ input,textarea{font-size:16px}
    hometabs (46px, sticky inside the scroll area) = 112px, so the Changes
    toasts sit just below it instead of at the old 3-row offset */
 #changes{top:calc(120px + env(safe-area-inset-top))}
+/* ===== v520: notification banner - a real phone banner that drops
+   at the story's hinge moments (his DM landing, the Day 6 scoop /
+   announcement morning, the mispost going public). One card, auto-
+   dismiss, gone when it leaves: the same class of element as the
+   Changes toasts, never a permanent float. Dark glass in both
+   themes, the way an OS banner looks over any app. ===== */
+#xbanner{position:absolute;top:calc(8px + env(safe-area-inset-top));left:10px;right:10px;z-index:116;display:flex;gap:10px;align-items:flex-start;background:rgba(26,26,30,.88);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-radius:22px;padding:11px 13px;color:#fff;box-shadow:0 18px 44px rgba(0,0,0,.42);cursor:pointer;opacity:0;transform:translateY(-135%);pointer-events:none;transition:transform .55s cubic-bezier(.2,.9,.25,1),opacity .3s ease}
+#xbanner.on{opacity:1;transform:translateY(0);pointer-events:auto}
+#xbanner .xb-av{width:38px;height:38px;border-radius:10px;object-fit:cover;flex:none;background:#333}
+#xbanner .xb-main{flex:1;min-width:0}
+#xbanner .xb-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+#xbanner .xb-name{font-size:13.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#xbanner .xb-when{font-size:11.5px;color:rgba(255,255,255,.55);flex:none}
+#xbanner .xb-tx{margin-top:1px;font-size:13px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#xbanner .xb-sub{margin-top:1px;font-size:11.5px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (prefers-reduced-motion:reduce){#xbanner{transition:opacity .2s ease;transform:none}}
 /* readable copy keeps its right end clear of the compose FAB's column, so
    glyphs can never slide under the button (same idea as .evcard h3 in v32) */
 #daybanner{padding-right:76px}
@@ -3887,7 +3903,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v519</p>
+  <p class="ver">v520</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4071,7 +4087,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v519</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v520</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4311,6 +4327,7 @@ input,textarea{font-size:16px}
       <button class="sv2-next" id="sv2-next" type="button"><span>次の日へ</span><span class="sv2-next-ar">→</span></button>
     </div>
   </div>
+  <div id="xbanner" role="button" aria-label="通知バナー"></div>
   <div id="livescene" role="dialog" aria-label="配信の切り抜き">
     <div class="lv-frame" id="lv-frame">
       <img class="lv-bg" src="assets/gen-hiroto-live.jpg" alt="">
@@ -4389,7 +4406,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v519</p>
+    <p class="ver">v520</p>
   </div>
 </section>
 </div>
@@ -6711,6 +6728,64 @@ function renderMiniCard(slot,def,di){
  slot.appendChild(card);
 }
 /* chapter flow */
+/* ===== v520: notification banners - at the story's hinge moments a
+   real banner drops from the top of the phone: his DM landing, the
+   Day 6 scoop / announcement morning, the mispost going public.
+   Presentation only: a session queue feeding one auto-dismissing
+   card (the same class of element as the Changes toasts - never a
+   permanent float). Nothing is saved; scene conditions, order and
+   numbers are untouched. Taps ride the existing navigation: the DM
+   pane for messages, openPostThread for posts. While a full-screen
+   scene (day intro, his screen, the DM unlock, the live / announce
+   viewers) is up, the queue simply waits its turn. ===== */
+let xbQueue=[],xbBusy=false,xbTimer=null;
+function queueBanner(b){if(!b)return;if(b.front)xbQueue.unshift(b);else xbQueue.push(b);setTimeout(xbFlush,650);}
+function xbBlocked(){return !!document.querySelector("#dayintro.on,#sideview.on,#dmunlock.on,#livescene.on,#annscene.on");}
+function xbFlush(){
+ if(xbBusy||!xbQueue.length)return;
+ if(xbBlocked()){setTimeout(xbFlush,800);return;}
+ xbShow(xbQueue.shift());
+}
+function xbShow(b){
+ xbBusy=true;
+ const render=()=>{
+  const el=$("#xbanner");if(!el){xbBusy=false;return;}
+  const A=ACC[b.a]||{};
+  el.innerHTML="";
+  const im=document.createElement("img");im.className="xb-av";im.src=A.av||"";im.alt="";el.appendChild(im);
+  const main=document.createElement("div");main.className="xb-main";
+  const head=document.createElement("div");head.className="xb-head";
+  const nm=document.createElement("span");nm.className="xb-name";nm.textContent=A.n||"";head.appendChild(nm);
+  const wh=document.createElement("span");wh.className="xb-when";wh.textContent="今";head.appendChild(wh);
+  main.appendChild(head);
+  const tx=document.createElement("div");tx.className="xb-tx";tx.textContent=b.tx||"";main.appendChild(tx);
+  if(b.sub){const sb=document.createElement("div");sb.className="xb-sub";sb.textContent=b.sub;main.appendChild(sb);}
+  el.appendChild(main);
+  el.onclick=()=>{xbHide();xbGo(b);};
+  void el.offsetWidth;el.classList.add("on");
+  try{if(window.__snd){if(b.flood)window.__snd.flood(b.flood);else if(b.dm)window.__snd.dmPing();else window.__snd.ntf();}}catch(_){}
+  clearTimeout(xbTimer);xbTimer=setTimeout(xbHide,4600);
+ };
+ /* b.pre: a held breath of quiet before the drop (the Day 6 morning) */
+ if(b.pre){try{window.__snd&&window.__snd.hush(b.pre);}catch(_){}}
+ setTimeout(render,b.pre?b.pre+120:0);
+}
+function xbHide(){
+ const el=$("#xbanner");if(el){el.classList.remove("on");el.onclick=null;}
+ clearTimeout(xbTimer);
+ setTimeout(()=>{xbBusy=false;xbFlush();},380);
+}
+function xbGo(b){
+ try{
+  if(b.go==="msg"){showPane("msg");return;}
+  if(b.postId){
+   const pool=(S.posts||[]).concat(S.men||[],S.rkeep||[]);
+   const tp=pool.find(x=>x.id===b.postId);
+   if(tp){openPostThread(tp);return;}
+  }
+  if(b.go==="feed")showPane("tl");
+ }catch(_){}
+}
 function startChapter(n){
  S.ch=n;S.posted=false;S.evDone=false;S.actDone=false;
  if(!S.folHist)S.folHist=[];
@@ -6803,6 +6878,7 @@ function startChapter(n){
    S.hirotoDm="open";
    S.threads.unshift({id:tgtKey(),who:tgtKey(),msgs:TDM.msgs.slice(),choices:TDM.choices,done:false,unread:true,special:true,replyIdx:-1});
    S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:tgtKey()==="hiroto"?"何年も眠っていたスレッドから":"久しぶりの、本人からの連絡"});
+   queueBanner({a:tgtKey(),tx:TDM.msgs[0]||"",sub:"メッセージ",go:"msg",dm:1});
  }
  /* v250 (episode): the follow-up exchange (TARGET_DM2) continues
     the same thread on Day 5, if the first one was answered */
@@ -6810,7 +6886,8 @@ function startChapter(n){
  if(n===5&&TDM2&&S.hirotoDm==="done"){
    const th=S.threads.find(x=>x.id===tgtKey()&&x.special);
    if(th&&!th.round2){th.round2=true;th.msgs=th.msgs.concat(svDm2Msgs(TDM2.msgs));th.choices=TDM2.choices;th.done=false;th.unread=true;
-     S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:"本人からの、つづきの連絡"});}
+     S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:"本人からの、つづきの連絡"});
+     queueBanner({a:tgtKey(),tx:TDM2.msgs[0]||"",sub:"メッセージ",go:"msg",dm:1});}
  }
  /* v254 (episode): the third exchange (TARGET_DM3) lands on the
     morning of Day 6, if the second was answered */
@@ -6818,7 +6895,8 @@ function startChapter(n){
  if(n===6&&TDM3&&S.hirotoDm==="done"){
    const th=S.threads.find(x=>x.id===tgtKey()&&x.special);
    if(th&&th.round2&&th.done&&!th.round3){th.round3=true;th.msgs=th.msgs.concat(svDm3Msgs(((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))&&TARGET_DM3B[tgtKey()]?TARGET_DM3B[tgtKey()]:TDM3).msgs));th.choices=TDM3.choices;th.done=false;th.unread=true;
-     S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:(tgtKey()==="sakuya"?"発表の日の朝に":"報道の日の朝に")});}
+     S.notifs.unshift({a:tgtKey(),tx:"からDMが届きました",sub:(tgtKey()==="sakuya"?"発表の日の朝に":"報道の日の朝に")});
+     queueBanner({a:tgtKey(),tx:(((S.posts||[]).some(p=>p.mine&&(p.img==="assets/nao-hiroto-mispost.jpg"||p.img==="assets/nao-sakuya-mispost.jpg"))&&TARGET_DM3B[tgtKey()]?TARGET_DM3B[tgtKey()]:TDM3).msgs||[])[0]||"",sub:"メッセージ",go:"msg",dm:1});}
  }
  /* v261 (episode - heat): on the announcement morning, if the
     distance has really closed, he follows her - no announcement,
@@ -6838,6 +6916,16 @@ function startChapter(n){
  if(n===6&&(S.posts||[]).some(p=>p.mine&&p.img==="assets/nao-"+tgtKey()+"-mispost.jpg")&&!S.notifs.some(x=>x.sub==="例の誤爆、その後")){
    S.notifs.unshift({a:"fan1",tx:"さんのポストが話題です",sub:"例の誤爆、その後"});
    S.posts.unshift(mkPost("fan1",tgtKey()==="sakuya"?"例の誤爆、『伝説の誤爆』ってもう笑い話になってる。本人たちが何も言わないのが、またいいんだと思う":"例の誤投稿、今朝のまとめで『伝説の3分』って呼ばれてて笑った。本人たちは何も言わないのが、またいいんだと思う",640,79,61,false,null));
+ }
+ /* v520: the Day 6 morning lands as a phone banner ahead of the
+    feed - the scoop on his route, the announcement on hers - after
+    a held breath of quiet, with the arrivals piling up behind it.
+    Queued ahead of the morning's DM banner (front), display only */
+ if(n===6){
+  if(tgtKey()==="hiroto"){const mp=(S.posts||[]).find(p=>p.a==="media"&&p.t&&p.t.indexOf("熱愛報道")>=0);
+   queueBanner({a:"media",tx:"Hearts2Hearts・なおに熱愛報道",sub:"週刊誌系の電子版が報じました",postId:mp?mp.id:null,go:"feed",front:1,flood:5,pre:650});}
+  else{const mp=(S.posts||[]).find(p=>p.a==="media");
+   queueBanner({a:"media",tx:"本日12時、サクヤ×なお コラボ発表",sub:"Hearts2Hearts × NCT WISH",postId:mp?mp.id:null,go:"feed",front:1,flood:4,pre:650});}
  }
  injectBuzz(n>=2?1:0,0);
  renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();checkNext();updateBdg();save();
@@ -6929,6 +7017,12 @@ function doPost(o){
   if(fi>=0){let n=0;for(let j=fi+1;j<kids.length&&n<reacts.length;j++){const el=kids[j];if(el.classList&&(el.classList.contains("post")||el.classList.contains("sysnote"))){el.style.animation="fadeup .45s cubic-bezier(.2,.8,.3,1) "+(500+n*600)+"ms both";n++;}}}
  }
  renderNotifs();checkNext();addStory("post");save();
+ /* v520: the mispost going public arrives the way it would on a
+    real phone - the matome account's take as a banner, a beat
+    after her own post and its first reactions have landed, with
+    the replies starting to pile up in sound as well */
+ if(o.img&&/-mispost\.jpg$/.test(o.img)){const mr=reacts.find(r=>!r.sys&&r.a==="matome");
+  setTimeout(()=>queueBanner({a:"matome",tx:"新人・なお、公式アカウントに私的なツーショットを誤投稿か",sub:"数分で消えたが、スクショは出回っている",postId:mr?mr.id:null,flood:3}),1700);}
 }
 /* activity (Status-style: pick a title, then run. v142: the partner and
    time-slot steps are gone by user decision - neither ever fed fx, the
@@ -8101,7 +8195,7 @@ function lvAddCmt(n,tx,troll){const box=$("#lv-cmts");if(!box)return;const d=doc
 function lvNext(){lvClearTimers();if(lvIdx>=LIVE_STEPS.length)return;const st=LIVE_STEPS[lvIdx++];
  if(st.c){lvAddCmt(st.c[0],st.c[1],st.t);lvSchedule(1500);}
  else if(st.v){lvSetView(st.v);lvNext();}
- else if(st.silence){const sil=$("#lv-silence");sil.style.display="";lvSilSec=0;$("#lv-sil-t").textContent="0:00";
+ else if(st.silence){try{window.__snd&&window.__snd.hush(2800);}catch(_){}const sil=$("#lv-silence");sil.style.display="";lvSilSec=0;$("#lv-sil-t").textContent="0:00";
   lvSilInt=setInterval(()=>{lvSilSec++;$("#lv-sil-t").textContent="0:"+String(lvSilSec).padStart(2,"0");if(lvSilSec===9)lvSetView(468);if(lvSilSec===17)lvSetView(512);if(lvSilSec>=23){clearInterval(lvSilInt);lvSilInt=null;sil.style.display="none";lvNext();}},115);}
  else if(st.line){const l=$("#lv-line");l.textContent=st.line;l.style.display="";lvSchedule(2800);}
  else if(st.end){const e=$("#lv-end");e.textContent=st.end;e.style.display="";$("#lv-line").style.display="none";$("#lv-hint").style.display="none";const cb=$("#lv-close");cb.style.display="";lvDone=true;}}
@@ -8150,7 +8244,7 @@ function anCountTo(tg){anPendingCount=tg;if(!anLastCard){anPendingCount=null;anN
  const t0=performance.now(),dur=950;
  anCountInt=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/dur);const e=1-Math.pow(1-k,3);["rc","rp","lk"].forEach(k2=>{if(els[k2])els[k2].textContent=fmtCnt(Math.round(from[k2]+(tg[k2]-from[k2])*e));});if(k>=1){clearInterval(anCountInt);anCountInt=null;anPendingCount=null;anSchedule(550);}},40);}
 function anNext(){anClearTimers();if(anFinishCount()){anSchedule(350);return;}if(anIdx>=ANN_STEPS.length)return;const st=ANN_STEPS[anIdx++];
- if(st.clock){$("#an-time").textContent=st.clock;if(st.note)$("#an-note").textContent=st.note;anSchedule(st.wait||1200);}
+ if(st.clock){$("#an-time").textContent=st.clock;if(st.note)$("#an-note").textContent=st.note;if(st.clock==="11:59"){try{window.__snd&&window.__snd.hush(1400);}catch(_){}}anSchedule(st.wait||1200);}
  else if(st.post){anCard(st);anSchedule(1050);}
  else if(st.count){anCountTo(st.count);}
  else if(st.notif){const A=ACC[st.notif.a]||{};const d=document.createElement("div");d.className="an-notif";d.innerHTML=anAvatar(st.notif.a);const sp=document.createElement("span");const b=document.createElement("b");b.textContent=A.n||"";sp.appendChild(b);sp.appendChild(document.createTextNode("　"+st.notif.tx));d.appendChild(sp);$("#an-feed").appendChild(d);anFeedBottom();anSchedule(1150);}
@@ -8679,7 +8773,12 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
 var PKEY="debut-status-snd",on=true;
 try{on=localStorage.getItem(PKEY)!=="0";}catch(e){}
 var ctx=null,master=null,bgmBus=null,noiseBuf=null;
-var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0,result:0,lvup:0,rp:0,bmk:0};
+var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0,result:0,lvup:0,rp:0,bmk:0,flood:0,hush:0};
+/* v520: deliberate silence - while a hush window is open, every
+   tone and noise in this module stays quiet (the held minute
+   before an announcement, the stream's 23 seconds, the breath
+   before the Day 6 banner). The switch still rules everything. */
+var hushUntil=0;
 function ac(){
   if(!ctx){
     var AC=window.AudioContext||window.webkitAudioContext;
@@ -8694,7 +8793,7 @@ function ac(){
 }
 function env(g,t,a,peak,dur){g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+dur);}
 function tone(o){
-  if(!on||!ac())return;
+  if(!on||Date.now()<hushUntil||!ac())return;
   var t=ctx.currentTime+(o.at||0),os=ctx.createOscillator(),g=ctx.createGain();
   os.type=o.type||"sine";os.frequency.setValueAtTime(o.f0,t);
   if(o.f1)os.frequency.exponentialRampToValueAtTime(o.f1,t+(o.dur||.15));
@@ -8702,7 +8801,7 @@ function tone(o){
   os.connect(g);g.connect(master);os.start(t);os.stop(t+(o.dur||.15)+.05);
 }
 function noise(o){
-  if(!on||!ac())return;
+  if(!on||Date.now()<hushUntil||!ac())return;
   if(!noiseBuf){noiseBuf=ctx.createBuffer(1,Math.floor(ctx.sampleRate*.3),ctx.sampleRate);var d=noiseBuf.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;}
   var t=ctx.currentTime+(o.at||0),s=ctx.createBufferSource();s.buffer=noiseBuf;s.loop=true;
   var f=ctx.createBiquadFilter();f.type="bandpass";f.Q.value=1.1;
@@ -8716,6 +8815,11 @@ var Snd={
   sel:function(){played.sel++;tone({f0:660,dur:.07,vol:.09});tone({f0:990,dur:.1,vol:.07,at:.05});},
   like:function(){played.like++;tone({f0:520,f1:940,dur:.1,vol:.14,a:.005});tone({f0:1320,dur:.13,vol:.06,at:.06});},
   ntf:function(){played.ntf++;tone({f0:1318,dur:.32,vol:.07,a:.01});tone({f0:1760,dur:.42,vol:.05,at:.09,a:.01});},
+  /* v520: a burst of arrivals - the notify voice repeated in quick
+     succession, each a touch lower, like a phone going off under a
+     pile of replies. Capped at six, same volumes, same switch. */
+  flood:function(n){played.flood++;if(!on||!ac())return;n=Math.max(1,Math.min(n||3,6));
+    for(var i=0;i<n;i++){tone({f0:1318-i*55,dur:.3,vol:.06,a:.01,at:i*.17});tone({f0:1760-i*65,dur:.38,vol:.045,at:i*.17+.08,a:.01});}},
   dm:function(){played.dm++;tone({type:"triangle",f0:880,dur:.08,vol:.11});tone({type:"triangle",f0:1174,dur:.15,vol:.09,at:.07});},
   send:function(){played.send++;noise({f0:500,f1:2600,dur:.16,vol:.06});tone({type:"triangle",f0:420,f1:840,dur:.14,vol:.045});},
   /* v512: the two footer toggles that used to stay silent get their
@@ -8861,7 +8965,7 @@ if(row)row.addEventListener("click",function(){
   if(on){ac();Snd.sel();bgmSync();}else{bgmStop();}
 });
 paint();
-window.__snd={played:played,isOn:function(){return on;},bgm:function(){return bgmOn;},ctxState:function(){return ctx?ctx.state:"none";}};
+window.__snd={played:played,isOn:function(){return on;},bgm:function(){return bgmOn;},ctxState:function(){return ctx?ctx.state:"none";},flood:function(n){Snd.flood(n);},hush:function(ms){hushUntil=Date.now()+(ms||0);played.hush++;},hushLeft:function(){return Math.max(0,hushUntil-Date.now());},ntf:function(){Snd.ntf();},dmPing:function(){Snd.dm();}};
 })();
 </script>
 </body>

@@ -3679,5 +3679,13 @@ v476 の全体総点検の続き。本編側（彼女側のXアプリ全体）�
 - 絶対条件の維持：fxcheck で fx296・cond82・BUZZキー112・img79 が v518 と順序列まで完全一致。変更は文章と版数のみ（git diff は SIDE_SCENES／MINI_EVENTS の該当行＋版数3箇所のみ、凍結面は無変更）。声明文・システム・UI・選択肢・条件・時系列・セーブ形式・写真割り当て・彼の画面の同寸・冒頭フロー・FINボタン2つ不変。版数3箇所 v519 統一。script ブロック4本 node --check OK
 - 検証（軽量標準、~/workspace/v519work/verify519.py＋verify519b.py、Playwright 390×844）：両ルート Day1 通しでページ／コンソールエラー0、新文面15件の存在と旧文面15件の消滅を照合、ミニ sakuya:1／sakuya:3 の新文面をデータ層で確認、彼の画面は実クリックで選択→記録→解放→場面退出→Day2 開始まで確認し全項目 PASS
 
+## v520（2026-11-21）通知バナー演出＋サウンド拡張
+- 本人が採用した演出追加（外部AI提案から本人が「両方足す」を選択した前半分）。後半分（彼女側の下書き・鍵垢）は別パス扱いで本パス範囲外
+- 通知バナー（新規 #xbanner、#phone 内・z-index 116 のダークガラスカード、iOSバナー様式）：セッション内キュー queueBanner→xbFlush→xbShow の単一カード方式で、自動消滅トーストと同じ扱い（常設の浮き要素ではない）。表示 4.6 秒で自動消滅、タップで既存遷移へ（DM は showPane("msg")、ポストは openPostThread、解決不能時はフィード）。全画面シーン表示中（dayintro／sideview／dmunlock／livescene／annscene）はキューが待機し、演出同士は重ならない。prefers-reduced-motion ではスライドなし。セーブには一切書かない
+- バナーの発火点：①相手DM解放（Day4 の TARGET_DM 解放／Day5 の round2／Day6 の round3＝誤爆有無で DM3B 切替も複製）で彼の名前＋1通目の文面そのまま＋dm 音 ②Day6 朝：ひろと編＝media「Hearts2Hearts・なおに熱愛報道」（front でDMバナーより先、pre 650ms の hush の後に flood 5連）、サクヤ編＝media「本日12時、サクヤ×なお コラボ発表」（flood 4連） ③Day5 誤爆ポスト時：投稿と初期反応の着地を待って 1.7 秒後に matome「新人・なお、公式アカウントに私的なツーショットを誤投稿か」（flood 3連、タップで matome リアクションのスレッドへ）
+- サウンド拡張（既存 IIFE 内）：Snd.flood(n)＝通知音色を少しずつ音程を下げながら最大6連（0.17秒間隔、音量は既存 ntf と同格）。hush＝hushUntil 窓の間 tone／noise の全発音を抑制する意図的な無音。発火点：livescene の沈黙ステップ開始（2800ms＝沈黙 23tick×115ms を覆う）、annscene の 11:59 ステップ表示（1400ms）、Day6 バナーの pre。__snd に flood／hush／hushLeft／ntf／dmPing を診断・連携用に追加公開。設定 OFF（debut-status-snd）では従来どおり全無音（AudioContext 自体が生成されないことを実測）
+- 絶対条件の維持：fxcheck で fx296・cond82・BUZZキー112・img79 が v519 と順序列まで完全一致。エンディング条件・閾値・判定順・タイミング・発生条件・セーブ形式（演出の一時状態は未保存）・写真割り当て・彼の画面の同寸・冒頭フロー・FINボタン2つ不変。版数3箇所 v520 統一。script ブロック4本 node --check OK。差分に「線」・プリン・禁止呼称なし
+- 検証（軽量標準、~/workspace/v520work/verify520.py＋verify520c.py、Playwright 390×844）：ひろと編を通しで実測し、Day4 DMバナー（名前・文面・dm音・タップ→DMペイン）、Day5 誤爆バナー（まとめ名・文面・flood・タップ→スレッド）、livescene 沈黙の hush 窓（残り 2270ms）、Day6 バナー（hush 先行→flood、タップ→media スレッド、後続で DM3 バナー）、サクヤ編 annscene 11:59 の hush 窓、設定 OFF でのバナー表示＋AudioContext 未生成、両ルート＋OFF の3セッションでページ／コンソールエラー0、全項目 PASS。初回検証の2件 FAIL（誤爆バナーの観測タイミング、タイトル画面での OFF 確認）は検証側の段取り起因と切り分け済み（タイトル画面ではアプリ層が畳まれているのが既存仕様で、バナーはゲーム内でのみ発火する）
+
 ## 恒常メモ（2026-11-21、v519で記録）
 - 彼は配信者ではない。配信は気まぐれで不定期。「7年」を配信歴として使わない（ファンの応援歴は番組時代＝日プ等を起点とする文脈でのみ可）
