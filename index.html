@@ -1873,6 +1873,23 @@ input,textarea{font-size:16px}
 .ej-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
 .ej-dots i.on{background:linear-gradient(135deg,#7856ff,#f91880)}
 .ej-words{margin:11px 0 2px;font-size:12px;line-height:1.7;color:#9aa0a6}
+/* ===== v522: the run album - a short read-back of this run inside
+   FIN (her posts, his-screen choices and the DM lines they actually
+   delivered, the events that happened, how the distance landed).
+   No scoring, nothing written to the save; items whose events never
+   happened in this run are absent. ===== */
+.end-album{width:100%;margin-top:12px;background:linear-gradient(180deg,rgba(23,23,36,.92),rgba(12,12,20,.95));border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:15px 16px 13px;box-shadow:0 18px 40px rgba(0,0,0,.45);text-align:left}
+.alb-item{padding:10px 0 9px;border-top:1px solid rgba(255,255,255,.08);animation:fadeup .5s ease both}
+.alb-item:first-child{border-top:none;padding-top:3px}
+.alb-h{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.alb-day{font-size:10.5px;font-weight:900;letter-spacing:.1em;color:#0f1419;background:#e7e9ea;border-radius:999px;padding:2.5px 9px;white-space:nowrap}
+.alb-cat{font-size:11px;font-weight:800;color:#9aa0a6;letter-spacing:.08em}
+.alb-do{font-size:13px;line-height:1.75;color:#fff;white-space:pre-line}
+.alb-then{font-size:12.5px;line-height:1.75;color:#cfd4d9;white-space:pre-line;margin-top:3px}
+.alb-then i{font-style:normal;color:#f91880;font-weight:900;margin-right:6px}
+.alb-refl{font-size:12px;line-height:1.75;color:#9aa0a6;margin-top:6px;border-left:2px solid rgba(249,24,128,.55);padding-left:9px;white-space:pre-line}
+.alb-refl b{display:block;color:#e7e9ea;font-weight:800;font-size:11.5px;letter-spacing:.04em}
+@media (prefers-reduced-motion:reduce){.alb-item{animation:none}}
 /* ===== v66: story image resolution fix - avatar-grade files (512px)
    no longer stretch across the fullscreen story viewer; they present
    as a photo card near native size over the account-hue gradient. ===== */
@@ -3958,7 +3975,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v521</p>
+  <p class="ver">v522</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4143,7 +4160,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v521</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v522</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4463,6 +4480,10 @@ input,textarea{font-size:16px}
       <p class="ej-words" id="ej-words"></p>
       <div class="ej-strip-wrap" id="ej-strip-wrap" style="display:none"><div class="ej-strip-h"><span>HIGHLIGHTS</span><small>6日間の写真</small></div><div class="ej-strip" id="ej-strip"></div></div>
     </div>
+    <div class="end-album" id="end-album" style="display:none">
+      <div class="ej-h"><span class="ej-t">ALBUM</span><small>この周回の記録</small></div>
+      <div id="alb-items"></div>
+    </div>
     </div>
     <button class="btn" id="btn-day7" type="button">Day 7 ― その後の一日へ</button>
     <div class="end-credits" id="end-credits">
@@ -4482,7 +4503,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v521</p>
+    <p class="ver">v522</p>
   </div>
 </section>
 </div>
@@ -8585,6 +8606,114 @@ function renderCredits(kind){
  if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
   bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
  renderTitleSave();}
+/* v522: the run album - a short read-back of this run, rendered
+   inside FIN under the JOURNEY panel. Every item pairs something
+   the player chose with what actually came of it, and everything is
+   derived from state that already exists: her posts (texts and the
+   numbers they ended with), the special DM thread (her replies and
+   his answers stand in its msgs), his recorded side-view choices
+   (S.sv) and the DM lines those choices really delivered - the
+   reflection lines are recomputed with the game's own svDm*Msgs
+   builders and only quoted when the line is found in the thread, so
+   nothing is invented. Events that never happened in this run (the
+   mispost, his follow, an unanswered DM) simply leave no item.
+   Nothing is scored, nothing is written to the save. */
+function albThread(){return (S.threads||[]).find(x=>x&&x.id===tgtKey()&&x.special)||null;}
+function albMispost(){return (S.posts||[]).some(p=>p&&p.mine&&p.img==="assets/nao-"+tgtKey()+"-mispost.jpg");}
+function albDmRounds(){
+ const th=albThread();if(!th)return {};
+ const defs=[null,TARGET_DMS[tgtKey()],TARGET_DM2[tgtKey()],TARGET_DM3[tgtKey()],null];
+ try{defs[4]=day7Dm4((window.__D7&&__D7.kind)||"start");}catch(_){}
+ const out={};let cur=0;
+ for(let r=1;r<=4;r++){const def=defs[r];if(!def||!def.choices)continue;
+  for(let j=cur;j<th.msgs.length;j++){const c=def.choices.find(x=>x.t===th.msgs[j]);
+   if(c){out[r]={me:th.msgs[j],res:(th.msgs[j+1]===c.r)?c.r:null};cur=j+1;break;}}}
+ return out;}
+function albSvItem(d,refl){
+ const idx=svGet(d);if(idx==null)return null;
+ let sc=null;try{sc=sideScene(d);}catch(_){}
+ if(!sc||!sc.blocks)return null;
+ const find=t=>sc.blocks.find(b=>b.t===t&&b.choices&&b.choices[idx]);
+ /* the Day 5 reply to his oldest fan (Hiroto) and the Day 6 draft
+    line (Sakuya) are replyq scenes, and their DM reflections key on
+    that answer - when a reflection is attached, read that block
+    first so the pairing names the choice that really caused it */
+ const order=(refl&&((d===5&&tgtKey()==="hiroto")||(d===6&&tgtKey()==="sakuya")))?["replyq","pick","chatq"]:["pick","chatq","replyq"];
+ let doTx=null,thenTx=null;
+ for(const t of order){
+  const b=find(t);if(!b)continue;const c=b.choices[idx];
+  if(t==="pick"){doTx=c.tx;thenTx=c.r;}
+  else if(t==="chatq"){doTx="送った文面 ― "+c.send;const rx=c.react||[];thenTx=rx.length?rx[rx.length-1][1]:"";}
+  else if(t==="replyq"){
+   if(b.mode==="draft"){doTx="書いた一文 ― "+c.tx;const kept=svGet(String(d)+"k");thenTx=kept===1?"その一文は、下書きに残した":kept===0?"その一文は、消した":"";}
+   else{doTx="送った返信 ― "+c.send;thenTx=c.follow?((c.followN||"相手")+" ― 「"+c.follow+"」"):"";}}
+  if(doTx)break;}
+ if(!doTx)return null;
+ const it={day:d,dayTx:"Day "+d,cat:"彼の画面",do:doTx,then:thenTx};
+ if(refl)it.refl=refl;
+ return it;}
+function albSvItems(){
+ const out=[];const th=albThread();
+ const has=s=>!!(th&&s&&th.msgs.indexOf(s)>=0);
+ const refl={};
+ if(th){
+  try{const b2=TARGET_DM2[tgtKey()].msgs,m2=svDm2Msgs(b2.slice());
+   for(let i=0;i<m2.length;i++)if(m2[i]!==b2[i]&&has(m2[i]))refl[4]={line:m2[i],to:"Day 5 のDM"};}catch(_){}
+  try{const b3=((albMispost()&&TARGET_DM3B[tgtKey()])?TARGET_DM3B[tgtKey()]:TARGET_DM3[tgtKey()]).msgs,m3=svDm3Msgs(b3.slice());
+   m3.filter(x=>b3.indexOf(x)<0).forEach(s=>{if(has(s))refl[5]={line:s,to:"Day 6 のDM"};});}catch(_){}
+  try{const b4=day7Dm4((window.__D7&&__D7.kind)||"start");
+   if(b4&&b4.msgs){
+    const t7={msgs:b4.msgs.slice()};svDm4D7(t7);
+    t7.msgs.filter(x=>b4.msgs.indexOf(x)<0).forEach(s=>{if(has(s))refl[7]={line:s,to:"Day 7 のDM"};});
+    const t6={msgs:b4.msgs.slice()};svDm4Msgs(t6);
+    t6.msgs.filter(x=>b4.msgs.indexOf(x)<0).forEach(s=>{if(has(s))refl[6]={line:s,to:"Day 7 のDM"};});}}catch(_){}
+ }
+ [5,7,6,4].forEach(d=>{if(out.length>=2||!refl[d])return;const it=albSvItem(d,refl[d]);if(it)out.push(it);});
+ if(!out.length)for(let d=7;d>=1;d--){const it=albSvItem(d,null);if(it){out.push(it);break;}}
+ return out;}
+function buildAlbum(){
+ const items=[];const kind=(window.__D7&&__D7.kind)||"start";
+ const lk=p=>parseInt((p.m&&p.m[2])||"0",10)||0;
+ const eng=p=>"いいね "+fmtCnt(lk(p))+" ・ リポスト "+fmtCnt(parseInt((p.m&&p.m[1])||"0",10)||0)+" ・ 返信 "+fmtCnt(parseInt((p.m&&p.m[0])||"0",10)||0);
+ const mine=(S.posts||[]).filter(p=>p&&p.mine&&p.t);
+ let debut=null;mine.forEach(p=>{if((p.dy||1)===1)debut=p;});
+ if(!debut&&mine.length)debut=mine[mine.length-1];
+ if(debut)items.push({day:debut.dy||1,dayTx:"Day "+(debut.dy||1),cat:"ポスト",do:debut.t,then:eng(debut),pri:0});
+ let top=null;mine.forEach(p=>{if(p!==debut&&p.img!=="assets/nao-"+tgtKey()+"-mispost.jpg"&&(!top||lk(p)>lk(top)))top=p;});
+ if(top)items.push({day:top.dy||1,dayTx:"Day "+(top.dy||1),cat:"ポスト ― いちばん伸びた投稿",do:top.t,then:eng(top),pri:3});
+ albSvItems().forEach((it,i)=>{it.pri=i?5:2;items.push(it);});
+ const rounds=albDmRounds();const dmR=[];
+ [3,4,1,2].forEach(r=>{if(rounds[r]&&rounds[r].res&&dmR.length<2)dmR.push(r);});
+ dmR.sort((a,b)=>a-b).forEach((r,i)=>{items.push({day:r+3,dayTx:"Day "+(r+3),cat:"DM",do:rounds[r].me,then:rounds[r].res,pri:i?4:2});});
+ if(albMispost()){
+  const resTx=({flame:"消したはずの一枚は残り続け、騒ぎを大きくした",collab:(tgtKey()==="sakuya"?"発表の歓声に紛れて、今では笑い話になっている":"蒸し返されるたび、二人だけが知っている話になった"),quiet:"彼の一言だけが残って、騒ぎにはならなかった",start:"本人より先に、その一枚だけが有名になった"})[kind];
+  items.push({day:5,dayTx:"Day 5",cat:"出来事",do:"鍵垢に上げるはずだった二人の写真を、公式アカウントに投稿してしまった。数分で消したけれど、スクショは残った",then:resTx,pri:1});}
+ try{const ch6=curCH()[5];const med=ch6&&ch6.seed?ch6.seed.find(s=>s.a==="media"):null;
+  if(med){let resTx;
+   if((S.notifs||[]).some(x=>x&&x.a===tgtKey()&&x.tx==="さんがあなたをフォローしました"))resTx="その朝、彼が彼女をフォローした。言葉は、なかった";
+   else resTx="世間の認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」のまま、結末を迎えた";
+   items.push({day:6,dayTx:"Day 6",cat:"出来事",do:med.tx,then:resTx,pri:0});}}catch(_){}
+ const si=distStageIdx();
+ items.push({day:8,dayTx:"Day 7 ― その後",cat:"最後の変化",do:"距離は STAGE "+(si+1)+" ― "+DIST_STAGES[si].lab+" まで近づいた",then:DIST_STAGES[si].note,pri:0});
+ items.sort((a,b)=>(a.day-b.day)||(a.pri-b.pri));
+ while(items.length>8){let wi=-1,wp=-1;items.forEach((it,i)=>{if(it.pri>0&&it.pri>=wp){wp=it.pri;wi=i;}});if(wi<0)break;items.splice(wi,1);}
+ return items;}
+function renderAlbum(){
+ const wrap=$("#end-album"),box=$("#alb-items");if(!wrap||!box)return;
+ let items=[];try{items=buildAlbum();}catch(_){items=[];}
+ if(!items.length){wrap.style.display="none";return;}
+ box.innerHTML="";
+ items.forEach((it,ix)=>{
+  const d=document.createElement("div");d.className="alb-item";d.style.animationDelay=(0.15+ix*0.09)+"s";
+  const h=document.createElement("div");h.className="alb-h";
+  const dy=document.createElement("span");dy.className="alb-day";dy.textContent=it.dayTx;h.appendChild(dy);
+  const ct=document.createElement("span");ct.className="alb-cat";ct.textContent=it.cat;h.appendChild(ct);
+  d.appendChild(h);
+  if(it.do){const p=document.createElement("p");p.className="alb-do";p.textContent=it.do;d.appendChild(p);}
+  if(it.then){const p=document.createElement("p");p.className="alb-then";const ar=document.createElement("i");ar.textContent="→";p.appendChild(ar);p.appendChild(document.createTextNode(it.then));d.appendChild(p);}
+  if(it.refl){const p=document.createElement("p");p.className="alb-refl";const b=document.createElement("b");b.textContent="その後、"+it.refl.to+"に届いた彼の言葉";p.appendChild(b);p.appendChild(document.createTextNode("「"+it.refl.line+"」"));d.appendChild(p);}
+  box.appendChild(d);});
+ wrap.style.display="";}
 /* v100: title save card - reads only state that already exists (day /
    chapter title / target / handle / followers / level) and promotes
    つづきから to the primary slot while a run is in progress: the
@@ -8914,7 +9043,7 @@ function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return
  const ejt=sec.querySelector(".ej-t");if(ejt)ejt.textContent="7 DAYS JOURNEY";const ejs=$("#ej-small");if(ejs)ejs.textContent="7日間の軌跡";
  const ps=$("#end-panel-sub");if(ps)ps.textContent="7日間の成績";const rl=$("#ec-record-lab");if(rl)rl.textContent="7日間の記録";
  const es=sec.querySelector(".ec-sub");if(es)es.textContent="STATUS × X ― A SEVEN-DAY STORY";
- renderEndJourney();renderCredits(D?D.kind:"start");const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";show("scr-ending");save();}
+ renderEndJourney();renderCredits(D?D.kind:"start");renderAlbum();const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";show("scr-ending");save();}
 $("#btn-day7").addEventListener("click",startDay7);
 renderTrends();
 const saved=load();
