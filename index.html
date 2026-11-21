@@ -161,7 +161,6 @@ input,textarea{font-size:16px}
 .xc-ring circle{fill:none;stroke-width:2.5}
 .xc-ring .bgc{stroke:#eff3f4}
 .xc-ring .fgc{stroke:#1d9bf0;stroke-linecap:round;transition:stroke-dashoffset .18s ease,stroke .18s ease}
-.xc-note{color:#536471;font-size:13px;margin:10px 16px 2px;flex:none}
 #postopts{padding:2px 16px 24px;overflow-y:auto}
 #x-nav{position:relative;flex:none;height:calc(58px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #eff3f4;display:flex;z-index:65;padding-bottom:calc(6px + env(safe-area-inset-bottom))}
 #x-nav button{flex:1;background:none;border:none;cursor:pointer;position:relative;color:#0f1419;display:flex;align-items:center;justify-content:center;transition:background .15s ease}
@@ -221,7 +220,6 @@ input,textarea{font-size:16px}
 .evcard .tag{display:inline-flex;align-items:center;gap:5px;background:#f7c948;color:#5b4300;font-size:11.5px;font-weight:800;letter-spacing:.1em;padding:4px 11px;border-radius:999px;box-shadow:0 2px 8px rgba(180,140,0,.35)}
 .evcard .tag svg{width:11px;height:11px;fill:#5b4300;flex:none}
 .actlab{font-size:12.5px;font-weight:800;color:#536471;letter-spacing:.06em;margin:14px 0 2px}
-.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
 .chip{padding:8px 14px;border-radius:999px;border:1px solid #cfd9de;background:#fff;font-size:13.5px;font-weight:700;color:#0f1419;cursor:pointer;transition:background .15s ease,color .15s ease,transform .1s ease;font-family:inherit}
 .chip:active{transform:scale(.96)}
 .chip.sel{background:#0f1419;color:#fff;border-color:#0f1419}
@@ -355,7 +353,6 @@ input,textarea{font-size:16px}
 .setup .opt.sel{border-color:#f91880;background:rgba(249,24,128,.13);box-shadow:0 0 0 1px #f91880,0 12px 32px rgba(249,24,128,.32);transform:scale(1.02)}
 .setup .opt.sel::after{content:"✓";position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#f91880;color:#fff;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(249,24,128,.5)}
 .setup .opt.card{display:flex;gap:14px;align-items:flex-start;text-align:left}
-.opt .cava{width:54px;height:54px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:900;color:#fff!important;border:2px solid rgba(255,255,255,.45);box-shadow:0 5px 16px rgba(0,0,0,.4)}
 .opt .cmain{flex:1;min-width:0}
 .opt .cmain b{display:block}
 .opt .cfol{display:block;margin-top:3px;font-size:11.5px;font-weight:800;color:#7856ff;letter-spacing:.03em}
@@ -380,7 +377,6 @@ input,textarea{font-size:16px}
 .hud-note{font-size:11px;color:#536471;line-height:1.55;margin-top:7px}
 .chg.good{border-color:#00ba7c;color:#8fe6c3}
 .chg.levelup{border-color:#ffd400;color:#ffd400;font-size:14.5px;padding:11px 18px;background:rgba(60,48,0,.96)}
-.evcard img.evimg{width:100%;border-radius:12px;margin-top:10px;display:block;border:1px solid #e3c766}
 /* ===== v19: home top overhaul (stories / Status HUD / day banner / event) ===== */
 #stories{gap:14px;padding:13px 14px 10px}
 .story{width:68px}
@@ -720,7 +716,6 @@ input,textarea{font-size:16px}
 .evcard .tag{background:linear-gradient(90deg,#ffd95e,#f7c948);color:#4a3200;box-shadow:0 3px 12px rgba(247,201,72,.45);font-size:11px;padding:5px 12px}
 .evcard h3{font-size:19.5px;font-weight:900;line-height:1.45;letter-spacing:.01em;color:#fff;margin:10px 0 7px}
 .evcard p{font-size:14px;line-height:1.72;color:#cdc3ee}
-.evcard img.evimg{border:1px solid rgba(247,201,72,.55);border-radius:14px;margin-top:12px;box-shadow:0 10px 26px rgba(0,0,0,.45)}
 .evcard .choice.evchoice{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;margin-top:10px;padding:13px 14px;border-radius:14px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:14px;line-height:1.55;position:relative;transition:background .15s ease,border-color .15s ease,transform .1s ease,box-shadow .15s ease}
 .evcard .choice.evchoice:active{background:rgba(255,255,255,.12);transform:scale(.99)}
 .evcard .choice.evchoice:disabled{opacity:.45}
@@ -1809,7 +1804,6 @@ input,textarea{font-size:16px}
 /* ===== v66: story image resolution fix - avatar-grade files (512px)
    no longer stretch across the fullscreen story viewer; they present
    as a photo card near native size over the account-hue gradient. ===== */
-.sv-photo{width:min(76vw,296px);aspect-ratio:1;object-fit:cover;object-position:center 22%;border-radius:20px;border:3px solid rgba(255,255,255,.92);box-shadow:0 18px 44px rgba(0,0,0,.5);animation:fadeup .35s ease}
 /* ===== v69: thread replies actually work - the docked composer pill
    expands into a real input form inside #threadbar (the dock stays
    in-flow above the nav; nothing floats, heights stay --app-h based).
@@ -1861,9 +1855,7 @@ input,textarea{font-size:16px}
 .sv-bg.blur{filter:blur(26px) brightness(.70) saturate(1.2);transform:scale(1.28)}
 #storyviewer.paused .sv-bg{animation-play-state:paused}
 .sv-center .ava-txt{box-shadow:0 0 0 3px rgba(255,255,255,.85),0 18px 44px rgba(0,0,0,.45)}
-.sv-photo{width:min(80vw,320px);animation:svcard 5s ease-out both}
 @keyframes svcard{0%{opacity:0;transform:scale(.94) translateY(10px)}12%{opacity:1;transform:scale(1) translateY(0)}100%{transform:scale(1.045) translateY(0)}}
-#storyviewer.paused .sv-photo{animation-play-state:paused}
 /* v267: captions clear the whole bottom layer (reactions row +
    reply bar), the way the real viewer stacks them */
 .sv-cap{bottom:calc(122px + env(safe-area-inset-bottom));font-size:16.5px;letter-spacing:.01em}
@@ -1881,7 +1873,7 @@ input,textarea{font-size:16px}
    photo's own motion must freeze with it, or the zoom runs ahead
    of the bar. Same play-state treatment as .paused, without the
    chrome fade (the reply bar stays up while she writes). */
-#storyviewer.typing .sv-bg,#storyviewer.typing .sv-photo{animation-play-state:paused}
+#storyviewer.typing .sv-bg{animation-play-state:paused}
 /* v415: closing fades out like the other overlays instead of
    vanishing; the drag-dismiss path already faded via inline
    styles and skips this (see closeStory) */
@@ -2969,10 +2961,7 @@ input,textarea{font-size:16px}
 #sideview .sv2-lab{display:block;font-size:10.5px;font-weight:900;letter-spacing:.26em;color:#8fd0ff}
 #sideview .sv2-day{display:block;margin-top:8px;font-size:12px;font-weight:800;letter-spacing:.14em;color:rgba(235,238,255,.55)}
 #sideview .sv2-rule{width:44px;height:2px;background:linear-gradient(90deg,#7856ff,#f91880);margin:16px 0 18px;border-radius:2px}
-#sideview .sv2-ph{display:block;width:100%;border-radius:16px;margin:0 0 18px;box-shadow:0 18px 40px rgba(0,0,0,.5);animation:svline .7s .1s ease both}
-#sideview .sv2-line{font-size:15px;line-height:1.95;color:rgba(240,242,255,.94);margin:0 0 14px;animation:svline .7s ease both}
-@keyframes svline{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-#sideview .sv2-tap{display:block;margin-top:22px;text-align:center;font-size:10.5px;font-weight:900;letter-spacing:.3em;color:rgba(235,238,255,.5);animation:svline .7s ease both}
+#sideview .sv2-ph{display:block;width:100%;border-radius:16px;margin:0 0 18px;box-shadow:0 18px 40px rgba(0,0,0,.5);animation:svphin .8s .1s cubic-bezier(.2,.8,.25,1) both}
 
 /* ===== v460: SIDE VIEW becomes the phone in his hand - the prose
    curtain is replaced by a device mock (bezel, status bar, app bar)
@@ -2992,7 +2981,6 @@ input,textarea{font-size:16px}
 #sideview .sv2-ph{height:104px;object-fit:cover;object-position:center 30%;margin:0 16px 10px;border-radius:14px}
 #sideview .sv3-top{display:flex;align-items:baseline;gap:10px;padding:0 16px}
 #sideview .sv3-top .sv2-day{margin-top:0}
-#sideview .sv3-back{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.18em;color:rgba(235,238,255,.42)}
 #sideview .sv2-rule{margin:10px 16px 12px}
 #sideview .sv3-app{flex:1;min-height:0;display:flex;animation:svappin .45s cubic-bezier(.2,.8,.25,1) .05s both}
 @keyframes svappin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -3430,7 +3418,6 @@ input,textarea{font-size:16px}
 #sideview .sv2-inner{position:relative}
 #sideview .sv2-rule{transform-origin:left center;animation:svrule .7s cubic-bezier(.2,.8,.25,1) .15s both}
 @keyframes svrule{from{transform:scaleX(0);opacity:0}to{transform:scaleX(1);opacity:1}}
-#sideview .sv2-line{animation-name:svline2}
 @keyframes svline2{from{opacity:0;transform:translateY(10px);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
 /* -- story progress gloss -- */
 .sv-seg i{position:relative}
@@ -3577,6 +3564,102 @@ input,textarea{font-size:16px}
 #sideview .sv3-sheet{animation-name:svsheet2}
 @keyframes svsheet2{from{opacity:0;transform:translateY(12px) scale(.992)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#sideview::after,#sideview.on .sv2-inner,#sideview.closing .sv2-inner,#sideview .sv2-lab,#sideview .sv2-qbox.done .sv2-qbtn.sel,#sideview .sv2-next:not(.dis)::before,#sideview .sv2-typing,#sideview .sv2-notif .ic{animation:none}#sideview .sv-amb{display:none}}
+/* ===== v504: SIDE VIEW luxury round 5 - the interlude's stage
+   dressing deepens and every surface learns to answer the finger.
+   Sub-views now travel like real X pushes (in from the right, back
+   to the left) instead of blinking; his sheets settle shut instead
+   of vanishing and carry the drag handle real sheets have; the app
+   bar wears his route's gradient hairline and gains a shadow once
+   the screen scrolls under it; the scene photo settles in with a
+   breath of scale; a playing track keeps a slow sheen crossing its
+   art and a glow on its progress, a playing video hides its button
+   the way real players do and lets light cross the stage; liked,
+   reposted and bookmarked actions land with one small pop; two
+   soft orbs of his route's colours drift behind the scene with the
+   motes (JS: svAmb); and the press feedback the main UI already
+   had - follow button, profile tabs, trend and message rows, menu
+   items, the media grid, sheet buttons - reaches every control his
+   screen still answered silently. Presentation layer only: no
+   size, text, choice, state or number changes, and everything
+   sleeps under prefers-reduced-motion. */
+/* -- sub-views travel, they no longer blink -- */
+#sideview .sv2-sub.svin{animation:svpush .34s cubic-bezier(.2,.8,.25,1) both}
+#sideview .sv2-home.svin-l{animation:svpushl .3s cubic-bezier(.2,.8,.25,1) both}
+@keyframes svpush{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes svpushl{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+/* -- his sheets settle shut, and carry a handle -- */
+#sideview .sv3-sheet::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:38px;height:4.5px;border-radius:3px;background:rgba(130,140,160,.4);pointer-events:none}
+#sideview .sv3-sheet.closing{animation:svsheetout .17s ease both}
+@keyframes svsheetout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(10px) scale(.996)}}
+/* -- the app bar: his colours in the hairline, a shadow when scrolled -- */
+#sideview .sv2-appbar{position:relative;transition:box-shadow .25s ease,border-color .25s ease}
+#sideview .sv2-appbar::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--svA),var(--svB));opacity:.45;pointer-events:none}
+#sideview .sv2-scrwrap.scrolled .sv2-appbar{box-shadow:0 8px 16px -10px rgba(8,8,24,.35);border-bottom-color:rgba(130,140,160,.32)}
+/* -- the scene photo settles in -- */
+@keyframes svphin{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:scale(1)}}
+/* -- actions land with one small pop -- */
+#sideview .sv2-act svg{transition:transform .15s ease}
+@keyframes svpop{0%{transform:scale(1)}35%{transform:scale(1.35)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+#sideview .sv2-act.like.on svg,#sideview .sv2-act.repost.on svg,#sideview .sv2-act.bmkA.on svg{animation:svpop .38s cubic-bezier(.34,1.4,.64,1)}
+/* -- playing: light crosses the art, the button steps aside -- */
+#sideview .sv2-album{position:relative;overflow:hidden}
+#sideview .sv2-blk.playing .sv2-album::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 70%);transform:translateX(-130%);animation:svalbsheen 3.2s ease-in-out infinite;pointer-events:none}
+@keyframes svalbsheen{0%{transform:translateX(-130%)}45%,100%{transform:translateX(130%)}}
+#sideview .sv2-blk.playing .sv2-pbar i{background:linear-gradient(90deg,#fff,#ffd7ec);box-shadow:0 0 8px rgba(255,255,255,.55)}
+#sideview .sv2-pbar i,#sideview .sv2-vbar i{transition:width .16s linear}
+#sideview .sv2-vbtn{transition:opacity .25s ease,transform .25s ease}
+#sideview .sv2-vbtn:active{transform:translate(-50%,-50%) scale(.9)}
+#sideview .sv2-blk.playing .sv2-vbtn{opacity:0;transform:translate(-50%,-50%) scale(.85)}
+#sideview .sv2-blk.playing .sv2-vstage::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.10) 50%,rgba(255,255,255,0) 65%);transform:translateX(-130%);animation:svvidsheen 4.2s ease-in-out infinite;pointer-events:none;z-index:1}
+@keyframes svvidsheen{0%{transform:translateX(-130%)}50%,100%{transform:translateX(130%)}}
+/* -- the follower tick lands with a small step down -- */
+#sideview .sv2-folnum{display:inline-block;transition:color .3s ease,transform .3s ease}
+#sideview .sv2-folnum.tick{transform:translateY(1.5px)}
+/* -- the way on and the toast arrive softly -- */
+#sideview .sv2-next{transition:opacity .3s ease,box-shadow .3s ease,transform .12s ease}
+#sideview .sv2-toast{transform:translate(-50%,8px) scale(.96)}
+#sideview .sv2-toast.on{transform:translate(-50%,0) scale(1)}
+/* -- press feedback for every control that answers -- */
+#sideview .sv2-btn{transition:transform .13s ease,background .2s ease,box-shadow .25s ease}
+#sideview .sv2-btn:active{transform:scale(.982)}
+#sideview .sv2-field{transition:border-color .2s ease,box-shadow .2s ease}
+#sideview .sv2-draft{transition:border-color .25s ease,background .25s ease}
+#sideview .sv2-ditem{transition:transform .13s ease}
+#sideview .sv2-shbtn{transition:transform .13s ease}
+#sideview .sv2-shbtn:active{transform:scale(.975)}
+#sideview .sv2-old .orow{transition:opacity .15s ease}
+#sideview .sv2-old .orow:active{opacity:.55}
+#sideview .sv3-msgbar .in{transition:border-color .2s ease,background .2s ease,color .2s ease}
+#sideview .sv2-pbtn{transition:transform .13s ease,background .2s ease,color .2s ease,border-color .2s ease}
+#sideview .sv2-pbtn:active{transform:scale(.955)}
+#sideview .sv2-ptab{transition:color .2s ease,opacity .15s ease}
+#sideview .sv2-ptab:active{opacity:.55}
+#sideview .sv2-trend,#sideview .sv2-msgrow,#sideview .sv2-lf-row{transition:background .15s ease}
+#sideview .sv2-trend:active,#sideview .sv2-msgrow:active,#sideview .sv2-lf-row:active{background:rgba(130,140,160,.09)}
+#sideview .sv2-notif{transition:background .15s ease}
+#sideview .sv2-notif:active{background:rgba(130,140,160,.07)}
+#sideview .sv2-mi{transition:background .15s ease}
+#sideview .sv2-mi:active{background:rgba(130,140,160,.1)}
+#sideview .sv2-undo{transition:transform .13s ease}
+#sideview .sv2-undo:active{transform:scale(.94)}
+#sideview .sv2-subhd .bk{transition:background .15s ease}
+#sideview .sv2-subhd .bk:active{background:rgba(130,140,160,.14)}
+#sideview .sv3-sheet .sh-x{transition:opacity .15s ease}
+#sideview .sv3-sheet .sh-x:active{opacity:.5}
+#sideview .sv2-pctl>span{transition:transform .13s ease,opacity .15s ease}
+#sideview .sv2-pctl>span:active{transform:scale(.88)}
+#sideview .sv2-pgrid img{transition:transform .15s ease,opacity .15s ease}
+#sideview .sv2-pgrid img:active{transform:scale(.965);opacity:.85}
+#sideview .sv2-td-item{transition:background .15s ease}
+#sideview .sv2-td-item:active{background:rgba(130,140,160,.07)}
+#sideview .sv2-row{transition:background .2s ease,border-color .2s ease}
+#sideview .sv3-xnav span,#sideview .sv3-xnav img{transition:transform .13s ease,opacity .15s ease}
+#sideview .sv3-xnav span:active,#sideview .sv3-xnav img:active{transform:scale(.88)}
+#sideview .sv2-chev{cursor:pointer;border-radius:50%;transition:background .15s ease,opacity .15s ease}
+#sideview .sv2-chev:active{background:rgba(130,140,160,.16);opacity:1}
+#sideview .sv2-more{border-radius:50%;transition:background .15s ease}
+#sideview .sv2-more:active{background:rgba(29,155,240,.12)}
+@media (prefers-reduced-motion:reduce){#sideview .sv2-sub.svin,#sideview .sv2-home.svin-l,#sideview .sv3-sheet.closing,#sideview .sv2-ph,#sideview .sv2-act.like.on svg,#sideview .sv2-act.repost.on svg,#sideview .sv2-act.bmkA.on svg,#sideview .sv2-blk.playing .sv2-album::after,#sideview .sv2-blk.playing .sv2-vstage::before{animation:none}}
 /* ===== v449: ANNOUNCE SCENE - the Sakuya route's Day 6 peak, the
    counterpart to Hiroto's live scene (v443): not a stream imitation
    but the announcement minute itself, replayed on a light real-X
@@ -3699,7 +3782,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v503</p>
+  <p class="ver">v504</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3883,7 +3966,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v503</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v504</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4200,7 +4283,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v503</p>
+    <p class="ver">v504</p>
   </div>
 </section>
 </div>
@@ -5102,7 +5185,6 @@ const STORY_ALLOW=new Set(["nao","hiroto","sakuya","akari","carmen","yuha","stel
 /* v116: Pinterest-sourced story photos. Wide-group material keeps
    the v66 photo-card treatment instead of the fullscreen cover, so
    nobody at the edges gets cropped out of the frame. */
-const STORY_CARD=new Set(["assets/pin-group.jpg"]);
 /* v116: Pinterest photos join the stories where the scene matches -
    per-day imgs arrays for Jiwoo (the empty practice studio on the
    final day) and Yuna (cafe mornings), Karina's and Mina's own photos
@@ -5483,46 +5565,16 @@ $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#home
 /* post detail (thread): tap a post -> large main post + replies, like real X */
 let threadStack=[],threadFrom="tl",threadScroll=0;
 function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};return num(2)*23+num(1)*61+num(0)*197+89;}
-/* v79: top-reply seeding - a post whose own counter says dozens of replies
-   exist must never open onto an empty thread (the user's Day-3 post read
-   304 replies and showed none). When the real list (replyIds / the feed
-   heuristic) comes up short and the reply counter is 10+, pin a few
-   hand-written top replies from the context pool into replyIds as ordinary
-   reply posts: the thread then shows the world's answers, they persist in
-   the save, and the composer pins onto the same list. Texts are written
-   per context (your fans/members, his fans, members, the general timeline)
-   - never stitched or concatenated. "No replies yet" now only appears on
-   posts whose counter is genuinely near zero. */
-const TOP_REPLIES={
- nao:[["fan1","生歌、本当にすごかった…！ 画面越しでも鳥肌でした"],["akari","なおオンニ、おつかれさま！ 今日も最高だったよ"],["sora","この声、もっとたくさんの人に届いてほしい"],["fan2","おすすめから来たけど、歌で完全に落ちました"],["carmen","楽屋でもずっと歌ってたなおオンニ、さすがです"],["fan1","何回も見てるのに、毎回ぐっときます"],["fan2","歌は好き。……でも、無理だけはしないでほしい"],["ian","オンニのポスト、メンバーみんなで見てるよ"],["fan2","10年以上、練習生だった人の歌だと思うと、ひとつひとつの音が重い"],["fan1","ふとした時に出る関西の言葉、すごく好きです"],["fan2","あの人のファンだったけど、この人の歌も好きになってきた。両方応援していいよね"],["fan1","サビ前のブレスで毎回泣く…。練習生の頃から、ずっとこうやって歌ってきたんだよね"],["fan2","コメント欄、平和で好き。歌の話しかしてないの、珍しいよな"],["akari","オンニの歌、レッスン室で聴いてた頃からずっと好き。……世界に見つかれ〜！"],["sora","上の人たちも言ってるけど、この人の生歌は本物。切り抜きだけでも伝わる"],["fan2","10年以上って、想像つかない長さだよな。歌の説得力、そこから来てるんだと思う"],["carmen","なおオンニの声、今日も世界に届いてます！ メンバーとして誇らしい！"]],
- tgtH:[["fan2","待ってました…！ ずっと聴いてます"],["sora","この人の配信、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって観ちゃった"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも静かで温かい。数字じゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","古参の皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"],["fan2","配信時間の件、古参はみんな気づいてたよ。……言わないだけ"],["fan1","ここのコメント欄、荒らされてもすぐ静かになるの好き"],["fan2","7年見てるけど、この人の『ありがとう』はいつも本気なんだよな"],["sora","雑談だけの配信なのに、ずっと聴いていられるの不思議"],["fan2","上の人と同じで、俺もあの頃から。静かに見守るのが古参の流儀"]],
- tgtS:[["fan2","待ってました…！ ずっと観てます"],["sora","この人のステージ、唯一無二だと思う"],["fan2","何年経っても応援してます。今日もありがとう"],["fan1","おすすめで流れてきて、思わず止まって聴き入った"],["fan2","聴くたびに、初めてみたいにドキドキします"],["fan1","おすすめで来たけど、コメント欄の温かさに残ることにしました"],["fan2","コメント欄がいつも温かい。数字だけじゃない場所だと思う"],["fan1","この人のファンの人たち、言葉が丁寧で驚いた"],["fan2","ファンの皆さんが静かに見守ってるの、ちゃんと伝わってきます"],["fan1","ファンの人たちが、相手のことを悪く言わないの、すごく素敵だと思う"],["fan1","挨拶の丁寧さ、画面越しでも伝わる…。人柄が出てる"],["fan2","『後輩です』の言い方、あの人らしいよな。静かに見守りたい"],["sora","この人の言葉選び、いつも少し不思議で、そこが好き"],["fan1","コメント欄が温かいの、この人の人柄だと思う"],["fan2","上の人たちも言ってるけど、歌は本当に別格。一度は生で聴きたい"]],
- member:[["fan1","なおちゃん推しだけど、この投稿は保存しました"],["sora","メンバーのこういう一言、ぐっときます"],["fan2","Hearts2Hearts、みんな仲が良いの伝わってくる"],["fan1","オンニ呼びの距離感、見てる側もほっこりする"],["fan1","メンバーのこういう素の感じ、グループの空気が良い証拠だよね"],["fan2","オンニへの信頼が伝わってくる。いいグループだな"]],
- news:[["fan2","これは広まる理由がわかる投稿"],["sora","界隈がざわつくのも納得です"],["fan1","タイムラインで一番目立ってました"],["fan2","続報待ちだな"],["sora","これは見守りたいやつ"],["fan1","通知で来て、思わず開いちゃった"],["fan2","まとめの書き方、煽りすぎじゃない？ 本人たちの言葉だけ見たい"],["fan1","こういう記事が出るたび、歌のほうも聴きに行ってる"]],
- other:[["sora","これは残しておきたい投稿"],["fan1","ほんとにそれです…！"],["fan2","同意しかないな"],["fan1","見てて、ほっとしました"],["fan2","この人の言葉、いつも短いけど重いんだよな"],["sora","同意。静かに見守りたいタイプの話"]]};
-function replyCountOf(p){const v=parseInt(String(p.m&&p.m[0]!=null?p.m[0]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;}
+/* v79: top-reply seeding lived here (a context pool of hand-written
+   replies pinned into threads whose counters promised more answers).
+   v426 retired the seeding itself - every post carries its own
+   dedicated replies (reps/replyIds) - and v504 removed the pool
+   table and the unreachable body. seedTopReplies stays as the
+   pass-through threadReplies has always called. */
 function seedTopReplies(p,have){
  /* v426: retired - every post carries its own dedicated replies
     (reps/replyIds); generic pool lines are no longer seeded. */
  return have;
- if(typeof S==="undefined"||!S||!S.posts)return have;
- const rc=replyCountOf(p);if(rc<10)return have;
- const want=rc>=250?4:rc>=60?3:2;
- if(have.length>=want)return have;
- /* v420: a post that already carries 2+ authored replies is a complete
-    thread - never top it up with pool lines (a cheerful pooled reply
-    under an apology post was the visible failure). */
- if(have.length>=2)return have;
- const pool=p.a==="nao"?TOP_REPLIES.nao:(p.a===tgtKey()?(tgtKey()==="hiroto"?TOP_REPLIES.tgtH:TOP_REPLIES.tgtS):(["akari","carmen","yuha","stella","juun","ana","ian","yeon"].includes(p.a)?TOP_REPLIES.member:((p.a==="media"||p.a==="matome")?TOP_REPLIES.news:TOP_REPLIES.other)));
- let h=0;for(const c of String(p.id))h=(h*31+c.charCodeAt(0))>>>0;
- const used=new Set(have.map(r=>r.a));const picks=[];
- for(let i=0;i<pool.length&&picks.length<want-have.length;i++){const e=pool[(h+i)%pool.length];if(e[0]===p.a||used.has(e[0]))continue;used.add(e[0]);picks.push(e);}
- if(!picks.length)return have;
- const seeds=picks.map((e,i)=>{const rp=mkPost(e[0],e[1],24+((h>>(i*3))%160),3+((h>>(i*2))%14),1+((h>>i)%6),false,null);rp.isReply=true;rp.replyTo=p.id;return rp;});
- seeds.forEach(r=>S.posts.push(r));
- p.replyIds=(p.replyIds&&p.replyIds.length?p.replyIds.slice():have.map(r=>r.id)).concat(seeds.map(r=>r.id));
- try{save();}catch(_){}
- return have.concat(seeds);
 }
 function threadReplies(p){
  let base=[];
@@ -6333,7 +6385,6 @@ const MINI_EVENTS={
    {t:"何もせず、画面を閉じる",r:"閉じた。守ってくれているのは、彼のファン一人ひとりの、小さな判断の積み重ねだった。自分にできるのは、その判断を邪魔しないことだと思った。",fx:{dist:5,xp:5}},
    {t:"そのポストに、いいねだけ置く",r:"いいね欄に、自分の名前が残った。……少しして、そのアカウントが書いた。『……ありがとうございます。出しませんから、安心してください』。誰のことか、分かってしまったらしい。表には出ない約束が、ひとつ増えた。",fx:{dist:6,xp:5,flm:2}},
    {t:"佐藤さんに「こういう声も、あります」とだけ伝える",r:"佐藤さんは少し驚いて、『……ありがたいですね。表には出せない味方ですけど』と笑った。明日の12時が、少しだけ楽しみになった。",fx:{dist:5,cog:1,xp:5}}]}};
-function miniDef(){return MINI_EVENTS[tgtKey()+":"+S.ch]||null;}
 /* v495: a day may carry a second mini (round 6), keyed
    route:day+"b". miniDefs returns the day's defs in display
    order - the primary def keeps the plain key, so the grid's
@@ -7105,7 +7156,7 @@ else if(b.t==="btn"){const bd=svEl("div","sv2-btn",b.tx);if(b.save)bd.setAttribu
 else if(b.t==="cal"){const d=svEl("div","sv2-cal");d.appendChild(svEl("span","tm",b.time));const m=svEl("div");m.appendChild(svEl("span","tx",b.tx));if(b.sub)m.appendChild(svEl("span","sub",b.sub));d.appendChild(m);w.appendChild(d);}
 else if(b.t==="stats"){const d=svEl("div","sv2-stats");b.items.forEach(it=>{const s=svEl("div","sv2-stat");s.appendChild(svEl("b",null,it[1]));s.appendChild(svEl("span",null,it[0]));d.appendChild(s);});w.appendChild(d);}
 else if(b.t==="note"){const d=svEl("div","sv2-note");const i=svEl("span");i.innerHTML=SVI[b.icon]||"";d.appendChild(i);d.appendChild(svEl("span",null,b.tx));w.appendChild(d);}
-else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");d._pb=b;const im=svEl("img","av");im.src=A.av;im.alt="";im.setAttribute("data-svx","prof");im.dataset.a=b.a;im.style.cursor="pointer";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.setAttribute("data-svx","prof");nb.dataset.a=b.a;nb.style.cursor="pointer";nh.appendChild(nb);if(VERIFIED.has(b.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);const hs=svEl("span",null,A.h+(b.time?" ・ "+b.time:""));hs.setAttribute("data-svx","prof");hs.dataset.a=b.a;hs.style.cursor="pointer";nh.appendChild(hs);const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.setAttribute("data-svx","more");nh.appendChild(mo);m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));const rpEl=mk(SVI.repost,b.rp,"repost");ac.appendChild(rpEl);const lkEl=mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":""));ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,b.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");bkEl.setAttribute("data-svx","bmk");d._bmkEl=bkEl;ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.setAttribute("data-svx","share");ac.appendChild(shEl);if(b.hov){lkEl.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);}else{lkEl.setAttribute("data-svx","like2");rpEl.setAttribute("data-svx","repost");}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
+else if(b.t==="post"){const A=ACC[b.a];const d=svEl("div","sv2-post");d._pb=b;const im=svEl("img","av");im.src=A.av;im.alt="";im.setAttribute("data-svx","prof");im.dataset.a=b.a;im.style.cursor="pointer";d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.setAttribute("data-svx","prof");nb.dataset.a=b.a;nb.style.cursor="pointer";nh.appendChild(nb);if(VERIFIED.has(b.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);const hs=svEl("span",null,A.h+(b.time?" · "+b.time:""));hs.setAttribute("data-svx","prof");hs.dataset.a=b.a;hs.style.cursor="pointer";nh.appendChild(hs);const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.setAttribute("data-svx","more");nh.appendChild(mo);m.appendChild(nh);m.appendChild(svEl("div","tx",b.tx));const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,b.rc));const rpEl=mk(SVI.repost,b.rp,"repost");ac.appendChild(rpEl);const lkEl=mk(b.like?SVI.heartF:SVI.heart,b.lk,"like"+(b.hov?" hov":""));ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,b.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");bkEl.setAttribute("data-svx","bmk");d._bmkEl=bkEl;ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.setAttribute("data-svx","share");ac.appendChild(shEl);if(b.hov){lkEl.setAttribute("data-svx","like");const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);}else{lkEl.setAttribute("data-svx","like2");rpEl.setAttribute("data-svx","repost");}m.appendChild(ac);d.appendChild(m);w.appendChild(d);}
 else if(b.t==="livefeed"){const d=svEl("div","sv2-lf");d.appendChild(svEl("div","sv2-lf-hd",b.head||"返信"));(b.items||[]).forEach(it=>{const A=ACC[it.a];const r=svEl("div","sv2-lf-row pend");r.dataset.a=it.a;r.style.cursor="pointer";const im=svEl("img","av");im.src=A.av;im.alt="";r.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");nh.appendChild(svEl("b",null,A.n));if(VERIFIED.has(it.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);nh.appendChild(svEl("span",null,A.h));m.appendChild(nh);m.appendChild(svEl("div","tx",it.tx));if(it.lk){const lk2=svEl("div","sv2-lf-lk");lk2.innerHTML=SVI.heart;lk2.appendChild(svEl("span",null,String(it.lk)));m.appendChild(lk2);}r.appendChild(m);d.appendChild(r);});w.appendChild(d);}
 else if(b.t==="foltick"){const d=svEl("div","sv2-row");d.appendChild(svEl("span","lab",b.lab));const r=svEl("span","rwrap");const v=svEl("span","val sv2-folnum",Number(b.from).toLocaleString("en-US"));v.setAttribute("data-svx","foltick");v.dataset.from=b.from;v.dataset.to=b.to;r.appendChild(v);if(b.sub)r.appendChild(svEl("span","sub",b.sub));d.appendChild(r);w.appendChild(d);}
 else if(b.t==="table"){const d=svEl("div","sv2-tbl");const tb=svEl("table");const tr=svEl("tr");b.head.forEach(hd=>tr.appendChild(svEl("th",null,hd)));tb.appendChild(tr);b.rows.forEach((r,ri)=>{const t2=svEl("tr","taprow");t2.setAttribute("data-svx","trow");r.forEach((c,ci)=>t2.appendChild(svEl("td",(ci===2&&b.hl&&b.hl.indexOf(ri)>=0)?"hot":"",c)));tb.appendChild(t2);});d.appendChild(tb);w.appendChild(d);}
@@ -7114,7 +7165,7 @@ else if(b.t==="sent"){const A=ACC[tgtKey()];const d=svEl("div","sv2-sent");const
 else if(b.t==="draft"){const d=svEl("div","sv2-draft");d.setAttribute("data-svx",b.replay?"replay":"draft");d.dataset.full=b.tx||"";d.appendChild(svEl("span","lab",b.lab));d.appendChild(svEl("div","tx",b.tx));if(b.sub)d.appendChild(svEl("span","sub",b.sub));w.appendChild(d);}
 else if(b.t==="drafts"){w.classList.add("sv2-stack");b.items.forEach(it=>{const d=svEl("div","sv2-ditem"+(it.keep?" keep":" off"));d.setAttribute("data-svx","ditem");d.dataset.tx=it.tx;d.dataset.keep=it.keep?"1":"";d.appendChild(svEl("span","mk",it.keep?"✓":"✕"));d.appendChild(svEl("span","tx",it.tx));w.appendChild(d);});}
 else if(b.t==="chat"){w.classList.add("sv2-stack");w.appendChild(svEl("div","sv2-chatname",b.who));b.msgs.forEach(m=>{const bb=svEl("div","sv2-bub "+(m[0]?"r":"l"),m[1]);bb.setAttribute("data-svx","bub");bb.dataset.side=m[0]?"r":"l";bb.appendChild(svEl("span","bmeta",""));w.appendChild(bb);});}
-else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vstage");st.setAttribute("data-svx","vid");st.dataset.prog=b.prog||0;st.dataset.playing=b.icon==="play"?"":"1";const vb=svEl("span","sv2-vbtn");vb.innerHTML=b.icon==="play"?SVI.play:SVI.pause;st.appendChild(vb);st.appendChild(svEl("span","sv2-vdur",b.dur));d.appendChild(st);const bar=svEl("div","sv2-vbar");const bi=svEl("i");bi.style.width=(b.prog||0)+"%";bar.appendChild(bi);d.appendChild(bar);const md=svEl("div","sv2-vmeta");md.appendChild(svEl("b",null,b.title));md.appendChild(svEl("span",null,b.by+" ・ "+b.views));d.appendChild(md);w.appendChild(d);}
+else if(b.t==="video"){const d=svEl("div","sv2-vid");const st=svEl("div","sv2-vstage");st.setAttribute("data-svx","vid");st.dataset.prog=b.prog||0;st.dataset.playing=b.icon==="play"?"":"1";const vb=svEl("span","sv2-vbtn");vb.innerHTML=b.icon==="play"?SVI.play:SVI.pause;st.appendChild(vb);st.appendChild(svEl("span","sv2-vdur",b.dur));d.appendChild(st);const bar=svEl("div","sv2-vbar");const bi=svEl("i");bi.style.width=(b.prog||0)+"%";bar.appendChild(bi);d.appendChild(bar);const md=svEl("div","sv2-vmeta");md.appendChild(svEl("b",null,b.title));md.appendChild(svEl("span",null,b.by+" · "+b.views));d.appendChild(md);w.appendChild(d);}
 else if(b.t==="player"){w.classList.add("sv2-stack");const al=svEl("div","sv2-album");al.innerHTML=SVI.note;al.appendChild(svEl("b",null,"Hearts2Hearts"));al.appendChild(svEl("span",null,"THE CHASE"));w.appendChild(al);const pt=svEl("div","sv2-ptitle");pt.appendChild(svEl("b",null,b.title));pt.appendChild(svEl("span",null,b.artist));w.appendChild(pt);const pb=svEl("div","sv2-pbar");const pi=svEl("i");pi.style.width=(b.prog||0)+"%";pb.appendChild(pi);w.appendChild(pb);const pc=svEl("div","sv2-pctl");const pv=svEl("span");pv.innerHTML=SVI.prev;pc.appendChild(pv);const big=svEl("span","big");big.setAttribute("data-svx","play");big.innerHTML=SVI.play;pc.appendChild(big);const nx=svEl("span");nx.innerHTML=SVI.next;pc.appendChild(nx);w.appendChild(pc);}
 else if(b.t==="photo"){const d=svEl("div","sv2-photo");d.setAttribute("data-svx","photo");const pv=svEl("div","sv2-pview");pv.innerHTML='<svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="72" cy="58" r="17"/><path d="M38 150c2-30 16-44 34-44s32 14 34 44z"/><circle cx="128" cy="52" r="20"/><path d="M92 150c2-34 17-50 36-50s34 16 36 50z"/></svg>';d.appendChild(pv);const pm=svEl("div","sv2-pmeta");pm.appendChild(svEl("b",null,b.date));pm.appendChild(svEl("span",null,b.place));const lk=svEl("span","lk");lk.innerHTML=SVI.lock;pm.appendChild(lk);d.appendChild(pm);w.appendChild(d);}
 else if(b.t==="compose"){w.classList.add("sv2-stack");const c=svEl("div","sv2-comp");c.setAttribute("data-svx","comp");c.dataset.final=b.tx;const to=svEl("div","to");to.appendChild(document.createTextNode("返信先："));to.appendChild(svEl("b",null,b.to));c.appendChild(to);c.appendChild(svEl("div","tx",b.tx));const bar=svEl("div","bar");const ii=svEl("span","iic");ii.innerHTML=SVI.img;bar.appendChild(ii);const sd=svEl("span","sv2-send","返信する");sd.setAttribute("data-svx","send");bar.appendChild(sd);c.appendChild(bar);w.appendChild(c);if(b.old&&b.old.length){const o=svEl("div","sv2-old");o.appendChild(svEl("span","lab2","書き直した下書き"));b.old.forEach(x=>{const or2=svEl("div","orow",x);or2.setAttribute("data-svx","old");or2.dataset.tx=x;o.appendChild(or2);});w.appendChild(o);}}
@@ -7431,7 +7482,7 @@ scr.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("cli
 scr.querySelectorAll('[data-svx="trow"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.parentNode.querySelectorAll("tr").forEach(r=>r.classList.remove("on"));el.classList.add("on");});});
 scr.querySelectorAll('[data-svx="draft"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
 scr.querySelectorAll('[data-svx="replay"]').forEach(el=>{const tx=el.querySelector(".tx");el.addEventListener("click",e=>{e.stopPropagation();if(el.dataset.busy||!tx)return;el.dataset.busy="1";const full=el.dataset.full||"";svErase(tx,()=>{svLater(()=>{svType(tx,full,()=>{svLater(()=>{svErase(tx,()=>{el.dataset.busy="";});},620);});},260);});});});
-scr.querySelectorAll('[data-svx="ditem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const sheet=$("#sv3-sheet");sheet.innerHTML="";const top=svEl("div","sh-top");top.appendChild(svEl("span",null,"下書き"));const x=svEl("span","sh-x","✕");top.appendChild(x);sheet.appendChild(top);sheet.appendChild(svEl("div","sh-tx",el.dataset.tx||""));const keep=!!el.dataset.keep;const acted=el.dataset.act==="1";const note=svEl("div","sh-note",acted?(keep?"残した下書き":"消した下書き"):(keep?"残した下書き":"破棄した下書き"));sheet.appendChild(note);if(!acted){const btn=svEl("button","sv2-shbtn",keep?"この一文を、残す":"この下書きを、消す");btn.type="button";btn.addEventListener("click",ev=>{ev.stopPropagation();el.dataset.act="1";if(keep){el.classList.add("kept2");note.textContent="残した下書き";svToast("一文を、残した");}else{el.classList.add("dropped");note.textContent="消した下書き";svToast("下書きを、消した");}btn.remove();});sheet.appendChild(btn);}sheet.style.display="";sheet.onclick=ev=>{ev.stopPropagation();};x.addEventListener("click",ev=>{ev.stopPropagation();sheet.style.display="none";});});});
+scr.querySelectorAll('[data-svx="ditem"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const sheet=$("#sv3-sheet");sheet.classList.remove("closing");sheet.innerHTML="";const top=svEl("div","sh-top");top.appendChild(svEl("span",null,"下書き"));const x=svEl("span","sh-x","✕");top.appendChild(x);sheet.appendChild(top);sheet.appendChild(svEl("div","sh-tx",el.dataset.tx||""));const keep=!!el.dataset.keep;const acted=el.dataset.act==="1";const note=svEl("div","sh-note",acted?(keep?"残した下書き":"消した下書き"):(keep?"残した下書き":"破棄した下書き"));sheet.appendChild(note);if(!acted){const btn=svEl("button","sv2-shbtn",keep?"この一文を、残す":"この下書きを、消す");btn.type="button";btn.addEventListener("click",ev=>{ev.stopPropagation();el.dataset.act="1";if(keep){el.classList.add("kept2");note.textContent="残した下書き";svToast("一文を、残した");}else{el.classList.add("dropped");note.textContent="消した下書き";svToast("下書きを、消した");}btn.remove();});sheet.appendChild(btn);}sheet.style.display="";sheet.onclick=ev=>{ev.stopPropagation();};x.addEventListener("click",ev=>{ev.stopPropagation();svSheetClose();});});});
 /* v486: replies keep landing under the post he is reading, and
    his follower count quietly ticks down on the news day. Both
    live only inside the scene; the timers die with it. */
@@ -7439,8 +7490,8 @@ scr.querySelectorAll(".sv2-lf-row.pend").forEach((r,i)=>{svLater(()=>{r.classLis
 scr.querySelectorAll('[data-svx="foltick"]').forEach(el=>{let cur=parseInt(el.dataset.from,10);const to=parseInt(el.dataset.to,10);const step=()=>{if(cur<=to)return;cur--;el.textContent=cur.toLocaleString("en-US");el.classList.add("tick");svLater(()=>el.classList.remove("tick"),320);if(cur>to)svLater(step,2300);};svLater(step,2100);});
 scr.querySelectorAll('[data-svx="bub"]').forEach(el=>{const meta=el.querySelector(".bmeta");if(meta)meta.textContent=(sc.clock||"")+(el.dataset.side==="r"?" 既読":"");el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("showmeta");});});
 scr.querySelectorAll('[data-svx="photo"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.toggle("open");});});
-scr.querySelectorAll('[data-svx="vid"]').forEach(st=>{const blk=st.closest(".sv2-blk");const btn=blk.querySelector(".sv2-vbtn");const bar=blk.querySelector(".sv2-vbar i");let prog=parseFloat(st.dataset.prog)||0;let timer=null;const setIcon=()=>{btn.innerHTML=st.dataset.playing?SVI.pause:SVI.play;};const tick=()=>{prog+=1.6;if(prog>=100){prog=100;st.dataset.playing="";setIcon();if(timer)clearInterval(timer);timer=null;}bar.style.width=prog+"%";st.dataset.prog=prog;};const start=()=>{if(!timer)timer=svEvery(tick,130);};if(st.dataset.playing)start();st.addEventListener("click",e=>{e.stopPropagation();if(st.dataset.playing){st.dataset.playing="";if(timer)clearInterval(timer);timer=null;setIcon();}else{if(prog>=100){prog=0;bar.style.width="0%";}st.dataset.playing="1";setIcon();start();}});});
-scr.querySelectorAll('[data-svx="play"]').forEach(big=>{const blk=big.closest(".sv2-blk");const bar=blk.querySelector(".sv2-pbar i");let prog=parseFloat(bar&&bar.style.width)||0;let timer=null;big.addEventListener("click",e=>{e.stopPropagation();if(big.dataset.playing){big.dataset.playing="";big.innerHTML=SVI.play;if(timer)clearInterval(timer);timer=null;}else{big.dataset.playing="1";big.innerHTML=SVI.pause;timer=svEvery(()=>{prog+=1.1;if(prog>=100)prog=0;if(bar)bar.style.width=prog+"%";},150);}});const ctl=blk.querySelectorAll(".sv2-pctl>span");if(ctl[0]){ctl[0].style.cursor="pointer";ctl[0].addEventListener("click",e=>{e.stopPropagation();prog=0;if(bar)bar.style.width="0%";});}if(ctl[2]){ctl[2].style.cursor="pointer";ctl[2].addEventListener("click",e=>{e.stopPropagation();prog=0;if(bar)bar.style.width="0%";if(!big.dataset.playing)big.click();});}});
+scr.querySelectorAll('[data-svx="vid"]').forEach(st=>{const blk=st.closest(".sv2-blk");const btn=blk.querySelector(".sv2-vbtn");const bar=blk.querySelector(".sv2-vbar i");let prog=parseFloat(st.dataset.prog)||0;let timer=null;const setIcon=()=>{btn.innerHTML=st.dataset.playing?SVI.pause:SVI.play;blk.classList.toggle("playing",!!st.dataset.playing);};const tick=()=>{prog+=1.6;if(prog>=100){prog=100;st.dataset.playing="";setIcon();if(timer)clearInterval(timer);timer=null;}bar.style.width=prog+"%";st.dataset.prog=prog;};const start=()=>{if(!timer)timer=svEvery(tick,130);};if(st.dataset.playing)start();setIcon();st.addEventListener("click",e=>{e.stopPropagation();if(st.dataset.playing){st.dataset.playing="";if(timer)clearInterval(timer);timer=null;setIcon();}else{if(prog>=100){prog=0;bar.style.width="0%";}st.dataset.playing="1";setIcon();start();}});});
+scr.querySelectorAll('[data-svx="play"]').forEach(big=>{const blk=big.closest(".sv2-blk");const bar=blk.querySelector(".sv2-pbar i");let prog=parseFloat(bar&&bar.style.width)||0;let timer=null;big.addEventListener("click",e=>{e.stopPropagation();if(big.dataset.playing){big.dataset.playing="";big.innerHTML=SVI.play;if(timer)clearInterval(timer);timer=null;}else{big.dataset.playing="1";big.innerHTML=SVI.pause;timer=svEvery(()=>{prog+=1.1;if(prog>=100)prog=0;if(bar)bar.style.width=prog+"%";},150);}blk.classList.toggle("playing",!!big.dataset.playing);});const ctl=blk.querySelectorAll(".sv2-pctl>span");if(ctl[0]){ctl[0].style.cursor="pointer";ctl[0].addEventListener("click",e=>{e.stopPropagation();prog=0;if(bar)bar.style.width="0%";});}if(ctl[2]){ctl[2].style.cursor="pointer";ctl[2].addEventListener("click",e=>{e.stopPropagation();prog=0;if(bar)bar.style.width="0%";if(!big.dataset.playing)big.click();});}});
 scr.querySelectorAll('[data-svx="like"]').forEach(la=>{const off=()=>la.classList.remove("pressing");la.addEventListener("pointerdown",e=>{e.stopPropagation();la.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>la.addEventListener(ev2,off));la.addEventListener("click",e=>{e.stopPropagation();});});
 scr.querySelectorAll('[data-svx="comp"]').forEach(c=>{const tx=c.querySelector(".tx");const fin=c.dataset.final||"";let busy=false;const retype=()=>{if(busy||!tx||c.classList.contains("sentcomp"))return;busy=true;c.classList.remove("struck");svErase(tx,()=>{svType(tx,fin,()=>{busy=false;});});};c.addEventListener("click",e=>{e.stopPropagation();retype();});c._svRetype=retype;});
 scr.querySelectorAll('[data-svx="old"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();const blk=el.closest(".sv2-blk");const c=blk?blk.querySelector('[data-svx="comp"]'):null;if(!c||c.classList.contains("sentcomp"))return;const tx=c.querySelector(".tx");if(!tx||c._svBusy)return;c.classList.add("struck");tx.textContent=el.dataset.tx||"";svLater(()=>{if(c._svRetype)c._svRetype();},1150);});});
@@ -7485,8 +7536,8 @@ qb.querySelectorAll('[data-svx="pchoice"]').forEach(btn=>{btn.addEventListener("
    single outcome. ===== */
 let svCur={d:0,sc:null,view:"home",typed:0};
 function svToast(msg){const t=$("#sv2-toast");if(!t)return;t.textContent=msg;t.classList.add("on");clearTimeout(t._tm);t._tm=setTimeout(()=>t.classList.remove("on"),2100);}
-function svSheet(box){const sheet=$("#sv3-sheet");sheet.innerHTML="";sheet.appendChild(box);sheet.style.display="";sheet.onclick=e=>{e.stopPropagation();};}
-function svSheetClose(){const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";}
+function svSheet(box){const sheet=$("#sv3-sheet");sheet.classList.remove("closing");sheet.innerHTML="";sheet.appendChild(box);sheet.style.display="";sheet.onclick=e=>{e.stopPropagation();};}
+function svSheetClose(){const sheet=$("#sv3-sheet");if(!sheet||sheet.style.display==="none")return;sheet.classList.add("closing");const rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;setTimeout(()=>{if(sheet.classList.contains("closing")){sheet.classList.remove("closing");sheet.style.display="none";sheet.innerHTML="";}},rm?0:170);}
 function svSheetTop(title){const top=svEl("div","sh-top");top.appendChild(svEl("span",null,title));const x=svEl("span","sh-x","✕");x.addEventListener("click",e=>{e.stopPropagation();svSheetClose();});top.appendChild(x);return top;}
 function svSyncNext(){const btn=$("#sv2-next");if(!btn)return;const pend=document.querySelectorAll("#sv2-home .sv2-qbox:not(.done)").length;btn.disabled=pend>0;btn.classList.toggle("dis",pend>0);}
 function svSharePost(a,tx){const A=ACC[a];const url="https://x.com/"+(A?A.h.replace("@",""):"")+"/status/1";const done=()=>svToast("リンクをコピーしました");if(navigator.share){navigator.share({title:"X",text:tx||"",url:url}).catch(()=>{});}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done).catch(done);}else done();}
@@ -7497,11 +7548,11 @@ function svPostMenu(postEl){if(!postEl||!postEl._pb)return;const b=postEl._pb;co
    ending ambient layer's family (motes, sparks, embers), tinted by
    route in the CSS grading. Pure dressing: rebuilt on every open,
    never read back, and hidden under prefers-reduced-motion. */
-function svAmb(route){const box=$("#sv-amb");if(!box)return;box.innerHTML="";const kinds=route==="sakuya"?["mote","mote","spark"]:["spark","ember","mote"];for(let i=0;i<9;i++){const s=document.createElement("span");const k=kinds[i%kinds.length];s.className="amb "+k;const sz=(k==="spark"?4:3)+Math.random()*4;s.style.left=(4+Math.random()*92)+"%";if(k==="spark")s.style.top=(8+Math.random()*68)+"%";s.style.width=sz+"px";s.style.height=sz+"px";s.style.setProperty("--dx",((Math.random()*56)-28)+"px");s.style.animationDuration=(8+Math.random()*7)+"s";s.style.animationDelay=(-Math.random()*13)+"s";box.appendChild(s);}}
+function svAmb(route){const box=$("#sv-amb");if(!box)return;box.innerHTML="";const kinds=route==="sakuya"?["mote","mote","spark"]:["spark","ember","mote"];for(let i=0;i<9;i++){const s=document.createElement("span");const k=kinds[i%kinds.length];s.className="amb "+k;const sz=(k==="spark"?4:3)+Math.random()*4;s.style.left=(4+Math.random()*92)+"%";if(k==="spark")s.style.top=(8+Math.random()*68)+"%";s.style.width=sz+"px";s.style.height=sz+"px";s.style.setProperty("--dx",((Math.random()*56)-28)+"px");s.style.animationDuration=(8+Math.random()*7)+"s";s.style.animationDelay=(-Math.random()*13)+"s";box.appendChild(s);}for(let j=0;j<2;j++){const o=document.createElement("span");o.className="amb orb";const osz=130+j*80;o.style.width=osz+"px";o.style.height=osz+"px";if(j===0){o.style.left="-34px";o.style.top="5%";}else{o.style.right="-44px";o.style.top="56%";}o.style.background=route==="sakuya"?"radial-gradient(circle,rgba(29,155,240,.20) 0%,rgba(94,234,212,.08) 48%,rgba(94,234,212,0) 70%)":"radial-gradient(circle,rgba(120,86,255,.22) 0%,rgba(249,24,128,.08) 48%,rgba(249,24,128,0) 70%)";o.style.animationDuration=(9+j*3.5)+"s";box.appendChild(o);}}
 function svTyping(){if(svCur.typed)return;const qb=document.querySelector("#sv2-home .sv2-qbox");if(!qb)return;svCur.typed=1;const host=qb.closest(".sv2-blk")||qb.parentNode;const tb=svEl("div","sv2-bub l sv2-typing");tb.innerHTML="<i></i><i></i><i></i>";host.insertBefore(tb,qb);svLater(()=>{tb.remove();},1600);}
 function svNavSync(){const bot=$("#sv3-bot");if(!bot)return;bot.querySelectorAll("[data-nav]").forEach(s=>s.classList.toggle("on",s.getAttribute("data-nav")===svCur.view));}
-function svShowSub(view){const home=$("#sv2-home"),sub=$("#sv2-sub");if(!home||!sub)return;home.style.display="none";sub.style.display="";svCur.view=view;$("#sv2-scr").scrollTop=0;svNavSync();}
-function svGo(view){const home=$("#sv2-home"),sub=$("#sv2-sub");if(!home||!sub)return;if(view==="home"){sub.style.display="none";sub.innerHTML="";home.classList.add("settled");home.style.display="";svCur.view="home";$("#sv2-scr").scrollTop=0;svNavSync();}else if(view==="search")svTrendsView();else if(view==="bell")svNotifsView();else if(view==="mail")svMailView();}
+function svShowSub(view){const home=$("#sv2-home"),sub=$("#sv2-sub");if(!home||!sub)return;home.style.display="none";sub.style.display="";svCur.view=view;$("#sv2-scr").scrollTop=0;svNavSync();sub.classList.remove("svin");void sub.offsetWidth;sub.classList.add("svin");}
+function svGo(view){const home=$("#sv2-home"),sub=$("#sv2-sub");if(!home||!sub)return;if(view==="home"){sub.style.display="none";sub.innerHTML="";home.classList.add("settled");home.style.display="";home.classList.remove("svin-l");void home.offsetWidth;home.classList.add("svin-l");svCur.view="home";$("#sv2-scr").scrollTop=0;svNavSync();}else if(view==="search")svTrendsView();else if(view==="bell")svNotifsView();else if(view==="mail")svMailView();}
 function svSubHead(title,backFn){const hd=svEl("div","sv2-subhd");const bk=svEl("span","bk");bk.innerHTML=SVI.back;bk.addEventListener("click",e=>{e.stopPropagation();if(backFn)backFn();else svGo("home");});hd.appendChild(bk);const t=svEl("div","htt");t.appendChild(svEl("b",null,title));hd.appendChild(t);return hd;}
 function svWireSub(root){root.querySelectorAll('[data-svx="notif"]').forEach(el=>{el.addEventListener("click",e=>{e.stopPropagation();el.classList.add("read");if(el.querySelector(".sv2-notif-det"))el.classList.toggle("open");});});}
 const svNum2=el=>{const n=parseInt((el.textContent||"").replace(/[^0-9]/g,""),10);return isNaN(n)?0:n;};
@@ -7509,7 +7560,7 @@ const svFmt2=n=>n.toLocaleString("en-US");
 /* v502: his screen used to collect posts, notifications and mail from every day of SIDE_SCENES at once, so on Day 2 his profile already held Day 6 posts and his inbox showed threads from days that had not happened yet. Collections now walk only the days up to the interlude on screen: earlier days contribute their (choice-resolved) scenes, the current day contributes the resolved scene being shown. */
 function svScenesPast(){const out=[];const raw=(typeof SIDE_SCENES!=="undefined"&&SIDE_SCENES)?(SIDE_SCENES[tgtKey()]||{}):{};const cur=(typeof svCur!=="undefined"&&svCur)?svCur.d:0;Object.keys(raw).forEach(dk=>{const d=parseInt(dk,10);if(!(d<cur))return;const sc=(typeof svResolve==="function")?svResolve(raw[dk]):raw[dk];if(sc)out.push({d:d,sc:sc});});if(cur&&typeof svCur!=="undefined"&&svCur&&svCur.sc)out.push({d:cur,sc:svCur.sc});out.sort((a,b)=>a.d-b.d);return out;}
 function svProfPosts(key){const out=[];const seen={};const push=(tx,img,rc,rp,lk,time,hov,vw)=>{if(!tx||seen[tx])return;seen[tx]=1;const o={};o.a=key;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=!!hov;o.vw=vw||"";out.push(o);};svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post"&&b.a===key)push(b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.hov,b.vw||"");});});if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(p.a===key&&!p.sys&&!p.isReply)push(p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",false,(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"");});return out;}
-function svPostEl(p){const A=ACC[p.a];const d=svEl("div","sv2-post");d._pb=p;const im=svEl("img","av");im.src=A.av;im.alt="";im.style.cursor="pointer";im.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.style.cursor="pointer";nb.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});nh.appendChild(nb);if(VERIFIED.has(p.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);nh.appendChild(svEl("span",null,A.h+(p.time?" ・ "+p.time:"")));const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.addEventListener("click",e=>{e.stopPropagation();svPostMenu(d);});nh.appendChild(mo);m.appendChild(nh);m.appendChild(svEl("div","tx",p.tx));if(p.img){const pi=svEl("img","sv2-pimg");pi.src=p.img;pi.alt="";m.appendChild(pi);}const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,p.rc));const rpEl=mk(SVI.repost,p.rp,"repost");rpEl.addEventListener("click",e=>{e.stopPropagation();const on=rpEl.classList.toggle("on");const num=rpEl.querySelector("span");if(num)num.textContent=svFmt2(svNum2(num)+(on?1:-1));});ac.appendChild(rpEl);const lkEl=mk(SVI.heart,p.lk,"like"+(p.hov?" hov":""));if(p.hov){const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);const off=()=>lkEl.classList.remove("pressing");lkEl.addEventListener("pointerdown",e=>{e.stopPropagation();lkEl.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>lkEl.addEventListener(ev2,off));lkEl.addEventListener("click",e=>{e.stopPropagation();});}else{lkEl.addEventListener("click",e=>{e.stopPropagation();const on=lkEl.classList.toggle("on");const num=lkEl.querySelector("span");const cnt=num?svNum2(num):0;lkEl.innerHTML=on?SVI.heartF:SVI.heart;if(num){num.textContent=svFmt2(cnt+(on?1:-1));lkEl.appendChild(num);}});}ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,p.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");d._bmkEl=bkEl;bkEl.addEventListener("click",e=>{e.stopPropagation();svToggleBmk(bkEl);});ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.addEventListener("click",e=>{e.stopPropagation();svSharePost(p.a,p.tx);});ac.appendChild(shEl);m.appendChild(ac);d.appendChild(m);return d;}
+function svPostEl(p){const A=ACC[p.a];const d=svEl("div","sv2-post");d._pb=p;const im=svEl("img","av");im.src=A.av;im.alt="";im.style.cursor="pointer";im.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.style.cursor="pointer";nb.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});nh.appendChild(nb);if(VERIFIED.has(p.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);nh.appendChild(svEl("span",null,A.h+(p.time?" · "+p.time:"")));const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.addEventListener("click",e=>{e.stopPropagation();svPostMenu(d);});nh.appendChild(mo);m.appendChild(nh);m.appendChild(svEl("div","tx",p.tx));if(p.img){const pi=svEl("img","sv2-pimg");pi.src=p.img;pi.alt="";m.appendChild(pi);}const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,p.rc));const rpEl=mk(SVI.repost,p.rp,"repost");rpEl.addEventListener("click",e=>{e.stopPropagation();const on=rpEl.classList.toggle("on");const num=rpEl.querySelector("span");if(num)num.textContent=svFmt2(svNum2(num)+(on?1:-1));});ac.appendChild(rpEl);const lkEl=mk(SVI.heart,p.lk,"like"+(p.hov?" hov":""));if(p.hov){const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);const off=()=>lkEl.classList.remove("pressing");lkEl.addEventListener("pointerdown",e=>{e.stopPropagation();lkEl.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>lkEl.addEventListener(ev2,off));lkEl.addEventListener("click",e=>{e.stopPropagation();});}else{lkEl.addEventListener("click",e=>{e.stopPropagation();const on=lkEl.classList.toggle("on");const num=lkEl.querySelector("span");const cnt=num?svNum2(num):0;lkEl.innerHTML=on?SVI.heartF:SVI.heart;if(num){num.textContent=svFmt2(cnt+(on?1:-1));lkEl.appendChild(num);}});}ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,p.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");d._bmkEl=bkEl;bkEl.addEventListener("click",e=>{e.stopPropagation();svToggleBmk(bkEl);});ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.addEventListener("click",e=>{e.stopPropagation();svSharePost(p.a,p.tx);});ac.appendChild(shEl);m.appendChild(ac);d.appendChild(m);return d;}
 function svOpenProfile(key){const A=ACC[key];if(!A)return;const isTgt=key===tgtKey();const T=isTgt?tgt():null;const posts=svProfPosts(key);const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-prof");const hd=svEl("div","sv2-subhd");const bk=svEl("span","bk");bk.innerHTML=SVI.back;bk.addEventListener("click",e=>{e.stopPropagation();svGo("home");});hd.appendChild(bk);const ht=svEl("div","htt");ht.appendChild(svEl("b",null,A.n));ht.appendChild(svEl("span",null,posts.length+" 件のポスト"));hd.appendChild(ht);wrap.appendChild(hd);const cv=svEl("div","sv2-pcover");const cov=T?T.cover:(key==="nao"?"assets/nao-promo.jpg":"");if(cov){const ci=svEl("img");ci.src=cov;ci.alt="";cv.appendChild(ci);}wrap.appendChild(cv);const pr=svEl("div","sv2-pavrow");const pa=svEl("img","sv2-pav");pa.src=A.av;pa.alt="";pr.appendChild(pa);const pb=svEl("button","sv2-pbtn",isTgt?"プロフィールを編集":"フォローする");pb.type="button";pb.addEventListener("click",e=>{e.stopPropagation();if(isTgt){svToast("プロフィールの編集は、彼の画面の中ではできない");return;}const on=pb.classList.toggle("fol");pb.textContent=on?"フォロー中":"フォローする";});pr.appendChild(pb);wrap.appendChild(pr);const pn=svEl("div","sv2-pname");pn.appendChild(svEl("span",null,A.n));if(VERIFIED.has(key))pn.insertAdjacentHTML("beforeend",VER_BADGE);wrap.appendChild(pn);wrap.appendChild(svEl("div","sv2-phandle",A.h));const bio=isTgt?T.bio:(typeof FOL_BIO!=="undefined"?(FOL_BIO[key]||""):"");if(bio)wrap.appendChild(svEl("div","sv2-pbio",bio));{let jn="";if(T)jn=T.jn;else if(key==="nao"&&typeof S!=="undefined"&&S&&S.posts){const fp=S.posts.find(p2=>p2.a==="nao");if(fp){const fdt=new Date(+String(fp.id).slice(0,13));if(!isNaN(fdt.getTime()))jn=fdt.getFullYear()+"年"+(fdt.getMonth()+1)+"月";}}if(jn){const pj=svEl("div","sv2-pjoined");pj.innerHTML=SVI.cal;pj.appendChild(document.createTextNode(jn+"からXを利用しています"));wrap.appendChild(pj);}}const pc=svEl("div","sv2-pcounts");if(T){const sf=svEl("span");sf.appendChild(svEl("b",null,"12"));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,T.fol));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else if(key==="nao"&&typeof S!=="undefined"&&S){const sf=svEl("span");sf.appendChild(svEl("b",null,String(42+(S.followHiroto?1:0))));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,fmtCnt(S.fol||0)));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else{const s2=svEl("span");s2.appendChild(svEl("b",null,String(posts.length)));s2.appendChild(document.createTextNode(" ポスト"));pc.appendChild(s2);}wrap.appendChild(pc);const tabs=svEl("div","sv2-ptabs");const t1=svEl("div","sv2-ptab on","ポスト");const t2=svEl("div","sv2-ptab","メディア");tabs.appendChild(t1);tabs.appendChild(t2);wrap.appendChild(tabs);const pane1=svEl("div","sv2-ppane");if(posts.length)posts.slice().reverse().forEach(p=>pane1.appendChild(svPostEl(p)));else pane1.appendChild(svEl("div","sv2-empty","まだポストがありません"));wrap.appendChild(pane1);const pane2=svEl("div","sv2-ppane");pane2.style.display="none";const imgs=[];posts.forEach(p=>{if(p.img&&imgs.indexOf(p.img)<0)imgs.push(p.img);});if(isTgt){const scs2=SIDE_SCENES[tgtKey()]||{};Object.keys(scs2).forEach(dk=>{const ph=scs2[dk].ph;if(ph&&imgs.indexOf(ph)<0)imgs.push(ph);});}if(imgs.length){const g=svEl("div","sv2-pgrid");imgs.forEach(src=>{const gi=svEl("img");gi.src=src;gi.alt="";gi.addEventListener("click",e=>{e.stopPropagation();const box=svEl("div");box.appendChild(svSheetTop("写真"));const bi=svEl("img","sh-img");bi.src=src;bi.alt="";box.appendChild(bi);svSheet(box);});g.appendChild(gi);});pane2.appendChild(g);}else pane2.appendChild(svEl("div","sv2-empty","メディアはまだありません"));wrap.appendChild(pane2);const sw=which=>{t1.classList.toggle("on",which===1);t2.classList.toggle("on",which===2);pane1.style.display=which===1?"":"none";pane2.style.display=which===2?"":"none";};t1.addEventListener("click",e=>{e.stopPropagation();sw(1);});t2.addEventListener("click",e=>{e.stopPropagation();sw(2);});sub.appendChild(wrap);svShowSub("prof");}
 function svTrendsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("トレンド"));(curTrends()||[]).forEach(t=>{const r=svEl("div","sv2-trend");r.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド"));r.appendChild(svEl("b",null,t[1]));r.appendChild(svEl("span","cnt",t[2]));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});sub.appendChild(wrap);svShowSub("search");}
 function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time,vw)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw=vw||"";all.push(o);};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys&&!p.isReply)push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"");});svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.vw||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));if(all.length)all.forEach(p=>wrap.appendChild(svPostEl(p)));else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
@@ -7567,7 +7618,7 @@ scr.scrollTop=0;
 const bot=$("#sv3-bot");bot.innerHTML="";
 if((sc.app||"")==="X"&&!(sc.blocks||[]).some(b=>b.t==="video"))bot.appendChild(svXNav());
 else if((sc.app||"")==="メッセージ")bot.appendChild(svMsgBar());
-const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";
+const sheet=$("#sv3-sheet");sheet.style.display="none";sheet.innerHTML="";sheet.classList.remove("closing");
 svWire(scr,sc);svSyncNext();
 const cap=$("#sv2-cap");cap.textContent=sc.cap||"";cap.style.display=sc.cap?"":"none";cap.style.animationDelay=(0.3+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
 const tap=$("#sv2-next");if(tap)tap.style.animationDelay=(0.45+(sc.blocks?sc.blocks.length:0)*0.13)+"s";
@@ -7580,6 +7631,8 @@ function closeSide(){const ov=$("#sideview");if(!ov||!ov.classList.contains("on"
    holds an unanswered choice of his. */
 $("#sv2-next").addEventListener("click",e=>{e.stopPropagation();closeSide();});
 $("#sv2-scr").addEventListener("click",e=>{const q=e.target.closest?e.target.closest('[data-svx="qchoice"],[data-svx="rqchoice"],[data-svx="pchoice"]'):null;if(q)setTimeout(svSyncNext,80);},true);
+/* v504: the app bar earns a shadow once his screen scrolls under it */
+$("#sv2-scr").addEventListener("scroll",()=>{const w=document.querySelector("#sideview .sv2-scrwrap");if(w)w.classList.toggle("scrolled",($("#sv2-scr").scrollTop||0)>6);},{passive:true});
 document.querySelector(".sv2-appbar .sv2-chev").addEventListener("click",e=>{e.stopPropagation();if(svCur.view&&svCur.view!=="home")svGo("home");});
 /* v443: LIVE SCENE - the Day 5 core, his stream of silence, replayed
    as a fan's clip inside a phone live-viewer. The comment river runs,
