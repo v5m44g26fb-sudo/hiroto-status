@@ -4185,7 +4185,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v531</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v532</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4527,7 +4527,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v531</p>
+    <p class="ver">v532</p>
   </div>
 </section>
 </div>
@@ -4827,6 +4827,50 @@ function injectBuzz(maxN,pos){
   if(e.a==="matome"){S.men.unshift(p);S.notifs.unshift({a:"matome",tx:"があなたについて報じました",sub:"世間の反応 ― "+curCH()[S.ch-1].day});}
   added++;
  }
+}
+/* v532: a few buzz posts are gated on a story trigger rather than a
+   plain threshold - h-s1 waits for Day 4, s-s1 for Day 3, h-m1/s-m1
+   for the Day-5 mispost to actually exist in the feed, s-a1-cafe for
+   the cafeteria mini to have happened. Builds from before those
+   gates existed could inject such a post early, and once it sits in
+   S.buzz / S.posts the cond fix alone never reaches the in-progress
+   save (the user's Day-2 screenshot showed h-s1 still on the feed).
+   On load, prune exactly those: a recorded key whose story trigger
+   the current state does not satisfy loses the key, its materialized
+   post and that post's replies (feed + mentions copies). Threshold
+   and chapter-window conds are NOT re-evaluated here - they can be
+   true at injection time and false now, and those posts are legit.
+   The buzz notif ("があなたについて報じました") is a plain text
+   record with no reference to the post, so it is left alone.
+   Idempotent: a pruned key is gone from S.buzz, so later loads skip
+   it; every gate here is monotonic over a run, so a post that was
+   injected legitimately can never fail its gate afterwards. */
+const BUZZ_GATES={
+ "h-s1":s=>s.ch>=4,
+ "s-s1":s=>s.ch>=3,
+ "h-m1":s=>(s.posts||[]).some(p=>p&&p.mine&&p.img==="assets/nao-hiroto-mispost.jpg"),
+ "s-m1":s=>(s.posts||[]).some(p=>p&&p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),
+ "s-a1-cafe":s=>(s.notifs||[]).some(n=>n&&n.mk==="mini-s4")
+};
+function pruneStaleBuzz(){
+ if(!S||!Array.isArray(S.buzz)||!S.buzz.length)return false;
+ let changed=false;
+ for(const k of Object.keys(BUZZ_GATES)){
+  if(!S.buzz.includes(k))continue;
+  let ok=false;try{ok=!!BUZZ_GATES[k](S);}catch(_){ok=false;}
+  if(ok)continue;
+  const e=BUZZ.concat(BUZZ_S).find(x=>x.k===k);
+  S.buzz=S.buzz.filter(x=>x!==k);changed=true;
+  if(!e)continue;
+  const dead=new Set();
+  (S.posts||[]).forEach(p=>{if(p&&p.a===e.a&&p.t===e.tx)dead.add(p.id);});
+  if(!dead.size)continue;
+  let grow=true;
+  while(grow){grow=false;(S.posts||[]).forEach(p=>{if(p&&p.replyTo&&dead.has(p.replyTo)&&!dead.has(p.id)){dead.add(p.id);grow=true;}});}
+  S.posts=S.posts.filter(p=>!(p&&dead.has(p.id)));
+  if(Array.isArray(S.men))S.men=S.men.filter(p=>!(p&&dead.has(p.id)));
+ }
+ return changed;
 }
 /* v251 (episode - heat): on the evening of the Day 5 rumor event,
    he posts once himself. Nothing is said outright - the restraint
@@ -9147,6 +9191,9 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
     persisted; a save left mid-Day-7 returns to the Day 6 verdict */
  if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
+ /* v532: drop buzz posts a pre-gate build injected before their
+    story trigger existed (key list + feed/mentions copies) */
+ if(pruneStaleBuzz())save();
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
  $("#btn-continue").onclick=()=>resumeGame();
  /* v188: the title save card itself opens the JOURNEY sheet */
