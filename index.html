@@ -4185,7 +4185,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v532</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v533</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4527,7 +4527,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v532</p>
+    <p class="ver">v533</p>
   </div>
 </section>
 </div>
@@ -4852,6 +4852,16 @@ const BUZZ_GATES={
  "s-m1":s=>(s.posts||[]).some(p=>p&&p.mine&&p.img==="assets/nao-sakuya-mispost.jpg"),
  "s-a1-cafe":s=>(s.notifs||[]).some(n=>n&&n.mk==="mini-s4")
 };
+function killBuzzEntity(e){
+ const dead=new Set();
+ (S.posts||[]).forEach(p=>{if(p&&p.a===e.a&&p.t===e.tx)dead.add(p.id);});
+ if(!dead.size)return false;
+ let grow=true;
+ while(grow){grow=false;(S.posts||[]).forEach(p=>{if(p&&p.replyTo&&dead.has(p.replyTo)&&!dead.has(p.id)){dead.add(p.id);grow=true;}});}
+ S.posts=S.posts.filter(p=>!(p&&dead.has(p.id)));
+ if(Array.isArray(S.men))S.men=S.men.filter(p=>!(p&&dead.has(p.id)));
+ return true;
+}
 function pruneStaleBuzz(){
  if(!S||!Array.isArray(S.buzz)||!S.buzz.length)return false;
  let changed=false;
@@ -4861,14 +4871,44 @@ function pruneStaleBuzz(){
   if(ok)continue;
   const e=BUZZ.concat(BUZZ_S).find(x=>x.k===k);
   S.buzz=S.buzz.filter(x=>x!==k);changed=true;
-  if(!e)continue;
-  const dead=new Set();
-  (S.posts||[]).forEach(p=>{if(p&&p.a===e.a&&p.t===e.tx)dead.add(p.id);});
-  if(!dead.size)continue;
-  let grow=true;
-  while(grow){grow=false;(S.posts||[]).forEach(p=>{if(p&&p.replyTo&&dead.has(p.replyTo)&&!dead.has(p.id)){dead.add(p.id);grow=true;}});}
-  S.posts=S.posts.filter(p=>!(p&&dead.has(p.id)));
-  if(Array.isArray(S.men))S.men=S.men.filter(p=>!(p&&dead.has(p.id)));
+  if(e)killBuzzEntity(e);
+ }
+ /* v533: before v531 the cafeteria sighting and the matome roundup
+    shared one key, s-a1 (and the umbrella sighting shared s-a2 with
+    the fan2 post). A save from that era records whichever post won
+    the key under the plain shared key, which the gate pass above
+    cannot see; the materialized post (author + text) tells which of
+    the pair the record belongs to.
+    - cafeteria post present, mini not done: it was injected before
+      its trigger existed - remove it like the pass above, and free
+      the s-a1 record when it was the cafeteria's (roundup post
+      absent), so the roundup can still appear later.
+    - cafeteria post present, mini done: the post is legitimate -
+      rename its legacy record to s-a1-cafe so the gate pass and the
+      already-injected check see the right key (a stray duplicate
+      s-a1 next to an existing s-a1-cafe record is dropped instead).
+    - umbrella post holding the s-a2 record: the umbrella has no
+      story gate, so nothing is removed - rename the record to
+      s-a2-umb so the fan2 s-a2 post is no longer blocked.
+    When the other post of the pair is on the feed, the shared
+    record belongs to that post and is left alone. Idempotent:
+    after a migration the legacy record is gone or renamed. */
+ const hasEnt=e=>(S.posts||[]).some(p=>p&&p.a===e.a&&p.t===e.tx);
+ const cafeE=BUZZ_S.find(x=>x.k==="s-a1-cafe"),roundE=BUZZ_S.find(x=>x.k==="s-a1");
+ if(cafeE&&hasEnt(cafeE)){
+  const roundEnt=roundE?hasEnt(roundE):false;
+  let mini=false;try{mini=!!BUZZ_GATES["s-a1-cafe"](S);}catch(_){mini=false;}
+  if(!mini){
+   if(killBuzzEntity(cafeE))changed=true;
+   if(!roundEnt&&S.buzz.includes("s-a1")){S.buzz=S.buzz.filter(x=>x!=="s-a1");changed=true;}
+  }else if(!roundEnt&&S.buzz.includes("s-a1")){
+   S.buzz=S.buzz.includes("s-a1-cafe")?S.buzz.filter(x=>x!=="s-a1"):S.buzz.map(x=>x==="s-a1"?"s-a1-cafe":x);
+   changed=true;
+  }
+ }
+ const umbE=BUZZ_S.find(x=>x.k==="s-a2-umb"),a2E=BUZZ_S.find(x=>x.k==="s-a2");
+ if(umbE&&a2E&&hasEnt(umbE)&&!hasEnt(a2E)&&S.buzz.includes("s-a2")&&!S.buzz.includes("s-a2-umb")){
+  S.buzz=S.buzz.map(x=>x==="s-a2"?"s-a2-umb":x);changed=true;
  }
  return changed;
 }
