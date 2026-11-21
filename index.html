@@ -3686,7 +3686,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v499</p>
+  <p class="ver">v500</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3870,7 +3870,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v499</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v500</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4187,7 +4187,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v499</p>
+    <p class="ver">v500</p>
   </div>
 </section>
 </div>
@@ -4562,7 +4562,16 @@ function fmtCnt(n){n=+n||0;if(n>=10000){const v=n/10000;return (v>=100?String(Ma
    Display-time derivation only - p.tm and the save are untouched. */
 function postBorn(p){const m=/-([0-9a-z]+)$/.exec(String(p&&p.id||""));if(!m)return 0;const t=parseInt(m[1],36);return(t>1e12&&t<Date.now()+6e4)?t:0;}
 function postOff(p){let h=0;const s=String(p&&p.id||"");for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return(h%180)*60000;}
-function postEff(p){const b=postBorn(p);return b?b-(p.mine?0:postOff(p)):0;}
+function postEff(p){const b=postBorn(p);if(!b)return 0;let e=b-(p.mine?0:postOff(p));
+ /* v500 (X realism - the clock ages with the story): each crossed day
+    boundary moves a post's effective time back a full day, so a post
+    from two chapters ago passes the 24h rung of the ladder and reads
+    as a calendar date - like the real client - instead of staying at
+    "○時間" for a whole week of story time. Display derivation only:
+    posts minted before this pass carry no dy and keep the old
+    behaviour, and the save gains nothing but the additive dy field. */
+ try{if(p.dy&&typeof S!=="undefined"&&S&&S.ch>p.dy)e-=(S.ch-p.dy)*86400000;}catch(_){}
+ return e;}
 function postTime(p){const e=postEff(p);if(!e)return p.tm||"今";let ms=Date.now()-e;if(ms<0)ms=0;const min=Math.floor(ms/60000);if(min<1)return "今";if(min<60)return min+"分";const hr=Math.floor(min/60);if(hr<24)return hr+"時間";const d=new Date(e),nw=new Date(),md=(d.getMonth()+1)+"月"+d.getDate()+"日";return d.getFullYear()===nw.getFullYear()?md:d.getFullYear()+"年"+md;}
 /* v408: the detail view's absolute clock, same derivation - the JP
    client prints "午後9:14 · 2026年11月16日" over the view count */
@@ -4575,7 +4584,7 @@ function qtDerive(p){try{
  const m=/「([^」]{5,})」/.exec(p.t||"");if(!m)return null;
  const orig=S.posts.find(o=>o.mine&&o.t&&(o.t.includes(m[1])||m[1].includes(o.t.slice(0,12))));
  if(!orig)return null;
- return{id:orig.id,n:orig.n,h:orig.h,av:orig.av,tx:orig.t,img:orig.img};
+ return{id:orig.id,n:orig.n,h:orig.h,av:orig.av,tx:orig.t,img:orig.img,dy:orig.dy};
 }catch(_){return null;}}
 function rpHeadEl(name){const d=document.createElement("div");d.className="rp-head";d.innerHTML='<span class="rp-ic">'+XIC9.rp+'</span><span></span>';d.querySelector("span:last-child").textContent=name+"さんがリポスト";return d;}
 const PIN_SVG='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>';
@@ -4631,7 +4640,7 @@ function postEl(p,hot){
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
-  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u30fb '+(postTime(p))+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
+  d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u00b7 '+(postTime(p))+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
     +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'"'+imgDimAttrs(p.img)+' alt="">':"")
     +'<div class="mt">'
     +cnt("reply-btn",XIC9.reply,rc)
@@ -4652,7 +4661,7 @@ function postEl(p,hot){
   const qtSnap=p.qt||qtDerive(p);
   if(qtSnap){const qc=document.createElement("div");qc.className="qtcard";
    qc.innerHTML='<div class="qt-h">'+(qtSnap.av?'<img class="qt-av" src="'+qtSnap.av+'" width="20" height="20" alt="">':"")+'<span class="qt-n"></span>'+(qtSnap.n===ACC.nao.n?VER_BADGE:"")+'<span class="qt-hd"></span><span class="qt-tm"></span></div><div class="qt-flex"><div class="qt-tx"></div>'+(qtSnap.img?'<img class="qt-thumb" loading="lazy" decoding="async" src="'+qtSnap.img+'" alt="">':"")+'</div>';
-   qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;qc.querySelector(".qt-tm").textContent="· "+postTime({id:qtSnap.id,mine:true,tm:"今"});linkifyTx(qc.querySelector(".qt-tx"),dispTx(qtSnap.tx));
+   qc.querySelector(".qt-n").textContent=qtSnap.n;qc.querySelector(".qt-hd").textContent=qtSnap.h;qc.querySelector(".qt-tm").textContent="· "+postTime({id:qtSnap.id,mine:true,tm:"今",dy:qtSnap.dy});linkifyTx(qc.querySelector(".qt-tx"),dispTx(qtSnap.tx));
    qc.addEventListener("click",e=>{e.stopPropagation();try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o.id===qtSnap.id);if(orig)openPostThread(orig);}catch(_){}});
    d.querySelector(".tx").after(qc);}
   const avEl=d.firstChild;
@@ -4721,7 +4730,7 @@ function fmt(n){return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,"")+"万":Nu
 function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
 let postSeq=0;
 function attachReps(post,reps,bucket){if(!post||!reps||!reps.length)return post;post.replyIds=reps.map(r=>{const rp=mkPost(r.a,r.tx,r.lk||12,0,0,false,null);rp.isReply=true;rp.replyTo=post.id;if(bucket)bucket.push(rp);else if(typeof S!=="undefined"&&S&&S.posts)S.posts.push(rp);return rp.id;});return post;}
-function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null};}
+function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null,dy:(typeof S!=="undefined"&&S&&S.ch)||1};}
 /* setup */
 let selH=null,selSt=null,selF=null,selW=null,selT=null;
 (function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;const bw=$("#btn-world");bw.disabled=false;bw.textContent=w.t+"に入る";};}box.appendChild(b);});})();
