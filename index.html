@@ -2485,6 +2485,7 @@ input,textarea{font-size:16px}
    language. Data, destinations and the read-marking itself are
    unchanged (the settle is a visual layer over the same timing). ===== */
 #x-notif .nrow{animation:nrowin .32s cubic-bezier(.2,.8,.25,1) both;transition:background .7s ease}
+#x-notif .nday-head{animation:nrowin .32s cubic-bezier(.2,.8,.25,1) both}/* v511: day heads land with the same stagger as their rows */
 @keyframes nrowin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 #x-notif .nrow.unseen{background:linear-gradient(120deg,rgba(29,155,240,.11),rgba(120,86,255,.08))}
 #x-notif .nrow.special.unseen{background:linear-gradient(120deg,rgba(249,24,128,.13),rgba(29,155,240,.08))}
@@ -3844,7 +3845,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v510</p>
+  <p class="ver">v511</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4028,7 +4029,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v510</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v511</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4345,7 +4346,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v510</p>
+    <p class="ver">v511</p>
   </div>
 </section>
 </div>
@@ -5194,15 +5195,16 @@ function renderNotifs(){
    /* v213: the day head names the chapter too, like the log and
       journey sheets (the sub still leads; rows keep their own) */
    hd.querySelector(".ndh-t").textContent=headTx[vi]||n.sub;/* v501: head title comes from the day-number grouping above (chapter day, single title) - replaces the v213/v487 append rule, which stacked a second, different title whenever the sub carried its own */
+   hd.style.animationDelay=Math.min(vi*0.05,0.55)+"s";/* v511: heads join the rows' staggered landing (delay rule below) */
    list.appendChild(hd);}
   if(grpMem.has(vi))return;
   if(grpOf[vi]){const mems=grpOf[vi].map(x=>visN[x]);const fn=mems[0].n,fa=ACC[fn.a]||{n:"不明なアカウント",h:""};const anyU=mems.some(x=>x.i<unseen),anyS=mems.some(x=>x.n.a===tgtKey());
-   const grow=document.createElement("div");grow.className="nrow nt-heart grpn"+(anyU?" unseen":"")+(anyS?" special":"");grow.style.animationDelay=Math.min(i*0.045,0.3)+"s";
+   const grow=document.createElement("div");grow.className="nrow nt-heart grpn"+(anyU?" unseen":"")+(anyS?" special":"");grow.style.animationDelay=Math.min(vi*0.05,0.55)+"s";
    const stack=mems.slice(0,4).map(x=>{const ma=ACC[x.n.a]||{n:"?",av:null};return ma.av?'<img class="avatar" loading="lazy" decoding="async" src="'+ma.av+'" alt="">':avaTxt(ma.n);}).join("");
    grow.innerHTML='<span class="ntypecol t-heart">'+NTYPE.heart+'</span>'+"<div class='nmain'><div class='nlab t-heart'>"+NLAB.heart+"</div><div class='nstack'>"+stack+"</div><b></b><span class='tx2'></span><small></small></div>"+(anyU?'<i class="ndot"></i>':"");
    const gb=grow.querySelector("b");gb.textContent=fa.n+"さんと他"+(mems.length-1)+"名";if(VERIFIED.has(fn.a))gb.insertAdjacentHTML("beforeend",VER_BADGE);
    grow.querySelector(".tx2").textContent=(fn.tx||"").replace(/^さん/,"");grow.querySelector("small").textContent=fn.sub||"";list.appendChild(grow);return;}
-  const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");row.style.animationDelay=Math.min(i*0.045,0.3)+"s";
+  const row=document.createElement("div");row.className="nrow nt-"+t+(i<unseen?" unseen":"")+(n.a===tgtKey()?" special":"");row.style.animationDelay=Math.min(vi*0.05,0.55)+"s";/* v511: the landing delay is keyed to the visible position, not the global index - by Day 3+ every row used to sit at the old 0.3s cap and land at once; now the list settles in sequence, like the real pane */
   row.innerHTML='<span class="ntypecol t-'+t+'">'+NTYPE[t]+'</span><span class="nava">'+(a.av?'<img class="avatar" loading="lazy" decoding="async" src="'+a.av+'" alt="">':avaTxt(a.n))+'</span>'+"<div class='nmain'><div class='nlab t-"+t+"'>"+NLAB[t]+"</div><b></b><span class='tx2'></span><small></small></div>"+(i<unseen?'<i class="ndot"></i>':"");
   row.querySelector("b").textContent=a.n;if(VERIFIED.has(n.a))row.querySelector("b").insertAdjacentHTML("beforeend",VER_BADGE);row.querySelector(".tx2").textContent=n.tx;row.querySelector("small").textContent=n.sub||"";list.appendChild(row);});
  /* v242: a visible end to the list, so the bottom reads as the
@@ -5648,7 +5650,40 @@ function threadReplies(p){
     rendered as a reply to Karina's congrats post) - removed. */
  return seedTopReplies(p,base);
 }
+let thCreepTimer=null;const thCreepOff={};
+function thCreepStop(){if(thCreepTimer){clearTimeout(thCreepTimer);thCreepTimer=null;}}
+/* v511: while a post's detail stays open, its counters keep
+   breathing - views climb steadily, a like lands now and then -
+   like watching a post live. Screen derivation only: the offsets
+   live in session state (thCreepOff), p.m / fx / the save are never
+   touched, and the like button's dataset count is nudged in step so
+   its own toggle maths stays exact against what she sees. */
+function thCreepStart(p,mainEl,metaEl,sdEl){
+ thCreepStop();
+ if(!p||!p.id||!mainEl)return;
+ if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const off=thCreepOff[p.id]||(thCreepOff[p.id]={v:0,l:0});
+ const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
+ const lkB=num(2),vwB=lkB*23+num(1)*61+num(0)*197+89;
+ const fVw=mainEl.querySelector(".views b");
+ const lkBtn=mainEl.querySelector(".like-btn");
+ const lkSpan=sdEl?sdEl.querySelector(".dts-lk b"):null;
+ const paint=()=>{if(metaEl)metaEl.textContent=postAbsTime(p)+" · "+fmtCnt(vwB+off.v)+" 回表示";
+  if(fVw)fVw.textContent=fmtCnt(vwB+off.v);
+  if(lkSpan)lkSpan.textContent=fmtCnt(lkB+(p.liked?1:0)+off.l);
+  if(lkBtn){lkBtn.dataset.n=String(lkB+(p.liked?1:0)+off.l);const b=lkBtn.querySelector("b");if(b)b.textContent=fmtCnt(lkB+(p.liked?1:0)+off.l);}};
+ paint();
+ const vwCap=Math.max(24,Math.round(vwB*0.08));
+ const tick=()=>{thCreepTimer=setTimeout(()=>{thCreepTimer=null;
+   if(!mainEl.isConnected||!threadStack.length||threadStack[threadStack.length-1]!==p)return;
+   const pane=$("#x-pane-thread");if(!pane||pane.style.display!=="block")return;
+   if(off.v<vwCap)off.v+=Math.max(1,Math.round(vwB*(0.0004+Math.random()*0.0011)));
+   if(lkB>=30&&off.l<12&&Math.random()<0.5)off.l+=1;
+   paint();tick();},2300+Math.random()*2100);};
+ tick();
+}
 function renderThread(p){
+ thCreepStop();
  $("#thread-sub").textContent=p.n;
  const tm=$("#thread-main");tm.innerHTML="";
  const reps=threadReplies(p);
@@ -5661,7 +5696,9 @@ function renderThread(p){
   /* v63: worded engagement summary, like real X (12 件のリポスト / 34 件のいいね) */
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
   const stats=[[num(0),"件の返信"],[num(1)+(p.rped?1:0),"件のリポスト"],[num(2)+(p.liked?1:0),"件のいいね"]].filter(x=>x[0]>0);
-  if(stats.length){const sd=document.createElement("div");sd.className="dtstats";sd.innerHTML=stats.map(x=>"<span><b>"+fmtCnt(x[0])+"</b>"+x[1]+"</span>").join("");mt.parentNode.insertBefore(sd,mt);}
+  let sdEl=null;
+  if(stats.length){const sd=document.createElement("div");sd.className="dtstats";sd.innerHTML=stats.map(x=>"<span"+(x[1]==="件のいいね"?" class=\"dts-lk\"":"")+"><b>"+fmtCnt(x[0])+"</b>"+x[1]+"</span>").join("");mt.parentNode.insertBefore(sd,mt);sdEl=sd;}
+  try{thCreepStart(p,main,meta,sdEl);}catch(_){}
  }
  tm.appendChild(main);
  const box=$("#thread-replies");box.innerHTML="";
@@ -5969,8 +6006,16 @@ function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
    12,402), like the real client. Display only: the stored strings
    and trendNum (which parses them back for the volume bars) are
    untouched. */
-function trendCntTx(t){return fmtCnt(trendNum(t))+" ポスト";}
-function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: a generic trend's category is just トレンド - appending the suffix printed トレンド ― トレンド */d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+/* v511: a trend's displayed count breathes with the day - the
+   authored base is scaled by how much of today has happened (her
+   post / the Event / the Activity) plus a small per-word jitter
+   from a stable hash. Pure derivation from state: the same state
+   always paints the same number, the TRENDS data itself is
+   untouched, and nothing is written to the save. */
+function trendHash(s){let h=0;const w=String(s);for(let i=0;i<w.length;i++)h=(h*31+w.charCodeAt(i))>>>0;return h;}
+function trendNumLive(t){const base=trendNum(t);if(!base||typeof S==="undefined"||!S||!S.started)return base;const heat=(S.posted?1:0)+(S.evDone?1:0)+(S.actDone?1:0);const j=(trendHash(t[1])%7)*0.008;return Math.max(1,Math.round(base*(0.9+heat*0.045+j)));}
+function trendCntTx(t){return fmtCnt(trendNumLive(t))+" ポスト";}
+function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: a generic trend's category is just トレンド - appending the suffix printed トレンド ― トレンド */d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNumLive(t)/Math.max(1,maxV||trendNumLive(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){/* v476: the fill of the retired trend pane is gone;
    this now only refreshes the search pane's suggestion chips and,
    via renderSearchTab below, its topic tab (the reachable trend UI) */
@@ -6007,9 +6052,10 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
  const box=$("#x-search-results");if(!box)return;box.innerHTML="";
  const hd=STAB_HEADS[k];if(hd){const hh=document.createElement("div");hh.className="cat-head";hh.innerHTML="<span class='ch-eyebrow'></span><b></b><small></small>";hh.querySelector(".ch-eyebrow").textContent=hd[0];hh.querySelector("b").textContent=hd[1];hh.querySelector("small").textContent=hd[2];box.appendChild(hh);}
  const cat={trend:null,news:"ニュース",entame:"エンタメ",sports:"スポーツ"}[k];
- const all=curTrends(),maxV=Math.max(1,...all.map(trendNum));
+ const all=curTrends(),maxV=Math.max(1,...all.map(trendNumLive));
  if(k==="topic"){if(all.length){box.appendChild(trendHero(all[0],maxV));all.slice(1).forEach((t,i)=>box.appendChild(trendEl(t,i+1,maxV)));}return;}
  const list=all.filter(t=>cat===null||t[0]===cat);
+ if(cat===null)list.sort((a,b)=>trendNumLive(b)-trendNumLive(a));/* v511: the trend tab's own subtitle promises count order - sort by the live derived counts (stable sort, so the authored order breaks ties); the explore tab keeps the authored order */
  if(!list.length){box.appendChild(mkEmpty("このカテゴリのトレンドはまだない","話題が動き始めたら、ここに表示されるよ。"));return;}
  if(cat===null){box.appendChild(trendHero(list[0],maxV));list.slice(1).forEach((t,i)=>box.appendChild(trendEl(t,i+1,maxV)));return;}
  list.forEach((t,i)=>box.appendChild(trendEl(t,i,maxV)));}
@@ -6018,7 +6064,7 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
 function trendHero(t,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend-hero"+(dyn?" dyn":"");
  d.innerHTML='<span class="th-eyebrow"><i></i>TOP TREND ― いま最も熱い話題</span><b class="th-title"></b><div class="th-meta"><span class="th-cat"></span><span class="th-count"></span>'+(dyn?'<span class="tdyn"><i></i>急上昇</span>':"")+'</div><span class="th-vol"><i></i></span>';
  d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: same dedup as trendEl */d.querySelector(".th-count").textContent=trendCntTx(t);
- d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";
+ d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNumLive(t)/Math.max(1,maxV||trendNumLive(t))*100))+"%";
  d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
 /* v87: search results composed like real X - an accounts section of
@@ -6966,7 +7012,7 @@ function renderDmList(){
  updateBdg();
 }
 function scrollDmBottom(smooth){const sc=$("#x-scroll");requestAnimationFrame(()=>requestAnimationFrame(()=>{sc.scrollTo({top:sc.scrollHeight,behavior:smooth?"smooth":"auto"});}));}
-function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),330);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;if(VERIFIED.has(t.who))$("#th-name").insertAdjacentHTML("beforeend",DM_VERIFIED);$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
+function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;dmRevealArm=wasUnread?t:null;$("#dmlist").classList.add("hidden");$("#dmlist-head").classList.add("hidden");const th=$("#dmthread");th.classList.remove("hidden");th.classList.toggle("special",!!t.special);th.classList.remove("dmin");void th.offsetWidth;th.classList.add("dmin");setTimeout(()=>th.classList.remove("dmin"),330);const a=ACC[t.who];$("#th-av").innerHTML=a.av?'<img class="avatar" src="'+a.av+'" width="40" height="40" alt="">':avaTxt(a.n);$("#th-name").textContent=a.n;if(VERIFIED.has(t.who))$("#th-name").insertAdjacentHTML("beforeend",DM_VERIFIED);$("#th-sub").textContent=a.h;$("#th-special").classList.toggle("hidden",!t.special);
  const ti=$("#th-intro");ti.innerHTML='<span class="ti-avw">'+(a.av?'<img class="avatar" src="'+a.av+'" width="64" height="64" alt="">':avaTxt(a.n))+'</span><div class="ti-name"></div><div class="ti-handle">'+a.h+'</div><div class="ti-bio"></div>'+(t.special?'<div class="ti-pill">'+(t.who==="hiroto"?"何年も眠っていたスレッド":"久しぶりの、本人からの連絡")+'</div>':"");
  ti.querySelector(".ti-name").textContent=a.n;if(VERIFIED.has(t.who))ti.querySelector(".ti-name").insertAdjacentHTML("beforeend",DM_VERIFIED);
  ti.querySelector(".ti-bio").textContent=t.special?tgt().bio:(FOL_BIO[t.who]||"");
@@ -6976,7 +7022,14 @@ function openThread(t){curThread=t;const wasUnread=t.unread;t.unread=false;$("#d
  const goProf=(t.special&&t.who===tgtKey())?()=>showPane("hisprof"):null;
  $("#th-av").onclick=goProf;th.querySelector(".th-id").onclick=goProf;ti.onclick=goProf;
  thEnter=true;renderThreadMsgs();updateBdg();save();scrollDmBottom(false);}
-function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const box=$("#th-msgs");box.innerHTML="";dmTray=null;dmTrayT=null;dmTrayI=-1;
+/* v511: opening a thread with fresh unread partner messages plays
+   their arrival - typing dots, then the messages land one by one -
+   instead of the whole backlog sitting there as read history. Pure
+   display: the messages are already in t.msgs, the reveal only
+   stages their first render; any re-render cancels it and shows
+   everything, and nothing here touches the save. */
+let dmRevealArm=null,dmRevealSeq=0,dmRevealTimer=null;
+function renderThreadMsgs(){const t=curThread;if(!t)return;dmRevealSeq++;if(dmRevealTimer){clearTimeout(dmRevealTimer);dmRevealTimer=null;}renderThDist();const box=$("#th-msgs");box.innerHTML="";dmTray=null;dmTrayT=null;dmTrayI=-1;
  /* v144: the open cascade is consumed here - later renders (my reply
     landing, his answer arriving) keep their own single-beat motion */
  const entering=thEnter;thEnter=false;
@@ -6992,8 +7045,16 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
  const lastMe=meSet.size?Math.max.apply(null,Array.from(meSet)):-1;
  const lastMeDone=t.rounds?(function(){const r=t.rounds.find(r=>r.me===lastMe);return r?r.done:false;})():t.done;
  const sepAt={};if(t.rounds&&t.rounds.length>1)t.rounds.forEach(r=>{sepAt[r.at]=r.d;});
- t.msgs.forEach((m,i)=>{if(sepAt[i]!=null){const sp=document.createElement("div");sp.className="th-sep";sp.textContent="Day "+sepAt[i];box.appendChild(sp);}
-  const side=isMe(i)?"me":"them";const tail=(i===t.msgs.length-1||sepAt[i+1]!=null||isMe(i+1)!==isMe(i));const d=document.createElement("div");d.className="msg "+side+((i>0&&sepAt[i]==null&&(isMe(i-1)?"me":"them")===side)?" grp":"")+(tail?" tail":"");d.textContent=m;if(entering&&i>=t.msgs.length-6)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+((i-Math.max(0,t.msgs.length-6))*70)+"ms both";box.appendChild(d);dmRctBadge(d,t,i);dmRctAttach(d,t,i);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}if(lastMeDone&&side==="me"&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";if(dmReadFresh){mm.style.animation="readmark .35s ease .55s both";dmReadFresh=false;}box.appendChild(mm);}});
+ /* v511: with the reveal armed, the trailing run of partner
+    messages (everything after her last reply) is held back from
+    this first render and staged in below */
+ let revealFrom=-1;
+ if(entering&&dmRevealArm===t){dmRevealArm=null;let f=lastMe+1;if(f<t.msgs.length){if(t.msgs.length-f>6)f=t.msgs.length-6;revealFrom=f;}}
+ const mkMsg=i=>{const side=isMe(i)?"me":"them";const tail=(i===t.msgs.length-1||sepAt[i+1]!=null||isMe(i+1)!==isMe(i));const d=document.createElement("div");d.className="msg "+side+((i>0&&sepAt[i]==null&&(isMe(i-1)?"me":"them")===side)?" grp":"")+(tail?" tail":"");d.textContent=t.msgs[i];dmRctBadge(d,t,i);dmRctAttach(d,t,i);if(side==="them"&&(i===t.msgs.length-1||isMe(i+1))){const A=ACC[t.who];if(A&&A.av){const im=document.createElement("img");im.className="th-av";im.src=A.av;im.alt="";d.appendChild(im);}}return d;};
+ const putMsg=(i,fresh)=>{if(sepAt[i]!=null){const sp=document.createElement("div");sp.className="th-sep";sp.textContent="Day "+sepAt[i];box.appendChild(sp);}
+  const d=mkMsg(i);if(fresh===true&&i>=t.msgs.length-6)d.style.animation="msgin .3s cubic-bezier(.2,.8,.25,1) "+((i-Math.max(0,t.msgs.length-6))*70)+"ms both";else if(fresh==="new")d.classList.add("new");box.appendChild(d);
+  if(lastMeDone&&isMe(i)&&i===lastMe){const mm=document.createElement("div");mm.className="msgmeta";mm.textContent="既読";if(dmReadFresh){mm.style.animation="readmark .35s ease .55s both";dmReadFresh=false;}box.appendChild(mm);}};
+ t.msgs.forEach((m,i)=>{if(revealFrom>=0&&i>=revealFrom)return;putMsg(i,entering);});
  const cb=$("#th-choices");cb.innerHTML="";
  if(!t.done){const lab=document.createElement("div");lab.className="dm-clab";lab.textContent="REPLY ― 返信を選ぶ";cb.appendChild(lab);t.choices.forEach((c,ci)=>{const b=document.createElement("button");b.className="choice dmchoice";b.style.animationDelay=(ci*70)+"ms";const chips=fxChips(c.fx);b.innerHTML='<span class="dmc-tx"></span>'+(chips?'<span class="dmc-chips">'+chips+"</span>":"");b.querySelector(".dmc-tx").textContent=c.t;b.onclick=()=>{
    if(t.rounds){const r=fanRoundOf(t);if(r){r.done=true;r.me=t.msgs.length;}const na=fanRoundOf(t);if(na)t.choices=na.choices;t.done=!na&&!(t.pend&&t.pend.length);}
@@ -7009,7 +7070,17 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;renderThDist();const 
    /* v459: a queued round from a later day joins this same thread
       the moment the answer lands */
    if(t.rounds&&t.pend&&t.pend.length){const nx=t.pend.shift();appendFanRound(t,nx.d,nx.msgs,nx.choices);if(curThread!==t)t.unread=true;}
-   if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},Math.max(700,Math.min(1900,560+(c.r||"").length*14)));};cb.appendChild(b);});}}
+   if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},Math.max(700,Math.min(1900,560+(c.r||"").length*14)));};cb.appendChild(b);});}
+ /* v511: the armed reveal plays out - a typing bubble breathes,
+    then each held-back message lands with its own small gap (the
+    same dots the v118 reply beat uses). Guarded by the render
+    sequence: any re-render, thread switch or close cancels it and
+    the messages simply stand as history from then on. */
+ if(revealFrom>=0){const seq=dmRevealSeq;let idx=revealFrom;
+  const alive=()=>seq===dmRevealSeq&&curThread===t&&!$("#dmthread").classList.contains("hidden");
+  const step=()=>{if(!alive())return;const ty=document.createElement("div");ty.className="msg them typing tail";ty.innerHTML="<i></i><i></i><i></i>";const A2=ACC[t.who];if(A2&&A2.av){const im2=document.createElement("img");im2.className="th-av";im2.src=A2.av;im2.alt="";ty.appendChild(im2);}box.appendChild(ty);scrollDmBottom(true);
+   dmRevealTimer=setTimeout(()=>{if(!alive()){ty.remove();return;}ty.remove();putMsg(idx,"new");scrollDmBottom(true);idx++;if(idx<t.msgs.length)dmRevealTimer=setTimeout(step,300+Math.random()*280);},idx===revealFrom?750+Math.random()*450:520+Math.random()*330);};
+  dmRevealTimer=setTimeout(step,220);}}
 /* v496: bubble reactions, the real client's long-press tray and
    double-tap heart. Display layer only: the pick is kept additively
    on the thread (t.rct, keyed by message index - messages only ever
@@ -7767,8 +7838,8 @@ tabEls.forEach((t,i)=>t.addEventListener("click",e=>{e.stopPropagation();sw(i+1)
 function svTrendsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("トレンド"));
 const sr=svEl("div","sv2-srch");sr.innerHTML=SVI.search;const inp=document.createElement("input");inp.type="text";inp.placeholder="検索";inp.setAttribute("autocomplete","off");sr.appendChild(inp);const sx=svEl("span","sx","✕");sx.style.display="none";sr.appendChild(sx);inp.addEventListener("keydown",e=>{e.stopPropagation();if(e.key==="Enter"){const q=inp.value.trim();if(q)svTrendPosts(q);}});inp.addEventListener("input",()=>{sx.style.display=inp.value?"":"none";});inp.addEventListener("click",e=>e.stopPropagation());sx.addEventListener("click",e=>{e.stopPropagation();inp.value="";sx.style.display="none";inp.focus();});wrap.appendChild(sr);
 const dd=svCur.d||1;const words=tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#何年も前の写真","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の沈黙","MUSIC STAGE"];const sug=svEl("div","sv2-sug");words.filter(w=>!((w==="#配信の沈黙"||w==="#何年も前の写真")&&dd<5)&&!(w==="熱愛報道"&&dd<6)&&!(w==="歌うまコラボSP"&&dd<4)).forEach(w=>{const s=svEl("span",null,w);s.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(w);});sug.appendChild(s);});wrap.appendChild(sug);
-const list=curTrends()||[];const maxV=Math.max.apply(null,[1].concat(list.map(t=>trendNum(t))));const base=new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1]));
-list.forEach((t,i)=>{const dyn=!base.has(t[1]);const r=svEl("div","sv2-trend");r.appendChild(svEl("span","sv2-trank"+(i<3?" rk"+(i+1):""),String(i+1)));const tm=svEl("div","sv2-tmain");tm.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド"));tm.appendChild(svEl("b",null,t[1]));tm.appendChild(svEl("span","cnt",trendCntTx(t)));const vol=svEl("span","sv2-tvol");const vi=svEl("i");vi.style.width=Math.max(6,Math.round(trendNum(t)/maxV*100))+"%";vol.appendChild(vi);tm.appendChild(vol);r.appendChild(tm);if(dyn)r.appendChild(svEl("span","sv2-tdyn","急上昇"));r.appendChild(svEl("span","sv2-tarr","›"));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});
+const list=curTrends()||[];const maxV=Math.max.apply(null,[1].concat(list.map(t=>trendNumLive(t))));const base=new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1]));
+list.forEach((t,i)=>{const dyn=!base.has(t[1]);const r=svEl("div","sv2-trend");r.appendChild(svEl("span","sv2-trank"+(i<3?" rk"+(i+1):""),String(i+1)));const tm=svEl("div","sv2-tmain");tm.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド"));tm.appendChild(svEl("b",null,t[1]));tm.appendChild(svEl("span","cnt",trendCntTx(t)));const vol=svEl("span","sv2-tvol");const vi=svEl("i");vi.style.width=Math.max(6,Math.round(trendNumLive(t)/maxV*100))+"%";vol.appendChild(vi);tm.appendChild(vol);r.appendChild(tm);if(dyn)r.appendChild(svEl("span","sv2-tdyn","急上昇"));r.appendChild(svEl("span","sv2-tarr","›"));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});
 wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));sub.appendChild(wrap);svShowSub("search");}
 function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time,vw)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw=vw||"";all.push(o);};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys&&!p.isReply)push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"");});svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.vw||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));svPostBack=()=>svTrendPosts(word);wrap.appendChild(svEl("div","sv2-rhead",all.length+" 件のポスト"));if(all.length){all.forEach(p=>wrap.appendChild(svPostEl(p)));wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));}else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
 function svNotifsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("通知"));
