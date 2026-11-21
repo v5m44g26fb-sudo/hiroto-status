@@ -264,6 +264,12 @@ input,textarea{font-size:16px}
 #actbar.final .dock-day{background:linear-gradient(90deg,#b8860b,#f7c948);color:#4a3500}
 .dock-ch{flex:1;min-width:0;font-size:12.5px;font-weight:700;color:#3d4750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dock-mission{flex:none;font-size:11px;font-weight:800;color:#8a94a6;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+/* v539: three pips spell out what the mission count is made of -
+   post / event / activity, each filling as it is spent today */
+.dock-pips{flex:none;display:flex;gap:4px;align-items:center}
+.dock-pips i{width:8px;height:8px;border-radius:50%;background:#e6ecef;box-shadow:inset 0 0 0 1.5px #c3ced4}
+.dock-pips i.done{background:linear-gradient(135deg,#7856ff,#f91880);box-shadow:none}
+#actbar.final .dock-pips i.done{background:linear-gradient(135deg,#b8860b,#f7c948)}
 .dock-btns{display:flex;gap:9px}
 #actbar .dock-btns button{display:flex;align-items:center;justify-content:center;gap:9px;padding:9px 13px;text-align:left}
 #btn-activity svg{width:19px;height:19px;flex:none;fill:#7856ff}
@@ -1575,6 +1581,18 @@ input,textarea{font-size:16px}
 #dmthread.dmin{animation:threadin .3s cubic-bezier(.16,.84,.3,1)}
 @keyframes threadin{from{opacity:0;transform:translateX(56px)}to{opacity:1;transform:none}}
 #dmthread .dm-inputbar{position:sticky;bottom:-14px;margin:8px 14px 14px;box-shadow:0 6px 20px rgba(15,20,25,.10)}/* bottom:-14px offsets #x-scroll's 24px bottom padding, so the stuck bar rests a visual 10px above the scrollport's foot */
+/* ===== v539: the DM composer is a replica, not a real input - replies
+   are picked, not typed. While a reply is pending, the placeholder
+   itself says so in the accent colour, and tapping the bar leads to
+   the choices (dmBarSync + the bar's click binding below). ===== */
+#dmthread .dm-inputbar{cursor:pointer}
+#dmthread .dm-inputbar .dm-ph{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#dmthread .dm-inputbar.await .dm-ph{color:#1d9bf0;font-weight:700}
+#dmthread.special .dm-inputbar.await .dm-ph{color:#d60f74}
+#th-choices.dmflash .choice.dmchoice{animation:dmflashA 1.4s ease}
+@keyframes dmflashA{0%,100%{box-shadow:0 1px 3px rgba(15,20,25,.05)}30%{box-shadow:0 0 0 3.5px rgba(29,155,240,.5)}65%{box-shadow:0 0 0 3.5px rgba(29,155,240,.16)}}
+#dmthread.special #th-choices.dmflash .choice.dmchoice{animation-name:dmflashB}
+@keyframes dmflashB{0%,100%{box-shadow:0 1px 3px rgba(15,20,25,.05)}30%{box-shadow:0 0 0 3.5px rgba(249,24,128,.45)}65%{box-shadow:0 0 0 3.5px rgba(249,24,128,.15)}}
 .dmrow:active{background:#edf2f4}
 .choice.dmchoice{transition:transform .12s ease,background .15s ease}
 .choice.dmchoice:active{transform:scale(.985)}
@@ -4185,7 +4203,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v538</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v539</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4207,6 +4225,7 @@ input,textarea{font-size:16px}
         <div class="setpanel set-howto">
           <div class="how-block"><b class="how-h">1日の流れ</b><p>投稿・Event・Activityの3つのミッションをこなすと、1日が終わるよ。選んだ行動でフォロワーや世間の認知度が動いて、反応がフィードに返ってくる。</p></div>
           <div class="how-block"><b class="how-h">レベルと称号</b><p>行動でXPがたまるとレベルが上がり、アイドルとしての称号も変わるよ。レベルが高いほど、投稿への反応も少し大きくなるよ。</p><div class="how-ranks" id="set-ranks"></div></div>
+          <div class="how-block"><b class="how-h">ステータスの見かた</b><p>フォロワーは彼女のファンの数、認知度は世間に知られている度合い、炎上度は批判や騒動の大きさ。どれも、選んだ行動の積み重ねで動いていくよ。</p></div>
           <div class="how-block"><b class="how-h">結末について</b><p>6日目の終わりに、フォロワー・認知度・あの人との距離・炎上度のバランスで結末が変わるよ。炎上しすぎには注意。</p></div>
           <div class="how-block"><b class="how-h">あの人との距離</b><p>EventやDM、反応の積み重ねで少しずつ深まっていくよ。もともと恋人同士の二人の、信頼と親密さの深さ。段階が上がると、開く扉も変わる。</p><div class="how-ranks" id="set-stages"></div></div>
         </div>
@@ -4290,7 +4309,7 @@ input,textarea{font-size:16px}
         <div class="dm-dock">
         <div id="th-choices" style="padding:2px 14px 2px"></div>
         </div>
-        <div class="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><text x="12" y="15.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="inherit">GIF</text></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M9 10.2h.01M15 10.2h.01" stroke-width="2.6"/><path d="M8.6 14.3c.9 1.2 2.1 1.8 3.4 1.8s2.5-.6 3.4-1.8"/></svg></span><span>メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
+        <div class="dm-inputbar" id="dm-inputbar"><span class="dm-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="m4.5 17.5 4.8-4.3 3.4 3 3-2.6 4.8 3.9"/></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><text x="12" y="15.2" text-anchor="middle" font-size="6.4" font-weight="800" fill="currentColor" stroke="none" font-family="inherit">GIF</text></svg></span><span class="dm-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M9 10.2h.01M15 10.2h.01" stroke-width="2.6"/><path d="M8.6 14.3c.9 1.2 2.1 1.8 3.4 1.8s2.5-.6 3.4-1.8"/></svg></span><span class="dm-ph">メッセージを入力</span><span class="dm-send"><svg viewBox="0 0 24 24"><path d="M3 20.5v-6.8L14.5 12 3 10.3V3.5L21.5 12z"/></svg></span></div>
       </div>
     </div>
   </div>
@@ -4299,6 +4318,7 @@ input,textarea{font-size:16px}
     <div class="dock-strip">
       <span class="dock-day" id="dock-day">DAY 1 / 6</span>
       <span class="dock-ch" id="dock-ch"></span>
+      <span class="dock-pips" id="dock-pips" aria-hidden="true"><i></i><i></i><i></i></span>
       <span class="dock-mission" id="dock-mission"></span>
     </div>
     <div class="dock-btns">
@@ -4527,7 +4547,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v538</p>
+    <p class="ver">v539</p>
   </div>
 </section>
 </div>
@@ -7596,6 +7616,7 @@ function renderThreadMsgs(){const t=curThread;if(!t)return;dmRevealSeq++;if(dmRe
       the moment the answer lands */
    if(t.rounds&&t.pend&&t.pend.length){const nx=t.pend.shift();appendFanRound(t,nx.d,nx.msgs,nx.choices);if(curThread!==t)t.unread=true;}
    if(curThread===t){renderThreadMsgs();const lb=$("#th-msgs").lastElementChild;if(lb)lb.classList.add("new");scrollDmBottom(true);}save();},Math.max(700,Math.min(1900,560+(c.r||"").length*14)));};cb.appendChild(b);});}
+ dmBarSync();
  /* v511: the armed reveal plays out - a typing bubble breathes,
     then each held-back message lands with its own small gap (the
     same dots the v118 reply beat uses). Guarded by the render
@@ -7626,6 +7647,15 @@ function dmRctAttach(d,t,i){let timer=null,lastTap=0,moved=false,sx=0,sy=0,longe
 document.addEventListener("pointerdown",e=>{if(dmTray&&e.target&&e.target.closest&&!e.target.closest(".msg-tray")&&!e.target.closest(".msg"))dmRctClose();});
 {const dmSc=$("#x-scroll");if(dmSc)dmSc.addEventListener("scroll",()=>dmRctClose(),{passive:true});}
 $("#dm-back").onclick=()=>{curThread=null;renderDmList();panePop($("#dmlist"));};
+/* v539: the DM composer bar is a replica of the real client's, but
+   this game answers by choosing, never by typing. While a reply is
+   pending, the placeholder says "pick a reply" in the accent colour;
+   tapping the bar (icons and send button included) scrolls the reply
+   choices into view and flashes them once, so the bar works as the
+   doorway to the choices instead of pretending to take text. With
+   the thread settled, a tap just returns to the latest message. */
+function dmBarSync(){const bar=$("#dm-inputbar");if(!bar)return;const t=curThread;const wait=!!(t&&!t.done);bar.classList.toggle("await",wait);const ph=bar.querySelector(".dm-ph");if(ph)ph.textContent=wait?"返信を選んでください":"メッセージを入力";}
+{const dmBar=$("#dm-inputbar");if(dmBar){dmBar.setAttribute("role","button");dmBar.addEventListener("click",()=>{const t=curThread;if(!t)return;const cb=$("#th-choices");if(!t.done&&cb&&cb.querySelector(".dmchoice")){cb.scrollIntoView({behavior:"smooth",block:"end"});cb.classList.remove("dmflash");void cb.offsetWidth;cb.classList.add("dmflash");setTimeout(()=>cb.classList.remove("dmflash"),1500);}else scrollDmBottom(true);});}}
 /* profile */
 let profFolSeen=null,profFolTok=0,profFolArm=false;
 function renderProfile(){if(!S||!S.started)return;
@@ -7718,6 +7748,9 @@ function renderHud(){if(!S||!S.started)return;const lv=1+Math.floor((S.xp||0)/50
  if(el("#dock-day"))el("#dock-day").textContent="DAY "+S.ch+" / "+totalDays();
  if(el("#dock-ch")){const chp=curCH()[S.ch-1];el("#dock-ch").textContent=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";}
  if(el("#dock-mission"))el("#dock-mission").textContent="MISSION "+used+" / 3";
+ /* v539: the dock pips mirror the same three spends (post / event /
+    activity) so the count reads as three separate things at a glance */
+ {const dp=el("#dock-pips");if(dp){const st=[S.posted,S.evDone,S.actDone];dp.querySelectorAll("i").forEach((p,i2)=>p.classList.toggle("done",!!st[i2]));}}
  if(el("#act-sub"))el("#act-sub").textContent=S.actDone?"今日は完了":"あと1回";
  if(el("#actbar"))el("#actbar").classList.toggle("final",S.ch>=TOTAL_DAYS);
  if(el("#hud-handle"))el("#hud-handle").textContent=S.handle||"";
