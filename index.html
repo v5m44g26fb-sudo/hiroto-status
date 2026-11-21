@@ -427,8 +427,8 @@ input,textarea{font-size:16px}
 #x-pane-me .x-ptabs button{flex:1;background:#eef2f4;border-radius:999px;padding:9px 0;font-size:13.5px}
 #x-pane-me .x-ptabs button.act{background:#0f1419;color:#fff;box-shadow:0 4px 12px rgba(15,20,25,.25)}
 #x-pane-me .x-ptabs button.act::after{display:none}
-#x-pane-me .mediagrid{gap:3px;padding:3px 3px 0}
-#x-pane-me .mediagrid img{border-radius:12px;transition:transform .12s ease,opacity .12s ease}
+#x-pane-me .mediagrid{gap:2px;padding:0}/* v501: real X media grids are full-bleed squares - no padding, 2px gaps */
+#x-pane-me .mediagrid img{border-radius:0;transition:transform .12s ease,opacity .12s ease}/* v501: square corners like real X (was 12px) */
 #x-pane-me .mediagrid img:active{transform:scale(.96);opacity:.85}
 #x-pane-me .editbtn{box-shadow:0 3px 12px rgba(15,20,25,.12);padding:9px 18px}
 /* ===== v21: hiroto profile overhaul (senior-artist grade: stage cover / gold ring / verified) ===== */
@@ -447,8 +447,8 @@ input,textarea{font-size:16px}
 #x-pane-hisprof .counts span{font-size:13.5px;color:#536471}
 #x-pane-hisprof .counts b{font-size:15px}
 #x-pane-hisprof .x-ptabs button.act::after{width:58px;height:4px;background:linear-gradient(90deg,#c9a227,#f6d67c)}
-#x-pane-hisprof .mediagrid{gap:3px;padding:3px 3px 0}
-#x-pane-hisprof .mediagrid img{border-radius:10px;transition:transform .12s ease,opacity .12s ease}
+#x-pane-hisprof .mediagrid{gap:2px;padding:0}/* v501: same full-bleed square grid as her pane */
+#x-pane-hisprof .mediagrid img{border-radius:0;transition:transform .12s ease,opacity .12s ease}/* v501: square corners like real X (was 10px) */
 #x-pane-hisprof .mediagrid img:active{transform:scale(.96);opacity:.85}
 /* ===== v22: DM list + thread overhaul (real-X DM grade / special hiroto thread) ===== */
 .dm-head-bar{display:flex;align-items:center;gap:9px;padding:16px 16px 8px}
@@ -3686,7 +3686,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v500</p>
+  <p class="ver">v501</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -3870,7 +3870,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v500</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v501</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4187,7 +4187,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v500</p>
+    <p class="ver">v501</p>
   </div>
 </section>
 </div>
@@ -5004,7 +5004,7 @@ function renderNotifs(){
   /* v220: a filtered-to-empty list offers the way back to all */
   if(notifFilter!=="all"){const rb=document.createElement("button");rb.type="button";rb.className="nempty-back";rb.textContent="すべての通知を見る";
    rb.addEventListener("click",()=>{const c=$('#nfilter [data-nf="all"]');if(c)c.click();});list.appendChild(rb);}}
- const headAt={};{let last=null,runStart=-1;visN.forEach((e,vi)=>{const g=e.n.sub&&e.n.sub.indexOf("Day")===0?e.n.sub:null;if(g!==last){if(last&&runStart>=0)headAt[runStart]=vi-runStart;last=g;runStart=g?vi:-1;}});if(last&&runStart>=0)headAt[runStart]=visN.length-runStart;}
+ const headAt={},headTx={};{let last=null,runStart=-1;visN.forEach((e,vi)=>{const mm=/^Day (\d+)/.exec(e.n.sub||"");const g=mm?mm[1]:null;if(g!==last){if(last&&runStart>=0)headAt[runStart]=vi-runStart;last=g;runStart=g?vi:-1;if(g){const chp=curCH()[Number(g)-1];headTx[vi]=(chp&&chp.day)?chp.day:e.n.sub;}}});if(last&&runStart>=0)headAt[runStart]=visN.length-runStart;}/* v501: group day heads by day number, not by the full sub string - subs for the same day carry different titles (EV_GLOW night titles, the chapter day itself), which split one day into several heads and stacked two titles in one head; the head now names the chapter day once, like v213 intended */
  /* v410 (X realism - notification aggregation): like the real client,
     a run of like notifications for the same text on the same Day from
     different people collapses into one row - "Aさんと他N名が…" with a
@@ -5021,7 +5021,7 @@ function renderNotifs(){
   if(headAt[vi]){const hd=document.createElement("div");hd.className="nday-head";hd.innerHTML='<span class="ndh-t"></span><span class="ndh-n">'+headAt[vi]+' 件</span>';
    /* v213: the day head names the chapter too, like the log and
       journey sheets (the sub still leads; rows keep their own) */
-   {let t=n.sub;const m=/^Day (\d+)/.exec(n.sub||"");if(m){const chp=curCH()[Number(m[1])-1];const ttl=chp?(chp.day||"").split(" ― ").slice(1).join(" ― "):"";if(ttl&&n.sub.indexOf(ttl)<0)t=n.sub+" ― "+ttl;}hd.querySelector(".ndh-t").textContent=t;}/* v487: some subs already carry the chapter's day title - appending it again printed it twice in the head ("…切り抜きが伸びた日 ― 切り抜きが伸びた日") */
+   hd.querySelector(".ndh-t").textContent=headTx[vi]||n.sub;/* v501: head title comes from the day-number grouping above (chapter day, single title) - replaces the v213/v487 append rule, which stacked a second, different title whenever the sub carried its own */
    list.appendChild(hd);}
   if(grpMem.has(vi))return;
   if(grpOf[vi]){const mems=grpOf[vi].map(x=>visN[x]);const fn=mems[0].n,fa=ACC[fn.a]||{n:"不明なアカウント",h:""};const anyU=mems.some(x=>x.i<unseen),anyS=mems.some(x=>x.n.a===tgtKey());
@@ -5829,7 +5829,7 @@ function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
    and trendNum (which parses them back for the volume bars) are
    untouched. */
 function trendCntTx(t){return fmtCnt(trendNum(t))+" ポスト";}
-function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]+" ― トレンド";d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: a generic trend's category is just トレンド - appending the suffix printed トレンド ― トレンド */d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){/* v476: the fill of the retired trend pane is gone;
    this now only refreshes the search pane's suggestion chips and,
    via renderSearchTab below, its topic tab (the reachable trend UI) */
@@ -5876,7 +5876,7 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
    (same data, same tap-to-search as the row it replaces) */
 function trendHero(t,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend-hero"+(dyn?" dyn":"");
  d.innerHTML='<span class="th-eyebrow"><i></i>TOP TREND ― いま最も熱い話題</span><b class="th-title"></b><div class="th-meta"><span class="th-cat"></span><span class="th-count"></span>'+(dyn?'<span class="tdyn"><i></i>急上昇</span>':"")+'</div><span class="th-vol"><i></i></span>';
- d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]+" ― トレンド";d.querySelector(".th-count").textContent=trendCntTx(t);
+ d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: same dedup as trendEl */d.querySelector(".th-count").textContent=trendCntTx(t);
  d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNum(t)/Math.max(1,maxV||trendNum(t))*100))+"%";
  d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
