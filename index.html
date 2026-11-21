@@ -2145,8 +2145,8 @@ input,textarea{font-size:16px}
 .pv-who-t small{font-size:12.5px;color:#536471}
 .pv-cap{margin-top:9px;font-size:14px;line-height:1.65;color:#0f1419;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .pv-meta{margin-top:7px;font-size:12px;color:#8b98a5;letter-spacing:.02em}
-.pv-goto{margin-top:11px;border:1.5px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:7px 15px;cursor:pointer;transition:background .15s ease,transform .1s ease}
-.pv-goto:active{transform:scale(.96);background:rgba(255,255,255,.16)}
+.pv-goto{margin-top:11px;border:1.5px solid #cfd9de;background:#fff;color:#0f1419;font:inherit;font-size:12.5px;font-weight:800;border-radius:999px;padding:7px 15px;cursor:pointer;transition:background .15s ease,transform .1s ease}
+.pv-goto:active{transform:scale(.96);background:#eff3f4}
 .pv-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border:none;cursor:pointer;border-radius:50%;background:rgba(240,243,244,.94);color:#0f1419;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(15,20,25,.14);transition:opacity .25s ease;z-index:2}
 .pv-nav svg{width:18px;height:18px}
 .pv-nav.prev{left:10px}
@@ -3844,7 +3844,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v505</p>
+  <p class="ver">v506</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4028,7 +4028,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v505</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v506</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4345,7 +4345,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v505</p>
+    <p class="ver">v506</p>
   </div>
 </section>
 </div>
@@ -7135,7 +7135,7 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
   row.querySelector(".dr-rlab").textContent=r.lab;
   if(S.ch>1&&yCnt[r.k]>0){const yv=yAgg[r.k],sm=document.createElement("small");sm.className="dr-yday";sm.textContent="昨日 "+(yv===0?"±0":((yv>0?"+":"−")+(r.useFmt?fmt(Math.abs(yv)):Math.abs(yv))));row.querySelector(".dr-rlab").appendChild(sm);}
   const val=row.querySelector(".dr-rval"),chip=row.querySelector(".dr-rd");
-  chip.textContent=r.d===0?"±0":((r.d>0?"▲ +":"▼ ")+r.d);
+  chip.textContent=r.d===0?"±0":((r.d>0?"▲ +":"▼ ")+(r.useFmt?fmt(r.d):r.d));
   chip.classList.add(r.d===0?"flat":(((r.fire?r.d<0:r.d>0))?"good":"bad"));if(r.pink&&r.d>0){chip.classList.remove("good");chip.classList.add("pink");}
   box.appendChild(row);
   countUp(val,r.now-r.d,r.now,r.useFmt);
