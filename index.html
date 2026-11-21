@@ -3973,21 +3973,35 @@ input,textarea{font-size:16px}
   <div class="flowsteps"><span>ワールド選択</span><span>ペルソナ作成</span><span>相手選択</span><span>最初のフォロワー</span></div>
   <div id="tsave" class="hidden">
     <div class="ts-top"><span class="ts-lab">SAVE DATA</span><span class="ts-day" id="ts-day">Day 1 / 6</span></div>
-    <div class="ts-chap" id="ts-chap"></div>
-    <div class="ts-prog" id="ts-prog"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="ts-grid">
-      <div class="ts-cell"><small>相手</small><b id="ts-target"></b></div>
-      <div class="ts-cell"><small>アカウント</small><b id="ts-handle"></b></div>
-      <div class="ts-cell"><small>フォロワー</small><b id="ts-fol"></b></div>
-      <div class="ts-cell"><small>レベル</small><b id="ts-lv"></b></div>
+    <div class="ts-sec">
+      <span class="ts-seclab">進行状況</span>
+      <div class="ts-chap" id="ts-chap"></div>
+      <div class="ts-prog" id="ts-prog"><i></i><i></i><i></i><i></i><i></i></div>
     </div>
-    <div class="ts-dist"><span class="ts-dist-lab" id="ts-dist-lab">二人の距離</span><span class="ts-pips" id="ts-pips"><i></i><i></i><i></i><i></i><i></i></span><b class="ts-dist-stage" id="ts-dist-stage"></b></div>
+    <div class="ts-sec">
+      <span class="ts-seclab">アカウント</span>
+      <div class="ts-grid ts-grid3">
+        <div class="ts-cell"><small>アカウント</small><b id="ts-handle"></b></div>
+        <div class="ts-cell"><small>フォロワー</small><b id="ts-fol"></b></div>
+        <div class="ts-cell"><small>レベル</small><b id="ts-lv"></b></div>
+      </div>
+    </div>
+    <div class="ts-sec">
+      <span class="ts-seclab">関係性</span>
+      <div class="ts-cell"><small>相手</small><b id="ts-target"></b></div>
+      <div class="ts-dist"><span class="ts-dist-lab" id="ts-dist-lab">二人の距離</span><span class="ts-pips" id="ts-pips"><i></i><i></i><i></i><i></i><i></i></span><b class="ts-dist-stage" id="ts-dist-stage"></b></div>
+    </div>
     <div class="ts-jhint">タップで「あゆみ」を開く</div>
   </div>
+  <div id="tsave-err" class="hidden">
+    <div class="ts-top"><span class="ts-lab">SAVE DATA</span><span class="ts-errpill">読み込みエラー</span></div>
+    <p class="ts-errtx">セーブデータを読み込めなかったよ。<br>データは消えていないから、もう一度読み込んでみてね。</p>
+    <button class="ts-retry" id="btn-reload" type="button">もう一度読み込む</button>
+    <p class="ts-errnote">消して最初からはじめる場合は、下の「最初から（セーブ削除）」から選んでね。</p>
+  </div>
   <button class="btn" id="btn-start">はじめる</button>
-  <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
+  <button class="btn ghost hidden" id="btn-continue">つづきから</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v525</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4113,7 +4127,6 @@ input,textarea{font-size:16px}
         </div>
         <div class="hud-trend"><span class="hud-trend-lab">フォロワーの推移</span><div class="hud-spark" id="hud-spark"></div><b class="hud-trend-d" id="hud-trend-d"></b></div>
         <div class="hud-bot">
-          <button id="hud-chg" type="button">これまでの Changes を見る ▸</button>
         </div>
         <div class="hud-note" id="hud-note">投稿・Event・Activityは全部Action。実行すると反応が連鎖して、フィードが刷新される。</div>
       </div>
@@ -4172,7 +4185,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v525</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v527</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4185,7 +4198,6 @@ input,textarea{font-size:16px}
           </div>
           <button class="setrow set-link" id="set-snd" type="button"><span class="set-ic" style="--c:#f91880"><svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.4L12 18.6V5.4L7.4 9.5H4zM15.5 8.7a4.4 4.4 0 0 1 0 6.6l-1.1-1.1a2.9 2.9 0 0 0 0-4.4l1.1-1.1zM18 6a8.3 8.3 0 0 1 0 12l-1.1-1.1a6.8 6.8 0 0 0 0-9.8L18 6z"/></svg></span><div class="set-main"><b>サウンド</b><small>効果音とタイトルのBGM</small></div><span class="set-sw on" id="set-snd-sw"><i></i></span></button>
           <button class="setrow set-link" id="set-chase" type="button"><span class="set-ic" style="--c:#fa243c"><svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></span><div class="set-main"><b>デビュー曲『The Chase』</b><small>Hearts2Hearts ― Apple Musicで聴く</small></div><span class="set-chev">›</span></button>
-          <button class="setrow set-link" id="set-chg"><span class="set-ic" style="--c:#f7c948"><svg viewBox="0 0 24 24"><path d="M4 20V10h3.2v10H4zm5.6 0V4h3.2v16H9.6zm5.6 0v-7.2h3.2V20h-3.2zM20 4.4 13.5 9l-3-2.4L7 9.4 5.8 7.8l4.8-3.4 2.9 2.3L18.7 3 20 4.4z"/></svg></span><div class="set-main"><b>これまでの記録</b><small>STATUS LOG ― 変化の履歴を見る</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-journey"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M6.5 3a2 2 0 0 1 2 2v14.3a1.7 1.7 0 0 1-2.8 1.3L4 19V5a2 2 0 0 1 2.5-2zM17.5 3A2 2 0 0 0 15.5 5v14.3a1.7 1.7 0 0 0 2.8 1.3L20 19V5a2 2 0 0 0-2.5-2zM10 7h3v1.8h-3zm0 4h3v1.8h-3zm0 4h3v1.8h-3z" transform="translate(-1.5,0)"/></svg></span><div class="set-main"><b id="set-journey-lab">6日間のあゆみ</b><small>JOURNEY ― 日ごとの記録を振り返る</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-export"><span class="set-ic" style="--c:#17bf63"><svg viewBox="0 0 24 24"><path d="M11 2.5h2v8.7l2.6-2.6 1.4 1.4-5 5-5-5 1.4-1.4 2.6 2.6zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを書き出す</b><small>JSONファイルで保存 ― 機種変更・引き継ぎ用</small></div><span class="set-chev">›</span></button>
           <button class="setrow set-link" id="set-import"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M11 15.5V6.3L8.4 8.9 7 7.5l5-5 5 5-1.4 1.4-2.6-2.6v9.2zM5 18h14v3H5z"/></svg></span><div class="set-main"><b>セーブを読み込む</b><small>書き出したファイルから進行を復元する</small></div><span class="set-chev">›</span></button>
@@ -4405,7 +4417,6 @@ input,textarea{font-size:16px}
         <div class="drs-foot"><span>デビューしたら、彼と同じステージの件</span><span class="drs-dots" id="drs-dots"></span></div>
       </div>
       <button class="drs-copy" id="drs-copy" type="button">結果をテキストでコピー</button>
-      <button class="drs-loglink" id="dr-loglink" type="button">変化の記録を STATUS LOG で見る ›</button>
       <p class="dr-note" id="dr-note"></p>
       <button class="btn" id="dr-go"><span class="dr-go-tx"><span class="dr-go-main">次の日へ</span><span class="dr-go-sub"></span></span><span class="dr-go-arrow">→</span></button>
     </div>
@@ -4516,19 +4527,11 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v525</p>
+    <p class="ver">v527</p>
   </div>
 </section>
 </div>
 <div id="changes"></div>
-<div class="scrim" id="scrim-chg"><div class="sheet">
-  <button class="close" data-close="scrim-chg">✕</button>
-  <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zm4 3.5h8V7H8v1.5zm0 4h8V11H8v1.5zm0 4h5V15H8v1.5z"/></svg>STATUS LOG ― 記録</span>
-  <h3>Changes履歴</h3><p class="desc">これまでの変化の記録。良い変化は緑、悪い変化は赤、彼との距離はピンクで表示される。</p>
-  <div class="chg-now" id="chg-now"></div>
-  <div class="chg-filter" id="chg-filter"></div>
-  <div id="chglist"></div>
-</div></div>
 <div class="scrim" id="scrim-drafts"><div class="sheet">
   <button class="close" data-close="scrim-drafts">✕</button>
   <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg>DRAFTS ― 下書き</span>
@@ -4567,6 +4570,14 @@ input,textarea{font-size:16px}
   <button class="rs-danger" id="btn-reset-yes">消して最初から</button>
   <button class="rs-cancel" data-close="scrim-reset">やめておく</button>
 </div></div>
+<div class="scrim" id="scrim-newgame"><div class="sheet reset-sheet">
+  <span class="rs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V1.8L6.8 6 12 10.2V7c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6H4c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8z"/></svg></span>
+  <h3>新しい物語をはじめる？</h3>
+  <p class="desc">今のセーブデータは、新しい記録に置きかわるよ。続きを遊びたいときは「つづきから」を選んでね。</p>
+  <button class="rs-go" id="btn-newgame-yes">新しくはじめる</button>
+  <button class="rs-cancel" data-close="scrim-newgame">やめておく</button>
+</div></div>
+<div id="loadveil" aria-hidden="true"><div class="lv-spin"></div><p class="lv-tx">読み込み中</p></div>
 <div class="scrim" id="scrim-chase"><div class="sheet chase-sheet">
   <button class="close" data-close="scrim-chase">✕</button>
   <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>MUSIC ― デビュー曲</span>
@@ -5140,7 +5151,15 @@ function updSetupNotes(){
  set("#ss-world",selW?selW.t:"―");set("#ss-handle",selH?selH.h:"―");set("#ss-stance",selSt?selSt.t:"―");set("#ss-target",selT?selT.name:"―");
  const sf=$("#ss-first");if(sf){if(selF){sf.textContent=selF.t.split("｜")[0];sf.classList.remove("unset");}else{sf.textContent="未選択";sf.classList.add("unset");}}
 }
-$("#btn-start").onclick=()=>{const _pl=load();S=defState();if(_pl&&_pl.lap)S.lap=1;S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");};
+function startNewGame(){const _pl=load();S=defState();if(_pl&&_pl.lap)S.lap=1;S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");}
+/* v527: with a run on record, はじめる asks first - the setup walk
+   itself is unchanged, cancelling leaves the save untouched, and a
+   short lock keeps double taps from firing the start twice */
+let startLock=false;
+function beginStart(){if(startLock)return;startLock=true;startNewGame();setTimeout(()=>{startLock=false;},700);}
+$("#btn-start").onclick=()=>{if(startLock)return;const ex=load();if(ex&&ex.started){const s=$("#scrim-newgame");if(s){s.classList.remove("closing");s.classList.add("on");}return;}beginStart();};
+$("#btn-newgame-yes").addEventListener("click",()=>{const s=$("#scrim-newgame");if(s){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}beginStart();});
+(function(){const s=$("#scrim-newgame");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 $("#btn-world").onclick=()=>{if(!selW)return;S.world=selW.id;show("scr-persona");};
 /* v216: the setup flow walks back as well as forward - selections
    live in module state and on the cards, so stepping back keeps
@@ -5255,7 +5274,6 @@ function renderChgLog(){
  /* v247: the log sheet ends with the terminal line when it lists */
  else{const en=document.createElement("div");en.className="nend";en.textContent="―― ここまで ――";box.appendChild(en);}
 }
-$("#hud-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 /* panes (transplanted xtab switching, extended with search/msg/hisprof panes) */
 /* v476: the trend and mention panes were retired - unreachable since the
    v34 xtabs removal (trends live in the search pane, mentions in the
@@ -6188,19 +6206,10 @@ $("#fol-back").addEventListener("click",()=>showPane(folBackTo));
     sparkline is the run's shape, the sheet is its detail */
  const htr=$("#status-hud .hud-trend");
  if(htr){htr.style.cursor="pointer";htr.setAttribute("role","button");htr.setAttribute("aria-label","あゆみを開く");htr.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});}
- /* v230: each axis cell opens the STATUS LOG pre-filtered to
-    that axis (the log's own chip state, v160) */
- [[".hstat.cog","cog"],[".hstat.flm","flm"],[".hstat.dist","dist"]].forEach(([sel,ax])=>{const c=$("#status-hud "+sel);if(c){c.style.cursor="pointer";c.addEventListener("click",()=>{chgFilter=ax;renderChgLog();$("#scrim-chg").classList.add("on");});}});
- /* v231: the XP row is the same kind of door, to the XP axis */
- {const xw=$("#status-hud .hud-xpwrap");if(xw){xw.style.cursor="pointer";xw.addEventListener("click",()=>{chgFilter="xp";renderChgLog();$("#scrim-chg").classList.add("on");});}}
- /* v232: his profile's relation card is the same door, from his
-    side - it opens the distance axis of the log */
- {const hd=$("#his-dist");if(hd){hd.style.cursor="pointer";hd.addEventListener("click",()=>{chgFilter="dist";renderChgLog();$("#scrim-chg").classList.add("on");});}}
- /* v233: the DM thread's distance bar is the same door again */
- {const td=$("#th-dist");if(td){td.style.cursor="pointer";td.addEventListener("click",()=>{chgFilter="dist";renderChgLog();$("#scrim-chg").classList.add("on");});}}
- /* v240: the journey sheet's totals strip opens the full log -
-    the sheet closes first, like its per-day links (v208) */
- {const jt=$("#jtotal");if(jt){jt.style.cursor="pointer";jt.addEventListener("click",()=>{const j=$("#scrim-journey");if(j)j.classList.remove("on");chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});}}
+ /* v527: the STATUS LOG viewer is retired (user decision) - the
+    HUD axis cells, the XP row, his relation card, the DM distance
+    bar and the journey totals strip no longer open it. They are
+    plain readouts again; chgLog itself keeps recording. */
  /* v223: both profile bars carry a share button - the same
     share-or-copy behaviour as a post's share (v190), with the
     game's public URL (v222) */
@@ -7710,8 +7719,6 @@ function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  let bestI=-1,bestV=0;rows.forEach((r,i)=>{if(!r.fire&&r.d>bestV){bestV=r.d;bestI=i;}});
  const rk=$("#dr-rank");if(rk)rk.innerHTML='<span class="dr-rank-lab">PLAYER</span><b>Lv '+lvNum()+"・"+lvTitle()+"</b>";
  rows.forEach((r,i)=>{const row=document.createElement("div");row.className="dr-row"+(r.cls?" "+r.cls:"")+(i===bestI?" best":"");row.style.animationDelay=(i*0.09)+"s";
-  /* v239: each result row opens the STATUS LOG on its own axis */
-  row.style.cursor="pointer";row.addEventListener("click",()=>{chgFilter=r.k;renderChgLog();$("#scrim-chg").classList.add("on");});
   row.innerHTML='<span class="dr-ic">'+r.ic+'</span><span class="dr-rmain"><span class="dr-rlab"></span><span class="dr-rval">0</span></span><span class="dr-rd"></span>'+(r.gauge>=0?'<span class="dr-gauge"><i></i></span>':"")+(i===bestI?'<span class="dr-best">BEST</span>':"");
   row.querySelector(".dr-rlab").textContent=r.lab;
   if(S.ch>1&&yCnt[r.k]>0){const yv=yAgg[r.k],sm=document.createElement("small");sm.className="dr-yday";sm.textContent="昨日 "+(yv===0?"±0":((yv>0?"+":"−")+(r.useFmt?fmt(Math.abs(yv)):Math.abs(yv))));row.querySelector(".dr-rlab").appendChild(sm);}
@@ -8485,9 +8492,6 @@ $("#an-close").addEventListener("click",e=>{e.stopPropagation();closeAnn();});
 function proceedFromResult(){if(window.__D7&&__D7.active&&S.ch===7){__D7.done=true;showFin();}else if(S.ch>=TOTAL_DAYS)ending();else{startChapter(S.ch+1);showPane("tl");}}
 $("#dr-go").addEventListener("click",()=>{const dr=$("#dayresult");if(dr.classList.contains("closing"))return;dr.classList.add("closing");setTimeout(()=>{dr.classList.remove("on");dr.classList.remove("closing");if(!(window.__D7&&__D7.active)&&S.ch>=1&&S.ch<=TOTAL_DAYS&&sideScene(S.ch))showSide(S.ch,proceedFromResult);else{if(window.__D7&&__D7.active)deliverDm4();proceedFromResult();}},180);});
 $("#drs-copy").addEventListener("click",()=>{const b=$("#drs-copy");if(!drsText||!navigator.clipboard||!navigator.clipboard.writeText)return;navigator.clipboard.writeText(drsText).then(()=>{const old=b.textContent;b.textContent="コピーしたよ ✓";b.classList.add("done");setTimeout(()=>{b.textContent=old;b.classList.remove("done");},1600);}).catch(()=>{});});
-/* v226: the RESULT screen links onward to the full record too -
-   the scrims layer over it, like they do over the ending (v192) */
-$("#dr-loglink").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
 /* v58: the target as a "special person" - distance is staged, and both his
    profile and the special DM thread read the current stage. Unlocking his
    DM gets a one-shot celebration the first time the message pane is opened
@@ -8661,7 +8665,7 @@ function renderCredits(kind){
  set("#ec-changes",(S.chgLog||[]).length+" 件の Changes");
  const bc=$("#btn-continue"),br=$("#btn-reset0");
  if(bc&&bc.classList.contains("hidden")){bc.classList.remove("hidden");if(br)br.classList.remove("hidden");
-  bc.onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};}
+  bc.onclick=()=>resumeGame();}
  renderTitleSave();}
 /* v522: the run album - a short read-back of this run, rendered
    inside FIN under the JOURNEY panel. Every item pairs something
@@ -8777,6 +8781,19 @@ function renderAlbum(){
    continue button moves ahead of はじめる and drops its ghost styling,
    はじめる steps back to a ghost, and the section gains .has-save so
    the reset can shrink to a quiet text action. Nothing is written. */
+/* v527: resume runs through one guarded path - a short loading
+   veil covers the hand-off into the main view, and a re-entry lock
+   keeps double taps from stacking the transition. The render
+   sequence itself is the one the title button always ran. */
+let resuming=false;
+function resumeGame(){
+ if(resuming||!S||!S.started)return;resuming=true;
+ const veil=$("#loadveil");if(veil)veil.classList.add("on");
+ const go=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");
+  setTimeout(()=>{if(veil)veil.classList.remove("on");resuming=false;},240);};
+ const rm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+ setTimeout(go,rm?40:600);
+}
 function renderTitleSave(){
  const card=$("#tsave");if(!card||typeof S==="undefined"||!S||!S.started)return;
  const T=tgt(),ch=curCH()[S.ch-1],parts=ch?(ch.day||"").split(" ― "):[];
@@ -8805,7 +8822,6 @@ const askReset=()=>{const s=$("#scrim-reset");if(s){s.classList.remove("closing"
 $("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-restart").onclick=askReset;
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
-(function(){const sc=$("#set-chg");if(sc)sc.addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});})();
 /* v479: debut song - the Apple Music embed player lives in its own
    sheet (scrim-chase), independent of the game's sound setting. The
    iframe is built lazily on first open (nothing loads or plays until
@@ -8861,12 +8877,8 @@ function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML=
    (S.chgLog||[]).filter(e=>e.day===d).forEach(e=>{if(e.cls==="lv")return;const kk=e.name===dl?"dist":e.name==="XP"?"xp":e.name==="世間の認知度"?"cog":e.name==="炎上度"?"flm":null;if(kk){agg[kk]+=e.v;cnt[kk]++;}});
    const bits=[];[["XP","xp"],["認知度","cog"],["炎上度","flm"],["距離","dist"]].forEach(([lab,kk])=>{if(cnt[kk]&&agg[kk]!==0)bits.push(lab+" "+(agg[kk]>0?"+":"−")+Math.abs(agg[kk]));});
    const jc=document.createElement("div");jc.className="jchips";jc.textContent=bits.length?("その日の変化 ― "+bits.join(" ・ ")):"その日の変化は、まだ記録がない";row.appendChild(jc);
-   /* v208: each lived day links onward to its full record in the
-      STATUS LOG - the journey stays the overview, the log keeps
-      the per-entry detail (same open path as the HUD link) */
-   const lk=document.createElement("button");lk.type="button";lk.className="jlog-link";lk.textContent="この日の記録を STATUS LOG で見る ›";
-   lk.addEventListener("click",()=>{const j=$("#scrim-journey");if(j)j.classList.remove("on");chgFilter="all";renderChgLog();$("#scrim-chg").classList.add("on");});
-   row.appendChild(lk);
+   /* v527: the per-day STATUS LOG link is retired with the viewer
+      itself - the journey sheet stays the overview and ends here */
   }
   box.appendChild(row);}}
 (function(){const jb=$("#set-journey");if(jb)jb.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});})();
@@ -9103,6 +9115,11 @@ function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return
  renderEndJourney();renderCredits(D?D.kind:"start");renderAlbum();const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";show("scr-ending");save();}
 $("#btn-day7").addEventListener("click",startDay7);
 renderTrends();
+/* v527: a save that exists but cannot be read is a failure state,
+   not an empty slot - detect it here (display side only; load()
+   and the stored bytes are never touched by this check) */
+let saveBroken=false;
+try{const _raw=localStorage.getItem(KEY);if(_raw){const _p=JSON.parse(_raw);if(!_p||typeof _p!=="object")saveBroken=true;}}catch(e){saveBroken=true;}
 const saved=load();
 if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="idol";
  /* v62 migration: saves written on the old follower scale are rescaled once */
@@ -9118,16 +9135,73 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
  if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  $("#btn-continue").classList.remove("hidden");$("#btn-reset0").classList.remove("hidden");
- $("#btn-continue").onclick=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");};
+ $("#btn-continue").onclick=()=>resumeGame();
  /* v188: the title save card itself opens the JOURNEY sheet */
  const tsv=$("#tsave");if(tsv){tsv.style.cursor="pointer";tsv.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});}
  renderTitleSave();}
+/* v527: broken-save title state - show the error card, keep the
+   deletion path (the reset sheet) reachable, and take はじめる off
+   the table so the unreadable bytes can never be overwritten by
+   accident. Nothing is written or removed here. */
+if(saveBroken){const sec=$("#scr-title");if(sec)sec.classList.add("save-broken");
+ const ec=$("#tsave-err");if(ec)ec.classList.remove("hidden");
+ const bs=$("#btn-start");if(bs)bs.classList.add("hidden");
+ const bc2=$("#btn-continue");if(bc2)bc2.classList.add("hidden");
+ const br2=$("#btn-reset0");if(br2)br2.classList.remove("hidden");
+ const rb=$("#btn-reload");if(rb)rb.addEventListener("click",()=>location.reload());}
 </script>
 <style>
 .set-sw{flex:none;width:46px;height:27px;border-radius:999px;background:#cfd9de;position:relative;transition:background .2s ease}
 .set-sw i{position:absolute;top:2.5px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(15,20,25,.3);transition:left .2s ease}
 .set-sw.on{background:#00ba7c}
 .set-sw.on i{left:21px}
+</style>
+<style>
+/* ===== v527: title save-load screen - the SAVE DATA card is grouped
+   into 進行状況 / アカウント / 関係性 sections, the resume CTA owns
+   the brand gradient while a save exists (はじめる steps back to a
+   quiet ghost), contrast deepens over the poster, and the has-save
+   stack is compressed so the card and the CTA fit the first view.
+   The broken-save card, the resume veil and the new-game confirm
+   button get their faces here. Display and navigation only. ===== */
+#scr-title::after{background:linear-gradient(180deg,rgba(6,5,16,.38) 0%,rgba(6,5,16,.16) 30%,rgba(6,5,16,.48) 58%,rgba(3,3,9,.93) 85%,rgba(2,2,7,.98) 100%)}
+#scr-title .sub{color:#dde4ea;text-shadow:0 1px 10px rgba(0,0,0,.55)}
+#tsave{background:linear-gradient(160deg,rgba(23,18,48,.86),rgba(10,8,24,.91))}
+.ts-sec{margin-top:12px;padding-top:11px;border-top:1px solid rgba(255,255,255,.14)}
+.ts-seclab{display:block;font-size:9.5px;font-weight:900;letter-spacing:.26em;color:#c9b8ff;margin-bottom:7px}
+#tsave .ts-chap{margin-top:0}
+#tsave .ts-prog{margin-top:9px}
+#tsave .ts-grid{margin-top:0;padding-top:0;border-top:none}
+#tsave .ts-grid3{grid-template-columns:1fr 1fr 1fr;gap:9px 10px}
+#tsave .ts-dist{margin-top:9px;padding-top:9px}
+.ts-cell small{color:#aeb9c2}
+#scr-title.has-save #btn-continue{background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;border:none;box-shadow:0 14px 32px rgba(249,24,128,.35),inset 0 1px 0 rgba(255,255,255,.35);animation:titlein .6s cubic-bezier(.2,.8,.25,1) 1.18s both,startglow 2.8s ease-in-out 2.1s infinite}
+#scr-title.has-save #btn-start{background:rgba(255,255,255,.05);color:#e7e9ea;border:1px solid rgba(255,255,255,.32);box-shadow:none;animation:titlein .6s cubic-bezier(.2,.8,.25,1) 1.24s both}
+#scr-title.has-save{padding-top:22px;padding-bottom:22px}
+#scr-title.has-save .xlogo{width:36px;height:36px;margin-bottom:12px}
+#scr-title.has-save .t-eyebrow{margin-bottom:9px}
+#scr-title.has-save h1{font-size:26px}
+#scr-title.has-save .t-rule{margin-top:10px}
+#scr-title.has-save .sub{font-size:12.5px;line-height:1.8;margin-top:8px}
+#scr-title.has-save .flowsteps{display:none}
+#scr-title.has-save #tsave{margin-top:14px;padding:13px 15px 11px}
+#scr-title.has-save .btn{margin-top:10px;padding-top:14px;padding-bottom:14px}
+@media (prefers-reduced-motion:reduce){#scr-title.has-save #btn-continue,#scr-title.has-save #btn-start{animation:none}}
+#tsave-err{width:100%;max-width:320px;margin:20px auto 2px;text-align:left;border-radius:18px;padding:15px 16px 13px;background:linear-gradient(160deg,rgba(48,18,34,.88),rgba(24,8,20,.93));border:1px solid rgba(255,138,194,.45);box-shadow:0 16px 38px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);position:relative;overflow:hidden;animation:fadeup .45s ease}
+#tsave-err::before{content:"";position:absolute;left:0;right:0;top:0;height:2.5px;background:linear-gradient(90deg,#f91880,#f7c948)}
+.ts-errpill{margin-left:auto;font-size:11px;font-weight:900;color:#fff;background:#f91880;border-radius:999px;padding:3px 10px;letter-spacing:.06em;flex:none}
+.ts-errtx{font-size:13.5px;line-height:1.85;color:#f2e7ee;margin-top:11px}
+.ts-retry{display:block;width:100%;margin-top:12px;padding:12px;border:none;border-radius:999px;background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;font-size:14.5px;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(249,24,128,.3)}
+.ts-retry:active{transform:scale(.98)}
+.ts-errnote{font-size:11.5px;line-height:1.7;color:rgba(255,255,255,.55);margin-top:10px}
+#loadveil{position:absolute;inset:0;z-index:300;background:rgba(4,3,10,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+#loadveil.on{opacity:1;pointer-events:auto}
+.lv-spin{width:34px;height:34px;border-radius:50%;border:3px solid rgba(255,255,255,.22);border-top-color:#f91880;animation:lvspin .8s linear infinite}
+@keyframes lvspin{to{transform:rotate(360deg)}}
+.lv-tx{font-size:13px;font-weight:800;letter-spacing:.14em;color:#e7e9ea}
+@media (prefers-reduced-motion:reduce){.lv-spin{animation-duration:1.8s}}
+.rs-go{display:block;width:100%;margin-top:18px;padding:14px;border:none;border-radius:999px;background:linear-gradient(90deg,#7856ff,#f91880);color:#fff;font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(249,24,128,.32);transition:transform .12s ease}
+.rs-go:active{transform:scale(.97)}
 </style>
 <script>
 /* ===== v398: sound - a small synthesized SE set plus a title-only
