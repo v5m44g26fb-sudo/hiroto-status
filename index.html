@@ -4206,7 +4206,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v548</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v549</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4551,7 +4551,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v548</p>
+    <p class="ver">v549</p>
   </div>
 </section>
 </div>
@@ -5229,20 +5229,37 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,lap:0,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,folScale:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[],sv:{},drafts:[],lockPosts:[]};}
+function defState(){return{started:false,lap:0,lapRoutes:{},world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,folScale:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[],sv:{},drafts:[],lockPosts:[],d7snap:null,d7done:false};}
 /* v521: drafts = composer choices she saved instead of posting
    ({d: day, i: option index, tx, im}); lockPosts = what she dropped
    on the locked account ({d: day, tx}). Both additive-only: older
    saves pick the defaults up from defState on load. */
+/* v549: d7snap = the full pre-Day-7 state, snapshotted by
+   startDay7() before the epilogue chapter touches anything. While
+   it is attached, the run is "Day 7 in progress": boot restores it
+   wholesale, so a mid-Day-7 reload rolls every Day 7 change back.
+   d7done = FIN was reached; showFin() drops the snapshot and sets
+   this, marking the save cleared (no resume, no Day 7 re-entry -
+   the replay path is a fresh start that carries S.lap and the
+   per-route clear history S.lapRoutes over). Both additive-only,
+   same as above. */
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 /* v524: second-lap discoveries. One additive save flag (S.lap) is set
    when an ending is reached and carried into the next run. Everything
    keyed on it is data/display selection only - with the flag off,
    every surface renders exactly as before. */
-function lap2(){return !!(typeof S!=="undefined"&&S&&S.lap);}
-function lapDmMsgs(k,base){const m=base.slice();if(!lap2())return m;if(k==="hiroto")m.splice(4,0,"……この先、何か言われても。……俺のやることは、変わらんから");else if(k==="sakuya")m.splice(5,0,"……発表の文面も、いつか書く日が来たら。……自分の言葉で書きます");return m;}
-function lapSv(k,d,sc){if(!lap2()||!sc||!sc.blocks)return sc;if(k==="hiroto"&&d===5){const b=sc.blocks.find(x=>x.t==="notif"&&x.n==="名無し");if(b)b.det="時刻まで、合っていた。デビューの日の21時から、全部つながっていた。それでも、頷かなかった";}else if(k==="sakuya"&&d===2){const b=sc.blocks.find(x=>x.t==="drafts");if(b&&b.items&&b.items[2])b.items[2].tx="練習生の頃、レッスン室の前で聴いた歌を、今も覚えています。……あの歌のことは、いつか本人に言います";}return sc;}
+/* v549: the second-lap extras are keyed on per-route clear history
+   (S.lapRoutes, additive), not on the lap flag alone - a route only
+   shows its extras once that route itself has been cleared. S.lap
+   keeps its v524 meaning (an ending was reached on some route).
+   lapRoutesOf() normalizes a stored save: recorded history wins;
+   a legacy save with S.lap but no history is credited with the
+   route it is currently on, the least surprising reading. */
+function lapRoutesOf(sv){if(!sv||typeof sv!=="object")return{};if(sv.lapRoutes&&typeof sv.lapRoutes==="object"&&Object.keys(sv.lapRoutes).length)return Object.assign({},sv.lapRoutes);if(sv.lap&&sv.target){const o={};o[sv.target]=1;return o;}return{};}
+function lap2(k){if(typeof S==="undefined"||!S||!S.lap)return false;const r=k||tgtKey();if(S.lapRoutes&&Object.keys(S.lapRoutes).length)return !!S.lapRoutes[r];return r===tgtKey();}
+function lapDmMsgs(k,base){const m=base.slice();if(!lap2(k))return m;if(k==="hiroto")m.splice(4,0,"……この先、何を言われても。……俺がなおの歌を観ることは、変わらんから");else if(k==="sakuya")m.splice(5,0,"……いつか、二人のことを公に話す日が来たら。……その言葉も、自分で選びたいです");return m;}
+function lapSv(k,d,sc){if(!lap2(k)||!sc||!sc.blocks)return sc;if(k==="hiroto"&&d===5){const b=sc.blocks.find(x=>x.t==="notif"&&x.n==="名無し");if(b)b.det="時刻まで、合っていた。デビューの日の21時から、全部つながっていた。それでも、頷くわけにはいかなかった";}else if(k==="sakuya"&&d===2){const b=sc.blocks.find(x=>x.t==="drafts");if(b&&b.items&&b.items[2])b.items[2].tx="練習生の頃、レッスン室の前で聴いた歌を、今も覚えています。……あの歌のことは、いつか本人に言います";}return sc;}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
 function fmt(n){return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,"")+"万":Number(n).toLocaleString("ja-JP");}
 function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
@@ -5267,7 +5284,7 @@ function updSetupNotes(){
  set("#ss-world",selW?selW.t:"―");set("#ss-handle",selH?selH.h:"―");set("#ss-stance",selSt?selSt.t:"―");set("#ss-target",selT?selT.name:"―");
  const sf=$("#ss-first");if(sf){if(selF){sf.textContent=selF.t.split("｜")[0];sf.classList.remove("unset");}else{sf.textContent="未選択";sf.classList.add("unset");}}
 }
-function startNewGame(){const _pl=load();S=defState();if(_pl&&_pl.lap)S.lap=1;S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");}
+function startNewGame(){const _pl=load();S=defState();if(_pl&&_pl.lap)S.lap=1;S.lapRoutes=lapRoutesOf(_pl);S.folScale=2;hudFolShown=null;hudFolTok++;selW=null;$$("#worlds .opt").forEach(o=>o.classList.remove("sel"));$("#btn-world").disabled=true;show("scr-world");}
 /* v527: with a run on record, はじめる asks first - the setup walk
    itself is unchanged, cancelling leaves the save untouched, and a
    short lock keeps double taps from firing the start twice */
@@ -8757,7 +8774,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;const misP=(S.posts||
     and order are untouched - only the prose branches. The gate reads
     her own posts, same as v295; no new save fields. */
  if(misP){const sk=tgtKey()==="sakuya";body+="\n"+({flame:"とどめは、あの誤投稿だった。鍵垢に上げるはずだった私的な一枚のスクショが、『匂わせの証拠』として並べられた。消したはずのものは、消えていなかった。",collab:sk?"発表の日、例のスクショの話題は、コラボの歓声にかき消えた。今ではファンの間で『伝説の誤爆』と笑って振り返られている。本人は、まだ少しだけ耳が赤い。":"例のスクショは、今もたまに蒸し返される。それでも、消えなかったものもある。騒ぎの向こう側で、二人だけが知っている。",quiet:sk?"あの誤投稿の写真も、もう騒がれていない。彼だけが『見られてよかったです』と言った。その一言だけが、静かに残っている。":"あの誤投稿のスクショも、もう騒がれていない。彼だけが『俺は見れてよかった』と言った。その一言だけ、スクショして残してある。",start:"あの誤投稿のスクショだけが、少し先に有名になった。それも含めて、二人の日常はこれからも続いていく。"})[kind];}
- S.lap=1;
+ S.lap=1;if(!S.lapRoutes||typeof S.lapRoutes!=="object")S.lapRoutes={};S.lapRoutes[tgtKey()]=1;
  window.__D7={kind:kind,active:false,done:false,ch7:null};
  renderTargetProfile();
  const sec=$("#scr-ending");sec.classList.remove("fin");const etag=sec.querySelector(".end-tag");if(etag)etag.textContent="ENDING";sec.classList.remove("end-collab","end-flame","end-quiet","end-start");sec.classList.add("end-"+kind);
@@ -8941,7 +8958,8 @@ function renderAlbum(){
    sequence itself is the one the title button always ran. */
 let resuming=false;
 function resumeGame(){
- if(resuming||!S||!S.started)return;resuming=true;
+ /* v549: cleared saves (FIN reached) never resume - see renderTitleSave */
+ if(resuming||!S||!S.started||S.d7done)return;resuming=true;
  const veil=$("#loadveil");if(veil)veil.classList.add("on");
  const go=()=>{show("v-x");renderDayBanner();$("#x-head-note").textContent="Day "+S.ch+" / "+totalDays()+"";renderStories();renderFeed();renderEvent();renderNotifs();renderDmList();renderProfile();checkNext();showPane("tl");
   setTimeout(()=>{if(veil)veil.classList.remove("on");resuming=false;},240);};
@@ -8963,8 +8981,10 @@ function renderTitleSave(){
  card.classList.remove("hidden");
  const bc=$("#btn-continue"),bs=$("#btn-start"),br=$("#btn-reset0"),sec=$("#scr-title");
  if(sec)sec.classList.add("has-save");
- if(bc){bc.classList.remove("hidden","ghost");if(bs&&bc.parentNode===bs.parentNode)bs.parentNode.insertBefore(bc,bs);}
- if(bs)bs.classList.add("ghost");
+ /* v549: a cleared save (FIN reached) offers no resume - the only
+    way back in is a fresh start into the next lap */
+ if(bc){if(S.d7done){bc.classList.add("hidden");}else{bc.classList.remove("hidden","ghost");if(bs&&bc.parentNode===bs.parentNode)bs.parentNode.insertBefore(bc,bs);}}
+ if(bs){if(S.d7done)bs.classList.remove("ghost");else bs.classList.add("ghost");}
  if(br)br.classList.remove("hidden");}
 /* boot / reset */
 function resetAll(){localStorage.removeItem(KEY);location.reload();}
@@ -8973,7 +8993,13 @@ function resetAll(){localStorage.removeItem(KEY);location.reload();}
    resetAll itself is untouched; all three entry points (settings,
    title, ending) route through the same sheet. */
 const askReset=()=>{const s=$("#scrim-reset");if(s){s.classList.remove("closing");s.classList.add("on");}};
-$("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;$("#btn-restart").onclick=askReset;
+$("#btn-reset").onclick=askReset;$("#btn-reset0").onclick=askReset;
+/* v549: the FIN screen's もう一度はじめる is the entrance to the
+   next lap, not a wipe - it asks on the same sheet as はじめる
+   and startNewGame() then clears the run while carrying S.lap
+   over, so the second-lap discoveries stay reachable. The
+   settings/title resets above keep the full wipe, lap included. */
+$("#btn-restart").onclick=()=>{if(startLock)return;const s=$("#scrim-newgame");if(s){s.classList.remove("closing");s.classList.add("on");}};
 $("#btn-reset-yes").onclick=resetAll;
 (function(){const s=$("#scrim-reset");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 /* v479: debut song - the Apple Music embed player lives in its own
@@ -9036,7 +9062,7 @@ function renderJourney(){const box=$("#jlist");if(!box||!S)return;box.innerHTML=
   }
   box.appendChild(row);}}
 (function(){const jb=$("#set-journey");if(jb)jb.addEventListener("click",()=>{renderJourney();$("#scrim-journey").classList.add("on");});})();
-$("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);});
+$("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollTo(0,0);renderTitleSave();});
 /* v103: boot splash - flags the title for its staggered entrance and
    removes the splash node once the dissolve has played. The splash is
    pointer-events:none in CSS, so nothing here can block the title. */
@@ -9307,7 +9333,17 @@ function day7Dm4(kind){return tgtKey()==="sakuya"?{
  {t:"「おはよう。……今日もレッスン、がんばる」",r:"「……うん。……無理せんとってな」短い。でも、始まりの朝に届く一言としては、それで十分だった。",fx:{fol:0,xp:5,dist:5,flm:0,cog:0}},
  {t:"「今日の歌、最初から観ててね」",r:"「……当たり前やろ」少し間があって。「……最初から観るのは、ずっと前からの決まりや」。「……今日も、最初から、な」。言い切る前に、笑った気配がした。",fx:{fol:0,xp:6,dist:7,flm:0,cog:0}},
  {t:"「私も大丈夫。……ありがとう」",r:"「……うん」短い返事。でも、始まったばかりの朝に、彼の名前が画面にあることが、少しだけ心強かった。",fx:{fol:0,xp:5,dist:6,flm:0,cog:0}}]})[kind]};}
-function startDay7(){const D=window.__D7;if(!D||D.active||D.done)return;D.ch7=buildDay7Chapter(D.kind);D.active=true;
+function startDay7(){const D=window.__D7;if(!D||D.active||D.done)return;
+ /* v549: a cleared run (FIN reached) never re-enters Day 7 - the
+    replay path is a fresh start, which carries S.lap over */
+ if(S.d7done)return;
+ /* v549: snapshot the whole pre-Day-7 state before the chapter
+    touches anything. Day 7 actions keep saving as usual while
+    playing; if a save is loaded with this snapshot still attached,
+    boot restores it wholesale, so the epilogue's gains, posts,
+    DMs and log entries can never be farmed twice. */
+ if(!S.d7snap){const snap=JSON.parse(JSON.stringify(S));delete snap.d7snap;snap.d7done=false;S.d7snap=snap;save();}
+ D.ch7=buildDay7Chapter(D.kind);D.active=true;
  /* v488: DM4 is held back until his Day 7 screen has played - the
     interlude opens right after her Day 7 Event, and DM4 lands as it
     closes, carrying his choice there in its second line */
@@ -9325,7 +9361,15 @@ function showFin(){const D=window.__D7;const sec=$("#scr-ending");if(!sec)return
  const ejt=sec.querySelector(".ej-t");if(ejt)ejt.textContent="7 DAYS JOURNEY";const ejs=$("#ej-small");if(ejs)ejs.textContent="7日間の軌跡";
  const ps=$("#end-panel-sub");if(ps)ps.textContent="7日間の成績";const rl=$("#ec-record-lab");if(rl)rl.textContent="7日間の記録";
  const es=sec.querySelector(".ec-sub");if(es)es.textContent="STATUS × X ― A SEVEN-DAY STORY";
- renderEndJourney();renderCredits(D?D.kind:"start");renderAlbum();const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";show("scr-ending");save();}
+ renderEndJourney();renderCredits(D?D.kind:"start");renderAlbum();const hl=sec.querySelector("#ej-strip-wrap small");if(hl)hl.textContent="7日間の写真";const wd2=$("#ej-words");if(wd2)wd2.textContent="認知度は「"+cogWord(S.cog)+"」、炎上度は「"+flmWord(S.flm)+"」で終えた7日間。";
+ /* v549: reaching FIN finalizes the run. The snapshot is dropped
+    and what stays on record is the verdict state (Day 6, chapter
+    complete) with every Day 7 gain kept in the stats, posts and
+    logs - the final figures this screen just showed. d7done marks
+    the save cleared: boot never rolls it back, the title offers
+    no resume, and Day 7 cannot be re-entered from it. */
+ S.d7done=true;S.d7snap=null;S.ch=6;S.posted=true;S.evDone=true;
+ show("scr-ending");save();}
 $("#btn-day7").addEventListener("click",startDay7);
 renderTrends();
 /* v527: a save that exists but cannot be read is a failure state,
@@ -9344,8 +9388,20 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
     older saves keep working) */
  mergeFanThreads();
  /* Day 7: the epilogue chapter is built per session and never
-    persisted; a save left mid-Day-7 returns to the Day 6 verdict */
- if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
+    persisted. v549: a save left mid-Day-7 still carries the
+    snapshot startDay7() took - restore it wholesale so every
+    Day 7 gain, post, DM, notification and log entry is rolled
+    back, not just the chapter counter, and the epilogue restarts
+    clean from the Day 6 verdict. A cleared save (d7done, set by
+    showFin) has no snapshot: its Day 7 results are the final
+    record and only the chapter counter returns to the verdict.
+    Saves from before v549 have no snapshot and keep the old
+    counter-only reset. */
+ if(S.d7snap&&typeof S.d7snap==="object"){const snap=S.d7snap;S=Object.assign(defState(),snap);S.d7snap=null;S.d7done=false;save();}
+ else if(S.ch>6){S.ch=6;S.posted=true;S.evDone=true;save();}
+ /* v549: legacy saves carry S.lap without per-route history -
+    credit the route the save is on (see lapRoutesOf) */
+ if(S.lap&&!(S.lapRoutes&&Object.keys(S.lapRoutes).length)){S.lapRoutes=lapRoutesOf(S);save();}
  (S.posts||[]).concat(S.men||[]).forEach((p,i)=>{if(!p)return;if(!p.id)p.id="sv"+i+"-"+(p.a||"x");p.liked=!!p.liked;p.rped=!!p.rped;p.bmked=!!p.bmked;});
  /* v532: drop buzz posts a pre-gate build injected before their
     story trigger existed (key list + feed/mentions copies) */
