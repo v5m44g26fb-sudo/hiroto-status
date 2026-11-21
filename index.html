@@ -1087,9 +1087,10 @@ input,textarea{font-size:16px}
 #dayintro .di-inner{position:relative;padding:0 34px;display:flex;flex-direction:column;align-items:center}
 #dayintro .di-lab{font-size:11px;font-weight:900;letter-spacing:.42em;color:#ffb3d1;animation:diup .6s cubic-bezier(.2,.8,.25,1) both}
 #dayintro .di-day{font-size:64px;font-weight:900;letter-spacing:.04em;line-height:1.05;margin-top:10px;text-shadow:0 10px 34px rgba(249,24,128,.35);animation:diup .6s .08s cubic-bezier(.2,.8,.25,1) both}
-#dayintro .di-rule{width:64px;height:3px;border-radius:2px;background:linear-gradient(90deg,#f91880,#7856ff,#1d9bf0);margin:18px 0 16px;animation:diup .6s .16s cubic-bezier(.2,.8,.25,1) both}
-#dayintro .di-title{font-size:21px;font-weight:900;letter-spacing:.03em;animation:diup .6s .24s cubic-bezier(.2,.8,.25,1) both}
-#dayintro .di-sub{font-size:13px;line-height:1.7;color:rgba(233,236,255,.78);margin-top:9px;max-width:300px;animation:diup .6s .32s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-date{font-size:13px;font-weight:800;letter-spacing:.16em;color:rgba(255,213,232,.95);margin-top:12px;animation:diup .6s .17s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-rule{width:64px;height:3px;border-radius:2px;background:linear-gradient(90deg,#f91880,#7856ff,#1d9bf0);margin:16px 0 16px;animation:diup .6s .24s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-title{font-size:21px;font-weight:900;letter-spacing:.03em;animation:diup .6s .3s cubic-bezier(.2,.8,.25,1) both}
+#dayintro .di-sub{font-size:13px;line-height:1.7;color:rgba(233,236,255,.78);margin-top:9px;max-width:300px;animation:diup .6s .37s cubic-bezier(.2,.8,.25,1) both}
 #dayintro .di-tap{margin-top:30px;font-size:10px;font-weight:800;letter-spacing:.3em;color:rgba(255,255,255,.45);animation:diup .6s .44s cubic-bezier(.2,.8,.25,1) both,dipulse 1.6s 1.2s ease-in-out infinite}
 @keyframes diup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes dipulse{0%,100%{opacity:.45}50%{opacity:.95}}
@@ -3298,6 +3299,47 @@ input,textarea{font-size:16px}
 #sideview .sv2-pjoined{display:flex;align-items:center;gap:5px;font-size:13.5px;color:#7a8494;font-weight:600;margin-top:3px}
 #sideview .sv2-pjoined svg{width:15px;height:15px;fill:currentColor;flex:none}
 #sideview .sv2-mday{display:flex;justify-content:center;margin:2px 0 10px}
+/* v512: his-screen follow / follower lists - the profile counts open
+   the same real-X list the main UI has had since v80, rebuilt from
+   the side view's own parts over the same account data (folSets /
+   FOL_BIO / ACC). Session-local state only, nothing is saved. */
+#sideview .sv2-pcounts span.clk{cursor:pointer}
+#sideview .sv2-pcounts span.clk:active{opacity:.55}
+#sideview .sv2-ftabs{display:flex;border-bottom:1px solid rgba(130,140,160,.25)}
+#sideview .sv2-ftab{flex:1;text-align:center;font-size:14.5px;font-weight:800;padding:11px 0;cursor:pointer;color:#7a8494;position:relative}
+#sideview .sv2-ftab.on{color:#0f1419}
+#sideview .th-dark .sv2-ftab.on{color:#fff}
+#sideview .sv2-ftab.on::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:-1px;width:52px;height:4px;border-radius:3px;background:#1d9bf0}
+#sideview .sv2-ftab .n{font-size:12.5px;color:#7a8494;font-weight:700;margin-left:4px}
+#sideview .sv2-frow{display:flex;gap:10px;padding:11px 2px;border-bottom:1px solid rgba(130,140,160,.14);align-items:flex-start}
+#sideview .sv2-frow .fav{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:none;cursor:pointer;background:#e8edf0}
+#sideview .sv2-fmain{flex:1;min-width:0}
+#sideview .sv2-fname{display:flex;align-items:center;gap:4px;font-size:14.5px;font-weight:800;color:#0f1419;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sideview .sv2-fname .p-ver{width:15px;height:15px;flex:none}
+#sideview .th-dark .sv2-fname{color:#fff}
+#sideview .sv2-fhandle{font-size:13px;color:#7a8494;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+#sideview .sv2-fmut{flex:none;font-size:10.5px;font-weight:700;color:#536471;background:rgba(130,140,160,.16);border-radius:4px;padding:1px 5px}
+#sideview .sv2-fbio{font-size:13px;line-height:1.5;color:#2b333b;margin-top:1px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#sideview .th-dark .sv2-fbio{color:#c6cbd8}
+#sideview .sv2-fbtn{flex:none;border-radius:999px;font-family:inherit;font-size:12.5px;font-weight:800;padding:6px 13px;cursor:pointer;border:1.5px solid #0f1419;background:#0f1419;color:#fff;transition:transform .13s ease,background .2s ease,color .2s ease,border-color .2s ease}
+#sideview .sv2-fbtn:active{transform:scale(.96)}
+#sideview .sv2-fbtn.on{background:transparent;color:#0f1419;border-color:#cfd9de}
+#sideview .th-dark .sv2-fbtn{background:#e8eaf2;color:#101018;border-color:#e8eaf2}
+#sideview .th-dark .sv2-fbtn.on{background:transparent;color:#e8eaf2;border-color:rgba(230,235,245,.4)}
+/* v512: quote cards on his screen - the same card the main UI builds
+   from qtDerive (v89), in the side view's parts and theme */
+#sideview .sv2-qt{border:1px solid #cfd9de;border-radius:14px;padding:9px 11px;margin-top:8px;cursor:pointer;background:rgba(255,255,255,.65)}
+#sideview .th-dark .sv2-qt{border-color:rgba(230,235,245,.28);background:rgba(255,255,255,.05)}
+#sideview .sv2-qt-h{display:flex;align-items:center;gap:5px;font-size:12.5px;min-width:0}
+#sideview .sv2-qt-av{width:19px;height:19px;border-radius:50%;object-fit:cover;flex:none}
+#sideview .sv2-qt-h b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sideview .sv2-qt-h .p-ver{width:14px;height:14px;flex:none}
+#sideview .sv2-qt-hd{color:#7a8494;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#sideview .sv2-qt-tm{color:#7a8494;white-space:nowrap;flex:none}
+#sideview .sv2-qt-flex{display:flex;gap:9px;margin-top:3px}
+#sideview .sv2-qt-tx{flex:1;min-width:0;font-size:13.5px;line-height:1.55;color:#0f1419;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#sideview .th-dark .sv2-qt-tx{color:#e8eaf2}
+#sideview .sv2-qt-th{width:60px;height:60px;border-radius:10px;object-fit:cover;object-position:center 20%;flex:none;border:1px solid rgba(130,140,160,.2)}
 #sideview .sv2-mday span{font-size:11.5px;font-weight:700;color:#536471;background:#eff3f4;border-radius:999px;padding:3px 12px}
 #sideview .th-dark .sv2-mday span{background:rgba(255,255,255,.12);color:#aeb6c4}
 #sideview .sv2-sent .p-ver{width:13px;height:13px;vertical-align:-2px;margin-left:4px}
@@ -3845,7 +3887,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v511</p>
+  <p class="ver">v512</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4029,7 +4071,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v511</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v512</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4216,6 +4258,7 @@ input,textarea{font-size:16px}
     <div class="di-inner">
       <span class="di-lab" id="di-lab">CHAPTER</span>
       <div class="di-day" id="di-day">DAY 1</div>
+      <div class="di-date" id="di-date"></div>
       <div class="di-rule"></div>
       <b class="di-title" id="di-title">デビュー発表の日</b>
       <p class="di-sub" id="di-sub"></p>
@@ -4346,7 +4389,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v511</p>
+    <p class="ver">v512</p>
   </div>
 </section>
 </div>
@@ -7240,8 +7283,15 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
    so numbers and the save format are untouched - presentation only. */
 let diTimer=null,diHideTimer=null;
 const DI_BG={1:"assets/nao-concept.jpg",2:"assets/nao-stage-ballad.jpg",3:"assets/nao-stage-sailor.jpg",4:"assets/nao-rec.jpg",5:"assets/nao-stage-confetti.jpg",6:"assets/nao-stage-dance.jpg",7:"assets/nao-story-cafe.jpg"};
+/* v512: the story's calendar - Day 1 is her debut day, 2025-02-24,
+   a Monday (the real release day of "The Chase"), and each Day
+   steps one real calendar day from there, weekday included. The
+   intro card and the result header now carry that date. Display
+   only; nothing about the day flow changes. */
+const STORY_WD=["日","月","火","水","木","金","土"];
+function storyDateTx(d){const t=new Date(2025,1,24+(d-1));return t.getFullYear()+"年"+(t.getMonth()+1)+"月"+t.getDate()+"日（"+STORY_WD[t.getDay()]+"）";}
 function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
- set("#di-day","DAY "+S.ch);set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
+ set("#di-day","DAY "+S.ch);set("#di-date",storyDateTx(S.ch));set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
  set("#di-lab","CHAPTER "+S.ch);
  /* v149: the day's mission preview (event row reads the chapter title) */
  const dm=$("#di-missions");if(dm){dm.innerHTML="";[["POST","今日の投稿を選ぶ","#7cc4ff"],["EVENT",ch.event?ch.event.title:"","#f7c948"],["ACTIVITY","今日の行動を選ぶ（1日1回）","#ff8fc0"]].forEach(r=>{if(!r[1])return;const d=document.createElement("div");d.className="di-mrow";d.innerHTML='<span class="di-mchip" style="--mc:'+r[2]+'">'+r[0]+'</span><span class="di-mtx"></span>';d.querySelector(".di-mtx").textContent=r[1];dm.appendChild(d);});}
@@ -7271,7 +7321,7 @@ function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
 let drsText="";
 function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
- $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT";
+ $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT ― "+storyDateTx(S.ch);
  const drEl=$("#dayresult");if(drEl)drEl.classList.toggle("final",S.ch>=TOTAL_DAYS);
  /* v104: each row carries an axis icon for its medallion; the values,
     deltas and gauges fed to the cards are exactly the ones computed
@@ -7790,7 +7840,12 @@ const svFmt2=n=>n.toLocaleString("en-US");
 /* v502: his screen used to collect posts, notifications and mail from every day of SIDE_SCENES at once, so on Day 2 his profile already held Day 6 posts and his inbox showed threads from days that had not happened yet. Collections now walk only the days up to the interlude on screen: earlier days contribute their (choice-resolved) scenes, the current day contributes the resolved scene being shown. */
 function svScenesPast(){const out=[];const raw=(typeof SIDE_SCENES!=="undefined"&&SIDE_SCENES)?(SIDE_SCENES[tgtKey()]||{}):{};const cur=(typeof svCur!=="undefined"&&svCur)?svCur.d:0;Object.keys(raw).forEach(dk=>{const d=parseInt(dk,10);if(!(d<cur))return;const sc=(typeof svResolve==="function")?svResolve(raw[dk]):raw[dk];if(sc)out.push({d:d,sc:sc});});if(cur&&typeof svCur!=="undefined"&&svCur&&svCur.sc)out.push({d:cur,sc:svCur.sc});out.sort((a,b)=>a.d-b.d);return out;}
 function svProfPosts(key){const out=[];const seen={};const push=(tx,img,rc,rp,lk,time,hov,vw,id)=>{if(!tx||seen[tx])return;seen[tx]=1;const o={};o.a=key;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=!!hov;o.vw=vw||"";o.id=id||"";out.push(o);return o;};svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post"&&b.a===key)push(b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.hov,b.vw||"");});});if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(p.a===key&&!p.sys&&!p.isReply){const o=push(p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",false,(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"",p.id);if(o)o.abs=(typeof postAbsTime==="function")?postAbsTime(p):"";}});return out;}
-function svPostEl(p,det){const A=ACC[p.a];const d=svEl("div","sv2-post");d._pb=p;const im=svEl("img","av");im.src=A.av;im.alt="";im.style.cursor="pointer";im.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.style.cursor="pointer";nb.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});nh.appendChild(nb);if(VERIFIED.has(p.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);nh.appendChild(svEl("span",null,A.h+(p.time?" · "+p.time:"")));const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.addEventListener("click",e=>{e.stopPropagation();svPostMenu(d);});nh.appendChild(mo);m.appendChild(nh);if(p.rtoH){const rt=svEl("div","sv2-rto");rt.appendChild(document.createTextNode("返信先： "));rt.appendChild(svEl("b",null,p.rtoH));rt.appendChild(document.createTextNode(" さん"));m.appendChild(rt);}const txd=svEl("div","tx");svLinkify(txd,p.tx);m.appendChild(txd);if(p.img){const pi=svEl("img","sv2-pimg");pi.src=p.img;pi.alt="";m.appendChild(pi);}const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,p.rc));const rpEl=mk(SVI.repost,p.rp,"repost");rpEl.addEventListener("click",e=>{e.stopPropagation();const on=rpEl.classList.toggle("on");const num=rpEl.querySelector("span");if(num)num.textContent=svFmt2(svNum2(num)+(on?1:-1));});ac.appendChild(rpEl);const lkEl=mk(SVI.heart,p.lk,"like"+(p.hov?" hov":""));if(p.hov){const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);const off=()=>lkEl.classList.remove("pressing");lkEl.addEventListener("pointerdown",e=>{e.stopPropagation();lkEl.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>lkEl.addEventListener(ev2,off));lkEl.addEventListener("click",e=>{e.stopPropagation();});}else{lkEl.addEventListener("click",e=>{e.stopPropagation();const on=lkEl.classList.toggle("on");const num=lkEl.querySelector("span");const cnt=num?svNum2(num):0;lkEl.innerHTML=on?SVI.heartF:SVI.heart;if(num){num.textContent=svFmt2(cnt+(on?1:-1));lkEl.appendChild(num);}});}ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,p.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");d._bmkEl=bkEl;bkEl.addEventListener("click",e=>{e.stopPropagation();svToggleBmk(bkEl);});ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.addEventListener("click",e=>{e.stopPropagation();svSharePost(p.a,p.tx);});ac.appendChild(shEl);m.appendChild(ac);d.appendChild(m);if(!det)d.addEventListener("click",()=>{svPostView(p);});return d;}
+function svPostEl(p,det){const A=ACC[p.a];const d=svEl("div","sv2-post");d._pb=p;const im=svEl("img","av");im.src=A.av;im.alt="";im.style.cursor="pointer";im.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});d.appendChild(im);const m=svEl("div","main");const nh=svEl("div","nh");const nb=svEl("b",null,A.n);nb.style.cursor="pointer";nb.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(p.a);});nh.appendChild(nb);if(VERIFIED.has(p.a))nh.insertAdjacentHTML("beforeend",VER_BADGE);nh.appendChild(svEl("span",null,A.h+(p.time?" · "+p.time:"")));const mo=svEl("span","sv2-more");mo.innerHTML=SVI.more;mo.addEventListener("click",e=>{e.stopPropagation();svPostMenu(d);});nh.appendChild(mo);m.appendChild(nh);if(p.rtoH){const rt=svEl("div","sv2-rto");rt.appendChild(document.createTextNode("返信先： "));rt.appendChild(svEl("b",null,p.rtoH));rt.appendChild(document.createTextNode(" さん"));m.appendChild(rt);}const txd=svEl("div","tx");svLinkify(txd,p.tx);m.appendChild(txd);/* v512: quote cards reach his screen too - a collected post that
+   quotes her words embeds the same card the main UI derives with
+   qtDerive (v89), and tapping it opens the original in his detail
+   view. Render-time derivation only; nothing is stored. */
+if(p.id&&typeof qtDerive==="function"&&typeof S!=="undefined"&&S){try{const orig=(S.posts||[]).concat(S.men||[]).find(o=>o&&o.id===p.id);const qs=orig?qtDerive(orig):null;if(qs){const qc=svEl("div","sv2-qt");const qh=svEl("div","sv2-qt-h");if(qs.av){const qi=svEl("img","sv2-qt-av");qi.src=qs.av;qi.alt="";qh.appendChild(qi);}qh.appendChild(svEl("b",null,qs.n));if(qs.n===(ACC.nao&&ACC.nao.n))qh.insertAdjacentHTML("beforeend",VER_BADGE);qh.appendChild(svEl("span","sv2-qt-hd",qs.h));qh.appendChild(svEl("span","sv2-qt-tm","· "+postTime({id:qs.id,mine:true,tm:"今",dy:qs.dy})));qc.appendChild(qh);const qf=svEl("div","sv2-qt-flex");const qt=svEl("div","sv2-qt-tx");svLinkify(qt,qs.tx);qf.appendChild(qt);if(qs.img){const th=svEl("img","sv2-qt-th");th.src=qs.img;th.alt="";qf.appendChild(th);}qc.appendChild(qf);qc.addEventListener("click",e=>{e.stopPropagation();svPostView({a:orig.a,tx:orig.t,img:orig.img||"",rc:orig.m?fmtCnt(orig.m[0]):"",rp:orig.m?fmtCnt(orig.m[1]):"",lk:orig.m?fmtCnt(orig.m[2]):"",time:orig.tm||"",vw:(typeof viewsOf==="function")?fmtCnt(viewsOf(orig)):"",id:orig.id,abs:(typeof postAbsTime==="function")?postAbsTime(orig):""});});m.appendChild(qc);}}catch(_){}}
+if(p.img){const pi=svEl("img","sv2-pimg");pi.src=p.img;pi.alt="";m.appendChild(pi);}const ac=svEl("div","sv2-acts");const mk=(ic,n,cls)=>{const s=svEl("span","sv2-act "+(cls||""));s.innerHTML=ic;s.appendChild(svEl("span",null,n));return s;};ac.appendChild(mk(SVI.reply,p.rc));const rpEl=mk(SVI.repost,p.rp,"repost");rpEl.addEventListener("click",e=>{e.stopPropagation();const on=rpEl.classList.toggle("on");const num=rpEl.querySelector("span");if(num)num.textContent=svFmt2(svNum2(num)+(on?1:-1));});ac.appendChild(rpEl);const lkEl=mk(SVI.heart,p.lk,"like"+(p.hov?" hov":""));if(p.hov){const hf=svEl("span","hf");hf.innerHTML=SVI.heartF;lkEl.appendChild(hf);const off=()=>lkEl.classList.remove("pressing");lkEl.addEventListener("pointerdown",e=>{e.stopPropagation();lkEl.classList.add("pressing");});["pointerup","pointercancel","pointerleave"].forEach(ev2=>lkEl.addEventListener(ev2,off));lkEl.addEventListener("click",e=>{e.stopPropagation();});}else{lkEl.addEventListener("click",e=>{e.stopPropagation();const on=lkEl.classList.toggle("on");const num=lkEl.querySelector("span");const cnt=num?svNum2(num):0;lkEl.innerHTML=on?SVI.heartF:SVI.heart;if(num){num.textContent=svFmt2(cnt+(on?1:-1));lkEl.appendChild(num);}});}ac.appendChild(lkEl);ac.appendChild(mk(SVI.views,p.vw||""));const bkEl=mk(SVI.bmk,"","bmkA");d._bmkEl=bkEl;bkEl.addEventListener("click",e=>{e.stopPropagation();svToggleBmk(bkEl);});ac.appendChild(bkEl);const shEl=mk(SVI.share,"","shrA");shEl.addEventListener("click",e=>{e.stopPropagation();svSharePost(p.a,p.tx);});ac.appendChild(shEl);m.appendChild(ac);d.appendChild(m);if(!det)d.addEventListener("click",()=>{svPostView(p);});return d;}
 let svPostBack=null;
 function svLinkify(el,text){if(!el)return;linkifyTx(el,text,true);el.querySelectorAll(".tx-tag").forEach(sp=>{sp.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(sp.textContent);});});el.querySelectorAll(".tx-men").forEach(sp=>{sp.addEventListener("click",e=>{e.stopPropagation();const key=Object.keys(ACC).find(k=>ACC[k].h===sp.textContent);if(key)svOpenProfile(key);});});}
 function svTabHead(t,n){const h=svEl("div","sv2-tabhead");h.appendChild(svEl("b",null,t));if(n)h.appendChild(svEl("span",null,n));return h;}
@@ -7806,7 +7861,11 @@ const reps=[];if(p.id&&typeof S!=="undefined"&&S&&S.posts){S.posts.forEach(r=>{i
 if(reps.length){const th=svEl("div","sv2-thread");reps.forEach(r=>th.appendChild(svPostEl(r)));wrap.appendChild(th);}
 else wrap.appendChild(svEl("div","sv2-empty","まだ返信はありません"));
 sub.appendChild(wrap);svShowSub(svCur.view||"prof");}
-function svOpenProfile(key){const A=ACC[key];if(!A)return;const isTgt=key===tgtKey();const T=isTgt?tgt():null;const posts=svProfPosts(key);svPostBack=()=>svOpenProfile(key);const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-prof");const hd=svEl("div","sv2-subhd");const bk=svEl("span","bk");bk.innerHTML=SVI.back;bk.addEventListener("click",e=>{e.stopPropagation();svGo("home");});hd.appendChild(bk);const ht=svEl("div","htt");ht.appendChild(svEl("b",null,A.n));ht.appendChild(svEl("span",null,posts.length+" 件のポスト"));hd.appendChild(ht);const shb=svEl("span","sv2-pshare");shb.innerHTML=SVI.share;shb.addEventListener("click",e=>{e.stopPropagation();svShareProfile(key);});hd.appendChild(shb);wrap.appendChild(hd);const cv=svEl("div","sv2-pcover");const cov=T?T.cover:(key==="nao"?"assets/nao-promo.jpg":"");if(cov){const ci=svEl("img");ci.src=cov;ci.alt="";cv.appendChild(ci);}wrap.appendChild(cv);const pr=svEl("div","sv2-pavrow");const pa=svEl("img","sv2-pav");pa.src=A.av;pa.alt="";pr.appendChild(pa);const pb=svEl("button","sv2-pbtn",isTgt?"プロフィールを編集":"フォローする");pb.type="button";pb.addEventListener("click",e=>{e.stopPropagation();if(isTgt){svToast("プロフィールの編集は、彼の画面の中ではできない");return;}const on=pb.classList.toggle("fol");pb.textContent=on?"フォロー中":"フォローする";});pr.appendChild(pb);wrap.appendChild(pr);const pn=svEl("div","sv2-pname");pn.appendChild(svEl("span",null,A.n));if(VERIFIED.has(key))pn.insertAdjacentHTML("beforeend",VER_BADGE);wrap.appendChild(pn);wrap.appendChild(svEl("div","sv2-phandle",A.h));const bio=isTgt?T.bio:(typeof FOL_BIO!=="undefined"?(FOL_BIO[key]||""):"");if(bio)wrap.appendChild(svEl("div","sv2-pbio",bio));{let jn="";if(T)jn=T.jn;else if(key==="nao"&&typeof S!=="undefined"&&S&&S.posts){const fp=S.posts.find(p2=>p2.a==="nao");if(fp){const fdt=new Date(+String(fp.id).slice(0,13));if(!isNaN(fdt.getTime()))jn=fdt.getFullYear()+"年"+(fdt.getMonth()+1)+"月";}}if(jn){const pj=svEl("div","sv2-pjoined");pj.innerHTML=SVI.cal;pj.appendChild(document.createTextNode(jn+"からXを利用しています"));wrap.appendChild(pj);}}const pc=svEl("div","sv2-pcounts");if(T){const sf=svEl("span");sf.appendChild(svEl("b",null,"12"));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,T.fol));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else if(key==="nao"&&typeof S!=="undefined"&&S){const sf=svEl("span");sf.appendChild(svEl("b",null,String(42+(S.followHiroto?1:0))));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,fmtCnt(S.fol||0)));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else{const s2=svEl("span");s2.appendChild(svEl("b",null,String(posts.length)));s2.appendChild(document.createTextNode(" ポスト"));pc.appendChild(s2);}wrap.appendChild(pc);const tabs=svEl("div","sv2-ptabs");
+function svOpenProfile(key){const A=ACC[key];if(!A)return;const isTgt=key===tgtKey();const T=isTgt?tgt():null;const posts=svProfPosts(key);svPostBack=()=>svOpenProfile(key);const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-prof");const hd=svEl("div","sv2-subhd");const bk=svEl("span","bk");bk.innerHTML=SVI.back;bk.addEventListener("click",e=>{e.stopPropagation();svGo("home");});hd.appendChild(bk);const ht=svEl("div","htt");ht.appendChild(svEl("b",null,A.n));ht.appendChild(svEl("span",null,posts.length+" 件のポスト"));hd.appendChild(ht);const shb=svEl("span","sv2-pshare");shb.innerHTML=SVI.share;shb.addEventListener("click",e=>{e.stopPropagation();svShareProfile(key);});hd.appendChild(shb);wrap.appendChild(hd);const cv=svEl("div","sv2-pcover");const cov=T?T.cover:(key==="nao"?"assets/nao-promo.jpg":"");if(cov){const ci=svEl("img");ci.src=cov;ci.alt="";cv.appendChild(ci);}wrap.appendChild(cv);const pr=svEl("div","sv2-pavrow");const pa=svEl("img","sv2-pav");pa.src=A.av;pa.alt="";pr.appendChild(pa);const pb=svEl("button","sv2-pbtn",isTgt?"プロフィールを編集":"フォローする");pb.type="button";pb.addEventListener("click",e=>{e.stopPropagation();if(isTgt){svToast("プロフィールの編集は、彼の画面の中ではできない");return;}const on=pb.classList.toggle("fol");pb.textContent=on?"フォロー中":"フォローする";});pr.appendChild(pb);wrap.appendChild(pr);const pn=svEl("div","sv2-pname");pn.appendChild(svEl("span",null,A.n));if(VERIFIED.has(key))pn.insertAdjacentHTML("beforeend",VER_BADGE);wrap.appendChild(pn);wrap.appendChild(svEl("div","sv2-phandle",A.h));const bio=isTgt?T.bio:(typeof FOL_BIO!=="undefined"?(FOL_BIO[key]||""):"");if(bio)wrap.appendChild(svEl("div","sv2-pbio",bio));{let jn="";if(T)jn=T.jn;else if(key==="nao"&&typeof S!=="undefined"&&S&&S.posts){const fp=S.posts.find(p2=>p2.a==="nao");if(fp){const fdt=new Date(+String(fp.id).slice(0,13));if(!isNaN(fdt.getTime()))jn=fdt.getFullYear()+"年"+(fdt.getMonth()+1)+"月";}}if(jn){const pj=svEl("div","sv2-pjoined");pj.innerHTML=SVI.cal;pj.appendChild(document.createTextNode(jn+"からXを利用しています"));wrap.appendChild(pj);}}const pc=svEl("div","sv2-pcounts");if(T){const sf=svEl("span");sf.appendChild(svEl("b",null,"12"));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,T.fol));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else if(key==="nao"&&typeof S!=="undefined"&&S){const sf=svEl("span");sf.appendChild(svEl("b",null,String(42+(S.followHiroto?1:0))));sf.appendChild(document.createTextNode(" フォロー中"));pc.appendChild(sf);const s1=svEl("span");s1.appendChild(svEl("b",null,fmtCnt(S.fol||0)));s1.appendChild(document.createTextNode(" フォロワー"));pc.appendChild(s1);}else{const s2=svEl("span");s2.appendChild(svEl("b",null,String(posts.length)));s2.appendChild(document.createTextNode(" ポスト"));pc.appendChild(s2);}/* v512: on his own profile and on hers, the counts open the follow
+   lists, like the main UI's profiles do (other accounts show no
+   follow counts here, so there is nothing to open) */
+if(T||key==="nao"){const c0=pc.children[0],c1=pc.children[1];if(c0){c0.classList.add("clk");c0.addEventListener("click",e=>{e.stopPropagation();svFollowList(key,"folwing");});}if(c1){c1.classList.add("clk");c1.addEventListener("click",e=>{e.stopPropagation();svFollowList(key,"folwers");});}}
+wrap.appendChild(pc);const tabs=svEl("div","sv2-ptabs");
 const t1=svEl("div","sv2-ptab on","ポスト");
 const t2=svEl("div","sv2-ptab","返信");
 const t3=svEl("div","sv2-ptab","メディア");
@@ -7835,13 +7894,31 @@ paneL.appendChild(svEl("div","sv2-empty",A.n+"がいいねしたポストは、�
 wrap.appendChild(paneL);const pane2=svEl("div","sv2-ppane");pane2.style.display="none";const imgs=[];posts.forEach(p=>{if(p.img&&imgs.indexOf(p.img)<0)imgs.push(p.img);});if(isTgt){const scs2=SIDE_SCENES[tgtKey()]||{};Object.keys(scs2).forEach(dk=>{const ph=scs2[dk].ph;if(ph&&imgs.indexOf(ph)<0)imgs.push(ph);});}pane2.appendChild(svTabHead("メディア",imgs.length+" 枚"));if(imgs.length){const g=svEl("div","sv2-pgrid");imgs.forEach(src=>{const gi=svEl("img");gi.src=src;gi.alt="";gi.addEventListener("click",e=>{e.stopPropagation();const box=svEl("div");box.appendChild(svSheetTop("写真"));const bi=svEl("img","sh-img");bi.src=src;bi.alt="";box.appendChild(bi);svSheet(box);});g.appendChild(gi);});pane2.appendChild(g);pane2.appendChild(svEl("div","sv2-end","―― ここまで ――"));}else pane2.appendChild(svEl("div","sv2-empty","メディアはまだありません"));wrap.appendChild(pane2);const tabEls=[t1,t2,t3,t4],paneEls=[pane1,paneR,pane2,paneL];
 const sw=which=>{tabEls.forEach((t,i)=>t.classList.toggle("on",which===i+1));paneEls.forEach((p,i)=>p.style.display=which===i+1?"":"none");};
 tabEls.forEach((t,i)=>t.addEventListener("click",e=>{e.stopPropagation();sw(i+1);}));sub.appendChild(wrap);svShowSub("prof");}
+/* v512: follow / follower lists for his screen, in the same format
+   as the main UI's list pane (v80): the story's named accounts from
+   folSets, with bios, verified badges, mutual chips and follow-state
+   buttons. The buttons are session-local feedback, exactly like the
+   main list - the one live state is her follow of him, which the
+   nao->target row mirrors (and tapping it jumps to his profile,
+   again like the main list). Nothing here writes to the save. */
+const svFolOverride={};
+function svFolState(owner,key){if(owner==="nao"&&key===tgtKey())return !!(typeof S!=="undefined"&&S&&S.followHiroto);const o=svFolOverride[owner+":"+key];if(o!==undefined)return o;return folSets(owner).folwing.includes(key);}
+function svFollowList(key,tab){const A=ACC[key];if(!A||typeof folSets==="undefined")return;const sets=folSets(key);const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");const hd=svSubHead(A.n,()=>svOpenProfile(key));const htt=hd.querySelector(".htt");if(htt)htt.appendChild(svEl("span",null,A.h));wrap.appendChild(hd);
+const tabs=svEl("div","sv2-ftabs");[["folwing","フォロー中"],["folwers","フォロワー"]].forEach(([tk,lab])=>{const t=svEl("div","sv2-ftab"+(tab===tk?" on":""));t.appendChild(document.createTextNode(lab));t.appendChild(svEl("span","n",String((sets[tk]||[]).length)));t.addEventListener("click",e=>{e.stopPropagation();if(tab!==tk)svFollowList(key,tk);});tabs.appendChild(t);});wrap.appendChild(tabs);
+const keys=(sets[tab]||[]).filter(k=>ACC[k]);
+if(!keys.length)wrap.appendChild(svEl("div","sv2-empty","まだいない"));
+keys.forEach(k=>{const a=ACC[k];const row=svEl("div","sv2-frow");const fav=svEl("img","fav");fav.src=a.av||"";fav.alt="";fav.addEventListener("click",e=>{e.stopPropagation();svOpenProfile(k);});row.appendChild(fav);const main=svEl("div","sv2-fmain");const fn=svEl("div","sv2-fname");fn.appendChild(svEl("span",null,a.n));if(VERIFIED.has(k))fn.insertAdjacentHTML("beforeend",VER_BADGE);main.appendChild(fn);const fh=svEl("div","sv2-fhandle");fh.appendChild(svEl("span",null,a.h));if(sets.folwing.includes(k)&&sets.folwers.includes(k))fh.appendChild(svEl("span","sv2-fmut","フォローされています"));main.appendChild(fh);const bio=(typeof FOL_BIO!=="undefined"&&FOL_BIO[k])||"";if(bio)main.appendChild(svEl("div","sv2-fbio",bio));row.appendChild(main);
+if(k!==key){const btn=svEl("button","sv2-fbtn",svFolState(key,k)?"フォロー中":"フォローする");btn.type="button";if(svFolState(key,k))btn.classList.add("on");btn.addEventListener("click",e=>{e.stopPropagation();if(key==="nao"&&k===tgtKey()){svOpenProfile(tgtKey());return;}const now=!svFolState(key,k);svFolOverride[key+":"+k]=now;btn.classList.toggle("on",now);btn.textContent=now?"フォロー中":"フォローする";});row.appendChild(btn);}
+wrap.appendChild(row);});
+if(keys.length)wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));
+sub.appendChild(wrap);svShowSub("prof");}
 function svTrendsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("トレンド"));
 const sr=svEl("div","sv2-srch");sr.innerHTML=SVI.search;const inp=document.createElement("input");inp.type="text";inp.placeholder="検索";inp.setAttribute("autocomplete","off");sr.appendChild(inp);const sx=svEl("span","sx","✕");sx.style.display="none";sr.appendChild(sx);inp.addEventListener("keydown",e=>{e.stopPropagation();if(e.key==="Enter"){const q=inp.value.trim();if(q)svTrendPosts(q);}});inp.addEventListener("input",()=>{sx.style.display=inp.value?"":"none";});inp.addEventListener("click",e=>e.stopPropagation());sx.addEventListener("click",e=>{e.stopPropagation();inp.value="";sx.style.display="none";inp.focus();});wrap.appendChild(sr);
 const dd=svCur.d||1;const words=tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#何年も前の写真","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の沈黙","MUSIC STAGE"];const sug=svEl("div","sv2-sug");words.filter(w=>!((w==="#配信の沈黙"||w==="#何年も前の写真")&&dd<5)&&!(w==="熱愛報道"&&dd<6)&&!(w==="歌うまコラボSP"&&dd<4)).forEach(w=>{const s=svEl("span",null,w);s.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(w);});sug.appendChild(s);});wrap.appendChild(sug);
 const list=curTrends()||[];const maxV=Math.max.apply(null,[1].concat(list.map(t=>trendNumLive(t))));const base=new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1]));
 list.forEach((t,i)=>{const dyn=!base.has(t[1]);const r=svEl("div","sv2-trend");r.appendChild(svEl("span","sv2-trank"+(i<3?" rk"+(i+1):""),String(i+1)));const tm=svEl("div","sv2-tmain");tm.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド"));tm.appendChild(svEl("b",null,t[1]));tm.appendChild(svEl("span","cnt",trendCntTx(t)));const vol=svEl("span","sv2-tvol");const vi=svEl("i");vi.style.width=Math.max(6,Math.round(trendNumLive(t)/maxV*100))+"%";vol.appendChild(vi);tm.appendChild(vol);r.appendChild(tm);if(dyn)r.appendChild(svEl("span","sv2-tdyn","急上昇"));r.appendChild(svEl("span","sv2-tarr","›"));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});
 wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));sub.appendChild(wrap);svShowSub("search");}
-function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time,vw)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw=vw||"";all.push(o);};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys&&!p.isReply)push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"");});svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.vw||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));svPostBack=()=>svTrendPosts(word);wrap.appendChild(svEl("div","sv2-rhead",all.length+" 件のポスト"));if(all.length){all.forEach(p=>wrap.appendChild(svPostEl(p)));wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));}else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
+function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time,vw,id,abs)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw=vw||"";o.id=id||"";o.abs=abs||"";all.push(o);};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys&&!p.isReply)push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"",p.id,(typeof postAbsTime==="function")?postAbsTime(p):"");});svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.vw||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));svPostBack=()=>svTrendPosts(word);wrap.appendChild(svEl("div","sv2-rhead",all.length+" 件のポスト"));if(all.length){all.forEach(p=>wrap.appendChild(svPostEl(p)));wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));}else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
 function svNotifsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("通知"));
 /* v505: his notifications group under day heads with the day total,
    the main list's grammar since v503 - scene notices carry their
@@ -8557,7 +8634,7 @@ if(saved&&saved.started){S=Object.assign(defState(),saved);if(!S.world)S.world="
 var PKEY="debut-status-snd",on=true;
 try{on=localStorage.getItem(PKEY)!=="0";}catch(e){}
 var ctx=null,master=null,bgmBus=null,noiseBuf=null;
-var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0,result:0,lvup:0};
+var played={tap:0,sel:0,like:0,ntf:0,dm:0,send:0,story:0,end:0,live:0,side:0,ann:0,result:0,lvup:0,rp:0,bmk:0};
 function ac(){
   if(!ctx){
     var AC=window.AudioContext||window.webkitAudioContext;
@@ -8596,6 +8673,12 @@ var Snd={
   ntf:function(){played.ntf++;tone({f0:1318,dur:.32,vol:.07,a:.01});tone({f0:1760,dur:.42,vol:.05,at:.09,a:.01});},
   dm:function(){played.dm++;tone({type:"triangle",f0:880,dur:.08,vol:.11});tone({type:"triangle",f0:1174,dur:.15,vol:.09,at:.07});},
   send:function(){played.send++;noise({f0:500,f1:2600,dur:.16,vol:.06});tone({type:"triangle",f0:420,f1:840,dur:.14,vol:.045});},
+  /* v512: the two footer toggles that used to stay silent get their
+     own quiet voices in the same synth family - repost is a quick
+     up-down pair (the cycle arrows), bookmark a single soft low
+     thock. Untoggling falls back to the plain tap, like unlike. */
+  rp:function(){played.rp++;tone({type:"triangle",f0:560,f1:880,dur:.07,vol:.08});tone({type:"triangle",f0:880,f1:590,dur:.08,vol:.06,at:.055});},
+  bmk:function(){played.bmk++;tone({f0:330,f1:205,dur:.09,vol:.09,a:.005});},
   story:function(){played.story++;noise({f0:1600,f1:700,dur:.11,vol:.085});},
   /* v451: scene sounds - kept short and quiet, in the same synth
      voice as the set above. end: a soft three-note resolve (the
@@ -8665,6 +8748,22 @@ document.addEventListener("click",function(e){
   var like=t.closest(".like-btn");
   if(like){setTimeout(function(){if(like.dataset.on==="1")Snd.like();else Snd.tap();},0);return;}
   if(t.closest("#sv-like")){var b=document.getElementById("sv-like");setTimeout(function(){if(b&&b.classList.contains("liked"))Snd.like();else Snd.tap();},0);return;}
+  /* v512: the post footer's span controls are not <button>s, so the
+     generic tap rule never reached them - repost and bookmark were
+     silent, and so were share, reply and the post menu. They join
+     the same delegation, reading the toggled state after the game's
+     own handler has run, exactly like the like rule above. */
+  var rpb=t.closest(".rp-btn");
+  if(rpb){setTimeout(function(){if(rpb.dataset.on==="1")Snd.rp();else Snd.tap();},0);return;}
+  var bkb=t.closest(".bmk-btn");
+  if(bkb){setTimeout(function(){if(bkb.dataset.on==="1")Snd.bmk();else Snd.tap();},0);return;}
+  if(t.closest(".share-btn")||t.closest(".reply-btn")||t.closest(".p-more")){Snd.tap();return;}
+  /* v512: his screen's action spans get the same treatment - like,
+     repost and bookmark toggles sound like the main UI's, and the
+     share act, profile tabs, app-bar nav and post menu join the tap */
+  var sva=t.closest("#sideview .sv2-act");
+  if(sva&&(sva.classList.contains("like")||sva.classList.contains("repost")||sva.classList.contains("bmkA"))){var svIsL=sva.classList.contains("like"),svIsR=sva.classList.contains("repost");setTimeout(function(){var on2=sva.classList.contains("on");if(!on2)Snd.tap();else if(svIsL)Snd.like();else if(svIsR)Snd.rp();else Snd.bmk();},0);return;}
+  if(t.closest("#sideview .shrA")||t.closest("#sideview .sv2-ptab")||t.closest("#sideview [data-nav]")||t.closest("#sideview .sv2-more")){Snd.tap();return;}
   var xp=t.closest("#xc-post");
   if(xp){if(!xp.disabled)Snd.send();return;}
   if(t.closest(".dm-send")||t.closest("#sv-send")){Snd.send();return;}
