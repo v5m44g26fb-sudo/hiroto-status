@@ -4185,7 +4185,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v526</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v530</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4527,7 +4527,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v526</p>
+    <p class="ver">v530</p>
   </div>
 </section>
 </div>
@@ -7651,7 +7651,7 @@ function renderDayBanner(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(c
  /* v484: while the song card is in the stack, the player card must not
     tuck up over it (its -20px overlap belongs to the banner alone) */
  const hudEl=$("#status-hud");if(hudEl)hudEl.classList.toggle("no-tuck",S.ch===1);
- set("#db-day","DAY "+S.ch);set("#db-prog",S.ch+" / "+totalDays()+"");set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
+ set("#db-day",S.ch===7?"DAY 7 · AFTER STORY":"DAY "+S.ch);set("#db-prog",S.ch+" / "+totalDays()+"");/* v530: Day 7 banner carries the AFTER STORY tag (label only) */set("#db-big",String(S.ch));set("#db-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#db-sub",ch.banner||"");
  /* v91: the CHAPTER banner carries the same per-chapter photo as the
     v88 day card, dimmed under its gradient (presentation only) */
  const bgEl=$("#db-bg");if(bgEl){const src=DI_BG[S.ch]||"";if(src&&bgEl.getAttribute("src")!==src)bgEl.src=src;}
@@ -7673,7 +7673,7 @@ const STORY_WD=["日","月","火","水","木","金","土"];
 function storyDateTx(d){const t=new Date(2025,1,24+(d-1));return t.getFullYear()+"年"+(t.getMonth()+1)+"月"+t.getDate()+"日（"+STORY_WD[t.getDay()]+"）";}
 function showDayIntro(){const ch=curCH()[S.ch-1];if(!ch)return;const parts=(ch.day||"").split(" ― ");const set=(id,v)=>{const e=$(id);if(e)e.textContent=v;};
  set("#di-day","DAY "+S.ch);set("#di-date",storyDateTx(S.ch));set("#di-big",String(S.ch));set("#di-title",parts.length>1?parts.slice(1).join(" ― "):(ch.day||""));set("#di-sub",ch.banner||"");
- set("#di-lab","CHAPTER "+S.ch);
+ set("#di-lab",S.ch===7?"AFTER STORY":"CHAPTER "+S.ch);/* v530: Day 7 is the epilogue - its chapter card carries the AFTER STORY tag instead of a chapter number (label only) */
  /* v149: the day's mission preview (event row reads the chapter title) */
  const dm=$("#di-missions");if(dm){dm.innerHTML="";[["POST","今日の投稿を選ぶ","#7cc4ff"],["EVENT",ch.event?ch.event.title:"","#f7c948"],["ACTIVITY","今日の行動を選ぶ（1日1回）","#ff8fc0"]].forEach(r=>{if(!r[1])return;const d=document.createElement("div");d.className="di-mrow";d.innerHTML='<span class="di-mchip" style="--mc:'+r[2]+'">'+r[0]+'</span><span class="di-mtx"></span>';d.querySelector(".di-mtx").textContent=r[1];dm.appendChild(d);});}
  /* v174: yesterday recap - the day-start snapshots bracket the
@@ -7702,7 +7702,7 @@ function countUp(el,from,to,useFmt){const t0=performance.now(),dur=760;
 let drsText="";
 function showDayResult(){const dd=dayDeltas(),agg=dd.agg;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
- $("#dr-lab").textContent="DAY "+S.ch+" ― RESULT ― "+storyDateTx(S.ch);
+ $("#dr-lab").textContent=S.ch===7?("AFTER STORY ― RESULT ― "+storyDateTx(S.ch).replace(/^\d+年/,"")):("DAY "+S.ch+" ― RESULT ― "+storyDateTx(S.ch));/* v530: the Day 7 result carries the AFTER STORY tag; the year is dropped there only, so the longer label stays on one line - the full date incl. year is on the Day 7 intro card (label only) */
  const drEl=$("#dayresult");if(drEl)drEl.classList.toggle("final",S.ch>=TOTAL_DAYS);
  /* v104: each row carries an axis icon for its medallion; the values,
     deltas and gauges fed to the cards are exactly the ones computed
