@@ -1873,6 +1873,18 @@ input,textarea{font-size:16px}
 .ej-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
 .ej-dots i.on{background:linear-gradient(135deg,#7856ff,#f91880)}
 .ej-words{margin:11px 0 2px;font-size:12px;line-height:1.7;color:#9aa0a6}
+/* ===== v523: why this ending - a short causal read-back on the
+   verdict screen, built only from what actually happened in this
+   run (the mispost only when it happened, the bands the numbers
+   really landed in). No thresholds, no scores; hidden in FIN,
+   where the album carries the record instead. ===== */
+.end-reason{margin-top:13px;border-top:1px solid rgba(255,255,255,.13);padding:12px 0 2px;animation:fadeup .5s ease .84s both}
+.end-reason .er-h{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.end-reason .er-h span{font-size:10.5px;font-weight:900;letter-spacing:.16em;color:var(--acc)}
+.end-reason .er-h small{font-size:11px;font-weight:800;color:#9aa0a6;letter-spacing:.08em}
+.end-reason p{font-size:12.5px;line-height:1.85;color:#cfd4d9;white-space:pre-line}
+#scr-ending.fin #end-reason{display:none}
+@media (prefers-reduced-motion:reduce){.end-reason{animation:none}}
 /* ===== v522: the run album - a short read-back of this run inside
    FIN (her posts, his-screen choices and the DM lines they actually
    delivered, the events that happened, how the distance landed).
@@ -3975,7 +3987,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v522</p>
+  <p class="ver">v523</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4160,7 +4172,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v522</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v523</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4471,6 +4483,7 @@ input,textarea{font-size:16px}
       <div class="erow"><span class="elab">世間の認知度</span><span class="egauge"><i id="end-cog-g"></i></span><b id="end-cog"></b></div>
       <div class="erow fire"><span class="elab">炎上度</span><span class="egauge"><i id="end-flm-g"></i></span><b id="end-flm"></b></div>
       <div class="erow dist"><span class="elab" id="end-dist-lab">ひろとの距離</span><span class="egauge"><i id="end-dist-g"></i></span><b id="end-dist"></b></div>
+      <div class="end-reason" id="end-reason"><div class="er-h"><span>WHY</span><small>なぜ、この結末か</small></div><p id="end-reason-tx"></p></div>
     <div class="end-journey" id="end-journey">
       <div class="ej-h"><span class="ej-t">6 DAYS JOURNEY</span><small id="ej-small">6日間の軌跡</small></div>
       <div class="ej-fol-h"><span>フォロワーの推移</span><b id="ej-fol-d"></b></div>
@@ -4503,7 +4516,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v522</p>
+    <p class="ver">v523</p>
   </div>
 </section>
 </div>
@@ -8531,6 +8544,41 @@ function renderEndJourney(){
   sw.style.display=imgs.length?"":"none";}
  setTimeout(()=>bars.classList.add("grow"),90);
 }
+/* v523: why this ending - a short causal read-back shown on the
+   verdict screen only (the block hides in FIN, where the v522
+   album carries the record). Every line is derived from the run
+   that just ended: the bands the four stats actually landed in,
+   and whether the Day 5 mispost really happened (albMispost -
+   the same gate the album uses). Nothing the player did not do
+   is named as a cause, no thresholds or numbers are shown, and
+   the ending body, its conditions and its order are untouched. */
+function endReason(kind){
+ const L=[],mis=albMispost(),wide=S.fol>=180000&&S.cog>=40;
+ if(kind==="flame"){
+  L.push("騒ぎの熱が下がりきらないまま、6日目を迎えた。反応が反応を呼んで、炎上が止まらなかった。");
+  if(wide&&S.dist>=38)L.push("歌は届いて、距離も近かった。それでも、炎上の熱が全部を上回った。");
+  if(mis)L.push("Day5の誤投稿も残った。消したはずのスクショが回っていて、記事の『証拠』として並べられた。");
+  if(S.dist>=40)L.push("彼との距離が近かったぶん、並べられた材料が本物らしく見えてしまった。");
+  else if(S.dist>=30)L.push("距離が縮まっていたことも、後から意味を持ってしまった。");
+  else if(!wide)L.push("二人の距離というより、騒ぎそのものの勢いで広がった。");
+ }else if(kind==="collab"){
+  L.push("歌が先に届いていた。フォロワーは大きく増え、世間の認知も広がった。そのうえで、彼との距離は最後まで近かった。");
+  L.push(S.flm>=40?"途中で熱が上がる場面もあったけれど、燃え広がる手前で止まった。":"炎上の熱も、大きくはならなかった。");
+  if(mis)L.push("Day5の誤投稿はあったけれど、騒ぎの中心にはならなかった。");
+ }else if(kind==="quiet"){
+  if(wide)L.push("歌は届いて、世間の認知も広がった。届かなかったのは、彼との距離のあと一歩だった。");
+  else L.push("フォロワーも認知も、まだ小さいままだった。大きな騒ぎにはならず、彼との距離だけが近づいていった。");
+  if(S.flm>=40)L.push("熱が上がりかけた日もあったけれど、燃え広がる前に冷めていった。");
+  if(mis)L.push("Day5の誤投稿も、騒ぎにはつながらなかった。");
+ }else{
+  if(wide)L.push("歌は届いて、世間の認知も広がった。届かなかったのは、彼との距離だった。");
+  else if(S.fol>=100000)L.push("フォロワーは増えていったけれど、関係を動かすところまでは行かなかった。彼との距離は、まだ遠いまま終わった。");
+  else L.push("彼との距離は、まだ遠いまま終わった。決め手になる出来事が、最後まで起きなかった。");
+  if(S.flm>=40)L.push("騒ぎになりかけた日もあったけれど、決定的な材料は出なかった。");
+  if(mis)L.push("Day5の誤投稿はあったけれど、それだけで何かが決まることはなかった。");
+ }
+ return L.join("\n");
+}
 /* ending */
 function ending(){let title,body,kind;const hot=S.dist>=40;
  const chgBox=$("#changes");if(chgBox)chgBox.innerHTML="";
@@ -8553,6 +8601,7 @@ function ending(){let title,body,kind;const hot=S.dist>=40;
  const tm=document.createElement("span");tm.className="et-main";tm.textContent=tp[0];th.appendChild(tm);
  if(tp[1]){const ts=document.createElement("span");ts.className="et-sub";ts.textContent=tp[1];th.appendChild(ts);}
  $("#end-body").textContent=body;
+ const ertx=$("#end-reason-tx");if(ertx)ertx.textContent=endReason(kind);
  /* v114: the follower count counts up to the same final figure */
  {const folEl=$("#end-fol"),fv=S.fol,t0=performance.now();const tick=t=>{const k=Math.max(0,Math.min(1,(t-t0)/850));folEl.textContent=fmt(Math.round(fv*(1-Math.pow(1-k,3))));if(k<1&&$("#scr-ending").classList.contains("on"))requestAnimationFrame(tick);};folEl.textContent=fmt(0);requestAnimationFrame(tick);}
  $("#end-dist").textContent=S.dist;$("#end-cog").textContent=S.cog;$("#end-flm").textContent=S.flm;
