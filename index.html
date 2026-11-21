@@ -830,6 +830,61 @@ input,textarea{font-size:16px}
 #xbanner .xb-tx{margin-top:1px;font-size:13px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #xbanner .xb-sub{margin-top:1px;font-size:11.5px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (prefers-reduced-motion:reduce){#xbanner{transition:opacity .2s ease;transform:none}}
+/* ===== v521: her drafts + the locked account. Drafts live inside the
+   composer she already uses (save the loaded choice, call it back the
+   same day, delete it any day) - no new float, the bar sits in flow
+   under the draft card. The locked account is a plain pane reached by
+   the account-switch row on her profile: no cover photo, no counts
+   that move, posts nobody can see (no fx, no reactions, ever). ===== */
+.xc-dbar{display:flex;gap:8px;padding:10px 16px 0}
+.xc-dbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px solid #d8dee3;color:#0f1419;font-family:inherit;font-size:13px;font-weight:800;padding:9px 10px;border-radius:999px;cursor:pointer;transition:transform .12s ease,background .15s ease}
+.xc-dbtn svg{width:16px;height:16px;fill:#536471;flex:none}
+.xc-dbtn:active{transform:scale(.96);background:#eff3f4}
+.xc-dbtn:disabled{opacity:.45;cursor:default}
+.xc-dbtn:disabled:active{transform:none;background:#fff}
+.xc-dbtn .n{color:#7856ff;font-weight:900}
+#scrim-drafts .drow{border:1px solid #e8edf0;border-radius:14px;padding:11px 12px;margin-top:10px;background:#fff}
+#scrim-drafts .drow-top{display:flex;align-items:center;gap:8px}
+#scrim-drafts .drow-day{font-size:10.5px;font-weight:900;letter-spacing:.08em;color:#fff;background:linear-gradient(90deg,#1d9bf0,#7856ff);border-radius:999px;padding:3px 9px;flex:none}
+#scrim-drafts .drow-note{font-size:11px;color:#8a94a6;font-weight:700}
+#scrim-drafts .drow-tx{font-size:14px;line-height:1.6;margin-top:7px;white-space:pre-wrap;word-break:break-word}
+#scrim-drafts .drow-img{margin-top:8px;width:100%;border-radius:10px;display:block}
+#scrim-drafts .drow-btns{display:flex;gap:8px;margin-top:10px}
+#scrim-drafts .dbtn{flex:1;font-family:inherit;font-size:13px;font-weight:800;padding:8px 10px;border-radius:999px;cursor:pointer;border:1px solid #d8dee3;background:#fff;color:#0f1419}
+#scrim-drafts .dbtn.go{background:#0f1419;color:#fff;border-color:#0f1419}
+#scrim-drafts .dbtn:active{transform:scale(.96)}
+#scrim-drafts .dbtn:disabled{opacity:.4;cursor:default}
+#scrim-drafts .dempty{margin-top:14px;font-size:13.5px;color:#536471;line-height:1.7;background:#f7f9f9;border-radius:14px;padding:14px}
+.acctsw{display:flex;align-items:center;gap:11px;width:100%;margin-top:14px;background:#fff;border:1px solid #e8edf0;border-radius:16px;padding:11px 13px;cursor:pointer;font-family:inherit;text-align:left;box-shadow:0 4px 14px rgba(15,20,25,.05);transition:transform .12s ease,background .15s ease}
+.acctsw:active{transform:scale(.98);background:#f7f9f9}
+.acctsw-ic{width:38px;height:38px;flex:none;border-radius:50%;background:#0f1419;display:flex;align-items:center;justify-content:center}
+.acctsw-ic svg{width:18px;height:18px;fill:#fff}
+.acctsw-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.acctsw-main b{font-size:14.5px;color:#0f1419}
+.acctsw-main small{font-size:12px;color:#536471}
+.acctsw-go{font-size:12.5px;font-weight:800;color:#7856ff;flex:none}
+#x-pane-lock .lock-cover{height:86px;background:linear-gradient(120deg,#141824,#232733 55%,#171a26)}
+#x-pane-lock .lock-ava{width:72px!important;height:72px!important;margin-top:-36px;border:4px solid #fff;box-shadow:0 6px 18px rgba(15,20,25,.25);filter:saturate(.82)}
+#x-pane-lock .lock-name{font-size:20px;font-weight:900;margin-top:7px;display:flex;align-items:center;gap:7px}
+.lock-chip{font-size:10.5px;font-weight:800;letter-spacing:.05em;color:#fff;background:#0f1419;border-radius:999px;padding:3px 9px}
+#x-pane-lock .lock-note{display:flex;gap:9px;align-items:flex-start;margin:14px 14px 0;background:#f7f9f9;border:1px solid #e8edf0;border-radius:14px;padding:11px 13px;font-size:12.5px;line-height:1.6;color:#3d4750}
+#x-pane-lock .lock-note svg{width:16px;height:16px;flex:none;fill:#536471;margin-top:2px}
+.lock-seclab{margin:20px 14px 4px;font-size:11px;font-weight:900;letter-spacing:.12em;color:#8a94a6}
+#lock-choices{padding:2px 14px 0}
+.lock-choice{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #e8edf0;border-radius:14px;padding:12px 13px;margin-top:9px;font-family:inherit;font-size:14px;line-height:1.6;color:#0f1419;cursor:pointer;transition:transform .12s ease,border-color .15s ease}
+.lock-choice:active{transform:scale(.98);border-color:#0f1419}
+.lock-done{margin:10px 14px 0;font-size:13px;color:#536471;background:#f7f9f9;border-radius:12px;padding:11px 13px;line-height:1.6}
+.lk-post{display:flex;gap:10px;padding:13px 14px;border-bottom:1px solid #eff3f4}
+.lk-post .avatar{width:40px;height:40px;flex:none;filter:saturate(.82)}
+.lk-main{flex:1;min-width:0}
+.lk-head{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.lk-head b{font-size:14.5px}
+.lk-head .h{font-size:13px;color:#536471}
+.lk-head .d{font-size:13px;color:#536471}
+.lk-tx{font-size:14.5px;line-height:1.6;margin-top:2px;white-space:pre-wrap;word-break:break-word}
+.lk-meta{margin-top:5px;font-size:11.5px;color:#8a94a6;display:flex;align-items:center;gap:5px}
+.lk-meta svg{width:12px;height:12px;fill:#8a94a6}
+.lk-empty{margin:12px 14px;font-size:13.5px;color:#536471;line-height:1.7;background:#f7f9f9;border-radius:14px;padding:14px}
 /* readable copy keeps its right end clear of the compose FAB's column, so
    glyphs can never slide under the button (same idea as .evcard h3 in v32) */
 #daybanner{padding-right:76px}
@@ -3903,7 +3958,7 @@ input,textarea{font-size:16px}
   <button class="btn" id="btn-start">はじめる</button>
   <button class="btn ghost hidden" id="btn-continue">つづきから →</button>
   <button class="btn ghost hidden" id="btn-reset0">最初から（セーブ削除）</button>
-  <p class="ver">v520</p>
+  <p class="ver">v521</p>
   <p class="t-copy">本作品はフィクションです。実在の人物・団体とは関係ありません。<br>© 2026 FAN-MADE STORY GAME</p>
 </section>
 
@@ -4059,6 +4114,7 @@ input,textarea{font-size:16px}
         <div style="font-size:14px;line-height:1.65;margin-top:6px" id="prof-bio">Hearts2Hearts 最年長、なおです。デビュー曲『The Chase』配信中。</div>
         <div class="prof-joined"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 15H5V10h14v9zM5 8V6h14v2H5z"/></svg><span id="me-joined-t"></span></div>
         <div class="counts" style="display:flex;gap:22px"><span><b id="x-folwing-n">42</b> フォロー中</span><span><b id="x-fol-n">1</b> フォロワー</span></div>
+        <button class="acctsw" id="me-to-lock" type="button"><span class="acctsw-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9zm3 4a2 2 0 0 1 1 3.73V19a1 1 0 0 1-2 0v-1.27A2 2 0 0 1 12 14z"/></svg></span><span class="acctsw-main"><b>なお（鍵）</b><small>@nao_kagi ― 非公開アカウント</small></span><span class="acctsw-go">切り替え ›</span></button>
       </div>
       <div class="me-now">
         <div class="me-now-cell"><small>レベル</small><b id="me-now-lv">Lv 1</b></div>
@@ -4087,7 +4143,7 @@ input,textarea{font-size:16px}
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v520</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v521</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4118,6 +4174,22 @@ input,textarea{font-size:16px}
           <p class="set-note">セーブを消すと、7日間の記録はすべて最初からになるよ。</p>
         </div>
       </div>
+    </div>
+    <div id="x-pane-lock" style="display:none">
+      <div class="profbar"><button class="pback" id="lock-back" aria-label="戻る">‹</button><div class="pt"><b>なお（鍵）</b><small>@nao_kagi</small></div></div>
+      <div class="lock-cover"></div>
+      <div style="padding:0 14px">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between"><img class="avatar lock-ava" src="assets/nao-avatar4.jpg" width="72" height="72" alt=""><button class="editbtn" id="lock-to-official" type="button">公式に戻る</button></div>
+        <div class="lock-name">なお（鍵）<span class="lock-chip">非公開</span></div>
+        <div style="color:#536471;font-size:13px">@nao_kagi</div>
+        <div style="font-size:14px;line-height:1.65;margin-top:6px">ここだけ本音置き場。公式では言えないことしか書かない。</div>
+        <div class="counts" style="display:flex;gap:22px;margin-top:10px"><span><b>0</b> フォロー中</span><span><b>0</b> フォロワー</span></div>
+      </div>
+      <div class="lock-note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9zm3 4a2 2 0 0 1 1 3.73V19a1 1 0 0 1-2 0v-1.27A2 2 0 0 1 12 14z"/></svg><span>このアカウントは非公開です。ここに書いたものは、誰のタイムラインにも出ません。フォロワーも、反応も、数字もつきません。</span></div>
+      <div class="lock-seclab" id="lock-daylab">今日の本音</div>
+      <div id="lock-choices"></div>
+      <div class="lock-seclab">これまでの本音</div>
+      <div id="lock-list"></div>
     </div>
     <div id="x-pane-hisprof" style="display:none">
       <div class="profbar"><button class="pback" data-back aria-label="戻る">‹</button><div class="pt"><b id="his-name-bar">井汲大翔</b><small id="his-pcount">0 ポスト</small></div><button class="pshare" id="his-share" type="button" aria-label="プロフィールを共有"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 7 5-5 5 5"/><path d="M5 12v8h14v-8"/></svg></button></div>
@@ -4226,6 +4298,10 @@ input,textarea{font-size:16px}
       <span class="xc-div"></span>
       <svg class="xc-ring" width="24" height="24" viewBox="0 0 24 24"><circle class="bgc" cx="12" cy="12" r="9"/><circle class="fgc" id="xc-ring-fg" cx="12" cy="12" r="9" stroke-dasharray="56.5" stroke-dashoffset="56.5"/></svg>
     </div>
+    </div>
+    <div class="xc-dbar">
+      <button class="xc-dbtn" id="xc-dsave" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg>下書きに保存</button>
+      <button class="xc-dbtn" id="xc-dopen" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zm4 3.5h8V7H8v1.5zm0 4h8V11H8v1.5zm0 4h5V15H8v1.5z"/></svg>下書きを開く<span class="n" id="xc-dcount"></span></button>
     </div>
     <div class="xc-seclab">投稿案を選ぶ<span>タップで下書きにセット、右上の「ポストする」で投稿</span></div>
     <div id="postopts"></div>
@@ -4406,7 +4482,7 @@ input,textarea{font-size:16px}
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v520</p>
+    <p class="ver">v521</p>
   </div>
 </section>
 </div>
@@ -4418,6 +4494,12 @@ input,textarea{font-size:16px}
   <div class="chg-now" id="chg-now"></div>
   <div class="chg-filter" id="chg-filter"></div>
   <div id="chglist"></div>
+</div></div>
+<div class="scrim" id="scrim-drafts"><div class="sheet">
+  <button class="close" data-close="scrim-drafts">✕</button>
+  <span class="chg-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg>DRAFTS ― 下書き</span>
+  <h3>下書き</h3><p class="desc">出さなかった文面は、ここに残るよ。今日の下書きは、投稿画面に呼び戻せる。いらなくなったら消してね。</p>
+  <div id="draftlist"></div>
 </div></div>
 <div class="scrim" id="scrim-journey"><div class="sheet">
   <button class="close" data-close="scrim-journey">✕</button>
@@ -4986,7 +5068,11 @@ function postEl(p,hot){
 /* ===== game state ===== */
 const KEY="debut-status-v1";
 let S=null;
-function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,folScale:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[],sv:{}};}
+function defState(){return{started:false,world:"",target:"hiroto",handle:"",stance:"",first:"",fol:1,folScale:1,xp:0,cog:0,flm:0,dist:0,ch:1,posted:false,evDone:false,actDone:false,posts:[],notifs:[],threads:[],hirotoDm:"locked",men:[],followHiroto:false,notifSeen:0,storySeen:[],chgLog:[],storyDyn:[],buzz:[],folHist:[],sv:{},drafts:[],lockPosts:[]};}
+/* v521: drafts = composer choices she saved instead of posting
+   ({d: day, i: option index, tx, im}); lockPosts = what she dropped
+   on the locked account ({d: day, tx}). Both additive-only: older
+   saves pick the defaults up from defState on load. */
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const r=localStorage.getItem(KEY);return r?JSON.parse(r):null;}catch(e){return null;}}
 function show(id){$$(".screen").forEach(x=>x.classList.remove("on"));$("#v-x").classList.remove("on");if(id==="v-x"){$("#v-x").classList.add("on");}else{$("#"+id).classList.add("on");}window.scrollTo(0,0);}
@@ -5134,7 +5220,7 @@ $("#hud-chg").addEventListener("click",()=>{chgFilter="all";renderChgLog();$("#s
    v34 xtabs removal (trends live in the search pane, mentions in the
    notification panel). Reachable panes keep their relative order, so
    slide directions are unchanged. */
-const PANES=["tl","me","search","msg","hisprof","thread","follow"];
+const PANES=["tl","me","search","msg","hisprof","thread","follow","lock"];
 let curPane="tl";
 let panePrev=null;
 function showPane(k){
@@ -5157,6 +5243,7 @@ function showPane(k){
  if(k==="hisprof")renderHisTab();
  if(k==="msg"){renderDmList();setTimeout(maybeShowDmUnlock,80);}
  if(k==="follow")renderFollowList();
+ if(k==="lock")renderLock();
  if(window.__syncProfBar)window.__syncProfBar();
 }
 /* one-shot "settle from the left" animation for back navigation */
@@ -6950,6 +7037,7 @@ const XC_MAX=140,XC_CIRC=56.5,XC_PLACEHOLDER="data:image/gif;base64,R0lGODlhAQAB
    stays hidden there) */
 $("#xc-pimg").addEventListener("click",()=>{if(!xcSel||!xcSel.img)return;try{openPhoto([{src:xcSel.img,name:"なお",handle:S?S.handle:"",av:(ACC.nao&&ACC.nao.av)||null,cap:xcSel.tx||"",date:"下書き",meta:""}],0);}catch(_){}});
 function xcRenderDraft(){
+ try{xcDraftSync();}catch(_){}
  const pv=$("#xc-preview"),btn=$("#xc-post"),cnt=$("#xc-count"),fg=$("#xc-ring-fg"),pi=$("#xc-pimg"),pw=$("#xc-pwrap"),cd=$(".xc-card");
  if(!xcSel){pv.textContent="いまどうしてる？";pv.classList.add("empty");btn.disabled=true;btn.classList.remove("ready");cnt.textContent="";cnt.className="xc-count";if(fg){fg.style.strokeDashoffset=XC_CIRC;fg.style.stroke="#1d9bf0";}if(pw)pw.classList.add("hidden");if(pi){pi.style.aspectRatio="";pi.src=XC_PLACEHOLDER;}if(cd)cd.classList.remove("loaded");return;}
  linkifyTx(pv,xcSel.tx,true);pv.classList.remove("empty");pv.classList.remove("swap");void pv.offsetWidth;pv.classList.add("swap");btn.disabled=xcBusy;btn.classList.remove("ready");void btn.offsetWidth;btn.classList.add("ready");
@@ -7024,6 +7112,102 @@ function doPost(o){
  if(o.img&&/-mispost\.jpg$/.test(o.img)){const mr=reacts.find(r=>!r.sys&&r.a==="matome");
   setTimeout(()=>queueBanner({a:"matome",tx:"新人・なお、公式アカウントに私的なツーショットを誤投稿か",sub:"数分で消えたが、スクショは出回っている",postId:mr?mr.id:null,flood:3}),1700);}
 }
+/* ===== v521: her drafts + the locked account =====
+   Drafts: while a choice is loaded in the composer she can shelve it
+   into S.drafts; the drafts sheet (opened from inside the composer)
+   calls a same-day draft back into the composer, or deletes any
+   draft. Saving never posts and never carries fx - posting still
+   goes through the day's own options, exactly as before.
+   The locked account is a pane of her own that nobody can see: one
+   choice a day, kept in S.lockPosts, with no fx, no reactions and
+   no notifications. The Day 5 mispost premise (she has a locked
+   account and hit post on the wrong one) is untouched - this only
+   lets the player visit the place that post was meant for. */
+const LOCK_TXT={
+hiroto:{1:["デビューした。……した、よね？ 実感ない。足がずっと浮いてる感じ","緊張で朝ごはん、喉通らんかった。10年以上待った日なのに","今日だけは言わせて。やっとスタートに立てた。ここからが本番なのは分かってる"],
+2:["生歌だって何回言わせるの。歌った。私が。……あー、悔しい","切り抜きのコメント欄、見なきゃいいのに見ちゃう。学習しない","耳、真っ赤だったらしい。恥ずかしい。でも歌は本物だから、まあいっか"],
+3:["今日、初めての歌番組。緊張で手が冷たい。……歌い切るしかない","楽屋のドアの自分の名前、何回見ても慣れない。写真撮った。消せない","今日のステージ、あの人も観てくれるかな。……聞けないけど"],
+4:["例の表、見た。本人には言えないけど、ちょっと笑って、ちょっと泣いた","今日出す文、何回も書き直した。あれが今の私の精一杯","偶然で済ませるの、嘘じゃないけど全部でもない。ここにだけ書く"],
+5:["今日は火種になる日って言われた。分かってる。ここでも誰の名前も出さない","23秒の沈黙、私も観た。……何も言えない。言わない。それだけ","手、震えてる。投稿ボタン押す前に、置く場所だけは絶対間違えない"],
+6:["報道、出た。怖くないって言ったら嘘。でも歌うのはやめない。それだけ","あの人の名前が、私のせいで見出しに並ぶのだけは、ずっと嫌だった","電話、鳴り止まない。味噌汁こぼした。……日常が一番遠い"],
+7:["7日目。終わったのか、始まったのか、まだ分からない。朝ごはんは美味しかった","この1週間分、ここにだけ本音が残ってる。消さないでおく","次に書くときは、もっと普通のことがいい。コンビニの新作とか"]},
+sakuya:{1:["デビューした。廊下で会う人みんな先輩で、頭下げすぎて首が痛い","あの子、私より後輩なのに私より落ち着いてた。……なんで","練習生の頃の自分に言いたい。時間かかるけど、ちゃんと来るよ、この日"],
+2:["挨拶が深すぎたって言われてる。だって緊張したんだもん","今日のステージ、声は届いた、はず。……届いてて","今日のことは、今日のうちにここに書いとく。明日になると恥ずかしくなるから"],
+3:["エンディングで並ぶの、緊張する。近すぎても遠すぎてもダメなやつ","先輩って呼ばれるの、まだ慣れない。練習歴だけは長いのに","今日のステージ、あの子の歌も聴けた。……仕事の顔、してた"],
+4:["ファンの人の長文、3回読んだ。スクショはしない。心に置く","界隈が静かになった日。歌う側は、歌うしかできないんだけど","嬉しいと怖いが、ずっと半分ずつ。両方本当"],
+5:["明日の発表、私の言葉で出るかどうか、まだ分からない。待つしかない","自販機でカフェオレ2つ買った。手が勝手に、ってやつ。私もだよ","今日は置く場所、絶対に間違えない。それだけは自分に言い聞かせてる"],
+6:["12時、息止めて見た。あの人の言葉、そのまま出た。よかった","発表文、あの人が自分で選んだ文だった。私が直したやつじゃない","囲み取材、笑えてたかな私。顔、ひきついてなかったかな"],
+7:["7日目。食堂の窓側の席の約束、まだ残ってる。……忘れてない","ここに書いた分だけは、誰にも見せてない私。消さないでおく","次は他愛ないことで書きたい。今日の空がどうとか"]}};
+function xcDraftSync(){const b=$("#xc-dsave");if(b)b.disabled=!xcSel||xcBusy;const c=$("#xc-dcount");if(c){const n=(S&&Array.isArray(S.drafts))?S.drafts.length:0;c.textContent=n?String(n):"";}}
+function closeDrafts(){const s=$("#scrim-drafts");if(!s||!s.classList.contains("on")||s.classList.contains("closing"))return;s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}
+function renderDrafts(){
+ const box=$("#draftlist");if(!box)return;box.innerHTML="";
+ const ds=(S&&Array.isArray(S.drafts))?S.drafts:[];
+ if(!ds.length){box.innerHTML='<div class="dempty">まだ下書きはないよ。投稿画面で案を選んで「下書きに保存」を押すと、出さなかった文面がここに残る。</div>';return;}
+ ds.forEach((dr,di)=>{
+  const row=document.createElement("div");row.className="drow";
+  const top=document.createElement("div");top.className="drow-top";
+  const chip=document.createElement("span");chip.className="drow-day";chip.textContent="Day "+dr.d;top.appendChild(chip);
+  const canBack=dr.d===S.ch&&!S.posted;
+  const note=document.createElement("span");note.className="drow-note";note.textContent=canBack?"今日の下書き ― 呼び戻せる":(dr.d===S.ch?"今日の下書き ― 投稿は済んでる":"前の日の下書き ― 見るだけ");top.appendChild(note);row.appendChild(top);
+  const tx=document.createElement("div");tx.className="drow-tx";tx.textContent=dr.tx;row.appendChild(tx);
+  if(dr.im){const im=document.createElement("img");im.className="drow-img";im.src=dr.im;im.alt="";im.loading="lazy";row.appendChild(im);}
+  const btns=document.createElement("div");btns.className="drow-btns";
+  const go=document.createElement("button");go.type="button";go.className="dbtn go";go.textContent="投稿画面に呼び戻す";go.disabled=!canBack;
+  go.addEventListener("click",()=>{closeDrafts();const cards=$$("#postopts .choice");const card=cards[dr.i];if(card)setTimeout(()=>card.click(),60);});
+  const del=document.createElement("button");del.type="button";del.className="dbtn";del.textContent="消す";
+  del.addEventListener("click",()=>{S.drafts.splice(di,1);save();xcDraftSync();renderDrafts();toastChg("下書きを消したよ");});
+  btns.appendChild(go);btns.appendChild(del);row.appendChild(btns);
+  box.appendChild(row);
+ });
+}
+$("#xc-dsave").addEventListener("click",()=>{
+ if(!xcSel||xcBusy)return;
+ const posts=curCH()[S.ch-1].posts,i=posts.indexOf(xcSel);if(i<0)return;
+ if(!Array.isArray(S.drafts))S.drafts=[];
+ if(S.drafts.some(d=>d.d===S.ch&&d.i===i)){toastChg("その案は、もう下書きにあるよ");return;}
+ S.drafts.unshift({d:S.ch,i:i,tx:xcSel.tx,im:xcSel.img||""});
+ save();xcDraftSync();toastChg("下書きに保存したよ");
+});
+$("#xc-dopen").addEventListener("click",()=>{renderDrafts();$("#scrim-drafts").classList.add("on");});
+(function(){const s=$("#scrim-drafts");if(!s)return;s.addEventListener("click",e=>{if(e.target===s)closeDrafts();});})();
+function lockDateTx(d){const t=new Date(2025,1,24+(d-1));return (t.getMonth()+1)+"月"+t.getDate()+"日";}
+function renderLock(){
+ if(!S||!S.started)return;
+ if(!Array.isArray(S.lockPosts))S.lockPosts=[];
+ const day=Math.max(1,Math.min(S.ch||1,7));
+ const lab=$("#lock-daylab");if(lab)lab.textContent="今日の本音 ― Day "+day;
+ const cw=$("#lock-choices");cw.innerHTML="";
+ if(S.lockPosts.some(p=>p.d===day)){
+  const d=document.createElement("div");d.className="lock-done";d.textContent="今日の分は、もう置いた。ここにあるのは、自分だけの記録。";cw.appendChild(d);
+ }else{
+  const set=(LOCK_TXT[tgtKey()]||{})[day]||[];
+  set.forEach(tx=>{
+   const b=document.createElement("button");b.type="button";b.className="lock-choice";b.textContent=tx;
+   b.addEventListener("click",()=>{S.lockPosts.unshift({d:day,tx:tx});save();try{Snd.send();}catch(_){}renderLock();toastChg("鍵垢に置いたよ");});
+   cw.appendChild(b);
+  });
+ }
+ const list=$("#lock-list");list.innerHTML="";
+ if(!S.lockPosts.length){list.innerHTML='<div class="lk-empty">まだ何も置いてない。ここは、誰にも見られない場所。</div>';return;}
+ const lockSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 1 1 6 0v3H9z"/></svg>';
+ S.lockPosts.forEach(p=>{
+  const row=document.createElement("div");row.className="lk-post";
+  const av=document.createElement("img");av.className="avatar";av.src=(ACC.nao&&ACC.nao.av)||"";av.alt="";av.width=40;av.height=40;row.appendChild(av);
+  const main=document.createElement("div");main.className="lk-main";
+  const head=document.createElement("div");head.className="lk-head";
+  const nm=document.createElement("b");nm.textContent="なお（鍵）";head.appendChild(nm);
+  const hd=document.createElement("span");hd.className="h";hd.textContent="@nao_kagi";head.appendChild(hd);
+  const dt=document.createElement("span");dt.className="d";dt.textContent="· "+lockDateTx(p.d);head.appendChild(dt);
+  main.appendChild(head);
+  const tx=document.createElement("div");tx.className="lk-tx";tx.textContent=p.tx;main.appendChild(tx);
+  const meta=document.createElement("div");meta.className="lk-meta";meta.innerHTML=lockSvg;const ms=document.createElement("span");ms.textContent="自分だけが見ています ― Day "+p.d;meta.appendChild(ms);main.appendChild(meta);
+  row.appendChild(main);list.appendChild(row);
+ });
+}
+$("#me-to-lock").addEventListener("click",()=>showPane("lock"));
+$("#lock-back").addEventListener("click",()=>showPane("me"));
+$("#lock-to-official").addEventListener("click",()=>showPane("me"));
 /* activity (Status-style: pick a title, then run. v142: the partner and
    time-slot steps are gone by user decision - neither ever fed fx, the
    result text or stories; the partner only echoed into the receipt's
