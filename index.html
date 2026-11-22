@@ -4039,6 +4039,10 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
    detail view, like the rest of the card). ===== */
 .p-head .hd{flex:none}
 .post .mt .views{cursor:pointer}
+/* ===== v572: danger item in the post menu, and the detail view's
+   reply-count stat is a tap target for the reply list below. ===== */
+.pm-item.danger{color:#f4212e}
+#thread-main .dtstats .dts-rp{cursor:pointer}
 </style>
 </head>
 <body>
@@ -4271,7 +4275,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v571</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v572</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4616,7 +4620,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v571</p>
+    <p class="ver">v572</p>
   </div>
 </section>
 </div>
@@ -5175,23 +5179,37 @@ const VER_BADGE='<svg class="p-ver" viewBox="0 0 24 24" aria-label="認証済み
    in the timeline and mentions, and her own posts can be pinned to
    her profile. All of it is session-only state (the DM unread
    filter precedent), so the save format is untouched. */
-const PM_HIDE=new Set(),PM_MUTE=new Set();let PM_PIN=null;
+const PM_HIDE=new Set(),PM_MUTE=new Set(),PM_BLOCK=new Set();let PM_PIN=null;
 const PM_MORE='<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>';
 const PM_IC={eyeoff:'<svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.8 9.8 0 0 1 12 5c7 0 9.5 7 9.5 7a17.6 17.6 0 0 1-3.2 3.9M6.6 6.9A16.9 16.9 0 0 0 2.5 12S5 19 12 19c1.5 0 2.8-.3 4-.8"/><path d="M9.9 9.9a3.2 3.2 0 0 0 4.2 4.2"/></svg>',
  mute:'<svg viewBox="0 0 24 24"><path d="M15 9.5a4 4 0 0 1 0 5"/><path d="M18.5 6.5a8.5 8.5 0 0 1 0 11"/><path d="M4 9v6h4l5 4V5L8 9H4z"/></svg>',
- pin:'<svg viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>'};
-function pmFiltered(p){return PM_HIDE.has(p.id)||PM_MUTE.has(p.a);}
+ pin:'<svg viewBox="0 0 24 24"><path d="M12 17v5"/><path d="M9 3h6l1 7 2.6 2.6a1 1 0 0 1-.7 1.4H6.1a1 1 0 0 1-.7-1.4L8 10l1-7z"/></svg>',
+ link:'<svg viewBox="0 0 24 24"><path d="M10.5 13.5a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M13.5 10.5a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>',
+ share:'<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4.2"/><path d="M8.6 13.4l6.8 4.2"/></svg>',
+ flag:'<svg viewBox="0 0 24 24"><path d="M5 21.5v-17"/><path d="M5 4.5c4-2 8 2 12 0v8c-4 2-8-2-12 0"/></svg>',
+ user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.6-3.8 4.4-5.2 7.5-5.2s5.9 1.4 7.5 5.2"/></svg>',
+ block:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg>'};
+function pmFiltered(p){return PM_HIDE.has(p.id)||PM_MUTE.has(p.a)||PM_BLOCK.has(p.a);}
 function openPostMenu(p,el){
  const box=$("#pm-items");if(!box)return;box.innerHTML="";
  const close=()=>$("#scrim-pmenu").classList.remove("on");
- const add=(ic,label,fn)=>{const b=document.createElement("button");b.className="pm-item";b.innerHTML=ic+"<span></span>";b.querySelector("span").textContent=label;b.addEventListener("click",()=>{close();fn();});box.appendChild(b);};
+ const add=(ic,label,fn,danger)=>{const b=document.createElement("button");b.className="pm-item"+(danger?" danger":"");b.innerHTML=ic+"<span></span>";b.querySelector("span").textContent=label;b.addEventListener("click",()=>{close();fn();});box.appendChild(b);};
  const vanish=()=>{if(el&&el.classList&&el.classList.contains("detail")){const tb=$("#thread-back");if(tb)tb.click();}else if(el&&el.remove)el.remove();};
+ const copyLink=()=>{try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(()=>{try{toastChg("リンクをコピーしたよ");}catch(_){}}).catch(()=>{try{toastChg("この環境ではコピーできないよ");}catch(_){}});}else{try{toastChg("この環境ではコピーできないよ");}catch(_){}}}catch(_){}};
+ const sharePost=()=>{const data={title:"デビューしたら、彼と同じステージの件",text:(p.n||"")+"のポスト ― "+(p.t||""),url:location.href};try{if(navigator.share){navigator.share(data).catch(()=>{});}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(data.text+" "+data.url).then(()=>{try{toastChg("リンクをコピーしたよ");}catch(_){}}).catch(()=>{});}else{try{toastChg("この環境では共有できないよ");}catch(_){}}}catch(_){}};
  if(p.mine){
   if(PM_PIN===p.id)add(PM_IC.pin,"固定を外す",()=>{PM_PIN=null;try{renderMeTab();}catch(_){} try{toastChg("固定を外したよ");}catch(_){}});
   else add(PM_IC.pin,"プロフィールに固定する",()=>{PM_PIN=p.id;try{renderMeTab();}catch(_){} try{toastChg("プロフィールに固定したよ");}catch(_){}});
+  add(PM_IC.link,"ポストへのリンクをコピー",copyLink);
+  add(PM_IC.share,"共有する",sharePost);
  }else{
+  if(p.a===tgtKey())add(PM_IC.user,(p.n||p.h||"")+" さんのプロフィール",()=>{try{showPane("hisprof");}catch(_){}});
+  add(PM_IC.link,"ポストへのリンクをコピー",copyLink);
+  add(PM_IC.share,"共有する",sharePost);
   add(PM_IC.eyeoff,"このポストに興味がない",()=>{PM_HIDE.add(p.id);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg("このポストを非表示にしたよ");}catch(_){}});
   add(PM_IC.mute,(p.h||"")+" さんをミュート",()=>{PM_MUTE.add(p.a);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg((p.h||"")+" さんをミュートしたよ");}catch(_){}});
+  add(PM_IC.block,(p.h||"")+" さんをブロック",()=>{PM_BLOCK.add(p.a);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg((p.h||"")+" さんをブロックしたよ");}catch(_){}},true);
+  add(PM_IC.flag,"ポストを報告",()=>{try{toastChg("報告を受け付けたよ");}catch(_){}});
  }
  $("#scrim-pmenu").classList.add("on");
 }
@@ -5258,7 +5276,7 @@ function postEl(p,hot){
    const top514=(typeof threadStack!=="undefined"&&threadStack.length&&threadStack[threadStack.length-1])?threadStack[threadStack.length-1].id:null;
    if(par514&&par514.id!==p.id&&top514!==par514.id){
     const txEl=d.querySelector(".tx");
-    if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto rto-link";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=par514.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" さん"));
+    if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto rto-link";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=par514.n||par514.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" "+(par514.h||"")+" さん"));
      rto.addEventListener("click",e=>{e.stopPropagation();openPostThread(par514);});
      txEl.parentNode.insertBefore(rto,txEl);}}}catch(_){}
   if(p.a===tgtKey()||p.a==="nao"){const goProf=e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}};if(avEl&&avEl.addEventListener){avEl.style.cursor="pointer";avEl.addEventListener("click",goProf);}[".nm",".hd"].forEach(sel=>{const nEl=d.querySelector(sel);if(nEl){nEl.style.cursor="pointer";nEl.addEventListener("click",goProf);}});}
@@ -6193,6 +6211,7 @@ function renderThread(p){
   const stats=[[num(0),"件の返信"],[num(1)+(p.rped?1:0),"件のリポスト"],[num(2)+(p.liked?1:0),"件のいいね"]].filter(x=>x[0]>0);
   let sdEl=null;
   if(stats.length){const sd=document.createElement("div");sd.className="dtstats";sd.innerHTML=stats.map(x=>"<span"+(x[1]==="件のいいね"?" class=\"dts-lk\"":"")+"><b>"+fmtCnt(x[0])+"</b>"+x[1]+"</span>").join("");mt.parentNode.insertBefore(sd,mt);sdEl=sd;}
+  if(sdEl&&num(0)>0){const rpEl=sdEl.querySelector("span");if(rpEl){rpEl.classList.add("dts-rp");rpEl.addEventListener("click",()=>{const rb=$("#thread-replies");if(rb)rb.scrollIntoView({behavior:"smooth",block:"start"});});}}
   try{thCreepStart(p,main,meta,sdEl);}catch(_){}
  }
  tm.appendChild(main);
@@ -6206,7 +6225,7 @@ function renderThread(p){
  else reps.forEach(r=>{const el=postEl(r,false);
   /* v63: real-X reply context line (display only; reply text untouched) */
   const txEl=el.querySelector(".tx");
-  if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=p.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" さん"));txEl.parentNode.insertBefore(rto,txEl);}
+  if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=p.n||p.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" "+(p.h||"")+" さん"));rto.classList.add("rto-link");rto.addEventListener("click",e=>{e.stopPropagation();const tmEl=$("#thread-main");if(tmEl)tmEl.scrollIntoView({behavior:"smooth",block:"start"});});txEl.parentNode.insertBefore(rto,txEl);}
   box.appendChild(el);});
  /* v63: the docked composer names who you are replying to */
  const ph=$(".tc-ph");if(ph)ph.textContent=p.n+" さんへの返信をポスト";
@@ -6249,7 +6268,7 @@ function tcSetForm(on){
  const pill=$("#tc-pill"),form=$("#tc-form");if(!pill||!form)return;
  pill.classList.toggle("hidden",on);form.classList.toggle("hidden",!on);
  if(on){const p=tcParent(),to=$("#tc-to");
-  if(to){to.innerHTML="";if(p){to.appendChild(document.createTextNode("返信先： "));const b=document.createElement("b");b.textContent=p.h;to.appendChild(b);to.appendChild(document.createTextNode(" さん"));}}
+  if(to){to.innerHTML="";if(p){to.appendChild(document.createTextNode("返信先： "));const b=document.createElement("b");b.textContent=p.n||p.h;to.appendChild(b);to.appendChild(document.createTextNode(" "+(p.h||"")+" さん"));}}
   tcSyncSend();const inp=$("#tc-input");setTimeout(()=>{try{inp.focus({preventScroll:true});}catch(_){}},60);}
 }
 function tcResetComposer(){const f=$("#tc-form"),p=$("#tc-pill"),i=$("#tc-input");if(i)i.value="";if(f)f.classList.add("hidden");if(p)p.classList.remove("hidden");tcSyncSend();}
