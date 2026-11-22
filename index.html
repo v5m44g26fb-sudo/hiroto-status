@@ -4033,6 +4033,12 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
 .pane-in-r,.pane-in-l{animation:none}
 #scr-ending .end-panel,#scr-ending .end-card,#scr-ending .end-panel .erow{animation:none}
 }
+/* ===== v571: post-card header - the handle never shrinks (a long
+   display name truncates instead, like the real client), and the
+   views row shows the pointer its tap deserves (it opens the
+   detail view, like the rest of the card). ===== */
+.p-head .hd{flex:none}
+.post .mt .views{cursor:pointer}
 </style>
 </head>
 <body>
@@ -4265,7 +4271,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v570</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v571</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4610,7 +4616,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v570</p>
+    <p class="ver">v571</p>
   </div>
 </section>
 </div>
@@ -5127,10 +5133,21 @@ function postStoryDy(p,depth){
  }catch(_){}
  return (typeof S!=="undefined"&&S&&S.ch)||0;
 }
-function postTime(p){const dy=postStoryDy(p);const b=postBorn(p);if(!dy||!b)return p.tm||"今";const ch=(typeof S!=="undefined"&&S&&S.ch)||dy;let age=(Date.now()-(b-(p.mine?0:postOff(p))))+Math.max(0,ch-dy)*86400000;if(age<0)age=0;if(age<60000)return "今";if(age<3600000)return Math.floor(age/60000)+"分";if(age<86400000)return Math.floor(age/3600000)+"時間";const d=storyDateOf(dy),md=(d.getMonth()+1)+"月"+d.getDate()+"日";return d.getFullYear()===2025?md:d.getFullYear()+"年"+md;}
+/* v571: the display clock is the story's alone. Until this pass the
+   ladder ran on the real mint instant, so a post's "○分 / ○時間"
+   grew with real elapsed time and the same save read differently
+   at different real hours. The age is now a pure function of story
+   state: the v526 story offset within the post's day (her own posts
+   start at 0 - a fresh post reads 今 and stays 今 that day), plus
+   one story day per crossed chapter boundary. postBorn / postEff
+   stay for the fresh-post count-up gate, which is an animation
+   trigger, not a displayed time. */
+function postWithinMs(p){if(!p)return 0;if(p.mine)return (typeof p.so==="number"?p.so:0)*60000;return postOff(p);}
+function postAgeMs(p){const dy=postStoryDy(p);if(!dy)return -1;const ch=(typeof S!=="undefined"&&S&&S.ch)||dy;return postWithinMs(p)+Math.max(0,ch-dy)*86400000;}
+function postTime(p){const dy=postStoryDy(p);const age=postAgeMs(p);if(!dy||age<0)return p.tm||"今";if(age<60000)return "今";if(age<3600000)return Math.floor(age/60000)+"分";if(age<86400000)return Math.floor(age/3600000)+"時間";const d=storyDateOf(dy),md=(d.getMonth()+1)+"月"+d.getDate()+"日";return d.getFullYear()===2025?md:d.getFullYear()+"年"+md;}
 /* v408: the detail view's absolute clock, same derivation - the JP
    client prints "午後9:14 · 2026年11月16日" over the view count */
-function postAbsTime(p){const dy=postStoryDy(p);const e=postEff(p);if(!dy||!e)return p.tm||"今";const d=new Date(e),sd=storyDateOf(dy),h=d.getHours(),hh=h%12===0?12:h%12;return (h<12?"午前":"午後")+hh+":"+String(d.getMinutes()).padStart(2,"0")+" · "+sd.getFullYear()+"年"+(sd.getMonth()+1)+"月"+sd.getDate()+"日";}
+function postAbsTime(p){const dy=postStoryDy(p);if(!dy)return p.tm||"今";const sd=storyDateOf(dy);const mins=Math.max(0,21*60-Math.round(postWithinMs(p)/60000)),h=Math.floor(mins/60),hh=h%12===0?12:h%12;return (h<12?"午前":"午後")+hh+":"+String(mins%60).padStart(2,"0")+" · "+sd.getFullYear()+"年"+(sd.getMonth()+1)+"月"+sd.getDate()+"日";}
 /* v89: find the quoted original for a post, if one unambiguously exists:
    a bracketed fragment of 5+ chars that appears verbatim in one of her
    own posts. Returns a display snapshot or null. */
@@ -5193,7 +5210,7 @@ function postEl(p,hot){
   const d=document.createElement("div");d.className="post";if(p.fresh)d.classList.add("fresh");
   const av=p.av?'<img class="avatar" loading="lazy" decoding="async" src="'+p.av+'" width="40" height="40" alt="">':avaTxt(p.n);
   const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
-  const rc=num(0),rp=num(1),lk=num(2),vw=lk*23+rp*61+rc*197+89;
+  const rc=num(0),rp=num(1),lk=num(2),vw=viewsOf(p);
   const cnt=(cls,ic,n)=>'<span class="act '+cls+'" data-n="'+n+'" role="button">'+ic+(n>0?"<b>"+fmtCnt(n)+"</b>":"")+"</span>";
   d.innerHTML=av+'<div class="p-main"><div class="p-head"><span class="nm-w"><span class="nm"></span>'+(VERIFIED.has(p.a)?VER_BADGE:"")+'</span><span class="hd">'+p.h+'</span><span class="tm">\u00b7 '+(postTime(p))+'</span><span class="p-more" role="button" aria-label="ポストのメニュー">'+PM_MORE+'</span></div><div class="tx"></div>'
     +(p.img?'<img class="pimg" loading="lazy" decoding="async" src="'+p.img+'"'+imgDimAttrs(p.img)+' alt="">':"")
@@ -5244,7 +5261,7 @@ function postEl(p,hot){
     if(txEl&&txEl.parentNode){const rto=document.createElement("div");rto.className="rto rto-link";rto.appendChild(document.createTextNode("返信先： "));const hb=document.createElement("b");hb.textContent=par514.h;rto.appendChild(hb);rto.appendChild(document.createTextNode(" さん"));
      rto.addEventListener("click",e=>{e.stopPropagation();openPostThread(par514);});
      txEl.parentNode.insertBefore(rto,txEl);}}}catch(_){}
-  if(avEl&&avEl.addEventListener&&(p.a===tgtKey()||p.a==="nao")){avEl.style.cursor="pointer";avEl.addEventListener("click",e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}});}
+  if(p.a===tgtKey()||p.a==="nao"){const goProf=e=>{e.stopPropagation();try{showPane(p.a==="nao"?"me":"hisprof");}catch(_){}};if(avEl&&avEl.addEventListener){avEl.style.cursor="pointer";avEl.addEventListener("click",goProf);}[".nm",".hd"].forEach(sel=>{const nEl=d.querySelector(sel);if(nEl){nEl.style.cursor="pointer";nEl.addEventListener("click",goProf);}});}
   const pmEl=d.querySelector(".p-more");if(pmEl)pmEl.addEventListener("click",e=>{e.stopPropagation();try{openPostMenu(p,d);}catch(_){}});
   const shEl=d.querySelector(".share-btn");if(shEl)shEl.addEventListener("click",e=>{e.stopPropagation();
    /* v190: the share button actually shares - the system share
@@ -5324,7 +5341,7 @@ function fmt(n){return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,"")+"万":Nu
 function stanceObj(){return STANCES.find(x=>x.id===S.stance)||STANCES[0];}
 let postSeq=0;
 function attachReps(post,reps,bucket){if(!post||!reps||!reps.length)return post;post.replyIds=reps.map(r=>{const rp=mkPost(r.a,(lap2()&&r.tx2?r.tx2:r.tx),r.lk||12,0,0,false,null);rp.isReply=true;rp.replyTo=post.id;rp.so=(typeof post.so==="number")?post.so:0;if(bucket)bucket.push(rp);else if(typeof S!=="undefined"&&S&&S.posts)S.posts.push(rp);return rp.id;});return post;}
-function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];return{id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null,so:0,dy:(typeof S!=="undefined"&&S&&S.ch)||1};}
+function mkPost(a,tx,lk,rp,rc,mine,img){const A=ACC[a];const o={id:"p"+(++postSeq)+"-"+Date.now().toString(36),liked:false,rped:false,bmked:false,n:A.n,h:a==="nao"?S.handle:A.h,t:tx,m:[String(rc||0),String(rp||0),String(lk||0)],tm:"今",av:A.av||null,mine:!!mine,a:a,img:img||null,so:0,dy:(typeof S!=="undefined"&&S&&S.ch)||1,vw:0};o.vw=viewsDerive(o);return o;}
 /* setup */
 let selH=null,selSt=null,selF=null,selW=null,selT=null;
 (function(){const box=$("#worlds");if(!box)return;WORLDS.forEach((w,i)=>{const b=document.createElement("button");b.className="opt card"+(w.locked?" locked":"");b.innerHTML='<span class="cmain"><span class="wlab">WORLD 0'+(i+1)+'</span><b></b><span class="d"></span>'+(w.locked?'<span class="locktag">LOCKED</span>':"")+'</span>'+(w.locked?"":'<span class="arr">›</span>');b.querySelector("b").textContent=w.t;b.querySelector(".d").textContent=w.d;if(w.locked){b.disabled=true;}else{b.onclick=()=>{box.querySelectorAll(".opt").forEach(o=>o.classList.remove("sel"));b.classList.add("sel");selW=w;const bw=$("#btn-world");bw.disabled=false;bw.textContent=w.t+"に入る";};}box.appendChild(b);});})();
@@ -6084,7 +6101,29 @@ $$("#hometabs [data-htab]").forEach(b=>b.addEventListener("click",()=>{$$("#home
  sc.addEventListener("scroll",()=>{if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});})();
 /* post detail (thread): tap a post -> large main post + replies, like real X */
 let threadStack=[],threadFrom="tl",threadScroll=0;
-function viewsOf(p){const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};return num(2)*23+num(1)*61+num(0)*197+89;}
+/* v571: views are a per-post stored value (p.vw), independent of
+   the engagement counters - liking, reposting or replying never
+   moves them, and the timeline and the detail view read the same
+   number. Posts minted from this pass carry their value from
+   mkPost. Older saves have none: viewsDerive fills one in
+   deterministically (a hash of the post id + text, scaled by the
+   account's tier and its seeded engagement, in the same magnitude
+   band the old counter formula produced), viewsOf stores it on
+   the post object, and the next save persists it - so the value
+   is identical on every load. */
+function viewsHash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function viewsDerive(p){
+ const num=i=>{const v=parseInt(String(p&&p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
+ const lk=num(2),rp=num(1),rc=num(0);
+ const base=String(p&&p.id||"")+"|"+String(p&&p.t||"");
+ const r1=(viewsHash(base+"#a")%1000)/1000,r2=(viewsHash(base+"#b")%1000)/1000,r3=(viewsHash(base+"#c")%1000)/1000;
+ let floor=40;
+ if(p&&(p.a==="media"||p.a==="matome"))floor=9000;
+ else if(p&&(p.a==="sakuya"||p.a==="sea"||p.a==="mina"))floor=3200;
+ else if(p&&(p.mine||p.a==="nao"))floor=2400;
+ return Math.max(30,Math.round(floor*(0.6+r1*1.1)+lk*(13+r2*26)+rp*(35+r3*70)+rc*(110+r1*180)+30+r2*300));
+}
+function viewsOf(p){if(!p)return 0;if(typeof p.vw==="number"&&isFinite(p.vw)&&p.vw>0)return p.vw;const v=viewsDerive(p);try{p.vw=v;}catch(_){}return v;}
 /* v79: top-reply seeding lived here (a context pool of hand-written
    replies pinned into threads whose counters promised more answers).
    v426 retired the seeding itself - every post carries its own
@@ -6120,7 +6159,7 @@ function thCreepStart(p,mainEl,metaEl,sdEl){
  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  const off=thCreepOff[p.id]||(thCreepOff[p.id]={v:0,l:0});
  const num=i=>{const v=parseInt(String(p.m&&p.m[i]!=null?p.m[i]:"0").replace(/[^0-9]/g,""),10);return isNaN(v)?0:v;};
- const lkB=num(2),vwB=lkB*23+num(1)*61+num(0)*197+89;
+ const lkB=num(2),vwB=viewsOf(p);
  const fVw=mainEl.querySelector(".views b");
  const lkBtn=mainEl.querySelector(".like-btn");
  const lkSpan=sdEl?sdEl.querySelector(".dts-lk b"):null;
