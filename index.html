@@ -79,6 +79,13 @@ button{font-family:inherit;cursor:pointer;touch-action:manipulation}
 .thread-rh{padding:10px 16px 8px;font-weight:800;font-size:15px;border-bottom:1px solid #eff3f4}
 @keyframes icopop{0%{transform:scale(1)}35%{transform:scale(1.32)}100%{transform:scale(1)}}
 .post .mt .pop{animation:icopop .32s ease}
+/* v575: the real client's like is a burst, not just a pop - six
+   pink particles fly from the heart on like-on (feed / detail /
+   profile all share postEl). Reduced motion keeps the pop only. */
+.post .mt .like-btn{position:relative}
+.lk-burst{position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#f91880;pointer-events:none;z-index:2;animation:lkburst .55s ease-out both}
+@keyframes lkburst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--bx,0),var(--by,0)) scale(.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){.lk-burst{display:none}}
 .post .mt .hot{color:#f91880;font-weight:700}
 .like-btn{cursor:pointer;user-select:none}
 .like-btn.liked{color:#f91880 !important;font-weight:800}
@@ -4296,7 +4303,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v574</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v575</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4641,7 +4648,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v574</p>
+    <p class="ver">v575</p>
   </div>
 </section>
 </div>
@@ -4662,6 +4669,13 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
 <div class="scrim" id="scrim-pmenu"><div class="sheet">
   <div id="pm-items"></div>
   <button class="pm-cancel" data-close="scrim-pmenu">キャンセル</button>
+</div></div>
+<div class="scrim" id="scrim-block"><div class="sheet reset-sheet">
+  <span class="rs-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"/></svg></span>
+  <h3 id="blk-title">ブロックしますか？</h3>
+  <p class="desc">このアカウントのポストは、あなたのタイムラインに表示されなくなります。相手は、あなたをフォローしたり、あなたのポストを見たりできなくなります。</p>
+  <button class="rs-danger" id="btn-block-yes">ブロック</button>
+  <button class="rs-cancel" data-close="scrim-block">キャンセル</button>
 </div></div>
 <div class="scrim" id="scrim-act"><div class="sheet">
   <button class="close" data-close="scrim-act" aria-label="閉じる">✕</button>
@@ -5232,11 +5246,23 @@ function openPostMenu(p,el){
   add(PM_IC.share,"共有する",sharePost);
   add(PM_IC.eyeoff,"このポストに興味がない",()=>{PM_HIDE.add(p.id);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg("このポストを非表示にしたよ");}catch(_){}});
   add(PM_IC.mute,(p.h||"")+" さんをミュート",()=>{PM_MUTE.add(p.a);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg((p.h||"")+" さんをミュートしたよ");}catch(_){}});
-  add(PM_IC.block,(p.h||"")+" さんをブロック",()=>{PM_BLOCK.add(p.a);vanish();try{renderFeed();renderNotifs();}catch(_){} try{toastChg((p.h||"")+" さんをブロックしたよ");}catch(_){}},true);
+  add(PM_IC.block,(p.h||"")+" さんをブロック",()=>{PM_BLOCK_PENDING={p:p,el:el};const bt=$("#blk-title");if(bt)bt.textContent=(p.h||"")+" さんをブロックしますか？";const bs=$("#scrim-block");if(bs)bs.classList.add("on");},true);
   add(PM_IC.flag,"ポストを報告",()=>{try{toastChg("報告を受け付けたよ");}catch(_){}});
  }
  $("#scrim-pmenu").classList.add("on");
 }
+/* v575: block asks first, like the real client - the menu item
+   only stages the target above; this sheet's danger button is
+   what applies PM_BLOCK (same vanish + rerender + toast flow
+   the v572 instant block used). Cancel / backdrop just close. */
+let PM_BLOCK_PENDING=null;
+function pmDoBlock(){const pb=PM_BLOCK_PENDING;PM_BLOCK_PENDING=null;if(!pb)return;const p=pb.p,el=pb.el;PM_BLOCK.add(p.a);
+ if(el&&el.classList&&el.classList.contains("detail")){const tb=$("#thread-back");if(tb)tb.click();}
+ else if(el&&el.remove)el.remove();
+ try{renderFeed();renderNotifs();}catch(_){}
+ try{toastChg((p.h||"")+" さんをブロックしたよ");}catch(_){}}
+(function(){const yb=$("#btn-block-yes");if(yb)yb.addEventListener("click",()=>{const s=$("#scrim-block");if(s){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}pmDoBlock();});
+ const s=$("#scrim-block");if(!s)return;s.addEventListener("click",e=>{if(e.target===s&&!s.classList.contains("closing")){s.classList.add("closing");setTimeout(()=>{s.classList.remove("on");s.classList.remove("closing");},175);}});})();
 /* v430: intrinsic size of every bundled photo. Post images carry an
    inline aspect-ratio so the browser reserves the exact box (width
    100% x ratio, capped by the existing max-height) before the file
@@ -5315,14 +5341,15 @@ function postEl(p,hot){
   const pimg=d.querySelector(".pimg");if(pimg)pimg.addEventListener("click",e=>{e.stopPropagation();try{openPostPhoto(p);}catch(_){}});
   d.addEventListener("click",()=>{try{openPostThread(p);}catch(_){}});
   const popSvg=el=>{const svg=el.querySelector("svg");if(!svg)return;svg.classList.remove("pop");void svg.getBoundingClientRect();svg.classList.add("pop");};
+  const burst=el=>{try{if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;const svg=el.querySelector("svg");if(!svg)return;const er=el.getBoundingClientRect(),sr=svg.getBoundingClientRect();const cx=sr.left-er.left+sr.width/2,cy=sr.top-er.top+sr.height/2;for(let i=0;i<6;i++){const s=document.createElement("span");s.className="lk-burst";const ang=(Math.PI*2*i)/6+0.5,dist=13+((i*7)%6);s.style.left=cx+"px";s.style.top=cy+"px";s.style.setProperty("--bx",(Math.cos(ang)*dist).toFixed(1)+"px");s.style.setProperty("--by",(Math.sin(ang)*dist).toFixed(1)+"px");el.appendChild(s);setTimeout(()=>s.remove(),620);}}catch(_){}};
   const syncEngage=()=>{try{if(!p.id||typeof S==="undefined"||!S)return;[S.posts,S.men].forEach(list=>{if(!list)return;list.forEach(o=>{if(o&&o!==p&&o.id===p.id){o.liked=p.liked;o.rped=p.rped;o.bmked=p.bmked;}});});}catch(_){}};
   const persist=()=>{syncEngage();try{save();}catch(_){}};
   const initTog=(sel,cls,fill,on)=>{const el=d.querySelector(sel);if(!el||!on)return;el.dataset.on="1";el.classList.add(cls);const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",fill);};
   initTog(".like-btn","liked","#f91880",!!p.liked); initTog(".rp-btn","rped",null,!!p.rped);
-  const bind=(sel,cls,fill,key)=>{const el=d.querySelector(sel);if(!el)return;el.addEventListener("click",e=>{e.stopPropagation();const on=el.dataset.on==="1";let n=parseInt(el.dataset.n||"0",10);n=on?Math.max(0,n-1):n+1;el.dataset.n=n;el.dataset.on=on?"":"1";el.classList.toggle(cls,!on);p[key]=!on;let b=el.querySelector("b");if(n>0){if(!b){el.insertAdjacentHTML("beforeend","<b></b>");b=el.querySelector("b");}b.textContent=fmtCnt(n);}else if(b){b.remove();}const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",!on?fill:"none");popSvg(el);persist();});};
+  const bind=(sel,cls,fill,key)=>{const el=d.querySelector(sel);if(!el)return;el.addEventListener("click",e=>{e.stopPropagation();const on=el.dataset.on==="1";let n=parseInt(el.dataset.n||"0",10);n=on?Math.max(0,n-1):n+1;el.dataset.n=n;el.dataset.on=on?"":"1";el.classList.toggle(cls,!on);p[key]=!on;let b=el.querySelector("b");if(n>0){if(!b){el.insertAdjacentHTML("beforeend","<b></b>");b=el.querySelector("b");}b.textContent=fmtCnt(n);}else if(b){b.remove();}const svg=el.querySelector("svg");if(svg&&fill)svg.setAttribute("fill",!on?fill:"none");popSvg(el);if(key==="liked"&&!on)burst(el);persist();});};
   bind(".like-btn","liked","#f91880","liked"); bind(".rp-btn","rped",null,"rped");
   const rb=d.querySelector(".reply-btn");if(rb)rb.addEventListener("click",()=>{try{tcAutoOpen=true;}catch(_){}});
-  const bk=d.querySelector(".bmk-btn");if(bk){if(p.bmked){bk.dataset.on="1";bk.classList.add("bmked");const s0=bk.querySelector("svg");if(s0)s0.setAttribute("fill","#1d9bf0");}bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);p.bmked=!on;const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);persist();});}
+  const bk=d.querySelector(".bmk-btn");if(bk){if(p.bmked){bk.dataset.on="1";bk.classList.add("bmked");const s0=bk.querySelector("svg");if(s0)s0.setAttribute("fill","#1d9bf0");}bk.addEventListener("click",e=>{e.stopPropagation();const on=bk.dataset.on==="1";bk.dataset.on=on?"":"1";bk.classList.toggle("bmked",!on);p.bmked=!on;const svg=bk.querySelector("svg");if(svg){svg.setAttribute("fill",!on?"#1d9bf0":"none");}popSvg(bk);persist();if(!on){try{toastChg("ブックマークに追加したよ");}catch(_){}}});}
   /* v163: a just-posted own post shows its first seconds of life -
      the engagement figures climb from a small fraction to their
      seeded finals (views first, then likes, reposts, replies),
@@ -8513,7 +8540,7 @@ function svSheetClose(){const sheet=$("#sv3-sheet");if(!sheet||sheet.style.displ
 function svSheetTop(title){const top=svEl("div","sh-top");top.appendChild(svEl("span",null,title));const x=svEl("span","sh-x","✕");x.addEventListener("click",e=>{e.stopPropagation();svSheetClose();});top.appendChild(x);return top;}
 function svSyncNext(){const btn=$("#sv2-next");if(!btn)return;const pend=document.querySelectorAll("#sv2-home .sv2-qbox:not(.done)").length;btn.disabled=pend>0;btn.classList.toggle("dis",pend>0);}
 function svSharePost(a,tx){const A=ACC[a];const url="https://x.com/"+(A?A.h.replace("@",""):"")+"/status/1";const done=()=>svToast("リンクをコピーしました");if(navigator.share){navigator.share({title:"X",text:tx||"",url:url}).catch(()=>{});}else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done).catch(done);}else done();}
-function svToggleBmk(el){const on=el.classList.toggle("on");const num=el.querySelector("span");el.innerHTML=on?SVI.bmkF:SVI.bmk;if(num)el.appendChild(num);}
+function svToggleBmk(el){const on=el.classList.toggle("on");const num=el.querySelector("span");el.innerHTML=on?SVI.bmkF:SVI.bmk;if(num)el.appendChild(num);if(on)svToast("ブックマークに追加しました");}
 function svHidePosts(hosts,label){if(!hosts.length)return;const first=hosts[0];const note=svEl("div","sv2-hidden");note.appendChild(svEl("span",null,label));const un=svEl("button","sv2-undo","元に戻す");un.type="button";un.addEventListener("click",e=>{e.stopPropagation();hosts.forEach(h=>{h.style.display="";});note.remove();});note.appendChild(un);first.parentNode.insertBefore(note,first);hosts.forEach(h=>{h.style.display="none";});}
 function svPostMenu(postEl){if(!postEl||!postEl._pb)return;const b=postEl._pb;const A=ACC[b.a];const own=b.a===tgtKey();const box=svEl("div");box.appendChild(svSheetTop(own?"自分のポスト":"ポスト"));const item=(label,fn,danger)=>{const it=svEl("div","sv2-mi"+(danger?" danger":""),label);it.addEventListener("click",e=>{e.stopPropagation();svSheetClose();fn();});box.appendChild(it);};const bmkEl=postEl.querySelector('[data-svx="bmk"]')||postEl._bmkEl;item(bmkEl&&bmkEl.classList.contains("on")?"ブックマークを取り消す":"ブックマークする",()=>{if(bmkEl)svToggleBmk(bmkEl);});item("共有する",()=>svSharePost(b.a,b.tx));if(!own){item("このポストに興味がない",()=>{svHidePosts([postEl.closest(".sv2-blk")||postEl],"このポストは表示されません");});item(A.n+" さんをミュート",()=>{const hosts=[];document.querySelectorAll("#sv2-scr .sv2-post").forEach(p=>{if(p._pb&&p._pb.a===b.a)hosts.push(p.closest(".sv2-blk")||p);});svHidePosts(hosts,A.n+" さんをミュートしました");svToast(A.n+" さんをミュートしました");},1);}svSheet(box);}
 /* v485: a few quiet motes of light drift behind his screen - the
