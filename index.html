@@ -4223,7 +4223,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v564</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v565</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4568,7 +4568,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v564</p>
+    <p class="ver">v565</p>
   </div>
 </section>
 </div>
@@ -4981,7 +4981,7 @@ function svImg(k){if(k==="nao")return naoStory().img;if(k===tgtKey())return tgt(
    render time, so in-progress saves get the day's story with no migration
    and the save format is untouched. */
 const NAO_STORY={1:{img:"assets/nao-story-heart.jpg",cap:"デビュー初日、いってきます"},2:{img:"assets/nao-story-cafe.jpg",cap:"オフのいちごミルク"},3:{img:"assets/nao-backstage-selfie.jpg",cap:"収録の日、楽屋から"},4:{img:"assets/nao-story-towel.jpg",cap:"レッスン終わり、汗だく"},5:{img:"assets/nao-story-night.jpg",cap:"静かな、帰り道"},6:{img:"assets/nao-cafe2.jpg",cap:"最終日、帰り道",imgH:"assets/gen-nao-day6-rain.jpg",capH:"最終日、雨の窓辺"}};
-const NAO_D7_PIC="assets/gen-nao-day7-cafe.jpg";NAO_STORY[7]={img:NAO_D7_PIC,cap:"一夜明けて、朝の光",imgH:NAO_D7_PIC,capH:"一夜明けて、雨上がり"};
+const NAO_D7_PIC="assets/gen-nao-day7-cafe.jpg";NAO_STORY[7]={img:NAO_D7_PIC,cap:"まぶしい朝の光",imgH:NAO_D7_PIC,capH:"雨上がりの朝"};
 function naoStory(){const d=(typeof S!=="undefined"&&S&&S.ch)||1;const e=NAO_STORY[d]||NAO_STORY[6]||NAO_STORY[1];if(e.imgH&&typeof tgtKey==="function"&&tgtKey()==="hiroto")return{img:e.imgH,cap:e.capH};return e;}
 </script>
 <script>
@@ -5679,16 +5679,16 @@ function storyBaseFor(k,day){const r=storyBaseForBase(k,day);if(day>6){if(STORY_
  const h=tgtKey()==="hiroto";
  const kind=(typeof window!=="undefined"&&window.__D7&&window.__D7.kind)||"start";
  const T={
-  akari:"報道から一夜。オンニ、私たちがついてるよ",
-  carmen:"一夜明けた。オンニの味方だよ、ずっと",
-  yeon:"一夜明けたね。オンニ、大丈夫だよ",
-  stella:"報道から一夜。オンニ、今日はゆっくりして",
+  akari:"オンニ、起きた？ 私たちがついてるよ",
+  carmen:"おはよう〜！ オンニの味方だよ、ずっと",
+  yeon:"オンニ、おはよう。大丈夫だよ",
+  stella:"オンニ、今日はゆっくりしてね。I'm here, okay?",
   juun:"オンニ、顔見せて。ちゃんと寝た？",
-  ana:"一夜明けたね。オンニ、ちゃんと寝られた？",
-  ian:"一夜明けた。オンニ、大丈夫だった？",
-  fan1:"報道から一夜。最後まで、見届けます",
-  miku:"報道から一夜。……あんたは大丈夫。地元から応援してる",
-  sea:"一夜明けました。……なおさんのこと、信じています",
+  ana:"オンニ、ちゃんと寝られた？ 起きたら何か食べよ",
+  ian:"オンニ、おはよう！ 大丈夫だった？",
+  fan1:"昨日の報道、見たよ。最後まで、見届けます",
+  miku:"昨日の報道、見たで。……あんたは大丈夫。地元から応援してる",
+  sea:"おはようございます。……なおさんのこと、信じています",
   mina:"一夜明けて。今日も、見届けます"};
  /* v536: the sakuya Day 7 captions were written for the collab
     morning only - every member said "発表から一夜" even in the
@@ -5697,11 +5697,11 @@ function storyBaseFor(k,day){const r=storyBaseForBase(k,day);if(day>6){if(STORY_
     of Day 7. The hiroto captions above need no split: the Day 6
     coverage happened in every hiroto ending. */
  const TS={
-  collab:{akari:"発表から一夜。なおオンニ、今日も隣にいるよ",carmen:"発表の余韻！ 今日もそわそわしてる",yeon:"発表、終わったね。……すごかった",stella:"発表から一夜。オンニ、まだドキドキしてる",juun:"発表から一夜。……おつかれさま、オンニ",ana:"発表から一夜。オンニ、いい朝だね",ian:"発表から一夜。オンニ、今日も隣にいる",fan1:"発表から一夜。画面の前で、まだ余韻の中",miku:"発表から一夜明けたね。私までまだ緊張してる",sea:"発表から一夜。……いい朝になりますように",mina:"一夜明けて。静かに、見届けます"},
-  flame:{akari:"騒ぎから一夜。オンニ、私たちがついてるよ",carmen:"オンニ！ カルメンはここにいるよ。今日も一緒にいようね！",yeon:"一夜明けたね。オンニ、大丈夫だよ",stella:"騒ぎから一夜。オンニ、今日はゆっくりして",juun:"オンニ、顔見せて。ちゃんと寝た？",ana:"一夜明けたね。オンニ、ちゃんと寝られた？",ian:"一夜明けた。オンニ、大丈夫だった？",fan1:"騒ぎから一夜。最後まで、見届けます",miku:"騒ぎから一夜。……あんたは大丈夫。地元から応援してる",sea:"一夜明けました。……なおさんのこと、信じています",mina:"一夜明けて。静かに、見届けます"},
-  quiet:{akari:"一夜明けて。オンニ、今日も一緒にがんばろう",carmen:"おはよう〜！ 今日もいい日にしよ、オンニ",yeon:"一夜明けたね。オンニ、おはよう",stella:"おはよう、オンニ。今日も隣にいるから",juun:"おはよう、オンニ。今日も見てるよ",ana:"一夜明けたね。オンニ、よく寝られた？",ian:"おはよう、オンニ。今日もファイト",fan1:"一夜明けて。今日も、なおちゃんの歌を待ってる",miku:"一夜明けたね。……あんたは今日も元気そうで何より",sea:"一夜明けました。今日も、いい日になりますように",mina:"一夜明けて。静かに、見届けます"},
-  start:{akari:"デビューから一週間。オンニ、ここからだね",carmen:"おはよう〜！ 一週間、あっという間だったね",yeon:"一週間たったね。オンニ、おはよう",stella:"一週間。オンニ、今日もがんばろう",juun:"デビュー一週間。オンニ、見てるよ",ana:"一週間たちました。オンニ、体調は大丈夫？",ian:"一週間！ オンニ、今日もファイト",fan1:"デビューから一週間。今日も画面の前で待機",miku:"一週間たったね。……あんた、ちゃんと食べてる？",sea:"一週間ですね。……この先も、見届けます",mina:"一夜明けて。静かに、見届けます"}};
- if(k===tgtKey()){r.cap=h?(kind==="flame"?"……今日は、静かにしてます":"20時から、配信します"):(kind==="flame"?"……今日は、静かに過ごします":kind==="collab"?"発表から一夜。今日も、よろしくお願いします":kind==="quiet"?"おはようございます。……今日も、よろしくお願いします":"おはようございます。……今日も、最初から聴きます");}
+  collab:{akari:"オンニ、今日も隣にいるよ。昨日の発表、すごかったね",carmen:"発表の余韻！ 今日もそわそわしてる",yeon:"発表、終わったね。……すごかった",stella:"Good morning, オンニ。まだドキドキしてる",juun:"おつかれさま、オンニ。昨日、すごかったね",ana:"いい朝だね、オンニ。昨日、すごかった！",ian:"オンニ！ 昨日すごかった！ 今日も隣にいるよ",fan1:"昨日の発表、何回も見返した。まだ余韻の中",miku:"昨日の発表見たで。私までまだ緊張してる",sea:"おはようございます。……いい朝になりますように",mina:"静かに、見届けます"},
+  flame:{akari:"おはよう、オンニ。私たちがついてるよ",carmen:"オンニ！ カルメンはここにいるよ。今日も一緒にいようね！",yeon:"オンニ、大丈夫だよ。今日も応援してるよ",stella:"おはよう、オンニ。今日はゆっくりして",juun:"オンニ、顔見せて。ちゃんと寝た？",ana:"オンニ、ちゃんと寝られた？ 温かいもの飲んだ？",ian:"オンニ、大丈夫だった？ ごはん食べたら元気出るよ",fan1:"昨日の騒ぎ、見てたよ。最後まで、見届けます",miku:"昨日の騒ぎ、見たで。……あんたは大丈夫。地元から応援してる",sea:"おはようございます。……なおさんのこと、信じています",mina:"朝、なおさんの歌を聴きました。今日も、見届けます"},
+  quiet:{akari:"おはよう、オンニ。今日も一緒にがんばろう",carmen:"おはよう〜！ 今日もいい日にしよ、オンニ",yeon:"オンニ、おはよう。今日もいい日だね",stella:"おはよう、オンニ。今日も隣にいるから",juun:"おはよう、オンニ。今日も見てるよ",ana:"オンニ、よく寝られた？ 朝ごはん、しっかり食べた？",ian:"おはよう、オンニ。今日もファイト",fan1:"おはよう。今日も、なおちゃんの歌を待ってる",miku:"おはよう。……あんたは今日も元気そうで何より",sea:"おはようございます。今日も、いい日になりますように",mina:"今日も、静かに見届けます"},
+  start:{akari:"デビューから一週間。オンニ、ここからだね",carmen:"おはよう〜！ 一週間、あっという間だったね",yeon:"一週間たったね。オンニ、おはよう",stella:"一週間。オンニ、今日もがんばろう",juun:"デビュー一週間。オンニ、見てるよ",ana:"一週間たちました。オンニ、体調は大丈夫？",ian:"一週間！ オンニ、今日もファイト",fan1:"デビューから一週間。今日も画面の前で待機",miku:"一週間たったね。……あんた、ちゃんと食べてる？",sea:"一週間ですね。……この先も、見届けます",mina:"一週間。静かに、見届けます"}};
+ if(k===tgtKey()){r.cap=h?(kind==="flame"?"……今日は、静かにしてます":"20時から、配信します"):(kind==="flame"?"……今日は、静かに過ごします":kind==="collab"?"おはようございます。今日も、よろしくお願いします":kind==="quiet"?"おはようございます。……今日も、よろしくお願いします":"おはようございます。……今日も、最初から聴きます");}
  else if(h){if(T[k])r.cap=T[k];}
  else{const tk=(TS[kind]||TS.start)[k];if(tk)r.cap=tk;}}
  return r;}
@@ -6832,7 +6832,7 @@ const MINI_EVENTS={
  "sakuya:7":{mk:"mini-s7",tag:"SIDE EVENT ― 小さな事件",title:"『1年前の今日』に、彼がいた",
   body:"朝、写真アプリの通知。『1年前の今日』――会社の廊下で撮った、彼女の何気ない一枚。その端に、小さく彼が写り込んでいた。何気ない顔で、通り過ぎる途中だった。",
   bodyK:{flame:"騒ぎの朝に見る1年前は、遠い国の話みたいだった。どうする？",
-   collab:"発表から一夜明けた朝に見る1年前は、全部、昨日につながっていたみたいだった。どうする？",
+   collab:"発表の翌朝に見る1年前は、全部、昨日につながっていたみたいだった。どうする？",
    quiet:"静かな朝に見る1年前は、今日の約束の出発点みたいだった。どうする？",
    start:"始まりの朝に見る1年前は、まだ何も知らない二人の顔をしていた。どうする？"},
   na:"miku",ntx:"さんから、朝の連絡が届きました",nsub:"小さな事件 ― 1年前の今日",
@@ -9103,10 +9103,10 @@ $("#btn-totitle").addEventListener("click",()=>{show("scr-title");window.scrollT
    and the ending kind, and is never written into CH / CH_S. */
 function day7Banner(kind){return (tgtKey()==="sakuya"?{
  flame:"騒ぎの熱が、まだ下がらない朝。それでも、昨日の歌を聴いてくれた人がいる。",
- collab:"コラボ発表から一夜。昨日の彼の返信ポストが、まだ胸に残っている。",
+ collab:"朝、目覚めても、昨日の彼の返信ポストが、まだ胸に残っていた。",
  quiet:"会社の食堂の約束が、まだ胸にある。静かな朝。",
  start:"デビューから一週間。これから先の活動も、二人の未来も、まだ決まっていないことばかり。ここからが、本当の始まり。"}:{
- flame:"報道から一夜。表の活動は止まったままでも、朝は来る。今日をどう生きるかは、自分で決める。",
+ flame:"表の活動は止まったままでも、朝は来る。今日をどう生きるかは、自分で決める。",
  collab:"騒ぎが引いた朝。公式には、何もなかったことになっている。それでも、昨日の配信で彼が漏らした一言を、覚えている人がいる。",
  quiet:"静かな朝。数字はまだ小さい。でも、昨日の夜届いた一通が、画面の中で光っている。",
  start:"新しい朝。何も終わっていない。これから積み重ねていくものが、まだたくさんある。――それでも、昨日より少しだけ前にいる。"})[kind]||"";}
