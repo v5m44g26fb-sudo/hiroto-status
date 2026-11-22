@@ -3991,7 +3991,48 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
 #sideview .sv2-comp .cmain{flex:1;min-width:0}
 #sideview .sv2-pshare{margin-left:auto;cursor:pointer;color:#536471;display:flex;align-items:center;flex:none}
 #sideview .sv2-pshare svg{width:18px;height:18px;fill:currentColor}
-
+/* ===== v569: UI audit pass (ch.1-11). Only the items that
+   reproduced against the real cascade get a rule here; the rest of
+   the audit was already satisfied by later layers or did not
+   reproduce at device widths (see the v569 checkpoint section).
+   CSS only - no text, logic, fx or save changes. ===== */
+/* ch.1a: setup step line - the tracked-out English sub-label sits
+   a little tighter so the heading owns the block */
+.setup .step{letter-spacing:.28em}
+/* ch.2b: title eyebrow closer to the title (has-save already 9px) */
+.t-eyebrow{margin-bottom:10px}
+/* ch.4c/11b: post action hit area grows through the padding /
+   negative-margin pair - the visual layout does not move */
+.post .mt .act{padding:8px;margin:-8px}
+.post .mt .grp>span{padding:8px;margin:-8px}
+/* ch.6f: DM list title 20px -> 18px */
+.dm-head-bar .dm-head-t{font-size:18px}
+/* ch.6c: special DM row - soften the pink wash and the rail so it
+   no longer shouts over an ordinary unread row */
+.dmrow.special{background:linear-gradient(90deg,rgba(249,24,128,.05),rgba(120,86,255,.04) 60%,rgba(249,24,128,.02));box-shadow:inset 3.5px 0 0 rgba(249,24,128,.55)}
+/* ch.8e: profile tab labels never wrap */
+.x-ptabs button{white-space:nowrap}
+/* ch.9a (partial): the status strip keeps its 4-column band, its
+   micro-labels and figures get a legibility bump */
+.me-now-cell small{font-size:10.5px}
+.me-now-cell b{font-size:14px}
+/* ch.10b/10f: ending badges and the result-panel header may wrap
+   on narrow screens instead of squeezing */
+.end-tagrow{flex-wrap:wrap;justify-content:center}
+.end-panel-h{flex-wrap:wrap;row-gap:4px}
+/* ch.10h: ending result rows finish their fade-in sooner */
+#scr-ending .end-panel .erow{animation-delay:.34s}
+#scr-ending .end-panel .erow.fol{animation-delay:.26s}
+#scr-ending .end-panel .erow.fire{animation-delay:.42s}
+#scr-ending .end-panel .erow.dist{animation-delay:.5s}
+/* ch.11f: reduced-motion coverage for the audited surfaces */
+@media (prefers-reduced-motion:reduce){
+#x-notif.on{animation:none}
+#x-notif .nrow{animation:none}
+#storyviewer.on{animation:none}
+.pane-in-r,.pane-in-l{animation:none}
+#scr-ending .end-panel,#scr-ending .end-card,#scr-ending .end-panel .erow{animation:none}
+}
 </style>
 </head>
 <body>
@@ -4224,7 +4265,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v568</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v569</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4569,7 +4610,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v568</p>
+    <p class="ver">v569</p>
   </div>
 </section>
 </div>
