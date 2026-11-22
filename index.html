@@ -4043,6 +4043,27 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
    reply-count stat is a tap target for the reply list below. ===== */
 .pm-item.danger{color:#f4212e}
 #thread-main .dtstats .dts-rp{cursor:pointer}
+/* ===== v573: real-client alignment for the explore surface - the
+   search category tabs take the same underline language as the home
+   xtabs (and the real explore tabs) instead of a pill switch, trend
+   rows go back to the client's flat hairline list (no card chrome,
+   no rank numeral, no volume bar, no category dot, no surge wash;
+   the surge chip itself stays as the story signal), and the compose
+   sheet drops its centred title, like the real composer. ===== */
+#x-stabs{background:none;border-bottom:1px solid #eff3f4;border-radius:0;padding:0;margin:0;backdrop-filter:none;-webkit-backdrop-filter:none}
+#x-stabs button{flex:1;border-bottom:3px solid transparent;border-radius:0;padding:11px 1px 9px;font-size:13px;color:#536471;background:none;box-shadow:none}
+#x-stabs button.act{background:none;color:#0f1419;font-weight:800;border-bottom-color:#1d9bf0;box-shadow:none}
+#x-stabs button:active{background:#f7f9f9}
+#x-stabs button.act:active{background:none}
+#x-pane-search .trend{margin:0;padding:13px 16px 12px;border:none;border-bottom:1px solid #eff3f4;border-radius:0;background:#fff;box-shadow:none;overflow:visible}
+#x-pane-search .trend .trank{display:none}
+#x-pane-search .trend .tvol{display:none}
+#x-pane-search .trend .tcat::before{display:none}
+#x-pane-search .trend.dyn{background:#fff}
+#x-pane-search .trend.dyn::before{display:none}
+#x-pane-search .trend .tarr{align-self:flex-start;margin-top:1px;display:flex}
+#x-pane-search .trend .tarr svg{display:block}
+#x-compose .xc-title{display:none}
 </style>
 </head>
 <body>
@@ -4275,7 +4296,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <div class="setwrap">
         <div class="me-seclab">設定 ― SETTINGS</div>
         <div class="setpanel">
-          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v572</span></div>
+          <div class="setrow"><span class="set-ic" style="--c:#7856ff"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 9.2h2.4V18h-2.4v-6.8zM12 5.4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3z"/></svg></span><div class="set-main"><b>デビューしたら、彼と同じステージの件</b><small>Status風Xゲーム ― 7日間の物語</small></div><span class="set-ver">v573</span></div>
           <div class="setrow set-savehead"><span class="set-ic" style="--c:#1d9bf0"><svg viewBox="0 0 24 24"><path d="M5 3h11.2L21 7.8V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm3.2.8v4.4h7.6V3.8H8.2zM12 20a3.8 3.8 0 1 0 0-7.6 3.8 3.8 0 0 0 0 7.6z"/></svg></span><div class="set-main"><b>セーブデータ</b><small>進行は自動で保存されるよ</small></div><span class="set-auto"><i></i>自動セーブ</span></div>
           <div class="set-savecard">
             <div class="ssv-grid">
@@ -4620,7 +4641,7 @@ button:focus-visible,[role="button"]:focus-visible,input:focus-visible,textarea:
       <button class="btn ghost" id="btn-totitle" type="button">タイトルへ戻る</button>
     </div>
     <button class="btn" id="btn-restart">もう一度はじめる</button>
-    <p class="ver">v572</p>
+    <p class="ver">v573</p>
   </div>
 </section>
 </div>
@@ -5625,7 +5646,11 @@ const NTYPE={
  bell:'<svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 3h-15L6 16z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/></svg>'};
 const NLAB={heart:"いいね",dm:"DM",follow:"フォロー",news:"世間の動き",bell:"お知らせ"};
 /* v64: DM reads as DM even when it comes from him (display classification only) */
-function notifType(n){if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("いいね"))return"heart";if(n.a===tgtKey())return"heart";if((n.tx||"").includes("フォロー"))return"follow";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
+/* v573: a follow reads as a follow even when it comes from him - the
+   real client badges the action, not the person, so his Day-6 follow
+   no longer renders under the like icon and label (same carve-out
+   shape as v64; his posts keep the special heart, by design) */
+function notifType(n){if((n.tx||"").includes("DM"))return"dm";if((n.tx||"").includes("いいね"))return"heart";if((n.tx||"").includes("フォロー"))return"follow";if(n.a===tgtKey())return"heart";if(n.a==="matome"||n.a==="media")return"news";return"bell";}
 function renderNotifs(){
  const list=$("#x-notif-list");const unseen=unseenNotifs();
  const chip=$("#nhead-chip");if(chip){chip.textContent=unseen?("新着 "+unseen+" 件"):"すべて既読";chip.classList.toggle("has",unseen>0);}
@@ -6520,7 +6545,7 @@ function trendNum(t){return parseInt(String(t[2]).replace(/[^0-9]/g,""),10)||0;}
 function trendHash(s){let h=0;const w=String(s);for(let i=0;i<w.length;i++)h=(h*31+w.charCodeAt(i))>>>0;return h;}
 function trendNumLive(t){const base=trendNum(t);if(!base||typeof S==="undefined"||!S||!S.started)return base;const heat=(S.posted?1:0)+(S.evDone?1:0)+(S.actDone?1:0);const j=(trendHash(t[1])%7)*0.008;return Math.max(1,Math.round(base*(0.9+heat*0.045+j)));}
 function trendCntTx(t){return fmtCnt(trendNumLive(t))+" ポスト";}
-function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'>›</span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: a generic trend's category is just トレンド - appending the suffix printed トレンド ― トレンド */d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNumLive(t)/Math.max(1,maxV||trendNumLive(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
+function trendEl(t,rank,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend"+(rank===0?" top":"")+(dyn?" dyn":"")+(rank!=null&&rank<3?" rk"+(rank+1):"");d.innerHTML="<span class='trank'></span><div class='tmain'><small class='tcat'></small><b></b><small class='tcount'></small><span class='tvol'><i></i></span></div>"+(dyn?"<span class='tdyn'><i></i>急上昇</span>":"")+"<span class='tarr'><svg viewBox='0 0 24 24' width='18' height='18' fill='#536471' aria-hidden='true'><circle cx='5' cy='12' r='1.8'/><circle cx='12' cy='12' r='1.8'/><circle cx='19' cy='12' r='1.8'/></svg></span>";d.querySelector(".trank").textContent=(rank==null?"":rank+1);d.querySelector(".tcat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" · トレンド";/* v573: the row's right mark is the client's ellipsis, and the category line takes the client's middle-dot separator (was a chevron and an em dash) *//* v501: a generic trend's category is just トレンド - appending the suffix printed トレンド ― トレンド */d.querySelector("b").textContent=t[1];d.querySelector(".tcount").textContent=trendCntTx(t);const vb=d.querySelector(".tvol i");if(vb)vb.style.width=Math.max(6,Math.round(trendNumLive(t)/Math.max(1,maxV||trendNumLive(t))*100))+"%";d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 function renderTrends(){/* v476: the fill of the retired trend pane is gone;
    this now only refreshes the search pane's suggestion chips and,
    via renderSearchTab below, its topic tab (the reachable trend UI) */
@@ -6568,7 +6593,7 @@ function renderSearchTab(k){searchTab=k;$$("#x-stabs [data-stab]").forEach(b=>b.
    (same data, same tap-to-search as the row it replaces) */
 function trendHero(t,maxV){const dyn=!new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1])).has(t[1]);const d=document.createElement("div");d.className="trend-hero"+(dyn?" dyn":"");
  d.innerHTML='<span class="th-eyebrow"><i></i>TOP TREND ― いま最も熱い話題</span><b class="th-title"></b><div class="th-meta"><span class="th-cat"></span><span class="th-count"></span>'+(dyn?'<span class="tdyn"><i></i>急上昇</span>':"")+'</div><span class="th-vol"><i></i></span>';
- d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド";/* v501: same dedup as trendEl */d.querySelector(".th-count").textContent=trendCntTx(t);
+ d.querySelector(".th-title").textContent=t[1];d.querySelector(".th-cat").textContent=t[0]==="トレンド"?"トレンド":t[0]+" · トレンド";/* v501: same dedup as trendEl; v573: middle-dot separator, as in trendEl */d.querySelector(".th-count").textContent=trendCntTx(t);
  d.querySelector(".th-vol i").style.width=Math.max(6,Math.round(trendNumLive(t)/Math.max(1,maxV||trendNumLive(t))*100))+"%";
  d.addEventListener("click",()=>{$("#x-q").value=t[1].replace(/^#/,"");runSearch();});return d;}
 $$("#x-stabs [data-stab]").forEach(b=>b.addEventListener("click",()=>renderSearchTab(b.dataset.stab)));
@@ -8585,7 +8610,7 @@ function svTrendsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";
 const sr=svEl("div","sv2-srch");sr.innerHTML=SVI.search;const inp=document.createElement("input");inp.type="text";inp.placeholder="検索";inp.setAttribute("autocomplete","off");sr.appendChild(inp);const sx=svEl("span","sx","✕");sx.style.display="none";sr.appendChild(sx);inp.addEventListener("keydown",e=>{e.stopPropagation();if(e.key==="Enter"){const q=inp.value.trim();if(q)svTrendPosts(q);}});inp.addEventListener("input",()=>{sx.style.display=inp.value?"":"none";});inp.addEventListener("click",e=>e.stopPropagation());sx.addEventListener("click",e=>{e.stopPropagation();inp.value="";sx.style.display="none";inp.focus();});wrap.appendChild(sr);
 const dd=svCur.d||1;const words=tgtKey()==="sakuya"?["なお デビュー","サクヤ","NCT WISH","歌うまコラボSP","#何年も前の写真","MUSIC STAGE"]:["なお デビュー","井汲大翔","熱愛報道","#配信の沈黙","MUSIC STAGE"];const sug=svEl("div","sv2-sug");words.filter(w=>!((w==="#配信の沈黙"||w==="#何年も前の写真")&&dd<5)&&!(w==="熱愛報道"&&dd<6)&&!(w==="歌うまコラボSP"&&dd<4)).forEach(w=>{const s=svEl("span",null,w);s.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(w);});sug.appendChild(s);});wrap.appendChild(sug);
 const list=curTrends()||[];const maxV=Math.max.apply(null,[1].concat(list.map(t=>trendNumLive(t))));const base=new Set((tgtKey()==="sakuya"?TRENDS_S:TRENDS).map(x=>x[1]));
-list.forEach((t,i)=>{const dyn=!base.has(t[1]);const r=svEl("div","sv2-trend");r.appendChild(svEl("span","sv2-trank"+(i<3?" rk"+(i+1):""),String(i+1)));const tm=svEl("div","sv2-tmain");tm.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" ― トレンド"));tm.appendChild(svEl("b",null,t[1]));tm.appendChild(svEl("span","cnt",trendCntTx(t)));const vol=svEl("span","sv2-tvol");const vi=svEl("i");vi.style.width=Math.max(6,Math.round(trendNumLive(t)/maxV*100))+"%";vol.appendChild(vi);tm.appendChild(vol);r.appendChild(tm);if(dyn)r.appendChild(svEl("span","sv2-tdyn","急上昇"));r.appendChild(svEl("span","sv2-tarr","›"));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});
+list.forEach((t,i)=>{const dyn=!base.has(t[1]);const r=svEl("div","sv2-trend");r.appendChild(svEl("span","sv2-trank"+(i<3?" rk"+(i+1):""),String(i+1)));const tm=svEl("div","sv2-tmain");tm.appendChild(svEl("span","cat",t[0]==="トレンド"?"トレンド":t[0]+" · トレンド"));/* v573: same middle-dot separator as her trend rows */tm.appendChild(svEl("b",null,t[1]));tm.appendChild(svEl("span","cnt",trendCntTx(t)));const vol=svEl("span","sv2-tvol");const vi=svEl("i");vi.style.width=Math.max(6,Math.round(trendNumLive(t)/maxV*100))+"%";vol.appendChild(vi);tm.appendChild(vol);r.appendChild(tm);if(dyn)r.appendChild(svEl("span","sv2-tdyn","急上昇"));r.appendChild(svEl("span","sv2-tarr","›"));r.addEventListener("click",e=>{e.stopPropagation();svTrendPosts(t[1]);});wrap.appendChild(r);});
 wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));sub.appendChild(wrap);svShowSub("search");}
 function svTrendPosts(word){const w2=String(word).replace(/^#/,"");const all=[];const seen={};const push=(a,tx,img,rc,rp,lk,time,vw,id,abs)=>{if(!tx||seen[tx]||tx.indexOf(w2)<0)return;seen[tx]=1;const o={};o.a=a;o.tx=tx;o.img=img||"";o.rc=rc||"";o.rp=rp||"";o.lk=lk||"";o.time=time||"";o.hov=false;o.vw=vw||"";o.id=id||"";o.abs=abs||"";all.push(o);return o;};if(typeof S!=="undefined"&&S&&S.posts)S.posts.forEach(p=>{if(!p.sys&&!p.isReply){const o=push(p.a,p.t,p.img,p.m?fmtCnt(p.m[0]):"",p.m?fmtCnt(p.m[1]):"",p.m?fmtCnt(p.m[2]):"",p.tm||"",(typeof viewsOf==="function")?fmtCnt(viewsOf(p)):"",p.id,(typeof postAbsTime==="function")?postAbsTime(p):"");if(o){try{const pool=(S.posts||[]).concat(S.men||[],S.rkeep||[]);let par=null;if(p.replyTo)par=pool.find(x=>x&&x.id===p.replyTo)||null;if(!par&&p.id)par=pool.find(x=>x&&x.replyIds&&x.replyIds.indexOf(p.id)>=0)||null;if(par)o.rtoH=par.h;}catch(_){}}}});svScenesPast().forEach(en=>{(en.sc.blocks||[]).forEach(b=>{if(b.t==="post")push(b.a,b.tx,"",b.rc,b.rp,b.lk,b.time||"",b.vw||"");});});const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead(word,()=>svTrendsView()));svPostBack=()=>svTrendPosts(word);wrap.appendChild(svEl("div","sv2-rhead",all.length+" 件のポスト"));if(all.length){all.forEach(p=>wrap.appendChild(svPostEl(p)));wrap.appendChild(svEl("div","sv2-end","―― ここまで ――"));}else wrap.appendChild(svEl("div","sv2-empty","この話題のポストは、彼の画面にはまだ届いていない"));sub.appendChild(wrap);svShowSub("search");}
 function svNotifsView(){const sub=$("#sv2-sub");if(!sub)return;sub.innerHTML="";const wrap=svEl("div","sv2-subv");wrap.appendChild(svSubHead("通知"));
